@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义地刺逐帧 Mote 和一格击退使用的原版 PawnFlyer。 -->
+
+  <!-- Def 职责：按 Mote 生命周期播放二十帧破土地刺动画。 -->
+  <ThingDef ParentName="MoteBase">
+    <defName>NingshaRace_Mote_GroundSpikeFrameAnimation</defName>
+    <label>凝砂族地刺动画</label>
+    <thingClass>MoteThrown</thingClass>
+    <altitudeLayer>MoteOverheadLow</altitudeLayer>
+    <mote>
+      <fadeInTime>0</fadeInTime>
+      <solidTime>1.3333333</solidTime>
+      <fadeOutTime>0</fadeOutTime>
+    </mote>
+    <graphicData>
+      <texPath>NingshaRace/Motes/GroundSpike/GroundSpikeFrames</texPath>
+      <graphicClass>NingshaRaceLib.Rendering.Graphic_MoteGroundSpikeFrameAnimation</graphicClass>
+      <shaderType>Mote</shaderType>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+  </ThingDef>
+
+  <!-- Def 职责：使用原版 PawnFlyer 把受击 Pawn 快速掀向攻击方向一格。 -->
+  <ThingDef ParentName="PawnFlyerBase">
+    <defName>NingshaRace_PawnFlyer_GroundSpikeKnockback</defName>
+    <label>地刺击退</label>
+    <pawnFlyer>
+      <flightDurationMin>0.15</flightDurationMin>
+      <flightSpeed>12</flightSpeed>
+      <heightFactor>0.35</heightFactor>
+    </pawnFlyer>
+  </ThingDef>
+</Defs>

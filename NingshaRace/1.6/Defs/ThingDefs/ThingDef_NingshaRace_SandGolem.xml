@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义沙傀机械体 Pawn 种族、无充电思维树和只绘制截图的单节点渲染树。 -->
+  <FleshTypeDef>
+    <defName>NingshaRace_SandGolemFlesh</defName>
+    <corpseCategory>CorpsesMechanoid</corpseCategory>
+    <damageEffecter>Damage_HitMechanoid</damageEffecter>
+    <isOrganic>false</isOrganic>
+    <genericWounds>
+      <li>
+        <texture>Things/Pawn/Wounds/WoundMechA</texture>
+      </li>
+      <li>
+        <texture>Things/Pawn/Wounds/WoundMechB</texture>
+      </li>
+      <li>
+        <texture>Things/Pawn/Wounds/WoundMechC</texture>
+      </li>
+    </genericWounds>
+  </FleshTypeDef>
+
+  <LifeStageDef>
+    <defName>NingshaRace_SandGolemAdult</defName>
+    <label>沙傀</label>
+    <visible>false</visible>
+    <developmentalStage>Adult</developmentalStage>
+    <workerClass>LifeStageWorker</workerClass>
+    <canDoRandomMentalBreaks>false</canDoRandomMentalBreaks>
+    <canVoluntarilySleep>false</canVoluntarilySleep>
+    <canSleepWhenStarving>false</canSleepWhenStarving>
+    <canInitiateSocialInteraction>false</canInitiateSocialInteraction>
+    <silhouetteGraphicData>
+      <texPath>Things/Pawn/Humanlike/Silhouettes/Silhouette_HumanAdult</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1</drawSize>
+    </silhouetteGraphicData>
+  </LifeStageDef>
+
+  <PawnRenderTreeDef>
+    <defName>NingshaRace_SandGolemRenderTree</defName>
+    <root Class="PawnRenderNodeProperties_Parent">
+      <debugLabel>Ningsha sand golem root</debugLabel>
+      <tagDef>Root</tagDef>
+      <drawSize>(1, 1)</drawSize>
+      <children>
+        <!-- 沙傀截图节点负责绘制唯一的 Pawn 等身截图贴图。 -->
+        <li>
+          <debugLabel>Ningsha sand golem capture</debugLabel>
+          <nodeClass>NingshaRaceLib.Rendering.PawnRenderNode_SandGolem</nodeClass>
+          <workerClass>NingshaRaceLib.Rendering.PawnRenderNodeWorker_SandGolem</workerClass>
+          <shaderTypeDef>NingshaRace_PawnSandify_ShaderPro</shaderTypeDef>
+          <drawSize>(1.68, 1.68)</drawSize>
+          <baseLayer>50</baseLayer>
+        </li>
+      </children>
+    </root>
+  </PawnRenderTreeDef>
+
+  <ThinkTreeDef>
+    <defName>NingshaRace_SandGolemMechanoid</defName>
+    <thinkRoot Class="ThinkNode_Priority">
+      <subNodes>
+        <!-- 沙傀消失在地图外时只执行原版离图逻辑。 -->
+        <li Class="ThinkNode_Subtree">
+          <treeDef>Despawned</treeDef>
+        </li>
+        <!-- 沙傀倒地时只执行倒地逻辑，不进入人类需求和情绪流程。 -->
+        <li Class="ThinkNode_Subtree">
+          <treeDef>Downed</treeDef>
+        </li>
+        <!-- 沙傀优先执行玩家手动下达的排队命令。 -->
+        <li Class="ThinkNode_QueuedJob" />
+        <!-- 玩家征召沙傀时只处理站位和直接命令。 -->
+        <li Class="ThinkNode_ConditionalOfPlayerFaction">
+          <subNodes>
+            <li Class="ThinkNode_Tagger">
+              <tagToGive>DraftedOrder</tagToGive>
+              <subNodes>
+                <li Class="JobGiver_MoveToStandable" />
+                <li Class="JobGiver_Orders" />
+              </subNodes>
+            </li>
+          </subNodes>
+        </li>
+        <!-- 沙傀接受领主职责，但不需要机械师监管。 -->
+        <li Class="ThinkNode_Subtree">
+          <treeDef>LordDuty</treeDef>
+        </li>
+        <!-- 玩家沙傀可以按工作优先级执行普通工作，不走机械体充电和工作模式。 -->
+        <li Class="ThinkNode_ConditionalOfPlayerFaction">
+          <subNodes>
+            <li Class="ThinkNode_ConditionalNotFormingCaravan">
+              <subNodes>
+                <li Class="JobGiver_SeekAllowedArea" />
+                <li Class="JobGiver_Work">
+                  <emergency>true</emergency>
+                </li>
+                <li Class="JobGiver_Work" />
+              </subNodes>
+            </li>
+          </subNodes>
+        </li>
+        <!-- 沙傀在没有工作时主动攻击附近敌人。 -->
+        <li Class="JobGiver_AIFightEnemies">
+          <targetAcquireRadius>30</targetAcquireRadius>
+          <targetKeepRadius>35</targetKeepRadius>
+        </li>
+        <!-- 玩家沙傀空闲时在殖民地内游荡。 -->
+        <li Class="ThinkNode_ConditionalOfPlayerFaction">
+          <subNodes>
+            <li Class="ThinkNode_Tagger">
+              <tagToGive>Idle</tagToGive>
+              <subNodes>
+                <li Class="JobGiver_WanderColony">
+                  <maxDanger>None</maxDanger>
+                </li>
+              </subNodes>
+            </li>
+          </subNodes>
+        </li>
+        <!-- 非玩家沙傀空闲时按机械体方式游荡。 -->
+        <li Class="ThinkNode_Tagger">
+          <tagToGive>Idle</tagToGive>
+          <subNodes>
+            <li Class="JobGiver_WanderAnywhere">
+              <maxDanger>Deadly</maxDanger>
+            </li>
+          </subNodes>
+        </li>
+        <!-- 沙傀所有节点都失败时输出原版空闲错误，方便定位 Def 问题。 -->
+        <li Class="JobGiver_IdleError" />
+      </subNodes>
+    </thinkRoot>
+  </ThinkTreeDef>
+
+  <ThingDef ParentName="BasePawn">
+    <defName>NingshaRace_SandGolem</defName>
+    <label>沙傀</label>
+    <description>由凝砂术临时塑成的沙偶。</description>
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+    <tradeability>None</tradeability>
+    <statBases>
+      <MarketValue>0</MarketValue>
+      <Mass>60</Mass>
+      <MaxHitPoints>300</MaxHitPoints>
+      <MoveSpeed>4.6</MoveSpeed>
+      <CarryingCapacity>100</CarryingCapacity>
+      <ComfyTemperatureMin>-100</ComfyTemperatureMin>
+      <ComfyTemperatureMax>100</ComfyTemperatureMax>
+      <PsychicSensitivity>0</PsychicSensitivity>
+      <ToxicResistance>1</ToxicResistance>
+      <Flammability>0</Flammability>
+      <MeatAmount>0</MeatAmount>
+      <ArmorRating_Blunt>0.2</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.3</ArmorRating_Sharp>
+      <ArmorRating_Heat>1</ArmorRating_Heat>
+      <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">1</ToxicEnvironmentResistance>
+      <Wildness>0</Wildness>
+      <GlobalLearningFactor>1</GlobalLearningFactor>
+    </statBases>
+    <tools>
+      <li>
+        <label>left fist</label>
+        <labelNoLocation>fist</labelNoLocation>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8.2</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+      </li>
+      <li>
+        <label>right fist</label>
+        <labelNoLocation>fist</labelNoLocation>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8.2</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+      </li>
+    </tools>
+    <race>
+      <thinkTreeMain>NingshaRace_SandGolemMechanoid</thinkTreeMain>
+      <intelligence>ToolUser</intelligence>
+      <fleshType>Mechanoid</fleshType>
+      <needsRest>false</needsRest>
+      <hasGenders>false</hasGenders>
+      <foodType>None</foodType>
+      <alwaysAwake>true</alwaysAwake>
+      <isImmuneToInfections>true</isImmuneToInfections>
+      <makesFootprints>true</makesFootprints>
+      <lifeExpectancy>1000</lifeExpectancy>
+      <bloodDef>Filth_MachineBits</bloodDef>
+      <bloodSmearDef>Filth_MachineBits</bloodSmearDef>
+      <body>Human</body>
+      <renderTree>NingshaRace_SandGolemRenderTree</renderTree>
+      <baseBodySize>1</baseBodySize>
+      <baseHealthScale>1</baseHealthScale>
+      <mechEnabledWorkTypes>
+        <li>Hauling</li>
+        <li>BasicWorker</li>
+        <li>Hunting</li>
+        <li>Cleaning</li>
+        <li>Construction</li>
+        <li>Firefighter</li>
+        <li>PlantCutting</li>
+        <li>Growing</li>
+        <li>Crafting</li>
+        <li>Smithing</li>
+        <li>Tailoring</li>
+        <li>Cooking</li>
+        <li>Mining</li>
+        <li MayRequire="Ludeon.RimWorld.Odyssey">Fishing</li>
+        <li>Doctor</li>
+      </mechEnabledWorkTypes>
+      <gestationPeriodDays>0</gestationPeriodDays>
+      <meatMarketValue>0</meatMarketValue>
+      <soundMeleeHitPawn>Pawn_Melee_MechanoidBash_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_MechanoidBash_HitBuilding</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_MechanoidBash_Miss</soundMeleeMiss>
+      <mechWeightClass MayRequire="Ludeon.RimWorld.Biotech">Medium</mechWeightClass>
+      <hediffGiverSets />
+      <lifeStageAges>
+        <li>
+          <def>MechanoidFullyFormed</def>
+          <minAge>0</minAge>
+          <soundWounded>Pawn_Mech_Scyther_Wounded</soundWounded>
+          <soundDeath>Pawn_Mech_Scyther_Death</soundDeath>
+          <soundCall>Pawn_Mech_Scyther_Call</soundCall>
+        </li>
+      </lifeStageAges>
+    </race>
+    <butcherProducts>
+      <BlocksSandstone>1</BlocksSandstone>
+    </butcherProducts>
+  </ThingDef>
+</Defs>

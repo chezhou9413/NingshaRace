@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义凝砂族地刺召唤物远程武器及其三格宽直线攻击参数。 -->
+
+  <!-- Def 职责：提供可隔墙召唤单列巨型地刺并击退路径敌人的开发者测试武器。 -->
+  <ThingDef ParentName="BaseWeapon">
+    <defName>NingshaRace_GroundSpikeSummoner</defName>
+    <label>地刺召唤物</label>
+    <description>一枚封存着凝砂术式的岩核。持有者可以沿指定方向依次唤醒地下砂岩，使单列巨型尖刺破土而出，将路径上的敌人刺伤并掀离原地。</description>
+    <techLevel>Medieval</techLevel>
+    <smeltable>false</smeltable>
+    <tradeability>None</tradeability>
+    <graphicData>
+      <texPath>NingshaRace/Weapons/GroundSpikeSummoner</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Cutout</shaderType>
+      <drawSize>(1.1,1.1)</drawSize>
+    </graphicData>
+    <uiIconScale>1</uiIconScale>
+    <equippedAngleOffset>-45</equippedAngleOffset>
+    <thingCategories>
+      <li>WeaponsRanged</li>
+    </thingCategories>
+    <weaponClasses>
+      <li>Ranged</li>
+    </weaponClasses>
+    <statBases>
+      <Mass>1.5</Mass>
+      <MarketValue>850</MarketValue>
+      <AccuracyTouch>1</AccuracyTouch>
+      <AccuracyShort>1</AccuracyShort>
+      <AccuracyMedium>1</AccuracyMedium>
+      <AccuracyLong>1</AccuracyLong>
+      <RangedWeapon_Cooldown>3</RangedWeapon_Cooldown>
+    </statBases>
+    <weaponTags Inherit="False">
+      <li>NingshaRaceGroundSpikeSummoner</li>
+    </weaponTags>
+    <tools Inherit="False" />
+    <verbs Inherit="False">
+      <li Class="NingshaRaceLib.Combat.VerbProperties_GroundSpikeSummoner">
+        <label>地刺突进</label>
+        <hasStandardCommand>true</hasStandardCommand>
+        <isPrimary>true</isPrimary>
+        <range>25</range>
+        <warmupTime>0.8</warmupTime>
+        <defaultCooldownTime>3</defaultCooldownTime>
+        <damageDef>Stab</damageDef>
+        <damageAmount>25</damageAmount>
+        <armorPenetration>0.3</armorPenetration>
+        <lineHalfWidth>1</lineHalfWidth>
+        <knockbackCells>1</knockbackCells>
+        <waveStepTicks>1</waveStepTicks>
+        <animationFrameCount>20</animationFrameCount>
+        <impactFrame>12</impactFrame>
+        <effectScale>3.2</effectScale>
+        <ai_IsWeapon>true</ai_IsWeapon>
+        <requireLineOfSight>false</requireLineOfSight>
+        <targetParams>
+          <canTargetLocations>true</canTargetLocations>
+          <canTargetSelf>false</canTargetSelf>
+          <canTargetPawns>true</canTargetPawns>
+          <canTargetBuildings>true</canTargetBuildings>
+          <canTargetItems>false</canTargetItems>
+          <canTargetPlants>false</canTargetPlants>
+          <canTargetFires>false</canTargetFires>
+          <canTargetCorpses>false</canTargetCorpses>
+          <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+        </targetParams>
+      </li>
+    </verbs>
+  </ThingDef>
+</Defs>

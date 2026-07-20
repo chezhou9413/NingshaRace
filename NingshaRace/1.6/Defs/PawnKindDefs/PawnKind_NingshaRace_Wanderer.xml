@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义凝砂族流浪者及其固定穿戴的基础服装。 -->
+
+  <!-- Def 职责：生成穿戴凝砂裹胸布、凝砂短裤和凝砂斗篷的凝砂族流浪者。 -->
+  <PawnKindDef ParentName="BasePlayerPawnKind">
+    <defName>NingshaRace_Wanderer</defName>
+    <label>凝砂族流浪者</label>
+    <race>NingshaRace</race>
+    <defaultFactionDef>PlayerColony</defaultFactionDef>
+    <useFactionXenotypes>false</useFactionXenotypes>
+    <apparelAllowHeadgearChance>0</apparelAllowHeadgearChance>
+    <apparelIgnorePollution MayRequire="Ludeon.RimWorld.Biotech">true</apparelIgnorePollution>
+    <apparelIgnoreSeasons>true</apparelIgnoreSeasons>
+    <apparelMoney>0~0</apparelMoney>
+    <apparelTags Inherit="False" />
+    <apparelRequired Inherit="False">
+      <li>NingshaRace_Apparel_Chestwrap</li>
+      <li>NingshaRace_Apparel_Shorts</li>
+      <li>NingshaRace_Apparel_Stonewrap</li>
+    </apparelRequired>
+    <specificApparelRequirements Inherit="False" />
+    <backstoryCryptosleepCommonality>1</backstoryCryptosleepCommonality>
+    <chemicalAddictionChance>0.06</chemicalAddictionChance>
+    <combatPower>30</combatPower>
+    <forceNormalGearQuality>true</forceNormalGearQuality>
+    <humanPregnancyChance>0.06</humanPregnancyChance>
+    <initialResistanceRange>13~21</initialResistanceRange>
+    <initialWillRange>0~0</initialWillRange>
+    <isFighter>false</isFighter>
+    <techHediffsChance>0.03</techHediffsChance>
+    <techHediffsMoney>50~800</techHediffsMoney>
+  </PawnKindDef>
+</Defs>

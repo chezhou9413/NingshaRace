@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义凝砂族鞭击逐帧 Mote 动画。 -->
+
+  <!-- Def 职责：按 Mote 生命周期播放 21 帧鞭子动画并在播放完成后销毁。 -->
+  <ThingDef ParentName="MoteBase">
+    <defName>NingshaRace_Mote_WhipFrameAnimation</defName>
+    <label>凝砂族鞭击动画</label>
+    <thingClass>MoteThrown</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <mote>
+      <fadeInTime>0</fadeInTime>
+      <solidTime>0.7</solidTime>
+      <fadeOutTime>0</fadeOutTime>
+    </mote>
+    <graphicData>
+      <texPath>NingshaRace/Motes/Whip/WhipFrames</texPath>
+      <graphicClass>NingshaRaceLib.Rendering.Graphic_MoteFrameAnimation</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(4,4)</drawSize>
+    </graphicData>
+  </ThingDef>
+</Defs>

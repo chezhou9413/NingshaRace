@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义只由凝砂族战士生成的作战内衬及其身体附加层。 -->
+
+  <!-- Def 职责：承载内衣、上衣、腰甲、腿甲和佩剑贴图，并作为凝砂族战士的固定内层服装。 -->
+  <ThingDef ParentName="NingshaRaceOutfitBase">
+    <defName>NingshaRace_Apparel_CombatLiner</defName>
+    <label>凝砂族作战内衬</label>
+    <description>凝砂族战士贴身穿戴的作战内衬，由内衣、短上衣、腰部护具、腿甲和随身佩剑组成。</description>
+    <generateAllowChance>0</generateAllowChance>
+    <graphicData>
+      <texPath>NingshaRace/Apparel/Outfit3/Outfit3Item</texPath>
+    </graphicData>
+    <apparel Inherit="False">
+      <wornGraphicPath>NingshaRace/Pawns/Ningsha/Null/Null</wornGraphicPath>
+      <bodyPartGroups>
+        <li>Torso</li>
+        <li>Neck</li>
+        <li>Shoulders</li>
+        <li>Arms</li>
+        <li>Legs</li>
+      </bodyPartGroups>
+      <layers>
+        <li>OnSkin</li>
+      </layers>
+    </apparel>
+    <comps>
+      <li Class="ChezhouLib.comp.ApparelAddBodyAddonCompProperties">
+        <targetRaces><li>NingshaRace</li></targetRaces>
+        <bodyAddonDefs>
+          <li>
+            <name>NingshaRace_Outfit3Underwear</name>
+            <userCustomizable>false</userCustomizable>
+            <path>NingshaRace/Apparel/Outfit3/Outfit3Underwear</path>
+            <colorChannel>raceskin</colorChannel>
+            <colorOverrideOne>(255,255,255)</colorOverrideOne>
+            <colorOverrideTwo>(255,255,255)</colorOverrideTwo>
+            <shaderType>CutoutComplex</shaderType>
+            <inFrontOfBody>true</inFrontOfBody>
+            <layerInvert>false</layerInvert>
+            <flipWest>true</flipWest>
+            <drawSize>1</drawSize>
+            <scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
+            <defaultOffset>Center</defaultOffset>
+            <alignWithHead>false</alignWithHead>
+            <conditions><BodyPart><bodyPart>Torso</bodyPart></BodyPart></conditions>
+            <offsets>
+              <south><layerOffset>-0.295</layerOffset><offset>(0, 0)</offset></south>
+              <north><layerOffset>-0.295</layerOffset><offset>(0, 0)</offset></north>
+              <east><layerOffset>-0.295</layerOffset><offset>(0, 0)</offset></east>
+              <west><layerOffset>-0.295</layerOffset><offset>(0, 0)</offset></west>
+            </offsets>
+          </li>
+          <li>
+            <name>NingshaRace_Outfit3Top</name>
+            <userCustomizable>false</userCustomizable>
+            <path>NingshaRace/Apparel/Outfit3/Outfit3Top</path>
+            <colorChannel>raceskin</colorChannel>
+            <colorOverrideOne>(255,255,255)</colorOverrideOne>
+            <colorOverrideTwo>(255,255,255)</colorOverrideTwo>
+            <shaderType>CutoutComplex</shaderType>
+            <inFrontOfBody>true</inFrontOfBody>
+            <layerInvert>false</layerInvert>
+            <flipWest>true</flipWest>
+            <drawSize>1</drawSize>
+            <scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
+            <defaultOffset>Center</defaultOffset>
+            <alignWithHead>false</alignWithHead>
+            <conditions><BodyPart><bodyPart>Torso</bodyPart></BodyPart></conditions>
+            <offsets>
+              <south><layerOffset>-0.294</layerOffset><offset>(0, 0)</offset></south>
+              <north><layerOffset>-0.294</layerOffset><offset>(0, 0)</offset></north>
+              <east><layerOffset>-0.294</layerOffset><offset>(0, 0)</offset></east>
+              <west><layerOffset>-0.294</layerOffset><offset>(0, 0)</offset></west>
+            </offsets>
+          </li>
+          <li>
+            <name>NingshaRace_Outfit3Waist</name>
+            <userCustomizable>false</userCustomizable>
+            <path>NingshaRace/Apparel/Outfit3/Outfit3Waist</path>
+            <colorChannel>raceskin</colorChannel>
+            <colorOverrideOne>(255,255,255)</colorOverrideOne>
+            <colorOverrideTwo>(255,255,255)</colorOverrideTwo>
+            <shaderType>CutoutComplex</shaderType>
+            <inFrontOfBody>true</inFrontOfBody>
+            <layerInvert>false</layerInvert>
+            <flipWest>true</flipWest>
+            <drawSize>1</drawSize>
+            <scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
+            <defaultOffset>Center</defaultOffset>
+            <alignWithHead>false</alignWithHead>
+            <conditions><BodyPart><bodyPart>Torso</bodyPart></BodyPart></conditions>
+            <offsets>
+              <south><layerOffset>-0.2935</layerOffset><offset>(0, 0)</offset></south>
+              <north><layerOffset>-0.2935</layerOffset><offset>(0, 0)</offset></north>
+              <east><layerOffset>-0.2935</layerOffset><offset>(0, 0)</offset></east>
+              <west><layerOffset>-0.2935</layerOffset><offset>(0, 0)</offset></west>
+            </offsets>
+          </li>
+          <li>
+            <name>NingshaRace_Outfit3LegArmor</name>
+            <userCustomizable>false</userCustomizable>
+            <path>NingshaRace/Apparel/Outfit3/Outfit3LegArmor</path>
+            <colorChannel>raceskin</colorChannel>
+            <colorOverrideOne>(255,255,255)</colorOverrideOne>
+            <colorOverrideTwo>(255,255,255)</colorOverrideTwo>
+            <shaderType>CutoutComplex</shaderType>
+            <inFrontOfBody>true</inFrontOfBody>
+            <layerInvert>false</layerInvert>
+            <flipWest>true</flipWest>
+            <drawSize>1</drawSize>
+            <scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
+            <defaultOffset>Center</defaultOffset>
+            <alignWithHead>false</alignWithHead>
+            <conditions><BodyPart><bodyPart>Torso</bodyPart></BodyPart></conditions>
+            <offsets>
+              <south><layerOffset>-0.29</layerOffset><offset>(0, 0)</offset></south>
+              <north><layerOffset>-0.293</layerOffset><offset>(0, 0)</offset></north>
+              <east><layerOffset>-0.294</layerOffset><offset>(0, 0)</offset></east>
+              <west><layerOffset>-0.293</layerOffset><offset>(0, 0)</offset></west>
+            </offsets>
+          </li>
+          <li>
+            <name>NingshaRace_Outfit3Sword</name>
+            <userCustomizable>false</userCustomizable>
+            <path>NingshaRace/Apparel/Outfit3/Outfit3Sword</path>
+            <colorChannel>raceskin</colorChannel>
+            <colorOverrideOne>(255,255,255)</colorOverrideOne>
+            <colorOverrideTwo>(255,255,255)</colorOverrideTwo>
+            <shaderType>CutoutComplex</shaderType>
+            <inFrontOfBody>true</inFrontOfBody>
+            <layerInvert>false</layerInvert>
+            <flipWest>true</flipWest>
+            <drawSize>1</drawSize>
+            <scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
+            <defaultOffset>Center</defaultOffset>
+            <alignWithHead>false</alignWithHead>
+            <conditions><BodyPart><bodyPart>Torso</bodyPart></BodyPart></conditions>
+            <offsets>
+              <south><layerOffset>-0.3</layerOffset><offset>(0, 0)</offset></south>
+              <north><layerOffset>-0.287</layerOffset><offset>(0, 0)</offset></north>
+              <east><layerOffset>-0.287</layerOffset><offset>(0, 0)</offset></east>
+              <west><layerOffset>-0.3</layerOffset><offset>(0, 0)</offset></west>
+            </offsets>
+          </li>
+        </bodyAddonDefs>
+      </li>
+    </comps>
+  </ThingDef>
+</Defs>

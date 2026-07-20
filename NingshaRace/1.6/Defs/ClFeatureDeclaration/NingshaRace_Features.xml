@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：声明凝砂族实际使用的 ChezhouLib 功能门控。 -->
+  <ChezhouLib.LibDef.ClFeatureDeclarationDef>
+    <defName>NingshaRace_Enable_UnityAssets</defName>
+    <feature>UnityAssets</feature>
+  </ChezhouLib.LibDef.ClFeatureDeclarationDef>
+
+  <ChezhouLib.LibDef.ClFeatureDeclarationDef>
+    <defName>NingshaRace_Enable_HARBodyAddon</defName>
+    <feature>HARBodyAddon</feature>
+  </ChezhouLib.LibDef.ClFeatureDeclarationDef>
+</Defs>

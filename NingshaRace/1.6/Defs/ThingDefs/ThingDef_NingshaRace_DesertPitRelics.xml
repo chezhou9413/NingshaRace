@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义沙漠巨坑地下洞穴中使用的古老图腾、石棺、开启石棺和可破坏罐子遗迹建筑。 -->
+  <ThingDef ParentName="BuildingBase" Name="NingshaRace_DesertPitRelicBase" Abstract="True">
+    <thingClass>Building</thingClass>
+    <category>Building</category>
+    <drawerType>MapMeshOnly</drawerType>
+    <altitudeLayer>Building</altitudeLayer>
+    <selectable>true</selectable>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.35</fillPercent>
+    <destroyable>false</destroyable>
+    <useHitPoints>false</useHitPoints>
+    <canOverlapZones>false</canOverlapZones>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <filthLeaving>Filth_RubbleBuilding</filthLeaving>
+    <soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+    <repairEffect>Repair</repairEffect>
+    <noRightClickDraftAttack>true</noRightClickDraftAttack>
+    <statBases>
+      <SellPriceFactor>0.7</SellPriceFactor>
+      <Flammability>0</Flammability>
+      <Beauty>3</Beauty>
+    </statBases>
+    <building>
+      <isEdifice>true</isEdifice>
+      <deconstructible>false</deconstructible>
+      <isTargetable>false</isTargetable>
+      <isInert>true</isInert>
+      <claimable>false</claimable>
+      <expandHomeArea>false</expandHomeArea>
+    </building>
+  </ThingDef>
+
+  <ThingDef ParentName="NingshaRace_DesertPitRelicBase" Name="NingshaRace_DesertPitTotemBase" Abstract="True">
+    <rotatable>false</rotatable>
+    <size>(1,1)</size>
+    <pathCost>60</pathCost>
+    <fillPercent>0.5</fillPercent>
+  </ThingDef>
+
+  <ThingDef ParentName="NingshaRace_DesertPitRelicBase" Name="NingshaRace_DesertPitSarcophagusBase" Abstract="True">
+    <rotatable>true</rotatable>
+    <size>(3,2)</size>
+    <pathCost>80</pathCost>
+    <fillPercent>0.55</fillPercent>
+    <statBases>
+      <SellPriceFactor>0.7</SellPriceFactor>
+      <Flammability>0</Flammability>
+      <Beauty>4</Beauty>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="NingshaRace_DesertPitTotemBase">
+    <defName>NingshaRace_DesertPitTotemStatueA</defName>
+    <label>裂纹砂岩图腾</label>
+    <description>一块被雕成图腾形状的风化砂岩，深裂中仍能看出凝砂族早期留下的几何纹样。</description>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Building/NingshaRace/DesertPit/Relics/NingshaRace_TotemStatue01</texPath>
+      <drawSize>(1.55,1.55)</drawSize>
+      <shadowData>
+        <volume>(0.7,0.8,0.7)</volume>
+      </shadowData>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="NingshaRace_DesertPitTotemBase">
+    <defName>NingshaRace_DesertPitTotemStatueB</defName>
+    <label>残缺砂岩图腾</label>
+    <description>残缺的地下图腾，底部被流沙半掩，表面刻痕像是在标记古老洞室的位置。</description>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Building/NingshaRace/DesertPit/Relics/NingshaRace_TotemStatue02</texPath>
+      <drawSize>(1.55,1.55)</drawSize>
+      <shadowData>
+        <volume>(0.7,0.8,0.7)</volume>
+      </shadowData>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="NingshaRace_DesertPitTotemBase">
+    <defName>NingshaRace_DesertPitTotemStatueC</defName>
+    <label>倾斜砂岩图腾</label>
+    <description>一座向侧面倾斜的砂岩图腾，似乎曾经守在某个地下墓室或祭祀场的边缘。</description>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Building/NingshaRace/DesertPit/Relics/NingshaRace_TotemStatue03</texPath>
+      <drawSize>(1.55,1.55)</drawSize>
+      <shadowData>
+        <volume>(0.7,0.8,0.7)</volume>
+      </shadowData>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="NingshaRace_DesertPitSarcophagusBase">
+    <defName>NingshaRace_DesertPitSarcophagus</defName>
+    <label>封闭砂岩石棺</label>
+    <description>沉重的砂岩石棺，棺盖已经开裂，仍像在守护某个被风沙吞没的地下秘密。</description>
+    <graphicData>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <texPath>Things/Building/NingshaRace/DesertPit/Relics/NingshaRace_SarcophagusClosed</texPath>
+      <drawSize>(3,3)</drawSize>
+      <shadowData>
+        <volume>(2.5,0.55,1.6)</volume>
+      </shadowData>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="NingshaRace_DesertPitSarcophagusBase">
+    <defName>NingshaRace_DesertPitOpenSarcophagus</defName>
+    <label>开启砂岩石棺</label>
+    <description>已经开启的砂岩石棺，内部只剩被沙尘磨平的空腔和断裂的边缘。</description>
+    <fillPercent>0.45</fillPercent>
+    <graphicData>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <texPath>Things/Building/NingshaRace/DesertPit/Relics/NingshaRace_SarcophagusOpen</texPath>
+      <drawSize>(3,3)</drawSize>
+      <shadowData>
+        <volume>(2.5,0.55,1.6)</volume>
+      </shadowData>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>NingshaRace_DesertPitPot</defName>
+    <label>古旧砂陶罐</label>
+    <description>散落在地下洞穴中的古旧砂陶罐，罐身覆着细沙和裂纹，里面偶尔还残留着一点能用的东西。</description>
+    <thingClass>NingshaRaceLib.DesertPit.Building_DesertPitPot</thingClass>
+    <category>Building</category>
+    <drawerType>MapMeshOnly</drawerType>
+    <altitudeLayer>Building</altitudeLayer>
+    <selectable>true</selectable>
+    <rotatable>false</rotatable>
+    <size>(1,1)</size>
+    <passability>PassThroughOnly</passability>
+    <pathCost>35</pathCost>
+    <fillPercent>0.28</fillPercent>
+    <destroyable>true</destroyable>
+    <useHitPoints>true</useHitPoints>
+    <canOverlapZones>false</canOverlapZones>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <filthLeaving>Filth_RubbleBuilding</filthLeaving>
+    <soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+    <repairEffect>Repair</repairEffect>
+    <noRightClickDraftAttack>false</noRightClickDraftAttack>
+    <statBases>
+      <SellPriceFactor>0.7</SellPriceFactor>
+      <MaxHitPoints>1</MaxHitPoints>
+      <WorkToBuild>120</WorkToBuild>
+      <Flammability>0</Flammability>
+      <Beauty>1</Beauty>
+    </statBases>
+    <building>
+      <isEdifice>true</isEdifice>
+      <deconstructible>false</deconstructible>
+      <isTargetable>true</isTargetable>
+      <isInert>true</isInert>
+      <claimable>false</claimable>
+      <expandHomeArea>false</expandHomeArea>
+      <displayAttackToDestroyOnInspectPane>true</displayAttackToDestroyOnInspectPane>
+    </building>
+    <graphicData>
+      <graphicClass>Graphic_Random</graphicClass>
+      <texPath>Things/Building/NingshaRace/DesertPit/Relics/Pots</texPath>
+      <drawSize>(1.15,1.15)</drawSize>
+      <shadowData>
+        <volume>(0.55,0.45,0.55)</volume>
+      </shadowData>
+    </graphicData>
+  </ThingDef>
+</Defs>

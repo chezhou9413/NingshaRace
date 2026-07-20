@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义只供沙傀 PawnKind 固定使用的专属背景故事。 -->
+  <BackstoryDef>
+    <defName>NingshaRace_SandGolem_Childhood_FormlessSand</defName>
+    <identifier>NingshaRace_SandGolem_Childhood_FormlessSand</identifier>
+    <slot>Childhood</slot>
+    <spawnCategories>
+      <li>NingshaRace_SandGolemOnly</li>
+    </spawnCategories>
+    <title>未塑之砂</title>
+    <titleFemale>未塑之砂</titleFemale>
+    <titleShort>未塑之砂</titleShort>
+    <titleShortFemale>未塑之砂</titleShortFemale>
+    <description>它没有童年，也没有故乡。被术式唤醒之前，它只是散落在地表的一捧砂粒。</description>
+    <workDisables>None</workDisables>
+    <requiredWorkTags>None</requiredWorkTags>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+
+  <BackstoryDef>
+    <defName>NingshaRace_SandGolem_Adulthood_BoundGolem</defName>
+    <identifier>NingshaRace_SandGolem_Adulthood_BoundGolem</identifier>
+    <slot>Adulthood</slot>
+    <spawnCategories>
+      <li>NingshaRace_SandGolemOnly</li>
+    </spawnCategories>
+    <title>凝砂傀儡</title>
+    <titleFemale>凝砂傀儡</titleFemale>
+    <titleShort>沙傀</titleShort>
+    <titleShortFemale>沙傀</titleShortFemale>
+    <description>它由施术者的影与砂凝成，短暂地拥有行动的形体。它不继承血缘、记忆或欲望，只执行当前被赋予的职责。</description>
+    <workDisables>None</workDisables>
+    <requiredWorkTags>None</requiredWorkTags>
+    <shuffleable>false</shuffleable>
+  </BackstoryDef>
+</Defs>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义凝砂族战士及其专属服装生成规则。 -->
+
+  <!-- Def 职责：生成固定穿戴作战内衬，并有一半概率穿戴高阶战术斗篷的凝砂族战士。 -->
+  <PawnKindDef ParentName="BasePlayerPawnKind">
+    <defName>NingshaRace_Warrior</defName>
+    <label>凝砂族战士</label>
+    <race>NingshaRace</race>
+    <defaultFactionDef>PlayerColony</defaultFactionDef>
+    <useFactionXenotypes>false</useFactionXenotypes>
+    <apparelAllowHeadgearChance>0</apparelAllowHeadgearChance>
+    <apparelIgnorePollution MayRequire="Ludeon.RimWorld.Biotech">true</apparelIgnorePollution>
+    <apparelIgnoreSeasons>true</apparelIgnoreSeasons>
+    <apparelMoney>0~0</apparelMoney>
+    <apparelTags Inherit="False" />
+    <apparelRequired Inherit="False">
+      <li>NingshaRace_Apparel_CombatLiner</li>
+    </apparelRequired>
+    <specificApparelRequirements Inherit="False">
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>Shell</apparelLayer>
+        <apparelDef>NingshaRace_Apparel_AdvancedTacticalCloak</apparelDef>
+        <alternateTagChoices>
+          <li>
+            <tag>NingshaRaceWarriorTacticalCloak</tag>
+            <chance>0.5</chance>
+          </li>
+        </alternateTagChoices>
+      </li>
+    </specificApparelRequirements>
+    <weaponMoney>999999~999999</weaponMoney>
+    <weaponTags Inherit="False">
+      <li>NingshaRaceSnakeBellySword</li>
+    </weaponTags>
+    <backstoryCryptosleepCommonality>1</backstoryCryptosleepCommonality>
+    <chemicalAddictionChance>0.06</chemicalAddictionChance>
+    <combatPower>30</combatPower>
+    <forceNormalGearQuality>true</forceNormalGearQuality>
+    <humanPregnancyChance>0.06</humanPregnancyChance>
+    <initialResistanceRange>13~21</initialResistanceRange>
+    <initialWillRange>0~0</initialWillRange>
+    <isFighter>true</isFighter>
+    <techHediffsChance>0.03</techHediffsChance>
+    <techHediffsMoney>50~800</techHediffsMoney>
+  </PawnKindDef>
+</Defs>

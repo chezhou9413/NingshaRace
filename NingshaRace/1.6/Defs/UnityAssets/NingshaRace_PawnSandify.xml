@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：声明凝砂族沙偶 Shader 的 ChezhouLib Unity AssetBundle、材质模板和 RimWorld ShaderTypeDef。 -->
+  <ChezhouLib.LibDef.UnityShaderLord>
+    <defName>NingshaRace_ShaderLord</defName>
+    <AbPath>/AssetBundles/ningsharace.ab</AbPath>
+    <ShaderFolderName>/Shader/</ShaderFolderName>
+    <ImageFolderName>/image/</ImageFolderName>
+  </ChezhouLib.LibDef.UnityShaderLord>
+
+  <ChezhouLib.LibDef.ClShaderMaterial>
+    <defName>NingshaRace_PawnSandify_Material</defName>
+    <label>凝砂族沙偶材质</label>
+    <shaderName>NingshaRace/Pawn/Sandify</shaderName>
+    <resModID>chezhou.race.ningsharace</resModID>
+    <shaderParameters>
+      <li>
+        <parameterName>_ShadowInfluence</parameterName>
+        <parameterValue>1</parameterValue>
+      </li>
+      <li>
+        <parameterName>_DetailPreserve</parameterName>
+        <parameterValue>1</parameterValue>
+      </li>
+      <li>
+        <parameterName>_ReliefStrength</parameterName>
+        <parameterValue>1</parameterValue>
+      </li>
+      <li>
+        <parameterName>_OriginalTint</parameterName>
+        <parameterValue>0.35</parameterValue>
+      </li>
+      <li>
+        <parameterName>_Brightness</parameterName>
+        <parameterValue>0.82</parameterValue>
+      </li>
+      <li>
+        <parameterName>_SandProgress</parameterName>
+        <parameterValue>0.494</parameterValue>
+      </li>
+      <li>
+        <parameterName>_GatherRadius</parameterName>
+        <parameterValue>0.991</parameterValue>
+      </li>
+      <li>
+        <parameterName>_ScatterRadius</parameterName>
+        <parameterValue>1</parameterValue>
+      </li>
+      <li>
+        <parameterName>_ParticleScale</parameterName>
+        <parameterValue>380</parameterValue>
+      </li>
+      <li>
+        <parameterName>_ParticleSize</parameterName>
+        <parameterValue>0.95</parameterValue>
+      </li>
+      <li>
+        <parameterName>_ParticleJitter</parameterName>
+        <parameterValue>0</parameterValue>
+      </li>
+      <li>
+        <parameterName>_ParticleDensity</parameterName>
+        <parameterValue>1</parameterValue>
+      </li>
+      <li>
+        <parameterName>_SolidHold</parameterName>
+        <parameterValue>0.035</parameterValue>
+      </li>
+      <li>
+        <parameterName>_CanvasPadding</parameterName>
+        <parameterValue>0.95</parameterValue>
+      </li>
+      <li>
+        <parameterName>_GrainScale</parameterName>
+        <parameterValue>256</parameterValue>
+      </li>
+      <li>
+        <parameterName>_GrainContrast</parameterName>
+        <parameterValue>0.2</parameterValue>
+      </li>
+      <li>
+        <parameterName>_GrainAmount</parameterName>
+        <parameterValue>1</parameterValue>
+      </li>
+      <li>
+        <parameterName>_SparkleAmount</parameterName>
+        <parameterValue>0.104</parameterValue>
+      </li>
+      <li>
+        <parameterName>_AlphaCutoff</parameterName>
+        <parameterValue>0.092</parameterValue>
+      </li>
+      <li>
+        <parameterName>_Color</parameterName>
+        <parameterValue>(1.000, 1.000, 1.000, 1.000)</parameterValue>
+      </li>
+      <li>
+        <parameterName>_SandDark</parameterName>
+        <parameterValue>(0.358, 0.340, 0.323, 1.000)</parameterValue>
+      </li>
+      <li>
+        <parameterName>_SandMid</parameterName>
+        <parameterValue>(0.679, 0.617, 0.548, 1.000)</parameterValue>
+      </li>
+      <li>
+        <parameterName>_SandLight</parameterName>
+        <parameterValue>(0.660, 0.632, 0.564, 1.000)</parameterValue>
+      </li>
+      <li>
+        <parameterName>_ReliefLightDirection</parameterName>
+        <parameterValue>(-0.35, 0.65, 0.00, 0.00)</parameterValue>
+      </li>
+    </shaderParameters>
+  </ChezhouLib.LibDef.ClShaderMaterial>
+
+  <ChezhouLib.LibDef.ClShaderPro>
+    <defName>NingshaRace_PawnSandify_ShaderPro</defName>
+    <ClShaderMaterial>NingshaRace_PawnSandify_Material</ClShaderMaterial>
+    <shaderPath>Map/Cutout</shaderPath>
+  </ChezhouLib.LibDef.ClShaderPro>
+</Defs>

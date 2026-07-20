@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义沙漠巨坑地下洞穴中使用的凝砂发光装饰植物。 -->
+  <ThingDef ParentName="CavePlantBase" Name="NingshaRace_DesertPitPlantBase" Abstract="True">
+    <category>Plant</category>
+    <selectable>true</selectable>
+    <pathCost>14</pathCost>
+    <fillPercent>0.2</fillPercent>
+    <statBases>
+      <MaxHitPoints>90</MaxHitPoints>
+      <Beauty>2</Beauty>
+      <BeautyOutdoors>2</BeautyOutdoors>
+      <Nutrition>0.1</Nutrition>
+    </statBases>
+    <plant>
+      <fertilityMin>0.01</fertilityMin>
+      <fertilitySensitivity>0.05</fertilitySensitivity>
+      <growDays>30</growDays>
+      <dieIfLeafless>true</dieIfLeafless>
+      <neverBlightable>true</neverBlightable>
+      <cavePlant>true</cavePlant>
+      <topWindExposure>0.02</topWindExposure>
+      <visualSizeRange>0.75~1.0</visualSizeRange>
+      <wildClusterRadius>4</wildClusterRadius>
+      <wildClusterWeight>0</wildClusterWeight>
+      <pollution>Any</pollution>
+    </plant>
+  </ThingDef>
+
+  <ThingDef ParentName="NingshaRace_DesertPitPlantBase">
+    <defName>NingshaRace_DesertPitPlantA</defName>
+    <label>蓝灰洞杯菌</label>
+    <description>一种扎根在沙岩裂隙中的蓝灰色杯状真菌，杯缘会散出微弱冷光。</description>
+    <graphicData>
+      <texPath>Things/Plant/NingshaRace/DesertPit/DesertPitPlant01</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1.45,1.45)</drawSize>
+    </graphicData>
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>4.2</glowRadius>
+        <glowColor>(42,76,92,0)</glowColor>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="NingshaRace_DesertPitPlantBase">
+    <defName>NingshaRace_DesertPitPlantB</defName>
+    <label>白晶砂芽</label>
+    <description>半透明的白色晶芽从软沙中探出，顶端凝聚着冰冷的幽光。</description>
+    <graphicData>
+      <texPath>Things/Plant/NingshaRace/DesertPit/DesertPitPlant02</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1.35,1.35)</drawSize>
+    </graphicData>
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>5.0</glowRadius>
+        <glowColor>(122,132,176,0)</glowColor>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="NingshaRace_DesertPitPlantBase">
+    <defName>NingshaRace_DesertPitPlantC</defName>
+    <label>浅青伞菇</label>
+    <description>细长的伞状洞菇在无光处生长，菌盖下方透出浅青色微光。</description>
+    <graphicData>
+      <texPath>Things/Plant/NingshaRace/DesertPit/DesertPitPlant03</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1.45,1.45)</drawSize>
+    </graphicData>
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>4.8</glowRadius>
+        <glowColor>(96,142,156,0)</glowColor>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="NingshaRace_DesertPitPlantBase">
+    <defName>NingshaRace_DesertPitPlantD</defName>
+    <label>紫辉花簇菌</label>
+    <description>盘状菌体上长出细小花簇，蓝紫色光点像被封在沙晶中的星屑。</description>
+    <graphicData>
+      <texPath>Things/Plant/NingshaRace/DesertPit/DesertPitPlant04</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1.55,1.55)</drawSize>
+    </graphicData>
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>5.6</glowRadius>
+        <glowColor>(92,76,164,0)</glowColor>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="NingshaRace_DesertPitPlantBase">
+    <defName>NingshaRace_DesertPitPlantE</defName>
+    <label>黄绿晶卵草</label>
+    <description>卵形晶囊包裹着枯枝般的内芯，根部会向周围投出柔和的黄绿色光。</description>
+    <graphicData>
+      <texPath>Things/Plant/NingshaRace/DesertPit/DesertPitPlant05</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1.35,1.35)</drawSize>
+    </graphicData>
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>5.4</glowRadius>
+        <glowColor>(142,154,84,0)</glowColor>
+      </li>
+    </comps>
+  </ThingDef>
+</Defs>

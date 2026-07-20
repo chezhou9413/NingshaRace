@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义沙漠巨坑地下洞穴中使用的钟乳石、骨骸和发光水晶装饰物。 -->
+  <ThingDef ParentName="BuildingBase" Name="NingshaRace_DesertPitDecorationBase" Abstract="True">
+    <thingClass>Building</thingClass>
+    <category>Building</category>
+    <drawerType>MapMeshOnly</drawerType>
+    <altitudeLayer>Building</altitudeLayer>
+    <selectable>false</selectable>
+    <rotatable>false</rotatable>
+    <passability>Standable</passability>
+    <pathCost>10</pathCost>
+    <fillPercent>0.12</fillPercent>
+    <destroyable>false</destroyable>
+    <useHitPoints>false</useHitPoints>
+    <canOverlapZones>true</canOverlapZones>
+    <statBases>
+      <Flammability>0</Flammability>
+      <Beauty>1</Beauty>
+    </statBases>
+    <building>
+      <isEdifice>true</isEdifice>
+      <deconstructible>false</deconstructible>
+      <isTargetable>false</isTargetable>
+      <isInert>true</isInert>
+      <claimable>false</claimable>
+      <expandHomeArea>false</expandHomeArea>
+    </building>
+  </ThingDef>
+
+  <ThingDef ParentName="NingshaRace_DesertPitDecorationBase">
+    <defName>NingshaRace_DesertPitStalactiteA</defName>
+    <label>沙岩钟乳石</label>
+    <description>风化沙岩在地下水痕中凝结出的钟乳石，表面布满细碎的砂晶。</description>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Building/NingshaRace/DesertPit/Decor/DesertPitStalactite01</texPath>
+      <drawSize>(1.35,1.35)</drawSize>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="NingshaRace_DesertPitDecorationBase">
+    <defName>NingshaRace_DesertPitStalactiteB</defName>
+    <label>细沙钟乳石</label>
+    <description>一簇细长的沙岩钟乳石，从洞顶碎落后斜插在软沙中。</description>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Building/NingshaRace/DesertPit/Decor/DesertPitStalactite02</texPath>
+      <drawSize>(1.15,1.15)</drawSize>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="NingshaRace_DesertPitDecorationBase">
+    <defName>NingshaRace_DesertPitStalactiteC</defName>
+    <label>裂痕钟乳石</label>
+    <description>带有纵向裂痕的沙岩钟乳石，像被地底风压扯裂的石刺。</description>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Building/NingshaRace/DesertPit/Decor/DesertPitStalactite03</texPath>
+      <drawSize>(1.35,1.35)</drawSize>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="NingshaRace_DesertPitDecorationBase">
+    <defName>NingshaRace_DesertPitStalactiteD</defName>
+    <label>暗砂钟乳石</label>
+    <description>颜色更深的钟乳石残柱，底部被长期流动的砂砾磨得圆钝。</description>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Building/NingshaRace/DesertPit/Decor/DesertPitStalactite04</texPath>
+      <drawSize>(1.3,1.3)</drawSize>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="NingshaRace_DesertPitDecorationBase">
+    <defName>NingshaRace_DesertPitStalactiteE</defName>
+    <label>巨砂钟乳石</label>
+    <description>较大的沙岩钟乳石残柱，常见于洞壁拐角和塌落边缘。</description>
+    <pathCost>18</pathCost>
+    <fillPercent>0.2</fillPercent>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Building/NingshaRace/DesertPit/Decor/DesertPitStalactite05</texPath>
+      <drawSize>(1.65,1.65)</drawSize>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="NingshaRace_DesertPitDecorationBase">
+    <defName>NingshaRace_DesertPitStalactiteF</defName>
+    <label>短砂钟乳石</label>
+    <description>短而密的沙岩钟乳石堆，像从洞顶坠落后重新嵌入地面的石簇。</description>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Building/NingshaRace/DesertPit/Decor/DesertPitStalactite06</texPath>
+      <drawSize>(1.2,1.2)</drawSize>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="NingshaRace_DesertPitDecorationBase">
+    <defName>NingshaRace_DesertPitBonesA</defName>
+    <label>沙埋骨骸</label>
+    <description>半埋在软沙里的陈旧骨骸，已经被地下砂尘磨去了大部分轮廓。</description>
+    <pathCost>4</pathCost>
+    <fillPercent>0.05</fillPercent>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Building/NingshaRace/DesertPit/Decor/DesertPitBones01</texPath>
+      <drawSize>(1.3,1.3)</drawSize>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="NingshaRace_DesertPitDecorationBase">
+    <defName>NingshaRace_DesertPitBonesB</defName>
+    <label>风化骨堆</label>
+    <description>散落在洞室边缘的风化骨堆，像是很久以前被流沙带进地下的遗留物。</description>
+    <pathCost>4</pathCost>
+    <fillPercent>0.05</fillPercent>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Building/NingshaRace/DesertPit/Decor/DesertPitBones02</texPath>
+      <drawSize>(1.35,1.35)</drawSize>
+    </graphicData>
+  </ThingDef>
+
+  <ThingDef ParentName="NingshaRace_DesertPitDecorationBase">
+    <defName>NingshaRace_DesertPitGlowCrystal</defName>
+    <label>幽光砂晶</label>
+    <description>从沙岩裂缝中长出的发光晶簇，内部缓慢流动着黄绿色的冷光。</description>
+    <pathCost>16</pathCost>
+    <fillPercent>0.18</fillPercent>
+    <statBases>
+      <Beauty>3</Beauty>
+      <Flammability>0</Flammability>
+    </statBases>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Building/NingshaRace/DesertPit/Decor/DesertPitGlowCrystal</texPath>
+      <drawSize>(1.45,1.45)</drawSize>
+    </graphicData>
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>6.5</glowRadius>
+        <glowColor>(116,142,80,0)</glowColor>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="NingshaRace_DesertPitDecorationBase">
+    <defName>NingshaRace_DesertPitGlowCrystalShard</defName>
+    <label>碎生砂晶</label>
+    <description>从砂岩裂隙里分叉长出的较小晶芽，常成片贴着潮湿洞壁分布。</description>
+    <pathCost>8</pathCost>
+    <fillPercent>0.1</fillPercent>
+    <statBases>
+      <Beauty>2</Beauty>
+      <Flammability>0</Flammability>
+    </statBases>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Building/NingshaRace/DesertPit/Decor/DesertPitGlowCrystal</texPath>
+      <drawSize>(1.05,1.05)</drawSize>
+    </graphicData>
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>4.2</glowRadius>
+        <glowColor>(92,132,92,0)</glowColor>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="NingshaRace_DesertPitDecorationBase">
+    <defName>NingshaRace_DesertPitGlowCrystalPillar</defName>
+    <label>高砂晶柱</label>
+    <description>在古老渗水脉上拔高生长的发光晶柱，周围的沙砾被微光染成青绿。</description>
+    <pathCost>20</pathCost>
+    <fillPercent>0.22</fillPercent>
+    <statBases>
+      <Beauty>4</Beauty>
+      <Flammability>0</Flammability>
+    </statBases>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Building/NingshaRace/DesertPit/Decor/DesertPitGlowCrystal</texPath>
+      <drawSize>(1.8,1.8)</drawSize>
+    </graphicData>
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>7.5</glowRadius>
+        <glowColor>(118,150,78,0)</glowColor>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="NingshaRace_DesertPitDecorationBase">
+    <defName>NingshaRace_DesertPitGlowCrystalBloom</defName>
+    <label>簇生砂晶</label>
+    <description>多束砂晶在同一条裂缝上交叠生长，形成洞穴深处醒目的发光晶簇。</description>
+    <pathCost>18</pathCost>
+    <fillPercent>0.2</fillPercent>
+    <statBases>
+      <Beauty>4</Beauty>
+      <Flammability>0</Flammability>
+    </statBases>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Building/NingshaRace/DesertPit/Decor/DesertPitGlowCrystal</texPath>
+      <drawSize>(1.55,1.55)</drawSize>
+    </graphicData>
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>6.8</glowRadius>
+        <glowColor>(104,142,112,0)</glowColor>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef>
+    <defName>NingshaRace_DesertPitCeilingSandfall</defName>
+    <label>坠砂裂隙</label>
+    <description>洞顶裂缝中持续落下细砂和碎石，标记着仍在活动的塌陷带。</description>
+    <thingClass>Building</thingClass>
+    <category>Building</category>
+    <drawerType>None</drawerType>
+    <altitudeLayer>Building</altitudeLayer>
+    <selectable>false</selectable>
+    <rotatable>false</rotatable>
+    <tickerType>Normal</tickerType>
+    <destroyable>false</destroyable>
+    <useHitPoints>false</useHitPoints>
+    <passability>Standable</passability>
+    <pathCost>6</pathCost>
+    <fillPercent>0</fillPercent>
+    <canOverlapZones>true</canOverlapZones>
+    <building>
+      <isEdifice>false</isEdifice>
+      <deconstructible>false</deconstructible>
+      <isTargetable>false</isTargetable>
+      <isInert>true</isInert>
+      <claimable>false</claimable>
+      <expandHomeArea>false</expandHomeArea>
+    </building>
+    <comps>
+      <li Class="CompProperties_Effecter">
+        <effecterDef>UndercaveCeilingDebris</effecterDef>
+      </li>
+    </comps>
+    <statBases>
+      <Flammability>0</Flammability>
+    </statBases>
+  </ThingDef>
+</Defs>

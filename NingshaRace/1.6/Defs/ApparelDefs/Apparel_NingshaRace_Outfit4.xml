@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义凝砂族四式套装及其前后裙摆、斗篷、胸布和围脖 BodyAddon。 -->
+  <ThingDef ParentName="NingshaRaceOutfitBase">
+    <defName>NingshaRace_Apparel_VeiledDress</defName>
+    <label>凝砂垂纱裙装</label>
+    <description>由分层裙摆、垂落斗篷、胸布与围脖组成的凝砂族完整套装。</description>
+    <graphicData>
+      <texPath>NingshaRace/Apparel/Outfit4/Outfit4Item</texPath>
+    </graphicData>
+    <comps>
+      <li Class="ChezhouLib.comp.ApparelAddBodyAddonCompProperties">
+        <targetRaces><li>NingshaRace</li></targetRaces>
+        <bodyAddonDefs>
+          <li>
+            <name>NingshaRace_Outfit4SkirtBack</name>
+            <userCustomizable>false</userCustomizable>
+            <path>NingshaRace/Apparel/Outfit4/Outfit4SkirtBack</path>
+            <colorChannel>raceskin</colorChannel>
+            <colorOverrideOne>(255,255,255)</colorOverrideOne>
+            <colorOverrideTwo>(255,255,255)</colorOverrideTwo>
+            <shaderType>CutoutComplex</shaderType>
+            <inFrontOfBody>true</inFrontOfBody>
+            <layerInvert>false</layerInvert>
+            <flipWest>true</flipWest>
+            <drawSize>1</drawSize>
+            <scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
+            <defaultOffset>Center</defaultOffset>
+            <alignWithHead>false</alignWithHead>
+            <conditions><BodyPart><bodyPart>Torso</bodyPart></BodyPart></conditions>
+            <offsets>
+              <south><layerOffset>-0.31</layerOffset><offset>(0, 0)</offset></south>
+              <north><layerOffset>-0.31</layerOffset><offset>(0, 0)</offset></north>
+              <east><layerOffset>-0.31</layerOffset><offset>(0, 0)</offset></east>
+              <west><layerOffset>-0.31</layerOffset><offset>(0, 0)</offset></west>
+            </offsets>
+          </li>
+          <li>
+            <name>NingshaRace_Outfit4Cape</name>
+            <userCustomizable>false</userCustomizable>
+            <path>NingshaRace/Apparel/Outfit4/Outfit4Cape</path>
+            <colorChannel>raceskin</colorChannel>
+            <colorOverrideOne>(255,255,255)</colorOverrideOne>
+            <colorOverrideTwo>(255,255,255)</colorOverrideTwo>
+            <shaderType>CutoutComplex</shaderType>
+            <inFrontOfBody>true</inFrontOfBody>
+            <layerInvert>false</layerInvert>
+            <flipWest>true</flipWest>
+            <drawSize>1</drawSize>
+            <scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
+            <defaultOffset>Center</defaultOffset>
+            <alignWithHead>false</alignWithHead>
+            <conditions><BodyPart><bodyPart>Torso</bodyPart></BodyPart></conditions>
+            <offsets>
+              <south><layerOffset>-0.3</layerOffset><offset>(0, 0)</offset></south>
+              <north><layerOffset>-0.292</layerOffset><offset>(0, 0)</offset></north>
+              <east><layerOffset>-0.3</layerOffset><offset>(0, 0)</offset></east>
+              <west><layerOffset>-0.3</layerOffset><offset>(0, 0)</offset></west>
+            </offsets>
+          </li>
+          <li>
+            <name>NingshaRace_Outfit4Chestwrap</name>
+            <userCustomizable>false</userCustomizable>
+            <path>NingshaRace/Apparel/Outfit4/Outfit4Chestwrap</path>
+            <colorChannel>raceskin</colorChannel>
+            <colorOverrideOne>(255,255,255)</colorOverrideOne>
+            <colorOverrideTwo>(255,255,255)</colorOverrideTwo>
+            <shaderType>CutoutComplex</shaderType>
+            <inFrontOfBody>true</inFrontOfBody>
+            <layerInvert>false</layerInvert>
+            <flipWest>true</flipWest>
+            <drawSize>1</drawSize>
+            <scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
+            <defaultOffset>Center</defaultOffset>
+            <alignWithHead>false</alignWithHead>
+            <conditions><BodyPart><bodyPart>Torso</bodyPart></BodyPart></conditions>
+            <offsets>
+              <south><layerOffset>-0.294</layerOffset><offset>(0, 0)</offset></south>
+              <north><layerOffset>-0.294</layerOffset><offset>(0, 0)</offset></north>
+              <east><layerOffset>-0.294</layerOffset><offset>(0, 0)</offset></east>
+              <west><layerOffset>-0.294</layerOffset><offset>(0, 0)</offset></west>
+            </offsets>
+          </li>
+          <li>
+            <name>NingshaRace_Outfit4SkirtFront</name>
+            <userCustomizable>false</userCustomizable>
+            <path>NingshaRace/Apparel/Outfit4/Outfit4SkirtFront</path>
+            <colorChannel>raceskin</colorChannel>
+            <colorOverrideOne>(255,255,255)</colorOverrideOne>
+            <colorOverrideTwo>(255,255,255)</colorOverrideTwo>
+            <shaderType>CutoutComplex</shaderType>
+            <inFrontOfBody>true</inFrontOfBody>
+            <layerInvert>false</layerInvert>
+            <flipWest>true</flipWest>
+            <drawSize>1</drawSize>
+            <scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
+            <defaultOffset>Center</defaultOffset>
+            <alignWithHead>false</alignWithHead>
+            <conditions><BodyPart><bodyPart>Torso</bodyPart></BodyPart></conditions>
+            <offsets>
+              <south><layerOffset>-0.293</layerOffset><offset>(0, 0)</offset></south>
+              <north><layerOffset>-0.293</layerOffset><offset>(0, 0)</offset></north>
+              <east><layerOffset>-0.293</layerOffset><offset>(0, 0)</offset></east>
+              <west><layerOffset>-0.293</layerOffset><offset>(0, 0)</offset></west>
+            </offsets>
+          </li>
+          <li>
+            <name>NingshaRace_Outfit4Scarf</name>
+            <userCustomizable>false</userCustomizable>
+            <path>NingshaRace/Apparel/Outfit4/Outfit4Scarf</path>
+            <colorChannel>raceskin</colorChannel>
+            <colorOverrideOne>(255,255,255)</colorOverrideOne>
+            <colorOverrideTwo>(255,255,255)</colorOverrideTwo>
+            <shaderType>CutoutComplex</shaderType>
+            <inFrontOfBody>true</inFrontOfBody>
+            <layerInvert>false</layerInvert>
+            <flipWest>true</flipWest>
+            <drawSize>1</drawSize>
+            <scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
+            <defaultOffset>Center</defaultOffset>
+            <alignWithHead>false</alignWithHead>
+            <conditions><BodyPart><bodyPart>Torso</bodyPart></BodyPart></conditions>
+            <offsets>
+              <south><layerOffset>-0.28</layerOffset><offset>(0, 0)</offset></south>
+              <north><layerOffset>-0.289</layerOffset><offset>(0, 0)</offset></north>
+              <east><layerOffset>-0.29</layerOffset><offset>(0, 0)</offset></east>
+              <west><layerOffset>-0.29</layerOffset><offset>(0, 0)</offset></west>
+            </offsets>
+          </li>
+        </bodyAddonDefs>
+      </li>
+    </comps>
+  </ThingDef>
+</Defs>

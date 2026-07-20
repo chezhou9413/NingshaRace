@@ -1,0 +1,24 @@
+# 本地部署和编译脚本由 xmlremove 脚手架生成，不纳入 Git 管理
+/deploy_modSelf.bat
+/compile_modSelf.bat
+/build.bat
+
+# IDE 配置和缓存
+.vs/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# C# 编译中间目录
+**/bin/
+**/obj/
+
+# 操作系统生成文件
+.DS_Store
+Thumbs.db
+
+# 本地日志和临时文件
+*.log
+*.tmp

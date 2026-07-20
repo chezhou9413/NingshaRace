@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义沙漠巨坑口袋地图专用地下生态，避免普通地表生态访问无效世界格温度。 -->
+  <BiomeDef ParentName="Biome_Underground">
+    <defName>NingshaRace_DesertPitBiome</defName>
+    <label>沙漠巨坑</label>
+    <description>被风沙侵蚀的地下沙岩洞室，空气干燥而闷热。</description>
+    <animalDensity>0</animalDensity>
+    <plantDensity>0</plantDensity>
+    <maxFishPopulation>0</maxFishPopulation>
+    <wildAnimalsCanWanderInto>false</wildAnimalsCanWanderInto>
+  </BiomeDef>
+</Defs>
