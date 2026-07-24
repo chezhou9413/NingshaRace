@@ -122,15 +122,20 @@
   <ItemGroup>
     <Compile Include="Abilities\CompAbilityEffect_SummonSandGolem.cs" />
     <Compile Include="Abilities\SandGolemAbilityUtility.cs" />
+    <Compile Include="Combat\BurialMountainGuardUtility.cs" />
+    <Compile Include="Combat\Comp_BurialMountainGuardMode.cs" />
     <Compile Include="Combat\GameComponent_GroundSpikeAttacks.cs" />
     <Compile Include="Combat\GameComponent_SnakeBellySwordAttacks.cs" />
+    <Compile Include="Combat\FallingMountainSlashRenderUtility.cs" />
     <Compile Include="Combat\GroundSpikeAttackSequence.cs" />
     <Compile Include="Combat\GroundSpikeCombatUtility.cs" />
     <Compile Include="Combat\GroundSpikeWaveStep.cs" />
+    <Compile Include="Combat\PawnFlyer_FallingMountainSlash.cs" />
     <Compile Include="Combat\SnakeBellySwordAttackSequence.cs" />
     <Compile Include="Combat\SnakeBellySwordCombatUtility.cs" />
     <Compile Include="Combat\SnakeBellySwordRenderState.cs" />
     <Compile Include="Combat\Verb_GroundSpikeSummoner.cs" />
+    <Compile Include="Combat\Verb_FallingMountainSlash.cs" />
     <Compile Include="Combat\Verb_SnakeBellySword.cs" />
     <Compile Include="Combat\VerbProperties_GroundSpikeSummoner.cs" />
     <Compile Include="Combat\VerbProperties_SnakeBellySword.cs" />
@@ -164,7 +169,9 @@
     <Compile Include="DevTools\NingshaDevPlacementCatalog.cs" />
     <Compile Include="DevTools\NingshaDevPlacementEntry.cs" />
     <Compile Include="MainEntry.cs" />
+    <Compile Include="Patches\Patch_BurialMountainGuardMode.cs" />
     <Compile Include="Patches\Patch_PawnAbilityGrant.cs" />
+    <Compile Include="Patches\Patch_FallingMountainSlashCarriedWeaponRendering.cs" />
     <Compile Include="Patches\Patch_SnakeBellySwordWeaponRendering.cs" />
     <Compile Include="Patches\Patch_SandGolemControl.cs" />
     <Compile Include="Patches\Patch_SandGolemGizmos.cs" />
@@ -173,6 +180,9 @@
     <Compile Include="Patches\Patch_SandGolemWorkTab.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rendering\Graphic_MoteGroundSpikeFrameAnimation.cs" />
+    <Compile Include="Rendering\Mote_BurialMountainGuardBurst.cs" />
+    <Compile Include="Rendering\Mote_BurialMountainGuardShield.cs" />
+    <Compile Include="Rendering\Mote_TerraCrescentSlash.cs" />
     <Compile Include="Rendering\Graphic_SandGolem.cs" />
     <Compile Include="Rendering\Graphic_MoteFrameAnimation.cs" />
     <Compile Include="Rendering\BodyAddons\BodyAddonLinkFallbackExtension.cs" />

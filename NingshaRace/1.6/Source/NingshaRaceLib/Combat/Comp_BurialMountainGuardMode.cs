@@ -1,0 +1,275 @@
+using System.Linq;
+using NingshaRaceLib.Rendering;
+using RimWorld;
+using UnityEngine;
+using Verse;
+using Verse.AI;
+
+namespace NingshaRaceLib.Combat
+{
+    //类职责：提供葬岳格挡模式的 XML 参数。
+    public class CompProperties_BurialMountainGuardMode : CompProperties
+    {
+        public float damageReduction = 20f;
+        public float chargeThreshold = 100f;
+        public float releaseDamageMultiplier = 0.5f;
+        public float releaseRadius = 3.9f;
+        public DamageDef releaseDamageDef = DamageDefOf.Blunt;
+        public float armorPenetration = 1f;
+        public float shieldScale = 2.6f;
+        public float burstScale = 7.8f;
+
+        //函数职责：把当前配置绑定到葬岳格挡 Comp。
+        public CompProperties_BurialMountainGuardMode()
+        {
+            compClass = typeof(Comp_BurialMountainGuardMode);
+        }
+    }
+
+    //类职责：保存并执行葬岳格挡模式的开关、减伤、蓄力、爆发和护盾显示。
+    public class Comp_BurialMountainGuardMode : ThingComp
+    {
+        private bool guardMode;
+        private bool guardAttackMessageShown;
+        private float storedDamage;
+        private Mote_BurialMountainGuardShield shieldMote;
+
+        private CompProperties_BurialMountainGuardMode Props => (CompProperties_BurialMountainGuardMode)props;
+
+        public bool GuardMode => guardMode;
+
+        public float StoredDamage => storedDamage;
+
+        public float ChargeRatio => Mathf.Clamp01(storedDamage / Mathf.Max(Props.chargeThreshold, 0.01f));
+
+        //函数职责：保存格挡开关和蓄力值。
+        public override void PostExposeData()
+        {
+            base.PostExposeData();
+            Scribe_Values.Look(ref guardMode, "guardMode", false);
+            Scribe_Values.Look(ref storedDamage, "storedDamage", 0f);
+        }
+
+        //函数职责：装备葬岳时按当前格挡状态刷新护盾显示。
+        public override void Notify_Equipped(Pawn pawn)
+        {
+            base.Notify_Equipped(pawn);
+            if (guardMode)
+            {
+                pawn.stances?.CancelBusyStanceHard();
+                EnsureShieldMote(pawn);
+            }
+        }
+
+        //函数职责：卸下葬岳时关闭格挡并清理护盾。
+        public override void Notify_Unequipped(Pawn pawn)
+        {
+            base.Notify_Unequipped(pawn);
+            guardMode = false;
+            DestroyShieldMote();
+        }
+
+        //函数职责：切换格挡模式，并在进入格挡时打断当前攻击动作。
+        public void ToggleGuardMode(Pawn pawn)
+        {
+            guardMode = !guardMode;
+            guardAttackMessageShown = false;
+            if (guardMode)
+            {
+                InterruptCurrentAttack(pawn);
+                EnsureShieldMote(pawn);
+                return;
+            }
+
+            DestroyShieldMote();
+        }
+
+        //函数职责：记录本次格挡期间是否已经显示过禁攻提示，并只允许首次攻击尝试显示。
+        public bool TryConsumeAttackBlockedMessage()
+        {
+            if (!guardMode || guardAttackMessageShown)
+            {
+                return false;
+            }
+
+            guardAttackMessageShown = true;
+            return true;
+        }
+
+        //函数职责：在 Pawn Tick 中维持装备中的护盾 Mote 和 shader 参数。
+        public void TickEquipped(Pawn pawn)
+        {
+            if (!guardMode)
+            {
+                DestroyShieldMote();
+                return;
+            }
+
+            if (pawn == null || pawn.Dead || !pawn.Spawned)
+            {
+                DestroyShieldMote();
+                return;
+            }
+
+            EnsureShieldMote(pawn);
+            if (shieldMote != null && !shieldMote.Destroyed)
+            {
+                shieldMote.Maintain();
+                shieldMote.UpdateVisuals(ChargeRatio);
+            }
+        }
+
+        //函数职责：按格挡减伤规则修改伤害并把吸收值加入蓄力。
+        public void AbsorbDamage(Pawn pawn, ref DamageInfo dinfo, ref bool absorbed)
+        {
+            if (!guardMode || absorbed || pawn == null || pawn.Dead || dinfo.Amount <= 0f)
+            {
+                return;
+            }
+
+            float absorbedAmount = Mathf.Min(dinfo.Amount, Props.damageReduction);
+            if (absorbedAmount <= 0f)
+            {
+                return;
+            }
+
+            float remainingDamage = dinfo.Amount - absorbedAmount;
+            storedDamage += absorbedAmount;
+            SpawnAbsorbDust(pawn);
+
+            if (remainingDamage <= 0.01f)
+            {
+                absorbed = true;
+                dinfo.SetAmount(0f);
+            }
+            else
+            {
+                dinfo.SetAmount(remainingDamage);
+            }
+
+            ReleaseIfCharged(pawn);
+        }
+
+        //函数职责：蓄力满值时消耗阈值并释放敌对目标范围伤害。
+        private void ReleaseIfCharged(Pawn pawn)
+        {
+            while (storedDamage >= Props.chargeThreshold)
+            {
+                storedDamage -= Props.chargeThreshold;
+                DoReleaseDamage(pawn);
+                SpawnBurstMote(pawn);
+                SpawnReleaseDust(pawn);
+            }
+        }
+
+        //函数职责：对爆发半径内敌对 Pawn 造成配置倍率伤害。
+        private void DoReleaseDamage(Pawn pawn)
+        {
+            if (pawn == null || !pawn.Spawned || pawn.Map == null)
+            {
+                return;
+            }
+
+            float damageAmount = Props.chargeThreshold * Props.releaseDamageMultiplier;
+            foreach (IntVec3 cell in GenRadial.RadialCellsAround(pawn.Position, Props.releaseRadius, true))
+            {
+                if (!cell.InBounds(pawn.Map))
+                {
+                    continue;
+                }
+
+                foreach (Thing thing in cell.GetThingList(pawn.Map).ToArray())
+                {
+                    Pawn targetPawn = thing as Pawn;
+                    if (targetPawn == null || targetPawn == pawn || targetPawn.Dead || !targetPawn.HostileTo(pawn))
+                    {
+                        continue;
+                    }
+
+                    DamageInfo damageInfo = new DamageInfo(Props.releaseDamageDef, damageAmount, Props.armorPenetration, -1f, pawn, null, parent.def);
+                    targetPawn.TakeDamage(damageInfo);
+                }
+            }
+        }
+
+        //函数职责：进入格挡时中断当前攻击、施法和瞄准姿态。
+        private void InterruptCurrentAttack(Pawn pawn)
+        {
+            if (pawn == null)
+            {
+                return;
+            }
+
+            pawn.stances?.CancelBusyStanceHard();
+            Job currentJob = pawn.CurJob;
+            if (currentJob != null && (currentJob.verbToUse != null || (currentJob.ability != null && currentJob.ability.def == DefOfRefs.NingshaRace_Ability_FallingMountainSlash) || currentJob.def == JobDefOf.AttackMelee))
+            {
+                pawn.jobs?.EndCurrentJob(JobCondition.InterruptForced);
+            }
+        }
+
+        //函数职责：生成并初始化跟随持剑者的常驻菲涅尔护盾。
+        private void EnsureShieldMote(Pawn pawn)
+        {
+            if (shieldMote != null && !shieldMote.Destroyed && shieldMote.Spawned)
+            {
+                return;
+            }
+
+            Mote mote = MoteMaker.MakeStaticMote(pawn.DrawPos, pawn.Map, DefOfRefs.NingshaRace_Mote_BurialMountainGuardShield, Props.shieldScale, true);
+            shieldMote = mote as Mote_BurialMountainGuardShield;
+            if (shieldMote != null)
+            {
+                shieldMote.Initialize(pawn);
+                shieldMote.UpdateVisuals(ChargeRatio);
+            }
+        }
+
+        //函数职责：销毁当前护盾 Mote。
+        private void DestroyShieldMote()
+        {
+            if (shieldMote != null && !shieldMote.Destroyed)
+            {
+                shieldMote.Destroy();
+            }
+            shieldMote = null;
+        }
+
+        //函数职责：在满蓄力释放时生成爆发 Mote。
+        private void SpawnBurstMote(Pawn pawn)
+        {
+            Mote mote = MoteMaker.MakeStaticMote(pawn.DrawPos, pawn.Map, DefOfRefs.NingshaRace_Mote_BurialMountainGuardBurst, Props.burstScale, true);
+            Mote_BurialMountainGuardBurst burstMote = mote as Mote_BurialMountainGuardBurst;
+            if (burstMote != null)
+            {
+                burstMote.Initialize(pawn.DrawPos);
+            }
+        }
+
+        //函数职责：吸收伤害时生成短促土尘。
+        private void SpawnAbsorbDust(Pawn pawn)
+        {
+            if (pawn.Spawned && pawn.Map != null && pawn.Position.ShouldSpawnMotesAt(pawn.Map))
+            {
+                FleckMaker.ThrowDustPuff(pawn.DrawPos, pawn.Map, 0.6f + ChargeRatio * 0.5f);
+            }
+        }
+
+        //函数职责：释放爆发时生成环状土尘和灵能冲击提示。
+        private void SpawnReleaseDust(Pawn pawn)
+        {
+            if (pawn.Map == null || !pawn.Position.ShouldSpawnMotesAt(pawn.Map))
+            {
+                return;
+            }
+
+            FleckMaker.Static(pawn.DrawPos, pawn.Map, FleckDefOf.PsycastAreaEffect, Props.releaseRadius);
+            for (int i = 0; i < 8; i++)
+            {
+                Vector2 offset = Rand.InsideUnitCircle.normalized * Rand.Range(0.8f, Props.releaseRadius);
+                Vector3 dustPos = pawn.DrawPos + new Vector3(offset.x, 0f, offset.y);
+                FleckMaker.ThrowDustPuff(dustPos, pawn.Map, Rand.Range(0.8f, 1.4f));
+            }
+        }
+    }
+}

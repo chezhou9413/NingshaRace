@@ -46,6 +46,36 @@ namespace NingshaRaceLib
         //字段职责：地刺命中后执行一格击退的原版 PawnFlyer。
         public static ThingDef NingshaRace_PawnFlyer_GroundSpikeKnockback;
 
+        //字段职责：开发者生成的凝砂族巨剑“葬岳”。
+        public static ThingDef NingshaRace_BurialMountainGreatsword;
+
+        //字段职责：“葬岳”装备后授予的坠岳斩能力。
+        public static AbilityDef NingshaRace_Ability_FallingMountainSlash;
+
+        //字段职责：承载坠岳斩位移、挥砍和伤害结算的 PawnFlyer。
+        public static ThingDef NingshaRace_PawnFlyer_FallingMountainSlash;
+
+        //字段职责：坠岳斩使用的程序化土元素月牙刀光。
+        public static ThingDef NingshaRace_Mote_TerraCrescentSlash;
+
+        //字段职责：坠岳斩落地时显示的单张地裂 Mote。
+        public static ThingDef NingshaRace_Mote_FallingMountainGroundCrack;
+
+        //字段职责：ChezhouLib 导入的土元素月牙刀光 ShaderTypeDef。
+        public static ShaderTypeDef NingshaRace_TerraCrescentSlash_ShaderPro;
+
+        //字段职责：葬岳格挡模式常驻沙土护盾 Mote。
+        public static ThingDef NingshaRace_Mote_BurialMountainGuardShield;
+
+        //字段职责：葬岳格挡蓄满后的沙土爆发 Mote。
+        public static ThingDef NingshaRace_Mote_BurialMountainGuardBurst;
+
+        //字段职责：ChezhouLib 导入的葬岳沙土护盾 ShaderTypeDef。
+        public static ShaderTypeDef NingshaRace_BurialMountainGuardShield_ShaderPro;
+
+        //字段职责：ChezhouLib 导入的葬岳格挡爆发 ShaderTypeDef。
+        public static ShaderTypeDef NingshaRace_BurialMountainGuardBurst_ShaderPro;
+
         //字段职责：可进入沙漠巨坑口袋地图的地表入口建筑。
         public static ThingDef NingshaRace_DesertPitGate;
 

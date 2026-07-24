@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 953843608
+CRC: 2945669643
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 282887614fd24271dc02b5e65ae8a5a4
+    Hash: 796bf1947399af81a725b1fbcb7f6662
   TypeTreeHash:
     serializedVersion: 2
     Hash: b30fce1a9ad74efb72be6c308c56e365
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 282887614fd24271dc02b5e65ae8a5a4
+    Hash: 796bf1947399af81a725b1fbcb7f6662
 HashAppended: 0
 ClassTypes:
 - Class: 21
@@ -20,8 +20,11 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
+- Assets/Shader/BurialMountainGuardBurst.shader
+- Assets/Shader/TerraCrescentSlash.shader
 - Assets/Materials/PawnSandify.mat
 - Assets/Shader/TankLiquid2D.shader
+- Assets/Shader/BurialMountainGuardShield.shader
 - Assets/EffImage/Noise35t.png
 - Assets/Shader/PawnSandify.shader
 Dependencies: []

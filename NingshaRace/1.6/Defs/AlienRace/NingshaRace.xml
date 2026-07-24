@@ -97,6 +97,7 @@
           </colorChannels>
 
           <bodyAddons>
+            <!-- 头部层职责：从 Head 到 Head4 的五套四向纹理中为每个 Pawn 持久化随机变体。 -->
             <li>
               <name>NingshaRace_Head</name>
               <userCustomizable>false</userCustomizable>
@@ -128,6 +129,43 @@
                 </north>
                 <east>
                   <layerOffset>-0.293</layerOffset>
+                  <offset>(0, 0)</offset>
+                </east>
+              </offsets>
+            </li>
+            <!-- 表情层职责：从常款和五套差分中为每个 Pawn 独立选择表情，并紧贴头部上方绘制。 -->
+            <li>
+              <name>NingshaRace_FaceExpression</name>
+              <userCustomizable>false</userCustomizable>
+              <path>NingshaRace/Pawns/Ningsha/Face/Expression</path>
+              <colorChannel>raceskin</colorChannel>
+              <colorOverrideOne>(255,255,255)</colorOverrideOne>
+              <colorOverrideTwo>(255,255,255)</colorOverrideTwo>
+              <shaderType>Cutout</shaderType>
+              <inFrontOfBody>true</inFrontOfBody>
+              <layerInvert>false</layerInvert>
+              <flipWest>true</flipWest>
+              <angle>0</angle>
+              <drawSize>1</drawSize>
+              <scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
+              <defaultOffset>Center</defaultOffset>
+              <alignWithHead>true</alignWithHead>
+              <conditions>
+                <BodyPart>
+                  <bodyPart>Head</bodyPart>
+                </BodyPart>
+              </conditions>
+              <offsets>
+                <south>
+                  <layerOffset>-0.292</layerOffset>
+                  <offset>(0, 0)</offset>
+                </south>
+                <north>
+                  <layerOffset>-0.292</layerOffset>
+                  <offset>(0, 0)</offset>
+                </north>
+                <east>
+                  <layerOffset>-0.292</layerOffset>
                   <offset>(0, 0)</offset>
                 </east>
               </offsets>
@@ -248,6 +286,7 @@
         <head>
           <path>NingshaRace/Pawns/Ningsha/Null/Null</path>
         </head>
+        <!-- 身体图形职责：从 AdultBody 到 AdultBody5 的六套四向纹理中为每个 Pawn 持久化随机变体。 -->
         <body>
           <path>NingshaRace/Pawns/Ningsha/Bodies/AdultBody/AdultBody</path>
         </body>
