@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：显式挂载凝砂族使用的 Unity 粒子预制体，避免扫描整个特效目录。 -->
+  <ChezhouLib.LibDef.ClAssetLord>
+    <defName>NingshaRace_PrefabAssets</defName>
+    <label>凝砂族粒子预制体</label>
+    <AbPath>/AssetBundles/ningsharace.ab</AbPath>
+    <AbPathWindows>/AssetBundles/ningsharace.ab</AbPathWindows>
+    <AbPathMac>/AssetBundles/ningsharace_mac.ab</AbPathMac>
+    <AbPathLinux>/AssetBundles/ningsharace.ab</AbPathLinux>
+    <unityAssetMount>
+      <li>
+        <key>NingshaRace_SandThrowBurst</key>
+        <value>/Prefabs/VFX/SandThrowBurst.prefab</value>
+      </li>
+      <li>
+        <key>NingshaRace_PetrifyingSandwave</key>
+        <value>/Prefabs/VFX/PetrifyingSandwave.prefab</value>
+      </li>
+      <li>
+        <key>NingshaRace_PetrifyingSandHit</key>
+        <value>/Prefabs/VFX/PetrifyingSandHit.prefab</value>
+      </li>
+    </unityAssetMount>
+  </ChezhouLib.LibDef.ClAssetLord>
+</Defs>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：声明可由外部累计、满层后失去移动速度与视觉能力的石化状态。 -->
+  <HediffDef>
+    <defName>NingshaRace_Petrification</defName>
+    <label>石化</label>
+    <description>砂石逐渐侵入身体并阻碍行动。石化达到满层后，目标将在一小时内失去移动速度与视觉能力，全身呈现为石质。</description>
+    <descriptionShort>逐渐降低移动速度，满层后失去移动速度与视觉能力。</descriptionShort>
+    <hediffClass>NingshaRaceLib.Petrification.Health.Hediff_Petrification</hediffClass>
+    <initialSeverity>0</initialSeverity>
+    <minSeverity>0</minSeverity>
+    <maxSeverity>1</maxSeverity>
+    <alwaysShowSeverity>true</alwaysShowSeverity>
+    <modExtensions>
+      <li Class="NingshaRaceLib.Petrification.Defs.PetrificationDefExtension">
+        <inactivityDurationTicks>30000</inactivityDurationTicks>
+        <fullPetrificationDurationTicks>2500</fullPetrificationDurationTicks>
+      </li>
+    </modExtensions>
+    <stages>
+      <li>
+        <statFactorsBySeverity>
+          <li>
+            <stat>MoveSpeed</stat>
+            <valueBySeverity>
+              <points>
+                <li>(0, 1)</li>
+                <li>(1, 0.4)</li>
+              </points>
+            </valueBySeverity>
+          </li>
+        </statFactorsBySeverity>
+      </li>
+      <li>
+        <minSeverity>1</minSeverity>
+        <label>完全石化</label>
+        <statFactors>
+          <MoveSpeed>0</MoveSpeed>
+        </statFactors>
+        <capMods>
+          <li>
+            <capacity>Sight</capacity>
+            <setMax>0</setMax>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+</Defs>

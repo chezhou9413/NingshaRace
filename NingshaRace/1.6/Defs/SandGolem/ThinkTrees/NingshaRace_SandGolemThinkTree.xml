@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义沙傀工作、征召、战斗和游荡使用的思维树。 -->
+  <ThinkTreeDef>
+    <defName>NingshaRace_SandGolemMechanoid</defName>
+    <thinkRoot Class="ThinkNode_Priority">
+      <subNodes>
+        <!-- 沙傀消失在地图外时只执行原版离图逻辑。 -->
+        <li Class="ThinkNode_Subtree">
+          <treeDef>Despawned</treeDef>
+        </li>
+        <!-- 沙傀倒地时只执行倒地逻辑，不进入人类需求和情绪流程。 -->
+        <li Class="ThinkNode_Subtree">
+          <treeDef>Downed</treeDef>
+        </li>
+        <!-- 沙傀优先执行玩家手动下达的排队命令。 -->
+        <li Class="ThinkNode_QueuedJob" />
+        <!-- 玩家征召沙傀时只处理站位和直接命令。 -->
+        <li Class="ThinkNode_ConditionalOfPlayerFaction">
+          <subNodes>
+            <li Class="ThinkNode_Tagger">
+              <tagToGive>DraftedOrder</tagToGive>
+              <subNodes>
+                <li Class="JobGiver_MoveToStandable" />
+                <li Class="JobGiver_Orders" />
+              </subNodes>
+            </li>
+          </subNodes>
+        </li>
+        <!-- 沙傀接受领主职责，但不需要机械师监管。 -->
+        <li Class="ThinkNode_Subtree">
+          <treeDef>LordDuty</treeDef>
+        </li>
+        <!-- 玩家沙傀可以按工作优先级执行普通工作，不走机械体充电和工作模式。 -->
+        <li Class="ThinkNode_ConditionalOfPlayerFaction">
+          <subNodes>
+            <li Class="ThinkNode_ConditionalNotFormingCaravan">
+              <subNodes>
+                <li Class="JobGiver_SeekAllowedArea" />
+                <li Class="JobGiver_Work">
+                  <emergency>true</emergency>
+                </li>
+                <li Class="JobGiver_Work" />
+              </subNodes>
+            </li>
+          </subNodes>
+        </li>
+        <!-- 沙傀在没有工作时主动攻击附近敌人。 -->
+        <li Class="JobGiver_AIFightEnemies">
+          <targetAcquireRadius>30</targetAcquireRadius>
+          <targetKeepRadius>35</targetKeepRadius>
+        </li>
+        <!-- 玩家沙傀空闲时在殖民地内游荡。 -->
+        <li Class="ThinkNode_ConditionalOfPlayerFaction">
+          <subNodes>
+            <li Class="ThinkNode_Tagger">
+              <tagToGive>Idle</tagToGive>
+              <subNodes>
+                <li Class="JobGiver_WanderColony">
+                  <maxDanger>None</maxDanger>
+                </li>
+              </subNodes>
+            </li>
+          </subNodes>
+        </li>
+        <!-- 非玩家沙傀空闲时按机械体方式游荡。 -->
+        <li Class="ThinkNode_Tagger">
+          <tagToGive>Idle</tagToGive>
+          <subNodes>
+            <li Class="JobGiver_WanderAnywhere">
+              <maxDanger>Deadly</maxDanger>
+            </li>
+          </subNodes>
+        </li>
+        <!-- 沙傀所有节点都失败时输出原版空闲错误，方便定位 Def 问题。 -->
+        <li Class="JobGiver_IdleError" />
+      </subNodes>
+    </thinkRoot>
+  </ThinkTreeDef>
+</Defs>

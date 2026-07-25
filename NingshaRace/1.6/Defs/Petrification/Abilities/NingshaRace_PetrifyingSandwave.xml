@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义凝砂族固有的扇形石化能力“凝砂之眼”。 -->
+  <AbilityDef>
+    <defName>NingshaRace_Ability_PetrifyingSandwave</defName>
+    <label>凝砂之眼</label>
+    <description>凝聚沉重砂潮冲刷前方。三格内的其他血肉生物会立即完全石化，远处目标则根据距离累计石化程度，不区分敌我阵营。</description>
+    <iconPath>UI/Abilities/PetrifyingSandwave</iconPath>
+    <displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+    <showWhenDrafted>true</showWhenDrafted>
+    <showCastingProgressBar>true</showCastingProgressBar>
+    <aiCanUse>false</aiCanUse>
+    <ai_IsOffensive>true</ai_IsOffensive>
+    <hostile>true</hostile>
+    <casterMustBeCapableOfViolence>true</casterMustBeCapableOfViolence>
+    <cooldownTicksRange>60000~60000</cooldownTicksRange>
+    <verbProperties>
+      <verbClass>NingshaRaceLib.Petrification.Abilities.Verbs.Verb_PetrifyingSandwave</verbClass>
+      <label>凝砂之眼</label>
+      <violent>true</violent>
+      <forceNormalTimeSpeed>false</forceNormalTimeSpeed>
+      <warmupTime>1</warmupTime>
+      <range>10</range>
+      <requireLineOfSight>true</requireLineOfSight>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetSelf>false</canTargetSelf>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetHumans>true</canTargetHumans>
+        <canTargetAnimals>true</canTargetAnimals>
+        <canTargetBuildings>false</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="NingshaRaceLib.Petrification.Abilities.Components.CompProperties_AbilityPetrifyingSandwave">
+        <coneAngle>90</coneAngle>
+        <fullPetrificationRadius>3</fullPetrificationRadius>
+        <nearSeverity>0.85</nearSeverity>
+        <edgeSeverity>0.15</edgeSeverity>
+        <effectModId>NingshaRace</effectModId>
+        <waveEffectName>PetrifyingSandwave</waveEffectName>
+        <hitEffectName>PetrifyingSandHit</hitEffectName>
+        <waveEffectScale>1</waveEffectScale>
+        <waveEffectLifetime>3</waveEffectLifetime>
+        <minHitEffectScale>0.65</minHitEffectScale>
+        <maxHitEffectScale>1.25</maxHitEffectScale>
+        <hitEffectLifetime>1.5</hitEffectLifetime>
+      </li>
+    </comps>
+  </AbilityDef>
+</Defs>

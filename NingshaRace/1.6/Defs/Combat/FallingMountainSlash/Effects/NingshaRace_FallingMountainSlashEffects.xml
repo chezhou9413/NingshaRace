@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义坠岳斩使用的 PawnFlyer、月牙刀光和落地地裂 Mote。 -->
+  <ThingDef ParentName="PawnFlyerBase">
+    <defName>NingshaRace_PawnFlyer_FallingMountainSlash</defName>
+    <label>坠岳斩飞行</label>
+    <thingClass>NingshaRaceLib.Combat.FallingMountainSlash.Flight.PawnFlyer_FallingMountainSlash</thingClass>
+    <pawnFlyer>
+      <flightDurationMin>0.4</flightDurationMin>
+      <flightSpeed>15</flightSpeed>
+      <heightFactor>1</heightFactor>
+    </pawnFlyer>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <defName>NingshaRace_Mote_FallingMountainGroundCrack</defName>
+    <label>坠岳斩地裂</label>
+    <thingClass>MoteThrown</thingClass>
+    <altitudeLayer>MoteLow</altitudeLayer>
+    <graphicData>
+      <texPath>NingshaRace/Effects/BurialMountainGroundCrack</texPath>
+      <graphicClass>Graphic_Mote</graphicClass>
+      <shaderType>Mote</shaderType>
+      <drawSize>(5.8,5.8)</drawSize>
+    </graphicData>
+    <mote>
+      <fadeInTime>0.05</fadeInTime>
+      <solidTime>0.55</solidTime>
+      <fadeOutTime>0.35</fadeOutTime>
+    </mote>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <defName>NingshaRace_Mote_TerraCrescentSlash</defName>
+    <label>土元素月牙刀光</label>
+    <thingClass>NingshaRaceLib.Combat.FallingMountainSlash.Rendering.Mote_TerraCrescentSlash</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <graphicData>
+      <texPath>UI/Misc/BadTexture</texPath>
+      <graphicClass>Graphic_Mote</graphicClass>
+      <shaderType>NingshaRace_TerraCrescentSlash_ShaderPro</shaderType>
+      <drawSize>(5,5)</drawSize>
+    </graphicData>
+    <mote>
+      <fadeInTime>0</fadeInTime>
+      <solidTime>0.9</solidTime>
+      <fadeOutTime>0</fadeOutTime>
+    </mote>
+  </ThingDef>
+</Defs>

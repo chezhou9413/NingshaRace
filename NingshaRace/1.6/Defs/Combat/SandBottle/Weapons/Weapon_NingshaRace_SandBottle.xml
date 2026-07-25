@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义沙瓶武器及其扇形喷砂参数。 -->
+
+  <!-- Def 职责：提供六格六十度扇形喷砂攻击的开发者武器。 -->
+  <ThingDef ParentName="BaseWeapon">
+    <defName>NingshaRace_SandBottle</defName>
+    <label>沙瓶</label>
+    <description>一只封存灼热细砂的粗砺容器。挥动时，瓶中的砂流会呈扇形喷向前方，灼伤敌人并阻滞其行动。</description>
+    <techLevel>Medieval</techLevel>
+    <recipeMaker IsNull="True" />
+    <smeltable>false</smeltable>
+    <tradeability>None</tradeability>
+    <graphicData>
+      <texPath>NingshaRace/Weapons/SandBottle</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Cutout</shaderType>
+      <drawSize>(1.1,1.1)</drawSize>
+    </graphicData>
+    <uiIconScale>0.9</uiIconScale>
+    <equippedAngleOffset>-45</equippedAngleOffset>
+    <thingCategories>
+      <li>WeaponsRanged</li>
+    </thingCategories>
+    <weaponClasses>
+      <li>Ranged</li>
+    </weaponClasses>
+    <statBases>
+      <Mass>1</Mass>
+      <MarketValue>550</MarketValue>
+      <AccuracyTouch>1</AccuracyTouch>
+      <AccuracyShort>1</AccuracyShort>
+      <AccuracyMedium>1</AccuracyMedium>
+      <AccuracyLong>1</AccuracyLong>
+      <RangedWeapon_Cooldown>2.5</RangedWeapon_Cooldown>
+    </statBases>
+    <weaponTags Inherit="False">
+      <li>NingshaRaceSandBottle</li>
+    </weaponTags>
+    <tools Inherit="False" />
+    <verbs Inherit="False">
+      <li Class="NingshaRaceLib.Combat.SandBottle.Verbs.VerbProperties_SandBottle">
+        <label>扇形喷砂</label>
+        <hasStandardCommand>true</hasStandardCommand>
+        <isPrimary>true</isPrimary>
+        <range>6</range>
+        <warmupTime>0.5</warmupTime>
+        <defaultCooldownTime>2.5</defaultCooldownTime>
+        <coneAngle>60</coneAngle>
+        <damageDef>Burn</damageDef>
+        <damageAmount>20</damageAmount>
+        <slowDurationTicks>300</slowDurationTicks>
+        <effectModId>NingshaRace</effectModId>
+        <effectName>SandThrowBurst</effectName>
+        <effectScale>0.75</effectScale>
+        <effectDepthScale>0.05</effectDepthScale>
+        <effectLifetime>5.5</effectLifetime>
+        <ai_IsWeapon>true</ai_IsWeapon>
+        <requireLineOfSight>true</requireLineOfSight>
+        <targetParams>
+          <canTargetLocations>false</canTargetLocations>
+          <canTargetSelf>false</canTargetSelf>
+          <canTargetPawns>true</canTargetPawns>
+          <canTargetBuildings>true</canTargetBuildings>
+          <canTargetItems>false</canTargetItems>
+          <canTargetPlants>false</canTargetPlants>
+          <canTargetFires>false</canTargetFires>
+          <canTargetCorpses>false</canTargetCorpses>
+          <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+        </targetParams>
+      </li>
+    </verbs>
+  </ThingDef>
+</Defs>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义沙漠巨坑口袋地图生成器及步骤顺序。 -->
+  <MapGeneratorDef>
+    <defName>NingshaRace_DesertPitMap</defName>
+    <label>沙漠巨坑</label>
+    <isUnderground>true</isUnderground>
+    <ignoreAreaRevealedLetter>true</ignoreAreaRevealedLetter>
+    <disableCallAid>true</disableCallAid>
+    <forceCaves>true</forceCaves>
+    <pocketMapProperties>
+      <biome>NingshaRace_DesertPitBiome</biome>
+      <temperature>24</temperature>
+      <tileMutators />
+    </pocketMapProperties>
+    <genSteps>
+      <li>NingshaRace_DesertPitLayout</li>
+      <li>NingshaRace_DesertPitTerrain</li>
+      <li>NingshaRace_DesertPitExit</li>
+      <li>NingshaRace_DesertPitScatter</li>
+      <li>NingshaRace_DesertPitGlow</li>
+      <li>NingshaRace_DesertPitLandmarks</li>
+      <li>NingshaRace_DesertPitHydrology</li>
+      <li>NingshaRace_DesertPitRelics</li>
+      <li>NingshaRace_DesertPitPots</li>
+      <li>NingshaRace_DesertPitDecorations</li>
+      <li>NingshaRace_DesertPitPlants</li>
+      <li>Fog</li>
+    </genSteps>
+  </MapGeneratorDef>
+</Defs>

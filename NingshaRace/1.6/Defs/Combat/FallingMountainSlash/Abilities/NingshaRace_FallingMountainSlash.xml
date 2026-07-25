@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义“葬岳”巨剑授予的坠岳斩能力。 -->
+
+  <!-- Def 职责：提供十格范围内锁定 Pawn 或地面位置的无前摇跳劈指令。 -->
+  <AbilityDef>
+    <defName>NingshaRace_Ability_FallingMountainSlash</defName>
+    <label>坠岳斩</label>
+    <description>持葬岳跃向目标，在落地时震裂大地并释放冲击波，对落点周围单位造成伤害，锁定目标会受到额外重击。</description>
+    <iconPath>UI/Abilities/FallingMountainSlash</iconPath>
+    <cooldownTicksRange>600~600</cooldownTicksRange>
+    <hostile>true</hostile>
+    <casterMustBeCapableOfViolence>true</casterMustBeCapableOfViolence>
+    <modExtensions>
+      <li Class="NingshaRaceLib.Combat.FallingMountainSlash.Defs.FallingMountainSlashDefExtension">
+        <attackProgress>0.55</attackProgress>
+        <landingImpactRadius>2.9</landingImpactRadius>
+        <landingAreaDamage>20</landingAreaDamage>
+        <lockedTargetDamage>40</lockedTargetDamage>
+        <landingDamageDef>Cut</landingDamageDef>
+        <landingArmorPenetration>1</landingArmorPenetration>
+        <landingScreenShake>0.45</landingScreenShake>
+      </li>
+    </modExtensions>
+    <verbProperties>
+      <verbClass>NingshaRaceLib.Combat.FallingMountainSlash.Verbs.Verb_FallingMountainSlash</verbClass>
+      <label>坠岳斩</label>
+      <violent>true</violent>
+      <forceNormalTimeSpeed>false</forceNormalTimeSpeed>
+      <warmupTime>0</warmupTime>
+      <range>10</range>
+      <requireLineOfSight>true</requireLineOfSight>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetSelf>false</canTargetSelf>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+  </AbilityDef>
+</Defs>

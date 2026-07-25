@@ -1,30 +1,43 @@
 ManifestFileVersion: 0
-CRC: 2945669643
+CRC: 3044931436
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 796bf1947399af81a725b1fbcb7f6662
+    Hash: e2ded18114a93bdc4c12377cb5e83981
   TypeTreeHash:
     serializedVersion: 2
-    Hash: b30fce1a9ad74efb72be6c308c56e365
+    Hash: 9838d6d81319a57e8e1fe23d674a4563
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 796bf1947399af81a725b1fbcb7f6662
+    Hash: e2ded18114a93bdc4c12377cb5e83981
 HashAppended: 0
 ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
 - Class: 21
   Script: {instanceID: 0}
 - Class: 28
   Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
+  Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Shader/BurialMountainGuardBurst.shader
+- Assets/Prefabs/VFX/SandThrowBurst.prefab
 - Assets/Shader/TerraCrescentSlash.shader
 - Assets/Materials/PawnSandify.mat
 - Assets/Shader/TankLiquid2D.shader
+- Assets/Prefabs/VFX/PetrifyingSandwave.prefab
 - Assets/Shader/BurialMountainGuardShield.shader
+- Assets/Shader/SandDustParticle.shader
 - Assets/EffImage/Noise35t.png
+- Assets/Prefabs/VFX/PetrifyingSandHit.prefab
 - Assets/Shader/PawnSandify.shader
+- Assets/Shader/PawnPetrify.shader
 Dependencies: []

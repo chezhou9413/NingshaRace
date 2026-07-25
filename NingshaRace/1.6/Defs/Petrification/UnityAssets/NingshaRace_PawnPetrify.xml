@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：声明凝砂族石化 Shader 的 ChezhouLib 材质模板和 RimWorld ShaderTypeDef。 -->
+  <ChezhouLib.LibDef.ClShaderMaterial>
+    <defName>NingshaRace_PawnPetrify_Material</defName>
+    <label>凝砂族石化材质</label>
+    <shaderName>NingshaRace/Pawn/Petrify</shaderName>
+    <resModID>chezhou.race.ningsharace</resModID>
+    <shaderParameters>
+      <li>
+        <parameterName>_ShadowInfluence</parameterName>
+        <parameterValue>0.988</parameterValue>
+      </li>
+      <li>
+        <parameterName>_DetailPreserve</parameterName>
+        <parameterValue>1</parameterValue>
+      </li>
+      <li>
+        <parameterName>_ReliefStrength</parameterName>
+        <parameterValue>1</parameterValue>
+      </li>
+      <li>
+        <parameterName>_OriginalTint</parameterName>
+        <parameterValue>0.241</parameterValue>
+      </li>
+      <li>
+        <parameterName>_RevealProgress</parameterName>
+        <parameterValue>1</parameterValue>
+      </li>
+      <li>
+        <parameterName>_DissolveProgress</parameterName>
+        <parameterValue>0</parameterValue>
+      </li>
+      <li>
+        <parameterName>_NoiseScale</parameterName>
+        <parameterValue>27.2</parameterValue>
+      </li>
+      <li>
+        <parameterName>_NoiseContrast</parameterName>
+        <parameterValue>4.33</parameterValue>
+      </li>
+      <li>
+        <parameterName>_DissolveSoftness</parameterName>
+        <parameterValue>0.32</parameterValue>
+      </li>
+      <li>
+        <parameterName>_EdgeWidth</parameterName>
+        <parameterValue>0.168</parameterValue>
+      </li>
+      <li>
+        <parameterName>_VerticalBias</parameterName>
+        <parameterValue>1</parameterValue>
+      </li>
+      <li>
+        <parameterName>_GrainScale</parameterName>
+        <parameterValue>256</parameterValue>
+      </li>
+      <li>
+        <parameterName>_GrainAmount</parameterName>
+        <parameterValue>1</parameterValue>
+      </li>
+      <li>
+        <parameterName>_CrackScale</parameterName>
+        <parameterValue>56</parameterValue>
+      </li>
+      <li>
+        <parameterName>_CrackAmount</parameterName>
+        <parameterValue>0.48</parameterValue>
+      </li>
+      <li>
+        <parameterName>_CrackWidth</parameterName>
+        <parameterValue>0.0154</parameterValue>
+      </li>
+      <li>
+        <parameterName>_StoneRoughness</parameterName>
+        <parameterValue>1</parameterValue>
+      </li>
+      <li>
+        <parameterName>_AlphaCutoff</parameterName>
+        <parameterValue>0.08</parameterValue>
+      </li>
+      <li>
+        <parameterName>_Color</parameterName>
+        <parameterValue>(1.000, 1.000, 1.000, 1.000)</parameterValue>
+      </li>
+      <li>
+        <parameterName>_StoneDark</parameterName>
+        <parameterValue>(0.160, 0.170, 0.170, 1.000)</parameterValue>
+      </li>
+      <li>
+        <parameterName>_StoneMid</parameterName>
+        <parameterValue>(0.430, 0.440, 0.420, 1.000)</parameterValue>
+      </li>
+      <li>
+        <parameterName>_StoneLight</parameterName>
+        <parameterValue>(0.690, 0.680, 0.620, 1.000)</parameterValue>
+      </li>
+      <li>
+        <parameterName>_EdgeColor</parameterName>
+        <parameterValue>(0.580, 0.570, 0.510, 1.000)</parameterValue>
+      </li>
+      <li>
+        <parameterName>_ReliefLightDirection</parameterName>
+        <parameterValue>(-0.35, 0.65, 0.00, 0.00)</parameterValue>
+      </li>
+    </shaderParameters>
+  </ChezhouLib.LibDef.ClShaderMaterial>
+
+  <ChezhouLib.LibDef.ClShaderPro>
+    <defName>NingshaRace_PawnPetrify_ShaderPro</defName>
+    <ClShaderMaterial>NingshaRace_PawnPetrify_Material</ClShaderMaterial>
+    <shaderPath>Map/Cutout</shaderPath>
+  </ChezhouLib.LibDef.ClShaderPro>
+</Defs>

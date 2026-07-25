@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义凝砂族贴身衣物使用的专用服装层。 -->
+  <!-- Def 职责：凝砂族内衣专用服装层，用于让贴身内衣和外层衣服共存。 -->
+  <ApparelLayerDef>
+    <defName>NingshaRace_Underwear</defName>
+    <label>凝砂内衣</label>
+    <drawOrder>-10</drawOrder>
+  </ApparelLayerDef>
+</Defs>

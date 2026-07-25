@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义凝砂族殖民者 PawnKind。 -->
+  <PawnKindDef ParentName="BasePlayerPawnKind">
+    <defName>NingshaRace_Colonist</defName>
+    <label>凝砂族殖民者</label>
+    <race>NingshaRace</race>
+    <defaultFactionDef>PlayerColony</defaultFactionDef>
+    <useFactionXenotypes>false</useFactionXenotypes>
+    <apparelAllowHeadgearChance>0</apparelAllowHeadgearChance>
+    <apparelIgnorePollution MayRequire="Ludeon.RimWorld.Biotech">true</apparelIgnorePollution>
+    <apparelIgnoreSeasons>true</apparelIgnoreSeasons>
+    <apparelMoney>0~0</apparelMoney>
+    <apparelRequired Inherit="False" />
+    <apparelTags/>
+    <specificApparelRequirements Inherit="False">
+      <li>
+        <requiredTag>NingshaRaceCompleteOutfit</requiredTag>
+      </li>
+    </specificApparelRequirements>
+    <backstoryCryptosleepCommonality>1</backstoryCryptosleepCommonality>
+    <chemicalAddictionChance>0.06</chemicalAddictionChance>
+    <combatPower>30</combatPower>
+    <forceNormalGearQuality>true</forceNormalGearQuality>
+    <humanPregnancyChance>0.06</humanPregnancyChance>
+    <initialResistanceRange>13~21</initialResistanceRange>
+    <initialWillRange>0~0</initialWillRange>
+    <isFighter>false</isFighter>
+    <techHediffsChance>0.03</techHediffsChance>
+    <techHediffsMoney>50~800</techHediffsMoney>
+  </PawnKindDef>
+</Defs>

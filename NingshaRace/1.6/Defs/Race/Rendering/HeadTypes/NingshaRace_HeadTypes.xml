@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义凝砂族使用的隐藏头型贴图占位。 -->
+  <HeadTypeDef ParentName="AverageBase">
+    <defName>NingshaRace_Head_A</defName>
+    <graphicPath>NingshaRace/Pawns/Ningsha/Null/Null</graphicPath>
+    <gender>None</gender>
+  </HeadTypeDef>
+</Defs>

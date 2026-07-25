@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义只绘制沙傀截图节点的渲染树。 -->
+  <PawnRenderTreeDef>
+    <defName>NingshaRace_SandGolemRenderTree</defName>
+    <root Class="PawnRenderNodeProperties_Parent">
+      <debugLabel>Ningsha sand golem root</debugLabel>
+      <tagDef>Root</tagDef>
+      <drawSize>(1, 1)</drawSize>
+      <children>
+        <!-- 沙傀截图节点负责绘制唯一的 Pawn 等身截图贴图。 -->
+        <li>
+          <debugLabel>Ningsha sand golem capture</debugLabel>
+          <nodeClass>NingshaRaceLib.SandGolem.Rendering.PawnRenderNode_SandGolem</nodeClass>
+          <workerClass>NingshaRaceLib.SandGolem.Rendering.PawnRenderNodeWorker_SandGolem</workerClass>
+          <shaderTypeDef>NingshaRace_PawnSandify_ShaderPro</shaderTypeDef>
+          <drawSize>(1.68, 1.68)</drawSize>
+          <baseLayer>50</baseLayer>
+        </li>
+      </children>
+    </root>
+  </PawnRenderTreeDef>
+</Defs>

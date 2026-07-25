@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义凝砂族远程武器飞针及其射击参数。 -->
+
+  <!-- Def 职责：提供快速单发远程攻击，连续四次命中可完成石化。 -->
+  <ThingDef ParentName="BaseWeapon">
+    <defName>NingshaRace_FlyingNeedle</defName>
+    <label>飞针</label>
+    <description>凝砂术锻成的细长暗针。针体几乎不造成创伤，却会把石化砂质送入血肉，连续命中四次即可使目标完全石化。</description>
+    <techLevel>Medieval</techLevel>
+    <recipeMaker IsNull="True" />
+    <smeltable>false</smeltable>
+    <tradeability>None</tradeability>
+    <graphicData>
+      <texPath>NingshaRace/Weapons/FlyingNeedles</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Cutout</shaderType>
+      <drawSize>(1.15,1.15)</drawSize>
+    </graphicData>
+    <uiIconScale>0.9</uiIconScale>
+    <equippedAngleOffset>-45</equippedAngleOffset>
+    <thingCategories>
+      <li>WeaponsRanged</li>
+    </thingCategories>
+    <weaponClasses>
+      <li>Ranged</li>
+    </weaponClasses>
+    <statBases>
+      <Mass>0.35</Mass>
+      <MarketValue>420</MarketValue>
+      <AccuracyTouch>0.95</AccuracyTouch>
+      <AccuracyShort>0.9</AccuracyShort>
+      <AccuracyMedium>0.82</AccuracyMedium>
+      <AccuracyLong>0.7</AccuracyLong>
+      <RangedWeapon_Cooldown>1.2</RangedWeapon_Cooldown>
+    </statBases>
+    <weaponTags Inherit="False">
+      <li>NingshaRaceFlyingNeedle</li>
+    </weaponTags>
+    <tools Inherit="False" />
+    <verbs Inherit="False">
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <label>发射飞针</label>
+        <hasStandardCommand>true</hasStandardCommand>
+        <isPrimary>true</isPrimary>
+        <defaultProjectile>NingshaRace_Projectile_FlyingNeedle</defaultProjectile>
+        <warmupTime>0.35</warmupTime>
+        <defaultCooldownTime>1.2</defaultCooldownTime>
+        <range>24</range>
+        <soundCast>Bow_Small</soundCast>
+        <ai_IsWeapon>true</ai_IsWeapon>
+        <requireLineOfSight>true</requireLineOfSight>
+      </li>
+    </verbs>
+  </ThingDef>
+</Defs>

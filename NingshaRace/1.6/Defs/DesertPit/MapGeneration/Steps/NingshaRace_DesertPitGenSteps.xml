@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义沙漠巨坑口袋地图使用的自定义生成步骤。 -->
+  <GenStepDef>
+    <defName>NingshaRace_DesertPitLayout</defName>
+    <order>100</order>
+    <genStep Class="NingshaRaceLib.DesertPit.Generation.Steps.GenStep_DesertPitLayout" />
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>NingshaRace_DesertPitTerrain</defName>
+    <order>200</order>
+    <genStep Class="NingshaRaceLib.DesertPit.Generation.Steps.GenStep_DesertPitTerrain" />
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>NingshaRace_DesertPitExit</defName>
+    <order>300</order>
+    <genStep Class="NingshaRaceLib.DesertPit.Generation.Steps.GenStep_DesertPitExit" />
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>NingshaRace_DesertPitScatter</defName>
+    <order>400</order>
+    <genStep Class="NingshaRaceLib.DesertPit.Generation.Steps.GenStep_DesertPitScatter" />
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>NingshaRace_DesertPitGlow</defName>
+    <order>450</order>
+    <genStep Class="NingshaRaceLib.DesertPit.Generation.Steps.GenStep_DesertPitGlow" />
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>NingshaRace_DesertPitDecorations</defName>
+    <order>455</order>
+    <genStep Class="NingshaRaceLib.DesertPit.Generation.Steps.GenStep_DesertPitDecorations" />
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>NingshaRace_DesertPitLandmarks</defName>
+    <order>452</order>
+    <genStep Class="NingshaRaceLib.DesertPit.Generation.Steps.GenStep_DesertPitLandmarks" />
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>NingshaRace_DesertPitHydrology</defName>
+    <order>453</order>
+    <genStep Class="NingshaRaceLib.DesertPit.Generation.Steps.GenStep_DesertPitHydrology" />
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>NingshaRace_DesertPitRelics</defName>
+    <order>454</order>
+    <genStep Class="NingshaRaceLib.DesertPit.Generation.Steps.GenStep_DesertPitRelics" />
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>NingshaRace_DesertPitPots</defName>
+    <order>454.5</order>
+    <genStep Class="NingshaRaceLib.DesertPit.Generation.Steps.GenStep_DesertPitPots" />
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>NingshaRace_DesertPitPlants</defName>
+    <order>460</order>
+    <genStep Class="NingshaRaceLib.DesertPit.Generation.Steps.GenStep_DesertPitPlants" />
+  </GenStepDef>
+</Defs>

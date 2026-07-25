@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义凝砂族 HAR 种族、身体贴图、覆盖层和基础人形属性。 -->
+  <!-- Def 职责：凝砂族主种族定义，使用 HAR 外星人框架承载渲染、身体贴图和基础人形生成规则。 -->
+  <AlienRace.ThingDef_AlienRace ParentName="BasePawn">
+    <defName>NingshaRace</defName>
+    <label>凝砂族</label>
+    <description>凝砂族是由砂砾、盐晶与血肉共同塑成的人形族群。他们的躯壳像被风暴压实的砂岩，行动时仍保留人类般的温度、欲望和社会关系。</description>
+
+    <comps>
+      <li Class="NingshaRaceLib.Race.Components.CompProperties_NingshaInnateAbilities" />
+    </comps>
+
+    <alienRace>
+      <raceRestriction>
+        <onlyUseRaceRestrictedApparel>true</onlyUseRaceRestrictedApparel>
+        <apparelList>
+          <li>NingshaRace_Apparel_Chestwrap</li>
+          <li>NingshaRace_Apparel_Shorts</li>
+          <li>NingshaRace_Apparel_Stonewrap</li>
+          <li>NingshaRace_Apparel_LongPantsSet</li>
+          <li>NingshaRace_Apparel_CombatLiner</li>
+          <li>NingshaRace_Apparel_AdvancedTacticalCloak</li>
+          <li>NingshaRace_Apparel_VeiledDress</li>
+        </apparelList>
+      </raceRestriction>
+
+      <styleSettings>
+        <li>
+          <key>HairDef</key>
+          <value>
+            <hasStyle>false</hasStyle>
+          </value>
+        </li>
+        <li>
+          <key>BeardDef</key>
+          <value>
+            <hasStyle>false</hasStyle>
+          </value>
+        </li>
+        <li>
+          <key>TattooDef</key>
+          <value>
+            <hasStyle>false</hasStyle>
+          </value>
+        </li>
+      </styleSettings>
+
+      <generalSettings>
+        <minAgeForAdulthood>18</minAgeForAdulthood>
+        <immuneToXenophobia>false</immuneToXenophobia>
+        <immuneToAge>false</immuneToAge>
+        <humanRecipeImport>true</humanRecipeImport>
+
+        <alienPartGenerator>
+          <customDrawSize>(1, 1)</customDrawSize>
+          <customHeadDrawSize>(1, 1)</customHeadDrawSize>
+          <customPortraitDrawSize>(1, 1)</customPortraitDrawSize>
+          <headOffsetDirectional>
+            <north>
+              <offset>(0,0.02)</offset>
+            </north>
+            <south>
+              <offset>(0,0.04)</offset>
+            </south>
+            <east>
+              <offset>(-0.025,0.018)</offset>
+            </east>
+            <west>
+              <offset>(0.025,0.018)</offset>
+            </west>
+          </headOffsetDirectional>
+          <bodyTypes>
+            <li>Thin</li>
+            <li>Hulk</li>
+            <li>Fat</li>
+            <li>Female</li>
+          </bodyTypes>
+          <headTypes Inherit="False">
+            <li>NingshaRace_Head_A</li>
+          </headTypes>
+          <colorChannels>
+            <li>
+              <name>raceskin</name>
+              <first Class="ColorGenerator_Single">
+                <color>RGB(255,255,255)</color>
+              </first>
+            </li>
+            <li>
+              <name>hair</name>
+              <first Class="ColorGenerator_Single">
+                <color>RGB(255,255,255)</color>
+              </first>
+            </li>
+          </colorChannels>
+
+          <bodyAddons>
+            <!-- 头部层职责：从 Head 到 Head4 的五套四向纹理中为每个 Pawn 持久化随机变体。 -->
+            <li>
+              <name>NingshaRace_Head</name>
+              <userCustomizable>false</userCustomizable>
+              <path>NingshaRace/Pawns/Ningsha/Head/Head</path>
+              <colorChannel>raceskin</colorChannel>
+              <colorOverrideOne>(255,255,255)</colorOverrideOne>
+              <colorOverrideTwo>(255,255,255)</colorOverrideTwo>
+              <inFrontOfBody>true</inFrontOfBody>
+              <layerInvert>false</layerInvert>
+              <flipWest>true</flipWest>
+              <angle>0</angle>
+              <drawSize>1</drawSize>
+              <scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
+              <defaultOffset>Center</defaultOffset>
+              <alignWithHead>true</alignWithHead>
+              <conditions>
+                <BodyPart>
+                  <bodyPart>Head</bodyPart>
+                </BodyPart>
+              </conditions>
+              <offsets>
+                <south>
+                  <layerOffset>-0.293</layerOffset>
+                  <offset>(0, 0)</offset>
+                </south>
+                <north>
+                  <layerOffset>-0.293</layerOffset>
+                  <offset>(0, 0)</offset>
+                </north>
+                <east>
+                  <layerOffset>-0.293</layerOffset>
+                  <offset>(0, 0)</offset>
+                </east>
+              </offsets>
+            </li>
+            <!-- 表情层职责：从常款和五套差分中为每个 Pawn 独立选择表情，并紧贴头部上方绘制。 -->
+            <li>
+              <name>NingshaRace_FaceExpression</name>
+              <userCustomizable>false</userCustomizable>
+              <path>NingshaRace/Pawns/Ningsha/Face/Expression</path>
+              <colorChannel>raceskin</colorChannel>
+              <colorOverrideOne>(255,255,255)</colorOverrideOne>
+              <colorOverrideTwo>(255,255,255)</colorOverrideTwo>
+              <shaderType>Cutout</shaderType>
+              <inFrontOfBody>true</inFrontOfBody>
+              <layerInvert>false</layerInvert>
+              <flipWest>true</flipWest>
+              <angle>0</angle>
+              <drawSize>1</drawSize>
+              <scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
+              <defaultOffset>Center</defaultOffset>
+              <alignWithHead>true</alignWithHead>
+              <conditions>
+                <BodyPart>
+                  <bodyPart>Head</bodyPart>
+                </BodyPart>
+              </conditions>
+              <offsets>
+                <south>
+                  <layerOffset>-0.292</layerOffset>
+                  <offset>(0, 0)</offset>
+                </south>
+                <north>
+                  <layerOffset>-0.292</layerOffset>
+                  <offset>(0, 0)</offset>
+                </north>
+                <east>
+                  <layerOffset>-0.292</layerOffset>
+                  <offset>(0, 0)</offset>
+                </east>
+              </offsets>
+            </li>
+            <!-- 中发层职责：提供发型随机变体编号，并在所有服装前方绘制主体发片。 -->
+            <li>
+              <name>NingshaRace_HairMiddle</name>
+              <userCustomizable>false</userCustomizable>
+              <path>NingshaRace/Pawns/Ningsha/Hair/Middle/HairMiddle</path>
+              <colorChannel>hair</colorChannel>
+              <shaderType>CutoutComplex</shaderType>
+              <inFrontOfBody>true</inFrontOfBody>
+              <layerInvert>false</layerInvert>
+              <flipWest>true</flipWest>
+              <angle>0</angle>
+              <drawSize>1</drawSize>
+              <scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
+              <defaultOffset>Center</defaultOffset>
+              <alignWithHead>true</alignWithHead>
+              <conditions>
+                <BodyPart>
+                  <bodyPart>Head</bodyPart>
+                </BodyPart>
+              </conditions>
+              <offsets>
+                <south>
+                  <layerOffset>-0.269</layerOffset>
+                  <offset>(0, 0)</offset>
+                </south>
+                <north>
+                  <layerOffset>-0.269</layerOffset>
+                  <offset>(0, 0)</offset>
+                </north>
+                <east>
+                  <layerOffset>-0.269</layerOffset>
+                  <offset>(0, 0)</offset>
+                </east>
+              </offsets>
+            </li>
+            <!-- 前发层职责：跟随中发变体编号，在中发和所有服装前方绘制刘海。 -->
+            <li>
+              <name>NingshaRace_HairFront</name>
+              <userCustomizable>false</userCustomizable>
+              <linkVariantIndexWithPrevious>true</linkVariantIndexWithPrevious>
+              <path>NingshaRace/Pawns/Ningsha/Hair/Front/HairFront</path>
+              <colorChannel>hair</colorChannel>
+              <shaderType>CutoutComplex</shaderType>
+              <inFrontOfBody>true</inFrontOfBody>
+              <layerInvert>false</layerInvert>
+              <flipWest>true</flipWest>
+              <angle>0</angle>
+              <drawSize>1</drawSize>
+              <scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
+              <defaultOffset>Center</defaultOffset>
+              <alignWithHead>true</alignWithHead>
+              <conditions>
+                <BodyPart>
+                  <bodyPart>Head</bodyPart>
+                </BodyPart>
+              </conditions>
+              <offsets>
+                <south>
+                  <layerOffset>-0.268</layerOffset>
+                  <offset>(0, 0)</offset>
+                </south>
+                <north>
+                  <layerOffset>-0.268</layerOffset>
+                  <offset>(0, 0)</offset>
+                </north>
+                <east>
+                  <layerOffset>-0.268</layerOffset>
+                  <offset>(0, 0)</offset>
+                </east>
+              </offsets>
+            </li>
+            <!-- 后发层职责：跟随前发变体编号和发色，在身体后方绘制配套后发。 -->
+            <li>
+              <name>NingshaRace_HairBack</name>
+              <userCustomizable>false</userCustomizable>
+              <linkVariantIndexWithPrevious>true</linkVariantIndexWithPrevious>
+              <path>NingshaRace/Pawns/Ningsha/Hair/Back/HairBack</path>
+              <colorChannel>hair</colorChannel>
+              <shaderType>CutoutComplex</shaderType>
+              <inFrontOfBody>true</inFrontOfBody>
+              <layerInvert>false</layerInvert>
+              <flipWest>true</flipWest>
+              <angle>0</angle>
+              <drawSize>1</drawSize>
+              <scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
+              <defaultOffset>Center</defaultOffset>
+              <alignWithHead>true</alignWithHead>
+              <conditions>
+                <BodyPart>
+                  <bodyPart>Head</bodyPart>
+                </BodyPart>
+              </conditions>
+              <offsets>
+                <south>
+                  <layerOffset>-0.31</layerOffset>
+                  <offset>(0, 0)</offset>
+                </south>
+                <north>
+                  <layerOffset>-0.31</layerOffset>
+                  <offset>(0, 0)</offset>
+                </north>
+                <east>
+                  <layerOffset>-0.31</layerOffset>
+                  <offset>(0, 0)</offset>
+                </east>
+              </offsets>
+            </li>
+          </bodyAddons>
+        </alienPartGenerator>
+      </generalSettings>
+
+      <graphicPaths>
+        <skinShader>Cutout</skinShader>
+        <head>
+          <path>NingshaRace/Pawns/Ningsha/Null/Null</path>
+        </head>
+        <!-- 身体图形职责：从 AdultBody 到 AdultBody5 的六套四向纹理中为每个 Pawn 持久化随机变体。 -->
+        <body>
+          <path>NingshaRace/Pawns/Ningsha/Bodies/AdultBody/AdultBody</path>
+        </body>
+        <skeleton>Things/Pawn/Humanlike/Bodies/Dessicated/Dessicated_Thin</skeleton>
+      </graphicPaths>
+
+      <thoughtSettings>
+        <replacerList />
+        <cannotReceiveThoughts />
+        <restrictedThoughts />
+      </thoughtSettings>
+    </alienRace>
+
+    <modExtensions>
+      <!-- 扩展职责：让前发和后发跟随中发编号，并对三层不存在的方向自动使用共享透明材质。 -->
+      <li Class="NingshaRaceLib.Race.Rendering.BodyAddons.BodyAddonLinkFallbackExtension">
+        <rules>
+          <li>
+            <sourceBodyAddonName>NingshaRace_HairMiddle</sourceBodyAddonName>
+            <linkedBodyAddonName>NingshaRace_HairFront</linkedBodyAddonName>
+            <sourceVariantCount>5</sourceVariantCount>
+          </li>
+          <li>
+            <sourceBodyAddonName>NingshaRace_HairMiddle</sourceBodyAddonName>
+            <linkedBodyAddonName>NingshaRace_HairBack</linkedBodyAddonName>
+            <sourceVariantCount>5</sourceVariantCount>
+          </li>
+        </rules>
+      </li>
+    </modExtensions>
+
+    <statBases>
+      <Mass>60</Mass>
+      <Flammability>0.6</Flammability>
+      <MarketValue>1800</MarketValue>
+      <MoveSpeed>4.6</MoveSpeed>
+      <ComfyTemperatureMin>0</ComfyTemperatureMin>
+      <ComfyTemperatureMax>42</ComfyTemperatureMax>
+      <LeatherAmount>75</LeatherAmount>
+      <Wildness>0.75</Wildness>
+      <ToxicResistance>0.15</ToxicResistance>
+      <GlobalLearningFactor>1</GlobalLearningFactor>
+      <PsychicSensitivity>1</PsychicSensitivity>
+    </statBases>
+
+    <tools>
+      <li>
+        <label>left fist</label>
+        <labelNoLocation>fist</labelNoLocation>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8.2</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+      </li>
+      <li>
+        <label>right fist</label>
+        <labelNoLocation>fist</labelNoLocation>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8.2</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+      </li>
+      <li>
+        <label>teeth</label>
+        <capacities>
+          <li>Bite</li>
+        </capacities>
+        <power>8.2</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>Teeth</linkedBodyPartsGroup>
+        <chanceFactor>0.07</chanceFactor>
+        <soundMeleeHit>Pawn_Melee_HumanBite_Hit</soundMeleeHit>
+        <soundMeleeMiss>Pawn_Melee_HumanBite_Miss</soundMeleeMiss>
+      </li>
+      <li>
+        <label>head</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>5</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <chanceFactor>0.2</chanceFactor>
+      </li>
+    </tools>
+
+    <race>
+      <renderTree>NingshaRenderTree</renderTree>
+      <thinkTreeMain>Humanlike</thinkTreeMain>
+      <thinkTreeConstant>HumanlikeConstant</thinkTreeConstant>
+      <intelligence>Humanlike</intelligence>
+      <makesFootprints>true</makesFootprints>
+      <bloodDef>Filth_Blood</bloodDef>
+      <bloodSmearDef>Filth_BloodSmear</bloodSmearDef>
+      <soundMeleeDodge>Pawn_MeleeDodge</soundMeleeDodge>
+      <fleshType>Normal</fleshType>
+      <leatherDef>Leather_Human</leatherDef>
+      <nameCategory>HumanStandard</nameCategory>
+      <body>Human</body>
+      <baseBodySize>1</baseBodySize>
+      <baseHealthScale>1</baseHealthScale>
+      <foodType>OmnivoreHuman</foodType>
+      <lifeExpectancy>100</lifeExpectancy>
+      <gestationPeriodDays>18</gestationPeriodDays>
+      <meatMarketValue>0.8</meatMarketValue>
+      <manhunterOnDamageChance>0.5</manhunterOnDamageChance>
+      <manhunterOnTameFailChance>0.1</manhunterOnTameFailChance>
+      <soundCallIntervalRange>2000~5000</soundCallIntervalRange>
+      <canBecomeShambler>true</canBecomeShambler>
+      <hasUnnaturalCorpse>true</hasUnnaturalCorpse>
+      <hediffGiverSets>
+        <li>OrganicStandard</li>
+        <li>Human</li>
+      </hediffGiverSets>
+      <lifeStageAges>
+        <li Class="AlienRace.LifeStageAgeAlien">
+          <def>HumanlikeBaby</def>
+          <minAge>0</minAge>
+          <customDrawSize>(1, 1)</customDrawSize>
+          <customHeadDrawSize>(1,1)</customHeadDrawSize>
+        </li>
+        <li Class="AlienRace.LifeStageAgeAlien">
+          <def>HumanlikeChild</def>
+          <minAge>5</minAge>
+          <customDrawSize>(1, 1)</customDrawSize>
+          <customHeadDrawSize>(1,1)</customHeadDrawSize>
+        </li>
+        <li Class="AlienRace.LifeStageAgeAlien">
+          <def>HumanlikeAdult</def>
+          <minAge>18</minAge>
+          <customDrawSize>(1, 1)</customDrawSize>
+          <customHeadDrawSize>(1, 1)</customHeadDrawSize>
+        </li>
+      </lifeStageAges>
+      <ageGenerationCurve>
+        <points>
+          <li>(14, 0)</li>
+          <li>(16, 100)</li>
+          <li>(35, 100)</li>
+          <li>(60, 30)</li>
+          <li>(85, 10)</li>
+          <li>(100, 0)</li>
+        </points>
+      </ageGenerationCurve>
+    </race>
+  </AlienRace.ThingDef_AlienRace>
+</Defs>

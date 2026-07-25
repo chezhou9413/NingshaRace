@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义沙傀 Pawn 种族的属性、身体和工作能力。 -->
+  <ThingDef ParentName="BasePawn">
+    <defName>NingshaRace_SandGolem</defName>
+    <label>沙傀</label>
+    <description>由凝砂术临时塑成的沙偶。</description>
+    <modExtensions>
+      <li Class="NingshaRaceLib.SandGolem.Defs.SandGolemDefExtension">
+        <animationTicks>120</animationTicks>
+        <maintenanceIntervalTicks>250</maintenanceIntervalTicks>
+      </li>
+    </modExtensions>
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+    <tradeability>None</tradeability>
+    <statBases>
+      <MarketValue>0</MarketValue>
+      <Mass>60</Mass>
+      <MaxHitPoints>300</MaxHitPoints>
+      <MoveSpeed>4.6</MoveSpeed>
+      <CarryingCapacity>100</CarryingCapacity>
+      <ComfyTemperatureMin>-100</ComfyTemperatureMin>
+      <ComfyTemperatureMax>100</ComfyTemperatureMax>
+      <PsychicSensitivity>0</PsychicSensitivity>
+      <ToxicResistance>1</ToxicResistance>
+      <Flammability>0</Flammability>
+      <MeatAmount>0</MeatAmount>
+      <ArmorRating_Blunt>0.2</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.3</ArmorRating_Sharp>
+      <ArmorRating_Heat>1</ArmorRating_Heat>
+      <ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">1</ToxicEnvironmentResistance>
+      <Wildness>0</Wildness>
+      <GlobalLearningFactor>1</GlobalLearningFactor>
+    </statBases>
+    <tools>
+      <li>
+        <label>left fist</label>
+        <labelNoLocation>fist</labelNoLocation>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8.2</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+      </li>
+      <li>
+        <label>right fist</label>
+        <labelNoLocation>fist</labelNoLocation>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8.2</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+      </li>
+    </tools>
+    <race>
+      <thinkTreeMain>NingshaRace_SandGolemMechanoid</thinkTreeMain>
+      <intelligence>ToolUser</intelligence>
+      <fleshType>Mechanoid</fleshType>
+      <needsRest>false</needsRest>
+      <hasGenders>false</hasGenders>
+      <foodType>None</foodType>
+      <alwaysAwake>true</alwaysAwake>
+      <isImmuneToInfections>true</isImmuneToInfections>
+      <makesFootprints>true</makesFootprints>
+      <lifeExpectancy>1000</lifeExpectancy>
+      <bloodDef>Filth_MachineBits</bloodDef>
+      <bloodSmearDef>Filth_MachineBits</bloodSmearDef>
+      <body>Human</body>
+      <renderTree>NingshaRace_SandGolemRenderTree</renderTree>
+      <baseBodySize>1</baseBodySize>
+      <baseHealthScale>1</baseHealthScale>
+      <mechEnabledWorkTypes>
+        <li>Hauling</li>
+        <li>BasicWorker</li>
+        <li>Hunting</li>
+        <li>Cleaning</li>
+        <li>Construction</li>
+        <li>Firefighter</li>
+        <li>PlantCutting</li>
+        <li>Growing</li>
+        <li>Crafting</li>
+        <li>Smithing</li>
+        <li>Tailoring</li>
+        <li>Cooking</li>
+        <li>Mining</li>
+        <li MayRequire="Ludeon.RimWorld.Odyssey">Fishing</li>
+        <li>Doctor</li>
+      </mechEnabledWorkTypes>
+      <gestationPeriodDays>0</gestationPeriodDays>
+      <meatMarketValue>0</meatMarketValue>
+      <soundMeleeHitPawn>Pawn_Melee_MechanoidBash_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_MechanoidBash_HitBuilding</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_MechanoidBash_Miss</soundMeleeMiss>
+      <mechWeightClass MayRequire="Ludeon.RimWorld.Biotech">Medium</mechWeightClass>
+      <hediffGiverSets />
+      <lifeStageAges>
+        <li>
+          <def>MechanoidFullyFormed</def>
+          <minAge>0</minAge>
+          <soundWounded>Pawn_Mech_Scyther_Wounded</soundWounded>
+          <soundDeath>Pawn_Mech_Scyther_Death</soundDeath>
+          <soundCall>Pawn_Mech_Scyther_Call</soundCall>
+        </li>
+      </lifeStageAges>
+    </race>
+    <butcherProducts>
+      <BlocksSandstone>1</BlocksSandstone>
+    </butcherProducts>
+  </ThingDef>
+</Defs>

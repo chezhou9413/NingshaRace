@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义凝砂族巨剑“葬岳”及其装备技能来源。 -->
+
+  <!-- Def 职责：提供开发者生成的重型巨剑，并在装备时授予“坠岳斩”。 -->
+  <ThingDef ParentName="BaseMeleeWeapon_Sharp_Quality">
+    <defName>NingshaRace_BurialMountainGreatsword</defName>
+    <label>葬岳</label>
+    <description>以沉黑巨铁锻成、由凝砂绷带层层封束的重型巨刃。持有者既能跃向敌阵挥下坠岳斩，也能横剑格挡，让岩土护盾吸收伤害并在蓄满后震击周围敌人。</description>
+    <recipeMaker IsNull="True" />
+    <smeltable>false</smeltable>
+    <tradeability>None</tradeability>
+    <graphicData>
+      <texPath>NingshaRace/Weapons/BurialMountainGreatsword</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Cutout</shaderType>
+      <drawSize>(1.5,1.5)</drawSize>
+    </graphicData>
+    <uiIconScale>1</uiIconScale>
+    <techLevel>Medieval</techLevel>
+    <equippedAngleOffset>0</equippedAngleOffset>
+    <equippedDistanceOffset>0.5</equippedDistanceOffset>
+    <statBases>
+      <MaxHitPoints>400</MaxHitPoints>
+      <Mass>3.5</Mass>
+      <MarketValue>1200</MarketValue>
+      <MeleeWeapon_DamageMultiplier>1</MeleeWeapon_DamageMultiplier>
+    </statBases>
+    <weaponTags Inherit="False">
+      <li>NingshaRaceBurialMountainGreatsword</li>
+    </weaponTags>
+    <weaponClasses>
+      <li>Melee</li>
+    </weaponClasses>
+    <comps>
+      <li Class="ChezhouLib.Comp.CompProperties_AbilityGiver_Direct">
+        <abilityDef>
+          <li>NingshaRace_Ability_FallingMountainSlash</li>
+        </abilityDef>
+      </li>
+      <li Class="NingshaRaceLib.Combat.BurialMountainGuard.Components.CompProperties_BurialMountainGuardMode">
+        <damageReduction>20</damageReduction>
+        <chargeThreshold>100</chargeThreshold>
+        <releaseDamageMultiplier>0.5</releaseDamageMultiplier>
+        <releaseRadius>3.9</releaseRadius>
+        <releaseDamageDef>Blunt</releaseDamageDef>
+        <armorPenetration>1</armorPenetration>
+        <shieldScale>2.6</shieldScale>
+        <burstScale>7.8</burstScale>
+      </li>
+    </comps>
+    <tools Inherit="False">
+      <li>
+        <label>剑柄（钝击）</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>10</power>
+        <armorPenetration>0.8</armorPenetration>
+        <cooldownTime>1</cooldownTime>
+      </li>
+      <li>
+        <label>剑尖（刺）</label>
+        <capacities>
+          <li>Stab</li>
+        </capacities>
+        <power>30</power>
+        <armorPenetration>0.8</armorPenetration>
+        <cooldownTime>1.5</cooldownTime>
+      </li>
+      <li>
+        <label>剑刃（割）</label>
+        <capacities>
+          <li>Cut</li>
+        </capacities>
+        <power>30</power>
+        <armorPenetration>0.8</armorPenetration>
+        <cooldownTime>1.5</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+</Defs>

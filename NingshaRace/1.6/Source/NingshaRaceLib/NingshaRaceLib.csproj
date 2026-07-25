@@ -44,7 +44,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="ChezhouLib">
-      <HintPath>E:\捷豹\rimworlddll\ChezhouLib.dll</HintPath>
+      <HintPath>E:\RimModDev\ChezhouLib\1.6\Assemblies\ChezhouLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="HarmonyMod">
@@ -120,90 +120,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abilities\CompAbilityEffect_SummonSandGolem.cs" />
-    <Compile Include="Abilities\SandGolemAbilityUtility.cs" />
-    <Compile Include="Combat\BurialMountainGuardUtility.cs" />
-    <Compile Include="Combat\Comp_BurialMountainGuardMode.cs" />
-    <Compile Include="Combat\GameComponent_GroundSpikeAttacks.cs" />
-    <Compile Include="Combat\GameComponent_SnakeBellySwordAttacks.cs" />
-    <Compile Include="Combat\FallingMountainSlashRenderUtility.cs" />
-    <Compile Include="Combat\GroundSpikeAttackSequence.cs" />
-    <Compile Include="Combat\GroundSpikeCombatUtility.cs" />
-    <Compile Include="Combat\GroundSpikeWaveStep.cs" />
-    <Compile Include="Combat\PawnFlyer_FallingMountainSlash.cs" />
-    <Compile Include="Combat\SnakeBellySwordAttackSequence.cs" />
-    <Compile Include="Combat\SnakeBellySwordCombatUtility.cs" />
-    <Compile Include="Combat\SnakeBellySwordRenderState.cs" />
-    <Compile Include="Combat\Verb_GroundSpikeSummoner.cs" />
-    <Compile Include="Combat\Verb_FallingMountainSlash.cs" />
-    <Compile Include="Combat\Verb_SnakeBellySword.cs" />
-    <Compile Include="Combat\VerbProperties_GroundSpikeSummoner.cs" />
-    <Compile Include="Combat\VerbProperties_SnakeBellySword.cs" />
-    <Compile Include="DefOfRefs.cs" />
-    <Compile Include="DesertPit\Building_DesertPitGate.cs" />
-    <Compile Include="DesertPit\Building_DesertPitPot.cs" />
-    <Compile Include="DesertPit\DesertPitCaveCarver.cs" />
-    <Compile Include="DesertPit\DesertPitCaveGraphUtility.cs" />
-    <Compile Include="DesertPit\DesertPitCaveNode.cs" />
-    <Compile Include="DesertPit\DesertPitDecorationUtility.cs" />
-    <Compile Include="DesertPit\DesertPitGenUtility.cs" />
-    <Compile Include="DesertPit\DesertPitLandmarkUtility.cs" />
-    <Compile Include="DesertPit\DesertPitLandmarkPlacementUtility.cs" />
-    <Compile Include="DesertPit\DesertPitLandmarkTerrainUtility.cs" />
-    <Compile Include="DesertPit\DesertPitLayoutData.cs" />
-    <Compile Include="DesertPit\DesertPitRelicUtility.cs" />
-    <Compile Include="DesertPit\GenStep_DesertPitExit.cs" />
-    <Compile Include="DesertPit\GenStep_DesertPitDecorations.cs" />
-    <Compile Include="DesertPit\GenStep_DesertPitGlow.cs" />
-    <Compile Include="DesertPit\GenStep_DesertPitHydrology.cs" />
-    <Compile Include="DesertPit\GenStep_DesertPitLandmarks.cs" />
-    <Compile Include="DesertPit\GenStep_DesertPitLayout.cs" />
-    <Compile Include="DesertPit\GenStep_DesertPitPlants.cs" />
-    <Compile Include="DesertPit\GenStep_DesertPitPots.cs" />
-    <Compile Include="DesertPit\GenStep_DesertPitRelics.cs" />
-    <Compile Include="DesertPit\GenStep_DesertPitScatter.cs" />
-    <Compile Include="DesertPit\GenStep_DesertPitTerrain.cs" />
-    <Compile Include="DevTools\Designator_NingshaDevPlace.cs" />
-    <Compile Include="DevTools\Dialog_NingshaDevPlacement.cs" />
-    <Compile Include="DevTools\NingshaDevPlacementActions.cs" />
-    <Compile Include="DevTools\NingshaDevPlacementCatalog.cs" />
-    <Compile Include="DevTools\NingshaDevPlacementEntry.cs" />
-    <Compile Include="MainEntry.cs" />
-    <Compile Include="Patches\Patch_BurialMountainGuardMode.cs" />
-    <Compile Include="Patches\Patch_PawnAbilityGrant.cs" />
-    <Compile Include="Patches\Patch_FallingMountainSlashCarriedWeaponRendering.cs" />
-    <Compile Include="Patches\Patch_SnakeBellySwordWeaponRendering.cs" />
-    <Compile Include="Patches\Patch_SandGolemControl.cs" />
-    <Compile Include="Patches\Patch_SandGolemGizmos.cs" />
-    <Compile Include="Patches\Patch_SandGolemDeath.cs" />
-    <Compile Include="Patches\Patch_SandGolemRendering.cs" />
-    <Compile Include="Patches\Patch_SandGolemWorkTab.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rendering\Graphic_MoteGroundSpikeFrameAnimation.cs" />
-    <Compile Include="Rendering\Mote_BurialMountainGuardBurst.cs" />
-    <Compile Include="Rendering\Mote_BurialMountainGuardShield.cs" />
-    <Compile Include="Rendering\Mote_TerraCrescentSlash.cs" />
-    <Compile Include="Rendering\Graphic_SandGolem.cs" />
-    <Compile Include="Rendering\Graphic_MoteFrameAnimation.cs" />
-    <Compile Include="Rendering\BodyAddons\BodyAddonLinkFallbackExtension.cs" />
-    <Compile Include="Rendering\BodyAddons\BodyAddonLinkFallbackRule.cs" />
-    <Compile Include="Rendering\BodyAddons\BodyAddonLinkFallbackUtility.cs" />
-    <Compile Include="Rendering\BodyAddons\BodyAddonTextureScaleDef.cs" />
-    <Compile Include="Rendering\BodyAddons\BodyAddonTextureScaleRule.cs" />
-    <Compile Include="Rendering\BodyAddons\BodyAddonTextureScaleUtility.cs" />
-    <Compile Include="Rendering\BodyAddons\Patch_BodyAddonOffsetFor_TextureRule.cs" />
-    <Compile Include="Rendering\BodyAddons\Patch_BodyAddonScaleFor_TextureRule.cs" />
-    <Compile Include="Rendering\BodyAddons\Patch_GraphicMulti_LinkedTransparentFallback.cs" />
-    <Compile Include="Rendering\PawnRenderNode_SandGolem.cs" />
-    <Compile Include="Rendering\PawnRenderNodeWorker_SandGolem.cs" />
-    <Compile Include="Rendering\SandGolemPawnCapture.cs" />
-    <Compile Include="SandGolem\GameComponent_SandGolemTracker.cs" />
-    <Compile Include="SandGolem\HediffComp_SandGolemMarker.cs" />
-    <Compile Include="SandGolem\PendingSandGolemSummon.cs" />
-    <Compile Include="SandGolem\SandGolemFactory.cs" />
-    <Compile Include="SandGolem\SandGolemIdentityCleaner.cs" />
-    <Compile Include="SandGolem\SandGolemRenderState.cs" />
-    <Compile Include="SandGolem\SandGolemUtility.cs" />
+    <Compile Include="**\*.cs" Exclude="obj\**\*.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

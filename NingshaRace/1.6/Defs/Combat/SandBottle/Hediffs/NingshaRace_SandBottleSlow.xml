@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义沙瓶命中 Pawn 后施加的短时滞缓状态。 -->
+
+  <!-- Def 职责：让沙瓶命中的 Pawn 在五秒内降低百分之四十移动速度。 -->
+  <HediffDef>
+    <defName>NingshaRace_SandBottleSlow</defName>
+    <label>沙尘滞缓</label>
+    <description>灼热细砂渗入关节与衣物，使移动暂时变得迟缓。</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.82,0.67,0.38)</defaultLabelColor>
+    <isBad>true</isBad>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <stages>
+      <li>
+        <statFactors>
+          <MoveSpeed>0.6</MoveSpeed>
+        </statFactors>
+      </li>
+    </stages>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>300</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+    </comps>
+  </HediffDef>
+</Defs>
