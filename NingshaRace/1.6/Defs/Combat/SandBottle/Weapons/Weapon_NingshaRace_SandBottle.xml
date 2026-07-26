@@ -6,7 +6,7 @@
   <ThingDef ParentName="BaseWeapon">
     <defName>NingshaRace_SandBottle</defName>
     <label>沙瓶</label>
-    <description>一只封存灼热细砂的粗砺容器。挥动时，瓶中的砂流会呈扇形喷向前方，灼伤敌人并阻滞其行动。</description>
+    <description>一只封存灼热细砂的粗砺容器，挥动时，瓶中的砂流会呈扇形喷向前方，灼伤敌人并阻滞其行动。\n 对于凝砂族流浪者来说，这是最容易获取的保命之物————也是他们认为最顺手的烫蚂蚁神器。</description>
     <techLevel>Medieval</techLevel>
     <recipeMaker IsNull="True" />
     <smeltable>false</smeltable>

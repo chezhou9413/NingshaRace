@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <!-- 名字部分：名 + 姓 的组合方式 -->
+  <NingshaRace.pawn.nameType>Person</NingshaRace.pawn.nameType>
+
+  <!-- 名（Given Name）词库，原版用 _First 后缀 -->
+  <NingshaRace.pawn.names.first>
+    <li>塞拉菲娜</li>
+    <li>萨米拉</li>
+    <li>奈芙缇丝</li>
+    <li>伊西斯娅</li>
+    <li>玛特琳</li>
+    <li>雅珊德拉</li>
+    <li>莱拉</li>
+    <li>玛丽卡</li>
+    <li>娜迪亚</li>
+    <li>索拉雅</li>
+    <li>艾琳娜</li>
+    <li>法蒂琳</li>
+    <li>克珊娜</li>
+    <li>米莉亚</li>
+    <li>塔莉娅</li>
+    <li>萨布丽娜</li>
+    <li>蕾拉</li>
+    <li>雅丝敏</li>
+    <li>希琳</li>
+    <li>塔米拉</li>
+    <li>艾莎</li>
+    <li>达莉亚</li>
+    <li>米拉</li>
+    <li>莎迪亚</li>
+    <li>席琳</li>
+    <li>阿缇芙</li>
+    <li>佐伊</li>
+    <li>塞尔</li>
+    <li>希布尔</li>
+    <li>维佩拉</li>
+    <li>萨法</li>
+    <li>梅里特</li>
+    <li>赛琳娜</li>
+  </NingshaRace.pawn.names.first>
+
+  <!-- 姓（Surname）词库，原版用 _Last 后缀 -->
+  <NingshaRace.pawn.names.last>
+    <li>卡迪西亚</li>
+    <li>奈芙瑞</li>
+    <li>塞特麦尔</li>
+    <li>赫利奥砂</li>
+    <li>伊西斯塔尔</li>
+    <li>欧律克同</li>
+    <li>佩特拉夏</li>
+    <li>卡珊德拉兹</li>
+    <li>孟菲拉</li>
+    <li>弥里翁</li>
+    <li>萨菲拉</li>
+    <li>哈吉尔</li>
+    <li>卡比尔丁</li>
+    <li>莱拉赫</li>
+    <li>苏莱曼砂</li>
+    <li>拉姆辛</li>
+    <li>乌雷斯</li>
+    <li>阿努比</li>
+    <li>扎伊尔德</li>
+    <li>俄菲翁</li>
+    <li>萨勒凡</li>
+    <li>曼菲斯</li>
+    <li>阿萨菲尔</li>
+    <li>努尔丁</li>
+    <li>残鳞氏</li>
+    <li>无巢者</li>
+    <li>守灯人</li>
+    <li>阿雅尔</li>
+    <li>寻迹者</li>
+    <li>蚀砂客</li>
+    <li>卡夫</li>
+    <li>泽姆</li>
+    <li>塔西斯</li>
+  </NingshaRace.pawn.names.last>
+
+  <!-- 简称昵称（Nick）词库，原版用 _Nick 后缀，非必须 -->
+  <NingshaRace.pawn.names.nick>
+    <li>圣瞳</li>
+    <li>梅里</li>
+    <li>月蛇</li>
+    <li>赤鳞</li>
+    <li>毒牙</li>
+    <li>噬影</li>
+    <li>盲眼</li>
+    <li>蜕砂</li>
+    <li>寻迹者</li>
+    <li>织鳞</li>
+    <li>掘沙</li>
+    <li>鳞刃</li>
+    <li>墨杜</li>
+    <li>娜蒂</li>
+    <li>奥菲</li>
+    <li>米米</li>
+    <li>菲菲</li>
+    <li>提蒂</li>
+    <li>诺诺</li>
+    <li>石匠</li>
+    <li>尾环</li>
+    <li>灰瞳</li>
+    <li>碎角</li>
+    <li>裂纹</li>
+    <li>半石化</li>
+    <li>渴沙</li>
+    <li>回头者</li>
+    <li>不肯睡的</li>
+    <li>无家的</li>
+    <li>静夜</li>
+    <li>无面</li>
+    <li>回声</li>
+    <li>尾声</li>
+    <li>砂喉</li>
+    <li>褪色者</li>
+    <li>珐琅</li>
+    <li>阿舒尔</li>
+  </NingshaRace.pawn.names.nick>
+
+</LanguageData>

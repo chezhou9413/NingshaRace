@@ -6,7 +6,7 @@
   <ThingDef ParentName="BaseMeleeWeapon_Sharp_Quality">
     <defName>NingshaRace_SnakeBellySword</defName>
     <label>蛇腹剑</label>
-    <description>由多节锋刃构成的凝砂族武器。挥动时刃节会沿攻击方向展开，同时扫击并击退前方的敌人。</description>
+    <description>由多节锋刃构成的柔性长剑，是凝砂族法里斯们最常用的武器。挥动时刃节会沿攻击方向展开，同时扫击并击退前方的敌人，如同从手中延伸出的、舞动的长蛇。</description>
     <recipeMaker IsNull="True" />
     <smeltable>false</smeltable>
     <graphicData>

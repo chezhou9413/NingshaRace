@@ -5,8 +5,8 @@
   <!-- Def 职责：提供开发者生成的重型巨剑，并在装备时授予“坠岳斩”。 -->
   <ThingDef ParentName="BaseMeleeWeapon_Sharp_Quality">
     <defName>NingshaRace_BurialMountainGreatsword</defName>
-    <label>葬岳</label>
-    <description>以沉黑巨铁锻成、由凝砂绷带层层封束的重型巨刃。持有者既能跃向敌阵挥下坠岳斩，也能横剑格挡，让岩土护盾吸收伤害并在蓄满后震击周围敌人。</description>
+    <label>盖布巨剑</label>
+    <description> 昔日的先民们怀揣着对大地的崇拜，将自身的深层之力灌入沉黑巨铁凝砂，以此铸造了这柄重型巨刃。\n \n 曾经在地表游历的冒险家玛蒂妮娅曾对此不以为然，在她看来，这种巨剑固然威力巨大，可持剑者面对远方的枪械只能当场饮恨————\n 直到她看见持剑的同胞开启护盾把射来的子弹全部“弹”了回去，她才意识到自己的错误</description>
     <recipeMaker IsNull="True" />
     <smeltable>false</smeltable>
     <tradeability>None</tradeability>
@@ -55,8 +55,8 @@
         <capacities>
           <li>Blunt</li>
         </capacities>
-        <power>10</power>
-        <armorPenetration>0.8</armorPenetration>
+        <power>12</power>
+        <armorPenetration>0.3</armorPenetration>
         <cooldownTime>1</cooldownTime>
       </li>
       <li>
@@ -64,9 +64,9 @@
         <capacities>
           <li>Stab</li>
         </capacities>
-        <power>30</power>
-        <armorPenetration>0.8</armorPenetration>
-        <cooldownTime>1.5</cooldownTime>
+        <power>20</power>
+        <armorPenetration>0.9</armorPenetration>
+        <cooldownTime>1.8</cooldownTime>
       </li>
       <li>
         <label>剑刃（割）</label>
@@ -75,7 +75,7 @@
         </capacities>
         <power>30</power>
         <armorPenetration>0.8</armorPenetration>
-        <cooldownTime>1.5</cooldownTime>
+        <cooldownTime>2.1</cooldownTime>
       </li>
     </tools>
   </ThingDef>
