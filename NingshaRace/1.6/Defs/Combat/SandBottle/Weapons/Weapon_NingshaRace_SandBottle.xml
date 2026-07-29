@@ -29,10 +29,10 @@
       <Mass>1</Mass>
       <MarketValue>550</MarketValue>
       <AccuracyTouch>1</AccuracyTouch>
-      <AccuracyShort>1</AccuracyShort>
+      <AccuracyShort>0.9</AccuracyShort>
       <AccuracyMedium>1</AccuracyMedium>
       <AccuracyLong>1</AccuracyLong>
-      <RangedWeapon_Cooldown>2.5</RangedWeapon_Cooldown>
+      <RangedWeapon_Cooldown>2.1</RangedWeapon_Cooldown>
     </statBases>
     <weaponTags Inherit="False">
       <li>NingshaRaceSandBottle</li>
@@ -43,12 +43,12 @@
         <label>扇形喷砂</label>
         <hasStandardCommand>true</hasStandardCommand>
         <isPrimary>true</isPrimary>
-        <range>6</range>
+        <range>8</range>
         <warmupTime>0.5</warmupTime>
-        <defaultCooldownTime>2.5</defaultCooldownTime>
+        <defaultCooldownTime>2.1</defaultCooldownTime>
         <coneAngle>60</coneAngle>
         <damageDef>Burn</damageDef>
-        <damageAmount>20</damageAmount>
+        <damageAmount>10</damageAmount>
         <slowDurationTicks>300</slowDurationTicks>
         <effectModId>NingshaRace</effectModId>
         <effectName>SandThrowBurst</effectName>

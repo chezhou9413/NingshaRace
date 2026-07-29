@@ -4,7 +4,7 @@
   <ThingDef ParentName="NingshaRaceOutfitBase">
     <defName>NingshaRace_Apparel_LongPantsSet</defName>
     <label>凝砂长裤套装</label>
-    <description>由贴身内裤、短上衣与长裤组成的凝砂族完整套装。</description>
+    <description>由贴身内裤、短上衣与宽松的低裆阿拉丁裤组成的凝砂族完整套装，展现大片肌肤，方便在沙漠中散热和行走，是王朝时代凝砂族富裕市民的日常着装。</description>
     <graphicData>
       <texPath>NingshaRace/Apparel/Outfit2/Outfit2Item</texPath>
     </graphicData>

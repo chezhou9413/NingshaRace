@@ -6,7 +6,7 @@
   <ThingDef ParentName="NingshaRaceOutfitBase">
     <defName>NingshaRace_Apparel_AdvancedTacticalCloak</defName>
     <label>凝砂族高阶战术斗篷</label>
-    <description>供凝砂族精锐战士使用的高阶战术斗篷，由后层披布、主斗篷与围巾构成。</description>
+    <description>由幸存的第二王朝匠人们为后侵蚀时代凝砂族精锐法里斯设计的高阶战术斗篷，由后层披布、主斗篷与围巾构成。\n 尽管法里斯们一开始依然对自己的蛇鳞重甲念念不忘，但很快她们就发现，面对异象与侵蚀，这些斗篷明显更加实用。</description>
     <generateAllowChance>0</generateAllowChance>
     <graphicData>
       <texPath>NingshaRace/Apparel/Outfit3/Outfit3Item</texPath>
