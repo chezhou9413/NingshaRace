@@ -6,7 +6,7 @@
   <ThingDef ParentName="BaseMeleeWeapon_Sharp_Quality">
     <defName>NingshaRace_SnakeBellySword</defName>
     <label>蛇腹剑</label>
-    <description>由多节锋刃构成的凝砂族武器。挥动时刃节会沿攻击方向展开，同时扫击并击退前方的敌人。</description>
+    <description>由多节锋刃构成的柔性长剑，是凝砂族法里斯们最常用的武器。挥动时刃节会沿攻击方向展开，同时扫击并击退前方的敌人，如同从手中延伸出的、舞动的长蛇。</description>
     <recipeMaker IsNull="True" />
     <smeltable>false</smeltable>
     <graphicData>
@@ -31,12 +31,12 @@
         <label>蛇腹剑攻击</label>
         <hasStandardCommand>true</hasStandardCommand>
         <isPrimary>true</isPrimary>
-        <range>5</range>
+        <range>7</range>
         <warmupTime>0.2</warmupTime>
-        <defaultCooldownTime>1.8</defaultCooldownTime>
+        <defaultCooldownTime>1.4</defaultCooldownTime>
         <meleeDamageDef>Cut</meleeDamageDef>
-        <meleeDamageBaseAmount>18</meleeDamageBaseAmount>
-        <meleeArmorPenetrationBase>0.25</meleeArmorPenetrationBase>
+        <meleeDamageBaseAmount>15</meleeDamageBaseAmount>
+        <meleeArmorPenetrationBase>0.21</meleeArmorPenetrationBase>
         <coneAngle>90</coneAngle>
         <knockbackCells>2</knockbackCells>
         <weaponHiddenTicks>42</weaponHiddenTicks>
@@ -65,5 +65,25 @@
         </targetParams>
       </li>
     </verbs>
+    <tools>
+      <li>
+        <label>剑柄</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>9</power>
+        <cooldownTime>2</cooldownTime>
+      </li>
+      <li>
+        <label>剑刃</label>
+        <capacities>
+          <li>Cut</li>
+          <li>Stab</li>
+        </capacities>
+        <power>12</power>
+        <armorPenetration>0.15</armorPenetration>
+        <cooldownTime>2</cooldownTime>
+      </li>
+    </tools>
   </ThingDef>
 </Defs>

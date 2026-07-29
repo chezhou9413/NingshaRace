@@ -5,8 +5,8 @@
   <!-- Def 职责：提供可隔墙召唤单列巨型地刺并击退路径敌人的开发者测试武器。 -->
   <ThingDef ParentName="BaseWeapon">
     <defName>NingshaRace_GroundSpikeSummoner</defName>
-    <label>地刺召唤物</label>
-    <description>一枚封存着凝砂术式的岩核。持有者可以沿指定方向依次唤醒地下砂岩，使单列巨型尖刺破土而出，将路径上的敌人刺伤并掀离原地。</description>
+    <label>锐沙方块</label>
+    <description>奇异工匠们将自身深层之力凝固为凝砂术式，再将固体术式重叠为岩核，一个锐沙方块就诞生了。持有者可以唤醒地下砂岩，使巨型尖刺破土而出，刺穿或掀飞沿途的敌人。\n 如今，这份技艺早已失传。</description>
     <techLevel>Medieval</techLevel>
     <smeltable>false</smeltable>
     <tradeability>None</tradeability>
@@ -42,12 +42,12 @@
         <label>地刺突进</label>
         <hasStandardCommand>true</hasStandardCommand>
         <isPrimary>true</isPrimary>
-        <range>25</range>
+        <range>27</range>
         <warmupTime>0.8</warmupTime>
         <defaultCooldownTime>3</defaultCooldownTime>
         <damageDef>Stab</damageDef>
-        <damageAmount>25</damageAmount>
-        <armorPenetration>0.3</armorPenetration>
+        <damageAmount>27</damageAmount>
+        <armorPenetration>0.5</armorPenetration>
         <lineHalfWidth>1</lineHalfWidth>
         <knockbackCells>1</knockbackCells>
         <waveStepTicks>1</waveStepTicks>

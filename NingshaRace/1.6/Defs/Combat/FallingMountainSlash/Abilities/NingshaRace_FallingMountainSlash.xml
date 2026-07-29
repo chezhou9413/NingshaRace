@@ -5,8 +5,8 @@
   <!-- Def 职责：提供十格范围内锁定 Pawn 或地面位置的无前摇跳劈指令。 -->
   <AbilityDef>
     <defName>NingshaRace_Ability_FallingMountainSlash</defName>
-    <label>坠岳斩</label>
-    <description>持葬岳跃向目标，在落地时震裂大地并释放冲击波，对落点周围单位造成伤害，锁定目标会受到额外重击。</description>
+    <label>坠地斩</label>
+    <description>持盖布巨剑跃向目标，在落地时震裂大地并释放冲击波，对落点周围单位造成伤害，锁定目标会受到额外重击。</description>
     <iconPath>UI/Abilities/FallingMountainSlash</iconPath>
     <cooldownTicksRange>600~600</cooldownTicksRange>
     <hostile>true</hostile>
@@ -24,7 +24,7 @@
     </modExtensions>
     <verbProperties>
       <verbClass>NingshaRaceLib.Combat.FallingMountainSlash.Verbs.Verb_FallingMountainSlash</verbClass>
-      <label>坠岳斩</label>
+      <label>坠地斩</label>
       <violent>true</violent>
       <forceNormalTimeSpeed>false</forceNormalTimeSpeed>
       <warmupTime>0</warmupTime>

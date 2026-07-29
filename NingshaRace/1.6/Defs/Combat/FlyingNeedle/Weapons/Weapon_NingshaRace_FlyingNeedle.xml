@@ -6,7 +6,7 @@
   <ThingDef ParentName="BaseWeapon">
     <defName>NingshaRace_FlyingNeedle</defName>
     <label>飞针</label>
-    <description>凝砂术锻成的细长暗针。针体几乎不造成创伤，却会把石化砂质送入血肉，连续命中四次即可使目标完全石化。</description>
+    <description>借助深层之力，凝砂族们将自石化的力量注入到纤细的凡铁中，以此将这些细长暗针作为自身能力的延伸，这可以说是如今的凝砂族少有的、可以自己打造出的异能武器\n 针体几乎不造成创伤，却会把石化砂质送入血肉，连续命中四次即可使目标完全石化。</description>
     <techLevel>Medieval</techLevel>
     <recipeMaker IsNull="True" />
     <smeltable>false</smeltable>
@@ -30,9 +30,9 @@
       <MarketValue>420</MarketValue>
       <AccuracyTouch>0.95</AccuracyTouch>
       <AccuracyShort>0.9</AccuracyShort>
-      <AccuracyMedium>0.82</AccuracyMedium>
-      <AccuracyLong>0.7</AccuracyLong>
-      <RangedWeapon_Cooldown>1.2</RangedWeapon_Cooldown>
+      <AccuracyMedium>0.72</AccuracyMedium>
+      <AccuracyLong>0.64</AccuracyLong>
+      <RangedWeapon_Cooldown>1</RangedWeapon_Cooldown>
     </statBases>
     <weaponTags Inherit="False">
       <li>NingshaRaceFlyingNeedle</li>
@@ -46,7 +46,7 @@
         <isPrimary>true</isPrimary>
         <defaultProjectile>NingshaRace_Projectile_FlyingNeedle</defaultProjectile>
         <warmupTime>0.35</warmupTime>
-        <defaultCooldownTime>1.2</defaultCooldownTime>
+        <defaultCooldownTime>1</defaultCooldownTime>
         <range>24</range>
         <soundCast>Bow_Small</soundCast>
         <ai_IsWeapon>true</ai_IsWeapon>

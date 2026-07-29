@@ -6,7 +6,7 @@
   <ThingDef ParentName="BaseWeapon">
     <defName>NingshaRace_SandBottle</defName>
     <label>沙瓶</label>
-    <description>一只封存灼热细砂的粗砺容器。挥动时，瓶中的砂流会呈扇形喷向前方，灼伤敌人并阻滞其行动。</description>
+    <description>一只封存灼热细砂的粗砺容器，挥动时，瓶中的砂流会呈扇形喷向前方，灼伤敌人并阻滞其行动。\n 对于凝砂族流浪者来说，这是最容易获取的保命之物————也是他们认为最顺手的烫蚂蚁神器。</description>
     <techLevel>Medieval</techLevel>
     <recipeMaker IsNull="True" />
     <smeltable>false</smeltable>
@@ -29,10 +29,10 @@
       <Mass>1</Mass>
       <MarketValue>550</MarketValue>
       <AccuracyTouch>1</AccuracyTouch>
-      <AccuracyShort>1</AccuracyShort>
+      <AccuracyShort>0.9</AccuracyShort>
       <AccuracyMedium>1</AccuracyMedium>
       <AccuracyLong>1</AccuracyLong>
-      <RangedWeapon_Cooldown>2.5</RangedWeapon_Cooldown>
+      <RangedWeapon_Cooldown>2.1</RangedWeapon_Cooldown>
     </statBases>
     <weaponTags Inherit="False">
       <li>NingshaRaceSandBottle</li>
@@ -43,12 +43,12 @@
         <label>扇形喷砂</label>
         <hasStandardCommand>true</hasStandardCommand>
         <isPrimary>true</isPrimary>
-        <range>6</range>
+        <range>8</range>
         <warmupTime>0.5</warmupTime>
-        <defaultCooldownTime>2.5</defaultCooldownTime>
+        <defaultCooldownTime>2.1</defaultCooldownTime>
         <coneAngle>60</coneAngle>
         <damageDef>Burn</damageDef>
-        <damageAmount>20</damageAmount>
+        <damageAmount>10</damageAmount>
         <slowDurationTicks>300</slowDurationTicks>
         <effectModId>NingshaRace</effectModId>
         <effectName>SandThrowBurst</effectName>

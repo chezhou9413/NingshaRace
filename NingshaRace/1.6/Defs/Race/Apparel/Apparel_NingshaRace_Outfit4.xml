@@ -3,8 +3,8 @@
   <!-- 文件职责：定义凝砂族四式套装及其前后裙摆、斗篷、胸布和围脖 BodyAddon。 -->
   <ThingDef ParentName="NingshaRaceOutfitBase">
     <defName>NingshaRace_Apparel_VeiledDress</defName>
-    <label>凝砂垂纱裙装</label>
-    <description>由分层裙摆、垂落斗篷、胸布与围脖组成的凝砂族完整套装。</description>
+    <label>凝砂手帕垂纱裙装</label>
+    <description>由分由围颈垂幔与多层裂片裙摆组成的凝砂族传统服饰，自太古王朝时期就已存在，深色粗布上缀有几何纹饰，行走时裂摆如砂流般曳动，是凝砂族平民的日常着装。</description>
     <graphicData>
       <texPath>NingshaRace/Apparel/Outfit4/Outfit4Item</texPath>
     </graphicData>

@@ -5,7 +5,7 @@
   <!-- Def 职责：生成固定穿戴作战内衬，并有一半概率穿戴高阶战术斗篷的凝砂族战士。 -->
   <PawnKindDef ParentName="BasePlayerPawnKind">
     <defName>NingshaRace_Warrior</defName>
-    <label>凝砂族战士</label>
+    <label>凝砂族法里斯</label>
     <race>NingshaRace</race>
     <defaultFactionDef>PlayerColony</defaultFactionDef>
     <useFactionXenotypes>false</useFactionXenotypes>
