@@ -39,7 +39,10 @@ namespace NingshaRaceLib.Combat.GroundSpike.Tracking
             map = verb.CasterPawn.Map;
             this.attackDirection = attackDirection;
             VerbProperties_GroundSpikeSummoner props = verb.Props;
-            if (props.animationFrameCount <= 0 || props.impactFrame < 1 || props.impactFrame > props.animationFrameCount)
+            if (props.animationFrameCount <= 0
+                || props.animationDurationTicks <= 0
+                || props.impactFrame < 1
+                || props.impactFrame > props.animationFrameCount)
             {
                 throw new InvalidOperationException("地刺动画帧参数无效，无法建立攻击序列。");
             }

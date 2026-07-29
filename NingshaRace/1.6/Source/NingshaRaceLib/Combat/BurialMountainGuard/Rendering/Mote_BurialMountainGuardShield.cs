@@ -10,18 +10,32 @@ namespace NingshaRaceLib.Combat.BurialMountainGuard.Rendering
     //类职责：绘制跟随葬岳持有者的沙暴护盾，并把蓄力映射为一到二的护盾强度。
     public class Mote_BurialMountainGuardShield : Mote
     {
+        //常量职责：限制护盾透明度，避免自发光效果遮挡 Pawn。
         private const float VisualAlphaMultiplier = 0.72f;
+
+        //字段职责：缓存护盾强度 Shader 属性编号。
         private static readonly int ShieldStrengthId = Shader.PropertyToID("_ShieldStrength");
+
+        //字段职责：缓存透明度 Shader 属性编号。
         private static readonly int AlphaId = Shader.PropertyToID("_Alpha");
 
+        //字段职责：保存护盾需要跟随和校验的持剑 Pawn。
         private Pawn sourcePawn;
+
+        //字段职责：缓存当前武器格挡组件，避免每 Tick 扫描装备组件列表。
+        private Comp_BurialMountainGuardMode guardComp;
+
+        //字段职责：保存零到一的护盾蓄力显示比例。
         private float chargeRatio;
+
+        //字段职责：复用单个材质属性块，避免每次绘制产生托管分配。
         private MaterialPropertyBlock propertyBlock;
 
-        //函数职责：绑定护盾跟随的 Pawn。
-        public void Initialize(Pawn pawn)
+        //函数职责：绑定护盾跟随的 Pawn 和对应武器格挡组件。
+        public void Initialize(Pawn pawn, Comp_BurialMountainGuardMode comp)
         {
             sourcePawn = pawn;
+            guardComp = comp;
             exactPosition = pawn.DrawPos;
             SetAltitude(ref exactPosition);
             Maintain();
@@ -41,18 +55,35 @@ namespace NingshaRaceLib.Combat.BurialMountainGuard.Rendering
             chargeRatio = Mathf.Clamp01(newChargeRatio);
         }
 
-        //函数职责：推进生命周期并同步护盾到 Pawn 当前绘制位置。
+        //函数职责：只在持有者仍使用同一把葬岳格挡时维持生命周期并同步显示状态。
         protected override void Tick()
         {
-            base.Tick();
-            if (Destroyed)
-            {
-                return;
-            }
-
             if (sourcePawn == null || sourcePawn.Destroyed || sourcePawn.Dead || !sourcePawn.Spawned)
             {
                 Destroy();
+                return;
+            }
+
+            if (guardComp == null || guardComp.parent != sourcePawn.equipment?.Primary)
+            {
+                if (!BurialMountainGuardUtility.TryGetGuardComp(sourcePawn, out guardComp))
+                {
+                    Destroy();
+                    return;
+                }
+            }
+
+            if (!guardComp.GuardMode)
+            {
+                Destroy();
+                return;
+            }
+
+            Maintain();
+            UpdateVisuals(guardComp.ChargeRatio);
+            base.Tick();
+            if (Destroyed)
+            {
                 return;
             }
 

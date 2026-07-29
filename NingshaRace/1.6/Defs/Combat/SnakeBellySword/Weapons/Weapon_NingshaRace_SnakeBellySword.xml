@@ -40,6 +40,12 @@
         <coneAngle>90</coneAngle>
         <knockbackCells>2</knockbackCells>
         <weaponHiddenTicks>42</weaponHiddenTicks>
+        <animationFrameCount>21</animationFrameCount>
+        <damageFrames>
+          <li>3</li>
+          <li>8</li>
+          <li>18</li>
+        </damageFrames>
         <effectScale>2.25</effectScale>
         <damageFactorMin>0.8</damageFactorMin>
         <damageFactorMax>1.2</damageFactorMax>

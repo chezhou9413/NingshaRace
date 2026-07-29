@@ -36,7 +36,7 @@ namespace NingshaRaceLib.Petrification.Utility
         {
             if (distance <= props.fullPetrificationRadius)
             {
-                return 1f;
+                return DefOfRefs.NingshaRace_Petrification.maxSeverity;
             }
             if (distance > range)
             {

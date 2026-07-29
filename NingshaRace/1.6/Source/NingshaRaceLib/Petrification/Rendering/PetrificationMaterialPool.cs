@@ -65,13 +65,41 @@ namespace NingshaRaceLib.Petrification.Rendering
                 });
                 if (!ReferenceEquals(source, null))
                 {
-                    CreatePetrifiedMaterial(source);
+                    GetOrCreatePetrifiedMaterial(source);
                     Material invisibleSource = InvisibilityMatPool.GetInvisibleMat(source);
                     if (!ReferenceEquals(invisibleSource, null))
                     {
-                        CreatePetrifiedMaterial(invisibleSource);
+                        GetOrCreatePetrifiedMaterial(invisibleSource);
                     }
                 }
+            }
+        }
+
+        //函数职责：在渲染树主线程初始化阶段预热节点经过全部子工作器处理后的最终材质。
+        public static void PrewarmFinalizedMaterials(PawnRenderNode node, Pawn pawn)
+        {
+            if (!UnityData.IsInMainThread)
+            {
+                throw new InvalidOperationException("石化最终材质只能在游戏主线程预热。");
+            }
+            if (node == null)
+            {
+                throw new ArgumentNullException(nameof(node));
+            }
+            if (pawn == null)
+            {
+                throw new ArgumentNullException(nameof(pawn));
+            }
+
+            foreach (Rot4 rotation in Rot4.AllRotations)
+            {
+                PawnDrawParms parms = PawnDrawParms.DefaultFor(pawn);
+                parms.facing = rotation;
+                parms.rotDrawMode = pawn.Drawer.renderer.CurRotDrawMode;
+                node.Worker.GetFinalizedMaterial(node, parms);
+
+                parms.flags |= PawnRenderFlags.Invisible;
+                node.Worker.GetFinalizedMaterial(node, parms);
             }
         }
 
@@ -91,7 +119,7 @@ namespace NingshaRaceLib.Petrification.Rendering
         }
 
         //函数职责：在游戏主线程保留原贴图、颜色、渲染队列和贴图变换并创建石化材质。
-        private static Material CreatePetrifiedMaterial(Material source)
+        public static Material GetOrCreatePetrifiedMaterial(Material source)
         {
             if (!UnityData.IsInMainThread)
             {

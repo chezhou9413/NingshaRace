@@ -9,6 +9,7 @@
       <li Class="NingshaRaceLib.SandGolem.Defs.SandGolemDefExtension">
         <animationTicks>120</animationTicks>
         <maintenanceIntervalTicks>250</maintenanceIntervalTicks>
+        <fallbackSkillLevel>6</fallbackSkillLevel>
       </li>
     </modExtensions>
     <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
