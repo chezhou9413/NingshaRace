@@ -5,6 +5,7 @@ using Verse;
 using Verse.AI;
 
 using NingshaRaceLib.Core.Defs;
+using NingshaRaceLib.SandGolem.Abilities.Components;
 using NingshaRaceLib.SandGolem.Defs;
 using NingshaRaceLib.SandGolem.Health;
 using NingshaRaceLib.SandGolem.Lifecycle;
@@ -23,14 +24,32 @@ namespace NingshaRaceLib.SandGolem.Utility
         private static readonly FieldInfo NeedsMiscField = typeof(Pawn_NeedsTracker).GetField("needsMisc", BindingFlags.Instance | BindingFlags.NonPublic);
 
         //属性职责：返回沙傀 ThingDef 上配置的汇聚和消散动画持续 Tick。
-        public static int AnimationTicks => Settings.animationTicks;
+        public static int AnimationTicks => LifecycleSettings.animationTicks;
 
         //属性职责：返回沙傀 ThingDef 上配置的低频身份维护间隔。
-        public static int MaintenanceIntervalTicks => Settings.maintenanceIntervalTicks;
+        public static int MaintenanceIntervalTicks => LifecycleSettings.maintenanceIntervalTicks;
 
         //属性职责：返回沙傀 ThingDef 上声明的生命周期配置。
-        private static SandGolemDefExtension Settings =>
+        private static SandGolemDefExtension LifecycleSettings =>
             DefOfRefs.NingshaRace_SandGolem.GetModExtension<SandGolemDefExtension>();
+
+        //属性职责：返回召唤沙傀能力组件声明的目标地形配置。
+        private static CompProperties_AbilitySummonSandGolem SummonSettings
+        {
+            get
+            {
+                List<AbilityCompProperties> comps = DefOfRefs.NingshaRace_Ability_SummonSandGolem.comps;
+                for (int i = 0; i < comps.Count; i++)
+                {
+                    if (comps[i] is CompProperties_AbilitySummonSandGolem settings)
+                    {
+                        return settings;
+                    }
+                }
+
+                throw new System.InvalidOperationException("召唤沙傀 AbilityDef 缺少 CompProperties_AbilitySummonSandGolem。");
+            }
+        }
 
         //函数职责：判断 Pawn 是否是凝砂族主种族。
         public static bool IsNingshaPawn(Pawn pawn)
@@ -130,7 +149,7 @@ namespace NingshaRaceLib.SandGolem.Utility
             }
 
             TerrainDef terrain = cell.GetTerrain(map);
-            if (terrain != TerrainDefOf.Sand && terrain != TerrainDefOf.SoftSand)
+            if (!SummonSettings.allowedTerrains.Contains(terrain))
             {
                 rejectReason = "需要选择沙地";
                 return false;
@@ -275,7 +294,9 @@ namespace NingshaRaceLib.SandGolem.Utility
                 }
                 else
                 {
-                    skill.Level = pawn.RaceProps.mechFixedSkillLevel > 0 ? pawn.RaceProps.mechFixedSkillLevel : 6;
+                    skill.Level = pawn.RaceProps.mechFixedSkillLevel > 0
+                        ? pawn.RaceProps.mechFixedSkillLevel
+                        : LifecycleSettings.fallbackSkillLevel;
                     skill.passion = Passion.None;
                 }
 

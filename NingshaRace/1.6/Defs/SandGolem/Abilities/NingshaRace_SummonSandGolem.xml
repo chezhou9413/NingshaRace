@@ -25,7 +25,12 @@
       </targetParams>
     </verbProperties>
     <comps>
-      <li Class="NingshaRaceLib.SandGolem.Abilities.Components.CompProperties_AbilitySummonSandGolem" />
+      <li Class="NingshaRaceLib.SandGolem.Abilities.Components.CompProperties_AbilitySummonSandGolem">
+        <allowedTerrains>
+          <li>Sand</li>
+          <li>SoftSand</li>
+        </allowedTerrains>
+      </li>
     </comps>
   </AbilityDef>
 </Defs>

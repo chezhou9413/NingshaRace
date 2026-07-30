@@ -42,12 +42,12 @@
         <label>地刺突进</label>
         <hasStandardCommand>true</hasStandardCommand>
         <isPrimary>true</isPrimary>
-        <range>25</range>
+        <range>27</range>
         <warmupTime>0.8</warmupTime>
         <defaultCooldownTime>3</defaultCooldownTime>
         <damageDef>Stab</damageDef>
-        <damageAmount>25</damageAmount>
-        <armorPenetration>0.3</armorPenetration>
+        <damageAmount>27</damageAmount>
+        <armorPenetration>0.5</armorPenetration>
         <lineHalfWidth>1</lineHalfWidth>
         <knockbackCells>1</knockbackCells>
         <waveStepTicks>1</waveStepTicks>

@@ -14,7 +14,10 @@ namespace NingshaRaceLib.Petrification.Health
     //类职责：保存石化严重度与持续时间，在满层期间登记材质替换状态。
     public class Hediff_Petrification : HediffWithComps
     {
+        //字段职责：记录最近一次石化严重度实际增加的游戏 Tick。
         private int lastSeverityIncreaseTick = -1;
+
+        //字段职责：记录完全石化持续阶段结束的游戏 Tick。
         private int fullPetrificationEndTick = -1;
 
         //字段职责：记录当前运行期是否已登记石化材质，避免每 Tick 重复安装补丁和刷新图形。
@@ -35,8 +38,11 @@ namespace NingshaRaceLib.Petrification.Health
         //属性职责：返回 HediffDef 上配置的石化持续与消退参数。
         private PetrificationDefExtension Settings => def.GetModExtension<PetrificationDefExtension>();
 
+        //属性职责：返回 HediffDef 声明的完全石化严重度阈值。
+        private float FullSeverity => def.maxSeverity;
+
         //属性职责：以真实百分比显示石化严重度。
-        public override string SeverityLabel => Severity.ToStringPercent();
+        public override string SeverityLabel => (Severity / FullSeverity).ToStringPercent();
 
         //属性职责：在满层持续时间结束或十二小时未累计时请求健康系统移除本状态。
         public override bool ShouldRemove
@@ -62,9 +68,9 @@ namespace NingshaRaceLib.Petrification.Health
             get => base.Severity;
             set
             {
-                if (HasTriggeredFullPetrification && value < 1f)
+                if (HasTriggeredFullPetrification && value < FullSeverity)
                 {
-                    value = 1f;
+                    value = FullSeverity;
                 }
 
                 float previousSeverity = base.Severity;
@@ -81,7 +87,7 @@ namespace NingshaRaceLib.Petrification.Health
                 bool attached = pawn != null
                     && pawn.health != null
                     && pawn.health.hediffSet.hediffs.Contains(this);
-                if (attached && currentSeverity >= 1f && !HasTriggeredFullPetrification)
+                if (attached && currentSeverity >= FullSeverity && !HasTriggeredFullPetrification)
                 {
                     EnterFullPetrification();
                 }
@@ -100,7 +106,7 @@ namespace NingshaRaceLib.Petrification.Health
             {
                 lastSeverityIncreaseTick = GenTicks.TicksGame;
             }
-            if (base.Severity >= 1f && !HasTriggeredFullPetrification)
+            if (base.Severity >= FullSeverity && !HasTriggeredFullPetrification)
             {
                 EnterFullPetrification();
             }

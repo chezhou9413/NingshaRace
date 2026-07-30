@@ -5,7 +5,7 @@
   <ThingDef>
     <defName>NingshaRace_Apparel_Chestwrap</defName>
     <label>凝砂裹胸布</label>
-    <description>凝砂族贴身穿戴的简易裹胸布，粗砺布料贴合砂质肌理，遮护胸腹。</description>
+    <description>凝砂族贴身穿戴的简易裹胸布，粗砺布料贴合砂质肌理，遮护并固定胸部，通常是底层平民穿戴，如今则是缺少纺织能力的流浪者和聚落居民的日常着装。</description>
     <thingClass>Apparel</thingClass>
     <category>Item</category>
     <generateAllowChance>0</generateAllowChance>
@@ -104,7 +104,7 @@
   <ThingDef>
     <defName>NingshaRace_Apparel_Shorts</defName>
     <label>凝砂短裤</label>
-    <description>凝砂族贴身穿戴的短裤，轻薄布料包覆腰腿，不影响外层斗篷穿戴。</description>
+    <description>在沉沙动乱前由向往地表的新生派凝砂族设计的“文明服装”，模仿人类贴身穿戴的短裤设计而成，由轻薄布料包覆腰腿，不影响外层斗篷穿戴。</description>
     <thingClass>Apparel</thingClass>
     <category>Item</category>
     <generateAllowChance>0</generateAllowChance>
@@ -203,7 +203,7 @@
   <ThingDef>
     <defName>NingshaRace_Apparel_Stonewrap</defName>
     <label>凝砂斗篷</label>
-    <description>凝砂族常用的外层斗篷，衣料像被细砂浸透的织物一样垂覆身体。</description>
+    <description>凝砂族常用的外层斗篷，衣料像被细砂浸透的织物一样垂覆身体。大侵蚀后，大多数凝砂族都缺乏纺织能力，她们穿着的斗篷也都因各种原因而变得十分破旧。</description>
     <generateCommonality>1</generateCommonality>
     <thingClass>Apparel</thingClass>
     <category>Item</category>

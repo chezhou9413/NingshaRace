@@ -13,17 +13,28 @@ namespace NingshaRaceLib.Combat.BurialMountainGuard.Components
     //类职责：保存并执行葬岳格挡模式的开关、减伤、蓄力、爆发和护盾显示。
     public class Comp_BurialMountainGuardMode : ThingComp
     {
+        //字段职责：记录当前武器是否处于格挡模式。
         private bool guardMode;
+
+        //字段职责：记录本轮格挡是否已经显示过禁止攻击提示。
         private bool guardAttackMessageShown;
+
+        //字段职责：累计尚未用于格挡爆发的吸收伤害。
         private float storedDamage;
+
+        //字段职责：保存当前武器对应的常驻护盾，避免读档或重复通知时再次生成。
         private Mote_BurialMountainGuardShield shieldMote;
 
+        //属性职责：返回葬岳 ThingDef 上配置的格挡参数。
         private CompProperties_BurialMountainGuardMode Props => (CompProperties_BurialMountainGuardMode)props;
 
+        //属性职责：返回当前是否启用了格挡模式。
         public bool GuardMode => guardMode;
 
+        //属性职责：返回尚未释放的格挡蓄力值。
         public float StoredDamage => storedDamage;
 
+        //属性职责：把当前蓄力换算为零到一的护盾显示比例。
         public float ChargeRatio => Mathf.Clamp01(storedDamage / Mathf.Max(Props.chargeThreshold, 0.01f));
 
         //函数职责：保存格挡开关和蓄力值。
@@ -32,6 +43,7 @@ namespace NingshaRaceLib.Combat.BurialMountainGuard.Components
             base.PostExposeData();
             Scribe_Values.Look(ref guardMode, "guardMode", false);
             Scribe_Values.Look(ref storedDamage, "storedDamage", 0f);
+            Scribe_References.Look(ref shieldMote, "shieldMote");
         }
 
         //函数职责：装备葬岳时按当前格挡状态刷新护盾显示。
@@ -78,29 +90,6 @@ namespace NingshaRaceLib.Combat.BurialMountainGuard.Components
 
             guardAttackMessageShown = true;
             return true;
-        }
-
-        //函数职责：在 Pawn Tick 中维持装备中的护盾 Mote 和 shader 参数。
-        public void TickEquipped(Pawn pawn)
-        {
-            if (!guardMode)
-            {
-                DestroyShieldMote();
-                return;
-            }
-
-            if (pawn == null || pawn.Dead || !pawn.Spawned)
-            {
-                DestroyShieldMote();
-                return;
-            }
-
-            EnsureShieldMote(pawn);
-            if (shieldMote != null && !shieldMote.Destroyed)
-            {
-                shieldMote.Maintain();
-                shieldMote.UpdateVisuals(ChargeRatio);
-            }
         }
 
         //函数职责：按格挡减伤规则修改伤害并把吸收值加入蓄力。
@@ -197,6 +186,7 @@ namespace NingshaRaceLib.Combat.BurialMountainGuard.Components
         {
             if (shieldMote != null && !shieldMote.Destroyed && shieldMote.Spawned)
             {
+                shieldMote.Initialize(pawn, this);
                 return;
             }
 
@@ -204,7 +194,7 @@ namespace NingshaRaceLib.Combat.BurialMountainGuard.Components
             shieldMote = mote as Mote_BurialMountainGuardShield;
             if (shieldMote != null)
             {
-                shieldMote.Initialize(pawn);
+                shieldMote.Initialize(pawn, this);
                 shieldMote.UpdateVisuals(ChargeRatio);
             }
         }

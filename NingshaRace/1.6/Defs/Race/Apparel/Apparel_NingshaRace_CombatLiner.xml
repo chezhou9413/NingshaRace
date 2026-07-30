@@ -6,7 +6,7 @@
   <ThingDef ParentName="NingshaRaceOutfitBase">
     <defName>NingshaRace_Apparel_CombatLiner</defName>
     <label>凝砂族作战内衬</label>
-    <description>凝砂族战士贴身穿戴的作战内衬，由内衣、短上衣、腰部护具、腿甲和随身佩剑组成。</description>
+    <description>凝砂族法里斯们贴身穿戴的作战内衬，由内衣、短上衣、腰部护具、腿甲和随身佩剑组成。在王朝时代，一些落魄法里斯的作战内衬通常都缺斤少两；而在后侵蚀时代，这种缺斤少两则成为了常态。</description>
     <generateAllowChance>0</generateAllowChance>
     <graphicData>
       <texPath>NingshaRace/Apparel/Outfit3/Outfit3Item</texPath>

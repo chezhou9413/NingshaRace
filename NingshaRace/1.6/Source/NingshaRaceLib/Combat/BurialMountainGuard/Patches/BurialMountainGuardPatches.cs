@@ -5,7 +5,6 @@ using UnityEngine;
 using Verse;
 
 using NingshaRaceLib.Combat.BurialMountainGuard.Components;
-using NingshaRaceLib.Combat.BurialMountainGuard.Rendering;
 using NingshaRaceLib.Combat.BurialMountainGuard.Utility;
 using NingshaRaceLib.Core.Defs;
 
@@ -115,18 +114,54 @@ namespace NingshaRaceLib.Combat.BurialMountainGuard.Patches
         }
     }
 
-    //类职责：让装备容器内的葬岳格挡 Comp 持续驱动常驻护盾 Mote。
-    [HarmonyPatch(typeof(Pawn), "Tick")]
-    public static class Patch_BurialMountainGuardTick
+    //类职责：格挡期间阻止原版战斗等待和 AI 为 Pawn 选择普通攻击 Verb。
+    [HarmonyPatch(typeof(Pawn), nameof(Pawn.TryGetAttackVerb))]
+    public static class Patch_BurialMountainGuardAttackVerbSelection
     {
-        //函数职责：每 Tick 更新装备中的格挡护盾显示。
-        public static void Postfix(Pawn __instance)
+        //函数职责：格挡期间直接返回空攻击 Verb，避免 Wait_Combat 反复选择并尝试普通攻击。
+        public static bool Prefix(Pawn __instance, ref Verb __result)
         {
-            Comp_BurialMountainGuardMode comp;
-            if (BurialMountainGuardUtility.TryGetGuardComp(__instance, out comp))
+            if (!BurialMountainGuardUtility.IsGuarding(__instance))
             {
-                comp.TickEquipped(__instance);
+                return true;
             }
+
+            __result = null;
+            return false;
+        }
+    }
+
+    //类职责：格挡期间阻止直接访问近战系统的代码进入原版无可用 Verb 报错分支。
+    [HarmonyPatch(typeof(Pawn_MeleeVerbs), nameof(Pawn_MeleeVerbs.TryGetMeleeVerb))]
+    public static class Patch_BurialMountainGuardMeleeVerbSelection
+    {
+        //函数职责：格挡期间查询近战动作时直接返回空，其余 Pawn 继续执行原版选择逻辑。
+        public static bool Prefix(Pawn_MeleeVerbs __instance, ref Verb __result)
+        {
+            if (!BurialMountainGuardUtility.IsGuarding(__instance?.Pawn))
+            {
+                return true;
+            }
+
+            __result = null;
+            return false;
+        }
+    }
+
+    //类职责：格挡期间阻止已经建立的近战 Job 从底层入口执行实际攻击。
+    [HarmonyPatch(typeof(Pawn_MeleeVerbs), nameof(Pawn_MeleeVerbs.TryMeleeAttack))]
+    public static class Patch_BurialMountainGuardMeleeAttack
+    {
+        //函数职责：格挡期间让近战尝试立即返回失败，避免绕过常规 Verb 起手检查。
+        public static bool Prefix(Pawn_MeleeVerbs __instance, ref bool __result)
+        {
+            if (!BurialMountainGuardUtility.IsGuarding(__instance?.Pawn))
+            {
+                return true;
+            }
+
+            __result = false;
+            return false;
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using RimWorld;
 using UnityEngine;
@@ -10,12 +11,9 @@ using NingshaRaceLib.Core.Defs;
 
 namespace NingshaRaceLib.Combat.SnakeBellySword.Tracking
 {
-    //类职责：保存一次蛇腹剑挥击的固定方向，并在第 3、8、18 帧分别结算一段伤害。
+    //类职责：保存一次蛇腹剑挥击的固定方向，并按武器 Def 配置的帧序列结算伤害。
     public class SnakeBellySwordAttackSequence
     {
-        private const int AnimationFrameCount = 21;
-        private static readonly int[] DamageFrames = { 3, 8, 18 };
-
         //字段职责：提供本轮攻击的伤害参数、攻击者和武器来源。
         private readonly Verb_SnakeBellySword verb;
 
@@ -30,7 +28,7 @@ namespace NingshaRaceLib.Combat.SnakeBellySword.Tracking
         private readonly int startTick;
         private int nextDamageIndex;
 
-        //构造函数职责：从已经验证成功的攻击 Verb 建立三段伤害序列。
+        //构造函数职责：验证武器 Def 中的动画结算帧，并建立本次伤害序列。
         public SnakeBellySwordAttackSequence(Verb_SnakeBellySword verb, Vector3 attackDirection, int startTick)
         {
             this.verb = verb;
@@ -38,6 +36,24 @@ namespace NingshaRaceLib.Combat.SnakeBellySword.Tracking
             origin = verb.CasterPawn.Position;
             this.attackDirection = attackDirection;
             this.startTick = startTick;
+
+            VerbProperties_SnakeBellySword props = verb.Props;
+            if (props.animationFrameCount <= 0 || props.damageFrames == null || props.damageFrames.Count == 0)
+            {
+                throw new InvalidOperationException("蛇腹剑动画总帧或伤害帧列表未正确配置。");
+            }
+
+            int previousFrame = 0;
+            for (int i = 0; i < props.damageFrames.Count; i++)
+            {
+                int frame = props.damageFrames[i];
+                if (frame <= previousFrame || frame > props.animationFrameCount)
+                {
+                    throw new InvalidOperationException("蛇腹剑伤害帧必须按升序排列并位于动画总帧范围内。");
+                }
+
+                previousFrame = frame;
+            }
         }
 
         //函数职责：结算当前 Tick 已经到达的动画伤害帧，并返回序列是否结束。
@@ -49,20 +65,21 @@ namespace NingshaRaceLib.Combat.SnakeBellySword.Tracking
                 return true;
             }
 
-            while (nextDamageIndex < DamageFrames.Length && currentTick >= DamageTick(nextDamageIndex))
+            List<int> damageFrames = verb.Props.damageFrames;
+            while (nextDamageIndex < damageFrames.Count && currentTick >= DamageTick(nextDamageIndex))
             {
-                ApplyDamageStage(nextDamageIndex == DamageFrames.Length - 1);
+                ApplyDamageStage(nextDamageIndex == damageFrames.Count - 1);
                 nextDamageIndex++;
             }
 
-            return nextDamageIndex >= DamageFrames.Length;
+            return nextDamageIndex >= damageFrames.Count;
         }
 
         //函数职责：把指定伤害帧换算为动画开始后的游戏 Tick。
         private int DamageTick(int damageIndex)
         {
-            int frameIndex = DamageFrames[damageIndex] - 1;
-            int tickOffset = frameIndex * verb.Props.weaponHiddenTicks / AnimationFrameCount;
+            int frameIndex = verb.Props.damageFrames[damageIndex] - 1;
+            int tickOffset = frameIndex * verb.Props.weaponHiddenTicks / verb.Props.animationFrameCount;
             return startTick + tickOffset;
         }
 

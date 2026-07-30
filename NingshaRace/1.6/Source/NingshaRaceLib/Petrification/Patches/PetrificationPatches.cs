@@ -77,6 +77,23 @@ namespace NingshaRaceLib.Petrification.Patches
         }
     }
 
+    //类职责：完全石化期间阻止近战系统进入原版无可用 Verb 的报错分支。
+    [HarmonyPatch(typeof(Pawn_MeleeVerbs), nameof(Pawn_MeleeVerbs.TryGetMeleeVerb))]
+    public static class Patch_PetrificationGetMeleeVerb
+    {
+        //函数职责：完全石化 Pawn 查询近战动作时直接返回空，其他 Pawn 继续执行原版选择逻辑。
+        public static bool Prefix(Pawn_MeleeVerbs __instance, ref Verb __result)
+        {
+            if (!PetrificationUtility.IsFullyPetrified(__instance?.Pawn))
+            {
+                return true;
+            }
+
+            __result = null;
+            return false;
+        }
+    }
+
     //类职责：在 Verb 每 Tick 推进前终止完全石化 Pawn 已经开始的连发状态。
     [HarmonyPatch(typeof(Verb), nameof(Verb.VerbTick))]
     public static class Patch_PetrificationVerbTick
@@ -120,6 +137,28 @@ namespace NingshaRaceLib.Petrification.Patches
         }
     }
 
+    //类职责：完全石化期间暂停 JobTracker 的间隔推进，避免重新分配等待、漫游和战斗 Job。
+    [HarmonyPatch(typeof(Pawn_JobTracker), nameof(Pawn_JobTracker.JobTrackerTickInterval))]
+    public static class Patch_PetrificationJobTrackerTickInterval
+    {
+        //函数职责：仅允许未完全石化的 Pawn 执行工作扫描和当前 Job 间隔逻辑。
+        public static bool Prefix(Pawn ___pawn)
+        {
+            return !PetrificationUtility.IsFullyPetrified(___pawn);
+        }
+    }
+
+    //类职责：完全石化期间拒绝外部系统直接向 Pawn 安装新的 Job。
+    [HarmonyPatch(typeof(Pawn_JobTracker), nameof(Pawn_JobTracker.StartJob))]
+    public static class Patch_PetrificationStartJob
+    {
+        //函数职责：阻止完全石化 Pawn 获得等待、移动、攻击或玩家命令 Job。
+        public static bool Prefix(Pawn ___pawn)
+        {
+            return !PetrificationUtility.IsFullyPetrified(___pawn);
+        }
+    }
+
     //类职责：完全石化期间把 Pawn 显示位置固定在当前格中心，排除所有动态视觉偏移。
     [HarmonyPatch(typeof(Pawn_DrawTracker), nameof(Pawn_DrawTracker.DrawPos), MethodType.Getter)]
     public static class Patch_PetrificationDrawPos
@@ -152,6 +191,11 @@ namespace NingshaRaceLib.Petrification.Patches
         //字段职责：同步首次补丁安装，防止重复向同一渲染方法追加后置处理。
         private static readonly object InstallLock = new object();
 
+        //字段职责：阻止最终材质预热再次进入材质变体初始化后置处理。
+        [ThreadStatic]
+        private static bool prewarmingFinalizedMaterials;
+
+        //字段职责：记录石化渲染动态补丁是否已经完成安装。
         private static bool installed;
 
         //函数职责：在确实需要显示石化材质时安装主线程预热与并行只读替换补丁。
@@ -205,11 +249,24 @@ namespace NingshaRaceLib.Petrification.Patches
         public static void PostfixEnsureMaterialVariantsInitialized(PawnRenderNode __instance, Graphic g)
         {
             Pawn pawn = __instance?.tree?.pawn;
-            if (!(__instance?.Worker is PawnRenderNodeWorker_Carried)
-                && pawn != null
-                && PetrificationUtility.IsFullyPetrified(pawn))
+            if (!UnityData.IsInMainThread
+                || prewarmingFinalizedMaterials
+                || __instance?.Worker is PawnRenderNodeWorker_Carried
+                || pawn == null
+                || !PetrificationUtility.IsFullyPetrified(pawn))
+            {
+                return;
+            }
+
+            prewarmingFinalizedMaterials = true;
+            try
             {
                 PetrificationMaterialPool.PrewarmGraphic(g, pawn);
+                PetrificationMaterialPool.PrewarmFinalizedMaterials(__instance, pawn);
+            }
+            finally
+            {
+                prewarmingFinalizedMaterials = false;
             }
         }
 
@@ -223,7 +280,9 @@ namespace NingshaRaceLib.Petrification.Patches
                 && !ReferenceEquals(__result, null)
                 && PetrificationUtility.IsFullyPetrified(parms.pawn))
             {
-                __result = PetrificationMaterialPool.GetPetrifiedMaterial(__result);
+                __result = UnityData.IsInMainThread
+                    ? PetrificationMaterialPool.GetOrCreatePetrifiedMaterial(__result)
+                    : PetrificationMaterialPool.GetPetrifiedMaterial(__result);
             }
         }
     }

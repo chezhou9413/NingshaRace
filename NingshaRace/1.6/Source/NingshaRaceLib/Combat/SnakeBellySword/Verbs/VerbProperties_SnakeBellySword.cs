@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using RimWorld;
 using Verse;
 
@@ -19,6 +20,12 @@ namespace NingshaRaceLib.Combat.SnakeBellySword.Verbs
 
         //字段职责：攻击时隐藏武器并播放动画的持续 Tick 数。
         public int weaponHiddenTicks = 42;
+
+        //字段职责：定义蛇腹剑逐帧动画包含的总帧数。
+        public int animationFrameCount = 21;
+
+        //字段职责：定义各段伤害在逐帧动画中的结算帧，最后一帧同时触发击退。
+        public List<int> damageFrames;
 
         //字段职责：攻击 Mote 相对基础绘制尺寸的缩放倍率。
         public float effectScale = 1.5f;
