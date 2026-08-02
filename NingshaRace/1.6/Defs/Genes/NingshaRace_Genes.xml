@@ -111,11 +111,12 @@
     <defName>NingshaRace_Cannibalism</defName>
     <label>同类相食</label>
     <labelShortAdj>食人</labelShortAdj>
-    <description>携带者不会因直接食用人肉或食用含人肉配料的食物而产生负面心情，但也不会因此获得额外愉悦。</description>
+    <description>携带者不会因直接食用人肉或食用含人肉配料的食物而产生负面心情。直接食用新鲜生肉时，她们反而会因血肉的原始滋味而感到愉悦。</description>
     <iconPath>UI/Icons/Genes/NingshaRace/Cannibalism</iconPath>
     <displayOrderInCategory>70</displayOrderInCategory>
     <customEffectDescriptions>
       <li>免疫由食用人肉产生的负面思想。</li>
+      <li>直接食用生肉时不会产生生食惩罚，并获得正面心情。</li>
     </customEffectDescriptions>
   </GeneDef>
 </Defs>

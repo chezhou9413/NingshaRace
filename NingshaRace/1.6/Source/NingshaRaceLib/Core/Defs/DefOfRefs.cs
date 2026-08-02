@@ -38,6 +38,9 @@ namespace NingshaRaceLib.Core.Defs
         //字段职责：过滤食用人肉负面思想的同类相食基因。
         public static GeneDef NingshaRace_Cannibalism;
 
+        //字段职责：同类相食基因携带者直接食用生肉后获得的正面心情。
+        public static ThoughtDef NingshaRace_AteRawMeat;
+
         //字段职责：沙傀独立 Pawn 种族 ThingDef。
         public static ThingDef NingshaRace_SandGolem;
 
