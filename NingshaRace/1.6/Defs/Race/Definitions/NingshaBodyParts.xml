@@ -1,4 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!-- 文件职责：记录凝砂族身体部件策略。当前种族沿用 Core 的 Human BodyDef，器官、受伤部位、手术配方和装备身体部位先保持人类结构。 -->
+  <!-- 文件职责：定义凝砂族独立身体树使用的鳞甲、凝砂囊和毒腺。 -->
+  <BodyPartDef>
+    <defName>NingshaRace_ScaleLayer</defName>
+    <label>鳞甲</label>
+    <hitPoints>32</hitPoints>
+    <permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
+    <skinCovered>false</skinCovered>
+    <solid>true</solid>
+    <bleedRate>0</bleedRate>
+    <canSuggestAmputation>false</canSuggestAmputation>
+    <destroyableByDamage>false</destroyableByDamage>
+  </BodyPartDef>
+
+  <BodyPartDef>
+    <defName>NingshaRace_SandSac</defName>
+    <label>凝砂囊</label>
+    <hitPoints>20</hitPoints>
+    <bleedRate>2</bleedRate>
+    <skinCovered>false</skinCovered>
+    <canSuggestAmputation>false</canSuggestAmputation>
+  </BodyPartDef>
+
+  <BodyPartDef>
+    <defName>NingshaRace_VenomGland</defName>
+    <label>毒腺</label>
+    <hitPoints>10</hitPoints>
+    <bleedRate>3</bleedRate>
+    <delicate>true</delicate>
+    <skinCovered>false</skinCovered>
+    <canSuggestAmputation>false</canSuggestAmputation>
+  </BodyPartDef>
 </Defs>

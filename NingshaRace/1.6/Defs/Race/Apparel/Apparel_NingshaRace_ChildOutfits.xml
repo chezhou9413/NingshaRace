@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义凝砂族儿童专属的两套服装及其身体附加层。 -->
+
+  <!-- Def 职责：提供儿童服装共用的物品属性、年龄限制和穿戴部位。 -->
+  <ThingDef Name="NingshaRaceChildOutfitBase" Abstract="True">
+    <thingClass>Apparel</thingClass>
+    <category>Item</category>
+    <tickerType>Never</tickerType>
+    <drawerType>MapMeshOnly</drawerType>
+    <useHitPoints>true</useHitPoints>
+    <selectable>true</selectable>
+    <alwaysHaulable>true</alwaysHaulable>
+    <altitudeLayer>Item</altitudeLayer>
+    <generateAllowChance>0</generateAllowChance>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <onGroundRandomRotateAngle>35</onGroundRandomRotateAngle>
+    </graphicData>
+    <apparel>
+      <wornGraphicPath>NingshaRace/Pawns/Ningsha/Null/Null</wornGraphicPath>
+      <developmentalStageFilter>Child</developmentalStageFilter>
+      <bodyPartGroups>
+        <li>Torso</li>
+        <li>Neck</li>
+        <li>Shoulders</li>
+        <li>Arms</li>
+        <li>Legs</li>
+      </bodyPartGroups>
+      <layers>
+        <li>OnSkin</li>
+        <li>Middle</li>
+      </layers>
+      <tags>
+        <li>NingshaRaceChildOutfit</li>
+      </tags>
+    </apparel>
+    <statBases>
+      <MaxHitPoints>80</MaxHitPoints>
+      <Flammability>0.5</Flammability>
+      <DeteriorationRate>2</DeteriorationRate>
+      <Mass>0.5</Mass>
+      <ArmorRating_Sharp>0.04</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.02</ArmorRating_Blunt>
+      <ArmorRating_Heat>0.04</ArmorRating_Heat>
+      <EquipDelay>1</EquipDelay>
+      <Insulation_Cold>3</Insulation_Cold>
+      <Insulation_Heat>6</Insulation_Heat>
+      <MarketValue>60</MarketValue>
+    </statBases>
+    <thingCategories>
+      <li>Apparel</li>
+    </thingCategories>
+    <comps>
+      <li Class="CompProperties_Forbiddable" />
+      <li>
+        <compClass>CompQuality</compClass>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- Def 职责：承载第一套凝砂儿童服装的物品图标与四向穿戴贴图。 -->
+  <ThingDef ParentName="NingshaRaceChildOutfitBase">
+    <defName>NingshaRace_Apparel_ChildShortwear</defName>
+    <label>凝砂儿童短衣</label>
+    <description>为尚未成年的凝砂族裁制的轻便短衣，便于幼体活动与散热。</description>
+    <graphicData>
+      <texPath>NingshaRace/Apparel/ChildOutfit1/ChildOutfit1_south</texPath>
+    </graphicData>
+    <comps>
+      <li Class="ChezhouLib.comp.ApparelAddBodyAddonCompProperties">
+        <targetRaces><li>NingshaRace</li></targetRaces>
+        <bodyAddonDefs>
+          <li>
+            <name>NingshaRace_ChildOutfit1</name>
+            <userCustomizable>false</userCustomizable>
+            <path>NingshaRace/Apparel/ChildOutfit1/ChildOutfit1</path>
+            <colorChannel>raceskin</colorChannel>
+            <colorOverrideOne>(255,255,255)</colorOverrideOne>
+            <colorOverrideTwo>(255,255,255)</colorOverrideTwo>
+            <shaderType>CutoutComplex</shaderType>
+            <inFrontOfBody>true</inFrontOfBody>
+            <layerInvert>false</layerInvert>
+            <flipWest>true</flipWest>
+            <drawSize>1</drawSize>
+            <scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
+            <defaultOffset>Center</defaultOffset>
+            <alignWithHead>false</alignWithHead>
+            <conditions><BodyPart><bodyPart>Torso</bodyPart></BodyPart></conditions>
+            <offsets>
+              <south><layerOffset>-0.295</layerOffset><offset>(0, 0)</offset></south>
+              <north><layerOffset>-0.295</layerOffset><offset>(0, 0)</offset></north>
+              <east><layerOffset>-0.295</layerOffset><offset>(0, 0)</offset></east>
+              <west><layerOffset>-0.295</layerOffset><offset>(0, 0)</offset></west>
+            </offsets>
+          </li>
+        </bodyAddonDefs>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- Def 职责：承载第二套凝砂儿童服装的物品图标与四向穿戴贴图。 -->
+  <ThingDef ParentName="NingshaRaceChildOutfitBase">
+    <defName>NingshaRace_Apparel_ChildRobe</defName>
+    <label>凝砂儿童罩衣</label>
+    <description>为尚未成年的凝砂族裁制的宽松罩衣，在保护幼体的同时保留充足的活动空间。</description>
+    <graphicData>
+      <texPath>NingshaRace/Apparel/ChildOutfit2/ChildOutfit2_south</texPath>
+    </graphicData>
+    <comps>
+      <li Class="ChezhouLib.comp.ApparelAddBodyAddonCompProperties">
+        <targetRaces><li>NingshaRace</li></targetRaces>
+        <bodyAddonDefs>
+          <li>
+            <name>NingshaRace_ChildOutfit2</name>
+            <userCustomizable>false</userCustomizable>
+            <path>NingshaRace/Apparel/ChildOutfit2/ChildOutfit2</path>
+            <colorChannel>raceskin</colorChannel>
+            <colorOverrideOne>(255,255,255)</colorOverrideOne>
+            <colorOverrideTwo>(255,255,255)</colorOverrideTwo>
+            <shaderType>CutoutComplex</shaderType>
+            <inFrontOfBody>true</inFrontOfBody>
+            <layerInvert>false</layerInvert>
+            <flipWest>true</flipWest>
+            <drawSize>1</drawSize>
+            <scaleWithPawnDrawsize>true</scaleWithPawnDrawsize>
+            <defaultOffset>Center</defaultOffset>
+            <alignWithHead>false</alignWithHead>
+            <conditions><BodyPart><bodyPart>Torso</bodyPart></BodyPart></conditions>
+            <offsets>
+              <south><layerOffset>-0.295</layerOffset><offset>(0, 0)</offset></south>
+              <north><layerOffset>-0.295</layerOffset><offset>(0, 0)</offset></north>
+              <east><layerOffset>-0.295</layerOffset><offset>(0, 0)</offset></east>
+              <west><layerOffset>-0.295</layerOffset><offset>(0, 0)</offset></west>
+            </offsets>
+          </li>
+        </bodyAddonDefs>
+      </li>
+    </comps>
+  </ThingDef>
+</Defs>

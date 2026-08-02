@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!-- 文件职责：定义凝砂族殖民者 PawnKind。 -->
+  <!-- 文件职责：定义只生成三至十七岁凝砂族儿童的专用 PawnKind。 -->
+  <!-- Def 职责：生成完整凝砂异种、无武器并随机穿戴一套儿童服装的凝砂族儿童。 -->
   <PawnKindDef ParentName="BasePlayerPawnKind">
-    <defName>NingshaRace_Colonist</defName>
-    <label>凝砂族殖民者</label>
+    <defName>NingshaRace_Child</defName>
+    <label>凝砂族儿童</label>
     <race>NingshaRace</race>
-    <minGenerationAge>18</minGenerationAge>
+    <minGenerationAge>3</minGenerationAge>
+    <maxGenerationAge>17</maxGenerationAge>
     <defaultFactionDef>PlayerColony</defaultFactionDef>
     <xenotypeSet Inherit="False">
       <xenotypeChances>
@@ -18,21 +20,23 @@
     <apparelIgnoreSeasons>true</apparelIgnoreSeasons>
     <apparelMoney>0~0</apparelMoney>
     <apparelRequired Inherit="False" />
-    <apparelTags/>
+    <apparelTags Inherit="False" />
     <specificApparelRequirements Inherit="False">
       <li>
-        <requiredTag>NingshaRaceCompleteOutfit</requiredTag>
+        <requiredTag>NingshaRaceChildOutfit</requiredTag>
       </li>
     </specificApparelRequirements>
-    <backstoryCryptosleepCommonality>1</backstoryCryptosleepCommonality>
-    <chemicalAddictionChance>0.06</chemicalAddictionChance>
-    <combatPower>30</combatPower>
+    <weaponMoney>0~0</weaponMoney>
+    <weaponTags Inherit="False" />
+    <backstoryCryptosleepCommonality>0</backstoryCryptosleepCommonality>
+    <chemicalAddictionChance>0</chemicalAddictionChance>
+    <combatPower>10</combatPower>
     <forceNormalGearQuality>true</forceNormalGearQuality>
-    <humanPregnancyChance>0.06</humanPregnancyChance>
+    <humanPregnancyChance>0</humanPregnancyChance>
     <initialResistanceRange>13~21</initialResistanceRange>
     <initialWillRange>0~0</initialWillRange>
     <isFighter>false</isFighter>
-    <techHediffsChance>0.03</techHediffsChance>
-    <techHediffsMoney>50~800</techHediffsMoney>
+    <techHediffsChance>0</techHediffsChance>
+    <techHediffsMoney>0~0</techHediffsMoney>
   </PawnKindDef>
 </Defs>

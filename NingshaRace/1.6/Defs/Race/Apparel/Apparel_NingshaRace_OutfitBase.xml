@@ -17,6 +17,7 @@
     </graphicData>
     <apparel>
       <wornGraphicPath>NingshaRace/Pawns/Ningsha/Null/Null</wornGraphicPath>
+      <developmentalStageFilter>Adult</developmentalStageFilter>
       <bodyPartGroups>
         <li>Torso</li>
         <li>Neck</li>

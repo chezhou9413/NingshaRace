@@ -6,7 +6,7 @@
   <ThingDef ParentName="BaseMeleeWeapon_Sharp_Quality">
     <defName>NingshaRace_BurialMountainGreatsword</defName>
     <label>盖布巨剑</label>
-    <description> 昔日的先民们怀揣着对大地的崇拜，将自身的深层之力灌入沉黑巨铁凝砂，以此铸造了这柄重型巨刃。\n \n 曾经在地表游历的冒险家玛蒂妮娅曾对此不以为然，在她看来，这种巨剑固然威力巨大，可持剑者面对远方的枪械只能当场饮恨————\n 直到她看见持剑的同胞开启护盾把射来的子弹全部“弹”了回去，她才意识到自己的错误</description>
+    <description>昔日的先民们怀揣着对大地的崇拜，将自身的深层之力灌入沉黑巨铁凝砂，以此铸造了这柄重型巨刃。\n \n 曾经在地表游历的冒险家玛蒂妮娅曾对此不以为然，在她看来，这种巨剑固然威力巨大，可持剑者面对远方的枪械只能当场饮恨————\n 直到她看见持剑的同胞开启护盾把射来的子弹全部“弹”了回去，她才意识到自己的错误</description>
     <recipeMaker IsNull="True" />
     <smeltable>false</smeltable>
     <tradeability>None</tradeability>

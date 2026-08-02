@@ -19,6 +19,10 @@
       <steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=839005762</steamWorkshopUrl>
     </li>
     <li>
+      <packageId>ludeon.rimworld.biotech</packageId>
+      <displayName>RimWorld - Biotech</displayName>
+    </li>
+    <li>
       <packageId>Chezhou.ChezhouLib.lib</packageId>
       <displayName>ChezhouLib</displayName>
     </li>
@@ -30,6 +34,7 @@
   <loadAfter>
     <li>brrainz.harmony</li>
     <li>erdelf.HumanoidAlienRaces</li>
+    <li>ludeon.rimworld.biotech</li>
     <li>Chezhou.ChezhouLib.lib</li>
     <li>ludeon.rimworld.anomaly</li>
   </loadAfter>
