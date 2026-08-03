@@ -5,7 +5,13 @@
     <defName>NingshaRace_Colonist</defName>
     <label>凝砂族殖民者</label>
     <race>NingshaRace</race>
+    <minGenerationAge>18</minGenerationAge>
     <defaultFactionDef>PlayerColony</defaultFactionDef>
+    <xenotypeSet Inherit="False">
+      <xenotypeChances>
+        <NingshaRace_Xenotype>1</NingshaRace_Xenotype>
+      </xenotypeChances>
+    </xenotypeSet>
     <useFactionXenotypes>false</useFactionXenotypes>
     <apparelAllowHeadgearChance>0</apparelAllowHeadgearChance>
     <apparelIgnorePollution MayRequire="Ludeon.RimWorld.Biotech">true</apparelIgnorePollution>

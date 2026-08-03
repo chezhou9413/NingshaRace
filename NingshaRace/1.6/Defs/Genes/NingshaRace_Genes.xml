@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义凝砂族异种人使用的专属基因分类和七项种族基因。 -->
+  <GeneCategoryDef>
+    <defName>NingshaRace_GeneCategory</defName>
+    <label>凝砂族</label>
+    <displayPriorityInXenotype>505</displayPriorityInXenotype>
+  </GeneCategoryDef>
+
+  <!-- 基因基类职责：统一凝砂族专属基因的分类与基础生物统计。 -->
+  <GeneDef Name="NingshaRace_GeneBase" Abstract="True">
+    <displayCategory>NingshaRace_GeneCategory</displayCategory>
+    <biostatCpx>1</biostatCpx>
+    <biostatMet>0</biostatMet>
+  </GeneDef>
+
+  <GeneDef ParentName="NingshaRace_GeneBase">
+    <defName>NingshaRace_VenomFangs</defName>
+    <label>毒牙</label>
+    <labelShortAdj>毒牙</labelShortAdj>
+    <description>这种自太古时代传承下来的战斗基因曾是某个部族的专属，是她们在战斗中无往不利的利器，令众多敌人闻风丧胆；但现在，它很常见了。</description>
+    <iconPath>UI/Icons/Genes/NingshaRace/VenomFangs</iconPath>
+    <displayOrderInCategory>10</displayOrderInCategory>
+    <customEffectDescriptions>
+      <li>成功近战命中时有50%概率增加5%石化进度。</li>
+    </customEffectDescriptions>
+  </GeneDef>
+
+  <GeneDef ParentName="NingshaRace_GeneBase">
+    <defName>NingshaRace_ScaledSkin</defName>
+    <label>鳞片皮肤</label>
+    <labelShortAdj>鳞皮</labelShortAdj>
+    <description>这种基因的携带者会拥有由坚韧而灵活的细密鳞片覆盖的皮肤，它们能够显著抵御外界伤害，而湿滑灵活的身体也能让携带者在近战中更加灵活。</description>
+    <iconPath>UI/Icons/Genes/NingshaRace/ScaledSkin</iconPath>
+    <displayOrderInCategory>20</displayOrderInCategory>
+    <statFactors>
+      <IncomingDamageFactor>0.6</IncomingDamageFactor>
+    </statFactors>
+    <statOffsets>
+      <MeleeDodgeChance>0.06</MeleeDodgeChance>
+    </statOffsets>
+  </GeneDef>
+
+  <GeneDef ParentName="NingshaRace_GeneBase">
+    <defName>NingshaRace_DesertAdaptation</defName>
+    <label>沙漠适应</label>
+    <labelShortAdj>沙漠适应</labelShortAdj>
+    <description>这种基因的携带者适应了沙漠与黑夜中的行动。在夜间，或身处沙漠、极端沙漠及沙漠巨坑时，工作与移动效率都会提高。</description>
+    <iconPath>UI/Icons/Genes/NingshaRace/DesertAdaptation</iconPath>
+    <displayOrderInCategory>30</displayOrderInCategory>
+    <conditionalStatAffecters>
+      <li Class="NingshaRaceLib.Genes.Conditions.ConditionalStatAffecter_NingshaDesertAdaptation">
+        <statFactors>
+          <WorkSpeedGlobal>1.2</WorkSpeedGlobal>
+          <MoveSpeed>1.1</MoveSpeed>
+        </statFactors>
+      </li>
+    </conditionalStatAffecters>
+  </GeneDef>
+
+  <GeneDef ParentName="NingshaRace_GeneBase">
+    <defName>NingshaRace_ColdBlooded</defName>
+    <label>冷血</label>
+    <labelShortAdj>冷血</labelShortAdj>
+    <description>这种基因的携带者血液冰冷，其更依赖温暖环境、能够承受更高温度，但冷淡的血液与情绪会让其在社交中更加疏远。</description>
+    <iconPath>UI/Icons/Genes/NingshaRace/ColdBlooded</iconPath>
+    <displayOrderInCategory>40</displayOrderInCategory>
+    <statOffsets>
+      <ComfyTemperatureMin>10</ComfyTemperatureMin>
+      <ComfyTemperatureMax>20</ComfyTemperatureMax>
+    </statOffsets>
+    <statFactors>
+      <SocialImpact>0.85</SocialImpact>
+    </statFactors>
+  </GeneDef>
+
+  <GeneDef ParentName="NingshaRace_GeneBase">
+    <defName>NingshaRace_HeatSense</defName>
+    <label>热感知</label>
+    <labelShortAdj>热感知</labelShortAdj>
+    <description>这种基因的携带者能够通过环境中的细微热量变化识别目标，从而改善视觉、射击精度和瞄准速度。</description>
+    <iconPath>UI/Icons/Genes/NingshaRace/HeatSense</iconPath>
+    <displayOrderInCategory>50</displayOrderInCategory>
+    <capMods>
+      <li>
+        <capacity>Sight</capacity>
+        <postFactor>1.2</postFactor>
+      </li>
+    </capMods>
+    <statOffsets>
+      <ShootingAccuracyPawn>3</ShootingAccuracyPawn>
+    </statOffsets>
+    <statFactors>
+      <AimingDelayFactor>0.8</AimingDelayFactor>
+    </statFactors>
+  </GeneDef>
+
+  <GeneDef ParentName="NingshaRace_GeneBase">
+    <defName>NingshaRace_ErosionTolerance</defName>
+    <label>侵蚀耐受</label>
+    <labelShortAdj>耐蚀</labelShortAdj>
+    <description>这种基因的携带者对深层之力的适配能力更强、对侵蚀的抵抗性更高，能够更自由的施展能力。</description>
+    <iconPath>UI/Icons/Genes/NingshaRace/ErosionTolerance</iconPath>
+    <displayOrderInCategory>60</displayOrderInCategory>
+    <statFactors>
+      <NingshaRace_ErosionLimit>1.2</NingshaRace_ErosionLimit>
+    </statFactors>
+  </GeneDef>
+
+  <GeneDef ParentName="NingshaRace_GeneBase">
+    <defName>NingshaRace_Cannibalism</defName>
+    <label>同类相食</label>
+    <labelShortAdj>食人</labelShortAdj>
+    <description>这种基因的携带者不会因直接食用人肉或食用含人肉配料的食物而产生负面心情。直接食用新鲜生肉时，她们反而会因血肉的原始滋味而感到愉悦。\n 在太古王朝前的岁月里，这种基因让凝砂族内充斥着黑暗、混乱与惊悚，进一步放大了她们的独居本能；随后王朝时代里，历代王都在压制乃至摘除这种基因。但很显然，到了现在，它们再一次广泛出现。</description>
+    <iconPath>UI/Icons/Genes/NingshaRace/Cannibalism</iconPath>
+    <displayOrderInCategory>70</displayOrderInCategory>
+    <customEffectDescriptions>
+      <li>免疫由食用人肉产生的负面思想。</li>
+      <li>直接食用生肉时不会产生生食惩罚，并获得正面心情。</li>
+    </customEffectDescriptions>
+  </GeneDef>
+</Defs>

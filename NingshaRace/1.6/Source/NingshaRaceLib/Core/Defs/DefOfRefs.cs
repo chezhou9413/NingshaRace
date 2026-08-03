@@ -11,6 +11,36 @@ namespace NingshaRaceLib.Core.Defs
         //字段职责：凝砂族主种族 ThingDef。
         public static ThingDef NingshaRace;
 
+        //字段职责：用于生成成年凝砂族殖民者的 PawnKindDef。
+        public static PawnKindDef NingshaRace_Colonist;
+
+        //字段职责：用于生成三至十七岁凝砂族儿童的 PawnKindDef。
+        public static PawnKindDef NingshaRace_Child;
+
+        //字段职责：凝砂族成员默认使用的可遗传异种基因组。
+        public static XenotypeDef NingshaRace_Xenotype;
+
+        //字段职责：凝砂族周期性排出的未受精食用卵。
+        public static ThingDef NingshaRace_EggUnfertilized;
+
+        //字段职责：保存父母数据并可在孵化巢中发育的受精卵。
+        public static ThingDef NingshaRace_EggFertilized;
+
+        //字段职责：容纳单枚凝砂卵并推进孵化的建筑。
+        public static ThingDef NingshaRace_HatchNest;
+
+        //字段职责：搬运者将凝砂卵放入孵化巢时使用的工作。
+        public static JobDef NingshaRace_Job_PlaceEggInHatchNest;
+
+        //字段职责：让近战命中有概率累计石化进度的毒牙基因。
+        public static GeneDef NingshaRace_VenomFangs;
+
+        //字段职责：过滤食用人肉负面思想的同类相食基因。
+        public static GeneDef NingshaRace_Cannibalism;
+
+        //字段职责：同类相食基因携带者直接食用生肉后获得的正面心情。
+        public static ThoughtDef NingshaRace_AteRawMeat;
+
         //字段职责：沙傀独立 Pawn 种族 ThingDef。
         public static ThingDef NingshaRace_SandGolem;
 
@@ -58,6 +88,12 @@ namespace NingshaRaceLib.Core.Defs
 
         //字段职责：凝砂族地刺逐帧 Mote 动画。
         public static ThingDef NingshaRace_Mote_GroundSpikeFrameAnimation;
+
+        //字段职责：沙漠适应基因认可的凝砂族地下沙漠生态。
+        public static BiomeDef NingshaRace_DesertPitBiome;
+
+        //字段职责：沙漠适应基因认可的原版极端沙漠生态。
+        public static BiomeDef ExtremeDesert;
 
         //字段职责：地刺命中后执行一格击退的原版 PawnFlyer。
         public static ThingDef NingshaRace_PawnFlyer_GroundSpikeKnockback;

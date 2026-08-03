@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义只生成三至十七岁凝砂族儿童的专用 PawnKind。 -->
+  <!-- Def 职责：生成完整凝砂异种、无武器并随机穿戴一套儿童服装的凝砂族儿童。 -->
+  <PawnKindDef ParentName="BasePlayerPawnKind">
+    <defName>NingshaRace_Child</defName>
+    <label>凝砂族儿童</label>
+    <race>NingshaRace</race>
+    <minGenerationAge>3</minGenerationAge>
+    <maxGenerationAge>17</maxGenerationAge>
+    <defaultFactionDef>PlayerColony</defaultFactionDef>
+    <xenotypeSet Inherit="False">
+      <xenotypeChances>
+        <NingshaRace_Xenotype>1</NingshaRace_Xenotype>
+      </xenotypeChances>
+    </xenotypeSet>
+    <useFactionXenotypes>false</useFactionXenotypes>
+    <apparelAllowHeadgearChance>0</apparelAllowHeadgearChance>
+    <apparelIgnorePollution MayRequire="Ludeon.RimWorld.Biotech">true</apparelIgnorePollution>
+    <apparelIgnoreSeasons>true</apparelIgnoreSeasons>
+    <apparelMoney>0~0</apparelMoney>
+    <apparelRequired Inherit="False" />
+    <apparelTags Inherit="False" />
+    <specificApparelRequirements Inherit="False">
+      <li>
+        <requiredTag>NingshaRaceChildOutfit</requiredTag>
+      </li>
+    </specificApparelRequirements>
+    <weaponMoney>0~0</weaponMoney>
+    <weaponTags Inherit="False" />
+    <backstoryCryptosleepCommonality>0</backstoryCryptosleepCommonality>
+    <chemicalAddictionChance>0</chemicalAddictionChance>
+    <combatPower>10</combatPower>
+    <forceNormalGearQuality>true</forceNormalGearQuality>
+    <humanPregnancyChance>0</humanPregnancyChance>
+    <initialResistanceRange>13~21</initialResistanceRange>
+    <initialWillRange>0~0</initialWillRange>
+    <isFighter>false</isFighter>
+    <techHediffsChance>0</techHediffsChance>
+    <techHediffsMoney>0~0</techHediffsMoney>
+  </PawnKindDef>
+</Defs>

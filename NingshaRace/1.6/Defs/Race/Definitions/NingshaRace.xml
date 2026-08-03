@@ -9,6 +9,10 @@
 
     <comps>
       <li Class="NingshaRaceLib.Race.Components.CompProperties_NingshaInnateAbilities" />
+      <li Class="NingshaRaceLib.Reproduction.Components.CompProperties_NingshaEggCycle">
+        <eggLayingIntervalDays>7</eggLayingIntervalDays>
+        <unfertilizedEggDef>NingshaRace_EggUnfertilized</unfertilizedEggDef>
+      </li>
     </comps>
 
     <alienRace>
@@ -22,6 +26,8 @@
           <li>NingshaRace_Apparel_CombatLiner</li>
           <li>NingshaRace_Apparel_AdvancedTacticalCloak</li>
           <li>NingshaRace_Apparel_VeiledDress</li>
+          <li>NingshaRace_Apparel_ChildShortwear</li>
+          <li>NingshaRace_Apparel_ChildRobe</li>
         </apparelList>
       </raceRestriction>
 
@@ -47,6 +53,8 @@
       </styleSettings>
 
       <generalSettings>
+        <!-- 性别生成职责：所有未明确强制性别的凝砂生成请求固定产生女性。 -->
+        <maleGenderProbability>0</maleGenderProbability>
         <minAgeForAdulthood>18</minAgeForAdulthood>
         <immuneToXenophobia>false</immuneToXenophobia>
         <immuneToAge>false</immuneToAge>
@@ -56,6 +64,7 @@
           <customDrawSize>(1, 1)</customDrawSize>
           <customHeadDrawSize>(1, 1)</customHeadDrawSize>
           <customPortraitDrawSize>(1, 1)</customPortraitDrawSize>
+          <customPortraitHeadDrawSize>(1, 1)</customPortraitHeadDrawSize>
           <headOffsetDirectional>
             <north>
               <offset>(0,0.02)</offset>
@@ -100,6 +109,14 @@
               <name>NingshaRace_Head</name>
               <userCustomizable>false</userCustomizable>
               <path>NingshaRace/Pawns/Ningsha/Head/Head</path>
+              <!-- 年龄图形职责：所有未成年阶段统一使用无鳞片头部，成年阶段恢复原有随机头部。 -->
+              <extendedGraphics>
+                <Age For="NingshaRace_HumanlikeBaby">NingshaRace/Pawns/Ningsha/Head/ChildHead/ChildHead</Age>
+                <Age For="NingshaRace_HumanlikeChild">NingshaRace/Pawns/Ningsha/Head/ChildHead/ChildHead</Age>
+                <Age For="NingshaRace_HumanlikePreTeenager" MayRequire="Ludeon.RimWorld.Biotech">
+                  NingshaRace/Pawns/Ningsha/Head/ChildHead/ChildHead</Age>
+                <Age For="NingshaRace_HumanlikeTeenager">NingshaRace/Pawns/Ningsha/Head/ChildHead/ChildHead</Age>
+              </extendedGraphics>
               <colorChannel>raceskin</colorChannel>
               <colorOverrideOne>(255,255,255)</colorOverrideOne>
               <colorOverrideTwo>(255,255,255)</colorOverrideTwo>
@@ -287,6 +304,14 @@
         <!-- 身体图形职责：从 AdultBody 到 AdultBody5 的六套四向纹理中为每个 Pawn 持久化随机变体。 -->
         <body>
           <path>NingshaRace/Pawns/Ningsha/Bodies/AdultBody/AdultBody</path>
+          <!-- 年龄图形职责：儿童、少年和青年共用无鳞片儿童身体，婴儿身体由襁褓遮盖。 -->
+          <ageGraphics>
+            <NingshaRace_HumanlikeBaby>NingshaRace/Pawns/Ningsha/Null/Null</NingshaRace_HumanlikeBaby>
+            <NingshaRace_HumanlikeChild>NingshaRace/Pawns/Ningsha/Bodies/ChildBody/ChildBody</NingshaRace_HumanlikeChild>
+            <NingshaRace_HumanlikePreTeenager MayRequire="Ludeon.RimWorld.Biotech">
+              NingshaRace/Pawns/Ningsha/Bodies/ChildBody/ChildBody</NingshaRace_HumanlikePreTeenager>
+            <NingshaRace_HumanlikeTeenager>NingshaRace/Pawns/Ningsha/Bodies/ChildBody/ChildBody</NingshaRace_HumanlikeTeenager>
+          </ageGraphics>
         </body>
         <skeleton>Things/Pawn/Humanlike/Bodies/Dessicated/Dessicated_Thin</skeleton>
       </graphicPaths>
@@ -388,9 +413,9 @@
       <fleshType>Normal</fleshType>
       <leatherDef>Leather_Human</leatherDef>
       <nameCategory>HumanStandard</nameCategory>
-      <body>Human</body>
+      <body>NingshaRace_Body</body>
       <baseBodySize>1</baseBodySize>
-      <baseHealthScale>1</baseHealthScale>
+      <baseHealthScale>1.25</baseHealthScale>
       <foodType>OmnivoreHuman</foodType>
       <lifeExpectancy>100</lifeExpectancy>
       <gestationPeriodDays>18</gestationPeriodDays>
@@ -405,25 +430,133 @@
         <li>Human</li>
       </hediffGiverSets>
       <lifeStageAges>
+        <!-- 襁褓阶段使用原版婴儿绘制尺寸。 -->
         <li Class="AlienRace.LifeStageAgeAlien">
-          <def>HumanlikeBaby</def>
+          <def>NingshaRace_HumanlikeBaby</def>
           <minAge>0</minAge>
-          <customDrawSize>(1, 1)</customDrawSize>
+          <customDrawSize>(1,1)</customDrawSize>
           <customHeadDrawSize>(1,1)</customHeadDrawSize>
+          <customPortraitDrawSize>(1,1)</customPortraitDrawSize>
+          <customPortraitHeadDrawSize>(1,1)</customPortraitHeadDrawSize>
+          <headFemaleOffsetDirectional>
+            <north>
+              <offset>(0,-0.06)</offset>
+            </north>
+            <south>
+              <offset>(0,-0.06)</offset>
+            </south>
+            <west>
+              <offset>(-0.01,-0.03)</offset>
+            </west>
+            <east>
+              <offset>(-0.01,-0.03)</offset>
+            </east>
+          </headFemaleOffsetDirectional>
         </li>
+        <!-- 3至8岁使用儿童阶段，身体与头部为成年绘制尺寸的百分之七十。 -->
         <li Class="AlienRace.LifeStageAgeAlien">
-          <def>HumanlikeChild</def>
-          <minAge>5</minAge>
-          <customDrawSize>(1, 1)</customDrawSize>
-          <customHeadDrawSize>(1,1)</customHeadDrawSize>
+          <def>NingshaRace_HumanlikeChild</def>
+          <minAge>3</minAge>
+          <customDrawSize>(0.55,0.55)</customDrawSize>
+          <customHeadDrawSize>(0.55,0.55)</customHeadDrawSize>
+          <customPortraitDrawSize>(0.55,0.55)</customPortraitDrawSize>
+          <customPortraitHeadDrawSize>(0.55,0.55)</customPortraitHeadDrawSize>
+          <headFemaleOffsetDirectional>
+            <north>
+              <offset>(0,-0.16)</offset>
+            </north>
+            <south>
+              <offset>(0,-0.16)</offset>
+            </south>
+            <west>
+              <offset>(0.04,-0.17)</offset>
+            </west>
+            <east>
+              <offset>(-0.04,-0.17)</offset>
+            </east>
+          </headFemaleOffsetDirectional>
         </li>
+        <!-- 9至12岁使用少年阶段，身体与头部为成年绘制尺寸的百分之九十。 -->
+        <li Class="AlienRace.LifeStageAgeAlien" MayRequire="Ludeon.RimWorld.Biotech">
+          <def>NingshaRace_HumanlikePreTeenager</def>
+          <minAge>9</minAge>
+          <customDrawSize>(0.7,0.7)</customDrawSize>
+          <customHeadDrawSize>(0.7,0.7)</customHeadDrawSize>
+          <customPortraitDrawSize>(0.7,0.7)</customPortraitDrawSize>
+          <customPortraitHeadDrawSize>(0.7,0.7)</customPortraitHeadDrawSize>
+          <headFemaleOffsetDirectional>
+            <north>
+              <offset>(0,-0.2)</offset>
+            </north>
+            <south>
+              <offset>(0,-0.2)</offset>
+            </south>
+            <west>
+              <offset>(0.05,-0.2)</offset>
+            </west>
+            <east>
+              <offset>(-0.05,-0.2)</offset>
+            </east>
+          </headFemaleOffsetDirectional>
+        </li>
+        <!-- 13至17岁使用青年阶段，身体与头部为成年绘制尺寸的百分之九十五。 -->
         <li Class="AlienRace.LifeStageAgeAlien">
-          <def>HumanlikeAdult</def>
+          <def>NingshaRace_HumanlikeTeenager</def>
+          <minAge>13</minAge>
+          <customDrawSize>(0.85,0.85)</customDrawSize>
+          <customHeadDrawSize>(0.85,0.85)</customHeadDrawSize>
+          <customPortraitDrawSize>(0.85,0.85)</customPortraitDrawSize>
+          <customPortraitHeadDrawSize>(0.85,0.85)</customPortraitHeadDrawSize>
+          <headFemaleOffsetDirectional>
+            <north>
+              <offset>(0,-0.22)</offset>
+            </north>
+            <south>
+              <offset>(0,-0.22)</offset>
+            </south>
+            <west>
+              <offset>(0.08,-0.22)</offset>
+            </west>
+            <east>
+              <offset>(-0.08,-0.22)</offset>
+            </east>
+          </headFemaleOffsetDirectional>
+        </li>
+        <!-- 18岁起使用完整的成年绘制尺寸。 -->
+        <li Class="AlienRace.LifeStageAgeAlien">
+          <def>NingshaRace_HumanlikeAdult</def>
           <minAge>18</minAge>
-          <customDrawSize>(1, 1)</customDrawSize>
-          <customHeadDrawSize>(1, 1)</customHeadDrawSize>
+          <customDrawSize>(1,1)</customDrawSize>
+          <customHeadDrawSize>(1,1)</customHeadDrawSize>
+          <customPortraitDrawSize>(1,1)</customPortraitDrawSize>
+          <customPortraitHeadDrawSize>(1,1)</customPortraitHeadDrawSize>
         </li>
       </lifeStageAges>
+      <!-- 儿童工作解锁年龄与渡鸦族及原版智人保持一致。 -->
+      <lifeStageWorkSettings MayRequire="Ludeon.RimWorld.Biotech">
+        <Firefighter>7</Firefighter>
+        <Patient>0</Patient>
+        <Doctor>10</Doctor>
+        <PatientBedRest>0</PatientBedRest>
+        <Childcare>0</Childcare>
+        <BasicWorker>3</BasicWorker>
+        <Warden>10</Warden>
+        <Handling>7</Handling>
+        <Cooking>7</Cooking>
+        <Hunting>7</Hunting>
+        <Construction>10</Construction>
+        <Growing>7</Growing>
+        <Mining>7</Mining>
+        <PlantCutting>7</PlantCutting>
+        <Smithing>13</Smithing>
+        <Tailoring>7</Tailoring>
+        <Art>10</Art>
+        <Crafting>7</Crafting>
+        <Hauling>3</Hauling>
+        <Cleaning>3</Cleaning>
+        <Research>13</Research>
+        <DarkStudy MayRequire="Ludeon.RimWorld.Anomaly">13</DarkStudy>
+      </lifeStageWorkSettings>
       <ageGenerationCurve>
         <points>
           <li>(14, 0)</li>
