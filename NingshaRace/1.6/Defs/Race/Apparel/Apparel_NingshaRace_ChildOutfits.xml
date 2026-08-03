@@ -63,7 +63,7 @@
   <ThingDef ParentName="NingshaRaceChildOutfitBase">
     <defName>NingshaRace_Apparel_ChildShortwear</defName>
     <label>凝砂儿童短衣</label>
-    <description>为尚未成年的凝砂族裁制的轻便短衣，便于幼体活动与散热。</description>
+    <description>为凝砂族幼童裁制的短氅，能够很好的保护她们在沙漠与洞穴中活动。轻薄的砂色织物层叠如瓣，正中缀有象征部族的几何纹理————但编织着自己也不知道这到底象征着哪个部族。</description>
     <graphicData>
       <texPath>NingshaRace/Apparel/ChildOutfit1/ChildOutfit1_south</texPath>
     </graphicData>
@@ -102,8 +102,8 @@
   <!-- Def 职责：承载第二套凝砂儿童服装的物品图标与四向穿戴贴图。 -->
   <ThingDef ParentName="NingshaRaceChildOutfitBase">
     <defName>NingshaRace_Apparel_ChildRobe</defName>
-    <label>凝砂儿童罩衣</label>
-    <description>为尚未成年的凝砂族裁制的宽松罩衣，在保护幼体的同时保留充足的活动空间。</description>
+    <label>凝砂儿童兜袍</label>
+    <description>为凝砂族幼童缝制的宽松长袍，轻薄的织物垂至脚踝，腰间束着缀有几何纹的布带。在王朝时代，这种衣装专属于富裕市民与小贵族孩童；但在现在，它反而变得常见了。</description>
     <graphicData>
       <texPath>NingshaRace/Apparel/ChildOutfit2/ChildOutfit2_south</texPath>
     </graphicData>
