@@ -111,11 +111,11 @@
               <path>NingshaRace/Pawns/Ningsha/Head/Head</path>
               <!-- 年龄图形职责：所有未成年阶段统一使用无鳞片头部，成年阶段恢复原有随机头部。 -->
               <extendedGraphics>
-                <Age For="HumanlikeBaby">NingshaRace/Pawns/Ningsha/Head/ChildHead/ChildHead</Age>
-                <Age For="HumanlikeChild">NingshaRace/Pawns/Ningsha/Head/ChildHead/ChildHead</Age>
-                <Age For="HumanlikePreTeenager" MayRequire="Ludeon.RimWorld.Biotech">
+                <Age For="NingshaRace_HumanlikeBaby">NingshaRace/Pawns/Ningsha/Head/ChildHead/ChildHead</Age>
+                <Age For="NingshaRace_HumanlikeChild">NingshaRace/Pawns/Ningsha/Head/ChildHead/ChildHead</Age>
+                <Age For="NingshaRace_HumanlikePreTeenager" MayRequire="Ludeon.RimWorld.Biotech">
                   NingshaRace/Pawns/Ningsha/Head/ChildHead/ChildHead</Age>
-                <Age For="HumanlikeTeenager">NingshaRace/Pawns/Ningsha/Head/ChildHead/ChildHead</Age>
+                <Age For="NingshaRace_HumanlikeTeenager">NingshaRace/Pawns/Ningsha/Head/ChildHead/ChildHead</Age>
               </extendedGraphics>
               <colorChannel>raceskin</colorChannel>
               <colorOverrideOne>(255,255,255)</colorOverrideOne>
@@ -306,11 +306,11 @@
           <path>NingshaRace/Pawns/Ningsha/Bodies/AdultBody/AdultBody</path>
           <!-- 年龄图形职责：儿童、少年和青年共用无鳞片儿童身体，婴儿身体由襁褓遮盖。 -->
           <ageGraphics>
-            <HumanlikeBaby>NingshaRace/Pawns/Ningsha/Null/Null</HumanlikeBaby>
-            <HumanlikeChild>NingshaRace/Pawns/Ningsha/Bodies/ChildBody/ChildBody</HumanlikeChild>
-            <HumanlikePreTeenager MayRequire="Ludeon.RimWorld.Biotech">
-              NingshaRace/Pawns/Ningsha/Bodies/ChildBody/ChildBody</HumanlikePreTeenager>
-            <HumanlikeTeenager>NingshaRace/Pawns/Ningsha/Bodies/ChildBody/ChildBody</HumanlikeTeenager>
+            <NingshaRace_HumanlikeBaby>NingshaRace/Pawns/Ningsha/Null/Null</NingshaRace_HumanlikeBaby>
+            <NingshaRace_HumanlikeChild>NingshaRace/Pawns/Ningsha/Bodies/ChildBody/ChildBody</NingshaRace_HumanlikeChild>
+            <NingshaRace_HumanlikePreTeenager MayRequire="Ludeon.RimWorld.Biotech">
+              NingshaRace/Pawns/Ningsha/Bodies/ChildBody/ChildBody</NingshaRace_HumanlikePreTeenager>
+            <NingshaRace_HumanlikeTeenager>NingshaRace/Pawns/Ningsha/Bodies/ChildBody/ChildBody</NingshaRace_HumanlikeTeenager>
           </ageGraphics>
         </body>
         <skeleton>Things/Pawn/Humanlike/Bodies/Dessicated/Dessicated_Thin</skeleton>
@@ -432,7 +432,7 @@
       <lifeStageAges>
         <!-- 襁褓阶段使用原版婴儿绘制尺寸。 -->
         <li Class="AlienRace.LifeStageAgeAlien">
-          <def>HumanlikeBaby</def>
+          <def>NingshaRace_HumanlikeBaby</def>
           <minAge>0</minAge>
           <customDrawSize>(1,1)</customDrawSize>
           <customHeadDrawSize>(1,1)</customHeadDrawSize>
@@ -455,7 +455,7 @@
         </li>
         <!-- 3至8岁使用儿童阶段，身体与头部为成年绘制尺寸的百分之七十。 -->
         <li Class="AlienRace.LifeStageAgeAlien">
-          <def>HumanlikeChild</def>
+          <def>NingshaRace_HumanlikeChild</def>
           <minAge>3</minAge>
           <customDrawSize>(0.55,0.55)</customDrawSize>
           <customHeadDrawSize>(0.55,0.55)</customHeadDrawSize>
@@ -478,7 +478,7 @@
         </li>
         <!-- 9至12岁使用少年阶段，身体与头部为成年绘制尺寸的百分之九十。 -->
         <li Class="AlienRace.LifeStageAgeAlien" MayRequire="Ludeon.RimWorld.Biotech">
-          <def>HumanlikePreTeenager</def>
+          <def>NingshaRace_HumanlikePreTeenager</def>
           <minAge>9</minAge>
           <customDrawSize>(0.7,0.7)</customDrawSize>
           <customHeadDrawSize>(0.7,0.7)</customHeadDrawSize>
@@ -501,7 +501,7 @@
         </li>
         <!-- 13至17岁使用青年阶段，身体与头部为成年绘制尺寸的百分之九十五。 -->
         <li Class="AlienRace.LifeStageAgeAlien">
-          <def>HumanlikeTeenager</def>
+          <def>NingshaRace_HumanlikeTeenager</def>
           <minAge>13</minAge>
           <customDrawSize>(0.85,0.85)</customDrawSize>
           <customHeadDrawSize>(0.85,0.85)</customHeadDrawSize>
@@ -524,7 +524,7 @@
         </li>
         <!-- 18岁起使用完整的成年绘制尺寸。 -->
         <li Class="AlienRace.LifeStageAgeAlien">
-          <def>HumanlikeAdult</def>
+          <def>NingshaRace_HumanlikeAdult</def>
           <minAge>18</minAge>
           <customDrawSize>(1,1)</customDrawSize>
           <customHeadDrawSize>(1,1)</customHeadDrawSize>
