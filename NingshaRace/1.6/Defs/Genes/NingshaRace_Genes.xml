@@ -18,7 +18,7 @@
     <defName>NingshaRace_VenomFangs</defName>
     <label>毒牙</label>
     <labelShortAdj>毒牙</labelShortAdj>
-    <description>携带者的毒牙会在近战命中时向活体血肉目标注入石化砂质。每次成功命中有50%的概率增加5%石化进度。</description>
+    <description>这种自太古时代传承下来的战斗基因曾是某个部族的专属，是她们在战斗中无往不利的利器，令众多敌人闻风丧胆；但现在，它很常见了。</description>
     <iconPath>UI/Icons/Genes/NingshaRace/VenomFangs</iconPath>
     <displayOrderInCategory>10</displayOrderInCategory>
     <customEffectDescriptions>
@@ -30,7 +30,7 @@
     <defName>NingshaRace_ScaledSkin</defName>
     <label>鳞片皮肤</label>
     <labelShortAdj>鳞皮</labelShortAdj>
-    <description>携带者的皮肤由坚韧而灵活的细密鳞片覆盖，能够显著减轻伤害并帮助身体避开近战攻击。</description>
+    <description>这种基因的携带者会拥有由坚韧而灵活的细密鳞片覆盖的皮肤，它们能够显著抵御外界伤害，而湿滑灵活的身体也能让携带者在近战中更加灵活。</description>
     <iconPath>UI/Icons/Genes/NingshaRace/ScaledSkin</iconPath>
     <displayOrderInCategory>20</displayOrderInCategory>
     <statFactors>
@@ -45,7 +45,7 @@
     <defName>NingshaRace_DesertAdaptation</defName>
     <label>沙漠适应</label>
     <labelShortAdj>沙漠适应</labelShortAdj>
-    <description>携带者适应了沙漠与黑夜中的行动。在夜间，或身处沙漠、极端沙漠及沙漠巨坑时，工作与移动效率都会提高。</description>
+    <description>这种基因的携带者适应了沙漠与黑夜中的行动。在夜间，或身处沙漠、极端沙漠及沙漠巨坑时，工作与移动效率都会提高。</description>
     <iconPath>UI/Icons/Genes/NingshaRace/DesertAdaptation</iconPath>
     <displayOrderInCategory>30</displayOrderInCategory>
     <conditionalStatAffecters>
@@ -62,7 +62,7 @@
     <defName>NingshaRace_ColdBlooded</defName>
     <label>冷血</label>
     <labelShortAdj>冷血</labelShortAdj>
-    <description>携带者更依赖温暖环境，同时能够承受更高温度，但冷淡的体温与情绪会削弱社交影响力。</description>
+    <description>这种基因的携带者血液冰冷，其更依赖温暖环境、能够承受更高温度，但冷淡的血液与情绪会让其在社交中更加疏远。</description>
     <iconPath>UI/Icons/Genes/NingshaRace/ColdBlooded</iconPath>
     <displayOrderInCategory>40</displayOrderInCategory>
     <statOffsets>
@@ -78,7 +78,7 @@
     <defName>NingshaRace_HeatSense</defName>
     <label>热感知</label>
     <labelShortAdj>热感知</labelShortAdj>
-    <description>携带者能够通过环境中的细微热量变化识别目标，从而改善视觉、射击精度和瞄准速度。</description>
+    <description>这种基因的携带者能够通过环境中的细微热量变化识别目标，从而改善视觉、射击精度和瞄准速度。</description>
     <iconPath>UI/Icons/Genes/NingshaRace/HeatSense</iconPath>
     <displayOrderInCategory>50</displayOrderInCategory>
     <capMods>
@@ -99,7 +99,7 @@
     <defName>NingshaRace_ErosionTolerance</defName>
     <label>侵蚀耐受</label>
     <labelShortAdj>耐蚀</labelShortAdj>
-    <description>携带者的身体能够容纳更多侵蚀力量，使侵蚀值上限提高20%。</description>
+    <description>这种基因的携带者对深层之力的适配能力更强、对侵蚀的抵抗性更高，能够更自由的施展能力。</description>
     <iconPath>UI/Icons/Genes/NingshaRace/ErosionTolerance</iconPath>
     <displayOrderInCategory>60</displayOrderInCategory>
     <statFactors>
@@ -111,7 +111,7 @@
     <defName>NingshaRace_Cannibalism</defName>
     <label>同类相食</label>
     <labelShortAdj>食人</labelShortAdj>
-    <description>携带者不会因直接食用人肉或食用含人肉配料的食物而产生负面心情。直接食用新鲜生肉时，她们反而会因血肉的原始滋味而感到愉悦。</description>
+    <description>这种基因的携带者不会因直接食用人肉或食用含人肉配料的食物而产生负面心情。直接食用新鲜生肉时，她们反而会因血肉的原始滋味而感到愉悦。\n 在太古王朝前的岁月里，这种基因让凝砂族内充斥着黑暗、混乱与惊悚，进一步放大了她们的独居本能；随后王朝时代里，历代王都在压制乃至摘除这种基因。但很显然，到了现在，它们再一次广泛出现。</description>
     <iconPath>UI/Icons/Genes/NingshaRace/Cannibalism</iconPath>
     <displayOrderInCategory>70</displayOrderInCategory>
     <customEffectDescriptions>
