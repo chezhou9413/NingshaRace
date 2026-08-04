@@ -49,6 +49,9 @@ namespace NingshaRaceLib.Petrification.Abilities.Components
         //字段职责：定义命中特效实例回收前的秒数。
         public float hitEffectLifetime = 1.5f;
 
+        //字段职责：决定砂潮是否排除与施法者属于同一阵营的 Pawn。
+        public bool excludeCasterFaction;
+
         //构造函数职责：绑定石化砂潮的能力效果实现。
         public CompProperties_AbilityPetrifyingSandwave()
         {

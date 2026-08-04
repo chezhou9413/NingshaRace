@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义侵蚀体转化锁定与永久实体状态。 -->
+
+  <!-- Def 职责：在五至十秒的实体化动画期间完全锁定 Pawn。 -->
+  <HediffDef>
+    <defName>NingshaRace_ErosionTransformation</defName>
+    <label>侵蚀体转化</label>
+    <description>深层侵蚀正在重塑这个凝砂族的躯壳与意识。</description>
+    <hediffClass>NingshaRaceLib.Erosion.Health.Hediff_ErosionTransformation</hediffClass>
+    <everCurableByItem>false</everCurableByItem>
+    <recordDownedTale>false</recordDownedTale>
+    <stages>
+      <li>
+        <painFactor>0</painFactor>
+        <capMods>
+          <li>
+            <capacity>Moving</capacity>
+            <postFactor>0</postFactor>
+          </li>
+          <li>
+            <capacity>Manipulation</capacity>
+            <postFactor>0</postFactor>
+          </li>
+          <li>
+            <capacity>Talking</capacity>
+            <postFactor>0</postFactor>
+          </li>
+          <li>
+            <capacity>Consciousness</capacity>
+            <setMax>0.1</setMax>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- Def 职责：承载侵蚀体的收容强度、无痛觉状态和平台束缚点。 -->
+  <HediffDef>
+    <defName>NingshaRace_ErosionBody</defName>
+    <label>侵蚀体</label>
+    <description>侵蚀已经永久吞没这个凝砂族的意识。它如今是由深层力量驱动、会无差别袭击其他生命的异常实体。</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <everCurableByItem>false</everCurableByItem>
+    <duplicationAllowed>false</duplicationAllowed>
+    <keepOnBodyPartRestoration>true</keepOnBodyPartRestoration>
+    <stages>
+      <li>
+        <painFactor>0</painFactor>
+        <statFactors>
+          <PsychicSensitivity>0</PsychicSensitivity>
+        </statFactors>
+        <statOffsets>
+          <MinimumContainmentStrength>35</MinimumContainmentStrength>
+        </statOffsets>
+        <capMods>
+          <li>
+            <capacity>Talking</capacity>
+            <postFactor>0</postFactor>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+    <comps>
+      <li Class="HediffCompProperties_AttachPoints" />
+    </comps>
+  </HediffDef>
+</Defs>

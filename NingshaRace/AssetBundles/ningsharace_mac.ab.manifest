@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 3181971437
+CRC: 4294046823
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 2496f41161782c7f206d75f204e0acab
+    Hash: 13047d42b096db23fec145bd18575b81
   TypeTreeHash:
     serializedVersion: 2
     Hash: 9838d6d81319a57e8e1fe23d674a4563
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 2496f41161782c7f206d75f204e0acab
+    Hash: 13047d42b096db23fec145bd18575b81
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -30,7 +30,9 @@ SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Shader/BurialMountainGuardBurst.shader
 - Assets/Prefabs/VFX/SandThrowBurst.prefab
+- Assets/Prefabs/VFX/qinshiyanwu.prefab
 - Assets/Shader/TerraCrescentSlash.shader
+- Assets/Shader/UpperErosionBlackFog.shader
 - Assets/Materials/PawnSandify.mat
 - Assets/Shader/TankLiquid2D.shader
 - Assets/Prefabs/VFX/PetrifyingSandwave.prefab

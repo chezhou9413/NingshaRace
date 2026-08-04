@@ -33,7 +33,12 @@ namespace NingshaRaceLib.Petrification.Abilities.Components
             Vector3 direction = PetrifyingSandwaveUtility.HorizontalDirection(
                 caster.Position.ToVector3Shifted(),
                 target.Cell.ToVector3Shifted());
-            PetrifyingSandwaveUtility.ApplyWave(caster, target.Cell, direction, Props);
+            PetrifyingSandwaveUtility.ApplyWave(
+                caster,
+                target.Cell,
+                direction,
+                parent.verb.EffectiveRange,
+                Props);
         }
     }
 }

@@ -9,9 +9,25 @@
 
     <comps>
       <li Class="NingshaRaceLib.Race.Components.CompProperties_NingshaInnateAbilities" />
+      <li Class="NingshaRaceLib.Erosion.Components.CompProperties_NingshaErosion">
+        <dailyDecay>10</dailyDecay>
+        <transformationTicks>300~600</transformationTicks>
+      </li>
       <li Class="NingshaRaceLib.Reproduction.Components.CompProperties_NingshaEggCycle">
         <eggLayingIntervalDays>7</eggLayingIntervalDays>
         <unfertilizedEggDef>NingshaRace_EggUnfertilized</unfertilizedEggDef>
+      </li>
+      <li Class="CompProperties_HoldingPlatformTarget">
+        <baseEscapeIntervalMtbDays>60</baseEscapeIntervalMtbDays>
+        <getsColdContainmentBonus>true</getsColdContainmentBonus>
+      </li>
+      <li Class="CompProperties_Studiable">
+        <frequencyTicks>120000</frequencyTicks>
+        <minMonolithLevelForStudy>1</minMonolithLevelForStudy>
+        <requiresImprisonment>true</requiresImprisonment>
+      </li>
+      <li Class="CompProperties_ProducesBioferrite">
+        <bioferriteDensity>2</bioferriteDensity>
       </li>
     </comps>
 

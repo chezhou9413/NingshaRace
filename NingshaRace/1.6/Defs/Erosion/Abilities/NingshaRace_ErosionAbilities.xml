@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义凝砂族侵蚀过载与侵蚀体专属凝砂之眼。 -->
+
+  <!-- Def 职责：消耗侵蚀余量清除两项凝砂族固有能力的全部冷却。 -->
+  <AbilityDef>
+    <defName>NingshaRace_Ability_ErosionOverload</defName>
+    <label>侵蚀过载</label>
+    <description>主动接纳深层侵蚀，增加20点侵蚀值，并立即清除凝砂之眼与召唤沙傀的全部冷却。侵蚀达到上限时会永久转化为侵蚀体。</description>
+    <iconPath>UI/Icons/Genes/NingshaRace/ErosionTolerance</iconPath>
+    <targetRequired>false</targetRequired>
+    <displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+    <showWhenDrafted>true</showWhenDrafted>
+    <aiCanUse>false</aiCanUse>
+    <ai_IsOffensive>false</ai_IsOffensive>
+    <hostile>false</hostile>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <range>0.1</range>
+      <warmupTime>0</warmupTime>
+      <nonInterruptingSelfCast>true</nonInterruptingSelfCast>
+      <targetParams>
+        <canTargetSelf>true</canTargetSelf>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetLocations>false</canTargetLocations>
+        <canTargetBuildings>false</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="NingshaRaceLib.Erosion.Abilities.CompProperties_AbilityErosionOverload">
+        <erosionGain>20</erosionGain>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <!-- Def 职责：让侵蚀体以二十秒冷却自动释放排除同阵营目标的强化砂潮。 -->
+  <AbilityDef>
+    <defName>NingshaRace_Ability_ErosionBodyPetrifyingSandwave</defName>
+    <label>侵蚀凝砂之眼</label>
+    <description>侵蚀体本能地掀起石化砂潮。近处血肉目标会立即完全石化，远处目标按距离累计石化程度，同属实体阵营的目标不会受到影响。</description>
+    <iconPath>UI/Abilities/PetrifyingSandwave</iconPath>
+    <aiCanUse>true</aiCanUse>
+    <ai_IsOffensive>true</ai_IsOffensive>
+    <hostile>true</hostile>
+    <casterMustBeCapableOfViolence>true</casterMustBeCapableOfViolence>
+    <cooldownTicksRange>1200~1200</cooldownTicksRange>
+    <verbProperties>
+      <verbClass>NingshaRaceLib.Petrification.Abilities.Verbs.Verb_PetrifyingSandwave</verbClass>
+      <label>侵蚀凝砂之眼</label>
+      <violent>true</violent>
+      <forceNormalTimeSpeed>false</forceNormalTimeSpeed>
+      <warmupTime>0.5</warmupTime>
+      <range>10</range>
+      <requireLineOfSight>true</requireLineOfSight>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetSelf>false</canTargetSelf>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetHumans>true</canTargetHumans>
+        <canTargetAnimals>true</canTargetAnimals>
+        <canTargetBuildings>false</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="NingshaRaceLib.Petrification.Abilities.Components.CompProperties_AbilityPetrifyingSandwave">
+        <coneAngle>90</coneAngle>
+        <fullPetrificationRadius>3</fullPetrificationRadius>
+        <nearSeverity>0.85</nearSeverity>
+        <edgeSeverity>0.15</edgeSeverity>
+        <excludeCasterFaction>true</excludeCasterFaction>
+        <effectModId>NingshaRace</effectModId>
+        <waveEffectName>PetrifyingSandwave</waveEffectName>
+        <hitEffectName>PetrifyingSandHit</hitEffectName>
+        <waveEffectScale>1</waveEffectScale>
+        <waveEffectLifetime>3</waveEffectLifetime>
+        <minHitEffectScale>0.65</minHitEffectScale>
+        <maxHitEffectScale>1.25</maxHitEffectScale>
+        <hitEffectLifetime>1.5</hitEffectLifetime>
+      </li>
+    </comps>
+  </AbilityDef>
+</Defs>

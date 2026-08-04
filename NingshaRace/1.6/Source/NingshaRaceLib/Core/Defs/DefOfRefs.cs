@@ -53,6 +53,27 @@ namespace NingshaRaceLib.Core.Defs
         //字段职责：玩家凝砂族固有的扇形石化砂潮能力。
         public static AbilityDef NingshaRace_Ability_PetrifyingSandwave;
 
+        //字段职责：玩家凝砂族通过增加侵蚀值清除固有能力冷却的过载能力。
+        public static AbilityDef NingshaRace_Ability_ErosionOverload;
+
+        //字段职责：侵蚀体以二十秒冷却自动使用的强化凝砂之眼。
+        public static AbilityDef NingshaRace_Ability_ErosionBodyPetrifyingSandwave;
+
+        //字段职责：凝砂族实时计算基因、Hediff 和装备修正后的侵蚀值上限。
+        public static StatDef NingshaRace_ErosionLimit;
+
+        //字段职责：满侵蚀实体化动画期间锁定 Pawn 的转化 Hediff。
+        public static HediffDef NingshaRace_ErosionTransformation;
+
+        //字段职责：侵蚀体 Mutant 持有的永久实体状态 Hediff。
+        public static HediffDef NingshaRace_ErosionBody;
+
+        //字段职责：将凝砂族永久转换为原版实体阵营侵蚀体的 MutantDef。
+        public static MutantDef NingshaRace_ErosionBodyMutant;
+
+        //字段职责：ChezhouLib 导入的侵蚀体头部上层黑雾 ShaderTypeDef。
+        public static ShaderTypeDef NingshaRace_UpperErosionBlackFog_ShaderPro;
+
         //字段职责：标记 Pawn 为沙傀并提供隐藏状态效果。
         public static HediffDef NingshaRace_SandGolemMarker;
 

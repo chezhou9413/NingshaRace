@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义凝砂族永久实体化后的侵蚀体 Mutant。 -->
+  <MutantDef ParentName="BaseMutantEntity">
+    <defName>NingshaRace_ErosionBodyMutant</defName>
+    <label>侵蚀体</label>
+    <description>侵蚀值达到极限后诞生的异常实体。原有意识已经消失，只留下会无差别追猎其他生命的凝砂躯壳。它能以极短间隔发动侵蚀凝砂之眼，但不会召唤沙傀。</description>
+    <hediff>NingshaRace_ErosionBody</hediff>
+    <thinkTree>NingshaRace_ErosionBody</thinkTree>
+    <thinkTreeConstant>NingshaRace_ErosionBodyConstant</thinkTreeConstant>
+    <namePrefix>侵蚀体 </namePrefix>
+    <defaultFaction>Entities</defaultFaction>
+    <standingAnimation>ShamblerSway</standingAnimation>
+    <canOpenDoors>false</canOpenDoors>
+    <makesFootprints>false</makesFootprints>
+    <tameable>false</tameable>
+    <entitledToMedicalCare>false</entitledToMedicalCare>
+    <clearMutantStatusOnDeath>false</clearMutantStatusOnDeath>
+    <canTravelInCaravan>false</canTravelInCaravan>
+    <canAttackWhileCrawling>true</canAttackWhileCrawling>
+    <respectsAllowedArea>false</respectsAllowedArea>
+    <canGainXP>false</canGainXP>
+    <canBeDrafted>false</canBeDrafted>
+    <disableHostilityResponse>true</disableHostilityResponse>
+    <deathOnDownedChance>0.25</deathOnDownedChance>
+    <bloodDef>Filth_DarkBlood</bloodDef>
+    <bloodSmearDef>Filth_DarkBloodSmear</bloodSmearDef>
+    <woundColor>(0.28, 0.12, 0.34, 1)</woundColor>
+    <skinColorTint>(0.22, 0.10, 0.30, 1)</skinColorTint>
+    <skinColorTintStrength>0.55</skinColorTintStrength>
+    <anomalyKnowledgeOffset>2</anomalyKnowledgeOffset>
+    <knowledgeCategory>Advanced</knowledgeCategory>
+    <codexEntry>NingshaRace_ErosionBodyCodex</codexEntry>
+    <!-- 渲染节点职责：仅在侵蚀体状态下注入三根头部蛇体，让它们在后发上方、头部下方独立缓慢摆动。 -->
+    <renderNodeProperties>
+      <!-- 蛇体 A 具有完整四向素材，始终围绕贴图中的蛇尾根部摆动。 -->
+      <li Class="PawnRenderNodeProperties_Spastic">
+        <debugLabel>侵蚀体蛇头 A</debugLabel>
+        <texPath>NingshaRace/Erosion/SnakeHeads/ErosionSnakeHeadA</texPath>
+        <parentTagDef>Head</parentTagDef>
+        <linkedBodyPartsGroup>FullHead</linkedBodyPartsGroup>
+        <pawnType>HumanlikeOnly</pawnType>
+        <drawSize>1</drawSize>
+        <rotDrawMode>Fresh, Rotting</rotDrawMode>
+        <useRottenColor>true</useRottenColor>
+        <rotateFacing>false</rotateFacing>
+        <rotationRange>-12~12</rotationRange>
+        <scaleRange>0.92~1.08</scaleRange>
+        <durationTicksRange>20~45</durationTicksRange>
+        <nextSpasmTicksRange>5~25</nextSpasmTicksRange>
+        <drawData>
+          <defaultData>
+            <layer>2</layer>
+          </defaultData>
+          <dataNorth>
+            <pivot>(0.397, 0.555)</pivot>
+            <layer>2</layer>
+          </dataNorth>
+          <dataEast>
+            <pivot>(0.445, 0.443)</pivot>
+          </dataEast>
+          <dataSouth>
+            <pivot>(0.596, 0.554)</pivot>
+          </dataSouth>
+          <dataWest>
+            <pivot>(0.435, 0.452)</pivot>
+          </dataWest>
+        </drawData>
+      </li>
+      <!-- 蛇体 B 只在正面、背面和右侧可见，对应原始素材提供的三个观察方向。 -->
+      <li Class="PawnRenderNodeProperties_Spastic">
+        <debugLabel>侵蚀体蛇头 B</debugLabel>
+        <texPath>NingshaRace/Erosion/SnakeHeads/ErosionSnakeHeadB</texPath>
+        <parentTagDef>Head</parentTagDef>
+        <linkedBodyPartsGroup>FullHead</linkedBodyPartsGroup>
+        <pawnType>HumanlikeOnly</pawnType>
+        <visibleFacing>
+          <li>North</li>
+          <li>East</li>
+          <li>South</li>
+        </visibleFacing>
+        <drawSize>1</drawSize>
+        <rotDrawMode>Fresh, Rotting</rotDrawMode>
+        <useRottenColor>true</useRottenColor>
+        <rotateFacing>false</rotateFacing>
+        <rotationRange>-10~10</rotationRange>
+        <scaleRange>0.94~1.06</scaleRange>
+        <durationTicksRange>24~50</durationTicksRange>
+        <nextSpasmTicksRange>8~28</nextSpasmTicksRange>
+        <drawData>
+          <defaultData>
+            <layer>1</layer>
+          </defaultData>
+          <dataNorth>
+            <pivot>(0.604, 0.453)</pivot>
+            <layer>1</layer>
+          </dataNorth>
+          <dataEast>
+            <pivot>(0.478, 0.441)</pivot>
+          </dataEast>
+          <dataSouth>
+            <pivot>(0.396, 0.451)</pivot>
+          </dataSouth>
+        </drawData>
+      </li>
+      <!-- 蛇体 C 只在正面和背面出现，避免缺少侧面素材时使用错误的方向贴图。 -->
+      <li Class="PawnRenderNodeProperties_Spastic">
+        <debugLabel>侵蚀体蛇头 C</debugLabel>
+        <texPath>NingshaRace/Erosion/SnakeHeads/ErosionSnakeHeadC</texPath>
+        <parentTagDef>Head</parentTagDef>
+        <linkedBodyPartsGroup>FullHead</linkedBodyPartsGroup>
+        <pawnType>HumanlikeOnly</pawnType>
+        <visibleFacing>
+          <li>North</li>
+          <li>South</li>
+        </visibleFacing>
+        <drawSize>1</drawSize>
+        <rotDrawMode>Fresh, Rotting</rotDrawMode>
+        <useRottenColor>true</useRottenColor>
+        <rotateFacing>false</rotateFacing>
+        <rotationRange>-14~14</rotationRange>
+        <scaleRange>0.93~1.07</scaleRange>
+        <durationTicksRange>18~42</durationTicksRange>
+        <nextSpasmTicksRange>6~24</nextSpasmTicksRange>
+        <drawData>
+          <defaultData>
+            <layer>0</layer>
+          </defaultData>
+          <dataNorth>
+            <pivot>(0.626, 0.538)</pivot>
+            <layer>0</layer>
+          </dataNorth>
+          <dataSouth>
+            <pivot>(0.374, 0.539)</pivot>
+          </dataSouth>
+        </drawData>
+      </li>
+    </renderNodeProperties>
+    <abilities>
+      <li>NingshaRace_Ability_ErosionBodyPetrifyingSandwave</li>
+    </abilities>
+    <abilityWhitelist>
+      <li>NingshaRace_Ability_ErosionBodyPetrifyingSandwave</li>
+    </abilityWhitelist>
+    <tools>
+      <li>
+        <label>左爪</label>
+        <labelNoLocation>砂爪</labelNoLocation>
+        <capacities>
+          <li>Scratch</li>
+        </capacities>
+        <power>8.2</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+        <chanceFactor>1.5</chanceFactor>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>右爪</label>
+        <labelNoLocation>砂爪</labelNoLocation>
+        <capacities>
+          <li>Scratch</li>
+        </capacities>
+        <power>8.2</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+        <chanceFactor>1.5</chanceFactor>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+    </tools>
+  </MutantDef>
+</Defs>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义侵蚀体的倒地、逃脱、主动攻击和低速游荡决策顺序。 -->
+  <ThinkTreeDef>
+    <defName>NingshaRace_ErosionBody</defName>
+    <thinkRoot Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="ThinkNode_Subtree">
+          <treeDef>Despawned</treeDef>
+        </li>
+        <li Class="ThinkNode_ConditionalDowned">
+          <subNodes>
+            <li Class="ThinkNode_ConditionalCanCrawl">
+              <invert>true</invert>
+              <subNodes>
+                <li Class="ThinkNode_Subtree">
+                  <treeDef>Downed</treeDef>
+                </li>
+              </subNodes>
+            </li>
+          </subNodes>
+        </li>
+        <li Class="ThinkNode_QueuedJob" />
+        <li Class="ThinkNodeConditional_EscapingHoldingPlatform">
+          <subNodes>
+            <li Class="JobGiver_EscapingHoldingPlatform" />
+          </subNodes>
+        </li>
+        <li Class="JobGiver_ReactToCloseMeleeThreat" />
+        <li Class="ThinkNode_Subtree">
+          <treeDef>LordDuty</treeDef>
+        </li>
+        <li Class="NingshaRaceLib.Erosion.AI.JobGiver_ErosionBodyFight">
+          <targetAcquireRadius>30</targetAcquireRadius>
+          <targetKeepRadius>35</targetKeepRadius>
+          <chaseTarget>true</chaseTarget>
+        </li>
+        <li Class="NingshaRaceLib.Erosion.AI.JobGiver_ErosionBodyWander">
+          <wanderRadius>5</wanderRadius>
+        </li>
+      </subNodes>
+    </thinkRoot>
+  </ThinkTreeDef>
+
+  <!-- Def 职责：在侵蚀体受领 Lord 指令时持续执行原版实体常驻决策。 -->
+  <ThinkTreeDef>
+    <defName>NingshaRace_ErosionBodyConstant</defName>
+    <thinkRoot Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="ThinkNode_Subtree">
+          <treeDef>Despawned</treeDef>
+        </li>
+        <li Class="ThinkNode_ConditionalCanDoLordJobNow">
+          <subNodes>
+            <li Class="ThinkNode_Subtree">
+              <treeDef>LordDutyConstant</treeDef>
+            </li>
+          </subNodes>
+        </li>
+      </subNodes>
+    </thinkRoot>
+  </ThinkTreeDef>
+</Defs>

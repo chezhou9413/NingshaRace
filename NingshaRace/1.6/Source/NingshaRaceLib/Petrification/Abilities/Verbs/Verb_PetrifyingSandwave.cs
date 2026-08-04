@@ -45,7 +45,9 @@ namespace NingshaRaceLib.Petrification.Abilities.Verbs
 
             if (target.HasThing)
             {
-                if (target.Thing is Pawn pawn && PetrifyingSandwaveUtility.IsValidTarget(casterPawn, pawn))
+                bool excludeCasterFaction = EffectComp?.Props.excludeCasterFaction == true;
+                if (target.Thing is Pawn pawn
+                    && PetrifyingSandwaveUtility.IsValidTarget(casterPawn, pawn, excludeCasterFaction))
                 {
                     return true;
                 }

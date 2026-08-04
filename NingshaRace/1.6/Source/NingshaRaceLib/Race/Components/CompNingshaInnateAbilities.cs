@@ -1,6 +1,7 @@
 using Verse;
 
 using NingshaRaceLib.Core.Defs;
+using NingshaRaceLib.Erosion.Abilities;
 using NingshaRaceLib.Petrification.Abilities.Utility;
 using NingshaRaceLib.Race.Rendering.BodyAddons;
 using NingshaRaceLib.SandGolem.Abilities.Utility;
@@ -28,6 +29,7 @@ namespace NingshaRaceLib.Race.Components
 
             SandGolemAbilityUtility.EnsureAbility(pawn);
             PetrifyingSandwaveAbilityUtility.EnsureAbility(pawn);
+            ErosionAbilityUtility.EnsureAbility(pawn);
         }
     }
 }

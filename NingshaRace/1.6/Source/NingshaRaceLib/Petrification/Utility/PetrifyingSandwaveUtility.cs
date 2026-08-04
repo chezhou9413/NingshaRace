@@ -16,8 +16,8 @@ namespace NingshaRaceLib.Petrification.Utility
     //类职责：负责石化砂潮的视线安全扫描、距离严重度换算和直接挂载特效播放。
     public static class PetrifyingSandwaveUtility
     {
-        //函数职责：判断 Pawn 是否为施法者同地图上的其他存活血肉目标，不限制阵营关系。
-        public static bool IsValidTarget(Pawn caster, Pawn target)
+        //函数职责：判断 Pawn 是否为同地图上的其他存活血肉目标，并按能力参数选择是否排除同阵营。
+        public static bool IsValidTarget(Pawn caster, Pawn target, bool excludeCasterFaction = false)
         {
             return caster != null
                 && target != null
@@ -25,7 +25,8 @@ namespace NingshaRaceLib.Petrification.Utility
                 && target.Spawned
                 && !target.Dead
                 && target.Map == caster.Map
-                && target.RaceProps.IsFlesh;
+                && target.RaceProps.IsFlesh
+                && (!excludeCasterFaction || target.Faction != caster.Faction);
         }
 
         //函数职责：根据距离返回本次应累计的石化严重度。
@@ -79,13 +80,11 @@ namespace NingshaRaceLib.Petrification.Utility
             Pawn caster,
             IntVec3 targetCell,
             Vector3 direction,
+            float range,
             CompProperties_AbilityPetrifyingSandwave props)
         {
-            float range = caster.abilities
-                .GetAbility(DefOfRefs.NingshaRace_Ability_PetrifyingSandwave)
-                .verb.EffectiveRange;
             SpawnWaveEffect(caster, direction, props);
-            List<Pawn> targets = FindTargets(caster, targetCell, range, props.coneAngle);
+            List<Pawn> targets = FindTargets(caster, targetCell, range, props);
             for (int i = 0; i < targets.Count; i++)
             {
                 Pawn target = targets[i];
@@ -137,18 +136,24 @@ namespace NingshaRaceLib.Petrification.Utility
         }
 
         //函数职责：从实际扇形格子中收集唯一的有效血肉 Pawn，并按距离排序。
-        private static List<Pawn> FindTargets(Pawn caster, IntVec3 targetCell, float range, float coneAngle)
+        private static List<Pawn> FindTargets(
+            Pawn caster,
+            IntVec3 targetCell,
+            float range,
+            CompProperties_AbilityPetrifyingSandwave props)
         {
             List<Pawn> targets = new List<Pawn>();
             HashSet<Pawn> addedTargets = new HashSet<Pawn>();
-            List<IntVec3> cells = FindConeCells(caster, targetCell, range, coneAngle);
+            List<IntVec3> cells = FindConeCells(caster, targetCell, range, props.coneAngle);
             for (int i = 0; i < cells.Count; i++)
             {
                 List<Thing> things = cells[i].GetThingList(caster.Map);
                 for (int j = 0; j < things.Count; j++)
                 {
                     Pawn pawn = things[j] as Pawn;
-                    if (pawn == null || addedTargets.Contains(pawn) || !IsValidTarget(caster, pawn))
+                    if (pawn == null
+                        || addedTargets.Contains(pawn)
+                        || !IsValidTarget(caster, pawn, props.excludeCasterFaction))
                     {
                         continue;
                     }

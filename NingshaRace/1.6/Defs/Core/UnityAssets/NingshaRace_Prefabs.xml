@@ -21,6 +21,11 @@
         <key>NingshaRace_PetrifyingSandHit</key>
         <value>/Prefabs/VFX/PetrifyingSandHit.prefab</value>
       </li>
+      <!-- 侵蚀烟雾职责：提供侵蚀体头部持续播放并由运行时跟随器管理的粒子预制体。 -->
+      <li>
+        <key>NingshaRace_QinshiYanwu</key>
+        <value>/Prefabs/VFX/qinshiyanwu.prefab</value>
+      </li>
     </unityAssetMount>
   </ChezhouLib.LibDef.ClAssetLord>
 </Defs>

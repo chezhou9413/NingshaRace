@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义侵蚀值非零时持续生效的四阶段负面心情。 -->
+  <ThoughtDef>
+    <defName>NingshaRace_ErosionMood</defName>
+    <workerClass>NingshaRaceLib.Erosion.Thoughts.ThoughtWorker_NingshaErosion</workerClass>
+    <validWhileDespawned>true</validWhileDespawned>
+    <stages>
+      <li>
+        <label>侵蚀低语</label>
+        <description>体内的砂砾正传来不属于我的低语。</description>
+        <baseMoodEffect>-2</baseMoodEffect>
+      </li>
+      <li>
+        <label>侵蚀躁动</label>
+        <description>深层力量在躯壳中翻涌，思绪难以维持平静。</description>
+        <baseMoodEffect>-5</baseMoodEffect>
+      </li>
+      <li>
+        <label>侵蚀撕扯</label>
+        <description>侵蚀正在撕扯血肉与意志，我越来越难以辨认自己。</description>
+        <baseMoodEffect>-9</baseMoodEffect>
+      </li>
+      <li>
+        <label>侵蚀吞没</label>
+        <description>某种饥饿的东西正从躯壳深处醒来，等待彻底取代我。</description>
+        <baseMoodEffect>-15</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+</Defs>
