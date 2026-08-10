@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义沙漠巨坑巢群的可攻击蚁穴建筑和可调行为参数。 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>NingshaRace_DesertPitAntNest</defName>
+    <label>洞穴蚁穴</label>
+    <description>由压实沙土、唾液和有机残渣构成的大型地下蚁穴，是整个巢群的食物储藏与繁衍核心。</description>
+    <thingClass>NingshaRaceLib.DesertPit.AntColony.Buildings.Building_DesertPitAntNest</thingClass>
+    <category>Building</category>
+    <drawerType>MapMeshOnly</drawerType>
+    <altitudeLayer>Building</altitudeLayer>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Building/NingshaRace/DesertPit/AntColony/AntNest</texPath>
+      <drawSize>(5.2,5.2)</drawSize>
+      <shadowData>
+        <volume>(3.6,1.3,3.6)</volume>
+        <offset>(0,0,-0.3)</offset>
+      </shadowData>
+    </graphicData>
+    <size>(4,4)</size>
+    <rotatable>false</rotatable>
+    <selectable>true</selectable>
+    <passability>Impassable</passability>
+    <fillPercent>0.9</fillPercent>
+    <pathCost>70</pathCost>
+    <destroyable>true</destroyable>
+    <useHitPoints>true</useHitPoints>
+    <canOverlapZones>false</canOverlapZones>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <filthLeaving>Filth_RubbleBuilding</filthLeaving>
+    <soundImpactDefault>BulletImpact_Ground</soundImpactDefault>
+    <statBases>
+      <MaxHitPoints>1200</MaxHitPoints>
+      <Flammability>0.3</Flammability>
+      <MarketValue>300</MarketValue>
+      <Beauty>-8</Beauty>
+    </statBases>
+    <building>
+      <isEdifice>true</isEdifice>
+      <deconstructible>false</deconstructible>
+      <claimable>false</claimable>
+      <isTargetable>true</isTargetable>
+      <expandHomeArea>false</expandHomeArea>
+    </building>
+    <modExtensions>
+      <li Class="NingshaRaceLib.DesertPit.AntColony.Config.DefModExtension_AntColony">
+        <workerTarget>4</workerTarget>
+        <soldierTarget>3</soldierTarget>
+        <regularAntCap>8</regularAntCap>
+        <boomAntCap>3</boomAntCap>
+        <storageCellCount>12</storageCellCount>
+        <secondColonyChance>0.45</secondColonyChance>
+        <alertRadius>20</alertRadius>
+        <soldierPatrolRadius>12</soldierPatrolRadius>
+        <workerWanderRadius>8</workerWanderRadius>
+        <queenLeashRadius>5</queenLeashRadius>
+        <workerRetreatRadius>8</workerRetreatRadius>
+        <frenzyRadius>40</frenzyRadius>
+        <workerHaulLimit>3</workerHaulLimit>
+        <workerHaulCooldownTicks>2500</workerHaulCooldownTicks>
+        <reproductionWorkTicks>600</reproductionWorkTicks>
+        <reproductionCooldownTicks>2500</reproductionCooldownTicks>
+        <workerNutritionCost>1</workerNutritionCost>
+        <soldierNutritionCost>1.5</soldierNutritionCost>
+        <fullAlarmDurationTicks>2500</fullAlarmDurationTicks>
+        <boomWaveCooldownTicks>1200</boomWaveCooldownTicks>
+        <boomTriggerDistance>1.5</boomTriggerDistance>
+        <boomExplosionRadius>2.5</boomExplosionRadius>
+        <boomExplosionDamage>25</boomExplosionDamage>
+      </li>
+    </modExtensions>
+  </ThingDef>
+</Defs>

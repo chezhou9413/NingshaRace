@@ -9,5 +9,45 @@
     <plantDensity>0</plantDensity>
     <maxFishPopulation>0</maxFishPopulation>
     <wildAnimalsCanWanderInto>false</wildAnimalsCanWanderInto>
+    <modExtensions>
+      <li Class="NingshaRaceLib.DesertPit.Ecology.Config.DefModExtension_DesertPitEcology">
+        <regrowthIntervalTicks>15000</regrowthIntervalTicks>
+        <initialGrowthRange>0.15~0.35</initialGrowthRange>
+        <habitatRadius>6</habitatRadius>
+        <placementAttempts>120</placementAttempts>
+        <plants>
+          <li><plant>NingshaRace_DesertPitPlantA</plant><weight>13</weight></li>
+          <li><plant>NingshaRace_DesertPitPlantB</plant><weight>13</weight></li>
+          <li><plant>NingshaRace_DesertPitPlantC</plant><weight>13</weight></li>
+          <li><plant>NingshaRace_DesertPitPlantD</plant><weight>13</weight></li>
+          <li><plant>NingshaRace_DesertPitPlantE</plant><weight>13</weight></li>
+          <li><plant>Glowstool</plant><weight>12</weight></li>
+          <li><plant>Bryolux</plant><weight>13</weight></li>
+          <li><plant>Agarilux</plant><weight>10</weight></li>
+        </plants>
+      </li>
+      <li Class="NingshaRaceLib.DesertPit.Ecology.Config.DefModExtension_DesertPitFauna">
+        <hiveCount>1</hiveCount>
+        <animalCountRange>5~8</animalCountRange>
+        <guaranteedAnimals>
+          <li>Cobra</li>
+          <li>Iguana</li>
+          <li>Rat</li>
+        </guaranteedAnimals>
+        <animalPool>
+          <li><pawnKind>Rat</pawnKind><weight>50</weight></li>
+          <li><pawnKind>Iguana</pawnKind><weight>35</weight></li>
+          <li><pawnKind>Cobra</pawnKind><weight>15</weight></li>
+        </animalPool>
+        <cappedAnimal>Cobra</cappedAnimal>
+        <cappedAnimalCount>2</cappedAnimalCount>
+        <entranceAvoidRadius>25</entranceAvoidRadius>
+        <antNestAvoidRadius>24</antNestAvoidRadius>
+        <hiveSceneRadius>8</hiveSceneRadius>
+        <animalEntranceAvoidRadius>12</animalEntranceAvoidRadius>
+        <animalSpacing>8</animalSpacing>
+        <scanBatchSize>512</scanBatchSize>
+      </li>
+    </modExtensions>
   </BiomeDef>
 </Defs>

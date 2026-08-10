@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义由地图生成时创建并在世界内复用的隐藏蚁群阵营。 -->
+  <FactionDef ParentName="FactionBase">
+    <defName>NingshaRace_DesertPitAntColonyFaction</defName>
+    <label>沙穴蚁群</label>
+    <fixedName>沙穴蚁群</fixedName>
+    <description>围绕地下蚁穴形成领地的独立蚁群，对其他阵营和其他蚁群具有永久敌意。</description>
+    <pawnSingular>巢群成员</pawnSingular>
+    <pawnsPlural>巢群成员</pawnsPlural>
+    <humanlikeFaction>false</humanlikeFaction>
+    <hidden>true</hidden>
+    <permanentEnemy>true</permanentEnemy>
+    <autoFlee>false</autoFlee>
+    <animalsFleeDanger>false</animalsFleeDanger>
+    <canSiege>false</canSiege>
+    <canStageAttacks>false</canStageAttacks>
+    <canMakeRandomly>false</canMakeRandomly>
+    <settlementGenerationWeight>0</settlementGenerationWeight>
+    <requiredCountAtGameStart>0</requiredCountAtGameStart>
+    <maxConfigurableAtWorldCreation>0</maxConfigurableAtWorldCreation>
+    <displayInFactionSelection>false</displayInFactionSelection>
+    <techLevel>Animal</techLevel>
+    <colorSpectrum>
+      <li>(0.55,0.30,0.08)</li>
+      <li>(0.72,0.46,0.12)</li>
+    </colorSpectrum>
+  </FactionDef>
+</Defs>

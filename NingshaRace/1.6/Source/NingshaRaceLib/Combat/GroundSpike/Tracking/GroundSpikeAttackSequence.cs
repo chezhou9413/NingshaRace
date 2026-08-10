@@ -12,7 +12,7 @@ using NingshaRaceLib.Core.Defs;
 namespace NingshaRaceLib.Combat.GroundSpike.Tracking
 {
     //类职责：保存一次直线地刺攻击，并同步各排唯一 Mote、三格伤害和击退。
-    public class GroundSpikeAttackSequence
+    public class GroundSpikeAttackSequence : IGroundSpikeAttackSequence
     {
         //字段职责：提供本次攻击的攻击者、武器和 XML 参数。
         private readonly Verb_GroundSpikeSummoner verb;

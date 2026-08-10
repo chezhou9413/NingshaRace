@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义锐沙方块装备后授予的环形地刺能力。 -->
+
+  <!-- Def 职责：让持有者以自身为中心释放逐圈向外扩散的敌对地刺。 -->
+  <AbilityDef>
+    <defName>NingshaRace_Ability_SandstoneSpikeRing</defName>
+    <label>砂岩棘环</label>
+    <description>唤醒脚下深层砂岩，使地刺以自身为中心逐环向外破土而出，对周围敌人造成伤害并将其掀飞。</description>
+    <iconPath>UI/Abilities/SandstoneSpikeRing</iconPath>
+    <targetRequired>false</targetRequired>
+    <displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+    <showWhenDrafted>true</showWhenDrafted>
+    <aiCanUse>false</aiCanUse>
+    <ai_IsOffensive>true</ai_IsOffensive>
+    <hostile>true</hostile>
+    <casterMustBeCapableOfViolence>true</casterMustBeCapableOfViolence>
+    <cooldownTicksRange>2500~2500</cooldownTicksRange>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <label>砂岩棘环</label>
+      <violent>true</violent>
+      <forceNormalTimeSpeed>false</forceNormalTimeSpeed>
+      <warmupTime>0.8</warmupTime>
+      <range>0.1</range>
+      <targetParams>
+        <canTargetSelf>true</canTargetSelf>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetLocations>false</canTargetLocations>
+        <canTargetBuildings>false</canTargetBuildings>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="NingshaRaceLib.Combat.GroundSpike.Abilities.CompProperties_AbilitySandstoneSpikeRing">
+        <radius>2</radius>
+        <damageDef>Stab</damageDef>
+        <damageAmount>27</damageAmount>
+        <armorPenetration>0.5</armorPenetration>
+        <knockbackCells>1</knockbackCells>
+        <ringStepTicks>4</ringStepTicks>
+        <animationFrameCount>20</animationFrameCount>
+        <animationDurationTicks>80</animationDurationTicks>
+        <impactFrame>12</impactFrame>
+        <effectScale>3.2</effectScale>
+      </li>
+    </comps>
+  </AbilityDef>
+</Defs>

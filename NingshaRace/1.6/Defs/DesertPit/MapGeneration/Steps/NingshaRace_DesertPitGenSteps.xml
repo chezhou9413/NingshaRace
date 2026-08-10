@@ -50,6 +50,18 @@
   </GenStepDef>
 
   <GenStepDef>
+    <defName>NingshaRace_DesertPitAntColonies</defName>
+    <order>453.5</order>
+    <genStep Class="NingshaRaceLib.DesertPit.AntColony.Generation.GenStep_DesertPitAntColonies" />
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>NingshaRace_DesertPitCaveEcology</defName>
+    <order>453.75</order>
+    <genStep Class="NingshaRaceLib.DesertPit.Ecology.Generation.GenStep_DesertPitCaveEcology" />
+  </GenStepDef>
+
+  <GenStepDef>
     <defName>NingshaRace_DesertPitRelics</defName>
     <order>454</order>
     <genStep Class="NingshaRaceLib.DesertPit.Generation.Steps.GenStep_DesertPitRelics" />

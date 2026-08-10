@@ -151,6 +151,6 @@
     <defName>NingshaRace_TerraCrescentSlash_ShaderPro</defName>
     <label>凝砂族土元素月牙刀光着色器</label>
     <ClShaderMaterial>NingshaRace_TerraCrescentSlash_Material</ClShaderMaterial>
-    <shaderPath>Transparent</shaderPath>
+    <shaderPath>Map/Transparent</shaderPath>
   </ChezhouLib.LibDef.ClShaderPro>
 </Defs>

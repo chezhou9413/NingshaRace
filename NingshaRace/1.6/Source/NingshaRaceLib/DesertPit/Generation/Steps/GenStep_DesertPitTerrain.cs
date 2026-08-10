@@ -1,3 +1,4 @@
+using System.Collections;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -8,18 +9,27 @@ using NingshaRaceLib.DesertPit.Buildings;
 using NingshaRaceLib.DesertPit.Generation.Caves;
 using NingshaRaceLib.DesertPit.Generation.Data;
 using NingshaRaceLib.DesertPit.Generation.Landmarks;
+using NingshaRaceLib.DesertPit.Generation.Progress;
 using NingshaRaceLib.DesertPit.Generation.Utility;
 
 namespace NingshaRaceLib.DesertPit.Generation.Steps
 {
     //类职责：把沙漠巨坑洞穴掩码落实成沙岩墙、厚岩顶、沙地、软沙和塌方地貌。
-    public class GenStep_DesertPitTerrain : GenStep
+    public class GenStep_DesertPitTerrain : GenStep, IDesertPitIncrementalGenStep
     {
         //属性职责：提供当前生成步骤的稳定随机种子片段。
         public override int SeedPart => 914027332;
 
         //函数职责：按洞穴掩码生成沙岩墙并铺设沙漠洞穴地形。
         public override void Generate(Map map, GenStepParams parms)
+        {
+            foreach (object unused in GenerateIncrementally(map, parms))
+            {
+            }
+        }
+
+        //函数职责：分批铺设岩顶、地形和沙岩墙，避免单个生成步骤长时间占用主线程。
+        public IEnumerable GenerateIncrementally(Map map, GenStepParams parms)
         {
             DesertPitGenUtility.SetGenerationStatus("砂岩地层");
             DesertPitLayoutData data = DesertPitGenUtility.GetLayoutData();
@@ -28,6 +38,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
             ModuleBase sandNoise = new Perlin(0.08500000089406967, 2.0, 0.5, 4, Rand.Int, QualityMode.Medium);
             using (map.pathing.DisableIncrementalScope())
             {
+                int processedCells = 0;
                 foreach (IntVec3 cell in map.AllCells)
                 {
                     map.roofGrid.SetRoof(cell, RoofDefOf.RoofRockThick);
@@ -41,9 +52,17 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
                         map.terrainGrid.SetTerrain(cell, TerrainDefOf.Sand);
                         GenSpawn.Spawn(ThingDefOf.Sandstone, cell, map);
                     }
+
+                    processedCells++;
+                    if (processedCells % 768 == 0)
+                    {
+                        DesertPitGenerationProgress.SetStepFraction((float)processedCells / map.cellIndices.NumGridCells);
+                        yield return null;
+                    }
                 }
 
                 PlaceCollapseRocks(map);
+                DesertPitGenerationProgress.SetStepFraction(1f);
             }
         }
 
@@ -118,7 +137,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
                         continue;
                     }
 
-                    if (Rand.Chance(0.24f) && cell.GetFirstThing(map, ThingDefOf.CollapsedRocks) == null)
+                    if (Rand.Chance(0.24f) && !data.ProtectedRouteCells.Contains(cell) && cell.GetFirstThing(map, ThingDefOf.CollapsedRocks) == null)
                     {
                         GenSpawn.Spawn(ThingDefOf.CollapsedRocks, cell, map);
                     }

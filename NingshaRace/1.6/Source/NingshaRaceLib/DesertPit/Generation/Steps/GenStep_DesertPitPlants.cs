@@ -5,6 +5,8 @@ using Verse;
 
 using NingshaRaceLib.Core.Defs;
 using NingshaRaceLib.DesertPit.Buildings;
+using NingshaRaceLib.DesertPit.Ecology.Config;
+using NingshaRaceLib.DesertPit.Ecology.Utility;
 using NingshaRaceLib.DesertPit.Generation.Caves;
 using NingshaRaceLib.DesertPit.Generation.Data;
 using NingshaRaceLib.DesertPit.Generation.Landmarks;
@@ -29,6 +31,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
         {
             DesertPitGenUtility.SetGenerationStatus("洞穴植物");
             DesertPitLayoutData data = DesertPitGenUtility.GetLayoutData();
+            DefModExtension_DesertPitEcology settings = DesertPitPlantEcologyUtility.GetSettings(map);
             ThingDef glowDef = DefDatabase<ThingDef>.GetNamed("NingshaRace_DesertPitGlow");
             List<IntVec3> candidates = CollectCandidates(map, data, glowDef);
             if (candidates.Count == 0)
@@ -42,10 +45,10 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
             for (int i = 0; i < clusterCount && placed.Count < targetCount && candidates.Count > 0; i++)
             {
                 IntVec3 center = candidates.RandomElementByWeight((IntVec3 cell) => ClusterCenterWeight(map, data, cell));
-                ScatterCluster(map, data, candidates, placed, center, targetCount);
+                ScatterCluster(map, data, settings, candidates, placed, center, targetCount);
             }
 
-            FillRemainingPlants(map, data, candidates, placed, targetCount);
+            FillRemainingPlants(map, data, settings, candidates, placed, targetCount);
         }
 
         //函数职责：收集所有可放置洞穴植物的基础候选格。
@@ -64,18 +67,18 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
         }
 
         //函数职责：在指定簇心附近生成三到七株混合植物。
-        private static void ScatterCluster(Map map, DesertPitLayoutData data, List<IntVec3> candidates, List<IntVec3> placed, IntVec3 center, int targetCount)
+        private static void ScatterCluster(Map map, DesertPitLayoutData data, DefModExtension_DesertPitEcology settings, List<IntVec3> candidates, List<IntVec3> placed, IntVec3 center, int targetCount)
         {
             int count = Rand.RangeInclusive(3, 7);
             float radius = Rand.Range(3.5f, 7f);
             for (int i = 0; i < count && placed.Count < targetCount; i++)
             {
-                ThingDef plantDef = ChoosePlantDef();
+                ThingDef plantDef = DesertPitPlantEcologyUtility.ChoosePlantDef(settings);
                 bool largePlant = IsLargePlant(plantDef);
                 IntVec3 cell;
-                if (TryFindClusterCell(map, data, candidates, placed, center, radius, largePlant, out cell))
+                if (TryFindClusterCell(map, data, candidates, placed, center, radius, plantDef, largePlant, out cell))
                 {
-                    SpawnPlant(map, plantDef, cell);
+                    DesertPitPlantEcologyUtility.SpawnPlant(map, plantDef, cell, new FloatRange(0.72f, 1f));
                     placed.Add(cell);
                     candidates.Remove(cell);
                 }
@@ -83,17 +86,17 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
         }
 
         //函数职责：在簇群未达到目标数量时补少量零散植物。
-        private static void FillRemainingPlants(Map map, DesertPitLayoutData data, List<IntVec3> candidates, List<IntVec3> placed, int targetCount)
+        private static void FillRemainingPlants(Map map, DesertPitLayoutData data, DefModExtension_DesertPitEcology settings, List<IntVec3> candidates, List<IntVec3> placed, int targetCount)
         {
             int guard = 0;
             while (placed.Count < targetCount && candidates.Count > 0 && guard < 300)
             {
-                ThingDef plantDef = ChoosePlantDef();
+                ThingDef plantDef = DesertPitPlantEcologyUtility.ChoosePlantDef(settings);
                 bool largePlant = IsLargePlant(plantDef);
                 IntVec3 cell;
-                if (TryFindAnyCell(map, data, candidates, placed, largePlant, out cell))
+                if (TryFindAnyCell(map, data, candidates, placed, plantDef, largePlant, out cell))
                 {
-                    SpawnPlant(map, plantDef, cell);
+                    DesertPitPlantEcologyUtility.SpawnPlant(map, plantDef, cell, new FloatRange(0.72f, 1f));
                     placed.Add(cell);
                     candidates.Remove(cell);
                 }
@@ -107,13 +110,13 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
         }
 
         //函数职责：从指定簇范围内选择一个符合间距要求的植物格。
-        private static bool TryFindClusterCell(Map map, DesertPitLayoutData data, List<IntVec3> candidates, List<IntVec3> placed, IntVec3 center, float radius, bool largePlant, out IntVec3 cell)
+        private static bool TryFindClusterCell(Map map, DesertPitLayoutData data, List<IntVec3> candidates, List<IntVec3> placed, IntVec3 center, float radius, ThingDef plantDef, bool largePlant, out IntVec3 cell)
         {
             List<IntVec3> localCandidates = new List<IntVec3>();
             for (int i = 0; i < candidates.Count; i++)
             {
                 IntVec3 candidate = candidates[i];
-                if (candidate.DistanceTo(center) <= radius && SpacingAllows(placed, candidate, largePlant))
+                if (candidate.DistanceTo(center) <= radius && SpacingAllows(placed, candidate, largePlant) && DesertPitPlantEcologyUtility.CanPlacePlant(map, candidate, plantDef, false))
                 {
                     localCandidates.Add(candidate);
                 }
@@ -130,13 +133,13 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
         }
 
         //函数职责：从剩余候选格中选择一个满足当前植物尺寸间距要求的位置。
-        private static bool TryFindAnyCell(Map map, DesertPitLayoutData data, List<IntVec3> candidates, List<IntVec3> placed, bool largePlant, out IntVec3 cell)
+        private static bool TryFindAnyCell(Map map, DesertPitLayoutData data, List<IntVec3> candidates, List<IntVec3> placed, ThingDef plantDef, bool largePlant, out IntVec3 cell)
         {
             List<IntVec3> localCandidates = new List<IntVec3>();
             for (int i = 0; i < candidates.Count; i++)
             {
                 IntVec3 candidate = candidates[i];
-                if (SpacingAllows(placed, candidate, largePlant))
+                if (SpacingAllows(placed, candidate, largePlant) && DesertPitPlantEcologyUtility.CanPlacePlant(map, candidate, plantDef, false))
                 {
                     localCandidates.Add(candidate);
                 }
@@ -155,7 +158,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
         //函数职责：判断格子是否满足基础占用、洞穴、安全区和地貌条件。
         private static bool CanPlacePlant(Map map, DesertPitLayoutData data, ThingDef glowDef, IntVec3 cell)
         {
-            if (!cell.InBounds(map) || !DesertPitGenUtility.IsCave(map, cell) || !cell.Standable(map))
+            if (!cell.InBounds(map) || !DesertPitGenUtility.IsCave(map, cell) || !cell.Standable(map) || data.ReservedSceneCells.Contains(cell))
             {
                 return false;
             }
@@ -245,36 +248,11 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
             return false;
         }
 
-        //函数职责：按权重选择凝砂植物或原版洞穴植物。
-        private static ThingDef ChoosePlantDef()
-        {
-            List<KeyValuePair<ThingDef, float>> pool = new List<KeyValuePair<ThingDef, float>>
-            {
-                new KeyValuePair<ThingDef, float>(DefDatabase<ThingDef>.GetNamed("NingshaRace_DesertPitPlantA"), 13f),
-                new KeyValuePair<ThingDef, float>(DefDatabase<ThingDef>.GetNamed("NingshaRace_DesertPitPlantB"), 13f),
-                new KeyValuePair<ThingDef, float>(DefDatabase<ThingDef>.GetNamed("NingshaRace_DesertPitPlantC"), 13f),
-                new KeyValuePair<ThingDef, float>(DefDatabase<ThingDef>.GetNamed("NingshaRace_DesertPitPlantD"), 13f),
-                new KeyValuePair<ThingDef, float>(DefDatabase<ThingDef>.GetNamed("NingshaRace_DesertPitPlantE"), 13f),
-                new KeyValuePair<ThingDef, float>(ThingDefOf.Glowstool, 12f),
-                new KeyValuePair<ThingDef, float>(ThingDefOf.Bryolux, 13f),
-                new KeyValuePair<ThingDef, float>(ThingDefOf.Agarilux, 10f)
-            };
-
-            return pool.RandomElementByWeight((KeyValuePair<ThingDef, float> entry) => entry.Value).Key;
-        }
-
         //函数职责：判断植物是否需要使用较大的生成间隔。
         private static bool IsLargePlant(ThingDef plantDef)
         {
             return plantDef.defName.StartsWith("NingshaRace_DesertPitPlant") || plantDef == ThingDefOf.Agarilux;
         }
 
-        //函数职责：生成成熟度随机的洞穴植物并放入地图。
-        private static void SpawnPlant(Map map, ThingDef plantDef, IntVec3 cell)
-        {
-            Plant plant = (Plant)ThingMaker.MakeThing(plantDef);
-            plant.Growth = Rand.Range(0.72f, 1f);
-            GenSpawn.Spawn(plant, cell, map);
-        }
     }
 }

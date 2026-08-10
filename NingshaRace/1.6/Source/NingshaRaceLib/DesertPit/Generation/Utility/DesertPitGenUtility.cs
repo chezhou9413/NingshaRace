@@ -1,14 +1,15 @@
+using System;
 using System.Collections.Generic;
 using RimWorld;
 using UnityEngine;
 using Verse;
-using Verse.Noise;
 
 using NingshaRaceLib.Core.Defs;
 using NingshaRaceLib.DesertPit.Buildings;
 using NingshaRaceLib.DesertPit.Generation.Caves;
 using NingshaRaceLib.DesertPit.Generation.Data;
 using NingshaRaceLib.DesertPit.Generation.Landmarks;
+using NingshaRaceLib.DesertPit.Generation.Progress;
 using NingshaRaceLib.DesertPit.Generation.Steps;
 
 namespace NingshaRaceLib.DesertPit.Generation.Utility
@@ -19,27 +20,10 @@ namespace NingshaRaceLib.DesertPit.Generation.Utility
         //字段职责：保存沙漠巨坑布局数据在 MapGenerator 临时表里的键名。
         public const string LayoutDataKey = "NingshaRace_DesertPitLayoutData";
 
-        //字段职责：保存洞穴边缘噪声在 MapGenerator 临时表里的键名。
-        private const string EdgeNoiseKey = "NingshaRace_DesertPitEdgeNoise";
-
         //函数职责：取得当前生成流程里的沙漠巨坑布局数据。
         public static DesertPitLayoutData GetLayoutData()
         {
             return MapGenerator.GetOrGenerateVar<DesertPitLayoutData>(LayoutDataKey);
-        }
-
-        //函数职责：创建用于洞室和隧道边缘扰动的 Perlin 噪声。
-        public static ModuleBase CreateEdgeNoise()
-        {
-            ModuleBase noise = MapGenerator.GetVar<ModuleBase>(EdgeNoiseKey);
-            if (noise != null)
-            {
-                return noise;
-            }
-
-            noise = new Perlin(0.055000000819563866, 2.0, 0.5, 4, Rand.Int, QualityMode.Medium);
-            MapGenerator.SetVar(EdgeNoiseKey, noise);
-            return noise;
         }
 
         //函数职责：判断指定格子是否属于沙漠巨坑已挖开的洞穴空间。
@@ -84,6 +68,44 @@ namespace NingshaRaceLib.DesertPit.Generation.Utility
             }
         }
 
+        //函数职责：一次性计算所有洞穴格到五格内最近洞壁的距离，供后续生成步骤复用。
+        public static void BuildCaveEdgeCache(Map map)
+        {
+            DesertPitLayoutData data = GetLayoutData();
+            byte[] distances = new byte[map.cellIndices.NumGridCells];
+            int searchCount = GenRadial.NumCellsInRadius(5f);
+            foreach (IntVec3 cell in map.AllCells)
+            {
+                int index = map.cellIndices.CellToIndex(cell);
+                if (!IsCave(map, cell))
+                {
+                    distances[index] = 0;
+                    continue;
+                }
+
+                byte nearest = 6;
+                for (int i = 1; i < searchCount; i++)
+                {
+                    IntVec3 offset = GenRadial.RadialPattern[i];
+                    IntVec3 check = cell + offset;
+                    if (!check.InBounds(map) || IsCave(map, check))
+                    {
+                        continue;
+                    }
+
+                    byte distance = (byte)Mathf.Clamp(Mathf.CeilToInt(offset.LengthHorizontal), 1, 5);
+                    if (distance < nearest)
+                    {
+                        nearest = distance;
+                    }
+                }
+
+                distances[index] = nearest;
+            }
+
+            data.CaveEdgeDistances = distances;
+        }
+
         //函数职责：清理指定区域内会阻挡入口和主路的物体并铺成沙地。
         public static void ClearSafeArea(Map map, IntVec3 center, float radius)
         {
@@ -112,17 +134,13 @@ namespace NingshaRaceLib.DesertPit.Generation.Utility
         //函数职责：判断格子附近是否紧邻洞穴边界。
         public static bool NearCaveEdge(Map map, IntVec3 cell, int radius)
         {
-            int cellCount = GenRadial.NumCellsInRadius(radius);
-            for (int i = 0; i < cellCount; i++)
+            DesertPitLayoutData data = GetLayoutData();
+            if (data.CaveEdgeDistances == null || data.CaveEdgeDistances.Length != map.cellIndices.NumGridCells)
             {
-                IntVec3 check = cell + GenRadial.RadialPattern[i];
-                if (check.InBounds(map) && !IsCave(map, check))
-                {
-                    return true;
-                }
+                throw new InvalidOperationException("沙漠巨坑洞壁距离缓存尚未构建。");
             }
 
-            return false;
+            return cell.InBounds(map) && data.CaveEdgeDistances[map.cellIndices.CellToIndex(cell)] <= Mathf.Clamp(radius, 0, 5);
         }
 
         //函数职责：判断指定地形是否属于水面、浅流、沼泽或湿地边缘。
@@ -131,10 +149,10 @@ namespace NingshaRaceLib.DesertPit.Generation.Utility
             return terrain.defName == "WaterShallow" || terrain.defName == "WaterMovingShallow" || terrain.defName == "Marsh" || terrain.defName == "MarshyTerrain";
         }
 
-        //函数职责：更新地图生成长任务窗口中的当前阶段提示。
+        //函数职责：更新当前地图进度窗口中的洞穴生成阶段提示。
         public static void SetGenerationStatus(string stage)
         {
-            LongEventHandler.SetCurrentEventText("正在生成凝砂沙漠巨坑：" + stage);
+            DesertPitGenerationProgress.SetStage(stage);
         }
     }
 }

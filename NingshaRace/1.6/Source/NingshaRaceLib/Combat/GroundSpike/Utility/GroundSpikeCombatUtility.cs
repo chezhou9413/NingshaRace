@@ -99,18 +99,38 @@ namespace NingshaRaceLib.Combat.GroundSpike.Utility
             Pawn attacker = verb.CasterPawn;
             ThingWithComps weapon = verb.EquipmentSource;
             VerbProperties_GroundSpikeSummoner props = verb.Props;
-            DamageInfo damageInfo = new DamageInfo(
+            return ApplyDamage(
+                attacker,
+                weapon?.def,
+                attacker.Position,
                 props.damageDef,
                 props.damageAmount,
                 props.armorPenetration,
+                target);
+        }
+
+        //函数职责：使用指定来源位置、伤害、穿甲和武器 Def 对目标结算一次地刺伤害。
+        public static DamageWorker.DamageResult ApplyDamage(
+            Pawn attacker,
+            ThingDef weaponDef,
+            IntVec3 sourceCell,
+            DamageDef damageDef,
+            float damageAmount,
+            float armorPenetration,
+            Thing target)
+        {
+            DamageInfo damageInfo = new DamageInfo(
+                damageDef,
+                damageAmount,
+                armorPenetration,
                 -1f,
                 attacker,
                 null,
-                weapon?.def,
+                weaponDef,
                 DamageInfo.SourceCategory.ThingOrUnknown,
                 null,
                 !attacker.Drafted);
-            damageInfo.SetAngle((target.Position - attacker.Position).ToVector3());
+            damageInfo.SetAngle((target.Position - sourceCell).ToVector3());
             return target.TakeDamage(damageInfo);
         }
 

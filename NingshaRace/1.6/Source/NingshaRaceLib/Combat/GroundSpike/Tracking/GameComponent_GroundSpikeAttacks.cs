@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using RimWorld;
 using UnityEngine;
 using Verse;
 
+using NingshaRaceLib.Combat.GroundSpike.Abilities;
 using NingshaRaceLib.Combat.GroundSpike.Rendering;
 using NingshaRaceLib.Combat.GroundSpike.Utility;
 using NingshaRaceLib.Combat.GroundSpike.Verbs;
@@ -13,7 +15,7 @@ namespace NingshaRaceLib.Combat.GroundSpike.Tracking
     public class GameComponent_GroundSpikeAttacks : GameComponent
     {
         //字段职责：保存当前仍有横排尚未完成伤害结算的地刺攻击。
-        private readonly List<GroundSpikeAttackSequence> attacks = new List<GroundSpikeAttackSequence>();
+        private readonly List<IGroundSpikeAttackSequence> attacks = new List<IGroundSpikeAttackSequence>();
 
         //构造函数职责：让 RimWorld 为当前游戏创建地刺攻击组件。
         public GameComponent_GroundSpikeAttacks(Game game)
@@ -37,6 +39,16 @@ namespace NingshaRaceLib.Combat.GroundSpike.Tracking
                 origin,
                 targetCell,
                 attackDirection,
+                Find.TickManager.TicksGame));
+        }
+
+        //函数职责：登记以固定圆心逐圈向外推进的砂岩棘环攻击。
+        public void RegisterRing(Pawn caster, IntVec3 origin, CompProperties_AbilitySandstoneSpikeRing props)
+        {
+            attacks.Add(new GroundSpikeRingAttackSequence(
+                caster,
+                origin,
+                props,
                 Find.TickManager.TicksGame));
         }
 

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义蚁群实体搬运、蚁后补员和爆浆蚁自爆工作。 -->
+  <JobDef>
+    <defName>NingshaRace_Job_DesertPitAntHaul</defName>
+    <driverClass>NingshaRaceLib.DesertPit.AntColony.Jobs.JobDriver_DesertPitAntHaul</driverClass>
+    <reportString>正在把 TargetA 搬回蚁穴。</reportString>
+    <casualInterruptible>true</casualInterruptible>
+    <playerInterruptible>false</playerInterruptible>
+  </JobDef>
+
+  <JobDef>
+    <defName>NingshaRace_Job_DesertPitAntReproduce</defName>
+    <driverClass>NingshaRaceLib.DesertPit.AntColony.Jobs.JobDriver_DesertPitAntReproduce</driverClass>
+    <reportString>正在为蚁穴补充成员。</reportString>
+    <casualInterruptible>false</casualInterruptible>
+    <playerInterruptible>false</playerInterruptible>
+  </JobDef>
+
+  <JobDef>
+    <defName>NingshaRace_Job_DesertPitBoomAntDetonate</defName>
+    <driverClass>NingshaRaceLib.DesertPit.AntColony.Jobs.JobDriver_DesertPitBoomAntDetonate</driverClass>
+    <reportString>正在扑向 TargetA。</reportString>
+    <casualInterruptible>false</casualInterruptible>
+    <playerInterruptible>false</playerInterruptible>
+  </JobDef>
+</Defs>

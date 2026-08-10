@@ -101,6 +101,9 @@ namespace NingshaRaceLib.Core.Defs
         //字段职责：凝砂族地刺召唤物远程武器。
         public static ThingDef NingshaRace_GroundSpikeSummoner;
 
+        //字段职责：锐沙方块装备后授予的环形地刺能力。
+        public static AbilityDef NingshaRace_Ability_SandstoneSpikeRing;
+
         //字段职责：凝砂族使用的扇形喷砂武器。
         public static ThingDef NingshaRace_SandBottle;
 
@@ -154,6 +157,33 @@ namespace NingshaRaceLib.Core.Defs
 
         //字段职责：沙漠巨坑地下沙岩洞穴使用的口袋地图生成器。
         public static MapGeneratorDef NingshaRace_DesertPitMap;
+
+        //字段职责：沙漠巨坑巢群使用的可攻击蚁穴建筑。
+        public static ThingDef NingshaRace_DesertPitAntNest;
+
+        //字段职责：沙漠巨坑中的独立蚁巢实例共同使用的隐藏永久敌对阵营定义。
+        public static FactionDef NingshaRace_DesertPitAntColonyFaction;
+
+        //字段职责：生成负责全图采集和实体搬运的洞穴工蚁。
+        public static PawnKindDef NingshaRace_DesertPitWorkerAntKind;
+
+        //字段职责：生成负责蚁穴领地巡逻和拦截的洞穴兵蚁。
+        public static PawnKindDef NingshaRace_DesertPitSoldierAntKind;
+
+        //字段职责：生成每个巢群唯一且负责补员的洞穴蚁后。
+        public static PawnKindDef NingshaRace_DesertPitQueenAntKind;
+
+        //字段职责：生成蚁穴受击时追踪入侵者的爆浆蚁。
+        public static PawnKindDef NingshaRace_DesertPitBoomAntKind;
+
+        //字段职责：工蚁把实体资源搬到本巢储藏格时使用的工作。
+        public static JobDef NingshaRace_Job_DesertPitAntHaul;
+
+        //字段职责：蚁后消耗巢穴食物并补充常规成员时使用的工作。
+        public static JobDef NingshaRace_Job_DesertPitAntReproduce;
+
+        //字段职责：爆浆蚁追到入侵者身边并触发酸液自爆时使用的工作。
+        public static JobDef NingshaRace_Job_DesertPitBoomAntDetonate;
 
         //静态构造函数职责：让 RimWorld 在 Def 初始化阶段填充本类字段。
         static DefOfRefs()

@@ -98,7 +98,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
         //函数职责：判断单格是否满足基础占用、洞穴、安全区和地貌条件。
         private static bool CanUseCell(Map map, DesertPitLayoutData data, ThingDef glowDef, IntVec3 cell)
         {
-            if (!cell.InBounds(map) || !DesertPitGenUtility.IsCave(map, cell) || !cell.Standable(map))
+            if (!cell.InBounds(map) || !DesertPitGenUtility.IsCave(map, cell) || !cell.Standable(map) || data.ReservedSceneCells.Contains(cell))
             {
                 return false;
             }

@@ -14,9 +14,9 @@
       <texPath>NingshaRace/Weapons/GroundSpikeSummoner</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <shaderType>Cutout</shaderType>
-      <drawSize>(1.1,1.1)</drawSize>
+      <drawSize>(0.5,0.5)</drawSize>
     </graphicData>
-    <uiIconScale>1</uiIconScale>
+    <uiIconScale>0.5</uiIconScale>
     <equippedAngleOffset>-45</equippedAngleOffset>
     <thingCategories>
       <li>WeaponsRanged</li>
@@ -36,6 +36,13 @@
     <weaponTags Inherit="False">
       <li>NingshaRaceGroundSpikeSummoner</li>
     </weaponTags>
+    <comps>
+      <li Class="ChezhouLib.Comp.CompProperties_AbilityGiver_Direct">
+        <abilityDef>
+          <li>NingshaRace_Ability_SandstoneSpikeRing</li>
+        </abilityDef>
+      </li>
+    </comps>
     <tools Inherit="False" />
     <verbs Inherit="False">
       <li Class="NingshaRaceLib.Combat.GroundSpike.Verbs.VerbProperties_GroundSpikeSummoner">

@@ -39,7 +39,7 @@
     <defName>NingshaRace_BurialMountainGuardShield_ShaderPro</defName>
     <label>葬岳沙暴护盾着色器</label>
     <ClShaderMaterial>NingshaRace_BurialMountainGuardShield_Material</ClShaderMaterial>
-    <shaderPath>Transparent</shaderPath>
+    <shaderPath>Map/Transparent</shaderPath>
   </ChezhouLib.LibDef.ClShaderPro>
 
   <!-- Def 职责：提供葬岳格挡蓄满爆发 Shader 的默认材质参数。 -->
@@ -77,6 +77,6 @@
     <defName>NingshaRace_BurialMountainGuardBurst_ShaderPro</defName>
     <label>葬岳沙暴爆发着色器</label>
     <ClShaderMaterial>NingshaRace_BurialMountainGuardBurst_Material</ClShaderMaterial>
-    <shaderPath>Transparent</shaderPath>
+    <shaderPath>Map/Transparent</shaderPath>
   </ChezhouLib.LibDef.ClShaderPro>
 </Defs>
