@@ -28,6 +28,9 @@
     </specificApparelRequirements>
     <weaponMoney>0~0</weaponMoney>
     <weaponTags Inherit="False" />
+    <backstoryCategories>
+      <li>NingshaRace</li>
+    </backstoryCategories>
     <backstoryCryptosleepCommonality>0</backstoryCryptosleepCommonality>
     <chemicalAddictionChance>0</chemicalAddictionChance>
     <combatPower>10</combatPower>

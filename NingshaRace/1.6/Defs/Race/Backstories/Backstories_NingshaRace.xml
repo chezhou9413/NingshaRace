@@ -19,7 +19,7 @@
       <Intellectual>1</Intellectual>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -40,8 +40,7 @@
       <Mining>1</Mining>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
-      <li>Trader</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -61,7 +60,7 @@
       <Shooting>1</Shooting>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -81,8 +80,7 @@
       <Intellectual>1</Intellectual>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
-      <li>Trader</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -101,7 +99,7 @@
       <Intellectual>3</Intellectual>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -122,7 +120,7 @@
       <Artistic>1</Artistic>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -142,8 +140,7 @@
       <Construction>2</Construction>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
-      <li>Offworld</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -164,7 +161,7 @@
       <Artistic>1</Artistic>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -184,7 +181,7 @@
       <Mining>2</Mining>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -205,7 +202,7 @@
       <Mining>1</Mining>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -224,9 +221,7 @@
       <Intellectual>3</Intellectual>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
-      <li>Offworld</li>
-      <li>Trader</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -248,7 +243,7 @@
       <Melee>4</Melee>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -269,7 +264,7 @@
       <Social>2</Social>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -290,8 +285,7 @@
       <Melee>1</Melee>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
-      <li>Trader</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -311,8 +305,7 @@
       <Crafting>1</Crafting>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
-      <li>Offworld</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -332,7 +325,7 @@
       <Mining>2</Mining>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -353,8 +346,7 @@
       <Mining>1</Mining>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
-      <li>Trader</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -375,8 +367,7 @@
       <Mining>1</Mining>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
-      <li>Offworld</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -396,7 +387,7 @@
       <Cooking>2</Cooking>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -416,7 +407,7 @@
       <Cooking>1</Cooking>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -436,7 +427,7 @@
       <Construction>2</Construction>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -456,7 +447,7 @@
       <Shooting>2</Shooting>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -476,7 +467,7 @@
       <Melee>3</Melee>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -497,7 +488,7 @@
       <Plants>3</Plants>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -518,7 +509,7 @@
       <Cooking>2</Cooking>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -538,7 +529,7 @@
       <Cooking>2</Cooking>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -561,7 +552,7 @@
       <Intellectual>1</Intellectual>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -581,7 +572,7 @@
       <Construction>1</Construction>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -602,7 +593,7 @@
       <Intellectual>1</Intellectual>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -623,7 +614,7 @@
       <Intellectual>1</Intellectual>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -643,7 +634,7 @@
       <Shooting>1</Shooting>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -665,7 +656,7 @@
       <Melee>3</Melee>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -685,7 +676,7 @@
       <Mining>2</Mining>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -705,7 +696,7 @@
       <Intellectual>2</Intellectual>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -725,7 +716,7 @@
       <Melee>2</Melee>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>
@@ -745,7 +736,7 @@
       <Shooting>3</Shooting>
     </skillGains>
     <spawnCategories>
-      <li>Civil</li>
+      <li>NingshaRace</li>
     </spawnCategories>
     <shuffleable>true</shuffleable>
   </BackstoryDef>

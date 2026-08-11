@@ -24,6 +24,9 @@
         <requiredTag>NingshaRaceCompleteOutfit</requiredTag>
       </li>
     </specificApparelRequirements>
+    <backstoryCategories>
+      <li>NingshaRace</li>
+    </backstoryCategories>
     <backstoryCryptosleepCommonality>1</backstoryCryptosleepCommonality>
     <chemicalAddictionChance>0.06</chemicalAddictionChance>
     <combatPower>30</combatPower>
