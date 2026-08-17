@@ -29,7 +29,7 @@
     <skinColorTint>(0.22, 0.10, 0.30, 1)</skinColorTint>
     <skinColorTintStrength>0.55</skinColorTintStrength>
     <anomalyKnowledgeOffset>2</anomalyKnowledgeOffset>
-    <knowledgeCategory>Advanced</knowledgeCategory>
+    <knowledgeCategory>Basic</knowledgeCategory>
     <codexEntry>NingshaRace_ErosionBodyCodex</codexEntry>
     <!-- 渲染节点职责：仅在侵蚀体状态下注入三根头部蛇体，让它们在后发上方、头部下方独立缓慢摆动。 -->
     <renderNodeProperties>

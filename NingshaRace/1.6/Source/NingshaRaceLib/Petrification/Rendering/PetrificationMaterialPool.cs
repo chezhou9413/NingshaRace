@@ -118,7 +118,7 @@ namespace NingshaRaceLib.Petrification.Rendering
             return source;
         }
 
-        //函数职责：在游戏主线程保留原贴图、颜色、渲染队列和贴图变换并创建石化材质。
+        //函数职责：在游戏主线程保留原贴图、透明度、渲染队列和贴图变换并创建石化材质。
         public static Material GetOrCreatePetrifiedMaterial(Material source)
         {
             if (!UnityData.IsInMainThread)
@@ -130,10 +130,11 @@ namespace NingshaRaceLib.Petrification.Rendering
                 return cachedMaterial;
             }
 
+            Color petrifiedTint = new Color(1f, 1f, 1f, source.color.a);
             MaterialRequest request = new MaterialRequest(
                 source.mainTexture,
                 DefOfRefs.NingshaRace_PawnPetrify_ShaderPro.Shader,
-                source.color)
+                petrifiedTint)
             {
                 renderQueue = source.renderQueue,
                 needsMainTex = source.mainTexture != null
@@ -153,6 +154,24 @@ namespace NingshaRaceLib.Petrification.Rendering
             }
             Materials[source] = petrifiedMaterial;
             return petrifiedMaterial;
+        }
+
+        //函数职责：在游戏切换或退出前销毁本池拥有的石化材质并清空引用。
+        public static void Reset()
+        {
+            if (!UnityData.IsInMainThread)
+            {
+                throw new InvalidOperationException("石化材质缓存只能在游戏主线程清理。");
+            }
+
+            foreach (Material material in Materials.Values)
+            {
+                if (!ReferenceEquals(material, null))
+                {
+                    UnityEngine.Object.Destroy(material);
+                }
+            }
+            Materials.Clear();
         }
     }
 }

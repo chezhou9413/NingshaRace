@@ -123,5 +123,23 @@ namespace NingshaRaceLib.Erosion.Rendering
             Materials[source] = erosionMaterial;
             return erosionMaterial;
         }
+
+        //函数职责：在游戏切换或退出前销毁本池拥有的侵蚀黑雾材质并清空引用。
+        public static void Reset()
+        {
+            if (!UnityData.IsInMainThread)
+            {
+                throw new InvalidOperationException("侵蚀体头部材质缓存只能在游戏主线程清理。");
+            }
+
+            foreach (Material material in Materials.Values)
+            {
+                if (!ReferenceEquals(material, null))
+                {
+                    UnityEngine.Object.Destroy(material);
+                }
+            }
+            Materials.Clear();
+        }
     }
 }

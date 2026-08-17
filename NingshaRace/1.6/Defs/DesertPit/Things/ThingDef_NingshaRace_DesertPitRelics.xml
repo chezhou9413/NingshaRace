@@ -98,6 +98,14 @@
     <defName>NingshaRace_DesertPitSarcophagus</defName>
     <label>封闭砂岩石棺</label>
     <description>沉重的砂岩石棺，棺盖已经开裂，仍像在守护某个被风沙吞没的地下秘密。</description>
+    <thingClass>NingshaRaceLib.DesertPit.Sarcophagus.Buildings.Building_NingshaSarcophagus</thingClass>
+    <modExtensions>
+      <li Class="NingshaRaceLib.DesertPit.Sarcophagus.Config.DefModExtension_NingshaSarcophagus">
+        <lootDef>NingshaRace_DesertPitSarcophagusLoot</lootDef>
+        <openedThingDef>NingshaRace_DesertPitOpenSarcophagus</openedThingDef>
+        <openTicks>300</openTicks>
+      </li>
+    </modExtensions>
     <graphicData>
       <graphicClass>Graphic_Multi</graphicClass>
       <texPath>Things/Building/NingshaRace/DesertPit/Relics/NingshaRace_SarcophagusClosed</texPath>

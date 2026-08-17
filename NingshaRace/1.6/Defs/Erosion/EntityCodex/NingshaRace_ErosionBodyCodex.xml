@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!-- 文件职责：将侵蚀体加入原版高级异常图鉴。 -->
+  <!-- 文件职责：将侵蚀体加入原版初级异常图鉴。 -->
   <EntityCodexEntryDef>
     <defName>NingshaRace_ErosionBodyCodex</defName>
     <label>侵蚀体</label>
     <description>侵蚀彻底吞没凝砂族后留下的异常实体。它保留了操纵石化砂潮的本能，会主动袭击实体阵营之外的所有生命，并可被收容和研究。</description>
-    <category>Advanced</category>
+    <category>Basic</category>
     <uiIconPath>UI/CodexEntries/Shambler</uiIconPath>
-    <orderInCategory>900</orderInCategory>
+    <orderInCategory>800</orderInCategory>
   </EntityCodexEntryDef>
 </Defs>

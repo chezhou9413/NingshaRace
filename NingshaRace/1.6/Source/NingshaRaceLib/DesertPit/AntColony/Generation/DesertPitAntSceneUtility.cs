@@ -7,6 +7,7 @@ using NingshaRaceLib.Core.Defs;
 using NingshaRaceLib.DesertPit.AntColony.Buildings;
 using NingshaRaceLib.DesertPit.AntColony.Components;
 using NingshaRaceLib.DesertPit.AntColony.Config;
+using NingshaRaceLib.DesertPit.AntColony.State;
 using NingshaRaceLib.DesertPit.Generation.Data;
 using NingshaRaceLib.DesertPit.Generation.Utility;
 
@@ -145,12 +146,13 @@ namespace NingshaRaceLib.DesertPit.AntColony.Generation
         private static void GenerateScene(Map map, DesertPitLayoutData data, ThingDef nestDef, IntVec3 center, int colonyIndex)
         {
             DefModExtension_AntColony settings = nestDef.GetModExtension<DefModExtension_AntColony>();
+            AntColonyPopulationSettings population = AntColonyPopulationSettings.Create(settings, 1f);
             MapComponent_DesertPitAntColonies manager = map.GetComponent<MapComponent_DesertPitAntColonies>();
             Faction faction = manager.GetColonyFaction(colonyIndex);
             CellRect occupied = GenAdj.OccupiedRect(center, Rot4.North, nestDef.size);
             List<IntVec3> storagePool = CollectStorageCells(map, data, occupied);
             storagePool.Shuffle();
-            List<IntVec3> storageCells = storagePool.GetRange(0, settings.storageCellCount);
+            List<IntVec3> storageCells = storagePool.GetRange(0, population.StorageCellCount);
             ReserveSceneArea(map, data, center);
 
             Building_DesertPitAntNest nest = (Building_DesertPitAntNest)ThingMaker.MakeThing(nestDef);
@@ -160,18 +162,18 @@ namespace NingshaRaceLib.DesertPit.AntColony.Generation
             List<Pawn> members = new List<Pawn>();
             Pawn queen = SpawnInitialMember(map, center, DefOfRefs.NingshaRace_DesertPitQueenAntKind, faction);
             members.Add(queen);
-            for (int i = 0; i < settings.workerTarget; i++)
+            for (int i = 0; i < population.WorkerTarget; i++)
             {
                 members.Add(SpawnInitialMember(map, center, DefOfRefs.NingshaRace_DesertPitWorkerAntKind, faction));
             }
 
-            for (int i = 0; i < settings.soldierTarget; i++)
+            for (int i = 0; i < population.SoldierTarget; i++)
             {
                 members.Add(SpawnInitialMember(map, center, DefOfRefs.NingshaRace_DesertPitSoldierAntKind, faction));
             }
 
             SpawnInitialStock(map, storageCells);
-            manager.RegisterGeneratedColony(nest, queen, members, storageCells, faction);
+            manager.RegisterGeneratedColony(nest, queen, members, storageCells, faction, population);
         }
 
         //函数职责：把巢穴周围场景半径登记为后续生成步骤不可占用的保留区域。

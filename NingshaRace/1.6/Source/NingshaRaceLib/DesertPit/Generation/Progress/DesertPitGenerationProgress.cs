@@ -2,10 +2,10 @@ using UnityEngine;
 
 namespace NingshaRaceLib.DesertPit.Generation.Progress
 {
-    //类职责：保存沙漠巨坑分帧生成时的阶段、百分比和当前场景进度窗口显示状态。
+    //类职责：保存凝砂口袋地图分帧生成时的阶段、百分比和当前场景进度窗口显示状态。
     internal static class DesertPitGenerationProgress
     {
-        //字段职责：记录当前是否存在正在执行的沙漠巨坑生成流程。
+        //字段职责：记录当前是否存在正在执行的凝砂口袋地图生成流程。
         private static bool active;
 
         //字段职责：记录当前生成阶段的中文名称。
@@ -29,7 +29,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Progress
         //属性职责：向进度窗口提供限制在有效范围内的生成进度。
         public static float Progress => Mathf.Clamp01(progress);
 
-        //函数职责：开始一次沙漠巨坑生成并初始化阶段信息。
+        //函数职责：开始一次凝砂口袋地图生成并初始化阶段信息。
         public static void Begin()
         {
             active = true;

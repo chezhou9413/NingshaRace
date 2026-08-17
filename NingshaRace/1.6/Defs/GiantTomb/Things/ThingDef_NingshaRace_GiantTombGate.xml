@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义仅通过开发者放置的巨型墓葬原版口袋地图入口。 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>NingshaRace_GiantTombGate</defName>
+    <label>凝砂巨型墓葬入口</label>
+    <description>一处通向巨型地下墓葬群的深坑入口，砂岩阶梯消失在厚重岩层下方。</description>
+    <thingClass>NingshaRaceLib.GiantTomb.Buildings.Building_GiantTombGate</thingClass>
+    <category>Building</category><drawerType>MapMeshOnly</drawerType><altitudeLayer>FloorEmplacement</altitudeLayer>
+    <selectable>true</selectable><rotatable>false</rotatable><size>(8,8)</size><passability>Impassable</passability>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded><holdsRoof>true</holdsRoof>
+    <destroyable>false</destroyable><useHitPoints>false</useHitPoints><canOverlapZones>false</canOverlapZones>
+    <building>
+      <isEdifice>true</isEdifice><deconstructible>false</deconstructible><isTargetable>false</isTargetable>
+      <isInert>true</isInert><claimable>false</claimable><expandHomeArea>false</expandHomeArea>
+    </building>
+    <inspectorTabs><li>ITab_ContentsMapPortal</li></inspectorTabs>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass><shaderType>ClSemiTransparentCutout_ShaderPro</shaderType>
+      <texPath>Things/Building/PitGate/PitGate</texPath><drawSize>(10.4,10.4)</drawSize>
+    </graphicData>
+    <portal>
+      <pocketMapGenerator>NingshaRace_GiantTombMap</pocketMapGenerator><exitDef>CaveExit</exitDef><pocketMapSize>200</pocketMapSize>
+      <enteredLetterLabel>凝砂巨型墓葬</enteredLetterLabel>
+      <enteredLetterText>砂岩深处展开了一片规模惊人的古代墓葬群。封闭墓室、仪式大厅与狭长通道在厚岩顶下向黑暗深处延伸。</enteredLetterText>
+      <enteredLetterDef>NeutralEvent</enteredLetterDef><traverseSound>TraversePitGate</traverseSound>
+    </portal>
+    <statBases><SellPriceFactor>0.7</SellPriceFactor><Flammability>0</Flammability></statBases>
+  </ThingDef>
+</Defs>

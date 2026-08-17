@@ -23,6 +23,14 @@
       <displayName>RimWorld - Biotech</displayName>
     </li>
     <li>
+      <packageId>ludeon.rimworld.royalty</packageId>
+      <displayName>RimWorld - Royalty</displayName>
+    </li>
+    <li>
+      <packageId>ludeon.rimworld.ideology</packageId>
+      <displayName>RimWorld - Ideology</displayName>
+    </li>
+    <li>
       <packageId>Chezhou.ChezhouLib.lib</packageId>
       <displayName>ChezhouLib</displayName>
     </li>
@@ -35,6 +43,8 @@
     <li>brrainz.harmony</li>
     <li>erdelf.HumanoidAlienRaces</li>
     <li>ludeon.rimworld.biotech</li>
+    <li>ludeon.rimworld.royalty</li>
+    <li>ludeon.rimworld.ideology</li>
     <li>Chezhou.ChezhouLib.lib</li>
     <li>ludeon.rimworld.anomaly</li>
     <li>ASEL.MonolynRace</li>
