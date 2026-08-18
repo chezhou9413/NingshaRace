@@ -10,7 +10,7 @@ using NingshaRaceLib.DesertPit.AntColony.State;
 
 namespace NingshaRaceLib.DesertPit.AntColony.Components
 {
-    //类职责：统一管理当前地图上的全部沙漠巨坑蚁巢、成员、警戒、补员和物资分配。
+    //类职责：统一管理当前地图上的全部洞穴蚁巢、成员、独立规模、警戒、补员和物资分配。
     public partial class MapComponent_DesertPitAntColonies : MapComponent
     {
         private List<AntColonyState> colonies = new List<AntColonyState>();
@@ -66,8 +66,12 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         }
 
         //函数职责：登记生成步骤创建的完整巢群，并向蚁穴和所有成员写入统一编号。
-        public AntColonyState RegisterGeneratedColony(Building_DesertPitAntNest nest, Pawn queen, List<Pawn> members, List<IntVec3> storageCells, Faction faction)
+        public AntColonyState RegisterGeneratedColony(Building_DesertPitAntNest nest, Pawn queen, List<Pawn> members, List<IntVec3> storageCells, Faction faction, AntColonyPopulationSettings population)
         {
+            if (population == null)
+            {
+                throw new System.ArgumentNullException(nameof(population));
+            }
             AntColonyState state = new AntColonyState
             {
                 Id = nextColonyId++,
@@ -77,6 +81,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
                 Queen = queen,
                 Members = new List<Pawn>(members),
                 StorageCells = new List<IntVec3>(storageCells),
+                Population = population,
                 NextBirthTick = Find.TickManager.TicksGame + Settings.reproductionCooldownTicks
             };
 

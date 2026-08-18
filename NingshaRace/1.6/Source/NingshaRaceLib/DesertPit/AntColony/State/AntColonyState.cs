@@ -6,7 +6,7 @@ using NingshaRaceLib.DesertPit.AntColony.Buildings;
 
 namespace NingshaRaceLib.DesertPit.AntColony.State
 {
-    //类职责：保存一个蚁巢在地图上的实体引用、储藏位置、警戒状态和补员计时。
+    //类职责：保存一个蚁巢在地图上的实体引用、有效规模、储藏位置、警戒状态和补员计时。
     public class AntColonyState : IExposable
     {
         public int Id;
@@ -16,6 +16,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.State
         public Pawn Queen;
         public List<Pawn> Members = new List<Pawn>();
         public List<IntVec3> StorageCells = new List<IntVec3>();
+        public AntColonyPopulationSettings Population;
         public bool NestDestroyed;
         public bool Frenzy;
         public int LastNestDamageTick = -1;
@@ -34,6 +35,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.State
             Scribe_References.Look(ref Queen, "queen");
             Scribe_Collections.Look(ref Members, "members", LookMode.Reference);
             Scribe_Collections.Look(ref StorageCells, "storageCells", LookMode.Value);
+            Scribe_Deep.Look(ref Population, "population");
             Scribe_Values.Look(ref NestDestroyed, "nestDestroyed");
             Scribe_Values.Look(ref Frenzy, "frenzy");
             Scribe_Values.Look(ref LastNestDamageTick, "lastNestDamageTick", -1);

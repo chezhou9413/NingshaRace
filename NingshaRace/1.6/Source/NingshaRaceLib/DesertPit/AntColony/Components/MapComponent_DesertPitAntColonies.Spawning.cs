@@ -13,7 +13,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         //函数职责：把指定巢群的存活爆浆蚁补充到独立数量上限。
         private void SpawnBoomAntsToCap(AntColonyState state)
         {
-            int missing = Settings.boomAntCap - CountCaste(state, AntCaste.Boom);
+            int missing = state.Population.BoomAntCap - CountCaste(state, AntCaste.Boom);
             for (int i = 0; i < missing; i++)
             {
                 if (SpawnMember(state, DefOfRefs.NingshaRace_DesertPitBoomAntKind) == null)
@@ -80,21 +80,21 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         private bool TryGetMissingRegularCaste(AntColonyState state, out PawnKindDef kind, out float nutritionCost)
         {
             int regularCount = state.Members.Count - CountCaste(state, AntCaste.Boom);
-            if (regularCount >= Settings.regularAntCap)
+            if (regularCount >= state.Population.RegularAntCap)
             {
                 kind = null;
                 nutritionCost = 0f;
                 return false;
             }
 
-            if (CountCaste(state, AntCaste.Worker) < Settings.workerTarget)
+            if (CountCaste(state, AntCaste.Worker) < state.Population.WorkerTarget)
             {
                 kind = DefOfRefs.NingshaRace_DesertPitWorkerAntKind;
                 nutritionCost = Settings.workerNutritionCost;
                 return true;
             }
 
-            if (CountCaste(state, AntCaste.Soldier) < Settings.soldierTarget)
+            if (CountCaste(state, AntCaste.Soldier) < state.Population.SoldierTarget)
             {
                 kind = DefOfRefs.NingshaRace_DesertPitSoldierAntKind;
                 nutritionCost = Settings.soldierNutritionCost;

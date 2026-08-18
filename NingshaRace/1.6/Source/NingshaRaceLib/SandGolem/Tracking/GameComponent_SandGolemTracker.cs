@@ -114,7 +114,7 @@ namespace NingshaRaceLib.SandGolem.Tracking
         {
             RemoveStateForGolem(golem);
             SandGolemRenderState state = new SandGolemRenderState(caster, golem, textures);
-            state.RebuildMaterials(DefOfRefs.NingshaRace_PawnSandify_ShaderPro.Shader);
+            state.RebuildMaterials();
             states.Add(state);
             SandGolemUtility.LockFacingAndMovement(golem, stopJobs: true);
         }
@@ -192,7 +192,7 @@ namespace NingshaRaceLib.SandGolem.Tracking
             {
                 Texture2D[] textures = SandGolemPawnCapture.CapturePawn(golem);
                 state = new SandGolemRenderState(null, golem, textures);
-                state.RebuildMaterials(DefOfRefs.NingshaRace_PawnSandify_ShaderPro.Shader);
+                state.RebuildMaterials();
                 states.Add(state);
             }
 
@@ -225,7 +225,7 @@ namespace NingshaRaceLib.SandGolem.Tracking
                 }
 
                 Pawn captureSource = state.caster != null && !state.caster.Destroyed ? state.caster : state.golem;
-                state.ReplaceTextures(SandGolemPawnCapture.CapturePawn(captureSource), DefOfRefs.NingshaRace_PawnSandify_ShaderPro.Shader);
+                state.ReplaceTextures(SandGolemPawnCapture.CapturePawn(captureSource));
                 SandGolemUtility.StripNeedsAndRelations(state.golem);
                 SandGolemIdentityCleaner.Clean(state.golem);
                 SandGolemUtility.EnsurePlayerControlComponents(state.golem);
@@ -268,6 +268,20 @@ namespace NingshaRaceLib.SandGolem.Tracking
                     states[i]?.DestroyRuntimeResources();
                     states.RemoveAt(i);
                 }
+            }
+        }
+
+        //函数职责：在当前游戏释放前销毁所有沙傀状态持有的运行时材质和截图纹理。
+        public void ReleaseRuntimeResources()
+        {
+            if (!UnityData.IsInMainThread)
+            {
+                throw new System.InvalidOperationException("沙傀运行时资源只能在游戏主线程清理。");
+            }
+
+            for (int i = 0; i < states.Count; i++)
+            {
+                states[i]?.DestroyRuntimeResources();
             }
         }
 

@@ -1,0 +1,160 @@
+{
+  "schema": "ChezhouLib.ClMapTemplateMetadata",
+  "version": 2,
+  "name": "大厅1",
+  "sourceFile": "大厅1.clmap",
+  "thumbnailFile": "大厅1.preview.png",
+  "binaryBytes": 958,
+  "templateSize": {
+    "width": 11,
+    "height": 11,
+    "cellCount": 121
+  },
+  "coordinateSystem": {
+    "origin": "lowerLeft",
+    "xDirection": "east",
+    "zDirection": "north",
+    "rowOrder": "northToSouth"
+  },
+  "structureFootprint": {
+    "empty": false,
+    "minX": 0,
+    "minZ": 0,
+    "maxX": 10,
+    "maxZ": 10,
+    "width": 11,
+    "height": 11,
+    "occupiedCellCount": 113
+  },
+  "wallDoorLegend": {
+    "0": "empty",
+    "1": "wall",
+    "2": "door"
+  },
+  "wallDoorGrid": [
+    "01111211110",
+    "11000000011",
+    "10000000001",
+    "10000000001",
+    "10000000001",
+    "20000000002",
+    "10000000001",
+    "10000000001",
+    "10000000001",
+    "11000000011",
+    "01111211110"
+  ],
+  "occupancyLegend": {
+    "0": "empty",
+    "1": "artificialFloorOrBuilding"
+  },
+  "occupancyGrid": [
+    "01111111110",
+    "11111111111",
+    "11111111111",
+    "11111011111",
+    "11110111111",
+    "11110111111",
+    "11111111111",
+    "11111111111",
+    "11111111111",
+    "11011111111",
+    "01111111110"
+  ],
+  "walkabilityLegend": {
+    "0": "outsideOrNoArtificialFloor",
+    "1": "walkableFloor",
+    "2": "wall",
+    "3": "door",
+    "4": "otherImpassable"
+  },
+  "walkabilityGrid": [
+    "02222322220",
+    "22111111122",
+    "21111111112",
+    "21144011112",
+    "21144111112",
+    "31110411113",
+    "21111111112",
+    "21111111112",
+    "21111114112",
+    "22011111422",
+    "02222322220"
+  ],
+  "inferredConnectors": [
+    {
+      "type": "Door",
+      "direction": "North",
+      "x": 5,
+      "z": 10,
+      "width": 1,
+      "startX": 5,
+      "startZ": 10,
+      "endX": 5,
+      "endZ": 10
+    },
+    {
+      "type": "Door",
+      "direction": "East",
+      "x": 10,
+      "z": 5,
+      "width": 1,
+      "startX": 10,
+      "startZ": 5,
+      "endX": 10,
+      "endZ": 5
+    },
+    {
+      "type": "Door",
+      "direction": "South",
+      "x": 5,
+      "z": 0,
+      "width": 1,
+      "startX": 5,
+      "startZ": 0,
+      "endX": 5,
+      "endZ": 0
+    },
+    {
+      "type": "Door",
+      "direction": "West",
+      "x": 0,
+      "z": 5,
+      "width": 1,
+      "startX": 0,
+      "startZ": 5,
+      "endX": 0,
+      "endZ": 5
+    }
+  ],
+  "materials": [
+    {
+      "defName": "BlocksGranite",
+      "label": "花岗岩砖",
+      "stuffUnits": 0,
+      "fixedCostUnits": 64,
+      "totalEstimatedUnits": 64
+    },
+    {
+      "defName": "BlocksLimestone",
+      "label": "石灰岩砖",
+      "stuffUnits": 0,
+      "fixedCostUnits": 100,
+      "totalEstimatedUnits": 100
+    },
+    {
+      "defName": "BlocksSandstone",
+      "label": "砂岩砖",
+      "stuffUnits": 280,
+      "fixedCostUnits": 96,
+      "totalEstimatedUnits": 376
+    },
+    {
+      "defName": "BlocksSlate",
+      "label": "板岩砖",
+      "stuffUnits": 60,
+      "fixedCostUnits": 60,
+      "totalEstimatedUnits": 120
+    }
+  ]
+}

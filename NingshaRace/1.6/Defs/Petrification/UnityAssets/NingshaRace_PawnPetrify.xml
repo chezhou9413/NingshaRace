@@ -9,7 +9,7 @@
     <shaderParameters>
       <li>
         <parameterName>_ShadowInfluence</parameterName>
-        <parameterValue>0.988</parameterValue>
+        <parameterValue>0.65</parameterValue>
       </li>
       <li>
         <parameterName>_DetailPreserve</parameterName>
@@ -21,7 +21,7 @@
       </li>
       <li>
         <parameterName>_OriginalTint</parameterName>
-        <parameterValue>0.241</parameterValue>
+        <parameterValue>0</parameterValue>
       </li>
       <li>
         <parameterName>_RevealProgress</parameterName>

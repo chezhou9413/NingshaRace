@@ -245,7 +245,7 @@ namespace NingshaRaceLib.Erosion.Components
             ErosionTransformationUtility.RemoveTransformationHediff(pawn);
             ErosionTransformationUtility.DropFromCarrier(pawn);
             GameComponent_SandGolemTracker.Current?.RecallGolemForCaster(pawn);
-            MutantUtility.SetPawnAsMutantInstantly(pawn, DefOfRefs.NingshaRace_ErosionBodyMutant);
+            ErosionBodySpawnUtility.TurnIntoErosionBody(pawn);
         }
 
         //函数职责：维持原版蹒跚怪起身动画、起身音效和扬尘粒子。

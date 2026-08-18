@@ -1,44 +1,27 @@
-using System;
 using HarmonyLib;
 using Verse;
 
 namespace NingshaRaceLib.DesertPit.Generation.Progress
 {
-    //类职责：在当前场景更新期间临时隐藏尚未初始化完成的巨坑地图，避免原版更新其空绘制分区。
-    [HarmonyPatch(typeof(Game), nameof(Game.UpdatePlay))]
+    //类职责：阻止尚未初始化完成的凝砂口袋地图执行绘制更新，同时保持地图索引和持有物引用有效。
+    [HarmonyPatch(typeof(Map), nameof(Map.MapUpdate))]
     internal static class DesertPitGameUpdatePatches
     {
-        //字段职责：保存当前游戏更新期间临时从地图列表摘出的半成品地图。
-        private static Map detachedGeneratingMap;
-
-        //函数职责：在其他游戏更新逻辑运行前摘出半成品地图，同时保留原地图场景正常刷新。
-        [HarmonyPrefix]
-        [HarmonyPriority(Priority.First)]
-        private static void Prefix()
+        //函数职责：只跳过当前正在生成的半成品地图，其他已初始化地图继续正常更新。
+        private static bool Prefix(Map __instance)
         {
-            Map generatingMap = MapGenerator.mapBeingGenerated;
-            if (!DesertPitGenerationProgress.Active || generatingMap == null || !Current.Game.Maps.Contains(generatingMap))
-            {
-                detachedGeneratingMap = null;
-                return;
-            }
-
-            Current.Game.Maps.Remove(generatingMap);
-            detachedGeneratingMap = generatingMap;
+            return !DesertPitGenerationProgress.Active || __instance != MapGenerator.mapBeingGenerated;
         }
+    }
 
-        //函数职责：无论本帧游戏更新是否异常都恢复生成地图，使下一批生成步骤维持原版地图上下文。
-        [HarmonyFinalizer]
-        [HarmonyPriority(Priority.Last)]
-        private static Exception Finalizer(Exception __exception)
+    //类职责：生成期间暂停全局Pawn纹理图集回收，避免扫描半成品地图中的尸体并减少无效工作。
+    [HarmonyPatch(typeof(GlobalTextureAtlasManager), nameof(GlobalTextureAtlasManager.GlobalTextureAtlasManagerUpdate))]
+    internal static class DesertPitTextureAtlasUpdatePatches
+    {
+        //函数职责：只在凝砂口袋地图生成流程结束后恢复原版纹理图集更新。
+        private static bool Prefix()
         {
-            if (detachedGeneratingMap != null && !Current.Game.Maps.Contains(detachedGeneratingMap))
-            {
-                Current.Game.Maps.Add(detachedGeneratingMap);
-            }
-
-            detachedGeneratingMap = null;
-            return __exception;
+            return !DesertPitGenerationProgress.Active;
         }
     }
 }

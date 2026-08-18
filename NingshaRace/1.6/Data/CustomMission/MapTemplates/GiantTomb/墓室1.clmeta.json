@@ -1,0 +1,122 @@
+{
+  "schema": "ChezhouLib.ClMapTemplateMetadata",
+  "version": 2,
+  "name": "墓室1",
+  "sourceFile": "墓室1.clmap",
+  "thumbnailFile": "墓室1.preview.png",
+  "binaryBytes": 1031,
+  "templateSize": {
+    "width": 9,
+    "height": 7,
+    "cellCount": 63
+  },
+  "coordinateSystem": {
+    "origin": "lowerLeft",
+    "xDirection": "east",
+    "zDirection": "north",
+    "rowOrder": "northToSouth"
+  },
+  "structureFootprint": {
+    "empty": false,
+    "minX": 0,
+    "minZ": 0,
+    "maxX": 8,
+    "maxZ": 6,
+    "width": 9,
+    "height": 7,
+    "occupiedCellCount": 59
+  },
+  "wallDoorLegend": {
+    "0": "empty",
+    "1": "wall",
+    "2": "door"
+  },
+  "wallDoorGrid": [
+    "011111110",
+    "110000011",
+    "100000001",
+    "100000001",
+    "100000001",
+    "110000011",
+    "011121110"
+  ],
+  "occupancyLegend": {
+    "0": "empty",
+    "1": "artificialFloorOrBuilding"
+  },
+  "occupancyGrid": [
+    "011111110",
+    "111111111",
+    "111111111",
+    "111111111",
+    "111111111",
+    "111111111",
+    "011111110"
+  ],
+  "walkabilityLegend": {
+    "0": "outsideOrNoArtificialFloor",
+    "1": "walkableFloor",
+    "2": "wall",
+    "3": "door",
+    "4": "otherImpassable"
+  },
+  "walkabilityGrid": [
+    "022222220",
+    "221111122",
+    "211111112",
+    "211111112",
+    "211111112",
+    "221111122",
+    "022232220"
+  ],
+  "inferredConnectors": [
+    {
+      "type": "Door",
+      "direction": "South",
+      "x": 4,
+      "z": 0,
+      "width": 1,
+      "startX": 4,
+      "startZ": 0,
+      "endX": 4,
+      "endZ": 0
+    }
+  ],
+  "materials": [
+    {
+      "defName": "BlocksGranite",
+      "label": "花岗岩砖",
+      "stuffUnits": 35,
+      "fixedCostUnits": 24,
+      "totalEstimatedUnits": 59
+    },
+    {
+      "defName": "BlocksLimestone",
+      "label": "石灰岩砖",
+      "stuffUnits": 0,
+      "fixedCostUnits": 36,
+      "totalEstimatedUnits": 36
+    },
+    {
+      "defName": "BlocksMarble",
+      "label": "大理石砖",
+      "stuffUnits": 0,
+      "fixedCostUnits": 80,
+      "totalEstimatedUnits": 80
+    },
+    {
+      "defName": "BlocksSandstone",
+      "label": "砂岩砖",
+      "stuffUnits": 125,
+      "fixedCostUnits": 0,
+      "totalEstimatedUnits": 125
+    },
+    {
+      "defName": "BlocksSlate",
+      "label": "板岩砖",
+      "stuffUnits": 160,
+      "fixedCostUnits": 20,
+      "totalEstimatedUnits": 180
+    }
+  ]
+}

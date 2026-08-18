@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
   <!-- 文件职责：定义沙漠巨坑巢群的可攻击蚁穴建筑和可调行为参数。 -->
-  <ThingDef ParentName="BuildingBase">
+  <ThingDef ParentName="BuildingBase" Name="NingshaRace_DesertPitAntNestBase">
     <defName>NingshaRace_DesertPitAntNest</defName>
     <label>洞穴蚁穴</label>
     <description>由压实沙土、唾液和有机残渣构成的大型地下蚁穴，是整个巢群的食物储藏与繁衍核心。</description>
@@ -70,5 +70,21 @@
         <boomExplosionDamage>25</boomExplosionDamage>
       </li>
     </modExtensions>
+  </ThingDef>
+
+  <ThingDef ParentName="NingshaRace_DesertPitAntNestBase">
+    <defName>NingshaRace_GiantTombAntNest</defName>
+    <label>墓穴洞穴蚁穴</label>
+    <description>占据墓葬储藏室的小型洞穴蚁穴，仍维持着完整的采集、储藏、繁殖和防御行为。</description>
+    <size>(3,3)</size>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Building/NingshaRace/DesertPit/AntColony/AntNest</texPath>
+      <drawSize>(4.1,4.1)</drawSize>
+      <shadowData>
+        <volume>(2.8,1.1,2.8)</volume>
+        <offset>(0,0,-0.2)</offset>
+      </shadowData>
+    </graphicData>
   </ThingDef>
 </Defs>

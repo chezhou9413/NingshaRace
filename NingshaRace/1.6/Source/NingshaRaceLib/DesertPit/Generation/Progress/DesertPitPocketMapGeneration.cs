@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using HarmonyLib;
@@ -8,19 +9,23 @@ using RimWorld;
 using RimWorld.Planet;
 using Verse;
 
-using NingshaRaceLib.DesertPit.Buildings;
+using NingshaRaceLib.PocketMaps.Buildings;
+using NingshaRaceLib.PocketMaps.Generation;
+using NingshaRaceLib.GiantTomb.Generation;
 
 namespace NingshaRaceLib.DesertPit.Generation.Progress
 {
-    //类职责：在主线程上分批生成沙漠巨坑口袋地图，并在安全阶段把执行权交还给当前场景窗口。
+    //类职责：在主线程上分批生成凝砂族原版口袋地图，并在安全阶段把执行权交还给当前场景窗口。
     internal static class DesertPitPocketMapGeneration
     {
         //字段职责：保存原版地图生成器清理临时网格与变量的方法入口。
         private static readonly MethodInfo ClearWorkingDataMethod = AccessTools.Method(typeof(MapGenerator), "ClearWorkingData");
 
-        //函数职责：依次完成地图初始化、岩顶铺设、生成步骤和地图收尾，并在阶段间交还一帧。
-        public static IEnumerable Generate(Building_DesertPitGate gate)
+        //函数职责：依次完成入口指定地图的初始化、岩顶铺设、生成步骤和地图收尾，并在阶段间交还一帧。
+        public static IEnumerable Generate(Building_NingshaPocketMapPortal gate)
         {
+            Stopwatch totalTimer = Stopwatch.StartNew();
+            List<string> timings = new List<string>();
             PocketMapParent parent = null;
             Map map = null;
             bool rockNoisesInitialized = false;
@@ -39,26 +44,22 @@ namespace NingshaRaceLib.DesertPit.Generation.Progress
                 int mapSize = gate.def.portal.pocketMapSize;
                 int seed;
                 DesertPitGenerationProgress.Report("准备地图", 0.02f);
+                Stopwatch stageTimer = Stopwatch.StartNew();
                 CreateMap(gate, generator, mapSize, out parent, out map, out seed);
+                timings.Add("建图=" + stageTimer.ElapsedMilliseconds + "ms");
                 mapAddedToGame = Current.Game.Maps.Contains(map);
                 if (!mapAddedToGame)
                 {
-                    throw new InvalidOperationException("沙漠巨坑基础地图未能加入当前游戏。");
+                    throw new InvalidOperationException(gate.LabelCap + "基础地图未能加入当前游戏。");
                 }
                 yield return null;
 
-                int roofedCells = 0;
-                int totalCells = map.cellIndices.NumGridCells;
-                foreach (IntVec3 cell in map.AllCells)
-                {
-                    map.roofGrid.SetRoof(cell, generator.roofDef ?? RoofDefOf.RoofRockThick);
-                    roofedCells++;
-                    if (roofedCells % 1536 == 0)
-                    {
-                        DesertPitGenerationProgress.Report("铺设岩顶", 0.02f + 0.06f * roofedCells / totalCells);
-                        yield return null;
-                    }
-                }
+                stageTimer.Restart();
+                DesertPitGenerationProgress.Report("铺设岩顶", 0.04f);
+                PocketMapInitialGridUtility.FillUniformRoof(map, generator.roofDef ?? RoofDefOf.RoofRockThick);
+                timings.Add("岩顶=" + stageTimer.ElapsedMilliseconds + "ms");
+                DesertPitGenerationProgress.SetProgress(0.08f);
+                yield return null;
 
                 map.areaManager.AddStartingAreas();
                 map.weatherDecider.StartInitialWeather();
@@ -66,36 +67,59 @@ namespace NingshaRaceLib.DesertPit.Generation.Progress
                 RockNoises.Init(map);
                 rockNoisesInitialized = true;
 
-                for (int i = 0; i < genSteps.Count; i++)
+                GiantTombBulkMapUpdateScope giantTombBulkScope = generator.defName == "NingshaRace_GiantTombMap"
+                    ? new GiantTombBulkMapUpdateScope(map)
+                    : null;
+                try
                 {
-                    float startProgress = 0.08f + 0.78f * i / genSteps.Count;
-                    float endProgress = 0.08f + 0.78f * (i + 1) / genSteps.Count;
-                    DesertPitGenerationProgress.SetStepRange(startProgress, endProgress);
-                    DesertPitGenerationProgress.SetProgress(startProgress);
-                    foreach (object unused in RunGenStep(genSteps, i, map, seed))
+                    for (int i = 0; i < genSteps.Count; i++)
                     {
+                        float startProgress = 0.08f + 0.78f * i / genSteps.Count;
+                        float endProgress = 0.08f + 0.78f * (i + 1) / genSteps.Count;
+                        DesertPitGenerationProgress.SetStepRange(startProgress, endProgress);
+                        DesertPitGenerationProgress.SetProgress(startProgress);
+                        stageTimer.Restart();
+                        foreach (object unused in RunGenStep(genSteps, i, map, seed, giantTombBulkScope != null))
+                        {
+                            yield return null;
+                        }
+                        timings.Add(genSteps[i].def.defName + "=" + stageTimer.ElapsedMilliseconds + "ms");
+                        DesertPitGenerationProgress.SetProgress(endProgress);
                         yield return null;
                     }
-
-                    DesertPitGenerationProgress.SetProgress(endProgress);
-                    yield return null;
+                }
+                finally
+                {
+                    if (giantTombBulkScope != null)
+                    {
+                        stageTimer.Restart();
+                        giantTombBulkScope.Dispose();
+                        timings.Add("提交路径区域=" + stageTimer.ElapsedMilliseconds + "ms");
+                    }
                 }
 
                 DesertPitGenerationProgress.Report("初始化地图", 0.9f);
+                stageTimer.Restart();
                 Find.Scenario.PostMapGenerate(map);
                 map.FinalizeInit();
                 mapFinalized = true;
+                timings.Add("FinalizeInit=" + stageTimer.ElapsedMilliseconds + "ms");
                 yield return null;
 
                 DesertPitGenerationProgress.Report("整理地图组件", 0.95f);
+                stageTimer.Restart();
                 MapComponentUtility.MapGenerated(map);
                 parent.PostMapGenerate();
                 MapGenerator.MapGeneratorPostInit(genSteps, map);
                 Find.World.pocketMaps.Add(parent);
                 gate.AssignPocketMap(map);
+                timings.Add("地图组件=" + stageTimer.ElapsedMilliseconds + "ms");
                 completed = true;
 
                 DesertPitGenerationProgress.Report("生成完成", 1f);
+                totalTimer.Stop();
+                Log.Message("[NingshaRace] " + gate.LabelCap + "生成用时 " + totalTimer.ElapsedMilliseconds
+                    + "ms；" + string.Join("，", timings));
                 yield return null;
             }
             finally
@@ -117,7 +141,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Progress
         }
 
         //函数职责：创建口袋地图父对象与基础地图组件，并取得与原版一致的地图种子。
-        private static void CreateMap(Building_DesertPitGate gate, MapGeneratorDef generator, int mapSize, out PocketMapParent parent, out Map map, out int seed)
+        private static void CreateMap(Building_NingshaPocketMapPortal gate, MapGeneratorDef generator, int mapSize, out PocketMapParent parent, out Map map, out int seed)
         {
             parent = (PocketMapParent)WorldObjectMaker.MakeWorldObject(WorldObjectDefOf.PocketMap);
             parent.sourceMap = gate.Map;
@@ -199,11 +223,11 @@ namespace NingshaRaceLib.DesertPit.Generation.Progress
         }
 
         //函数职责：使用原版种子规则执行单个生成步骤，并保证随机状态不会跨越画面帧。
-        private static IEnumerable RunGenStep(List<GenStepWithParams> genSteps, int index, Map map, int seed)
+        private static IEnumerable RunGenStep(List<GenStepWithParams> genSteps, int index, Map map, int seed, bool allowBulkMapUpdates)
         {
             GenStepWithParams step = genSteps[index];
             int stepSeed = Gen.HashCombineInt(seed, GetSeedPart(genSteps, index));
-            IDesertPitIncrementalGenStep incrementalStep = step.def.genStep as IDesertPitIncrementalGenStep;
+            INingshaIncrementalGenStep incrementalStep = step.def.genStep as INingshaIncrementalGenStep;
             if (incrementalStep == null)
             {
                 Rand.PushState(stepSeed);
@@ -234,10 +258,10 @@ namespace NingshaRaceLib.DesertPit.Generation.Progress
                 }
             }
 
-            if (map.pathing.IncrementalDirtyingDisabled)
+            if (!allowBulkMapUpdates && map.pathing.IncrementalDirtyingDisabled)
             {
                 map.pathing.ReEnableIncrementalDirtying();
-                throw new InvalidOperationException("沙漠巨坑生成步骤结束后仍禁用了增量寻路更新：" + step.def.defName);
+                throw new InvalidOperationException("凝砂口袋地图生成步骤结束后仍禁用了增量寻路更新：" + step.def.defName);
             }
         }
 
@@ -280,11 +304,13 @@ namespace NingshaRaceLib.DesertPit.Generation.Progress
             ClearWorkingDataMethod.Invoke(null, null);
         }
 
-        //函数职责：移除失败地图中的运行对象，并只对已完成绘制器初始化的地图执行完整释放。
+        //函数职责：先安排清空持有失败地图Pawn的运行时图集，再移除失败地图及其运行对象。
         private static void CleanupFailedMap(Map map, bool mapAddedToGame, bool mapFinalized)
         {
             if (mapAddedToGame)
             {
+                //原版图集更新会先执行重建释放，再扫描Pawn，确保地图索引失效后不会访问旧条目。
+                GlobalTextureAtlasManager.rebakeAtlas = true;
                 if (mapFinalized)
                 {
                     Current.Game.DeinitAndRemoveMap(map, notifyPlayer: false);

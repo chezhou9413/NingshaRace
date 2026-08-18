@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：按十九种巨型墓葬模板配置敌人结果、资源抽取次数和数量权重。 -->
+  <NingshaRaceLib.GiantTomb.Content.Config.NingshaGiantTombRoomContentDef>
+    <defName>NingshaRace_GiantTombContent_Chambers</defName>
+    <label>墓室内容</label>
+    <rooms>
+      <li>
+        <template>NingshaRace_GiantTomb_Chamber01</template>
+        <enemyOutcomes>
+          <li><weight>50</weight><spawns><li><pawnKind>NingshaRace_GiantTombMummyKind</pawnKind><count>2</count><factionDef>Entities</factionDef></li></spawns></li>
+          <li><weight>33</weight><spawns><li><pawnKind>NingshaRace_GiantTombMummyKind</pawnKind><count>3</count><factionDef>Entities</factionDef></li></spawns></li>
+          <li><weight>25</weight><spawns /></li>
+          <li><weight>2</weight><spawns><li><pawnKind>NingshaRace_Colonist</pawnKind><count>5</count><factionDef>Entities</factionDef><mutantDef>NingshaRace_ErosionBodyMutant</mutantDef></li></spawns></li>
+        </enemyOutcomes>
+      </li>
+      <li>
+        <template>NingshaRace_GiantTomb_Chamber02</template>
+        <enemyOutcomes>
+          <li><weight>50</weight><spawns /></li>
+          <li><weight>33</weight><spawns><li><pawnKind>NingshaRace_GiantTombMummyKind</pawnKind><count>1</count><factionDef>Entities</factionDef></li></spawns></li>
+          <li><weight>25</weight><spawns><li><pawnKind>Cobra</pawnKind><count>2</count><factionDef>Entities</factionDef></li></spawns></li>
+          <li><weight>2</weight><spawns><li><pawnKind>NingshaRace_Colonist</pawnKind><count>3</count><factionDef>Entities</factionDef><mutantDef>NingshaRace_ErosionBodyMutant</mutantDef></li></spawns></li>
+        </enemyOutcomes>
+      </li>
+      <li>
+        <template>NingshaRace_GiantTomb_Chamber03</template>
+        <enemyOutcomes>
+          <li><weight>50</weight><spawns><li><pawnKind>NingshaRace_GiantTombMummyKind</pawnKind><count>4</count><factionDef>Entities</factionDef></li></spawns></li>
+          <li><weight>33</weight><spawns /></li>
+          <li><weight>25</weight><spawns><li><pawnKind>Cobra</pawnKind><count>2</count><factionDef>Entities</factionDef></li></spawns></li>
+          <li><weight>2</weight><spawns><li><pawnKind>NingshaRace_Colonist</pawnKind><count>3</count><factionDef>Entities</factionDef><mutantDef>NingshaRace_ErosionBodyMutant</mutantDef></li></spawns></li>
+        </enemyOutcomes>
+      </li>
+      <li>
+        <template>NingshaRace_GiantTomb_Chamber04</template>
+        <enemyOutcomes>
+          <li><weight>50</weight><spawns><li><pawnKind>NingshaRace_GiantTombMummyKind</pawnKind><count>3</count><factionDef>Entities</factionDef></li></spawns></li>
+          <li><weight>33</weight><spawns><li><pawnKind>NingshaRace_GiantTombMummyKind</pawnKind><count>1</count><factionDef>Entities</factionDef></li></spawns></li>
+          <li><weight>25</weight><spawns /></li>
+          <li><weight>2</weight><spawns><li><pawnKind>NingshaRace_Colonist</pawnKind><count>3</count><factionDef>Entities</factionDef><mutantDef>NingshaRace_ErosionBodyMutant</mutantDef></li></spawns></li>
+        </enemyOutcomes>
+      </li>
+      <li>
+        <template>NingshaRace_GiantTomb_Chamber05</template>
+        <enemyOutcomes>
+          <li><weight>50</weight><spawns><li><pawnKind>NingshaRace_Colonist</pawnKind><count>1</count><factionDef>Entities</factionDef><mutantDef>NingshaRace_ErosionBodyMutant</mutantDef></li></spawns></li>
+          <li><weight>33</weight><spawns /></li>
+          <li><weight>25</weight><spawns><li><pawnKind>NingshaRace_GiantTombMummyKind</pawnKind><count>3</count><factionDef>Entities</factionDef></li></spawns></li>
+          <li><weight>2</weight><spawns><li><pawnKind>NingshaRace_Colonist</pawnKind><count>5</count><factionDef>Entities</factionDef><mutantDef>NingshaRace_ErosionBodyMutant</mutantDef></li></spawns></li>
+        </enemyOutcomes>
+      </li>
+    </rooms>
+    <rewardPickCount>3</rewardPickCount>
+    <rewardWithReplacement>false</rewardWithReplacement>
+    <rewards>
+      <li><thingDef>Gold</thingDef><quantities><li><count>30</count><weight>50</weight></li><li><count>50</count><weight>35</weight></li><li><count>100</count><weight>25</weight></li></quantities></li>
+      <li><thingDef>Silver</thingDef><quantities><li><count>100</count><weight>50</weight></li><li><count>300</count><weight>35</weight></li><li><count>200</count><weight>25</weight></li></quantities></li>
+      <li><thingDef>Jade</thingDef><quantities><li><count>50</count><weight>50</weight></li><li><count>30</count><weight>35</weight></li><li><count>80</count><weight>25</weight></li></quantities></li>
+      <li><thingDef>Steel</thingDef><quantities><li><count>200</count><weight>50</weight></li><li><count>400</count><weight>35</weight></li><li><count>300</count><weight>25</weight></li></quantities></li>
+      <li><thingDef>Beer</thingDef><quantities><li><count>20</count><weight>50</weight></li><li><count>30</count><weight>35</weight></li><li><count>50</count><weight>25</weight></li></quantities></li>
+      <li><thingDef>SmokeleafJoint</thingDef><quantities><li><count>5</count><weight>50</weight></li><li><count>10</count><weight>35</weight></li><li><count>15</count><weight>25</weight></li></quantities></li>
+      <li><thingDef>MedicineHerbal</thingDef><quantities><li><count>10</count><weight>50</weight></li><li><count>30</count><weight>35</weight></li><li><count>20</count><weight>25</weight></li></quantities></li>
+      <li><thingDef>NingshaRace_SandBottle</thingDef><quantities><li><count>1</count><weight>50</weight></li><li><count>2</count><weight>35</weight></li><li><count>1</count><weight>25</weight></li></quantities></li>
+      <li><thingDef>NingshaRace_FlyingNeedle</thingDef><quantities><li><count>1</count><weight>50</weight></li><li><count>3</count><weight>35</weight></li><li><count>1</count><weight>25</weight></li></quantities></li>
+    </rewards>
+  </NingshaRaceLib.GiantTomb.Content.Config.NingshaGiantTombRoomContentDef>
+
+  <NingshaRaceLib.GiantTomb.Content.Config.NingshaGiantTombRoomContentDef>
+    <defName>NingshaRace_GiantTombContent_GrandChambers</defName>
+    <label>大墓室内容</label>
+    <rooms>
+      <li>
+        <template>NingshaRace_GiantTomb_GrandChamber01</template>
+        <enemyOutcomes>
+          <li><weight>50</weight><spawns><li><pawnKind>NingshaRace_GiantTombMummyKind</pawnKind><count>2</count><factionDef>Entities</factionDef></li></spawns></li>
+          <li><weight>33</weight><spawns><li><pawnKind>NingshaRace_GiantTombMummyKind</pawnKind><count>3</count><factionDef>Entities</factionDef></li><li><pawnKind>NingshaRace_Colonist</pawnKind><count>1</count><factionDef>Entities</factionDef><mutantDef>NingshaRace_ErosionBodyMutant</mutantDef></li></spawns></li>
+          <li><weight>25</weight><spawns><li><pawnKind>NingshaRace_GiantTombMummyKind</pawnKind><count>3</count><factionDef>Entities</factionDef></li><li><pawnKind>Cobra</pawnKind><count>2</count><factionDef>Entities</factionDef></li></spawns></li>
+          <li><weight>2</weight><spawns><li><pawnKind>NingshaRace_Colonist</pawnKind><count>6</count><factionDef>Entities</factionDef><mutantDef>NingshaRace_ErosionBodyMutant</mutantDef></li></spawns></li>
+        </enemyOutcomes>
+      </li>
+      <li>
+        <template>NingshaRace_GiantTomb_GrandChamber02</template>
+        <enemyOutcomes>
+          <li><weight>50</weight><spawns><li><pawnKind>NingshaRace_GiantTombMummyKind</pawnKind><count>4</count><factionDef>Entities</factionDef></li></spawns></li>
+          <li><weight>33</weight><spawns><li><pawnKind>NingshaRace_GiantTombMummyKind</pawnKind><count>3</count><factionDef>Entities</factionDef></li><li><pawnKind>NingshaRace_Colonist</pawnKind><count>2</count><factionDef>Entities</factionDef><mutantDef>NingshaRace_ErosionBodyMutant</mutantDef></li></spawns></li>
+          <li><weight>25</weight><spawns><li><pawnKind>NingshaRace_GiantTombMummyKind</pawnKind><count>5</count><factionDef>Entities</factionDef></li><li><pawnKind>NingshaRace_Colonist</pawnKind><count>3</count><factionDef>Entities</factionDef><mutantDef>NingshaRace_ErosionBodyMutant</mutantDef></li></spawns></li>
+          <li><weight>2</weight><spawns><li><pawnKind>NingshaRace_Colonist</pawnKind><count>8</count><factionDef>Entities</factionDef><mutantDef>NingshaRace_ErosionBodyMutant</mutantDef></li></spawns></li>
+        </enemyOutcomes>
+      </li>
+      <li>
+        <template>NingshaRace_GiantTomb_GrandChamber03</template>
+        <enemyOutcomes>
+          <li><weight>50</weight><spawns><li><pawnKind>NingshaRace_GiantTombMummyKind</pawnKind><count>3</count><factionDef>Entities</factionDef></li></spawns></li>
+          <li><weight>33</weight><spawns><li><pawnKind>NingshaRace_GiantTombMummyKind</pawnKind><count>3</count><factionDef>Entities</factionDef></li><li><pawnKind>NingshaRace_Colonist</pawnKind><count>1</count><factionDef>Entities</factionDef><mutantDef>NingshaRace_ErosionBodyMutant</mutantDef></li></spawns></li>
+          <li><weight>25</weight><spawns><li><pawnKind>NingshaRace_GiantTombMummyKind</pawnKind><count>5</count><factionDef>Entities</factionDef></li><li><pawnKind>NingshaRace_Colonist</pawnKind><count>1</count><factionDef>Entities</factionDef><mutantDef>NingshaRace_ErosionBodyMutant</mutantDef></li></spawns></li>
+          <li><weight>2</weight><spawns><li><pawnKind>NingshaRace_Colonist</pawnKind><count>6</count><factionDef>Entities</factionDef><mutantDef>NingshaRace_ErosionBodyMutant</mutantDef></li></spawns></li>
+        </enemyOutcomes>
+      </li>
+      <li>
+        <template>NingshaRace_GiantTomb_GrandChamber04</template>
+        <enemyOutcomes>
+          <li><weight>50</weight><spawns><li><pawnKind>NingshaRace_GiantTombMummyKind</pawnKind><count>3</count><factionDef>Entities</factionDef></li></spawns></li>
+          <li><weight>33</weight><spawns><li><pawnKind>NingshaRace_GiantTombMummyKind</pawnKind><count>3</count><factionDef>Entities</factionDef></li><li><pawnKind>NingshaRace_Colonist</pawnKind><count>1</count><factionDef>Entities</factionDef><mutantDef>NingshaRace_ErosionBodyMutant</mutantDef></li></spawns></li>
+          <li><weight>25</weight><spawns><li><pawnKind>NingshaRace_GiantTombMummyKind</pawnKind><count>3</count><factionDef>Entities</factionDef></li><li><pawnKind>NingshaRace_Colonist</pawnKind><count>2</count><factionDef>Entities</factionDef><mutantDef>NingshaRace_ErosionBodyMutant</mutantDef></li></spawns></li>
+          <li><weight>2</weight><spawns><li><pawnKind>NingshaRace_Colonist</pawnKind><count>6</count><factionDef>Entities</factionDef><mutantDef>NingshaRace_ErosionBodyMutant</mutantDef></li></spawns></li>
+        </enemyOutcomes>
+      </li>
+    </rooms>
+    <rewardPickCount>5</rewardPickCount>
+    <rewardWithReplacement>false</rewardWithReplacement>
+    <rewards>
+      <li><thingDef>Gold</thingDef><quantities><li><count>50</count><weight>50</weight></li><li><count>100</count><weight>33</weight></li><li><count>160</count><weight>25</weight></li><li><count>400</count><weight>2</weight></li></quantities></li>
+      <li><thingDef>Silver</thingDef><quantities><li><count>300</count><weight>50</weight></li><li><count>500</count><weight>33</weight></li><li><count>800</count><weight>25</weight></li><li><count>1000</count><weight>2</weight></li></quantities></li>
+      <li><thingDef>Jade</thingDef><quantities><li><count>50</count><weight>50</weight></li><li><count>80</count><weight>33</weight></li><li><count>120</count><weight>25</weight></li><li><count>300</count><weight>2</weight></li></quantities></li>
+      <li><thingDef>Steel</thingDef><quantities><li><count>200</count><weight>50</weight></li><li><count>400</count><weight>33</weight></li><li><count>300</count><weight>25</weight></li><li><count>1200</count><weight>2</weight></li></quantities></li>
+      <li><thingDef>Beer</thingDef><quantities><li><count>30</count><weight>50</weight></li><li><count>50</count><weight>33</weight></li><li><count>120</count><weight>25</weight></li><li><count>270</count><weight>2</weight></li></quantities></li>
+      <li><thingDef>SmokeleafJoint</thingDef><quantities><li><count>15</count><weight>50</weight></li><li><count>30</count><weight>33</weight></li><li><count>50</count><weight>25</weight></li><li><count>100</count><weight>2</weight></li></quantities></li>
+      <li><thingDef>MedicineHerbal</thingDef><quantities><li><count>30</count><weight>50</weight></li><li><count>50</count><weight>33</weight></li><li><count>80</count><weight>25</weight></li><li><count>120</count><weight>2</weight></li></quantities></li>
+      <li><thingDef>Bioferrite</thingDef><quantities><li><count>20</count><weight>50</weight></li><li><count>50</count><weight>33</weight></li><li><count>30</count><weight>25</weight></li><li><count>240</count><weight>2</weight></li></quantities></li>
+      <li><thingDef>Leather_Thrumbo</thingDef><quantities><li><count>50</count><weight>50</weight></li><li><count>120</count><weight>33</weight></li><li><count>180</count><weight>25</weight></li><li><count>300</count><weight>2</weight></li></quantities></li>
+      <li><thingDef>NingshaRace_BurialMountainGreatsword</thingDef><quantities><li><count>1</count><weight>50</weight></li><li><count>2</count><weight>33</weight></li><li><count>1</count><weight>25</weight></li><li><count>3</count><weight>2</weight></li></quantities></li>
+      <li><thingDef>NingshaRace_SnakeBellySword</thingDef><quantities><li><count>1</count><weight>50</weight></li><li><count>2</count><weight>33</weight></li><li><count>1</count><weight>25</weight></li><li><count>3</count><weight>2</weight></li></quantities></li>
+      <li><thingDef>NingshaRace_GroundSpikeSummoner</thingDef><quantities><li><count>1</count><weight>50</weight></li><li><count>2</count><weight>33</weight></li><li><count>1</count><weight>25</weight></li><li><count>3</count><weight>2</weight></li></quantities></li>
+    </rewards>
+  </NingshaRaceLib.GiantTomb.Content.Config.NingshaGiantTombRoomContentDef>
+
+  <NingshaRaceLib.GiantTomb.Content.Config.NingshaGiantTombRoomContentDef>
+    <defName>NingshaRace_GiantTombContent_Hall</defName>
+    <label>大厅内容</label>
+    <rooms>
+      <li>
+        <template>NingshaRace_GiantTomb_Hall01</template>
+        <enemyOutcomes>
+          <li><weight>50</weight><spawns /></li>
+          <li><weight>33</weight><spawns /></li>
+          <li><weight>25</weight><spawns><li><pawnKind>NingshaRace_GiantTombMummyKind</pawnKind><count>1</count><factionDef>Entities</factionDef></li></spawns></li>
+          <li><weight>2</weight><spawns><li><pawnKind>NingshaRace_Colonist</pawnKind><count>2</count><factionDef>Entities</factionDef><mutantDef>NingshaRace_ErosionBodyMutant</mutantDef></li></spawns></li>
+        </enemyOutcomes>
+      </li>
+    </rooms>
+    <rewardPickCount>5</rewardPickCount>
+    <rewardWithReplacement>true</rewardWithReplacement>
+    <rewards>
+      <li><localStoneBlocks>true</localStoneBlocks><quantities><li><count>50</count><weight>50</weight></li><li><count>120</count><weight>33</weight></li><li><count>150</count><weight>25</weight></li><li><count>225</count><weight>2</weight></li></quantities></li>
+      <li><thingDef>Gold</thingDef><quantities><li><count>10</count><weight>50</weight></li><li><count>20</count><weight>33</weight></li><li><count>30</count><weight>25</weight></li><li><count>50</count><weight>2</weight></li></quantities></li>
+      <li><thingDef>Silver</thingDef><quantities><li><count>50</count><weight>50</weight></li><li><count>100</count><weight>33</weight></li><li><count>200</count><weight>25</weight></li><li><count>300</count><weight>2</weight></li></quantities></li>
+    </rewards>
+  </NingshaRaceLib.GiantTomb.Content.Config.NingshaGiantTombRoomContentDef>
+
+  <NingshaRaceLib.GiantTomb.Content.Config.NingshaGiantTombRoomContentDef>
+    <defName>NingshaRace_GiantTombContent_Storages</defName>
+    <label>储藏室内容</label>
+    <rooms>
+      <li>
+        <template>NingshaRace_GiantTomb_Storage01</template>
+        <enemyOutcomes>
+          <li><weight>50</weight><spawns><li><pawnKind>NingshaRace_GiantTombMummyKind</pawnKind><count>1</count><factionDef>Entities</factionDef></li></spawns></li>
+          <li><weight>33</weight><spawns><li><pawnKind>Cobra</pawnKind><count>2</count><factionDef>Entities</factionDef></li></spawns></li>
+          <li><weight>25</weight><spawns /></li>
+          <li><weight>2</weight><spawns><li><pawnKind>NingshaRace_Colonist</pawnKind><count>5</count><factionDef>Entities</factionDef><mutantDef>NingshaRace_ErosionBodyMutant</mutantDef></li></spawns></li>
+        </enemyOutcomes>
+      </li>
+      <li>
+        <template>NingshaRace_GiantTomb_Storage02</template>
+        <enemyOutcomes>
+          <li><weight>50</weight><spawns><li><pawnKind>NingshaRace_GiantTombMummyKind</pawnKind><count>2</count><factionDef>Entities</factionDef></li></spawns></li>
+          <li><weight>33</weight><spawns /></li>
+          <li><weight>25</weight><spawns><li><antNestDef>NingshaRace_GiantTombAntNest</antNestDef><count>1</count><scale>1</scale></li></spawns></li>
+          <li><weight>2</weight><spawns><li><pawnKind>NingshaRace_Colonist</pawnKind><count>5</count><factionDef>Entities</factionDef><mutantDef>NingshaRace_ErosionBodyMutant</mutantDef></li></spawns></li>
+        </enemyOutcomes>
+      </li>
+      <li>
+        <template>NingshaRace_GiantTomb_PotRoom</template>
+        <enemyOutcomes>
+          <li><weight>50</weight><spawns><li><pawnKind>Cobra</pawnKind><count>1</count><factionDef>Entities</factionDef></li></spawns></li>
+          <li><weight>33</weight><spawns><li><pawnKind>Cobra</pawnKind><count>3</count><factionDef>Entities</factionDef></li></spawns></li>
+          <li><weight>25</weight><spawns /></li>
+          <li><weight>2</weight><spawns><li><pawnKind>NingshaRace_Colonist</pawnKind><count>5</count><factionDef>Entities</factionDef><mutantDef>NingshaRace_ErosionBodyMutant</mutantDef></li></spawns></li>
+        </enemyOutcomes>
+      </li>
+    </rooms>
+    <rewardPickCount>3</rewardPickCount>
+    <rewardWithReplacement>false</rewardWithReplacement>
+    <rewards>
+      <li><localStoneBlocks>true</localStoneBlocks><quantities><li><count>75</count><weight>50</weight></li><li><count>150</count><weight>33</weight></li><li><count>225</count><weight>25</weight></li><li><count>300</count><weight>2</weight></li></quantities></li>
+      <li><thingDef>Pemmican</thingDef><quantities><li><count>30</count><weight>50</weight></li><li><count>50</count><weight>33</weight></li><li><count>75</count><weight>25</weight></li><li><count>240</count><weight>2</weight></li></quantities></li>
+      <li><thingDef>WoodLog</thingDef><quantities><li><count>75</count><weight>50</weight></li><li><count>100</count><weight>33</weight></li><li><count>150</count><weight>25</weight></li><li><count>300</count><weight>2</weight></li></quantities></li>
+      <li><thingDef>Beer</thingDef><quantities><li><count>10</count><weight>50</weight></li><li><count>30</count><weight>33</weight></li><li><count>50</count><weight>25</weight></li><li><count>120</count><weight>2</weight></li></quantities></li>
+      <li><thingDef>MedicineHerbal</thingDef><quantities><li><count>20</count><weight>50</weight></li><li><count>30</count><weight>33</weight></li><li><count>50</count><weight>25</weight></li><li><count>180</count><weight>2</weight></li></quantities></li>
+      <li><thingDef>Leather_Light</thingDef><quantities><li><count>75</count><weight>50</weight></li><li><count>180</count><weight>33</weight></li><li><count>240</count><weight>25</weight></li><li><count>500</count><weight>2</weight></li></quantities></li>
+    </rewards>
+  </NingshaRaceLib.GiantTomb.Content.Config.NingshaGiantTombRoomContentDef>
+
+  <NingshaRaceLib.GiantTomb.Content.Config.NingshaGiantTombRoomContentDef>
+    <defName>NingshaRace_GiantTombContent_Corridors</defName>
+    <label>走廊内容</label>
+    <rooms>
+      <li>
+        <template>NingshaRace_GiantTomb_OpenTurn</template>
+        <enemyOutcomes>
+          <li><weight>50</weight><spawns><li><pawnKind>NingshaRace_GiantTombMummyKind</pawnKind><count>2</count><factionDef>Entities</factionDef></li></spawns></li>
+          <li><weight>33</weight><spawns><li><pawnKind>Cobra</pawnKind><count>2</count><factionDef>Entities</factionDef></li></spawns></li>
+          <li><weight>25</weight><spawns /></li>
+          <li><weight>2</weight><spawns><li><pawnKind>NingshaRace_Colonist</pawnKind><count>1</count><factionDef>Entities</factionDef><mutantDef>NingshaRace_ErosionBodyMutant</mutantDef></li></spawns></li>
+        </enemyOutcomes>
+      </li>
+      <li>
+        <template>NingshaRace_GiantTomb_StraightCorridor</template>
+        <enemyOutcomes>
+          <li><weight>50</weight><spawns /></li>
+          <li><weight>33</weight><spawns /></li>
+          <li><weight>25</weight><spawns><li><pawnKind>NingshaRace_GiantTombMummyKind</pawnKind><count>1</count><factionDef>Entities</factionDef></li></spawns></li>
+          <li><weight>2</weight><spawns><li><pawnKind>NingshaRace_Colonist</pawnKind><count>1</count><factionDef>Entities</factionDef><mutantDef>NingshaRace_ErosionBodyMutant</mutantDef></li></spawns></li>
+        </enemyOutcomes>
+      </li>
+      <li>
+        <template>NingshaRace_GiantTomb_CorridorTurn</template>
+        <enemyOutcomes>
+          <li><weight>50</weight><spawns><li><pawnKind>NingshaRace_GiantTombMummyKind</pawnKind><count>1</count><factionDef>Entities</factionDef></li></spawns></li>
+          <li><weight>33</weight><spawns /></li>
+          <li><weight>25</weight><spawns /></li>
+          <li><weight>2</weight><spawns><li><pawnKind>NingshaRace_Colonist</pawnKind><count>1</count><factionDef>Entities</factionDef><mutantDef>NingshaRace_ErosionBodyMutant</mutantDef></li></spawns></li>
+        </enemyOutcomes>
+      </li>
+      <li>
+        <template>NingshaRace_GiantTomb_WideTurn</template>
+        <enemyOutcomes>
+          <li><weight>50</weight><spawns><li><pawnKind>NingshaRace_GiantTombMummyKind</pawnKind><count>2</count><factionDef>Entities</factionDef></li></spawns></li>
+          <li><weight>33</weight><spawns /></li>
+          <li><weight>25</weight><spawns /></li>
+          <li><weight>2</weight><spawns><li><pawnKind>NingshaRace_Colonist</pawnKind><count>2</count><factionDef>Entities</factionDef><mutantDef>NingshaRace_ErosionBodyMutant</mutantDef></li></spawns></li>
+        </enemyOutcomes>
+      </li>
+      <li>
+        <template>NingshaRace_GiantTomb_EntranceCorridor</template>
+        <enemyOutcomes>
+          <li><weight>1</weight><spawns /></li>
+        </enemyOutcomes>
+      </li>
+      <li>
+        <template>NingshaRace_GiantTomb_Crossroads</template>
+        <enemyOutcomes>
+          <li><weight>50</weight><spawns><li><pawnKind>NingshaRace_GiantTombMummyKind</pawnKind><count>3</count><factionDef>Entities</factionDef></li></spawns></li>
+          <li><weight>33</weight><spawns /></li>
+          <li><weight>25</weight><spawns><li><pawnKind>NingshaRace_GiantTombMummyKind</pawnKind><count>2</count><factionDef>Entities</factionDef></li><li><pawnKind>NingshaRace_Colonist</pawnKind><count>1</count><factionDef>Entities</factionDef><mutantDef>NingshaRace_ErosionBodyMutant</mutantDef></li></spawns></li>
+          <li><weight>2</weight><spawns><li><pawnKind>NingshaRace_Colonist</pawnKind><count>5</count><factionDef>Entities</factionDef><mutantDef>NingshaRace_ErosionBodyMutant</mutantDef></li></spawns></li>
+        </enemyOutcomes>
+      </li>
+    </rooms>
+    <rewardPickCount>1</rewardPickCount>
+    <rewardWithReplacement>false</rewardWithReplacement>
+    <rewards>
+      <li><localStoneBlocks>true</localStoneBlocks><quantities><li><count>30</count><weight>50</weight></li><li><count>75</count><weight>35</weight></li><li><count>150</count><weight>25</weight></li></quantities></li>
+      <li><thingDef>WoodLog</thingDef><quantities><li><count>30</count><weight>50</weight></li><li><count>75</count><weight>35</weight></li><li><count>120</count><weight>25</weight></li></quantities></li>
+      <li><thingDef>Steel</thingDef><quantities><li><count>10</count><weight>50</weight></li><li><count>50</count><weight>35</weight></li><li><count>75</count><weight>25</weight></li></quantities></li>
+      <li><thingDef>Silver</thingDef><quantities><li><count>10</count><weight>50</weight></li><li><count>50</count><weight>35</weight></li><li><count>100</count><weight>25</weight></li></quantities></li>
+      <li><thingDef>Leather_Light</thingDef><quantities><li><count>40</count><weight>50</weight></li><li><count>75</count><weight>35</weight></li><li><count>100</count><weight>25</weight></li></quantities></li>
+    </rewards>
+  </NingshaRaceLib.GiantTomb.Content.Config.NingshaGiantTombRoomContentDef>
+
+  <NingshaRaceLib.GiantTomb.Content.Config.NingshaGiantTombContentCatalogDef>
+    <defName>NingshaRace_GiantTombContentCatalog</defName>
+    <layoutDef>NingshaRace_GiantTombLayout</layoutDef>
+    <roomContents>
+      <li>NingshaRace_GiantTombContent_Chambers</li>
+      <li>NingshaRace_GiantTombContent_GrandChambers</li>
+      <li>NingshaRace_GiantTombContent_Hall</li>
+      <li>NingshaRace_GiantTombContent_Storages</li>
+      <li>NingshaRace_GiantTombContent_Corridors</li>
+    </roomContents>
+  </NingshaRaceLib.GiantTomb.Content.Config.NingshaGiantTombContentCatalogDef>
+</Defs>

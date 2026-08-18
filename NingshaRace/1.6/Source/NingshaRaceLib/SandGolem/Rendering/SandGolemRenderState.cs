@@ -1,3 +1,6 @@
+using System;
+using ChezhouLib.LibDef;
+using ChezhouLib.ObjectPool;
 using UnityEngine;
 using Verse;
 
@@ -98,34 +101,60 @@ namespace NingshaRaceLib.SandGolem.Rendering
             return LocksFacingAndMovement() ? Rot4.South : facing;
         }
 
-        //函数职责：根据当前截图纹理在主线程创建四方向材质。
-        public void RebuildMaterials(Shader shader)
+        //函数职责：根据当前截图纹理从 ChezhouLib 模板创建本状态独占的四方向材质。
+        public void RebuildMaterials()
         {
+            if (!UnityData.IsInMainThread)
+            {
+                throw new InvalidOperationException("沙傀运行时材质只能在游戏主线程创建。");
+            }
+
+            DestroyMaterials();
             materials = new Material[Rot4.RotationCount];
             if (textures == null)
             {
                 return;
             }
 
-            Shader resolvedShader = shader ?? ShaderDatabase.Cutout;
+            ClShaderPro shaderPro = DefOfRefs.NingshaRace_PawnSandify_ShaderPro as ClShaderPro;
+            Material template = shaderPro?.ClShaderMaterial == null
+                ? null
+                : ClMaterialPool.GetByDefName(shaderPro.ClShaderMaterial.defName);
+            if (template == null)
+            {
+                throw new InvalidOperationException("无法取得 NingshaRace_PawnSandify_Material 模板材质。");
+            }
+
             foreach (Rot4 rotation in Rot4.AllRotations)
             {
                 Texture2D texture = TextureFor(rotation);
-                materials[rotation.AsInt] = MaterialPool.MatFrom(texture, resolvedShader, Color.white, 3000);
+                materials[rotation.AsInt] = new Material(template)
+                {
+                    name = "NingshaRace_SandGolem_" + rotation,
+                    mainTexture = texture,
+                    color = Color.white,
+                    renderQueue = 3000
+                };
             }
         }
 
         //函数职责：替换运行时截图纹理，并释放旧截图占用的 Unity 资源。
-        public void ReplaceTextures(Texture2D[] newTextures, Shader shader)
+        public void ReplaceTextures(Texture2D[] newTextures)
         {
             DestroyRuntimeResources();
             textures = newTextures;
-            RebuildMaterials(shader);
+            RebuildMaterials();
         }
 
-        //函数职责：释放沙傀截图纹理，材质由 MaterialPool 管理只清引用。
+        //函数职责：释放沙傀状态独占的材质和截图纹理。
         public void DestroyRuntimeResources()
         {
+            if (!UnityData.IsInMainThread)
+            {
+                throw new InvalidOperationException("沙傀运行时资源只能在游戏主线程清理。");
+            }
+
+            DestroyMaterials();
             if (textures != null)
             {
                 for (int i = 0; i < textures.Length; i++)
@@ -133,12 +162,30 @@ namespace NingshaRaceLib.SandGolem.Rendering
                     Texture2D texture = textures[i];
                     if (texture != null && texture != BaseContent.WhiteTex)
                     {
-                        Object.Destroy(texture);
+                        UnityEngine.Object.Destroy(texture);
                     }
                 }
             }
 
             textures = null;
+        }
+
+        //函数职责：销毁当前状态独占的四方向材质并清空引用。
+        private void DestroyMaterials()
+        {
+            if (materials == null)
+            {
+                return;
+            }
+
+            for (int i = 0; i < materials.Length; i++)
+            {
+                Material material = materials[i];
+                if (material != null)
+                {
+                    UnityEngine.Object.Destroy(material);
+                }
+            }
             materials = null;
         }
 
