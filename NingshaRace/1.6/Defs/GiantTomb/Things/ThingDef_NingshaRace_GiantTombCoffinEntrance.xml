@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义沙漠巨坑内可调查的破损石棺及调查后开启的巨型墓葬入口。 -->
+  <ThingDef ParentName="NingshaRace_DesertPitSarcophagusBase">
+    <defName>NingshaRace_GiantTombBrokenCoffin</defName>
+    <label>破损砂岩石棺</label>
+    <description>一具被塌方挤裂的古老砂岩石棺。棺体下方传来异常空旷的回声，附近的沙土也带有被反复扰动的痕迹。</description>
+    <thingClass>NingshaRaceLib.GiantTomb.Discovery.Buildings.Building_GiantTombBrokenCoffin</thingClass>
+    <tickerType>Normal</tickerType>
+    <graphicData>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <texPath>Things/Building/NingshaRace/DesertPit/Relics/NingshaRace_SarcophagusClosed</texPath>
+      <drawSize>(3,3)</drawSize>
+      <shadowData>
+        <volume>(2.5,0.55,1.6)</volume>
+      </shadowData>
+    </graphicData>
+    <comps>
+      <li Class="NingshaRaceLib.GiantTomb.Discovery.Components.CompProperties_GiantTombCoffinProximity">
+        <radius>8</radius>
+        <letterLabel>发现破损石棺</letterLabel>
+        <letterText>一名殖民者注意到，这具破损砂岩石棺下方传来了远超棺体大小的空旷回声。右键命令殖民者调查它，或许能找到隐藏在岩层中的通路。</letterText>
+        <letterDef>NeutralEvent</letterDef>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="NingshaRace_DesertPitSarcophagusBase">
+    <defName>NingshaRace_GiantTombCoffinEntrance</defName>
+    <label>开启的墓葬石棺</label>
+    <description>破裂棺底已经被移开，露出一道向砂岩深处延伸的狭窄阶梯。阶梯尽头连接着规模庞大的古代墓葬群。</description>
+    <thingClass>NingshaRaceLib.GiantTomb.Discovery.Buildings.Building_GiantTombCoffinEntrance</thingClass>
+    <tickerType>Normal</tickerType>
+    <inspectorTabs>
+      <li>ITab_ContentsMapPortal</li>
+    </inspectorTabs>
+    <graphicData>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <texPath>Things/Building/NingshaRace/DesertPit/Relics/NingshaRace_SarcophagusOpen</texPath>
+      <drawSize>(3,3)</drawSize>
+      <shadowData>
+        <volume>(2.5,0.55,1.6)</volume>
+      </shadowData>
+    </graphicData>
+    <portal>
+      <pocketMapGenerator>NingshaRace_GiantTombMap</pocketMapGenerator>
+      <exitDef>CaveExit</exitDef>
+      <pocketMapSize>200</pocketMapSize>
+      <enteredLetterLabel>凝砂巨型墓葬</enteredLetterLabel>
+      <enteredLetterText>砂岩深处展开了一片规模惊人的古代墓葬群。封闭墓室、仪式大厅与狭长通道在厚岩顶下向黑暗深处延伸。</enteredLetterText>
+      <enteredLetterDef>NeutralEvent</enteredLetterDef>
+      <traverseSound>TraversePitGate</traverseSound>
+    </portal>
+  </ThingDef>
+</Defs>

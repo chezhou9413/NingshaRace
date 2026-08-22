@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义殖民者调查破损石棺并揭示巨型墓葬入口的工作。 -->
+  <JobDef>
+    <defName>NingshaRace_Job_InvestigateGiantTombCoffin</defName>
+    <driverClass>NingshaRaceLib.GiantTomb.Discovery.Jobs.JobDriver_InvestigateGiantTombCoffin</driverClass>
+    <reportString>正在调查 TargetA。</reportString>
+    <casualInterruptible>true</casualInterruptible>
+    <playerInterruptible>true</playerInterruptible>
+  </JobDef>
+</Defs>

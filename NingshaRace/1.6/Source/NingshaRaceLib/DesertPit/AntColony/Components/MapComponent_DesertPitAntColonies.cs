@@ -13,15 +13,31 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
     //类职责：统一管理当前地图上的全部洞穴蚁巢、成员、独立规模、警戒、补员和物资分配。
     public partial class MapComponent_DesertPitAntColonies : MapComponent
     {
+        //字段职责：保存当前地图全部仍有效或尚有成员的巢群状态。
         private List<AntColonyState> colonies = new List<AntColonyState>();
+
+        //字段职责：记录下一次注册巢群时分配的唯一编号。
         private int nextColonyId = 1;
+
+        //字段职责：按巢群编号缓存运行时状态查询。
         private Dictionary<int, AntColonyState> coloniesById = new Dictionary<int, AntColonyState>();
+
+        //字段职责：按成员 Pawn 缓存其所属巢群。
         private Dictionary<Pawn, AntColonyState> coloniesByPawn = new Dictionary<Pawn, AntColonyState>();
+
+        //字段职责：按蚁穴建筑缓存其所属巢群。
         private Dictionary<Building_DesertPitAntNest, AntColonyState> coloniesByNest = new Dictionary<Building_DesertPitAntNest, AntColonyState>();
+
+        //字段职责：缓存全图可供工蚁采集的实体物资。
         private List<Thing> forageCandidates = new List<Thing>();
+
+        //字段职责：记录已经分配给工蚁的采集物，避免多只工蚁重复争抢。
         private Dictionary<Thing, Pawn> assignedForageThings = new Dictionary<Thing, Pawn>();
+
+        //字段职责：记录已经分配给搬运工作的实体储藏格。
         private Dictionary<IntVec3, Pawn> assignedStorageCells = new Dictionary<IntVec3, Pawn>();
 
+        //属性职责：统一读取蚁穴 Def 上的行为、等级、撤退与调查配置。
         private DefModExtension_AntColony Settings => DefOfRefs.NingshaRace_DesertPitAntNest.GetModExtension<DefModExtension_AntColony>();
 
         //构造函数职责：把蚁群管理组件绑定到指定地图。
@@ -66,7 +82,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         }
 
         //函数职责：登记生成步骤创建的完整巢群，并向蚁穴和所有成员写入统一编号。
-        public AntColonyState RegisterGeneratedColony(Building_DesertPitAntNest nest, Pawn queen, List<Pawn> members, List<IntVec3> storageCells, Faction faction, AntColonyPopulationSettings population)
+        public AntColonyState RegisterGeneratedColony(Building_DesertPitAntNest nest, Pawn queen, List<Pawn> members, List<IntVec3> storageCells, Faction faction, AntColonyPopulationSettings population, bool levelingEnabled, int currentLevel, int maximumLevel)
         {
             if (population == null)
             {
@@ -82,6 +98,10 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
                 Members = new List<Pawn>(members),
                 StorageCells = new List<IntVec3>(storageCells),
                 Population = population,
+                LevelingEnabled = levelingEnabled,
+                CurrentLevel = currentLevel,
+                MaxLevel = maximumLevel,
+                NextRepairTick = Find.TickManager.TicksGame + Settings.repairIntervalTicks,
                 NextBirthTick = Find.TickManager.TicksGame + Settings.reproductionCooldownTicks
             };
 
@@ -128,6 +148,12 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
                 return;
             }
 
+            Comp_DesertPitAntMember memberComp = pawn.TryGetComp<Comp_DesertPitAntMember>();
+            if (pawn.Dead && memberComp != null)
+            {
+                RecordRegularAntDeath(state, pawn, memberComp.Caste);
+            }
+
             state.Members.Remove(pawn);
             coloniesByPawn.Remove(pawn);
             if (state.Queen == pawn)
@@ -164,6 +190,8 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             state.Nest = nest;
             state.NestPosition = nest.Position;
             state.LastNestDamageTick = ticks;
+            state.NextRepairTick = System.Math.Max(state.NextRepairTick, ticks + Settings.repairDelayAfterDamageTicks);
+            CancelInvestigation(state);
             if (aggressor != null && !aggressor.Dead)
             {
                 state.LastAggressor = aggressor;
@@ -191,6 +219,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             state.NestPosition = nest.Position;
             state.NestDestroyed = true;
             state.Frenzy = true;
+            CancelInvestigation(state);
             SpawnBoomAntsToCap(state);
         }
 

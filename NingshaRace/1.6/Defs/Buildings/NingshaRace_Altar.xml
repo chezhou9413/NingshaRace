@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- Def 职责：定义可直接建造和搬运的凝砂族蛇形装饰祭坛。 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>NingshaRace_Altar</defName>
+    <label>凝砂族祭坛</label>
+    <description>以砂岩雕成的蛇形祭坛。盘绕的蛇身象征凝砂族对血脉、沙海与轮回的敬畏。</description>
+    <category>Building</category>
+    <graphicData>
+      <texPath>NingshaRace/Buildings/NingshaRaceAltar</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Cutout</shaderType>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <size>(1,1)</size>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.35</fillPercent>
+    <rotatable>false</rotatable>
+    <selectable>true</selectable>
+    <designationCategory>Misc</designationCategory>
+    <uiOrder>2090</uiOrder>
+    <costList>
+      <BlocksSandstone>50</BlocksSandstone>
+    </costList>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>3000</WorkToBuild>
+      <Beauty>10</Beauty>
+      <Flammability>0</Flammability>
+      <Mass>12</Mass>
+    </statBases>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <filthLeaving>Filth_RubbleBuilding</filthLeaving>
+    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsMisc</li>
+    </thingCategories>
+  </ThingDef>
+</Defs>

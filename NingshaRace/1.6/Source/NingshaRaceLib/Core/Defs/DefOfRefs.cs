@@ -11,6 +11,9 @@ namespace NingshaRaceLib.Core.Defs
         //字段职责：凝砂族主种族 ThingDef。
         public static ThingDef NingshaRace;
 
+        //字段职责：提高异常事件出现比例的索提斯叙事者定义。
+        public static StorytellerDef Ningsha_SotisiStoryteller;
+
         //字段职责：用于生成成年凝砂族殖民者的 PawnKindDef。
         public static PawnKindDef NingshaRace_Colonist;
 
@@ -154,6 +157,39 @@ namespace NingshaRaceLib.Core.Defs
 
         //字段职责：可进入沙漠巨坑口袋地图的地表入口建筑。
         public static ThingDef NingshaRace_DesertPitGate;
+
+        //字段职责：沙漠巨坑地下用于返回地表和双向货运的专用离洞绳。
+        public static ThingDef NingshaRace_DesertPitCaveExit;
+
+        //字段职责：沙漠巨坑内周期性生成化合燃料的天然油砂渗洞。
+        public static ThingDef NingshaRace_DesertPitOilSeep;
+
+        //字段职责：沙漠巨坑内等待玩家调查并揭示巨型墓葬入口的破损砂岩石棺。
+        public static ThingDef NingshaRace_GiantTombBrokenCoffin;
+
+        //字段职责：破损石棺调查完成后使用的巨型墓葬口袋地图入口。
+        public static ThingDef NingshaRace_GiantTombCoffinEntrance;
+
+        //字段职责：殖民者右键调查破损石棺并揭示墓葬入口时使用的工作。
+        public static JobDef NingshaRace_Job_InvestigateGiantTombCoffin;
+
+        //字段职责：可播种并收获生菌的蓝灰洞杯菌。
+        public static ThingDef NingshaRace_DesertPitPlantA;
+
+        //字段职责：可播种并收获生菌的浅青伞菇。
+        public static ThingDef NingshaRace_DesertPitPlantC;
+
+        //字段职责：可播种并收获草药的紫辉花簇菌。
+        public static ThingDef NingshaRace_DesertPitPlantD;
+
+        //字段职责：高级矿脉可能生成的原版压缩塑钢。
+        public static ThingDef MineablePlasteel;
+
+        //字段职责：高级矿脉可能生成的原版铀矿石。
+        public static ThingDef MineableUranium;
+
+        //字段职责：高级矿脉可能生成的原版黄金矿石。
+        public static ThingDef MineableGold;
 
         //字段职责：沙漠巨坑地下沙岩洞穴使用的口袋地图生成器。
         public static MapGeneratorDef NingshaRace_DesertPitMap;

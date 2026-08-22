@@ -4,8 +4,8 @@
   <XenotypeDef>
     <defName>NingshaRace_Xenotype</defName>
     <label>凝砂族</label>
-    <description>凝砂族是适应沙漠与黑夜的蛇裔异种人。她们拥有坚硬鳞片、敏锐热感知和可传播石化砂质的毒牙，却因冷血生理和退化的精细手工能力而受到限制。</description>
-    <descriptionShort>适应沙漠与黑夜，拥有鳞片、热感知和石化毒牙的可遗传异种人。</descriptionShort>
+    <description>凝砂族是适应沙漠、黑夜与地下洞穴的蛇裔异种人。她们拥有坚硬鳞片、敏锐热感知和可传播石化砂质的毒牙，却因冷血生理和退化的精细手工能力而受到限制。</description>
+    <descriptionShort>适应沙漠、黑夜与洞穴，拥有鳞片、热感知和石化毒牙的可遗传异种人。</descriptionShort>
     <iconPath>UI/Icons/Xenotypes/NingshaRace</iconPath>
     <inheritable>true</inheritable>
     <factionlessGenerationWeight>0</factionlessGenerationWeight>
@@ -13,6 +13,7 @@
       <li>NingshaRace_VenomFangs</li>
       <li>NingshaRace_ScaledSkin</li>
       <li>NingshaRace_DesertAdaptation</li>
+      <li>NingshaRace_CaveAdaptation</li>
       <li>NingshaRace_ColdBlooded</li>
       <li>NingshaRace_HeatSense</li>
       <li>NingshaRace_ErosionTolerance</li>

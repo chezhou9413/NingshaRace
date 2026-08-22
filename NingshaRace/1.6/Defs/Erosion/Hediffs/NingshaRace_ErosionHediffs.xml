@@ -63,6 +63,8 @@
     </stages>
     <comps>
       <li Class="HediffCompProperties_AttachPoints" />
+      <!-- 组件职责：为任务生成的侵蚀体保存跨存档的优先追杀目标。 -->
+      <li Class="NingshaRaceLib.Erosion.Health.Components.HediffCompProperties_ErosionPursuitTarget" />
     </comps>
   </HediffDef>
 </Defs>

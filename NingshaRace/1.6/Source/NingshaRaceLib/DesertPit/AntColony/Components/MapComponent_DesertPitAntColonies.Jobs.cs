@@ -22,6 +22,11 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
 
             Comp_DesertPitAntMember memberComp = pawn.TryGetComp<Comp_DesertPitAntMember>();
             AntCaste caste = memberComp.Caste;
+            if (IsRetreating(state, Find.TickManager.TicksGame))
+            {
+                return TryCreateRetreatJob(pawn, state, caste);
+            }
+
             Thing intruder = FindNearestIntruder(pawn, state);
 
             if (caste == AntCaste.Boom)

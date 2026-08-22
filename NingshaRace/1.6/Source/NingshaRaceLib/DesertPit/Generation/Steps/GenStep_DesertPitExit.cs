@@ -24,7 +24,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
             IntVec3 exitCell = FindExitCell(map, data);
             DesertPitGenUtility.ClearSafeArea(map, exitCell, 4.5f);
 
-            PocketMapExit exit = GenSpawn.Spawn(ThingMaker.MakeThing(ThingDefOf.CaveExit), exitCell, map) as PocketMapExit;
+            PocketMapExit exit = GenSpawn.Spawn(ThingMaker.MakeThing(DefOfRefs.NingshaRace_DesertPitCaveExit), exitCell, map) as PocketMapExit;
             MapPortal portal = PocketMapUtility.currentlyGeneratingPortal;
             if (portal != null)
             {

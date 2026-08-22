@@ -16,8 +16,13 @@ namespace NingshaRaceLib.DesertPit.AntColony.Generation
     //类职责：选择自然洞室位置并生成一个完整蚁穴、实体储藏、初始成员和储备物资场景。
     public static class DesertPitAntSceneUtility
     {
+        //字段职责：规定蚁巢场景与主入口之间的最小距离。
         private const float EntranceSafeRadius = 25f;
+
+        //字段职责：规定两个独立蚁巢中心之间的最小距离。
         private const float ColonySpacing = 28f;
+
+        //字段职责：规定场景生成和物品禁止标记使用的蚁巢保护半径。
         private const float SceneReserveRadius = 10f;
 
         //函数职责：寻找一个符合洞穴与间距规则的位置，并生成完整巢群场景。
@@ -146,7 +151,10 @@ namespace NingshaRaceLib.DesertPit.AntColony.Generation
         private static void GenerateScene(Map map, DesertPitLayoutData data, ThingDef nestDef, IntVec3 center, int colonyIndex)
         {
             DefModExtension_AntColony settings = nestDef.GetModExtension<DefModExtension_AntColony>();
-            AntColonyPopulationSettings population = AntColonyPopulationSettings.Create(settings, 1f);
+            int currentLevel = Rand.RangeInclusive(settings.initialLevelMin, settings.initialLevelMax);
+            int maximumLevel = Rand.RangeInclusive(settings.maximumLevelMin, settings.maximumLevelMax);
+            currentLevel = Mathf.Min(currentLevel, maximumLevel);
+            AntColonyPopulationSettings population = AntColonyPopulationSettings.CreateForLevel(settings, currentLevel);
             MapComponent_DesertPitAntColonies manager = map.GetComponent<MapComponent_DesertPitAntColonies>();
             Faction faction = manager.GetColonyFaction(colonyIndex);
             CellRect occupied = GenAdj.OccupiedRect(center, Rot4.North, nestDef.size);
@@ -173,7 +181,30 @@ namespace NingshaRaceLib.DesertPit.AntColony.Generation
             }
 
             SpawnInitialStock(map, storageCells);
-            manager.RegisterGeneratedColony(nest, queen, members, storageCells, faction, population);
+            manager.RegisterGeneratedColony(nest, queen, members, storageCells, faction, population, true, currentLevel, maximumLevel);
+            ForbidSceneHaulables(map, center);
+        }
+
+        //函数职责：将蚁巢十格场景内全部可搬运物品标记为玩家禁止，包含初始物资与既有岩块。
+        private static void ForbidSceneHaulables(Map map, IntVec3 center)
+        {
+            foreach (IntVec3 cell in GenRadial.RadialCellsAround(center, SceneReserveRadius, true))
+            {
+                if (!cell.InBounds(map))
+                {
+                    continue;
+                }
+
+                List<Thing> things = cell.GetThingList(map);
+                for (int i = 0; i < things.Count; i++)
+                {
+                    Thing thing = things[i];
+                    if (thing.def.EverHaulable)
+                    {
+                        thing.SetForbidden(true, false);
+                    }
+                }
+            }
         }
 
         //函数职责：把巢穴周围场景半径登记为后续生成步骤不可占用的保留区域。

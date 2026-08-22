@@ -31,6 +31,7 @@
       <expandHomeArea>false</expandHomeArea>
     </building>
     <comps>
+      <li Class="NingshaRaceLib.PocketMaps.Cargo.CompProperties_NingshaPortalCargo" />
       <li Class="CompProperties_LeaveFilthOnDestroyed">
         <filthDef>Filth_LooseGround</filthDef>
         <thickness>5</thickness>
@@ -47,7 +48,7 @@
     </graphicData>
     <portal>
       <pocketMapGenerator>NingshaRace_DesertPitMap</pocketMapGenerator>
-      <exitDef>CaveExit</exitDef>
+      <exitDef>NingshaRace_DesertPitCaveExit</exitDef>
       <pocketMapSize>140</pocketMapSize>
       <enteredLetterLabel>沙漠地下洞室</enteredLetterLabel>
       <enteredLetterText>坑底通向一片被沙岩包围的地下洞室。风化的砂砾、塌落的石柱和狭窄支洞在黑暗中延伸。</enteredLetterText>
@@ -58,5 +59,15 @@
       <SellPriceFactor>0.7</SellPriceFactor>
       <Flammability>0</Flammability>
     </statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="CaveExit">
+    <defName>NingshaRace_DesertPitCaveExit</defName>
+    <label>离洞绳</label>
+    <description>一根连接沙漠巨坑地表与地下洞室的坚固绳索，也可供殖民者双向搬运物资。</description>
+    <thingClass>NingshaRaceLib.DesertPit.Buildings.Building_NingshaCaveExit</thingClass>
+    <comps>
+      <li Class="NingshaRaceLib.PocketMaps.Cargo.CompProperties_NingshaPortalCargo" />
+    </comps>
   </ThingDef>
 </Defs>

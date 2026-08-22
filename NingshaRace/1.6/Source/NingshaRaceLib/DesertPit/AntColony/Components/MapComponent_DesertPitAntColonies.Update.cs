@@ -19,7 +19,11 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             {
                 AntColonyState state = colonies[i];
                 PruneInvalidMembers(state);
+                PruneDeathRecords(state, ticks);
                 RefreshIntruders(state);
+                TryRepairNest(state, ticks);
+                TryUpgradeColony(state, ticks);
+                TryDispatchInvestigation(state, ticks);
 
                 if (IsFullAlarm(state, ticks) && ticks >= state.NextBoomWaveTick)
                 {

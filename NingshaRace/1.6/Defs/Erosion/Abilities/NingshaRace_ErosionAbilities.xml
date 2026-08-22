@@ -7,7 +7,7 @@
     <defName>NingshaRace_Ability_ErosionOverload</defName>
     <label>侵蚀过载</label>
     <description>主动接纳深层侵蚀，增加20点侵蚀值，并立即清除凝砂之眼与召唤沙傀的全部冷却。侵蚀达到上限时会永久转化为侵蚀体。</description>
-    <iconPath>UI/Icons/Genes/NingshaRace/ErosionTolerance</iconPath>
+    <iconPath>UI/Abilities/ErosionOverload</iconPath>
     <targetRequired>false</targetRequired>
     <displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
     <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>

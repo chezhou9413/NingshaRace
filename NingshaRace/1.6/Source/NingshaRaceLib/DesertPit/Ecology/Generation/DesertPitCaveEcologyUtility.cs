@@ -15,7 +15,7 @@ namespace NingshaRaceLib.DesertPit.Ecology.Generation
         //函数职责：验证格子是否适合作为原版虫巢中心，并执行入口、蚁穴与生成保留区避让。
         public static bool CanPlaceHiveAt(Map map, DesertPitLayoutData data, DefModExtension_DesertPitFauna settings, IntVec3 cell)
         {
-            if (!IsClearNaturalCaveCell(map, cell) || cell.DistanceTo(data.MainCenter) < settings.entranceAvoidRadius || NearThingDef(map, cell, ThingDefOf.CaveExit, settings.entranceAvoidRadius))
+            if (!IsClearNaturalCaveCell(map, cell) || cell.DistanceTo(data.MainCenter) < settings.entranceAvoidRadius || NearThingDef(map, cell, DefOfRefs.NingshaRace_DesertPitCaveExit, settings.entranceAvoidRadius))
             {
                 return false;
             }
@@ -31,7 +31,7 @@ namespace NingshaRaceLib.DesertPit.Ecology.Generation
         //函数职责：验证格子是否适合生成一只野生动物，并避开入口、全部保留场景和现有实体。
         public static bool CanPlaceAnimalAt(Map map, DesertPitLayoutData data, DefModExtension_DesertPitFauna settings, IntVec3 cell)
         {
-            if (!IsClearNaturalCaveCell(map, cell) || cell.DistanceTo(data.MainCenter) < settings.animalEntranceAvoidRadius || NearThingDef(map, cell, ThingDefOf.CaveExit, settings.animalEntranceAvoidRadius))
+            if (!IsClearNaturalCaveCell(map, cell) || cell.DistanceTo(data.MainCenter) < settings.animalEntranceAvoidRadius || NearThingDef(map, cell, DefOfRefs.NingshaRace_DesertPitCaveExit, settings.animalEntranceAvoidRadius))
             {
                 return false;
             }

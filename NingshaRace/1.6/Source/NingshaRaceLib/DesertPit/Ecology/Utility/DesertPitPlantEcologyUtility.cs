@@ -103,7 +103,7 @@ namespace NingshaRaceLib.DesertPit.Ecology.Utility
                 return false;
             }
 
-            if (NearThingDef(map, cell, ThingDefOf.CaveExit, ExitSafeRadius) || NearThingDef(map, cell, DefOfRefs.NingshaRace_DesertPitAntNest, AntNestSafeRadius))
+            if (NearThingDef(map, cell, DefOfRefs.NingshaRace_DesertPitCaveExit, ExitSafeRadius) || NearThingDef(map, cell, DefOfRefs.NingshaRace_DesertPitAntNest, AntNestSafeRadius))
             {
                 return false;
             }

@@ -23,6 +23,9 @@
           <treeDef>MentalStateCritical</treeDef>
         </li>
         <li Class="ThinkNode_QueuedJob" />
+        <li Class="ThinkNode_Subtree">
+          <treeDef>LordDuty</treeDef>
+        </li>
         <li Class="NingshaRaceLib.DesertPit.AntColony.AI.JobGiver_DesertPitAntColony" />
         <li Class="JobGiver_IdleError" />
       </subNodes>
@@ -35,6 +38,13 @@
       <subNodes>
         <li Class="ThinkNode_Subtree">
           <treeDef>Despawned</treeDef>
+        </li>
+        <li Class="ThinkNode_ConditionalCanDoLordJobNow">
+          <subNodes>
+            <li Class="ThinkNode_Subtree">
+              <treeDef>LordDutyConstant</treeDef>
+            </li>
+          </subNodes>
         </li>
       </subNodes>
     </thinkRoot>

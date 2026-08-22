@@ -26,6 +26,12 @@
   </GenStepDef>
 
   <GenStepDef>
+    <defName>NingshaRace_DesertPitMineralVeins</defName>
+    <order>459</order>
+    <genStep Class="NingshaRaceLib.DesertPit.Generation.Resources.GenStep_DesertPitMineralVeins" />
+  </GenStepDef>
+
+  <GenStepDef>
     <defName>NingshaRace_DesertPitGlow</defName>
     <order>450</order>
     <genStep Class="NingshaRaceLib.DesertPit.Generation.Steps.GenStep_DesertPitGlow" />
@@ -47,6 +53,18 @@
     <defName>NingshaRace_DesertPitHydrology</defName>
     <order>453</order>
     <genStep Class="NingshaRaceLib.DesertPit.Generation.Steps.GenStep_DesertPitHydrology" />
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>NingshaRace_DesertPitEnergySites</defName>
+    <order>453.25</order>
+    <genStep Class="NingshaRaceLib.DesertPit.Generation.Resources.GenStep_DesertPitEnergySites" />
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>NingshaRace_GiantTombCoffinEntrance</defName>
+    <order>453.35</order>
+    <genStep Class="NingshaRaceLib.GiantTomb.Discovery.Generation.GenStep_GiantTombCoffinEntrance" />
   </GenStepDef>
 
   <GenStepDef>

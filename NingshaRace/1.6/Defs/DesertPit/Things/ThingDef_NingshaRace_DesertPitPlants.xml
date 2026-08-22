@@ -31,6 +31,25 @@
     <defName>NingshaRace_DesertPitPlantA</defName>
     <label>蓝灰洞杯菌</label>
     <description>一种扎根在沙岩裂隙中的蓝灰色杯状真菌，杯缘会散出微弱冷光。</description>
+    <plant>
+      <fertilityMin>0.1</fertilityMin>
+      <fertilitySensitivity>0.1</fertilitySensitivity>
+      <growDays>6</growDays>
+      <growMinGlow>0</growMinGlow>
+      <growOptimalGlow>0</growOptimalGlow>
+      <soundHarvesting>Harvest_Standard</soundHarvesting>
+      <soundHarvestFinish>Harvest_Standard_Finish</soundHarvestFinish>
+      <sowWork>220</sowWork>
+      <harvestWork>220</harvestWork>
+      <harvestTag>Standard</harvestTag>
+      <harvestedThingDef>RawFungus</harvestedThingDef>
+      <harvestYield>8</harvestYield>
+      <sowTags>
+        <li>Ground</li>
+      </sowTags>
+      <purpose>Food</purpose>
+      <humanFoodPlant>true</humanFoodPlant>
+    </plant>
     <graphicData>
       <texPath>Things/Plant/NingshaRace/DesertPit/DesertPitPlant01</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -65,6 +84,25 @@
     <defName>NingshaRace_DesertPitPlantC</defName>
     <label>浅青伞菇</label>
     <description>细长的伞状洞菇在无光处生长，菌盖下方透出浅青色微光。</description>
+    <plant>
+      <fertilityMin>0.1</fertilityMin>
+      <fertilitySensitivity>0.1</fertilitySensitivity>
+      <growDays>6</growDays>
+      <growMinGlow>0</growMinGlow>
+      <growOptimalGlow>0</growOptimalGlow>
+      <soundHarvesting>Harvest_Standard</soundHarvesting>
+      <soundHarvestFinish>Harvest_Standard_Finish</soundHarvestFinish>
+      <sowWork>220</sowWork>
+      <harvestWork>220</harvestWork>
+      <harvestTag>Standard</harvestTag>
+      <harvestedThingDef>RawFungus</harvestedThingDef>
+      <harvestYield>8</harvestYield>
+      <sowTags>
+        <li>Ground</li>
+      </sowTags>
+      <purpose>Food</purpose>
+      <humanFoodPlant>true</humanFoodPlant>
+    </plant>
     <graphicData>
       <texPath>Things/Plant/NingshaRace/DesertPit/DesertPitPlant03</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -82,6 +120,25 @@
     <defName>NingshaRace_DesertPitPlantD</defName>
     <label>紫辉花簇菌</label>
     <description>盘状菌体上长出细小花簇，蓝紫色光点像被封在沙晶中的星屑。</description>
+    <plant>
+      <fertilityMin>0.1</fertilityMin>
+      <fertilitySensitivity>0.1</fertilitySensitivity>
+      <growDays>9</growDays>
+      <growMinGlow>0</growMinGlow>
+      <growOptimalGlow>0</growOptimalGlow>
+      <soundHarvesting>Harvest_Standard</soundHarvesting>
+      <soundHarvestFinish>Harvest_Standard_Finish</soundHarvestFinish>
+      <sowWork>700</sowWork>
+      <harvestWork>400</harvestWork>
+      <harvestTag>Standard</harvestTag>
+      <harvestedThingDef>MedicineHerbal</harvestedThingDef>
+      <harvestYield>1</harvestYield>
+      <sowMinSkill>6</sowMinSkill>
+      <sowTags>
+        <li>Ground</li>
+      </sowTags>
+      <purpose>Health</purpose>
+    </plant>
     <graphicData>
       <texPath>Things/Plant/NingshaRace/DesertPit/DesertPitPlant04</texPath>
       <graphicClass>Graphic_Single</graphicClass>

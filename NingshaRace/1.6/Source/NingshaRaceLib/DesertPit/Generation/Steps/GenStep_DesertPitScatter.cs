@@ -11,13 +11,13 @@ using NingshaRaceLib.DesertPit.Generation.Utility;
 
 namespace NingshaRaceLib.DesertPit.Generation.Steps
 {
-    //类职责：在沙漠巨坑小洞室、洞壁过渡带和塌方区域散布矿物、沙岩块和岩屑。
+    //类职责：在沙漠巨坑小洞室、洞壁过渡带和塌方区域散布沙岩块和岩屑。
     public class GenStep_DesertPitScatter : GenStep
     {
         //属性职责：提供当前生成步骤的稳定随机种子片段。
         public override int SeedPart => 914027334;
 
-        //函数职责：围绕小洞室生成资源点，并在洞穴边缘生成岩屑和松散沙岩块。
+        //函数职责：围绕小洞室生成岩块，并在洞穴边缘生成岩屑和松散沙岩块。
         public override void Generate(Map map, GenStepParams parms)
         {
             DesertPitGenUtility.SetGenerationStatus("岩屑矿脉");
@@ -26,10 +26,6 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
             foreach (IntVec3 room in data.SmallRooms)
             {
                 ScatterChunks(map, room, sandstoneChunk);
-                if (Rand.Chance(0.35f))
-                {
-                    ScatterMineables(map, room);
-                }
             }
 
             ScatterRubbleFields(map, data);
@@ -46,23 +42,6 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
                 if (CellFinder.TryFindRandomCellNear(room, map, 9, (IntVec3 candidate) => CanPlaceLooseThing(map, candidate) && DesertPitGenUtility.NearCaveEdge(map, candidate, 3), out cell))
                 {
                     GenSpawn.Spawn(sandstoneChunk, cell, map);
-                }
-            }
-        }
-
-        //函数职责：把少量矿物嵌入洞室附近的沙岩墙中。
-        private static void ScatterMineables(Map map, IntVec3 room)
-        {
-            ThingDef mineable = Rand.Chance(0.75f) ? ThingDefOf.MineableSteel : ThingDefOf.MineableComponentsIndustrial;
-            int count = Rand.RangeInclusive(3, 7);
-            for (int i = 0; i < count; i++)
-            {
-                IntVec3 cell;
-                if (CellFinder.TryFindRandomCellNear(room, map, 11, (IntVec3 candidate) => CanReplaceWall(map, candidate), out cell))
-                {
-                    Thing edifice = cell.GetEdifice(map);
-                    edifice?.Destroy();
-                    GenSpawn.Spawn(mineable, cell, map);
                 }
             }
         }
@@ -205,18 +184,6 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
             return DesertPitGenUtility.IsCave(cell) && cell.Standable(map) && cell.GetEdifice(map) == null;
         }
 
-        //函数职责：判断指定沙岩墙是否适合替换成矿物。
-        private static bool CanReplaceWall(Map map, IntVec3 cell)
-        {
-            if (!cell.InBounds(map))
-            {
-                return false;
-            }
-
-            Building edifice = cell.GetEdifice(map);
-            return edifice != null && edifice.def == ThingDefOf.Sandstone && AdjacentToCave(map, cell);
-        }
-
         //函数职责：判断指定格子是否靠近塌方和碎石边缘。
         private static bool NearCollapse(DesertPitLayoutData data, IntVec3 cell)
         {
@@ -231,19 +198,5 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
             return false;
         }
 
-        //函数职责：判断岩墙是否贴近已挖开的洞穴，避免把矿物埋到不可见深处。
-        private static bool AdjacentToCave(Map map, IntVec3 cell)
-        {
-            for (int i = 0; i < GenAdj.CardinalDirections.Length; i++)
-            {
-                IntVec3 check = cell + GenAdj.CardinalDirections[i];
-                if (check.InBounds(map) && DesertPitGenUtility.IsCave(check))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
     }
 }

@@ -47,7 +47,19 @@
       <li Class="NingshaRaceLib.DesertPit.AntColony.Config.DefModExtension_AntColony">
         <workerTarget>4</workerTarget>
         <soldierTarget>3</soldierTarget>
-        <regularAntCap>8</regularAntCap>
+        <initialLevelMin>1</initialLevelMin>
+        <initialLevelMax>3</initialLevelMax>
+        <maximumLevelMin>3</maximumLevelMin>
+        <maximumLevelMax>5</maximumLevelMax>
+        <level2Nutrition>10</level2Nutrition>
+        <level3Nutrition>50</level3Nutrition>
+        <level4Nutrition>100</level4Nutrition>
+        <level5Nutrition>500</level5Nutrition>
+        <upgradeCooldownTicks>420000</upgradeCooldownTicks>
+        <repairDelayAfterDamageTicks>2500</repairDelayAfterDamageTicks>
+        <repairIntervalTicks>2500</repairIntervalTicks>
+        <repairNutritionCost>1</repairNutritionCost>
+        <repairHitPoints>100</repairHitPoints>
         <boomAntCap>3</boomAntCap>
         <storageCellCount>12</storageCellCount>
         <secondColonyChance>0.45</secondColonyChance>
@@ -57,6 +69,19 @@
         <queenLeashRadius>5</queenLeashRadius>
         <workerRetreatRadius>8</workerRetreatRadius>
         <frenzyRadius>40</frenzyRadius>
+        <retreatDefenseRadius>6</retreatDefenseRadius>
+        <retreatLossWindowTicks>10000</retreatLossWindowTicks>
+        <retreatDurationTicks>10000</retreatDurationTicks>
+        <retreatLossFraction>0.5</retreatLossFraction>
+        <investigationLossWindowTicks>60000</investigationLossWindowTicks>
+        <investigationHotspotRadius>10</investigationHotspotRadius>
+        <investigationLossFraction>0.2</investigationLossFraction>
+        <investigationMinimumDeaths>3</investigationMinimumDeaths>
+        <investigationCooldownTicks>60000</investigationCooldownTicks>
+        <investigationRallyTimeoutTicks>2500</investigationRallyTimeoutTicks>
+        <investigationTravelTimeoutTicks>10000</investigationTravelTimeoutTicks>
+        <investigationDefendTicks>2500</investigationDefendTicks>
+        <investigationMaxSquadSize>6</investigationMaxSquadSize>
         <workerHaulLimit>3</workerHaulLimit>
         <workerHaulCooldownTicks>2500</workerHaulCooldownTicks>
         <reproductionWorkTicks>600</reproductionWorkTicks>

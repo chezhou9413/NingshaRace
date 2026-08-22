@@ -1,6 +1,7 @@
 using RimWorld;
 using Verse;
 using Verse.AI;
+using UnityEngine;
 
 using NingshaRaceLib.DesertPit.AntColony.Core;
 
@@ -9,11 +10,19 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
     //类职责：保存单只蚂蚁的巢群编号，并把生成和销毁事件转交地图组件。
     public class Comp_DesertPitAntMember : ThingComp
     {
+        //字段职责：记录成员所属的地图内唯一蚁巢编号。
         private int colonyId;
+
+        //字段职责：记录当前采集批次已经完成的搬运次数。
         private int completedHaulsThisCycle;
+
+        //字段职责：记录工蚁下一次允许外出采集的游戏 Tick。
         private int nextForageTick;
 
+        //属性职责：向蚁群管理器和调试界面提供成员所属蚁巢编号。
         public int ColonyId => colonyId;
+
+        //属性职责：从组件配置读取成员固定阶级。
         public AntCaste Caste => ((CompProperties_DesertPitAntMember)props).caste;
 
         //函数职责：设置成员所属巢群编号，供生成和补员流程登记成员。
@@ -94,6 +103,23 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             if (pawn.CurJobDef != null)
             {
                 pawn.jobs.EndCurrentJob(JobCondition.Incompletable);
+            }
+        }
+
+        //函数职责：选中蚂蚁时用白线连接其所属且仍存活的蚁穴。
+        public override void PostDrawExtraSelectionOverlays()
+        {
+            base.PostDrawExtraSelectionOverlays();
+            Pawn pawn = parent as Pawn;
+            if (pawn == null || !pawn.Spawned || colonyId <= 0)
+            {
+                return;
+            }
+
+            State.AntColonyState state;
+            if (pawn.Map.GetComponent<MapComponent_DesertPitAntColonies>().TryGetColony(pawn, out state) && state.Nest != null && state.Nest.Spawned && !state.Nest.Destroyed)
+            {
+                GenDraw.DrawLineBetween(pawn.DrawPos, state.Nest.DrawPos, SimpleColor.White, 0.2f);
             }
         }
 

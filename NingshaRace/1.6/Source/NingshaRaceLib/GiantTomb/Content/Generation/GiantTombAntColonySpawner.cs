@@ -48,7 +48,7 @@ namespace NingshaRaceLib.GiantTomb.Content.Generation
                 {
                     members.Add(SpawnMember(map, cells, storageCells, center, DefOfRefs.NingshaRace_DesertPitSoldierAntKind, faction));
                 }
-                manager.RegisterGeneratedColony(nest, queen, members, storageCells, faction, population);
+                manager.RegisterGeneratedColony(nest, queen, members, storageCells, faction, population, false, 1, 1);
                 spawnedPawns.AddRange(members);
             }
         }

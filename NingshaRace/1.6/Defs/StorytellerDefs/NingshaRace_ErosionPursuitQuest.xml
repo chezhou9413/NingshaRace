@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义凝砂族被侵蚀体追杀的一次性任务及其叙事者事件入口。 -->
+
+  <!-- 事件职责：以较高权重向所有叙事者的普通任务池提供固定侵蚀追杀任务。 -->
+  <IncidentDef ParentName="GiveQuestBase">
+    <defName>NingshaRace_GiveQuest_ErosionPursuit</defName>
+    <label>凝砂族侵蚀追杀</label>
+    <workerClass>NingshaRaceLib.Storyteller.Quests.Incidents.IncidentWorker_GiveQuestNingshaErosionPursuit</workerClass>
+    <questScriptDef>NingshaRace_Quest_ErosionPursuit</questScriptDef>
+    <baseChance>0.75</baseChance>
+    <earliestDay>0</earliestDay>
+    <letterLabel>凝砂族求救</letterLabel>
+  </IncidentDef>
+
+  <!-- 任务职责：让一名凝砂族加入殖民地，并要求玩家消灭或收容追杀她的侵蚀体。 -->
+  <QuestScriptDef>
+    <defName>NingshaRace_Quest_ErosionPursuit</defName>
+    <rootSelectionWeight>0</rootSelectionWeight>
+    <rootMinPoints>0</rootMinPoints>
+    <expireDaysRange>1</expireDaysRange>
+    <rootIncreasesPopulation>true</rootIncreasesPopulation>
+    <defaultCharity>true</defaultCharity>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->侵蚀之影</li>
+        <li>questName->[joiner_nameDef]的追猎者</li>
+        <li>questName->逃离侵蚀</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <rulesStrings>
+        <li>questDescription->一名叫做[joiner_nameDef]的凝砂族正在附近逃亡。一只侵蚀体紧随其后，并且不会停止对她的追杀。
+\n如果接受，[joiner_nameDef]会从[map_definite]边缘进入并永久加入殖民地。追杀她的[erosionBody_label]随后会从相同方向抵达。
+\n在[joiner_nameDef]死亡前杀死侵蚀体，或将指定侵蚀体放上玩家的收容平台，即可完成任务。如果[joiner_nameDef]先死亡，任务将失败。</li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <root Class="NingshaRaceLib.Storyteller.Quests.Generation.QuestNode_Root_NingshaErosionPursuit" />
+  </QuestScriptDef>
+</Defs>

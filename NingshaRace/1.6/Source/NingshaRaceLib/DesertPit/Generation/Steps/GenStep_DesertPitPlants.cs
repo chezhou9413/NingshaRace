@@ -41,6 +41,11 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
 
             List<IntVec3> placed = new List<IntVec3>();
             int targetCount = Mathf.Min(Rand.RangeInclusive(70, 105), candidates.Count);
+            int foodCount = Rand.RangeInclusive(24, 32);
+            int medicineCount = Rand.RangeInclusive(6, 10);
+            PlaceGuaranteedPlants(map, data, candidates, placed, DefOfRefs.NingshaRace_DesertPitPlantA, foodCount / 2, "食用菌A");
+            PlaceGuaranteedPlants(map, data, candidates, placed, DefOfRefs.NingshaRace_DesertPitPlantC, foodCount - foodCount / 2, "食用菌C");
+            PlaceGuaranteedPlants(map, data, candidates, placed, DefOfRefs.NingshaRace_DesertPitPlantD, medicineCount, "药用菌");
             int clusterCount = Mathf.Min(Rand.RangeInclusive(16, 24), candidates.Count);
             for (int i = 0; i < clusterCount && placed.Count < targetCount && candidates.Count > 0; i++)
             {
@@ -49,6 +54,27 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
             }
 
             FillRemainingPlants(map, data, settings, candidates, placed, targetCount);
+            if (placed.Count < targetCount)
+            {
+                throw new System.InvalidOperationException("沙漠巨坑洞穴植物未达到生态总量，目标数量：" + targetCount + "，实际数量：" + placed.Count + "。");
+            }
+        }
+
+        //函数职责：为生存所需植物放置指定数量的成熟植株，无法满足时直接报告地图生成错误。
+        private static void PlaceGuaranteedPlants(Map map, DesertPitLayoutData data, List<IntVec3> candidates, List<IntVec3> placed, ThingDef plantDef, int count, string resourceLabel)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                IntVec3 cell;
+                if (!TryFindAnyCell(map, data, candidates, placed, plantDef, IsLargePlant(plantDef), out cell))
+                {
+                    throw new System.InvalidOperationException("沙漠巨坑无法生成足量" + resourceLabel + "，目标数量：" + count + "。");
+                }
+
+                DesertPitPlantEcologyUtility.SpawnPlant(map, plantDef, cell, new FloatRange(1f, 1f));
+                placed.Add(cell);
+                candidates.Remove(cell);
+            }
         }
 
         //函数职责：收集所有可放置洞穴植物的基础候选格。

@@ -94,7 +94,7 @@
     <label>凝砂木乃伊</label>
     <useDescriptionFrom>NingshaRace_GiantTombMummy</useDescriptionFrom>
     <category>Basic</category>
-    <uiIconPath>UI/CodexEntries/Shambler</uiIconPath>
+    <uiIconPath>UI/CodexEntries/NingshaRace/GiantTombMummy</uiIconPath>
     <discoveryType>Unfog</discoveryType>
     <orderInCategory>900</orderInCategory>
     <linkedThings>

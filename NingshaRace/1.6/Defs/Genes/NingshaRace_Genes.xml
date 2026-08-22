@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!-- 文件职责：定义凝砂族异种人使用的专属基因分类和七项种族基因。 -->
+  <!-- 文件职责：定义凝砂族异种人使用的专属基因分类和种族基因。 -->
   <GeneCategoryDef>
     <defName>NingshaRace_GeneCategory</defName>
     <label>凝砂族</label>
@@ -72,6 +72,18 @@
     <statFactors>
       <SocialImpact>0.85</SocialImpact>
     </statFactors>
+  </GeneDef>
+
+  <GeneDef ParentName="NingshaRace_GeneBase">
+    <defName>NingshaRace_CaveAdaptation</defName>
+    <label>穴居适应</label>
+    <labelShortAdj>穴居适应</labelShortAdj>
+    <description>这种基因使携带者把幽暗、封闭的洞穴视为安全而自然的栖居地，不再需要通过户外活动缓解幽居感。</description>
+    <iconPath>UI/Icons/Genes/NingshaRace/CaveAdaptation</iconPath>
+    <displayOrderInCategory>35</displayOrderInCategory>
+    <disablesNeeds>
+      <li>Outdoors</li>
+    </disablesNeeds>
   </GeneDef>
 
   <GeneDef ParentName="NingshaRace_GeneBase">

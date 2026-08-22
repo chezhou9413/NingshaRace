@@ -2,6 +2,7 @@ using RimWorld;
 using Verse;
 
 using NingshaRaceLib.DesertPit.Generation.Progress;
+using NingshaRaceLib.PocketMaps.Cargo;
 
 namespace NingshaRaceLib.PocketMaps.Buildings
 {
@@ -30,6 +31,7 @@ namespace NingshaRaceLib.PocketMaps.Buildings
 
             generationActive = true;
             generationFailed = false;
+            notifiedCantLoadMore = true;
             DesertPitGenerationProgress.Begin();
             Find.WindowStack.Add(new Window_DesertPitGeneration(this));
         }
@@ -45,6 +47,7 @@ namespace NingshaRaceLib.PocketMaps.Buildings
         {
             generationActive = false;
             generationFailed = false;
+            notifiedCantLoadMore = false;
         }
 
         //函数职责：结束失败的地图生成状态，使等待中的进入作业终止并允许下次重试。
@@ -52,6 +55,12 @@ namespace NingshaRaceLib.PocketMaps.Buildings
         {
             generationActive = false;
             generationFailed = true;
+            GetComp<Comp_NingshaPortalCargo>()?.CancelCargoTransfer();
+            if (LoadInProgress)
+            {
+                CancelLoad();
+            }
+            notifiedCantLoadMore = false;
         }
     }
 }

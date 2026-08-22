@@ -8,6 +8,25 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
     //类职责：集中实现蚁群实体储备的营养统计、食物识别和繁殖消耗。
     public partial class MapComponent_DesertPitAntColonies
     {
+        //函数职责：为检查面板和升级逻辑计算指定巢群当前可消费的实体储藏营养。
+        public float GetStoredNutrition(AntColonyState state)
+        {
+            Pawn eater = GetNutritionConsumer(state);
+            return eater == null ? 0f : GetStoredNutrition(state, eater);
+        }
+
+        //函数职责：优先选择蚁后并在蚁后失效时选择任一存活成员，作为营养换算与消费主体。
+        private static Pawn GetNutritionConsumer(AntColonyState state)
+        {
+            Pawn eater = state?.Queen;
+            if (eater == null || eater.Dead || eater.Destroyed)
+            {
+                eater = state?.Members.Find(member => member != null && !member.Dead && !member.Destroyed);
+            }
+
+            return eater;
+        }
+
         //函数职责：计算指定巢群实体储藏格内可用于进食和繁殖的总营养。
         private float GetStoredNutrition(AntColonyState state, Pawn eater)
         {

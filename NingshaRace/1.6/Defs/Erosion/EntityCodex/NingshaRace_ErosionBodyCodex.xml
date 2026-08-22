@@ -6,7 +6,7 @@
     <label>侵蚀体</label>
     <description>侵蚀彻底吞没凝砂族后留下的异常实体。它保留了操纵石化砂潮的本能，会主动袭击实体阵营之外的所有生命，并可被收容和研究。</description>
     <category>Basic</category>
-    <uiIconPath>UI/CodexEntries/Shambler</uiIconPath>
+    <uiIconPath>UI/CodexEntries/NingshaRace/ErosionBody</uiIconPath>
     <orderInCategory>800</orderInCategory>
   </EntityCodexEntryDef>
 </Defs>

@@ -191,6 +191,12 @@ She will offer you some help, guide more Ningsha to join your colony, and find w
           <li>Map_TempIncident</li>
         </allowedTargetTags>
       </li>
+      <li Class="NingshaRaceLib.Storyteller.Quests.Scheduling.StorytellerCompProperties_NingshaErosionPursuit">
+        <incident>NingshaRace_GiveQuest_ErosionPursuit</incident>
+        <allowedTargetTags>
+          <li>World</li>
+        </allowedTargetTags>
+      </li>
       <li Class="StorytellerCompProperties_RandomQuest">
         <category>GiveQuest</category>
         <allowedTargetTags>

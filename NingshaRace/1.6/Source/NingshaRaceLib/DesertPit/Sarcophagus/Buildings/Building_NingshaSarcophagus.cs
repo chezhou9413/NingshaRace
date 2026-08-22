@@ -33,7 +33,7 @@ namespace NingshaRaceLib.DesertPit.Sarcophagus.Buildings
             Scribe_Values.Look(ref contentsInitialized, "ningshaContentsInitialized");
         }
 
-        //函数职责：执行原版弹出动作后在原位置和朝向替换为开启石棺。
+        //函数职责：执行原版弹出动作后安全移出不可摧毁的封闭石棺，并在原位置替换为开启石棺。
         public override void Open()
         {
             Map map = Map;
@@ -42,7 +42,7 @@ namespace NingshaRaceLib.DesertPit.Sarcophagus.Buildings
             Faction faction = Faction;
             ThingDef openedDef = Settings.openedThingDef;
             base.Open();
-            Destroy(DestroyMode.Vanish);
+            DeSpawn(DestroyMode.WillReplace);
             Thing opened = ThingMaker.MakeThing(openedDef);
             GenSpawn.Spawn(opened, position, map, rotation);
             if (faction != null)
