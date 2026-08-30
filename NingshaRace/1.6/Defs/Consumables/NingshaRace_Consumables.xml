@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义沙之热、两种凝砂料理、对应配方和进食心情。 -->
+  <ThingDef ParentName="ResourceBase">
+    <defName>NingshaRace_SandHeat</defName>
+    <label>沙之热</label>
+    <description>诞生于地底沙漠的炙热香料。它不能直接食用，却能在烹饪中刺激味觉并稳固凝砂族身体。</description>
+    <graphicData><texPath>NingshaRace/Consumables/SandHeat</texPath><graphicClass>Graphic_Single</graphicClass></graphicData>
+    <stackLimit>75</stackLimit>
+    <statBases><MarketValue>4</MarketValue><Mass>0.02</Mass><Flammability>0</Flammability><DeteriorationRate>0</DeteriorationRate></statBases>
+    <thingCategories><li>ResourcesRaw</li></thingCategories>
+  </ThingDef>
+
+  <ThingDef ParentName="MealBaseIngredientless">
+    <defName>NingshaRace_MushroomFlatbread</defName>
+    <label>面菇饼</label>
+    <description>将蘑菇处理为浆后以特殊手法烙成的饼，鲜美而厚实。</description>
+    <graphicData><texPath>NingshaRace/Consumables/MushroomFlatbread</texPath><graphicClass>Graphic_Single</graphicClass></graphicData>
+    <stackLimit>75</stackLimit><tickerType>Rare</tickerType>
+    <statBases><MarketValue>12</MarketValue><WorkToMake>300</WorkToMake><Nutrition>0.8</Nutrition><DeteriorationRate>2</DeteriorationRate></statBases>
+    <ingestible><preferability>MealSimple</preferability><ingestEffect>EatVegetarian</ingestEffect><ingestSound>Meal_Eat</ingestSound></ingestible>
+    <comps>
+      <li Class="CompProperties_Ingredients"><splitTransferableFoodKind>true</splitTransferableFoodKind></li>
+      <li Class="CompProperties_Rottable"><daysToRotStart>12</daysToRotStart><rotDestroys>true</rotDestroys></li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="MealBaseIngredientless">
+    <defName>NingshaRace_ScorchingEarthStew</defName>
+    <label>炙热地煲</label>
+    <description>以地底特色蘑菇为底，铺上碎菇慢炖并加入沙之热香料的料理，入口炙热而余味鲜美。</description>
+    <graphicData><texPath>NingshaRace/Consumables/ScorchingEarthStew</texPath><graphicClass>Graphic_Single</graphicClass></graphicData>
+    <stackLimit>75</stackLimit><tickerType>Rare</tickerType>
+    <statBases><MarketValue>20</MarketValue><WorkToMake>300</WorkToMake><Nutrition>0.9</Nutrition><DeteriorationRate>2</DeteriorationRate></statBases>
+    <ingestible><preferability>MealFine</preferability><ingestEffect>EatVegetarian</ingestEffect><ingestSound>Meal_Eat</ingestSound></ingestible>
+    <comps>
+      <li Class="CompProperties_Ingredients"><splitTransferableFoodKind>true</splitTransferableFoodKind></li>
+      <li Class="CompProperties_Rottable"><daysToRotStart>6</daysToRotStart><rotDestroys>true</rotDestroys></li>
+    </comps>
+  </ThingDef>
+
+  <RecipeDef>
+    <defName>NingshaRace_CookMushroomFlatbread</defName><label>制作面菇饼</label><description>用生菌烙制一份厚实的面菇饼。</description>
+    <jobString>正在制作面菇饼。</jobString><workAmount>300</workAmount><workSpeedStat>CookSpeed</workSpeedStat>
+    <requiredGiverWorkType>Cooking</requiredGiverWorkType><effectWorking>Cook</effectWorking><soundWorking>Recipe_CookMeal</soundWorking>
+    <ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
+    <fixedIngredientFilter><thingDefs><li>RawFungus</li></thingDefs></fixedIngredientFilter>
+    <defaultIngredientFilter><thingDefs><li>RawFungus</li></thingDefs></defaultIngredientFilter>
+    <ingredients><li><filter><thingDefs><li>RawFungus</li></thingDefs></filter><count>0.4</count></li></ingredients>
+    <products><NingshaRace_MushroomFlatbread>1</NingshaRace_MushroomFlatbread></products><workSkill>Cooking</workSkill>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>NingshaRace_CookScorchingEarthStew</defName><label>制作炙热地煲</label><description>用生菌与五份沙之热烹制炙热地煲。</description>
+    <jobString>正在制作炙热地煲。</jobString><workAmount>300</workAmount><workSpeedStat>CookSpeed</workSpeedStat>
+    <requiredGiverWorkType>Cooking</requiredGiverWorkType><effectWorking>Cook</effectWorking><soundWorking>Recipe_CookMeal</soundWorking>
+    <ingredientValueGetterClass>NingshaRaceLib.Consumables.Recipes.IngredientValueGetter_NutritionAndSandHeat</ingredientValueGetterClass>
+    <fixedIngredientFilter><thingDefs><li>RawFungus</li><li>NingshaRace_SandHeat</li></thingDefs></fixedIngredientFilter>
+    <defaultIngredientFilter><thingDefs><li>RawFungus</li><li>NingshaRace_SandHeat</li></thingDefs></defaultIngredientFilter>
+    <ingredients>
+      <li><filter><thingDefs><li>RawFungus</li></thingDefs></filter><count>0.6</count></li>
+      <li><filter><thingDefs><li>NingshaRace_SandHeat</li></thingDefs></filter><count>5</count></li>
+    </ingredients>
+    <products><NingshaRace_ScorchingEarthStew>1</NingshaRace_ScorchingEarthStew></products><workSkill>Cooking</workSkill>
+  </RecipeDef>
+
+  <ThoughtDef>
+    <defName>NingshaRace_AteScorchingEarthStew</defName><durationDays>1</durationDays><stackLimit>1</stackLimit>
+    <stages><li><label>炙热的美味！</label><description>地煲的炙热香气仍萦绕在舌尖。</description><baseMoodEffect>6</baseMoodEffect></li></stages>
+  </ThoughtDef>
+</Defs>

@@ -62,6 +62,12 @@
   </GenStepDef>
 
   <GenStepDef>
+    <defName>NingshaRace_DesertPitWisdomSerpentAltar</defName>
+    <order>453.3</order>
+    <genStep Class="NingshaRaceLib.Altar.Generation.GenStep_DesertPitWisdomSerpentAltar" />
+  </GenStepDef>
+
+  <GenStepDef>
     <defName>NingshaRace_GiantTombCoffinEntrance</defName>
     <order>453.35</order>
     <genStep Class="NingshaRaceLib.GiantTomb.Discovery.Generation.GenStep_GiantTombCoffinEntrance" />

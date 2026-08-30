@@ -13,7 +13,7 @@ using Verse;
 
 namespace NingshaRaceLib.GiantTomb.Generation.Steps
 {
-    //类职责：加载全部墓葬模板并在受限随机回溯中建立200格口袋地图布局。
+    //类职责：加载配置指定的墓葬模板并在受限随机回溯中建立对应尺寸的地下布局。
     public sealed class GenStep_GiantTombLayout : GenStep, INingshaIncrementalGenStep
     {
         //字段职责：引用本生成步骤使用的模板清单和搜索限制。
@@ -37,9 +37,9 @@ namespace NingshaRaceLib.GiantTomb.Generation.Steps
             {
                 throw new InvalidOperationException("巨型墓葬生成步骤缺少layoutDef");
             }
-            if (map.Size.x != 200 || map.Size.z != 200)
+            if (map.Size.x != layoutDef.requiredMapSize || map.Size.z != layoutDef.requiredMapSize)
             {
-                throw new InvalidOperationException("巨型墓葬地图尺寸必须为200x200");
+                throw new InvalidOperationException("墓葬地图尺寸必须为" + layoutDef.requiredMapSize + "x" + layoutDef.requiredMapSize);
             }
 
             DesertPitGenerationProgress.SetStage("读取墓葬模板");
@@ -55,9 +55,9 @@ namespace NingshaRaceLib.GiantTomb.Generation.Steps
             templateTimer.Stop();
             Log.Message("[NingshaRace] 巨型墓葬模板准备完成：" + required.Count + "个，缓存命中" + cacheHits + "个，耗时" + templateTimer.ElapsedMilliseconds + "毫秒。");
             yield return null;
-            if (required.Count != 19 || required.Select((GiantTombModule module) => module.Def).Distinct().Count() != 19)
+            if (required.Count != layoutDef.modules.Count || required.Select((GiantTombModule module) => module.Def).Distinct().Count() != layoutDef.modules.Count)
             {
-                throw new InvalidOperationException("巨型墓葬必须配置19个互不重复的必选模板");
+                throw new InvalidOperationException("墓葬布局必须完整加载配置中全部互不重复的必选模板");
             }
             GiantTombModule entrance = required.FirstOrDefault((GiantTombModule module) => module.Def == layoutDef.entranceTemplate);
             if (entrance == null)
@@ -203,10 +203,13 @@ namespace NingshaRaceLib.GiantTomb.Generation.Steps
         //函数职责：按接口守恒比例组合分支、尽头、中转房和少量走廊，使新增模块仍能构成完整树。
         private static List<GiantTombModule> BuildPool(List<GiantTombModule> required, List<GiantTombModule> branches, List<GiantTombModule> leaves, List<GiantTombModule> transitRooms, List<GiantTombModule> corridors, int repeatCount, out RepeatPoolCounts counts)
         {
-            int branchCount = Math.Max(1, (repeatCount + 2) / 5);
-            while (branchCount * 3 > repeatCount) branchCount--;
-            int leafCount = branchCount * 2;
-            int degreeTwoCount = repeatCount - branchCount - leafCount;
+            int branchCount;
+            int leafCount;
+            int degreeTwoCount;
+            if (!TryResolveRepeatCounts(required, repeatCount, out branchCount, out leafCount, out degreeTwoCount))
+            {
+                throw new InvalidOperationException("墓葬必选模板与额外模块数量无法满足接口守恒: " + repeatCount);
+            }
             int transitRoomCount = Math.Min(degreeTwoCount, Math.Max(1, (degreeTwoCount * 3 + 2) / 4));
             int corridorCount = degreeTwoCount - transitRoomCount;
             counts = new RepeatPoolCounts(branchCount, leafCount, transitRoomCount, corridorCount);
@@ -222,6 +225,38 @@ namespace NingshaRaceLib.GiantTomb.Generation.Steps
                 if (GiantTombConnectorCompatibility.HasEvenConnectorComponents(result)) return result;
             }
             throw new InvalidOperationException("巨型墓葬随机模板池无法满足各接口兼容组的偶数闭合条件");
+        }
+
+        //函数职责：根据必选模板实际接口总数求出四接口、单接口和双接口额外模块数量。
+        private static bool TryResolveRepeatCounts(List<GiantTombModule> required, int repeatCount,
+            out int branches, out int leaves, out int degreeTwo)
+        {
+            int requiredConnectors = required.Sum(module => module.Connectors.Count);
+            int expectedTotal = 2 * (required.Count + repeatCount - 1);
+            int preferredBranches = Math.Min(repeatCount / 3, Math.Max(0, (repeatCount + 2) / 5));
+            int preferredLeaves = Math.Min(repeatCount - preferredBranches, preferredBranches * 2);
+            int preferredDegreeTwo = repeatCount - preferredBranches - preferredLeaves;
+            int bestScore = int.MaxValue;
+            branches = leaves = degreeTwo = 0;
+            for (int branchCount = 0; branchCount <= repeatCount; branchCount++)
+            {
+                for (int leafCount = 0; leafCount <= repeatCount - branchCount; leafCount++)
+                {
+                    int twoCount = repeatCount - branchCount - leafCount;
+                    if (requiredConnectors + branchCount * 4 + leafCount + twoCount * 2 == expectedTotal)
+                    {
+                        int score = Math.Abs(branchCount - preferredBranches) * 100
+                            + Math.Abs(leafCount - preferredLeaves) * 10
+                            + Math.Abs(twoCount - preferredDegreeTwo);
+                        if (score >= bestScore) continue;
+                        bestScore = score;
+                        branches = branchCount;
+                        leaves = leafCount;
+                        degreeTwo = twoCount;
+                    }
+                }
+            }
+            return bestScore != int.MaxValue;
         }
 
         //函数职责：先尽量覆盖类别中的不同模板，再按Def权重补足该类别的重复数量。

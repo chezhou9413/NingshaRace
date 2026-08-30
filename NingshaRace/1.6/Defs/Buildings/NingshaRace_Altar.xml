@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!-- Def 职责：定义可直接建造和搬运的凝砂族蛇形装饰祭坛。 -->
+  <!-- Def 职责：定义可供奉生肉并发布凝砂族探索任务的智慧之蛇祭坛。 -->
   <ThingDef ParentName="BuildingBase">
     <defName>NingshaRace_Altar</defName>
-    <label>凝砂族祭坛</label>
-    <description>以砂岩雕成的蛇形祭坛。盘绕的蛇身象征凝砂族对血脉、沙海与轮回的敬畏。</description>
+    <label>智慧之蛇祭坛</label>
+    <description>以砂岩雕成的蛇形祭坛。将生肉供奉给盘绕的智慧之蛇，可获得指向遗迹、蚁巢或受困同胞的启示。</description>
+    <thingClass>NingshaRaceLib.Altar.Buildings.Building_WisdomSerpentAltar</thingClass>
     <category>Building</category>
     <graphicData>
       <texPath>NingshaRace/Buildings/NingshaRaceAltar</texPath>
@@ -37,5 +38,10 @@
     <thingCategories>
       <li>BuildingsMisc</li>
     </thingCategories>
+    <comps>
+      <li Class="NingshaRaceLib.Altar.Components.CompProperties_AltarOffering">
+        <nutritionCapacity>100</nutritionCapacity>
+      </li>
+    </comps>
   </ThingDef>
 </Defs>

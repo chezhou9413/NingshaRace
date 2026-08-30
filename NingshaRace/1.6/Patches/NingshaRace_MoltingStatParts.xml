@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 文件职责：把蜕皮层数线性属性计算接入三个原版属性与凝砂族侵蚀上限。 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/StatDef[defName="InjuryHealingFactor"]/parts</xpath>
+    <match Class="PatchOperationAdd"><xpath>Defs/StatDef[defName="InjuryHealingFactor"]/parts</xpath><value><li Class="NingshaRaceLib.Molting.Stats.StatPart_NingshaMolting"><mode>HealingFactor</mode></li></value></match>
+    <nomatch Class="PatchOperationAdd"><xpath>Defs/StatDef[defName="InjuryHealingFactor"]</xpath><value><parts><li Class="NingshaRaceLib.Molting.Stats.StatPart_NingshaMolting"><mode>HealingFactor</mode></li></parts></value></nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/StatDef[defName="MoveSpeed"]/parts</xpath>
+    <match Class="PatchOperationAdd"><xpath>Defs/StatDef[defName="MoveSpeed"]/parts</xpath><value><li Class="NingshaRaceLib.Molting.Stats.StatPart_NingshaMolting"><mode>MoveSpeed</mode></li></value></match>
+    <nomatch Class="PatchOperationAdd"><xpath>Defs/StatDef[defName="MoveSpeed"]</xpath><value><parts><li Class="NingshaRaceLib.Molting.Stats.StatPart_NingshaMolting"><mode>MoveSpeed</mode></li></parts></value></nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/StatDef[defName="PainShockThreshold"]/parts</xpath>
+    <match Class="PatchOperationAdd"><xpath>Defs/StatDef[defName="PainShockThreshold"]/parts</xpath><value><li Class="NingshaRaceLib.Molting.Stats.StatPart_NingshaMolting"><mode>PainShockThreshold</mode></li></value></match>
+    <nomatch Class="PatchOperationAdd"><xpath>Defs/StatDef[defName="PainShockThreshold"]</xpath><value><parts><li Class="NingshaRaceLib.Molting.Stats.StatPart_NingshaMolting"><mode>PainShockThreshold</mode></li></parts></value></nomatch>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/StatDef[defName="NingshaRace_ErosionLimit"]/parts</xpath>
+    <match Class="PatchOperationAdd"><xpath>Defs/StatDef[defName="NingshaRace_ErosionLimit"]/parts</xpath><value><li Class="NingshaRaceLib.Molting.Stats.StatPart_NingshaMolting"><mode>ErosionLimit</mode></li></value></match>
+    <nomatch Class="PatchOperationAdd"><xpath>Defs/StatDef[defName="NingshaRace_ErosionLimit"]</xpath><value><parts><li Class="NingshaRaceLib.Molting.Stats.StatPart_NingshaMolting"><mode>ErosionLimit</mode></li></parts></value></nomatch>
+  </Operation>
+</Patch>

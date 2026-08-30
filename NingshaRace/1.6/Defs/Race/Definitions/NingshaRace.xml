@@ -13,6 +13,10 @@
         <dailyDecay>10</dailyDecay>
         <transformationTicks>300~600</transformationTicks>
       </li>
+      <li Class="NingshaRaceLib.Molting.Components.CompProperties_NingshaMolting">
+        <nutritionCapacity>100</nutritionCapacity>
+        <rescueNutritionCost>60</rescueNutritionCost>
+      </li>
       <li Class="NingshaRaceLib.Reproduction.Components.CompProperties_NingshaEggCycle">
         <eggLayingIntervalDays>7</eggLayingIntervalDays>
         <unfertilizedEggDef>NingshaRace_EggUnfertilized</unfertilizedEggDef>

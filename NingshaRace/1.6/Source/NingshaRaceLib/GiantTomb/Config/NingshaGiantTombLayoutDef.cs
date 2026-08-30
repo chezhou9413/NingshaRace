@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using ChezhouLib.CustomMission.MapTemplates;
 using Verse;
 
@@ -7,6 +8,9 @@ namespace NingshaRaceLib.GiantTomb.Config
     //类职责：声明巨型墓葬使用的全部模板、入口、终点候选和布局搜索限制。
     public sealed class NingshaGiantTombLayoutDef : Def
     {
+        //字段职责：规定使用该布局定义时地图必须采用的正方形边长。
+        public int requiredMapSize = 200;
+
         //字段职责：保存每张墓葬必须各出现一次的完整模板集合。
         public List<ClMapTemplateDef> modules = new List<ClMapTemplateDef>();
 
@@ -51,6 +55,14 @@ namespace NingshaRaceLib.GiantTomb.Config
             if (modules == null || modules.Count == 0)
             {
                 yield return defName + ": modules不能为空";
+            }
+            if (requiredMapSize < 50)
+            {
+                yield return defName + ": requiredMapSize不能小于50";
+            }
+            if (modules != null && modules.Distinct().Count() != modules.Count)
+            {
+                yield return defName + ": modules不能包含重复模板";
             }
             if (entranceTemplate == null || !modules.Contains(entranceTemplate))
             {

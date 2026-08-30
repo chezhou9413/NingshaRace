@@ -143,6 +143,16 @@ namespace NingshaRaceLib.Erosion.Components
             }
         }
 
+        //函数职责：降低普通阶段侵蚀值并钳制到零，但绝不逆转已经开始的实体化流程。
+        public void ReduceErosion(float amount)
+        {
+            if (amount <= 0f || transforming)
+            {
+                return;
+            }
+            currentErosion = Mathf.Max(0f, currentErosion - amount);
+        }
+
         //函数职责：判断增加指定点数后是否会达到当前最终侵蚀上限。
         public bool WouldReachLimit(float amount)
         {

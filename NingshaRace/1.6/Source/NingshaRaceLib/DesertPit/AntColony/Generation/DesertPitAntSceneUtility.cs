@@ -28,6 +28,13 @@ namespace NingshaRaceLib.DesertPit.AntColony.Generation
         //函数职责：寻找一个符合洞穴与间距规则的位置，并生成完整巢群场景。
         public static bool TryGenerateColony(Map map, DesertPitLayoutData data, List<IntVec3> existingCenters, out IntVec3 center)
         {
+            return TryGenerateColony(map, data, existingCenters, null, true, out center);
+        }
+
+        //函数职责：按任务指定固定等级和升级开关生成一个巢群，空等级表示沿用自然沙漠巨坑随机规则。
+        public static bool TryGenerateColony(Map map, DesertPitLayoutData data, List<IntVec3> existingCenters,
+            int? fixedLevel, bool levelingEnabled, out IntVec3 center)
+        {
             ThingDef nestDef = DefOfRefs.NingshaRace_DesertPitAntNest;
             List<IntVec3> candidates = new List<IntVec3>();
             foreach (IntVec3 cell in map.AllCells)
@@ -48,7 +55,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Generation
             {
                 return ScenePlacementWeight(map, data, cell);
             });
-            GenerateScene(map, data, nestDef, center, existingCenters.Count);
+            GenerateScene(map, data, nestDef, center, existingCenters.Count, fixedLevel, levelingEnabled);
             return true;
         }
 
@@ -148,11 +155,12 @@ namespace NingshaRaceLib.DesertPit.AntColony.Generation
         }
 
         //函数职责：保留巢区、生成蚁穴与初始成员，并把完整状态登记到地图组件。
-        private static void GenerateScene(Map map, DesertPitLayoutData data, ThingDef nestDef, IntVec3 center, int colonyIndex)
+        private static void GenerateScene(Map map, DesertPitLayoutData data, ThingDef nestDef, IntVec3 center, int colonyIndex,
+            int? fixedLevel, bool levelingEnabled)
         {
             DefModExtension_AntColony settings = nestDef.GetModExtension<DefModExtension_AntColony>();
-            int currentLevel = Rand.RangeInclusive(settings.initialLevelMin, settings.initialLevelMax);
-            int maximumLevel = Rand.RangeInclusive(settings.maximumLevelMin, settings.maximumLevelMax);
+            int currentLevel = fixedLevel ?? Rand.RangeInclusive(settings.initialLevelMin, settings.initialLevelMax);
+            int maximumLevel = fixedLevel ?? Rand.RangeInclusive(settings.maximumLevelMin, settings.maximumLevelMax);
             currentLevel = Mathf.Min(currentLevel, maximumLevel);
             AntColonyPopulationSettings population = AntColonyPopulationSettings.CreateForLevel(settings, currentLevel);
             MapComponent_DesertPitAntColonies manager = map.GetComponent<MapComponent_DesertPitAntColonies>();
@@ -181,7 +189,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Generation
             }
 
             SpawnInitialStock(map, storageCells);
-            manager.RegisterGeneratedColony(nest, queen, members, storageCells, faction, population, true, currentLevel, maximumLevel);
+            manager.RegisterGeneratedColony(nest, queen, members, storageCells, faction, population, levelingEnabled, currentLevel, maximumLevel);
             ForbidSceneHaulables(map, center);
         }
 

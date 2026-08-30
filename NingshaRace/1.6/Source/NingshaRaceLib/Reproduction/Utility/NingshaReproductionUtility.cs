@@ -6,6 +6,7 @@ using Verse;
 
 using NingshaRaceLib.Core.Defs;
 using NingshaRaceLib.Reproduction.Components;
+using NingshaRaceLib.Molting.Components;
 
 namespace NingshaRaceLib.Reproduction.Utility
 {
@@ -169,7 +170,7 @@ namespace NingshaRaceLib.Reproduction.Utility
             }
         }
 
-        //函数职责：从受精卵生成固定三岁凝砂儿童，建立父母关系并完成破壳清理。
+        //函数职责：从受精卵生成固定三岁凝砂儿童，应用母方蜕皮快照、建立父母关系并完成破壳清理。
         public static void HatchEgg(CompNingshaEmbryo embryo)
         {
             Thing egg = embryo?.parent;
@@ -196,6 +197,7 @@ namespace NingshaRaceLib.Reproduction.Utility
                 forcedXenotype: DefOfRefs.NingshaRace_Xenotype,
                 developmentalStages: DevelopmentalStage.Child);
             Pawn child = PawnGenerator.GeneratePawn(request);
+            child.TryGetComp<CompNingshaMolting>()?.ApplyInheritedCount(embryo.InheritedMoltingCount);
 
             if (mother != null)
             {

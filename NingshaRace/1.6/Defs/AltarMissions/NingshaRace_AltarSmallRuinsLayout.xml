@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：配置120格小型遗迹的八个固定模板与四至六个分类重复模块。 -->
+  <NingshaRaceLib.GiantTomb.Config.NingshaGiantTombLayoutDef>
+    <defName>NingshaRace_AltarSmallRuinsLayoutDef</defName><requiredMapSize>120</requiredMapSize>
+    <modules>
+      <li>NingshaRace_GiantTomb_EntranceCorridor</li><li>NingshaRace_GiantTomb_Storage01</li>
+      <li>NingshaRace_GiantTomb_Chamber01</li><li>NingshaRace_GiantTomb_Chamber03</li>
+      <li>NingshaRace_GiantTomb_PotRoom</li><li>NingshaRace_GiantTomb_Hall01</li>
+      <li>NingshaRace_GiantTomb_WideTurn</li><li>NingshaRace_GiantTomb_GrandChamber02</li>
+    </modules>
+    <entranceTemplate>NingshaRace_GiantTomb_EntranceCorridor</entranceTemplate>
+    <terminalTemplates><li>NingshaRace_GiantTomb_GrandChamber02</li></terminalTemplates>
+    <repeatBranchTemplates><li>NingshaRace_GiantTomb_Hall01</li></repeatBranchTemplates>
+    <repeatLeafTemplates><li>NingshaRace_GiantTomb_Storage01</li><li>NingshaRace_GiantTomb_Chamber01</li><li>NingshaRace_GiantTomb_PotRoom</li><li>NingshaRace_GiantTomb_GrandChamber02</li></repeatLeafTemplates>
+    <repeatTransitRoomTemplates><li>NingshaRace_GiantTomb_Chamber03</li></repeatTransitRoomTemplates>
+    <repeatCorridorTemplates><li>NingshaRace_GiantTomb_WideTurn</li></repeatCorridorTemplates>
+    <repeatCount>4~6</repeatCount><borderMargin>7</borderMargin><maxRestarts>48</maxRestarts><maxCandidateEvaluations>240000</maxCandidateEvaluations>
+  </NingshaRaceLib.GiantTomb.Config.NingshaGiantTombLayoutDef>
+</Defs>

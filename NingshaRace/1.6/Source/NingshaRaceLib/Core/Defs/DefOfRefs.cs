@@ -32,6 +32,36 @@ namespace NingshaRaceLib.Core.Defs
         //字段职责：容纳单枚凝砂卵并推进孵化的建筑。
         public static ThingDef NingshaRace_HatchNest;
 
+        //字段职责：保存供奉营养并发布三类探索任务的智慧之蛇祭坛。
+        public static ThingDef NingshaRace_Altar;
+
+        //字段职责：小型遗迹独占产出的不可食用炙热香料。
+        public static ThingDef NingshaRace_SandHeat;
+
+        //字段职责：消耗生菌制作的凝砂族厚实饼食。
+        public static ThingDef NingshaRace_MushroomFlatbread;
+
+        //字段职责：食用后降低侵蚀并提供正面心情的香料料理。
+        public static ThingDef NingshaRace_ScorchingEarthStew;
+
+        //字段职责：食用炙热地煲后持续一天的正面心情记忆。
+        public static ThoughtDef NingshaRace_AteScorchingEarthStew;
+
+        //字段职责：搬运者把生肉转化为祭坛供奉营养时使用的工作。
+        public static JobDef NingshaRace_Job_FillWisdomSerpentAltar;
+
+        //字段职责：殖民者在满值祭坛前祈求任务时使用的工作。
+        public static JobDef NingshaRace_Job_ConsultWisdomSerpentAltar;
+
+        //字段职责：智慧之蛇祭坛发布的小型遗迹任务定义。
+        public static QuestScriptDef NingshaRace_Quest_AltarSmallRuins;
+
+        //字段职责：智慧之蛇祭坛发布的清剿蚁巢任务定义。
+        public static QuestScriptDef NingshaRace_Quest_AltarAntNest;
+
+        //字段职责：智慧之蛇祭坛发布的解救同胞任务定义。
+        public static QuestScriptDef NingshaRace_Quest_AltarRescueKinsfolk;
+
         //字段职责：搬运者将凝砂卵放入孵化巢时使用的工作。
         public static JobDef NingshaRace_Job_PlaceEggInHatchNest;
 
@@ -71,6 +101,12 @@ namespace NingshaRaceLib.Core.Defs
         //字段职责：侵蚀体 Mutant 持有的永久实体状态 Hediff。
         public static HediffDef NingshaRace_ErosionBody;
 
+        //字段职责：以严重度保存一至二十次凝砂族蜕皮层数的可见状态。
+        public static HediffDef NingshaRace_MoltingLayers;
+
+        //字段职责：蜕皮营养达到六十后阻止原版立即死亡的隐藏就绪状态。
+        public static HediffDef NingshaRace_MoltingRescueReady;
+
         //字段职责：将凝砂族永久转换为原版实体阵营侵蚀体的 MutantDef。
         public static MutantDef NingshaRace_ErosionBodyMutant;
 
@@ -100,6 +136,9 @@ namespace NingshaRaceLib.Core.Defs
 
         //字段职责：凝砂族战士必定携带的蛇腹剑武器。
         public static ThingDef NingshaRace_SnakeBellySword;
+
+        //字段职责：小型遗迹武器池中的凝砂族飞针武器。
+        public static ThingDef NingshaRace_FlyingNeedle;
 
         //字段职责：凝砂族地刺召唤物远程武器。
         public static ThingDef NingshaRace_GroundSpikeSummoner;
@@ -211,6 +250,33 @@ namespace NingshaRaceLib.Core.Defs
 
         //字段职责：生成蚁穴受击时追踪入侵者的爆浆蚁。
         public static PawnKindDef NingshaRace_DesertPitBoomAntKind;
+
+        //字段职责：小型遗迹使用的敌对凝砂木乃伊PawnKind。
+        public static PawnKindDef NingshaRace_GiantTombMummyKind;
+
+        //字段职责：解救任务临时承载待救凝砂族的隐藏友方阵营。
+        public static FactionDef NingshaRace_RescueFaction;
+
+        //字段职责：小型遗迹的专用原版Site世界物体定义。
+        public static WorldObjectDef NingshaRace_AltarSmallRuinsSite;
+
+        //字段职责：清剿蚁巢的专用原版Site世界物体定义。
+        public static WorldObjectDef NingshaRace_AltarAntNestSite;
+
+        //字段职责：解救同胞地表地点的专用原版Site世界物体定义。
+        public static WorldObjectDef NingshaRace_AltarRescueSurfaceSite;
+
+        //字段职责：解救同胞地下地点的专用原版Site世界物体定义。
+        public static WorldObjectDef NingshaRace_AltarRescueUndergroundSite;
+
+        //字段职责：小型遗迹地图附加目标使用的SitePart定义。
+        public static SitePartDef NingshaRace_AltarSmallRuinsPart;
+
+        //字段职责：固定蚁巢地图附加目标使用的SitePart定义。
+        public static SitePartDef NingshaRace_AltarAntNestPart;
+
+        //字段职责：解救同胞地图附加目标使用的SitePart定义。
+        public static SitePartDef NingshaRace_AltarRescuePart;
 
         //字段职责：工蚁把实体资源搬到本巢储藏格时使用的工作。
         public static JobDef NingshaRace_Job_DesertPitAntHaul;

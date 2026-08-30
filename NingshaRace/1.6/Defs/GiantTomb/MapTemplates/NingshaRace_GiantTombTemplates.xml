@@ -103,6 +103,7 @@
 
   <NingshaRaceLib.GiantTomb.Config.NingshaGiantTombLayoutDef>
     <defName>NingshaRace_GiantTombLayout</defName>
+    <requiredMapSize>200</requiredMapSize>
     <modules>
       <li>NingshaRace_GiantTomb_Storage01</li><li>NingshaRace_GiantTomb_Storage02</li>
       <li>NingshaRace_GiantTomb_Crossroads</li><li>NingshaRace_GiantTomb_WideTurn</li>

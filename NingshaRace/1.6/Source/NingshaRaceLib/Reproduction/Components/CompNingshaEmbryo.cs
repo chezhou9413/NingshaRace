@@ -7,6 +7,7 @@ using Verse;
 using NingshaRaceLib.Core.Defs;
 using NingshaRaceLib.Reproduction.Buildings;
 using NingshaRaceLib.Reproduction.Utility;
+using NingshaRaceLib.Molting.Components;
 
 namespace NingshaRaceLib.Reproduction.Components
 {
@@ -19,6 +20,9 @@ namespace NingshaRaceLib.Reproduction.Components
         //字段职责：保存子代破壳时继承的阵营。
         private Faction hatcheeFaction;
 
+        //字段职责：保存受精卵创建瞬间母方蜕皮次数快照，父方和母方后续变化均不参与。
+        private int inheritedMoltingCount;
+
         //属性职责：提供当前受精卵的孵化参数。
         public CompProperties_NingshaEmbryo Props => (CompProperties_NingshaEmbryo)props;
 
@@ -27,6 +31,9 @@ namespace NingshaRaceLib.Reproduction.Components
 
         //属性职责：提供破壳子代应当使用的阵营。
         public Faction HatcheeFaction => hatcheeFaction;
+
+        //属性职责：提供子代破壳时应继承的母方蜕皮次数快照。
+        public int InheritedMoltingCount => inheritedMoltingCount;
 
         //属性职责：判断受精卵当前是否处于凝砂孵化巢内。
         public bool IsInsideHatchNest => parent.ParentHolder is Building_NingshaHatchNest;
@@ -47,21 +54,23 @@ namespace NingshaRaceLib.Reproduction.Components
             }
         }
 
-        //函数职责：写入产卵时的父母来源和阵营。
+        //函数职责：写入产卵时的父母来源、阵营和母方蜕皮次数快照。
         public void Initialize(Pawn mother, Pawn father, Faction faction)
         {
             CompHasPawnSources sourceComp = parent.TryGetComp<CompHasPawnSources>();
             sourceComp?.AddSource(mother);
             sourceComp?.AddSource(father);
             hatcheeFaction = faction ?? mother?.Faction ?? Faction.OfPlayer;
+            inheritedMoltingCount = mother?.TryGetComp<CompNingshaMolting>()?.MoltingCount ?? 0;
         }
 
-        //函数职责：保存孵化进度与破壳阵营。
+        //函数职责：保存孵化进度、破壳阵营和母方蜕皮次数快照。
         public override void PostExposeData()
         {
             base.PostExposeData();
             Scribe_Values.Look(ref hatchProgress, "ningshaHatchProgress", 0f);
             Scribe_References.Look(ref hatcheeFaction, "ningshaHatcheeFaction");
+            Scribe_Values.Look(ref inheritedMoltingCount, "inheritedMoltingCount", 0);
         }
 
         //函数职责：仅在凝砂孵化巢与安全温度条件同时成立时推进孵化。

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义凝砂族蜕皮层数显示与隐藏防死亡就绪状态。 -->
+  <HediffDef>
+    <defName>NingshaRace_MoltingLayers</defName>
+    <label>蜕皮者</label>
+    <description>该凝砂族通过一次次蜕皮强化了身体结构。具体属性修正由蜕皮次数线性计算。</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <maxSeverity>20</maxSeverity>
+    <initialSeverity>1</initialSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <stages>
+      <li><minSeverity>0</minSeverity><label>蜕皮者</label></li>
+    </stages>
+  </HediffDef>
+  <HediffDef>
+    <defName>NingshaRace_MoltingRescueReady</defName>
+    <label>蜕皮保命就绪</label>
+    <description>已储备足够营养，可在可治疗的致命伤势发生时消耗营养保命。</description>
+    <hediffClass>NingshaRaceLib.Molting.Health.Hediff_MoltingRescueReady</hediffClass>
+    <isBad>false</isBad>
+    <preventsDeath>true</preventsDeath>
+    <scenarioCanAdd>false</scenarioCanAdd>
+  </HediffDef>
+</Defs>
