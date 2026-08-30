@@ -8,8 +8,12 @@ using NingshaRaceLib.Core.Defs;
 namespace NingshaRaceLib.Molting.Components
 {
     //类职责：保存凝砂族进食累计营养与蜕皮次数，并维护防死亡就绪状态。
+    [StaticConstructorOnStartup]
     public sealed class CompNingshaMolting : ThingComp
     {
+        //字段职责：缓存蜕皮命令使用的蛇蜕专用图标。
+        private static readonly Texture2D MoltingIcon = ContentFinder<Texture2D>.Get("UI/Commands/Molting");
+
         //字段职责：保存通过实际摄入营养累计的蜕皮资源。
         private float moltingNutrition;
 
@@ -73,13 +77,21 @@ namespace NingshaRaceLib.Molting.Components
             SynchronizeHediffs();
         }
 
-        //函数职责：在未满二十层且营养充足时消耗一百并立即增加一层蜕皮。
+        //函数职责：在地图上消耗一百营养完成主动蜕皮，增加一层状态并在脚下留下蛇蜕。
         public void PerformMolting()
         {
-            if (moltingCount >= 20 || moltingNutrition < Props.nutritionCapacity)
+            if (moltingCount >= 20 || moltingNutrition < Props.nutritionCapacity || !Pawn.Spawned)
             {
                 return;
             }
+
+            Thing shedSkin = ThingMaker.MakeThing(DefOfRefs.NingshaRace_ShedSkin);
+            if (!GenPlace.TryPlaceThing(shedSkin, Pawn.Position, Pawn.Map, ThingPlaceMode.Near))
+            {
+                Log.Error("[NingshaRace] 无法在" + Pawn.LabelShortCap + "附近放置主动蜕皮产生的蛇蜕。");
+                return;
+            }
+
             moltingNutrition -= Props.nutritionCapacity;
             moltingCount++;
             SynchronizeHediffs();
@@ -100,21 +112,22 @@ namespace NingshaRaceLib.Molting.Components
             SynchronizeHediffs();
         }
 
-        //函数职责：为未满二十层且营养达到一百的玩家凝砂族显示即时蜕皮命令。
+        //函数职责：为地图上未满二十层且营养达到一百的玩家凝砂族显示即时蜕皮命令。
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
             foreach (Gizmo gizmo in base.CompGetGizmosExtra())
             {
                 yield return gizmo;
             }
-            if (Pawn.Faction != Faction.OfPlayer || moltingCount >= 20 || moltingNutrition < Props.nutritionCapacity)
+            if (Pawn.Faction != Faction.OfPlayer || !Pawn.Spawned || moltingCount >= 20 || moltingNutrition < Props.nutritionCapacity)
             {
                 yield break;
             }
             yield return new Command_Action
             {
                 defaultLabel = "蜕皮",
-                defaultDesc = "消耗100点蜕皮营养，永久增加一层蜕皮者状态。",
+                defaultDesc = "消耗100点蜕皮营养，永久增加一层蜕皮者状态，并在脚下留下一个蛇蜕。",
+                icon = MoltingIcon,
                 action = PerformMolting
             };
         }

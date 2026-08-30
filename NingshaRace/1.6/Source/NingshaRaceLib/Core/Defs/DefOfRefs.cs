@@ -47,6 +47,9 @@ namespace NingshaRaceLib.Core.Defs
         //字段职责：食用炙热地煲后持续一天的正面心情记忆。
         public static ThoughtDef NingshaRace_AteScorchingEarthStew;
 
+        //字段职责：凝砂族主动蜕皮后在脚下留下的蛇蜕物品。
+        public static ThingDef NingshaRace_ShedSkin;
+
         //字段职责：搬运者把生肉转化为祭坛供奉营养时使用的工作。
         public static JobDef NingshaRace_Job_FillWisdomSerpentAltar;
 
