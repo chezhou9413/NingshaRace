@@ -36,12 +36,13 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
             TerrainDef sandstoneRough = DefDatabase<TerrainDef>.GetNamed("Sandstone_Rough");
             ModuleBase rockNoise = new Perlin(0.055000000819563866, 2.0, 0.5, 4, Rand.Int, QualityMode.Medium);
             ModuleBase sandNoise = new Perlin(0.08500000089406967, 2.0, 0.5, 4, Rand.Int, QualityMode.Medium);
+            RoofDef roofDef = map.generatorDef.roofDef;
             using (map.pathing.DisableIncrementalScope())
             {
                 int processedCells = 0;
                 foreach (IntVec3 cell in map.AllCells)
                 {
-                    map.roofGrid.SetRoof(cell, RoofDefOf.RoofRockThick);
+                    map.roofGrid.SetRoof(cell, roofDef);
                     if (DesertPitGenUtility.IsCave(cell))
                     {
                         TerrainDef terrain = ChooseCaveTerrain(map, data, cell, rockNoise, sandNoise, sandstoneRough);
@@ -127,7 +128,8 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
         private static void PlaceCollapseRocks(Map map)
         {
             DesertPitLayoutData data = DesertPitGenUtility.GetLayoutData();
-            ThingDef sandstoneChunk = DefDatabase<ThingDef>.GetNamed("ChunkSandstone");
+            ThingDef collapsedRock = DefOfRefs.NingshaRace_DesertPitCollapsedRockLarge;
+            ThingDef sandstoneRubble = DefOfRefs.NingshaRace_DesertPitSandstoneRubbleSmall;
             foreach (IntVec3 collapse in data.Collapses)
             {
                 foreach (IntVec3 cell in GenRadial.RadialCellsAround(collapse, Rand.Range(3.5f, 6f), useCenter: true))
@@ -137,13 +139,13 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
                         continue;
                     }
 
-                    if (Rand.Chance(0.24f) && !data.ProtectedRouteCells.Contains(cell) && cell.GetFirstThing(map, ThingDefOf.CollapsedRocks) == null)
+                    if (Rand.Chance(0.24f) && !data.ProtectedRouteCells.Contains(cell) && cell.GetFirstThing(map, collapsedRock) == null)
                     {
-                        GenSpawn.Spawn(ThingDefOf.CollapsedRocks, cell, map);
+                        GenSpawn.Spawn(collapsedRock, cell, map);
                     }
-                    else if (Rand.Chance(0.32f) && cell.GetFirstThing(map, sandstoneChunk) == null)
+                    else if (Rand.Chance(0.32f) && cell.GetFirstThing(map, sandstoneRubble) == null)
                     {
-                        GenSpawn.Spawn(sandstoneChunk, cell, map);
+                        GenSpawn.Spawn(sandstoneRubble, cell, map);
                     }
 
                     if (Rand.Chance(0.65f))

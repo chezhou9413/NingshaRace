@@ -41,6 +41,27 @@ namespace NingshaRaceLib.AltarMissions.World
             return true;
         }
 
+        //函数职责：校正任务槽后判断指定任务是否是当前登记的智慧之蛇指引。
+        public bool IsRegisteredMission(Quest quest)
+        {
+            ReconcileActiveMission();
+            return quest != null && activeQuestId == quest.id;
+        }
+
+        //函数职责：正式拒绝当前尚未接受的祭坛任务并立即释放全局任务槽。
+        public bool TryRejectOffer(Quest quest)
+        {
+            ReconcileActiveMission();
+            if (quest == null || activeQuestId != quest.id || quest.State != QuestState.NotYetAccepted)
+            {
+                return false;
+            }
+
+            quest.End(QuestEndOutcome.InvalidPreAcceptance, sendLetter: false, playSound: false);
+            activeQuestId = -1;
+            return true;
+        }
+
         //函数职责：在指定任务结束或异常消失后释放全局祭坛任务名额。
         public void Release(int questId)
         {
@@ -79,7 +100,18 @@ namespace NingshaRaceLib.AltarMissions.World
                 return;
             }
             Quest quest = Find.QuestManager.QuestsListForReading.FirstOrDefault(candidate => candidate.id == activeQuestId);
-            if (quest == null || quest.State != QuestState.NotYetAccepted && quest.State != QuestState.Ongoing)
+            if (quest == null)
+            {
+                activeQuestId = -1;
+                return;
+            }
+            if (quest.State == QuestState.NotYetAccepted && quest.dismissed)
+            {
+                quest.End(QuestEndOutcome.InvalidPreAcceptance, sendLetter: false, playSound: false);
+                activeQuestId = -1;
+                return;
+            }
+            if (quest.State != QuestState.NotYetAccepted && quest.State != QuestState.Ongoing)
             {
                 activeQuestId = -1;
             }

@@ -26,6 +26,9 @@ namespace NingshaRaceLib.SandGolem.Utility
         //属性职责：返回沙傀 ThingDef 上配置的汇聚和消散动画持续 Tick。
         public static int AnimationTicks => LifecycleSettings.animationTicks;
 
+        //属性职责：返回沙傀完成汇聚后允许稳定存在的 Tick 总数。
+        public static int LifetimeTicks => LifecycleSettings.lifetimeTicks;
+
         //属性职责：返回沙傀 ThingDef 上配置的低频身份维护间隔。
         public static int MaintenanceIntervalTicks => LifecycleSettings.maintenanceIntervalTicks;
 

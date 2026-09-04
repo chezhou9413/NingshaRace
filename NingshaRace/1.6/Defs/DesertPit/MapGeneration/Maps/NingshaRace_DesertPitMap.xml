@@ -8,6 +8,7 @@
     <ignoreAreaRevealedLetter>true</ignoreAreaRevealedLetter>
     <disableCallAid>true</disableCallAid>
     <forceCaves>true</forceCaves>
+    <roofDef>NingshaRace_DesertPitStableRockRoof</roofDef>
     <pocketMapProperties>
       <biome>NingshaRace_DesertPitBiome</biome>
       <temperature>24</temperature>
@@ -31,6 +32,39 @@
       <li>NingshaRace_DesertPitPots</li>
       <li>NingshaRace_DesertPitDecorations</li>
       <li>NingshaRace_DesertPitPlants</li>
+      <li>Fog</li>
+    </genSteps>
+  </MapGeneratorDef>
+
+  <!-- Def 职责：生成凝砂族专属开局使用的地下殖民地，并执行场景人员与物资投放。 -->
+  <MapGeneratorDef>
+    <defName>NingshaRace_DesertPitStartingMap</defName>
+    <label>凝砂族沙漠地底开局</label>
+    <isUnderground>true</isUnderground>
+    <ignoreAreaRevealedLetter>true</ignoreAreaRevealedLetter>
+    <disableCallAid>true</disableCallAid>
+    <forceCaves>true</forceCaves>
+    <validScenarioMap>true</validScenarioMap>
+    <roofDef>NingshaRace_DesertPitStableRockRoof</roofDef>
+    <genSteps>
+      <li>NingshaRace_DesertPitLayout</li>
+      <li>NingshaRace_DesertPitTerrain</li>
+      <li>NingshaRace_DesertPitExit</li>
+      <li>NingshaRace_DesertPitScatter</li>
+      <li>NingshaRace_DesertPitMineralVeins</li>
+      <li>NingshaRace_DesertPitGlow</li>
+      <li>NingshaRace_DesertPitLandmarks</li>
+      <li>NingshaRace_DesertPitHydrology</li>
+      <li>NingshaRace_DesertPitEnergySites</li>
+      <li>NingshaRace_DesertPitWisdomSerpentAltar</li>
+      <li>NingshaRace_GiantTombCoffinEntrance</li>
+      <li>NingshaRace_DesertPitAntColonies</li>
+      <li>NingshaRace_DesertPitCaveEcology</li>
+      <li>NingshaRace_DesertPitRelics</li>
+      <li>NingshaRace_DesertPitPots</li>
+      <li>NingshaRace_DesertPitDecorations</li>
+      <li>NingshaRace_DesertPitPlants</li>
+      <li>ScenParts</li>
       <li>Fog</li>
     </genSteps>
   </MapGeneratorDef>

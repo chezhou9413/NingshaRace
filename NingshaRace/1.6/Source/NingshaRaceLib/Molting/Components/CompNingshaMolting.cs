@@ -4,6 +4,7 @@ using UnityEngine;
 using Verse;
 
 using NingshaRaceLib.Core.Defs;
+using NingshaRaceLib.Molting.UI;
 
 namespace NingshaRaceLib.Molting.Components
 {
@@ -28,6 +29,12 @@ namespace NingshaRaceLib.Molting.Components
 
         //属性职责：提供当前蜕皮营养。
         public float MoltingNutrition => moltingNutrition;
+
+        //属性职责：提供蜕皮营养相对容量的零至一进度比例。
+        public float NutritionRatio => Mathf.Clamp01(moltingNutrition / Props.nutritionCapacity);
+
+        //属性职责：提供完成下一次主动蜕皮仍需积累的营养值。
+        public float MissingMoltingNutrition => Mathf.Max(0f, Props.nutritionCapacity - moltingNutrition);
 
         //属性职责：提供钳制在零至二十的蜕皮层数。
         public int MoltingCount => moltingCount;
@@ -112,24 +119,39 @@ namespace NingshaRaceLib.Molting.Components
             SynchronizeHediffs();
         }
 
-        //函数职责：为地图上未满二十层且营养达到一百的玩家凝砂族显示即时蜕皮命令。
+        //函数职责：为地图上的玩家凝砂族常显营养条和带准确禁用原因的主动蜕皮命令。
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
             foreach (Gizmo gizmo in base.CompGetGizmosExtra())
             {
                 yield return gizmo;
             }
-            if (Pawn.Faction != Faction.OfPlayer || !Pawn.Spawned || moltingCount >= 20 || moltingNutrition < Props.nutritionCapacity)
+            if (Pawn.Faction != Faction.OfPlayer || !Pawn.Spawned)
             {
                 yield break;
             }
-            yield return new Command_Action
+
+            yield return new Gizmo_NingshaMoltingNutrition
+            {
+                molting = this
+            };
+
+            Command_Action command = new Command_Action
             {
                 defaultLabel = "蜕皮",
                 defaultDesc = "消耗100点蜕皮营养，永久增加一层蜕皮者状态，并在脚下留下一个蛇蜕。",
                 icon = MoltingIcon,
                 action = PerformMolting
             };
+            if (moltingCount >= 20)
+            {
+                command.Disable("已经达到20层蜕皮上限。");
+            }
+            else if (moltingNutrition < Props.nutritionCapacity)
+            {
+                command.Disable("还需要 " + MissingMoltingNutrition.ToString("0.##") + " 点蜕皮营养。");
+            }
+            yield return command;
         }
 
         //函数职责：显示蜕皮次数、营养和当前保命就绪状态。

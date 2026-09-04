@@ -30,6 +30,9 @@ namespace NingshaRaceLib.SandGolem.Rendering
         //字段职责：记录当前动画开始的游戏 Tick。
         public int phaseStartTick;
 
+        //字段职责：记录沙傀稳定存在阶段结束的绝对游戏 Tick。
+        public int expireTick;
+
         //字段职责：记录沙傀当前生命周期阶段。
         public SandGolemPhase phase;
 
@@ -49,6 +52,7 @@ namespace NingshaRaceLib.SandGolem.Rendering
             this.textures = textures;
             phase = SandGolemPhase.Gathering;
             phaseStartTick = Find.TickManager.TicksGame;
+            expireTick = phaseStartTick + SandGolemUtility.AnimationTicks + SandGolemUtility.LifetimeTicks;
         }
 
         //函数职责：保存和读取沙傀状态中可持久化的引用和阶段数据。
@@ -57,6 +61,7 @@ namespace NingshaRaceLib.SandGolem.Rendering
             Scribe_References.Look(ref caster, "caster");
             Scribe_References.Look(ref golem, "golem");
             Scribe_Values.Look(ref phaseStartTick, "phaseStartTick");
+            Scribe_Values.Look(ref expireTick, "expireTick", -1);
             Scribe_Values.Look(ref phase, "phase", SandGolemPhase.Gathering);
             Scribe_Values.Look(ref destroyAfterDissolve, "destroyAfterDissolve");
         }
@@ -210,6 +215,28 @@ namespace NingshaRaceLib.SandGolem.Rendering
         public bool PhaseFinished(int tick)
         {
             return tick - phaseStartTick >= SandGolemUtility.AnimationTicks;
+        }
+
+        //函数职责：返回指定 Tick 时沙傀稳定阶段尚可存在的 Tick 数，汇聚阶段显示完整寿命。
+        public int RemainingLifetimeTicksAt(int tick)
+        {
+            if (phase == SandGolemPhase.Gathering)
+            {
+                return SandGolemUtility.LifetimeTicks;
+            }
+            return Mathf.Max(0, expireTick - tick);
+        }
+
+        //函数职责：返回指定 Tick 时沙傀寿命条使用的零至一比例。
+        public float LifetimeRatioAt(int tick)
+        {
+            return Mathf.Clamp01(RemainingLifetimeTicksAt(tick) / (float)SandGolemUtility.LifetimeTicks);
+        }
+
+        //函数职责：判断稳定阶段沙傀是否已经达到绝对到期时间。
+        public bool LifetimeExpiredAt(int tick)
+        {
+            return phase == SandGolemPhase.Stable && tick >= expireTick;
         }
 
         //函数职责：切换到沙傀稳定存在阶段。

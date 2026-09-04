@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义沙漠巨坑不会因玩家拆除支撑物而坍塌的天然厚岩顶。 -->
+  <RoofDef>
+    <defName>NingshaRace_DesertPitStableRockRoof</defName>
+    <label>稳定厚岩顶</label>
+    <isNatural>true</isNatural>
+    <isThickRoof>true</isThickRoof>
+    <canCollapse>false</canCollapse>
+    <collapseLeavingThingDef>NingshaRace_DesertPitCollapsedRockLarge</collapseLeavingThingDef>
+    <filthLeaving>Filth_RubbleRock</filthLeaving>
+  </RoofDef>
+</Defs>

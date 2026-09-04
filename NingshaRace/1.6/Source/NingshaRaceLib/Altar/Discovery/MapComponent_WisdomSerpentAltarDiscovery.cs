@@ -3,6 +3,7 @@ using RimWorld;
 using Verse;
 
 using NingshaRaceLib.Core.Defs;
+using NingshaRaceLib.DesertPit.Utility;
 
 namespace NingshaRaceLib.Altar.Discovery
 {
@@ -21,7 +22,7 @@ namespace NingshaRaceLib.Altar.Discovery
         public override void MapComponentTick()
         {
             base.MapComponentTick();
-            if (discoveryLetterSent || map.generatorDef != DefOfRefs.NingshaRace_DesertPitMap
+            if (discoveryLetterSent || !DesertPitMapUtility.IsDesertPitMap(map)
                 || !map.IsHashIntervalTick(60) || !map.mapPawns.FreeColonistsSpawned.Any())
             {
                 return;

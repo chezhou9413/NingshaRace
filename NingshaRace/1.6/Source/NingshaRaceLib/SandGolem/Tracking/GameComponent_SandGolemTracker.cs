@@ -101,6 +101,12 @@ namespace NingshaRaceLib.SandGolem.Tracking
                     continue;
                 }
 
+                if (state.LifetimeExpiredAt(tick))
+                {
+                    BeginDissolve(state.golem, destroyPawn: true);
+                    continue;
+                }
+
                 if (state.phase == SandGolemPhase.Dissolving && state.PhaseFinished(tick))
                 {
                     FinishDissolve(state);

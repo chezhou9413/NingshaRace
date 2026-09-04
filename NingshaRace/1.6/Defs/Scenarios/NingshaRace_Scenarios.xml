@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义凝砂族专属的沙漠地底殖民开局。 -->
+
+  <!-- Def 职责：提供三名凝砂族携带专属装备、直接在随机沙漠地下开始的固定场景。 -->
+  <ScenarioDef ParentName="ScenarioBase">
+    <defName>NingshaRace_DesertPitStart</defName>
+    <label>深砂遗民</label>
+    <description>你们是三名离开旧聚落的凝砂族。地表的酷热与追猎迫使队伍再次潜入沙海之下，在一座陌生巨坑中建立新家。这里没有可以选择的安稳落脚点，命运只会把你们送往世界上的某片沙漠。
+
+三名成员分别携带蛇腹剑、飞针和沙瓶。巨坑拥有稳定的厚岩顶、独特生态与有限资源，也隔绝了太阳能。</description>
+    <scenario>
+      <summary>三名携带专属武器的凝砂族，在随机沙漠区域的地下巨坑中建立殖民地。</summary>
+      <parts>
+        <li Class="NingshaRaceLib.Scenarios.Parts.ScenPart_ForcedDesertPitStart">
+          <def>NingshaRace_ForcedDesertPitStart</def>
+          <mapGenerator>NingshaRace_DesertPitStartingMap</mapGenerator>
+          <layerDef>Surface</layerDef>
+          <visible>false</visible>
+        </li>
+
+        <li Class="ScenPart_ConfigPage_ConfigureStartingPawns_KindDefs">
+          <def>ConfigurePawnsKindDefs</def>
+          <pawnChoiceCount>8</pawnChoiceCount>
+          <leftBehindPawnKind>NingshaRace_Colonist</leftBehindPawnKind>
+          <kindCounts>
+            <li>
+              <kindDef>NingshaRace_Colonist</kindDef>
+              <count>3</count>
+              <requiredAtStart>true</requiredAtStart>
+            </li>
+          </kindCounts>
+        </li>
+
+        <li Class="ScenPart_PlayerPawnsArriveMethod">
+          <def>PlayerPawnsArriveMethod</def>
+          <method>Standing</method>
+          <visible>false</visible>
+        </li>
+
+        <li Class="NingshaRaceLib.Scenarios.Parts.ScenPart_NingshaStartingEquipment">
+          <def>NingshaRace_StartingEquipment</def>
+          <weapons>
+            <li>NingshaRace_SnakeBellySword</li>
+            <li>NingshaRace_FlyingNeedle</li>
+            <li>NingshaRace_SandBottle</li>
+          </weapons>
+        </li>
+
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>MealSurvivalPack</thingDef>
+          <count>30</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>MedicineIndustrial</thingDef>
+          <count>15</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>ComponentIndustrial</thingDef>
+          <count>20</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>Steel</thingDef>
+          <count>300</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>WoodLog</thingDef>
+          <count>200</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>BlocksSandstone</thingDef>
+          <count>150</count>
+        </li>
+        <li Class="ScenPart_StartingThing_Defined">
+          <def>StartingThing_Defined</def>
+          <thingDef>Silver</thingDef>
+          <count>500</count>
+        </li>
+      </parts>
+    </scenario>
+  </ScenarioDef>
+</Defs>

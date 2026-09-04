@@ -4,6 +4,7 @@ using NingshaRaceLib.SandGolem.Health;
 using NingshaRaceLib.SandGolem.Lifecycle;
 using NingshaRaceLib.SandGolem.Rendering;
 using NingshaRaceLib.SandGolem.Tracking;
+using NingshaRaceLib.SandGolem.UI;
 using NingshaRaceLib.SandGolem.Utility;
 using RimWorld;
 using System.Collections.Generic;
@@ -182,6 +183,16 @@ namespace NingshaRaceLib.SandGolem.Patches
                 yield break;
             }
 
+            GameComponent_SandGolemTracker tracker = GameComponent_SandGolemTracker.Current;
+            SandGolemRenderState state = null;
+            if (tracker != null && tracker.TryGetState(__instance, out state) && state.phase != SandGolemPhase.Dissolving)
+            {
+                yield return new Gizmo_SandGolemLifetime
+                {
+                    state = state
+                };
+            }
+
             Command_Action command = new Command_Action
             {
                 defaultLabel = "收回沙傀",
@@ -189,11 +200,11 @@ namespace NingshaRaceLib.SandGolem.Patches
                 icon = RecallIcon,
                 action = delegate
                 {
-                    GameComponent_SandGolemTracker.Current?.BeginDissolve(__instance, destroyPawn: true);
+                    tracker?.BeginDissolve(__instance, destroyPawn: true);
                 }
             };
 
-            if (GameComponent_SandGolemTracker.Current != null && GameComponent_SandGolemTracker.Current.TryGetState(__instance, out SandGolemRenderState state) && state.phase == SandGolemPhase.Dissolving)
+            if (state?.phase == SandGolemPhase.Dissolving)
             {
                 command.Disabled = true;
                 command.disabledReason = "沙傀正在消散";

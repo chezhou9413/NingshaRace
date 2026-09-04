@@ -7,6 +7,7 @@ using NingshaRaceLib.Core.Defs;
 using NingshaRaceLib.DesertPit.AntColony.Components;
 using NingshaRaceLib.DesertPit.Ecology.Config;
 using NingshaRaceLib.DesertPit.Generation.Utility;
+using NingshaRaceLib.DesertPit.Utility;
 
 namespace NingshaRaceLib.DesertPit.Ecology.Utility
 {
@@ -19,6 +20,11 @@ namespace NingshaRaceLib.DesertPit.Ecology.Utility
         //函数职责：取得地图所属沙漠巨坑生物群系上的生态配置。
         public static DefModExtension_DesertPitEcology GetSettings(Map map)
         {
+            if (DesertPitMapUtility.IsDesertPitMap(map))
+            {
+                return DefOfRefs.NingshaRace_DesertPitBiome.GetModExtension<DefModExtension_DesertPitEcology>();
+            }
+
             return map?.Biome?.GetModExtension<DefModExtension_DesertPitEcology>();
         }
 

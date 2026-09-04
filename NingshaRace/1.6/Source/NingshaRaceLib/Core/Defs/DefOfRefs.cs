@@ -236,6 +236,18 @@ namespace NingshaRaceLib.Core.Defs
         //字段职责：沙漠巨坑地下沙岩洞穴使用的口袋地图生成器。
         public static MapGeneratorDef NingshaRace_DesertPitMap;
 
+        //字段职责：凝砂族专属场景直接建立地下殖民地时使用的地图生成器。
+        public static MapGeneratorDef NingshaRace_DesertPitStartingMap;
+
+        //字段职责：沙漠巨坑使用的不可坍塌天然厚岩顶。
+        public static RoofDef NingshaRace_DesertPitStableRockRoof;
+
+        //字段职责：沙漠巨坑塌方区生成的可拆除大型岩堆。
+        public static ThingDef NingshaRace_DesertPitCollapsedRockLarge;
+
+        //字段职责：沙漠巨坑塌方区生成的可拆除小型砂岩碎石。
+        public static ThingDef NingshaRace_DesertPitSandstoneRubbleSmall;
+
         //字段职责：沙漠巨坑巢群使用的可攻击蚁穴建筑。
         public static ThingDef NingshaRace_DesertPitAntNest;
 

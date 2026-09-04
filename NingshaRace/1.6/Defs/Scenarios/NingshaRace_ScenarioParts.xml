@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义凝砂族沙漠地底开局使用的固定场景部件。 -->
+
+  <!-- Def 职责：跳过手动选址并把殖民地固定到沙漠世界格和地下地图生成器。 -->
+  <ScenPartDef>
+    <defName>NingshaRace_ForcedDesertPitStart</defName>
+    <label>沙漠地底出生地</label>
+    <description>殖民地会自动建立在随机沙漠区域的地下。</description>
+    <category>Fixed</category>
+    <scenPartClass>NingshaRaceLib.Scenarios.Parts.ScenPart_ForcedDesertPitStart</scenPartClass>
+    <summaryPriority>480</summaryPriority>
+    <selectionWeight>0</selectionWeight>
+    <canBeRandomlyAdded>false</canBeRandomlyAdded>
+    <canBePlayerAddedRemoved>false</canBePlayerAddedRemoved>
+  </ScenPartDef>
+
+  <!-- Def 职责：为三名凝砂族开局成员分别装备一件专属武器。 -->
+  <ScenPartDef>
+    <defName>NingshaRace_StartingEquipment</defName>
+    <label>凝砂族开局装备</label>
+    <description>三名凝砂族分别携带蛇腹剑、飞针和沙瓶。</description>
+    <category>Fixed</category>
+    <scenPartClass>NingshaRaceLib.Scenarios.Parts.ScenPart_NingshaStartingEquipment</scenPartClass>
+    <summaryPriority>450</summaryPriority>
+    <selectionWeight>0</selectionWeight>
+    <canBeRandomlyAdded>false</canBeRandomlyAdded>
+    <canBePlayerAddedRemoved>false</canBePlayerAddedRemoved>
+  </ScenPartDef>
+</Defs>

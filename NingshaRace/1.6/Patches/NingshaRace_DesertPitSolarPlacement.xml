@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 文件职责：给原版太阳能板追加仅针对沙漠巨坑的放置限制。 -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="SolarGenerator"]/placeWorkers</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="SolarGenerator"]/placeWorkers</xpath>
+      <value>
+        <li>NingshaRaceLib.DesertPit.Placement.PlaceWorker_RejectSolarInDesertPit</li>
+      </value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="SolarGenerator"]</xpath>
+      <value>
+        <placeWorkers>
+          <li>NingshaRaceLib.DesertPit.Placement.PlaceWorker_RejectSolarInDesertPit</li>
+        </placeWorkers>
+      </value>
+    </nomatch>
+  </Operation>
+</Patch>

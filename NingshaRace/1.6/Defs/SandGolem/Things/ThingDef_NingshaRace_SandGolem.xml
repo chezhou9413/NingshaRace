@@ -8,6 +8,7 @@
     <modExtensions>
       <li Class="NingshaRaceLib.SandGolem.Defs.SandGolemDefExtension">
         <animationTicks>120</animationTicks>
+        <lifetimeTicks>60000</lifetimeTicks>
         <maintenanceIntervalTicks>250</maintenanceIntervalTicks>
         <fallbackSkillLevel>6</fallbackSkillLevel>
       </li>

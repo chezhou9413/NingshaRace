@@ -142,6 +142,9 @@
     <abilityWhitelist>
       <li>NingshaRace_Ability_ErosionBodyPetrifyingSandwave</li>
     </abilityWhitelist>
+    <killedLeavings>
+      <Plasteel>8</Plasteel>
+    </killedLeavings>
     <tools>
       <li>
         <label>左爪</label>

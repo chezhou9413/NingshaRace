@@ -9,6 +9,9 @@ namespace NingshaRaceLib.SandGolem.Defs
         //字段职责：定义沙傀汇聚与消散动画持续的游戏 Tick 数。
         public int animationTicks = 120;
 
+        //字段职责：定义沙傀完成汇聚后能够稳定存在的游戏 Tick 数。
+        public int lifetimeTicks = 60000;
+
         //字段职责：定义沙傀无需求、无关系状态的维护间隔。
         public int maintenanceIntervalTicks = 250;
 
@@ -30,6 +33,10 @@ namespace NingshaRaceLib.SandGolem.Defs
             if (maintenanceIntervalTicks <= 0)
             {
                 yield return "沙傀 maintenanceIntervalTicks 必须大于零。";
+            }
+            if (lifetimeTicks <= 0)
+            {
+                yield return "沙傀 lifetimeTicks 必须大于零。";
             }
             if (fallbackSkillLevel < 0 || fallbackSkillLevel > 20)
             {

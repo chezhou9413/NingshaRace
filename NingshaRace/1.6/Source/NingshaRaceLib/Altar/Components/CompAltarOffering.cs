@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -8,6 +7,7 @@ using Verse.AI;
 using NingshaRaceLib.AltarMissions.Core;
 using NingshaRaceLib.AltarMissions.Generation;
 using NingshaRaceLib.AltarMissions.World;
+using NingshaRaceLib.Altar.Jobs;
 using NingshaRaceLib.Core.Defs;
 
 namespace NingshaRaceLib.Altar.Components
@@ -63,44 +63,26 @@ namespace NingshaRaceLib.Altar.Components
             return text;
         }
 
-        //函数职责：为可操作的自由殖民者提供三百Tick祭坛祈求工作。
+        //函数职责：为可操作的自由殖民者提供祭坛填充与三百Tick祈求任务。
         public override IEnumerable<FloatMenuOption> CompFloatMenuOptions(Pawn selPawn)
         {
             foreach (FloatMenuOption option in base.CompFloatMenuOptions(selPawn))
             {
                 yield return option;
             }
-            if (!selPawn.IsColonistPlayerControlled || !selPawn.CanReach(parent, PathEndMode.Touch, Danger.Deadly))
+            if (!selPawn.IsColonistPlayerControlled)
             {
                 yield break;
             }
+
+            yield return MakeManualFillOption(selPawn, includePawnName: false);
             if (!OccupiedByPlayer)
             {
-                yield return new FloatMenuOption("优先填充智慧之蛇祭坛（需要先占用）", null);
                 yield return new FloatMenuOption("接受智慧之蛇任务（需要先占用）", null);
                 yield break;
             }
             if (!Full)
             {
-                if (!offeringEnabled)
-                {
-                    yield return new FloatMenuOption("优先填充智慧之蛇祭坛（已禁止供奉）", null);
-                    yield return new FloatMenuOption("接受智慧之蛇任务（供奉尚未充满）", null);
-                    yield break;
-                }
-                Thing meat = FindClosestRawMeat(selPawn);
-                if (meat == null)
-                {
-                    yield return new FloatMenuOption("优先填充智慧之蛇祭坛（没有可用生肉）", null);
-                }
-                else
-                {
-                    yield return FloatMenuUtility.DecoratePrioritizedTask(
-                        new FloatMenuOption("优先填充智慧之蛇祭坛", delegate
-                        {
-                            selPawn.jobs.TryTakeOrderedJob(MakeFillJob(meat), JobTag.Misc);
-                        }), selPawn, meat);
-                }
                 yield return new FloatMenuOption("接受智慧之蛇任务（供奉尚未充满）", null);
                 yield break;
             }
@@ -115,6 +97,23 @@ namespace NingshaRaceLib.Altar.Components
                     Job job = JobMaker.MakeJob(DefOfRefs.NingshaRace_Job_ConsultWisdomSerpentAltar, parent);
                     selPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
                 }), selPawn, parent);
+        }
+
+        //函数职责：为多选殖民者逐个提供带姓名的祭坛优先填充选项。
+        public override IEnumerable<FloatMenuOption> CompMultiSelectFloatMenuOptions(IEnumerable<Pawn> selPawns)
+        {
+            foreach (FloatMenuOption option in base.CompMultiSelectFloatMenuOptions(selPawns))
+            {
+                yield return option;
+            }
+
+            foreach (Pawn pawn in selPawns)
+            {
+                if (pawn?.IsColonistPlayerControlled == true)
+                {
+                    yield return MakeManualFillOption(pawn, includePawnName: true);
+                }
+            }
         }
 
         //函数职责：为玩家提供供奉许可开关，并在上帝模式下提供填满供奉和指定任务的调试命令。
@@ -186,7 +185,7 @@ namespace NingshaRaceLib.Altar.Components
         //函数职责：按原料实际营养消耗生肉并把供奉值钳制到容量上限。
         public int ConsumeRawMeat(Thing meat)
         {
-            if (!CanAcceptOffering || !IsAcceptedRawMeat(meat))
+            if (!CanAcceptOffering || !AltarOfferingJobUtility.IsAcceptedRawMeat(meat))
             {
                 return 0;
             }
@@ -208,36 +207,25 @@ namespace NingshaRaceLib.Altar.Components
             return true;
         }
 
-        //函数职责：只接受可食用生肉物品，明确排除尸体、熟食及非肉食物。
-        public static bool IsAcceptedRawMeat(Thing thing)
+        //函数职责：按共享判定结果创建可执行或带明确禁用原因的祭坛填充选项。
+        private FloatMenuOption MakeManualFillOption(Pawn pawn, bool includePawnName)
         {
-            if (thing == null || thing is Corpse || thing.def.ingestible == null)
+            string label = "优先填充智慧之蛇祭坛";
+            if (includePawnName)
             {
-                return false;
+                label += "（" + pawn.LabelShortCap + "）";
             }
-            FoodTypeFlags foodType = thing.def.ingestible.foodType;
-            return (foodType & FoodTypeFlags.Meat) != 0
-                && thing.def.thingCategories != null
-                && thing.def.thingCategories.Exists(category => category.defName == "MeatRaw");
-        }
 
-        //函数职责：为右键优先填充寻找当前殖民者可预留、可到达且未被禁止的最近生肉。
-        private Thing FindClosestRawMeat(Pawn pawn)
-        {
-            List<Thing> candidates = pawn.Map.listerThings.ThingsInGroup(ThingRequestGroup.HaulableEver)
-                .Where(thing => IsAcceptedRawMeat(thing) && thing.Spawned && !thing.IsForbidden(pawn)
-                    && pawn.CanReserveAndReach(thing, PathEndMode.ClosestTouch, Danger.Deadly)).ToList();
-            return GenClosest.ClosestThing_Global_Reachable(
-                pawn.Position, pawn.Map, candidates, PathEndMode.ClosestTouch, TraverseParms.For(pawn), 9999f);
-        }
+            if (!AltarOfferingJobUtility.TryMakeManualFillJob(pawn, parent, out Job job, out string rejectReason))
+            {
+                return new FloatMenuOption(label + "（" + rejectReason + "）", null);
+            }
 
-        //函数职责：按祭坛缺失营养计算最小整数生肉数量并创建一次强制优先填充工作。
-        private Job MakeFillJob(Thing meat)
-        {
-            float nutrition = meat.GetStatValue(StatDefOf.Nutrition);
-            Job job = JobMaker.MakeJob(DefOfRefs.NingshaRace_Job_FillWisdomSerpentAltar, meat, parent);
-            job.count = System.Math.Min(meat.stackCount, Mathf.CeilToInt(MissingNutrition / nutrition));
-            return job;
+            return FloatMenuUtility.DecoratePrioritizedTask(
+                new FloatMenuOption(label, delegate
+                {
+                    pawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
+                }), pawn, parent);
         }
     }
 }

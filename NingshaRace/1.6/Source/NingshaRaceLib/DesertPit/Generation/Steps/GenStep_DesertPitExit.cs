@@ -10,13 +10,13 @@ using NingshaRaceLib.DesertPit.Generation.Utility;
 
 namespace NingshaRaceLib.DesertPit.Generation.Steps
 {
-    //类职责：在沙漠巨坑主洞室放置返回地表的洞穴出口并绑定原入口。
+    //类职责：确定沙漠巨坑主洞室出生点，并为口袋地图放置返回地表的洞穴出口。
     public class GenStep_DesertPitExit : GenStep
     {
         //属性职责：提供当前生成步骤的稳定随机种子片段。
         public override int SeedPart => 914027333;
 
-        //函数职责：清理主洞室安全区、生成 CaveExit 并设置玩家进入点。
+        //函数职责：清理主洞室安全区、设置玩家进入点，并在口袋地图生成期间绑定洞穴出口。
         public override void Generate(Map map, GenStepParams parms)
         {
             DesertPitGenUtility.SetGenerationStatus("洞穴出口");
@@ -24,10 +24,10 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
             IntVec3 exitCell = FindExitCell(map, data);
             DesertPitGenUtility.ClearSafeArea(map, exitCell, 4.5f);
 
-            PocketMapExit exit = GenSpawn.Spawn(ThingMaker.MakeThing(DefOfRefs.NingshaRace_DesertPitCaveExit), exitCell, map) as PocketMapExit;
             MapPortal portal = PocketMapUtility.currentlyGeneratingPortal;
             if (portal != null)
             {
+                PocketMapExit exit = GenSpawn.Spawn(ThingMaker.MakeThing(DefOfRefs.NingshaRace_DesertPitCaveExit), exitCell, map) as PocketMapExit;
                 portal.exit = exit;
             }
 
