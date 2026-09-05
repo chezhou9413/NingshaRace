@@ -36,16 +36,21 @@
     </genSteps>
   </MapGeneratorDef>
 
-  <!-- Def 职责：生成凝砂族专属开局使用的地下殖民地，并执行场景人员与物资投放。 -->
+  <!-- Def 职责：生成与地表入口相连的地下家园，成员与物资在地图完成后直接安置。 -->
   <MapGeneratorDef>
     <defName>NingshaRace_DesertPitStartingMap</defName>
-    <label>凝砂族沙漠地底开局</label>
+    <label>沙漠巨坑内部</label>
     <isUnderground>true</isUnderground>
     <ignoreAreaRevealedLetter>true</ignoreAreaRevealedLetter>
     <disableCallAid>true</disableCallAid>
     <forceCaves>true</forceCaves>
-    <validScenarioMap>true</validScenarioMap>
+    <validScenarioMap>false</validScenarioMap>
     <roofDef>NingshaRace_DesertPitStableRockRoof</roofDef>
+    <pocketMapProperties>
+      <biome>NingshaRace_DesertPitBiome</biome>
+      <temperature>24</temperature>
+      <tileMutators />
+    </pocketMapProperties>
     <genSteps>
       <li>NingshaRace_DesertPitLayout</li>
       <li>NingshaRace_DesertPitTerrain</li>
@@ -64,7 +69,6 @@
       <li>NingshaRace_DesertPitPots</li>
       <li>NingshaRace_DesertPitDecorations</li>
       <li>NingshaRace_DesertPitPlants</li>
-      <li>ScenParts</li>
       <li>Fog</li>
     </genSteps>
   </MapGeneratorDef>

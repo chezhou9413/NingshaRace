@@ -1,10 +1,11 @@
 using UnityEngine;
 using Verse;
 using NingshaRaceLib.UI.Foundation;
+using NingshaRaceLib.UI.Rendering;
 
 namespace NingshaRaceLib.UI.Controls
 {
-    //类职责：提供带文字测量、截断提示和颜色隔离的凝砂文本组件。
+    //类职责：提供带文字测量、截断提示、浅色背景阴影和颜色隔离的凝砂文本组件。
     public static class NingshaText
     {
         //函数职责：在足够行高的矩形内绘制单行文字，超宽时截断并提供完整悬停说明。
@@ -37,7 +38,7 @@ namespace NingshaRaceLib.UI.Controls
                     if (low > 0 && char.IsHighSurrogate(shown[low - 1])) low--;
                     shown = shown.Substring(0, low) + "…";
                 }
-                Widgets.Label(rect, shown);
+                NingshaTextContrast.Draw(rect, shown);
             }
         }
 
@@ -49,7 +50,7 @@ namespace NingshaRaceLib.UI.Controls
                 Text.WordWrap = true;
                 Text.Anchor = TextAnchor.UpperLeft;
                 GUI.color = color ?? NingshaPalette.Muted;
-                Widgets.Label(rect, text);
+                NingshaTextContrast.Draw(rect, text);
             }
         }
     }

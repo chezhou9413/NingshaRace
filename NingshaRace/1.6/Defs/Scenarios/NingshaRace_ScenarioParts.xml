@@ -15,7 +15,7 @@
     <canBePlayerAddedRemoved>false</canBePlayerAddedRemoved>
   </ScenPartDef>
 
-  <!-- Def 职责：跳过手动选址并把殖民地固定到沙漠世界格和地下地图生成器。 -->
+  <!-- Def 职责：跳过手动选址并把地表入口固定到沙漠世界格。 -->
   <ScenPartDef>
     <defName>NingshaRace_ForcedDesertPitStart</defName>
     <label>沙漠地底出生地</label>
@@ -23,6 +23,17 @@
     <category>Fixed</category>
     <scenPartClass>NingshaRaceLib.Scenarios.Parts.ScenPart_ForcedDesertPitStart</scenPartClass>
     <summaryPriority>480</summaryPriority>
+    <selectionWeight>0</selectionWeight>
+    <canBeRandomlyAdded>false</canBeRandomlyAdded>
+    <canBePlayerAddedRemoved>false</canBePlayerAddedRemoved>
+  </ScenPartDef>
+
+  <!-- Def 职责：在地表生成完成后建立地下家园，直接安置成员和物资。 -->
+  <ScenPartDef>
+    <defName>NingshaRace_UndergroundArrival</defName>
+    <label>在巨坑内安家</label>
+    <scenPartClass>NingshaRaceLib.Scenarios.Parts.ScenPart_NingshaUndergroundArrival</scenPartClass>
+    <category>Fixed</category>
     <selectionWeight>0</selectionWeight>
     <canBeRandomlyAdded>false</canBeRandomlyAdded>
     <canBePlayerAddedRemoved>false</canBePlayerAddedRemoved>

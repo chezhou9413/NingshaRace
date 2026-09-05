@@ -13,6 +13,8 @@
       <shaderType>Cutout</shaderType>
       <drawSize>(1,1)</drawSize>
     </graphicData>
+    <!-- 建筑使用高清原图，建造与物品菜单使用同造型的小尺寸图标。 -->
+    <uiIconPath>UI/Icons/Buildings/NingshaRaceAltar</uiIconPath>
     <size>(1,1)</size>
     <altitudeLayer>Building</altitudeLayer>
     <passability>PassThroughOnly</passability>

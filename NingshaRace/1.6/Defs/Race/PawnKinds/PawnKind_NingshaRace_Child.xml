@@ -6,6 +6,7 @@
     <defName>NingshaRace_Child</defName>
     <label>凝砂族儿童</label>
     <race>NingshaRace</race>
+    <!-- 年龄范围由 NingshaChildGenerationUtility 与请求阶段协调，孵化的固定三岁请求保持原样。 -->
     <minGenerationAge>3</minGenerationAge>
     <maxGenerationAge>17</maxGenerationAge>
     <defaultFactionDef>PlayerColony</defaultFactionDef>

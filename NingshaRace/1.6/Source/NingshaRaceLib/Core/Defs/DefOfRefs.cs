@@ -239,6 +239,9 @@ namespace NingshaRaceLib.Core.Defs
         //字段职责：凝砂族专属场景直接建立地下殖民地时使用的地图生成器。
         public static MapGeneratorDef NingshaRace_DesertPitStartingMap;
 
+        //字段职责：连接地表沙漠聚落并保有玩家家园身份的巨坑地图父对象。
+        public static WorldObjectDef NingshaRace_DesertPitHome;
+
         //字段职责：沙漠巨坑使用的不可坍塌天然厚岩顶。
         public static RoofDef NingshaRace_DesertPitStableRockRoof;
 

@@ -9,12 +9,16 @@ namespace NingshaRaceLib.Scenarios.Parts
     //类职责：跳过玩家手动选址，并将凝砂族专属开局固定到可建立殖民地的沙漠世界格。
     public sealed class ScenPart_ForcedDesertPitStart : ScenPart_ForcedMap
     {
-        //函数职责：在世界生成完成后选择沙漠世界格，并指定开局专用地下地图生成器。
+        //函数职责：在世界生成完成后选择沙漠世界格，先生成承载巨坑入口的地表地图。
         public override void PostWorldGenerate()
         {
             if (mapGenerator == null)
             {
                 throw new InvalidOperationException("凝砂族沙漠地底开局缺少地图生成器配置。");
+            }
+            if (mapGenerator.isUnderground)
+            {
+                throw new InvalidOperationException("凝砂族开局必须先生成地表沙漠，再通过地下安置部件建立巨坑家园。");
             }
 
             PlanetLayer surface = Find.WorldGrid.FirstLayerOfDef(layerDef);
@@ -71,6 +75,10 @@ namespace NingshaRaceLib.Scenarios.Parts
             if (layerDef == null)
             {
                 yield return "凝砂族沙漠地底开局未配置 layerDef。";
+            }
+            if (mapGenerator != null && mapGenerator.isUnderground)
+            {
+                yield return "凝砂族开局的强制地图必须使用地表生成器，不能把地下巨坑直接挂在地表聚落上。";
             }
         }
     }

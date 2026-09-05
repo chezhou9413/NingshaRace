@@ -4,11 +4,12 @@
 
 将凝砂族自行绘制的 IMGUI、命令和进度信息统一为可组合工具，而不是全局更换 RimWorld 皮肤。
 
-- **底材**：深砂岩与低对比度风蚀沉积纹，叠加微尘和带明暗面的细沙，边缘积沙向内渐淡，文字区域保持安静。
+- **底材**：以原有静态砂岩、细沙凹凸和边缘积沙为主体，保留砂岩棕与旧铜配色，仅在上面叠加同色系的稀薄流沙。文字、图标和边框始终在背景之后绘制。
 - **结构**：旧铜双边框、角部短刻线、带中心刻印的分隔线。
 - **语义**：砂金表示通常状态；绿松石表示开启、选中或阈值；赭红表示警告，侵蚀紫和暗红表示高侵蚀与不可逆风险。
 - **交互**：实时时间驱动悬停过渡，暂停游戏也可工作；选中状态有持续刻线；禁用控件保留解释。
 - **动效真实性**：砂面高光可流动，填充比例与倒计时始终使用真实游戏数值，不模拟虚假加载进度。
+- **环境动效**：稀薄沙尘在窗口、状态面板和技能按钮的整个背景上持续流动，中央也有轻微变化；悬停略微增强，凹入与禁用区域降低强度。使用与静态底材一致的颜色和非加法混合，不以浓厚色幕取代原有质感；文字加细窄暗影保持可读。
 - **字体**：保留游戏字体，不另装字体；所有单行及多行区域先测量。窄控件截断并保留完整提示，状态卡可点击展开。
 - **玩家文案**：使用“详情、按钮、物品、准备目的地”等直白词语，不向玩家介绍铭文、符印、模板、组件、线程等视觉或实现概念。物品和能力本身的设定名称保留；开发日志和本文中的技术入口不作混淆替换。
 
@@ -37,7 +38,7 @@ Verse IMGUI + CL Shader 注册 + 独立 UI AssetBundle
 | `UI/Layout` | 顺序行、等分列、实测文字高度、主体与页脚分区 | `NingshaLayout` |
 | `UI/Controls` | 石板容器、文字、按钮、输入、砂槽进度 | `NingshaFrame`、`NingshaText`、`NingshaButton`、`NingshaInput`、`NingshaProgress` |
 | `UI/Motion` | 按实时时间插值悬停，回收离屏控件状态 | `NingshaUiMotion` |
-| `UI/Rendering` | 经 CL 取得底纹、缓存面板颗粒及进度渐变纹理、绘制柔光 | `NingshaUiAssets`、`NingshaPanelGrain`、`NingshaProgressTextures`、`NingshaProgressPainter` |
+| `UI/Rendering` | 经 CL 取得底材与风沙 Shader、缓存噪声与自由细沙、绘制背景及文字阴影 | `NingshaUiAssets`、`NingshaPanelGrain`、`NingshaPanelDrift`、`NingshaDriftSurface`、`NingshaStormNoise`、`NingshaSandGrainTexture`、`NingshaTextContrast`、`NingshaProgressTextures`、`NingshaProgressPainter` |
 | `UI/Gizmos` | 状态石板、行动符印、开关符印、能力冷却 | `Gizmo_NingshaStatus`、`Command_Ningsha*` |
 | `UI/Windows` | 窗口壳、完整铭文、不可逆确认、独立选项列表 | `NingshaWindow`、`Dialog_Ningsha*` |
 | `UI/Panels` | 可直接装入窗口安全区的复合展示模块 | `NingshaGenerationPanel` |
@@ -68,9 +69,27 @@ Verse IMGUI + CL Shader 注册 + 独立 UI AssetBundle
 
 ### 面板沙粒
 
-`NingshaFrame.Panel` 在底材之后、边框和内容之前调用 `NingshaPanelGrain`，窗口、状态卡和命令按钮共用同一套底纹。细小椭圆颗粒以暖色亮面和暗面表现凹凸，并混合更细的微尘；四周的积沙在 16 像素内平滑淡出，角部自然叠加。短边不足 56 的紧凑控件省略积沙边带，凹入或禁用底板降低颗粒强度，不占用文字、图标或点击区域。
+`NingshaFrame.Panel` 依次绘制砂岩底材、静态细沙与积沙、稀薄的全幅流沙，最后绘制边框和内容。所有面板均调用 `NingshaPanelGrain` 保留原有静态沉积感：椭圆细沙带有暖色亮面、暗面和更细的微尘，四周积沙在16像素内平滑淡出。短边不足56的紧凑控件省略静态积沙边带。
 
-纹理按界面坐标平铺，不随面板尺寸拉伸颗粒；双线性采样适应界面缩放。三张缓存纹理为 128×128、128×16 和 16×128，像素数据共 80 KiB（不含引擎对象开销）；首次重绘生成并释放 CPU 像素副本，后续普通面板最多增加五次纹理绘制，紧凑控件一次。颗粒使用坐标散列，不消耗游戏随机数，不随时间闪动，不需要重建资源包。绘制恢复调用方颜色，游戏切换时统一释放缓存。
+静态颗粒按界面坐标平铺，不随面板尺寸拉伸；双线性采样适应界面缩放。三张缓存纹理为128×128、128×16和16×128，像素数据共80 KiB（不含引擎对象开销）；首次重绘生成并释放 CPU 像素副本。每个面板最多增加五次静态纹理绘制，短控件一次，不逐帧生成颗粒。颗粒使用固定散列，不消耗游戏随机数，不需要重建资源包。绘制恢复调用方颜色，游戏切换时统一释放缓存。
+
+### 全幅风沙背景
+
+`NingshaPanelDrift` 把一张完整的动态风沙画面铺到内侧整个矩形，覆盖中央、四角和边缘，不限制为上下窄带。窗口、180×75状态面板、80×75技能按钮及小按钮均常驻绘制；普通强度0.88，悬停时增强至1.0，凹入区域0.46，禁用状态再乘0.6。风沙画面按界面像素平铺，左上角为取样锚点，拖动和拉大窗口不会拉伸或重排颗粒。原有边框、文字、数值、图标和命中矩形不随风沙运动。
+
+`NingshaStormNoise` 首次使用时生成256×256线性 RGBA32噪声，四通道分别对应4、8、16、32格周期噪声。格点散列与平滑插值保证跨边界连续，不使用游戏随机数，上传后释放 CPU 可读副本。`SandstormField.cginc` 中的 `StormWarp` 用不同速度的噪声扭曲取样坐标；`StormDensity` 组合大团沙尘与细碎侵蚀场，持续表现聚拢、翻卷、破碎和消散。
+
+`NingshaSandGrainTexture` 一次性把23000颗细沙与3500颗稍大沙粒自由散布在512×512纹理的独立通道中，不再按“每格一粒”布置。每颗沙粒在整张纹理内独立选取位置、半径、长短轴、角度与强度，允许自然重叠和疏密差异。细沙基础半径0.28至0.70像素，较大沙粒0.60至1.15像素，额外0.35像素取样支撑与柔边衰减用于亚像素显示；蓝通道提供微尘明暗。跨边界的颗粒回绕到另一侧，固定散列不消耗游戏随机数。
+
+`GrainField` 对细沙和较大颗粒使用不同速度、涡流扰动和错向坐标，基本风速约30界面像素每秒，细沙层乘1.35，较大颗粒乘0.83。细沙是主要细节，较大颗粒仅少量参与；分布固定但随风连续取样，不逐帧重排成闪烁白噪点。流沙底色与原有 `WeatheredSandstone` 一致，为 `(0.13, 0.105, 0.075)`；沙尘色沿用沉积纹的 `(0.23, 0.18, 0.115)`；受光细沙沿用静态颗粒的 `(0.83, 0.69, 0.46)`。不更改静态底材、旧铜边或文字配色，也不叠乘全幅压暗系数。
+
+流沙不透明度为 `0.02 + density * 0.16 + grainLight * 0.10`，两项输入均在0至1之间，输出范围为0.02至0.28，再乘面板强度。即使悬停且沙尘最浓，静态底纹也保留至少72%的混合权重；稀疏处近乎透明。浓度仍由连续噪声控制，颗粒明暗与位置算法不变，不以铺满面板的高不透明度色幕制造风沙。
+
+`NingshaDriftSurface` 经 CL 取得 `Ningsha/UI/DriftingSand`，将噪声绑定到 `_NoiseTex`、细沙绑定到 `_GrainTex`，共用一份材质和512×512、无深度与 mipmap 的 ARGB32 RenderTexture。背景像素数据1 MiB，噪声256 KiB，细沙1 MiB，总计2.25 MiB，不含引擎开销和既有静态底材；数据纹理上传后均释放 CPU 可读副本。以 `Time.frameCount` 限制每帧最多一次 `Graphics.Blit`，没有面板请求时不更新；每个面板只增加一次标准 GUI 纹理绘制。C# 只在创建细沙纹理时遍历颗粒，不逐帧分配贴图或粒子对象。未进行运行时帧率测量，不声称零开销。
+
+着色器输出风沙颜色和未预乘透明度，标准 GUI 只调节整板强度；横纵向均可重复采样，涡流、噪声和沙粒分布同样遵守周期边界。实时时间由 `_FlowTime` 显式传入，暂停时仍移动，游戏倍速不影响速度。绘制保留原版滚动裁剪，不把自定义材质直接送入界面；`GUI.color` 和 `RenderTexture.active` 均由 `finally` 恢复，背景、噪声、细沙与材质由 `NingshaGraphicsLifecycle` 经 `NingshaPanelDrift.Reset` 一并回收。Shader 缺失、不受支持或纹理创建失败直接报错，不用静止图片掩盖资源问题。
+
+`NingshaTextContrast` 为单行文字和说明段落补一像素暗影，使用原矩形、字号、对齐与换行设置，不增加布局高度。阴影和正文在原文字矩形内裁剪，各类界面事件维持一致的调用序列，颜色与裁剪通过 `finally` 恢复；每段文字增加一次标签绘制，不在整片背景上覆盖黑色阅读框。
 
 ### 进度条细节
 
@@ -102,16 +121,20 @@ Verse IMGUI + CL Shader 注册 + 独立 UI AssetBundle
 
 Unity 工程：`E:/mygame/NingshaRace`，匹配编辑器 `2022.3.35f1c1`。
 
-- Shader：`Assets/NingshaUI/Shaders/WeatheredSandstone.shader`
+可随仓库维护的 UI 源码位于 `SourceAssets/UI/Assets`，保留同名 Unity 工程路径与资源 `.meta`；包含下列两个 Shader、包含文件和构建器，不包含 Unity 缓存或第三方包。同步与异机构建说明见 `SourceAssets/UI/README.md`。外部工程中的源码、仓库副本和构建产物需一起维护。
+
+- 底材 Shader：`Assets/NingshaUI/Shaders/WeatheredSandstone.shader`
+- 风沙 Shader：`Assets/NingshaUI/Shaders/DriftingSand.shader`
+- 风沙噪声与颗粒函数：`Assets/NingshaUI/Shaders/SandstormField.cginc`，编译时包含，不是单独加载的资源。
 - 构建器：`Assets/Editor/NingshaUI/NingshaUiBundleBuilder.cs`
 - 注册：模组 `1.6/Defs/UI/NingshaRace_UiAssets.xml`
 - 输出：`1.6/AssetBundles/ningsha_ui.ab`、`ningsha_ui_mac.ab`
-- 包内唯一资源：`Assets/NingshaUI/Shaders/WeatheredSandstone.shader`；无外部依赖。
-- CL key：包标识 `chezhou.race.ningsharace`，Shader 真名 `Ningsha/UI/WeatheredSandstone`。
+- 包内资源：上述两个 Shader，无外部依赖；构建器显式列出两项，并在平台构建前后检查着色器错误。
+- CL key：包标识 `chezhou.race.ningsharace`，Shader 真名分别为 `Ningsha/UI/WeatheredSandstone` 和 `Ningsha/UI/DriftingSand`。
 
 `NingshaRace_Enable_UnityAssets` 已存在，独立 UI 包由 CL 声明加载，不复用或重写人物特效包。
 
-首次界面绘制时，Shader 在 256×256 RenderTexture 中生成底纹；之后用标准 GUI 纹理函数绘制，因此滚动区仍采用原版 GUI 裁剪，而不是直接把自定义材质画进滚动区。每个控件不重复分配材质、不每帧离屏烘焙。`NingshaGraphicsLifecycle` 在游戏切换时释放底纹、材质、面板颗粒、进度纹理和悬停缓存。面板颗粒与进度条细化仅使用 C#，不需要重新构建已有 UI 资源包。
+首次界面绘制时，底材 Shader 在256×256 RenderTexture 中生成静止衬底；全幅风沙另用512×512共享画面按需更新，噪声由 C# 一次性生成，两者最终都通过标准 GUI 纹理函数绘制。`NingshaGraphicsLifecycle` 在游戏切换时释放底纹、风沙画面与材质、噪声、面板颗粒、进度纹理和悬停缓存。Shader、包含文件或构建清单变更必须重建 UI 包，不能仅替换 DLL。界面自行持有材质，不添加没有消费者的 `ClShaderMaterial` 或 `ClShaderPro` Def。
 
 动画使用框架自身的实时时间插值，没有引入 DOTween DLL 或修改 ChezhouLib。用户允许使用 CL 的 DOTween，但当前悬停动效不需要额外补间生命周期。
 
@@ -122,7 +145,7 @@ Unity 工程：`E:/mygame/NingshaRace`，匹配编辑器 `2022.3.35f1c1`。
 & 'E:/VS/MSBuild/Current/Bin/MSBuild.exe' 'E:/RimModDev/NingshaRace/NingshaRace/1.6/Source/NingshaRaceLib/NingshaRaceLib.csproj' /p:Configuration=Release /nologo /verbosity:minimal
 ```
 
-Unity 日志：`E:/mygame/NingshaRace/Logs/NingshaUiBundleBuild.log`。现有工程的 Code Coverage 依赖扫描有 `System.Numerics.Vector4` 诊断，日志完整保留；UI 构建器成功输出两包并正常退出，无 UI Shader 编译错误。不要为了隐藏这些诊断修改无关 Unity 包。
+Unity 日志：`E:/mygame/NingshaRace/Logs/NingshaUiBundleBuild.log`。本次构建成功输出双平台包，两个包的清单均包含底材与流沙 Shader，无外部依赖，无 UI Shader 编译错误，批处理退出码为0。Unity 启动阶段仍有许可客户端诊断，完整日志保留，不修改无关工具配置来隐藏诊断。C# Release 编译通过，现有 Harmony 引用的 MSIL/AMD64 架构警告仍保留。
 
 ## 验证边界
 

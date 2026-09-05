@@ -24,9 +24,13 @@
         <requiredTag>NingshaRaceCompleteOutfit</requiredTag>
       </li>
     </specificApparelRequirements>
-    <backstoryCategories>
-      <li>NingshaRace</li>
-    </backstoryCategories>
+    <!-- 背景职责：只从凝砂族故事中选择，不混入玩家派系的原版故事。 -->
+    <backstoryFiltersOverride Inherit="False">
+      <li>
+        <categories><li>NingshaRace</li></categories>
+        <commonality>1</commonality>
+      </li>
+    </backstoryFiltersOverride>
     <backstoryCryptosleepCommonality>1</backstoryCryptosleepCommonality>
     <chemicalAddictionChance>0.06</chemicalAddictionChance>
     <combatPower>30</combatPower>

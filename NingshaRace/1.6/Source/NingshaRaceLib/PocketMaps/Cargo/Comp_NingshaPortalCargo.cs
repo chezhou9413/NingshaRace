@@ -10,9 +10,10 @@ using NingshaRaceLib.UI.Gizmos;
 namespace NingshaRaceLib.PocketMaps.Cargo
 {
     //类职责：管理传送门的独立货运模式、按钮、进入锁定和存档状态。
+    [StaticConstructorOnStartup]
     public sealed class Comp_NingshaPortalCargo : ThingComp
     {
-        //字段职责：复用原版装载命令图标展示货运入口。
+        //字段职责：在启动主线程预加载原版装载图标，后台开局创建组件时只复用缓存。
         private static readonly Texture2D CargoIcon = ContentFinder<Texture2D>.Get("UI/Commands/LoadTransporter");
 
         //字段职责：记录当前装载清单是否由独立货运窗口创建。

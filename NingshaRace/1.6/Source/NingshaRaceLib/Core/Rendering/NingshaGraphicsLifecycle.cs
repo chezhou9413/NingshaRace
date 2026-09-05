@@ -42,6 +42,7 @@ namespace NingshaRaceLib.Core.Rendering
             ErosionBodyHeadMaterialPool.Reset();
             UI.Rendering.NingshaUiAssets.Reset();
             UI.Rendering.NingshaPanelGrain.Reset();
+            UI.Rendering.NingshaPanelDrift.Reset();
             UI.Rendering.NingshaProgressTextures.Reset();
             UI.Motion.NingshaUiMotion.Reset();
         }

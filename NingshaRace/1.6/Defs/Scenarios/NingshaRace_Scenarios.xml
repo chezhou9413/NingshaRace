@@ -14,7 +14,7 @@
       <parts>
         <li Class="NingshaRaceLib.Scenarios.Parts.ScenPart_ForcedDesertPitStart">
           <def>NingshaRace_ForcedDesertPitStart</def>
-          <mapGenerator>NingshaRace_DesertPitStartingMap</mapGenerator>
+          <mapGenerator>Base_Player</mapGenerator>
           <layerDef>Surface</layerDef>
           <visible>false</visible>
         </li>
@@ -31,9 +31,8 @@
           </kindCounts>
         </li>
 
-        <li Class="ScenPart_PlayerPawnsArriveMethod">
-          <def>PlayerPawnsArriveMethod</def>
-          <method>Standing</method>
+        <li Class="NingshaRaceLib.Scenarios.Parts.ScenPart_NingshaUndergroundArrival">
+          <def>NingshaRace_UndergroundArrival</def>
           <visible>false</visible>
         </li>
 

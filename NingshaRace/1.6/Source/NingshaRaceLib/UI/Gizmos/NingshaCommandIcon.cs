@@ -4,8 +4,10 @@ using Verse;
 namespace NingshaRaceLib.UI.Gizmos
 {
     //类职责：按命令图标比例与材质绘制大图标，并去除已知蜕皮图片的透明外边。
+    [StaticConstructorOnStartup]
     internal static class NingshaCommandIcon
     {
+        //字段职责：在启动主线程预加载蜕皮图标，绘制阶段只用缓存识别图案。
         private static readonly Texture2D MoltingIcon = ContentFinder<Texture2D>.Get("UI/Commands/Molting");
         private static readonly Rect FullTexture = new Rect(0f, 0f, 1f, 1f);
         private static readonly Rect MoltingContent = new Rect(9f / 300f, 20f / 300f, 280f / 300f, 234f / 300f);
