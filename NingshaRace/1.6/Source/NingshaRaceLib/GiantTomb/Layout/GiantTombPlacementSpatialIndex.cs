@@ -14,6 +14,7 @@ namespace NingshaRaceLib.GiantTomb.Layout
         private readonly List<GiantTombPlacement>[] buckets;
         private readonly int[] visitedStamps;
         private int queryStamp;
+        public long PairChecks { get; private set; }
 
         //函数职责：按地图尺寸和本轮最大实例编号建立只供单个后台求解器使用的空间索引。
         public GiantTombPlacementSpatialIndex(int mapWidth, int mapHeight, int maximumInstanceId)
@@ -86,6 +87,7 @@ namespace NingshaRaceLib.GiantTomb.Layout
                             continue;
                         }
                         visitedStamps[instanceId] = stamp;
+                        PairChecks++;
                         if (bounds.Overlaps(existing.Bounds)
                             || existing != parent && queryBounds.Overlaps(existing.Bounds))
                         {

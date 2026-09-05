@@ -5,6 +5,8 @@ using Verse;
 using NingshaRaceLib.DesertPit.AntColony.Components;
 using NingshaRaceLib.DesertPit.AntColony.State;
 
+using NingshaRaceLib.UI.Gizmos;
+
 namespace NingshaRaceLib.DesertPit.AntColony.Buildings
 {
     //类职责：作为沙漠巨坑蚁群的实体核心，并把受击和摧毁事件通知地图组件。
@@ -36,7 +38,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Buildings
                 yield break;
             }
 
-            yield return new Command_Action
+            yield return new Command_NingshaAction
             {
                 defaultLabel = "强制升级蚁巢",
                 defaultDesc = "上帝模式：无视储藏营养、蚁后状态和升级冷却，将该蚁巢强制提升一级。",

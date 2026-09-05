@@ -4,6 +4,7 @@
 
   <!-- Def 职责：提供十格范围内锁定 Pawn 或地面位置的无前摇跳劈指令。 -->
   <AbilityDef>
+    <gizmoClass>NingshaRaceLib.UI.Gizmos.Command_NingshaAbility</gizmoClass>
     <defName>NingshaRace_Ability_FallingMountainSlash</defName>
     <label>坠地斩</label>
     <description>持盖布巨剑跃向目标，在落地时震裂大地并释放冲击波，对落点周围单位造成伤害，锁定目标会受到额外重击。</description>

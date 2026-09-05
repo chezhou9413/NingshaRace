@@ -96,14 +96,14 @@ namespace NingshaRaceLib.DevTools.DesertPit
         {
             if (placingDef is TerrainDef)
             {
-                GenDraw.DrawTargetHighlightWithLayer(UI.MouseCell(), AltitudeLayer.Terrain);
+                GenDraw.DrawTargetHighlightWithLayer(Verse.UI.MouseCell(), AltitudeLayer.Terrain);
                 return;
             }
 
             ThingDef thingDef = (ThingDef)placingDef;
             if (thingDef.graphicData != null && thingDef.graphic != null)
             {
-                GhostDrawer.DrawGhostThing(UI.MouseCell(), placingRot, thingDef, thingDef.graphic, ghostCol, AltitudeLayer.Blueprint, null, drawPlaceWorkers: true, StuffDef);
+                GhostDrawer.DrawGhostThing(Verse.UI.MouseCell(), placingRot, thingDef, thingDef.graphic, ghostCol, AltitudeLayer.Blueprint, null, drawPlaceWorkers: true, StuffDef);
                 return;
             }
 
@@ -114,13 +114,13 @@ namespace NingshaRaceLib.DevTools.DesertPit
         private void DrawOccupiedCellsPreview(ThingDef thingDef)
         {
             OccupiedPreviewCells.Clear();
-            CellRect occupiedRect = GenAdj.OccupiedRect(UI.MouseCell(), placingRot, thingDef.Size);
+            CellRect occupiedRect = GenAdj.OccupiedRect(Verse.UI.MouseCell(), placingRot, thingDef.Size);
             foreach (IntVec3 cell in occupiedRect.Cells)
             {
                 OccupiedPreviewCells.Add(cell);
             }
 
-            GenDraw.DrawFieldEdges(OccupiedPreviewCells, CanDesignateCell(UI.MouseCell()).Accepted ? Designator_Place.CanPlaceColor : Designator_Place.CannotPlaceColor);
+            GenDraw.DrawFieldEdges(OccupiedPreviewCells, CanDesignateCell(Verse.UI.MouseCell()).Accepted ? Designator_Place.CanPlaceColor : Designator_Place.CannotPlaceColor);
         }
 
         //函数职责：直接设置指定格的地形。

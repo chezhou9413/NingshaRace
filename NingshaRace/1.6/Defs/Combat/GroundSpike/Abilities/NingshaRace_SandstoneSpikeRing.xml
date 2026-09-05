@@ -4,6 +4,7 @@
 
   <!-- Def 职责：让持有者以自身为中心释放逐圈向外扩散的敌对地刺。 -->
   <AbilityDef>
+    <gizmoClass>NingshaRaceLib.UI.Gizmos.Command_NingshaAbility</gizmoClass>
     <defName>NingshaRace_Ability_SandstoneSpikeRing</defName>
     <label>砂岩棘环</label>
     <description>唤醒脚下深层砂岩，使地刺以自身为中心逐环向外破土而出，对周围敌人造成伤害并将其掀飞。</description>

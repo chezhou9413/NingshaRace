@@ -9,7 +9,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Progress
         private static bool active;
 
         //字段职责：记录当前生成阶段的中文名称。
-        private static string stage = "准备地图";
+        private static string stage = "准备目的地";
 
         //字段职责：记录零到一之间的总生成进度。
         private static float progress;
@@ -33,7 +33,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Progress
         public static void Begin()
         {
             active = true;
-            stage = "准备地图";
+            stage = "准备目的地";
             progress = 0f;
             stepStart = 0f;
             stepEnd = 0f;
@@ -75,7 +75,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Progress
         public static void End()
         {
             active = false;
-            stage = "准备地图";
+            stage = "准备目的地";
             progress = 0f;
             stepStart = 0f;
             stepEnd = 0f;

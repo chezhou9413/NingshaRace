@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 
+using NingshaRaceLib.UI.Gizmos;
+
 namespace NingshaRaceLib.SandGolem.Patches
 {
 //类职责：让玩家沙傀作为无机械师机械体接受征召和右键移动命令。
@@ -193,7 +195,7 @@ namespace NingshaRaceLib.SandGolem.Patches
                 };
             }
 
-            Command_Action command = new Command_Action
+            Command_Action command = new Command_NingshaAction
             {
                 defaultLabel = "收回沙傀",
                 defaultDesc = "让沙傀原地消散并返回散沙状态。",

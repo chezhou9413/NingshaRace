@@ -10,6 +10,10 @@ using NingshaRaceLib.AltarMissions.World;
 using NingshaRaceLib.Altar.Jobs;
 using NingshaRaceLib.Core.Defs;
 
+using NingshaRaceLib.UI.Gizmos;
+using NingshaRaceLib.UI.Models;
+using NingshaRaceLib.UI.Windows;
+
 namespace NingshaRaceLib.Altar.Components
 {
     //类职责：保存祭坛供奉营养与启用状态，接收生肉并提供填充、调试和任务交互。
@@ -125,7 +129,7 @@ namespace NingshaRaceLib.Altar.Components
             }
             if (OccupiedByPlayer)
             {
-                yield return new Command_Toggle
+                yield return new Command_NingshaToggle
                 {
                     defaultLabel = "允许供奉",
                     defaultDesc = "关闭后禁止自动搬运和右键优先填充生肉；已经完成的供奉和任务交互不受影响。",
@@ -136,14 +140,14 @@ namespace NingshaRaceLib.Altar.Components
             }
             if (DebugSettings.godMode)
             {
-                yield return new Command_Action
+                yield return new Command_NingshaAction
                 {
                     defaultLabel = "DEV：填满祭坛供奉",
                     defaultDesc = "不消耗生肉，立即把智慧之蛇祭坛的供奉营养设为上限。",
                     icon = parent.def.uiIcon,
                     action = delegate { storedNutrition = Props.nutritionCapacity; }
                 };
-                Command_Action chooseMission = new Command_Action
+                Command_Action chooseMission = new Command_NingshaAction
                 {
                     defaultLabel = "DEV：选择祭坛任务",
                     defaultDesc = "直接选择并发布一种智慧之蛇祭坛任务，不要求占用或供奉，也不消耗供奉值。",
@@ -161,19 +165,19 @@ namespace NingshaRaceLib.Altar.Components
         //函数职责：打开包含三类祭坛任务的调试选择菜单。
         private void OpenDebugMissionMenu()
         {
-            List<FloatMenuOption> options = new List<FloatMenuOption>
+            List<NingshaChoice> options = new List<NingshaChoice>
             {
                 MakeDebugMissionOption("小型遗迹", AltarMissionType.SmallRuins),
                 MakeDebugMissionOption("清剿蚁巢", AltarMissionType.AntNest),
                 MakeDebugMissionOption("解救同胞", AltarMissionType.RescueKinsfolk)
             };
-            Find.WindowStack.Add(new FloatMenu(options));
+            Find.WindowStack.Add(new Dialog_NingshaChoices("智慧之蛇 · 选择指引", options));
         }
 
         //函数职责：为指定任务类型创建直接发布任务且不消耗供奉的调试菜单项。
-        private FloatMenuOption MakeDebugMissionOption(string label, AltarMissionType missionType)
+        private NingshaChoice MakeDebugMissionOption(string label, AltarMissionType missionType)
         {
-            return new FloatMenuOption(label, delegate
+            return new NingshaChoice(label, delegate
             {
                 if (!AltarMissionGenerator.TryGenerateMission(missionType, null))
                 {

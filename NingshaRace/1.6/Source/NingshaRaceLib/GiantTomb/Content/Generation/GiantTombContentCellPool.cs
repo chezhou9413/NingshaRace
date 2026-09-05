@@ -11,9 +11,11 @@ namespace NingshaRaceLib.GiantTomb.Content.Generation
         private readonly Map map;
         private readonly GiantTombPlacement placement;
         private readonly List<IntVec3> available = new List<IntVec3>();
-        private readonly HashSet<IntVec3> availableSet = new HashSet<IntVec3>();
+        private readonly Dictionary<IntVec3, int> availableIndices = new Dictionary<IntVec3, int>();
         private readonly List<IntVec3> itemStorageCells = new List<IntVec3>();
         private readonly List<IntVec3> rewardCells = new List<IntVec3>();
+        private readonly HashSet<IntVec3> rewardCellSet = new HashSet<IntVec3>();
+        private readonly List<IntVec3> candidates = new List<IntVec3>();
 
         public IReadOnlyList<IntVec3> Available => available;
         public string TemplateDefName => placement.Module.Def.defName;
@@ -28,8 +30,8 @@ namespace NingshaRaceLib.GiantTomb.Content.Generation
             {
                 if (!connectorBuffer.Contains(cell) && IsClearCell(cell))
                 {
+                    availableIndices.Add(cell, available.Count);
                     available.Add(cell);
-                    availableSet.Add(cell);
                 }
             }
         }
@@ -50,20 +52,21 @@ namespace NingshaRaceLib.GiantTomb.Content.Generation
         //函数职责：优先把奖励分散到蚁群储藏格和普通空格，空间用尽后复用已经选定的奖励格。
         public IntVec3 TakeRewardCell(string purpose)
         {
-            List<IntVec3> unusedStorageCells = new List<IntVec3>();
+            candidates.Clear();
             for (int i = 0; i < itemStorageCells.Count; i++)
             {
                 IntVec3 cell = itemStorageCells[i];
-                if (!rewardCells.Contains(cell) && CanPlaceRewardAt(cell))
+                if (!rewardCellSet.Contains(cell) && CanPlaceRewardAt(cell))
                 {
-                    unusedStorageCells.Add(cell);
+                    candidates.Add(cell);
                 }
             }
 
-            if (unusedStorageCells.Count > 0)
+            if (candidates.Count > 0)
             {
-                IntVec3 storageCell = unusedStorageCells.RandomElement();
+                IntVec3 storageCell = candidates.RandomElement();
                 rewardCells.Add(storageCell);
+                rewardCellSet.Add(storageCell);
                 return storageCell;
             }
 
@@ -71,28 +74,29 @@ namespace NingshaRaceLib.GiantTomb.Content.Generation
             {
                 IntVec3 availableCell = TakeRandom(purpose);
                 rewardCells.Add(availableCell);
+                rewardCellSet.Add(availableCell);
                 return availableCell;
             }
 
-            List<IntVec3> reusableCells = new List<IntVec3>();
+            candidates.Clear();
             for (int i = 0; i < rewardCells.Count; i++)
             {
                 if (CanPlaceRewardAt(rewardCells[i]))
                 {
-                    reusableCells.Add(rewardCells[i]);
+                    candidates.Add(rewardCells[i]);
                 }
             }
-            if (reusableCells.Count == 0)
+            if (candidates.Count == 0)
             {
                 throw NoSpace(purpose);
             }
-            return reusableCells.RandomElement();
+            return candidates.RandomElement();
         }
 
         //函数职责：在指定中心附近随机取得并预留一个空格。
         public IntVec3 TakeRandomNear(IntVec3 center, float radius, string purpose)
         {
-            List<IntVec3> candidates = new List<IntVec3>();
+            candidates.Clear();
             float radiusSquared = radius * radius;
             for (int i = 0; i < available.Count; i++)
             {
@@ -115,7 +119,7 @@ namespace NingshaRaceLib.GiantTomb.Content.Generation
         {
             foreach (IntVec3 cell in rect)
             {
-                if (!availableSet.Contains(cell))
+                if (!availableIndices.ContainsKey(cell))
                 {
                     return false;
                 }
@@ -126,21 +130,21 @@ namespace NingshaRaceLib.GiantTomb.Content.Generation
         //函数职责：预留一个格子，防止后续内容在同一位置生成。
         public void Reserve(IntVec3 cell)
         {
-            if (!availableSet.Remove(cell))
+            if (!availableIndices.TryGetValue(cell, out int index))
             {
                 throw new InvalidOperationException("重复预留墓葬内容格: " + placement.Module.Def.defName + " @ " + cell);
             }
-            available.Remove(cell);
+            RemoveAt(index);
         }
 
         //函数职责：把蚁群储藏位从敌人建筑候选中移除，同时保留为物品奖励落点。
         public void ReserveItemStorage(IntVec3 cell)
         {
-            if (!availableSet.Remove(cell))
+            if (!availableIndices.TryGetValue(cell, out int index))
             {
                 throw new InvalidOperationException("重复预留墓葬储藏格: " + placement.Module.Def.defName + " @ " + cell);
             }
-            available.Remove(cell);
+            RemoveAt(index);
             itemStorageCells.Add(cell);
         }
 
@@ -209,12 +213,16 @@ namespace NingshaRaceLib.GiantTomb.Content.Generation
             return true;
         }
 
-        //函数职责：从列表和集合中同步移除一个候选格。
+        //函数职责：用末项交换和索引更新以常数时间预留空格，避免搬移整段房间候选列表。
         private void RemoveAt(int index)
         {
             IntVec3 cell = available[index];
-            available.RemoveAt(index);
-            availableSet.Remove(cell);
+            int last = available.Count - 1;
+            IntVec3 moved = available[last];
+            available[index] = moved;
+            availableIndices[moved] = index;
+            available.RemoveAt(last);
+            availableIndices.Remove(cell);
         }
 
         //函数职责：创建包含模板名和生成用途的空间不足异常。

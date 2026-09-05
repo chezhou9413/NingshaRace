@@ -5,11 +5,14 @@ using UnityEngine;
 using Verse;
 
 using NingshaRaceLib.PocketMaps.Buildings;
+using NingshaRaceLib.UI.Windows;
+using NingshaRaceLib.UI.Panels;
+using NingshaRaceLib.UI.Foundation;
 
 namespace NingshaRaceLib.DesertPit.Generation.Progress
 {
     //类职责：在当前地图画面上暂停游戏并按帧推进凝砂口袋地图生成，同时显示实际阶段与进度。
-    internal sealed class Window_DesertPitGeneration : Window
+    internal sealed class Window_DesertPitGeneration : NingshaWindow
     {
         //字段职责：限制单帧用于地图生成的最长实时秒数，避免长时间阻塞界面刷新。
         private const float FrameBudgetSeconds = 0.025f;
@@ -26,8 +29,11 @@ namespace NingshaRaceLib.DesertPit.Generation.Progress
         //字段职责：记录生成流程是否已经结束，仅在结束后允许窗口关闭。
         private bool finished;
 
+        //字段职责：记录玩家是否展开生成规则说明。
+        private bool showExplanation;
+
         //属性职责：提供适合阶段文字和进度条的居中窗口尺寸。
-        public override Vector2 InitialSize => new Vector2(520f, 180f);
+        public override Vector2 InitialSize => new Vector2(Mathf.Min(560f, Verse.UI.screenWidth), Mathf.Min(340f, Verse.UI.screenHeight));
 
         //函数职责：初始化不可手动关闭的暂停窗口与对应入口的地图生成器。
         public Window_DesertPitGeneration(Building_NingshaPocketMapPortal gate)
@@ -94,46 +100,14 @@ namespace NingshaRaceLib.DesertPit.Generation.Progress
             }
         }
 
-        //函数职责：绘制经过文字高度测量的阶段信息和不会与文字重叠的进度条。
+        //函数职责：把窗口安全区交给统一生成面板，业务迭代器与关闭限制保持独立。
         public override void DoWindowContents(Rect inRect)
         {
-            GameFont oldFont = Text.Font;
-            TextAnchor oldAnchor = Text.Anchor;
-            bool oldWordWrap = Text.WordWrap;
-            Color oldColor = GUI.color;
-            try
+            using (new NingshaGuiScope(GameFont.Small))
             {
-                float y = 0f;
-                Text.Font = GameFont.Medium;
-                Text.Anchor = TextAnchor.UpperCenter;
-                Text.WordWrap = true;
-                string title = "正在生成" + gate.LabelCap;
-                float titleHeight = Text.CalcHeight(title, inRect.width);
-                Widgets.Label(new Rect(0f, y, inRect.width, titleHeight), title);
-                y += titleHeight + 12f;
-
-                Text.Font = GameFont.Small;
-                Text.Anchor = TextAnchor.UpperLeft;
-                string status = DesertPitGenerationProgress.Stage + "  " + DesertPitGenerationProgress.Progress.ToStringPercent();
-                float statusHeight = Text.CalcHeight(status, inRect.width);
-                Widgets.Label(new Rect(0f, y, inRect.width, statusHeight), status);
-                y += statusHeight + 12f;
-
-                Rect barRect = new Rect(0f, y, inRect.width, 16f);
-                Widgets.DrawBoxSolidWithOutline(barRect, new Color(0.12f, 0.1f, 0.08f, 0.95f), new Color(0.48f, 0.38f, 0.22f), 1);
-                Rect fillRect = barRect.ContractedBy(2f);
-                fillRect.width *= DesertPitGenerationProgress.Progress;
-                if (fillRect.width > 0f)
-                {
-                    Widgets.DrawBoxSolid(fillRect, new Color(0.82f, 0.58f, 0.18f));
-                }
-            }
-            finally
-            {
-                Text.Font = oldFont;
-                Text.Anchor = oldAnchor;
-                Text.WordWrap = oldWordWrap;
-                GUI.color = oldColor;
+                Rect body = DrawShell(inRect, "正在准备目的地", canClose: false);
+                NingshaGenerationPanel.Draw(body, DesertPitGenerationProgress.Stage,
+                    DesertPitGenerationProgress.Progress, ref showExplanation);
             }
         }
 
@@ -160,7 +134,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Progress
             DisposeGenerator();
             DesertPitGenerationProgress.End();
             gate.NotifyGenerationFailed();
-            Messages.Message(gate.LabelCap + "生成失败，请查看日志后重试。", gate, MessageTypeDefOf.NegativeEvent);
+            Messages.Message(gate.LabelCap + "准备失败，请查看错误记录后重试。", gate, MessageTypeDefOf.NegativeEvent);
             Log.Error(gate.LabelCap + "分帧生成失败：" + exception);
             Close(doCloseSound: false);
         }

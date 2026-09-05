@@ -9,6 +9,8 @@ using NingshaRaceLib.Core.Defs;
 using NingshaRaceLib.Reproduction.Components;
 using NingshaRaceLib.Reproduction.Utility;
 
+using NingshaRaceLib.UI.Gizmos;
+
 namespace NingshaRaceLib.Reproduction.Buildings
 {
     //类职责：容纳单枚凝砂卵、驱动其内部 Tick，并提供装填、弹出、检查与开发者控制。
@@ -120,7 +122,7 @@ namespace NingshaRaceLib.Reproduction.Buildings
                 yield return gizmo;
             }
 
-            yield return new Command_Toggle
+            yield return new Command_NingshaToggle
             {
                 defaultLabel = "NingshaRace_HatchNestAutoLoadLabel".Translate(),
                 defaultDesc = "NingshaRace_HatchNestAutoLoadDescription".Translate(),
@@ -131,7 +133,7 @@ namespace NingshaRaceLib.Reproduction.Buildings
 
             if (!Empty)
             {
-                yield return new Command_Action
+                yield return new Command_NingshaAction
                 {
                     defaultLabel = "NingshaRace_EjectEggLabel".Translate(),
                     defaultDesc = "NingshaRace_EjectEggDescription".Translate(),
@@ -151,7 +153,7 @@ namespace NingshaRaceLib.Reproduction.Buildings
                 yield break;
             }
 
-            Command_Action createEgg = new Command_Action
+            Command_Action createEgg = new Command_NingshaAction
             {
                 defaultLabel = "DEV：生成并装入受精卵",
                 defaultDesc = "使用地图上的凝砂雌性和男性智人作为父母；找不到时创建无父母测试卵。",
@@ -164,13 +166,13 @@ namespace NingshaRaceLib.Reproduction.Buildings
             yield return createEgg;
 
             CompNingshaEmbryo containedEmbryo = ContainedEgg?.TryGetComp<CompNingshaEmbryo>();
-            Command_Action addProgress = new Command_Action
+            Command_Action addProgress = new Command_NingshaAction
             {
                 defaultLabel = "DEV：孵化进度 +10%",
                 defaultDesc = "为巢内受精凝砂卵增加百分之十孵化进度。",
                 action = delegate { containedEmbryo.AddHatchProgress(0.1f); }
             };
-            Command_Action hatchNow = new Command_Action
+            Command_Action hatchNow = new Command_NingshaAction
             {
                 defaultLabel = "DEV：立刻孵化",
                 defaultDesc = "直接调用正式破壳生成逻辑。",

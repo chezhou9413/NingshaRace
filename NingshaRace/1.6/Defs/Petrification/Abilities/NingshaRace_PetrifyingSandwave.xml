@@ -2,6 +2,7 @@
 <Defs>
   <!-- 文件职责：定义凝砂族固有的扇形石化能力“凝砂之眼”。 -->
   <AbilityDef>
+    <gizmoClass>NingshaRaceLib.UI.Gizmos.Command_NingshaAbility</gizmoClass>
     <defName>NingshaRace_Ability_PetrifyingSandwave</defName>
     <label>凝砂之眼</label>
     <description>凝聚沉重砂潮冲刷前方。三格内的其他血肉生物会立即完全石化，远处目标则根据距离累计石化程度，不区分敌我阵营。</description>

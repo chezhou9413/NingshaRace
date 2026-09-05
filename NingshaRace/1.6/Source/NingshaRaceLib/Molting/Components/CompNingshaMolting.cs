@@ -6,6 +6,8 @@ using Verse;
 using NingshaRaceLib.Core.Defs;
 using NingshaRaceLib.Molting.UI;
 
+using NingshaRaceLib.UI.Gizmos;
+
 namespace NingshaRaceLib.Molting.Components
 {
     //类职责：保存凝砂族进食累计营养与蜕皮次数，并维护防死亡就绪状态。
@@ -136,7 +138,7 @@ namespace NingshaRaceLib.Molting.Components
                 molting = this
             };
 
-            Command_Action command = new Command_Action
+            Command_Action command = new Command_NingshaAction
             {
                 defaultLabel = "蜕皮",
                 defaultDesc = "消耗100点蜕皮营养，永久增加一层蜕皮者状态，并在脚下留下一个蛇蜕。",

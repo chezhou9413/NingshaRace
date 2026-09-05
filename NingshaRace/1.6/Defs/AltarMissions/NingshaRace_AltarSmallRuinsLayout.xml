@@ -15,6 +15,7 @@
     <repeatLeafTemplates><li>NingshaRace_GiantTomb_Storage01</li><li>NingshaRace_GiantTomb_Chamber01</li><li>NingshaRace_GiantTomb_PotRoom</li><li>NingshaRace_GiantTomb_GrandChamber02</li></repeatLeafTemplates>
     <repeatTransitRoomTemplates><li>NingshaRace_GiantTomb_Chamber03</li></repeatTransitRoomTemplates>
     <repeatCorridorTemplates><li>NingshaRace_GiantTomb_WideTurn</li></repeatCorridorTemplates>
-    <repeatCount>4~6</repeatCount><borderMargin>7</borderMargin><maxRestarts>48</maxRestarts><maxCandidateEvaluations>240000</maxCandidateEvaluations>
+    <repeatCount>4~6</repeatCount><borderMargin>7</borderMargin><maxRestarts>32</maxRestarts><maxCandidateEvaluations>240000</maxCandidateEvaluations>
+    <maxCompactCandidateEvaluations>2400000</maxCompactCandidateEvaluations>
   </NingshaRaceLib.GiantTomb.Config.NingshaGiantTombLayoutDef>
 </Defs>

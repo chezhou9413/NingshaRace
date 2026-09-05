@@ -43,7 +43,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Progress
                 MapGeneratorDef generator = gate.def.portal.pocketMapGenerator;
                 int mapSize = gate.def.portal.pocketMapSize;
                 int seed;
-                DesertPitGenerationProgress.Report("准备地图", 0.02f);
+                DesertPitGenerationProgress.Report("准备目的地", 0.02f);
                 Stopwatch stageTimer = Stopwatch.StartNew();
                 CreateMap(gate, generator, mapSize, out parent, out map, out seed);
                 timings.Add("建图=" + stageTimer.ElapsedMilliseconds + "ms");
@@ -98,7 +98,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Progress
                     }
                 }
 
-                DesertPitGenerationProgress.Report("初始化地图", 0.9f);
+                DesertPitGenerationProgress.Report("整理地下环境", 0.9f);
                 stageTimer.Restart();
                 Find.Scenario.PostMapGenerate(map);
                 map.FinalizeInit();
@@ -106,7 +106,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Progress
                 timings.Add("FinalizeInit=" + stageTimer.ElapsedMilliseconds + "ms");
                 yield return null;
 
-                DesertPitGenerationProgress.Report("整理地图组件", 0.95f);
+                DesertPitGenerationProgress.Report("完成最后的准备", 0.95f);
                 stageTimer.Restart();
                 MapComponentUtility.MapGenerated(map);
                 parent.PostMapGenerate();
@@ -116,7 +116,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Progress
                 timings.Add("地图组件=" + stageTimer.ElapsedMilliseconds + "ms");
                 completed = true;
 
-                DesertPitGenerationProgress.Report("生成完成", 1f);
+                DesertPitGenerationProgress.Report("准备完成", 1f);
                 totalTimer.Stop();
                 Log.Message("[NingshaRace] " + gate.LabelCap + "生成用时 " + totalTimer.ElapsedMilliseconds
                     + "ms；" + string.Join("，", timings));

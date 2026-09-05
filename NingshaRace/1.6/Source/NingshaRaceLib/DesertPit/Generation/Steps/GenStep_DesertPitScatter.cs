@@ -22,7 +22,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
         {
             DesertPitGenUtility.SetGenerationStatus("岩屑矿脉");
             DesertPitLayoutData data = DesertPitGenUtility.GetLayoutData();
-            ThingDef sandstoneChunk = DefDatabase<ThingDef>.GetNamed("ChunkSandstone");
+            ThingDef sandstoneChunk = DefOfRefs.NingshaRace_DesertPitSandstoneRubbleSmall;
             foreach (IntVec3 room in data.SmallRooms)
             {
                 ScatterChunks(map, room, sandstoneChunk);
@@ -173,7 +173,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
             }
         }
 
-        //函数职责：判断指定洞穴格是否可以放置松散物品。
+        //函数职责：判断指定洞穴格是否可以放置可拆除的松散岩块建筑。
         private static bool CanPlaceLooseThing(Map map, IntVec3 cell)
         {
             if (!cell.InBounds(map))

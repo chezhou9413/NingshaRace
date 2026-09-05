@@ -9,7 +9,7 @@ using NingshaRaceLib.Erosion.Utility;
 
 namespace NingshaRaceLib.AltarMissions.Map
 {
-    //类职责：在解救任务中央生成凝砂族待救者，并在四角轮流生成三倍侵蚀体。
+    //类职责：在解救任务中央生成凝砂族待救者，并向四角方向的连通空地轮流生成三倍侵蚀体。
     public sealed class GenStep_AltarRescueTargets : GenStep
     {
         //属性职责：提供地图生成器使用的稳定随机种子片段。
@@ -35,9 +35,10 @@ namespace NingshaRaceLib.AltarMissions.Map
                 new IntVec3(12, 0, 12), new IntVec3(map.Size.x - 13, 0, 12),
                 new IntVec3(map.Size.x - 13, 0, map.Size.z - 13), new IntVec3(12, 0, map.Size.z - 13)
             };
+            List<IntVec3> candidates = AltarRescuePlacementUtility.CollectCandidates(map);
             for (int i = 0; i < rescueCount * 3; i++)
             {
-                IntVec3 cell = FindCornerCell(map, corners[i % corners.Length]);
+                IntVec3 cell = AltarRescuePlacementUtility.TakeCornerCell(map, candidates, corners[i % corners.Length], rescuees[0].Position);
                 Pawn pawn = ErosionBodySpawnUtility.Spawn(map, cell, DefOfRefs.NingshaRace_Colonist, Faction.OfEntities);
                 pawn.mindState.duty = new PawnDuty(DutyDefOf.IdleNoInteraction, cell, 4f);
                 erosionBodies.Add(pawn);
@@ -69,17 +70,5 @@ namespace NingshaRaceLib.AltarMissions.Map
             throw new InvalidOperationException("解救任务中央没有可生成待救者的位置。");
         }
 
-        //函数职责：在对应角落寻找距玩家入场点至少二十格的侵蚀体生成格。
-        private static IntVec3 FindCornerCell(Verse.Map map, IntVec3 corner)
-        {
-            IntVec3 playerStart = MapGenerator.PlayerStartSpot;
-            if (CellFinder.TryFindRandomCellNear(corner, map, 10,
-                cell => cell.Standable(map) && cell.GetFirstPawn(map) == null
-                    && (!playerStart.IsValid || cell.DistanceTo(playerStart) >= 20f), out IntVec3 result, 300))
-            {
-                return result;
-            }
-            throw new InvalidOperationException("解救任务角落没有距玩家入场区二十格以上的侵蚀体位置。");
-        }
     }
 }

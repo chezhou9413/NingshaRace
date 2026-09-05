@@ -27,7 +27,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
             DesertPitGenUtility.SetGenerationStatus("洞穴地貌");
             DesertPitLayoutData data = DesertPitGenUtility.GetLayoutData();
             TerrainDef sandstoneRough = DefDatabase<TerrainDef>.GetNamed("Sandstone_Rough");
-            ThingDef sandstoneChunk = DefDatabase<ThingDef>.GetNamed("ChunkSandstone");
+            ThingDef sandstoneChunk = DefOfRefs.NingshaRace_DesertPitSandstoneRubbleSmall;
             ThingDef sandfallDef = DefDatabase<ThingDef>.GetNamed("NingshaRace_DesertPitCeilingSandfall");
             List<IntVec3> centers = DesertPitLandmarkUtility.CollectCenterCandidates(map, data);
             if (centers.Count == 0)
@@ -172,7 +172,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
                 IntVec3 cell;
                 if (CellFinder.TryFindRandomCellNear(center, map, Mathf.CeilToInt(radius), (IntVec3 candidate) => DesertPitLandmarkUtility.CanPlaceLandmarkThing(map, data, candidate), out cell))
                 {
-                    GenSpawn.Spawn(ThingDefOf.CollapsedRocks, cell, map);
+                    GenSpawn.Spawn(DefOfRefs.NingshaRace_DesertPitCollapsedRockLarge, cell, map);
                 }
             }
         }

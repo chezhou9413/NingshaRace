@@ -19,10 +19,9 @@
           <visible>false</visible>
         </li>
 
-        <li Class="ScenPart_ConfigPage_ConfigureStartingPawns_KindDefs">
-          <def>ConfigurePawnsKindDefs</def>
+        <li Class="NingshaRaceLib.Scenarios.Parts.ScenPart_NingshaStartingPawns">
+          <def>NingshaRace_StartingPawns</def>
           <pawnChoiceCount>8</pawnChoiceCount>
-          <leftBehindPawnKind>NingshaRace_Colonist</leftBehindPawnKind>
           <kindCounts>
             <li>
               <kindDef>NingshaRace_Colonist</kindDef>

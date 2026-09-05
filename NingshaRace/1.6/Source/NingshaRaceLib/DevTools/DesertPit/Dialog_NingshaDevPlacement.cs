@@ -1,106 +1,120 @@
+using System;
 using System.Collections.Generic;
 using RimWorld;
 using UnityEngine;
 using Verse;
-
-using NingshaRaceLib.Core.Defs;
-using NingshaRaceLib.DesertPit.Buildings;
-using NingshaRaceLib.DesertPit.Generation.Caves;
-using NingshaRaceLib.DesertPit.Generation.Data;
-using NingshaRaceLib.DesertPit.Generation.Landmarks;
-using NingshaRaceLib.DesertPit.Generation.Steps;
-using NingshaRaceLib.DesertPit.Generation.Utility;
+using NingshaRaceLib.UI.Controls;
+using NingshaRaceLib.UI.Foundation;
+using NingshaRaceLib.UI.Layout;
+using NingshaRaceLib.UI.Windows;
 
 namespace NingshaRaceLib.DevTools.DesertPit
 {
-    //类职责：显示凝砂开发者摆放工具窗口，并把条目选择转换为地图摆放 Designator。
-    public class Dialog_NingshaDevPlacement : Window
+    //类职责：把凝砂摆放目录组合成可检索、可折叠的古遗迹条目面板，保留地图摆放工具入口。
+    public class Dialog_NingshaDevPlacement : NingshaWindow
     {
-        //字段职责：记录窗口内可选择的全部摆放条目。
         private readonly List<NingshaDevPlacementEntry> entries;
-
-        //字段职责：记录滚动列表当前位置。
+        private readonly List<NingshaDevPlacementEntry> filtered = new List<NingshaDevPlacementEntry>();
+        private readonly HashSet<string> collapsed = new HashSet<string>();
         private Vector2 scrollPosition;
+        private string search = "";
+        private string appliedSearch;
+        private string selectedDef;
 
-        //属性职责：声明窗口初始尺寸。
-        public override Vector2 InitialSize => new Vector2(460f, 640f);
-
-        //属性职责：标记本窗口属于调试窗口。
+        //属性职责：提供受屏幕约束的初始窗口尺寸和调试窗口标识。
+        public override Vector2 InitialSize => new Vector2(Mathf.Min(560f, Verse.UI.screenWidth), Mathf.Min(680f, Verse.UI.screenHeight));
         public override bool IsDebug => true;
 
-        //构造函数职责：初始化窗口状态和条目列表。
+        //构造职责：初始化目录、拖动和关闭规则，不占用地图摄像机操作。
         public Dialog_NingshaDevPlacement()
         {
-            doCloseX = true;
             draggable = true;
-            resizeable = true;
+            resizeable = false;
             closeOnAccept = false;
             closeOnCancel = true;
             preventCameraMotion = false;
-            optionalTitle = "凝砂摆放工具";
             entries = NingshaDevPlacementCatalog.CreateEntries();
+            UpdateFilter();
         }
 
-        //函数职责：绘制窗口内容和可摆放条目按钮。
+        //函数职责：组合窗口壳、检索栏、结果数和滚动目录，并保护全部界面状态。
         public override void DoWindowContents(Rect inRect)
         {
-            Text.Font = GameFont.Small;
-            Widgets.Label(new Rect(inRect.x, inRect.y, inRect.width, 42f), "选择条目后在地图上点击或拖拽摆放。右键或取消键退出摆放。");
-            Rect listRect = new Rect(inRect.x, inRect.y + 48f, inRect.width, inRect.height - 48f);
-            float viewHeight = CalculateViewHeight(listRect.width);
-            Rect viewRect = new Rect(0f, 0f, listRect.width - 16f, viewHeight);
-            Widgets.BeginScrollView(listRect, ref scrollPosition, viewRect);
-            DrawEntries(viewRect);
-            Widgets.EndScrollView();
+            using (new NingshaGuiScope(GameFont.Small))
+            {
+                Rect area = DrawShell(inRect, "凝砂摆放工具", "选择条目后点击或拖拽摆放；右键或取消键退出摆放。");
+                NingshaLayout layout = new NingshaLayout(area);
+                search = NingshaInput.Search(layout.Take(NingshaLayout.RowHeight()), search, "placement:search");
+                if (search != appliedSearch) UpdateFilter();
+                NingshaText.Label(layout.Take(NingshaLayout.RowHeight(GameFont.Tiny, 4f)), filtered.Count + " 项可选内容 · 点击分类展开或收起", NingshaPalette.Muted, GameFont.Tiny);
+                DrawList(layout.Remaining);
+            }
         }
 
-        //函数职责：计算滚动视图实际内容高度。
-        private float CalculateViewHeight(float width)
+        //函数职责：只在检索条件变化时重新过滤条目，匹配中文名称、定义和分类。
+        private void UpdateFilter()
         {
-            string lastCategory = null;
+            filtered.Clear();
+            foreach (NingshaDevPlacementEntry entry in entries)
+            {
+                if (entry.Label.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0
+                    || entry.DefName.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0
+                    || entry.Category.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0)
+                    filtered.Add(entry);
+            }
+            appliedSearch = search;
+            scrollPosition = Vector2.zero;
+        }
+
+        //函数职责：按当前折叠状态测量列表，并在可滚动区域绘制同一套行布局。
+        private void DrawList(Rect rect)
+        {
+            float rowHeight = NingshaLayout.RowHeight();
+            float headerHeight = NingshaLayout.RowHeight(GameFont.Small, 14f);
             float height = 0f;
-            for (int i = 0; i < entries.Count; i++)
+            string category = null;
+            foreach (NingshaDevPlacementEntry entry in filtered)
             {
-                if (entries[i].Category != lastCategory)
-                {
-                    height += 30f;
-                    lastCategory = entries[i].Category;
-                }
-
-                height += 34f;
+                if (category != entry.Category) { height += headerHeight + 6f; category = entry.Category; }
+                if (!collapsed.Contains(category)) height += rowHeight + 5f;
             }
-
-            return height + 8f;
+            Rect view = new Rect(0f, 0f, rect.width - 18f, Mathf.Max(rect.height, height));
+            Widgets.BeginScrollView(rect, ref scrollPosition, view);
+            try
+            {
+                float y = 0f;
+                category = null;
+                foreach (NingshaDevPlacementEntry entry in filtered)
+                {
+                    if (category != entry.Category)
+                    {
+                        category = entry.Category;
+                        bool folded = collapsed.Contains(category);
+                        if (NingshaButton.Draw(new Rect(0f, y, view.width, headerHeight), (folded ? "＋ " : "－ ") + category,
+                            "placement:category:" + category, selected: !folded))
+                        {
+                            if (folded) collapsed.Remove(category); else collapsed.Add(category);
+                            break;
+                        }
+                        y += headerHeight + 6f;
+                    }
+                    if (collapsed.Contains(category)) continue;
+                    Rect row = new Rect(8f, y, view.width - 8f, rowHeight);
+                    if (NingshaButton.Draw(row, entry.Label, "placement:" + entry.DefName,
+                        tip: entry.Label + "\n" + entry.DefName, selected: selectedDef == entry.DefName))
+                    {
+                        SelectEntry(entry);
+                        selectedDef = entry.DefName;
+                    }
+                    y += rowHeight + 5f;
+                }
+                if (filtered.Count == 0)
+                    NingshaText.Label(new Rect(0f, 0f, view.width, rowHeight), "没有找到符合条件的内容。", NingshaPalette.Muted);
+            }
+            finally { Widgets.EndScrollView(); }
         }
 
-        //函数职责：绘制所有分类标题和条目按钮。
-        private void DrawEntries(Rect viewRect)
-        {
-            string lastCategory = null;
-            float curY = 0f;
-            for (int i = 0; i < entries.Count; i++)
-            {
-                NingshaDevPlacementEntry entry = entries[i];
-                if (entry.Category != lastCategory)
-                {
-                    Text.Font = GameFont.Medium;
-                    Widgets.Label(new Rect(0f, curY, viewRect.width, 28f), entry.Category);
-                    Text.Font = GameFont.Small;
-                    curY += 30f;
-                    lastCategory = entry.Category;
-                }
-
-                Rect buttonRect = new Rect(0f, curY, viewRect.width, 30f);
-                if (Widgets.ButtonText(buttonRect, entry.Label + "  [" + entry.DefName + "]"))
-                {
-                    SelectEntry(entry);
-                }
-
-                curY += 34f;
-            }
-        }
-
-        //函数职责：根据条目创建并选中地图摆放 Designator。
+        //函数职责：根据条目创建地图摆放工具，地图不存在时明确拒绝操作。
         private static void SelectEntry(NingshaDevPlacementEntry entry)
         {
             if (Find.CurrentMap == null)
@@ -108,7 +122,6 @@ namespace NingshaRaceLib.DevTools.DesertPit
                 Messages.Message("当前没有可摆放的地图。", MessageTypeDefOf.RejectInput, historical: false);
                 return;
             }
-
             BuildableDef buildableDef = entry.ResolveDef();
             Find.DesignatorManager.Select(new Designator_NingshaDevPlace(buildableDef));
         }

@@ -40,6 +40,10 @@ namespace NingshaRaceLib.Core.Rendering
             game?.GetComponent<GameComponent_SandGolemTracker>()?.ReleaseRuntimeResources();
             PetrificationMaterialPool.Reset();
             ErosionBodyHeadMaterialPool.Reset();
+            UI.Rendering.NingshaUiAssets.Reset();
+            UI.Rendering.NingshaPanelGrain.Reset();
+            UI.Rendering.NingshaProgressTextures.Reset();
+            UI.Motion.NingshaUiMotion.Reset();
         }
     }
 

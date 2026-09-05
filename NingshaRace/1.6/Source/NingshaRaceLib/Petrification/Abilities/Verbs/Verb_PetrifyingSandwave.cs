@@ -54,7 +54,7 @@ namespace NingshaRaceLib.Petrification.Abilities.Verbs
 
                 if (showMessages)
                 {
-                    Messages.Message("石化砂潮只能锁定其他血肉 Pawn，也可以直接选择地面", casterPawn, MessageTypeDefOf.RejectInput, false);
+                    Messages.Message("石化砂潮只能瞄准其他血肉生物，也可以直接选择地面", casterPawn, MessageTypeDefOf.RejectInput, false);
                 }
                 return false;
             }

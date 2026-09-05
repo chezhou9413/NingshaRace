@@ -147,7 +147,8 @@
     </repeatCorridorTemplates>
     <repeatCount>24~32</repeatCount>
     <borderMargin>8</borderMargin>
-    <maxRestarts>64</maxRestarts>
+    <maxRestarts>32</maxRestarts>
     <maxCandidateEvaluations>500000</maxCandidateEvaluations>
+    <maxCompactCandidateEvaluations>2400000</maxCompactCandidateEvaluations>
   </NingshaRaceLib.GiantTomb.Config.NingshaGiantTombLayoutDef>
 </Defs>

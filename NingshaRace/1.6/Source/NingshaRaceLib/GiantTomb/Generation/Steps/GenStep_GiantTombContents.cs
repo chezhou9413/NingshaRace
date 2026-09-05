@@ -44,7 +44,7 @@ namespace NingshaRaceLib.GiantTomb.Generation.Steps
                 {
                     throw new InvalidOperationException("墓葬模板缺少内容配置: " + placement.Module.Def.defName);
                 }
-                DesertPitGenerationProgress.SetStage("生成墓葬内容 " + (i + 1) + "/" + data.Placements.Count);
+                DesertPitGenerationProgress.SetStage("安置生物与物资 " + (i + 1) + "/" + data.Placements.Count);
                 GiantTombContentCellPool cells = new GiantTombContentCellPool(map, placement);
                 GiantTombThreatSpawner.Spawn(map, cells, binding.Profile, ref colonyIndex);
                 GiantTombRewardSpawner.SpawnRoomRewards(map, cells, binding.Content);

@@ -4,6 +4,7 @@ using Verse;
 
 using NingshaRaceLib.Erosion.Components;
 using NingshaRaceLib.Erosion.Utility;
+using NingshaRaceLib.UI.Windows;
 
 namespace NingshaRaceLib.Erosion.Abilities
 {
@@ -51,7 +52,7 @@ namespace NingshaRaceLib.Erosion.Abilities
 
             string text = pawn.LabelShortCap
                 + "的侵蚀值将达到上限，并在起身动画结束后永久转化为敌对侵蚀体。该过程不可逆，是否继续？";
-            return Dialog_MessageBox.CreateConfirmation(text, confirmAction, destructive: true);
+            return new Dialog_NingshaConfirmation("侵蚀过载", text, confirmAction, "确认不可逆转化");
         }
 
         //函数职责：增加侵蚀值并只清除凝砂之眼和召唤沙傀的冷却。

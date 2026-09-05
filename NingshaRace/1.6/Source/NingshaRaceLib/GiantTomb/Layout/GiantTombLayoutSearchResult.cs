@@ -12,5 +12,7 @@ namespace NingshaRaceLib.GiantTomb.Layout
         public long TotalEvaluations;
         public int DeepestPlacementCount;
         public long ElapsedMilliseconds;
+        public long CollisionChecks;
+        public int CompletedAttempts;
     }
 }

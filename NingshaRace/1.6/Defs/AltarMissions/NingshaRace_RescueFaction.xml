@@ -5,6 +5,7 @@
     <defName>NingshaRace_RescueFaction</defName><label>凝砂族救援对象</label><fixedName>凝砂族救援对象</fixedName>
     <description>仅在智慧之蛇救援任务中承载待救凝砂族的隐藏友方阵营。</description>
     <pawnSingular>待救者</pawnSingular><pawnsPlural>待救者</pawnsPlural><humanlikeFaction>true</humanlikeFaction>
+    <backstoryCategories><li>NingshaRace</li></backstoryCategories>
     <hidden>true</hidden><permanentEnemy>false</permanentEnemy><autoFlee>false</autoFlee><canSiege>false</canSiege><canStageAttacks>false</canStageAttacks>
     <canMakeRandomly>false</canMakeRandomly><settlementGenerationWeight>0</settlementGenerationWeight><requiredCountAtGameStart>0</requiredCountAtGameStart><maxConfigurableAtWorldCreation>0</maxConfigurableAtWorldCreation><displayInFactionSelection>false</displayInFactionSelection><techLevel>Neolithic</techLevel>
   </FactionDef>

@@ -135,7 +135,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Landmarks
             return cell.InBounds(map) && DesertPitGenUtility.IsCave(map, cell) && cell.Standable(map) && cell.DistanceTo(data.MainCenter) >= MainSafeRadius;
         }
 
-        //函数职责：判断指定洞穴格是否可以放置沙岩块物品。
+        //函数职责：判断指定洞穴格是否可以放置可拆除的沙岩块建筑。
         private static bool CanPlaceLooseThing(Map map, IntVec3 cell)
         {
             if (!cell.InBounds(map) || !DesertPitGenUtility.IsCave(map, cell) || !cell.Standable(map) || cell.GetEdifice(map) != null)

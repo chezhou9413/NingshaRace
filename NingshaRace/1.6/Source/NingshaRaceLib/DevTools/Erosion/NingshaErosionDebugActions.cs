@@ -13,7 +13,7 @@ namespace NingshaRaceLib.DevTools.Erosion
             allowedGameStates = AllowedGameStates.PlayingOnMap, requiresAnomaly = true)]
         public static void SpawnErosionBody()
         {
-            ErosionBodySpawnUtility.Spawn(Find.CurrentMap, UI.MouseCell());
+            ErosionBodySpawnUtility.Spawn(Find.CurrentMap, Verse.UI.MouseCell());
         }
     }
 }

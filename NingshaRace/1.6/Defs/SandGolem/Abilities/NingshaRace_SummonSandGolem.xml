@@ -2,6 +2,7 @@
 <Defs>
   <!-- 文件职责：定义凝砂族召唤沙傀能力。 -->
   <AbilityDef>
+    <gizmoClass>NingshaRaceLib.UI.Gizmos.Command_NingshaAbility</gizmoClass>
     <defName>NingshaRace_Ability_SummonSandGolem</defName>
     <label>召唤沙傀</label>
     <description>在沙地上召唤一个由砂砾塑成的自身映像。每名凝砂族只能维持一个沙傀，再次召唤会先收回旧沙傀。</description>

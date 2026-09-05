@@ -4,6 +4,7 @@
 
   <!-- Def 职责：消耗侵蚀余量清除两项凝砂族固有能力的全部冷却。 -->
   <AbilityDef>
+    <gizmoClass>NingshaRaceLib.UI.Gizmos.Command_NingshaAbility</gizmoClass>
     <defName>NingshaRace_Ability_ErosionOverload</defName>
     <label>侵蚀过载</label>
     <description>主动接纳深层侵蚀，增加20点侵蚀值，并立即清除凝砂之眼与召唤沙傀的全部冷却。侵蚀达到上限时会永久转化为侵蚀体。</description>
@@ -37,6 +38,7 @@
 
   <!-- Def 职责：让侵蚀体以二十秒冷却自动释放排除同阵营目标的强化砂潮。 -->
   <AbilityDef>
+    <gizmoClass>NingshaRaceLib.UI.Gizmos.Command_NingshaAbility</gizmoClass>
     <defName>NingshaRace_Ability_ErosionBodyPetrifyingSandwave</defName>
     <label>侵蚀凝砂之眼</label>
     <description>侵蚀体本能地掀起石化砂潮。近处血肉目标会立即完全石化，远处目标按距离累计石化程度，同属实体阵营的目标不会受到影响。</description>

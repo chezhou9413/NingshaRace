@@ -38,11 +38,14 @@ namespace NingshaRaceLib.GiantTomb.Config
         //字段职责：限制所有模块与地图边界之间的最小岩层宽度。
         public int borderMargin = 8;
 
-        //字段职责：限制正常布局阶段允许并行准备的尝试数量，实际并发数最多为八。
-        public int maxRestarts = 64;
+        //字段职责：限制正常与紧凑阶段合计尝试数，正常阶段最多八次，紧凑阶段最多二十四次。
+        public int maxRestarts = 32;
 
-        //字段职责：限制一次地图生成允许检查的候选摆放总数。
+        //字段职责：限制正常布局阶段所有尝试合计的候选摆放总数。
         public int maxCandidateEvaluations = 500000;
+
+        //字段职责：限制紧凑布局阶段的候选摆放总数，耗尽后明确报告失败，不无限重试。
+        public int maxCompactCandidateEvaluations = 2400000;
 
         //函数职责：在Def加载阶段报告会使巨型墓葬无法生成的静态配置错误。
         public override IEnumerable<string> ConfigErrors()
@@ -64,7 +67,7 @@ namespace NingshaRaceLib.GiantTomb.Config
             {
                 yield return defName + ": modules不能包含重复模板";
             }
-            if (entranceTemplate == null || !modules.Contains(entranceTemplate))
+            if (entranceTemplate == null || modules == null || !modules.Contains(entranceTemplate))
             {
                 yield return defName + ": entranceTemplate必须包含在modules中";
             }
@@ -76,7 +79,7 @@ namespace NingshaRaceLib.GiantTomb.Config
             {
                 for (int i = 0; i < terminalTemplates.Count; i++)
                 {
-                    if (!modules.Contains(terminalTemplates[i]))
+                    if (modules == null || !modules.Contains(terminalTemplates[i]))
                     {
                         yield return defName + ": 终点模板未包含在modules中: " + terminalTemplates[i]?.defName;
                     }
@@ -90,7 +93,8 @@ namespace NingshaRaceLib.GiantTomb.Config
             {
                 yield return error;
             }
-            if (borderMargin < 1 || maxRestarts < 1 || maxCandidateEvaluations < 1)
+            if (borderMargin < 1 || borderMargin * 2 >= requiredMapSize || maxRestarts < 1
+                || maxCandidateEvaluations < 1 || maxCompactCandidateEvaluations < 1)
             {
                 yield return defName + ": 布局搜索限制必须为正数";
             }

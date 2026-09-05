@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using ChezhouLib.CustomMission.MapTemplates;
+using static NingshaRaceLib.GiantTomb.Generation.GiantTombSearchPoolBuilder;
 using NingshaRaceLib.DesertPit.Generation.Progress;
 using NingshaRaceLib.GiantTomb.Config;
 using NingshaRaceLib.GiantTomb.Layout;
@@ -42,7 +42,7 @@ namespace NingshaRaceLib.GiantTomb.Generation.Steps
                 throw new InvalidOperationException("墓葬地图尺寸必须为" + layoutDef.requiredMapSize + "x" + layoutDef.requiredMapSize);
             }
 
-            DesertPitGenerationProgress.SetStage("读取墓葬模板");
+            DesertPitGenerationProgress.SetStage("勘察墓葬");
             Stopwatch templateTimer = Stopwatch.StartNew();
             int cacheHits = 0;
             List<GiantTombModule> required = new List<GiantTombModule>();
@@ -51,6 +51,13 @@ namespace NingshaRaceLib.GiantTomb.Generation.Steps
                 required.Add(GiantTombMetadataLoader.Load(layoutDef.modules[i], out bool cacheHit));
                 if (cacheHit) cacheHits++;
                 DesertPitGenerationProgress.SetStepFraction(0.2f * (i + 1f) / layoutDef.modules.Count);
+                //冷缓存读盘后交还生成驱动，允许它依据本帧预算刷新界面。
+                if (!cacheHit)
+                {
+                    templateTimer.Stop();
+                    yield return null;
+                    templateTimer.Start();
+                }
             }
             templateTimer.Stop();
             Log.Message("[NingshaRace] 巨型墓葬模板准备完成：" + required.Count + "个，缓存命中" + cacheHits + "个，耗时" + templateTimer.ElapsedMilliseconds + "毫秒。");
@@ -70,221 +77,71 @@ namespace NingshaRaceLib.GiantTomb.Generation.Steps
             List<GiantTombModule> corridorModules = ResolveRepeatModules(required, layoutDef.repeatCorridorTemplates, 2, "二接口走廊");
 
             GiantTombModule[] terminalModules = ResolveTerminalModules(required, layoutDef.terminalTemplates);
+            GiantTombSearchCatalog catalog = new GiantTombSearchCatalog(required);
             int primaryAttemptCount = Math.Max(1, Math.Min(8, layoutDef.maxRestarts));
             GiantTombLayoutSearchAttempt[] primaryAttempts = BuildSearchAttempts(required, branchModules, leafModules,
                 transitRoomModules, corridorModules, primaryAttemptCount, layoutDef.maxCandidateEvaluations, layoutDef.repeatCount);
-            List<GiantTombModule> compactBranches = SelectSmallModules(branchModules, 2);
-            List<GiantTombModule> compactLeaves = SelectSmallModules(leafModules, 4);
-            List<GiantTombModule> compactTransitRooms = SelectSmallModules(transitRoomModules, 2);
-            List<GiantTombModule> compactCorridors = SelectSmallModules(corridorModules, 2);
-            const int rescueAttemptCount = 24;
-            IntRange compactRepeatCount = new IntRange(layoutDef.repeatCount.min, layoutDef.repeatCount.min);
-            GiantTombLayoutSearchAttempt[] rescueAttempts = BuildSearchAttempts(required, compactBranches, compactLeaves,
-                compactTransitRooms, compactCorridors, rescueAttemptCount, rescueAttemptCount * 100000, compactRepeatCount);
-            int totalAttemptCount = primaryAttempts.Length + rescueAttempts.Length;
-            GiantTombParallelLayoutSearch search = new GiantTombParallelLayoutSearch(primaryAttempts, entrance, terminalModules,
-                map.Size.x, map.Size.z, layoutDef.borderMargin);
-            DesertPitGenerationProgress.SetStage("多线程拼接墓葬结构 0/" + totalAttemptCount);
-            search.Start();
-            while (!search.Completion.IsCompleted)
+            GiantTombLayoutSearchResult searchResult;
+            using (GiantTombParallelLayoutSearch search = new GiantTombParallelLayoutSearch(primaryAttempts, entrance, catalog,
+                terminalModules, map.Size.x, map.Size.z, layoutDef.borderMargin))
             {
-                int completed = search.CompletedAttempts;
-                DesertPitGenerationProgress.SetStage("多线程拼接墓葬结构 " + completed + "/" + totalAttemptCount);
-                DesertPitGenerationProgress.SetStepFraction(0.2f + 0.8f * completed / totalAttemptCount);
-                yield return null;
+                search.Start();
+                while (!search.Completion.IsCompleted)
+                {
+                    DesertPitGenerationProgress.SetStage("寻找墓葬中的通路");
+                    DesertPitGenerationProgress.SetStepFraction(0.2f + 0.35f * search.CompletedAttempts / primaryAttempts.Length);
+                    yield return null;
+                }
+                searchResult = search.Completion.GetAwaiter().GetResult();
             }
 
-            GiantTombLayoutSearchResult searchResult = search.Completion.GetAwaiter().GetResult();
-            int usedRescueRound = 0;
-            if (!searchResult.Success)
+            int compactAttemptCount = Math.Min(24, layoutDef.maxRestarts - primaryAttempts.Length);
+            bool usedCompact = !searchResult.Success && compactAttemptCount > 0;
+            if (usedCompact)
             {
-                long accumulatedEvaluations = searchResult.TotalEvaluations;
-                long accumulatedMilliseconds = searchResult.ElapsedMilliseconds;
-                int deepestPlacementCount = searchResult.DeepestPlacementCount;
-                int rescueRound = 0;
-                while (!searchResult.Success)
+                //只有正常阶段确实失败才抽取紧凑池，避免成功路径提前构造和随机抽取二十四组备用方案。
+                GiantTombLayoutSearchAttempt[] compactAttempts = BuildSearchAttempts(required,
+                    SelectSmallModules(branchModules, 2), SelectSmallModules(leafModules, 4),
+                    SelectSmallModules(transitRoomModules, 2), SelectSmallModules(corridorModules, 2),
+                    compactAttemptCount, layoutDef.maxCompactCandidateEvaluations,
+                    new IntRange(layoutDef.repeatCount.min, layoutDef.repeatCount.min));
+                GiantTombLayoutSearchResult normalResult = searchResult;
+                using (GiantTombParallelLayoutSearch search = new GiantTombParallelLayoutSearch(compactAttempts, entrance, catalog,
+                    terminalModules, map.Size.x, map.Size.z, layoutDef.borderMargin))
                 {
-                    rescueRound++;
-                    usedRescueRound = rescueRound;
-                    if (rescueRound > 1)
-                    {
-                        rescueAttempts = BuildSearchAttempts(required, compactBranches, compactLeaves,
-                            compactTransitRooms, compactCorridors, rescueAttemptCount, rescueAttemptCount * 100000, compactRepeatCount);
-                    }
-                    search = new GiantTombParallelLayoutSearch(rescueAttempts, entrance, terminalModules,
-                        map.Size.x, map.Size.z, layoutDef.borderMargin);
                     search.Start();
                     while (!search.Completion.IsCompleted)
                     {
-                        int completed = search.CompletedAttempts;
-                        DesertPitGenerationProgress.SetStage("保底拼接墓葬结构 第" + rescueRound + "轮 " + completed + "/" + rescueAttempts.Length);
-                        DesertPitGenerationProgress.SetStepFraction(0.45f + 0.5f * completed / rescueAttempts.Length);
+                        DesertPitGenerationProgress.SetStage("寻找更合适的通路");
+                        DesertPitGenerationProgress.SetStepFraction(0.55f + 0.4f * search.CompletedAttempts / compactAttempts.Length);
                         yield return null;
                     }
                     searchResult = search.Completion.GetAwaiter().GetResult();
-                    accumulatedEvaluations += searchResult.TotalEvaluations;
-                    accumulatedMilliseconds += searchResult.ElapsedMilliseconds;
-                    deepestPlacementCount = Math.Max(deepestPlacementCount, searchResult.DeepestPlacementCount);
                 }
-                searchResult.TotalEvaluations = accumulatedEvaluations;
-                searchResult.ElapsedMilliseconds = accumulatedMilliseconds;
-                searchResult.DeepestPlacementCount = deepestPlacementCount;
+                searchResult.TotalEvaluations += normalResult.TotalEvaluations;
+                searchResult.CollisionChecks += normalResult.CollisionChecks;
+                searchResult.CompletedAttempts += normalResult.CompletedAttempts;
+                searchResult.ElapsedMilliseconds += normalResult.ElapsedMilliseconds;
+                searchResult.DeepestPlacementCount = Math.Max(searchResult.DeepestPlacementCount, normalResult.DeepestPlacementCount);
+            }
+            if (!searchResult.Success)
+            {
+                throw new InvalidOperationException("墓葬布局搜索预算耗尽：" + layoutDef.defName + "，尝试"
+                    + searchResult.CompletedAttempts + "次，摆放候选" + searchResult.TotalEvaluations
+                    + "个，矩形碰撞检查" + searchResult.CollisionChecks + "次，最深"
+                    + searchResult.DeepestPlacementCount + "个模块，耗时" + searchResult.ElapsedMilliseconds
+                    + "毫秒。请检查模板空间和布局预算；不会生成不完整墓葬。");
             }
 
             GiantTombLayoutData data = BuildLayoutData(map, searchResult.Placements, searchResult.Connections, entrance);
             GiantTombGenUtility.SetLayoutData(data);
             GiantTombLayoutSearchAttempt selectedAttempt = searchResult.Attempt;
-            string searchMode = usedRescueRound == 0 ? "正常阶段" : "保底第" + usedRescueRound + "轮";
+            string searchMode = usedCompact ? "紧凑阶段" : "正常阶段";
             Log.Message("[NingshaRace] 巨型墓葬并行布局完成：" + searchMode + "采用尝试" + selectedAttempt.Index + "，检查候选" + searchResult.TotalEvaluations
-                + "个，耗时" + searchResult.ElapsedMilliseconds + "毫秒。");
+                + "个，完成尝试" + searchResult.CompletedAttempts + "次，矩形碰撞检查" + searchResult.CollisionChecks + "次，耗时" + searchResult.ElapsedMilliseconds + "毫秒。");
             Log.Message("[NingshaRace] 巨型墓葬额外模块：分支中转" + selectedAttempt.BranchCount + "，尽头/小房间" + selectedAttempt.LeafCount
                 + "，二接口中转房" + selectedAttempt.TransitRoomCount + "，普通走廊" + selectedAttempt.CorridorCount + "。");
             DesertPitGenerationProgress.SetStepFraction(1f);
-        }
-
-        //函数职责：按模板矩形面积选择指定数量的小型模块，供保底布局降低空间拥挤。
-        private static List<GiantTombModule> SelectSmallModules(List<GiantTombModule> modules, int count)
-        {
-            return modules.OrderBy((GiantTombModule module) => module.Width * module.Height)
-                .ThenBy((GiantTombModule module) => module.Def.defName).Take(count).ToList();
-        }
-
-        //函数职责：在主线程把终点Def引用解析为稳定模块数组，避免后台访问Def配置集合。
-        private static GiantTombModule[] ResolveTerminalModules(List<GiantTombModule> required, List<ClMapTemplateDef> definitions)
-        {
-            GiantTombModule[] result = new GiantTombModule[definitions.Count];
-            for (int i = 0; i < definitions.Count; i++)
-            {
-                GiantTombModule module = required.FirstOrDefault((GiantTombModule candidate) => candidate.Def == definitions[i]);
-                if (module == null) throw new InvalidOperationException("巨型墓葬终点模板未加载: " + definitions[i]?.defName);
-                result[i] = module;
-            }
-            return result;
-        }
-
-        //函数职责：在主线程预先冻结全部模块池、预算和局部随机种子，作为后台并行搜索的唯一输入。
-        private static GiantTombLayoutSearchAttempt[] BuildSearchAttempts(List<GiantTombModule> required, List<GiantTombModule> branches,
-            List<GiantTombModule> leaves, List<GiantTombModule> transitRooms, List<GiantTombModule> corridors,
-            int maximumAttempts, int totalCandidateBudget, IntRange repeatCountRange)
-        {
-            int perAttemptBudget = Math.Max(1000, totalCandidateBudget / maximumAttempts);
-            int remainingBudget = totalCandidateBudget;
-            List<GiantTombLayoutSearchAttempt> result = new List<GiantTombLayoutSearchAttempt>(maximumAttempts);
-            for (int index = 0; index < maximumAttempts && remainingBudget > 0; index++)
-            {
-                int repeatCount = repeatCountRange.RandomInRange;
-                List<GiantTombModule> pool = BuildPool(required, branches, leaves, transitRooms, corridors, repeatCount, out RepeatPoolCounts counts);
-                ValidateDegreeInvariant(pool);
-                int budget = Math.Min(perAttemptBudget, remainingBudget);
-                result.Add(new GiantTombLayoutSearchAttempt(index, pool.ToArray(), Rand.Int, budget,
-                    counts.Branches, counts.Leaves, counts.TransitRooms, counts.Corridors));
-                remainingBudget -= budget;
-            }
-            if (result.Count == 0) throw new InvalidOperationException("巨型墓葬布局没有可执行的搜索预算");
-            return result.ToArray();
-        }
-
-        //函数职责：把配置Def列表解析为已经加载的模块并验证该类别要求的连接点数量。
-        private static List<GiantTombModule> ResolveRepeatModules(List<GiantTombModule> required, List<ClMapTemplateDef> definitions, int connectorCount, string category)
-        {
-            List<GiantTombModule> result = new List<GiantTombModule>();
-            for (int i = 0; i < definitions.Count; i++)
-            {
-                GiantTombModule module = required.FirstOrDefault((GiantTombModule candidate) => candidate.Def == definitions[i]);
-                if (module == null || module.Connectors.Count != connectorCount)
-                {
-                    throw new InvalidOperationException("巨型墓葬" + category + "必须使用" + connectorCount + "连接点模板: " + definitions[i]?.defName);
-                }
-                result.Add(module);
-            }
-            return result;
-        }
-
-        //函数职责：按接口守恒比例组合分支、尽头、中转房和少量走廊，使新增模块仍能构成完整树。
-        private static List<GiantTombModule> BuildPool(List<GiantTombModule> required, List<GiantTombModule> branches, List<GiantTombModule> leaves, List<GiantTombModule> transitRooms, List<GiantTombModule> corridors, int repeatCount, out RepeatPoolCounts counts)
-        {
-            int branchCount;
-            int leafCount;
-            int degreeTwoCount;
-            if (!TryResolveRepeatCounts(required, repeatCount, out branchCount, out leafCount, out degreeTwoCount))
-            {
-                throw new InvalidOperationException("墓葬必选模板与额外模块数量无法满足接口守恒: " + repeatCount);
-            }
-            int transitRoomCount = Math.Min(degreeTwoCount, Math.Max(1, (degreeTwoCount * 3 + 2) / 4));
-            int corridorCount = degreeTwoCount - transitRoomCount;
-            counts = new RepeatPoolCounts(branchCount, leafCount, transitRoomCount, corridorCount);
-
-            for (int attempt = 0; attempt < 32; attempt++)
-            {
-                List<GiantTombModule> result = new List<GiantTombModule>(required.Count + repeatCount);
-                result.AddRange(required);
-                AddWeightedWithDiversity(result, branches, branchCount);
-                AddWeightedWithDiversity(result, leaves, leafCount);
-                AddWeightedWithDiversity(result, transitRooms, transitRoomCount);
-                AddWeightedWithDiversity(result, corridors, corridorCount);
-                if (GiantTombConnectorCompatibility.HasEvenConnectorComponents(result)) return result;
-            }
-            throw new InvalidOperationException("巨型墓葬随机模板池无法满足各接口兼容组的偶数闭合条件");
-        }
-
-        //函数职责：根据必选模板实际接口总数求出四接口、单接口和双接口额外模块数量。
-        private static bool TryResolveRepeatCounts(List<GiantTombModule> required, int repeatCount,
-            out int branches, out int leaves, out int degreeTwo)
-        {
-            int requiredConnectors = required.Sum(module => module.Connectors.Count);
-            int expectedTotal = 2 * (required.Count + repeatCount - 1);
-            int preferredBranches = Math.Min(repeatCount / 3, Math.Max(0, (repeatCount + 2) / 5));
-            int preferredLeaves = Math.Min(repeatCount - preferredBranches, preferredBranches * 2);
-            int preferredDegreeTwo = repeatCount - preferredBranches - preferredLeaves;
-            int bestScore = int.MaxValue;
-            branches = leaves = degreeTwo = 0;
-            for (int branchCount = 0; branchCount <= repeatCount; branchCount++)
-            {
-                for (int leafCount = 0; leafCount <= repeatCount - branchCount; leafCount++)
-                {
-                    int twoCount = repeatCount - branchCount - leafCount;
-                    if (requiredConnectors + branchCount * 4 + leafCount + twoCount * 2 == expectedTotal)
-                    {
-                        int score = Math.Abs(branchCount - preferredBranches) * 100
-                            + Math.Abs(leafCount - preferredLeaves) * 10
-                            + Math.Abs(twoCount - preferredDegreeTwo);
-                        if (score >= bestScore) continue;
-                        bestScore = score;
-                        branches = branchCount;
-                        leaves = leafCount;
-                        degreeTwo = twoCount;
-                    }
-                }
-            }
-            return bestScore != int.MaxValue;
-        }
-
-        //函数职责：先尽量覆盖类别中的不同模板，再按Def权重补足该类别的重复数量。
-        private static void AddWeightedWithDiversity(List<GiantTombModule> target, List<GiantTombModule> choices, int count)
-        {
-            if (count <= 0) return;
-            List<GiantTombModule> shuffled = choices.InRandomOrder().ToList();
-            int diverseCount = Math.Min(count, shuffled.Count);
-            for (int i = 0; i < diverseCount; i++) target.Add(shuffled[i]);
-            for (int i = diverseCount; i < count; i++)
-            {
-                target.Add(choices.RandomElementByWeight((GiantTombModule module) => module.Def.selectionWeight));
-            }
-        }
-
-        //函数职责：验证所有连接点数量恰好能构成一个使用全部接口的树。
-        private static void ValidateDegreeInvariant(List<GiantTombModule> pool)
-        {
-            int connectorCount = pool.Sum((GiantTombModule module) => module.Connectors.Count);
-            int expected = 2 * (pool.Count - 1);
-            if (connectorCount != expected)
-            {
-                throw new InvalidOperationException("巨型墓葬连接点总数不能构成完整树: " + connectorCount + " != " + expected);
-            }
-            if (!GiantTombConnectorCompatibility.HasEvenConnectorComponents(pool))
-            {
-                throw new InvalidOperationException("巨型墓葬接口兼容组存在奇数个连接点，无法全部闭合");
-            }
         }
 
         //函数职责：把求解结果转换为格网掩码并登记给后续地形、模板和矿物步骤。
@@ -315,22 +172,5 @@ namespace NingshaRaceLib.GiantTomb.Generation.Steps
             return data;
         }
 
-        //结构职责：保存一次额外模块池中各探索类型的实际数量，供日志和布局结果核对。
-        private readonly struct RepeatPoolCounts
-        {
-            public readonly int Branches;
-            public readonly int Leaves;
-            public readonly int TransitRooms;
-            public readonly int Corridors;
-
-            //函数职责：记录一次满足接口守恒的分类抽取数量。
-            public RepeatPoolCounts(int branches, int leaves, int transitRooms, int corridors)
-            {
-                Branches = branches;
-                Leaves = leaves;
-                TransitRooms = transitRooms;
-                Corridors = corridors;
-            }
-        }
     }
 }

@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 namespace NingshaRaceLib.GiantTomb.Layout
 {
     //类职责：在独立任务中按确定性批次并行求解纯墓葬布局，并向主线程公开只读进度。
-    internal sealed class GiantTombParallelLayoutSearch
+    internal sealed class GiantTombParallelLayoutSearch : IDisposable
     {
         private const int MaximumWorkerCount = 8;
         private readonly GiantTombLayoutSearchAttempt[] attempts;
         private readonly GiantTombModule entrance;
+        private readonly GiantTombSearchCatalog catalog;
         private readonly GiantTombModule[] terminalModules;
         private readonly int mapWidth;
         private readonly int mapHeight;
@@ -19,6 +20,8 @@ namespace NingshaRaceLib.GiantTomb.Layout
         private int completedAttempts;
         private long totalEvaluations;
         private int deepestPlacementCount;
+        private long collisionChecks;
+        private int stopping;
 
         public Task<GiantTombLayoutSearchResult> Completion { get; private set; }
         public int CompletedAttempts => Volatile.Read(ref completedAttempts);
@@ -26,11 +29,12 @@ namespace NingshaRaceLib.GiantTomb.Layout
         public int AttemptCount => attempts.Length;
 
         //函数职责：接收主线程冻结的全部输入，不在后台读取地图、Def数据库或全局随机状态。
-        public GiantTombParallelLayoutSearch(GiantTombLayoutSearchAttempt[] attempts, GiantTombModule entrance,
+        public GiantTombParallelLayoutSearch(GiantTombLayoutSearchAttempt[] attempts, GiantTombModule entrance, GiantTombSearchCatalog catalog,
             GiantTombModule[] terminalModules, int mapWidth, int mapHeight, int borderMargin)
         {
             this.attempts = attempts ?? throw new ArgumentNullException(nameof(attempts));
             this.entrance = entrance ?? throw new ArgumentNullException(nameof(entrance));
+            this.catalog = catalog ?? throw new ArgumentNullException(nameof(catalog));
             this.terminalModules = terminalModules ?? throw new ArgumentNullException(nameof(terminalModules));
             this.mapWidth = mapWidth;
             this.mapHeight = mapHeight;
@@ -51,14 +55,15 @@ namespace NingshaRaceLib.GiantTomb.Layout
             int workerCount = Math.Max(1, Math.Min(MaximumWorkerCount, Environment.ProcessorCount - 1));
             for (int batchStart = 0; batchStart < attempts.Length; batchStart += workerCount)
             {
+                if (Volatile.Read(ref stopping) != 0) break;
                 int batchEnd = Math.Min(attempts.Length, batchStart + workerCount);
                 int bestSuccessIndex = int.MaxValue;
                 ConcurrentBag<GiantTombLayoutSearchResult> batchResults = new ConcurrentBag<GiantTombLayoutSearchResult>();
                 Parallel.For(batchStart, batchEnd, new ParallelOptions { MaxDegreeOfParallelism = workerCount }, attemptIndex =>
                 {
                     GiantTombLayoutSearchAttempt attempt = attempts[attemptIndex];
-                    GiantTombLayoutSolver solver = new GiantTombLayoutSolver(mapWidth, mapHeight, borderMargin, terminalModules,
-                        attempt.RandomSeed, () => Volatile.Read(ref bestSuccessIndex) < attempt.Index);
+                    GiantTombLayoutSolver solver = new GiantTombLayoutSolver(mapWidth, mapHeight, borderMargin, catalog, terminalModules,
+                        attempt.RandomSeed, () => Volatile.Read(ref stopping) != 0 || Volatile.Read(ref bestSuccessIndex) < attempt.Index);
                     bool success = solver.TrySolve(attempt.Pool, entrance, attempt.CandidateBudget,
                         out var placements, out var connections);
                     if (success)
@@ -66,6 +71,7 @@ namespace NingshaRaceLib.GiantTomb.Layout
                         UpdateMinimum(ref bestSuccessIndex, attempt.Index);
                     }
                     Interlocked.Add(ref totalEvaluations, solver.Evaluations);
+                    Interlocked.Add(ref collisionChecks, solver.CollisionChecks);
                     UpdateMaximum(ref deepestPlacementCount, solver.DeepestPlacementCount);
                     batchResults.Add(new GiantTombLayoutSearchResult
                     {
@@ -110,6 +116,15 @@ namespace NingshaRaceLib.GiantTomb.Layout
             result.TotalEvaluations = Interlocked.Read(ref totalEvaluations);
             result.DeepestPlacementCount = Volatile.Read(ref deepestPlacementCount);
             result.ElapsedMilliseconds = elapsedMilliseconds;
+            result.CollisionChecks = Interlocked.Read(ref collisionChecks);
+            result.CompletedAttempts = CompletedAttempts;
+        }
+
+        //职责：生成枚举器退出时请求搜索停止，并等待整个并行计算收束后才允许调用者清理地图。
+        public void Dispose()
+        {
+            Interlocked.Exchange(ref stopping, 1);
+            if (Completion != null) Completion.GetAwaiter().GetResult();
         }
 
         //函数职责：使用无锁比较交换记录所有并行尝试达到的最大模块深度。

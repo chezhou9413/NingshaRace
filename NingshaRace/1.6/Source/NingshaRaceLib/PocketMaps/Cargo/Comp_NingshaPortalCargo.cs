@@ -5,6 +5,8 @@ using Verse;
 
 using NingshaRaceLib.PocketMaps.Buildings;
 
+using NingshaRaceLib.UI.Gizmos;
+
 namespace NingshaRaceLib.PocketMaps.Cargo
 {
     //类职责：管理传送门的独立货运模式、按钮、进入锁定和存档状态。
@@ -32,7 +34,7 @@ namespace NingshaRaceLib.PocketMaps.Cargo
         //函数职责：提供独立货运按钮，并在其他装载或地图生成期间给出明确禁用原因。
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
-            Command_Action command = new Command_Action
+            Command_Action command = new Command_NingshaAction
             {
                 defaultLabel = "搬运物资……",
                 defaultDesc = "选择本地图上的玩家动物与可达物资，由殖民者搬运到传送门并送往另一张地图。搬运者不会跟随货物过图。",

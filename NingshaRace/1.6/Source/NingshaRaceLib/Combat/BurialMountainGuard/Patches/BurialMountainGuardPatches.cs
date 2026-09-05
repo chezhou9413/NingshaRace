@@ -8,6 +8,8 @@ using NingshaRaceLib.Combat.BurialMountainGuard.Components;
 using NingshaRaceLib.Combat.BurialMountainGuard.Utility;
 using NingshaRaceLib.Core.Defs;
 
+using NingshaRaceLib.UI.Gizmos;
+
 namespace NingshaRaceLib.Combat.BurialMountainGuard.Patches
 {
     //类职责：给装备葬岳的 Pawn 追加格挡模式切换按钮。
@@ -45,7 +47,7 @@ namespace NingshaRaceLib.Combat.BurialMountainGuard.Patches
                 yield break;
             }
 
-            Command_Action command = new Command_Action
+            Command_Action command = new Command_NingshaAction
             {
                 defaultLabel = comp.GuardMode ? "关闭格挡" : "格挡模式",
                 defaultDesc = "切换葬岳格挡姿态。格挡中无法攻击，每次受到伤害时最多抵消二十点并积蓄岩土之力，蓄满后震击周围敌人。",

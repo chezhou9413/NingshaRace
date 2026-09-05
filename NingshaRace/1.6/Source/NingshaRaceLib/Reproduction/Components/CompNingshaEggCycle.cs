@@ -5,6 +5,8 @@ using Verse;
 
 using NingshaRaceLib.Reproduction.Utility;
 
+using NingshaRaceLib.UI.Gizmos;
+
 namespace NingshaRaceLib.Reproduction.Components
 {
     //类职责：保存雌性凝砂的排卵进度，并提供正式产卵与开发者控制入口。
@@ -83,14 +85,14 @@ namespace NingshaRaceLib.Reproduction.Components
                 yield break;
             }
 
-            yield return new Command_Action
+            yield return new Command_NingshaAction
             {
                 defaultLabel = "DEV：立刻排出未受精卵",
                 defaultDesc = "直接调用正式排卵逻辑，并重新开始七天周期。",
                 action = delegate { TryLayUnfertilizedEgg(); }
             };
 
-            Command_Action finishPregnancy = new Command_Action
+            Command_Action finishPregnancy = new Command_NingshaAction
             {
                 defaultLabel = "DEV：强制完成妊娠",
                 defaultDesc = "把当前原版怀孕推进到生产阶段，随后继续走正式产卵流程。",
@@ -102,7 +104,7 @@ namespace NingshaRaceLib.Reproduction.Components
             }
             yield return finishPregnancy;
 
-            Command_Action layFertilizedEgg = new Command_Action
+            Command_Action layFertilizedEgg = new Command_NingshaAction
             {
                 defaultLabel = "DEV：立刻排出受精卵",
                 defaultDesc = "使用当前怀孕记录的父亲立即产下一枚受精凝砂卵。",

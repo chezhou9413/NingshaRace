@@ -9,6 +9,8 @@ using NingshaRaceLib.Reproduction.Buildings;
 using NingshaRaceLib.Reproduction.Utility;
 using NingshaRaceLib.Molting.Components;
 
+using NingshaRaceLib.UI.Gizmos;
+
 namespace NingshaRaceLib.Reproduction.Components
 {
     //类职责：保存受精凝砂卵的阵营与孵化进度，并在适宜孵化巢内推进破壳。
@@ -120,13 +122,13 @@ namespace NingshaRaceLib.Reproduction.Components
                 yield break;
             }
 
-            yield return new Command_Action
+            yield return new Command_NingshaAction
             {
                 defaultLabel = "DEV：孵化进度 +10%",
                 defaultDesc = "为巢内受精凝砂卵增加百分之十孵化进度。",
                 action = delegate { AddHatchProgress(0.1f); }
             };
-            yield return new Command_Action
+            yield return new Command_NingshaAction
             {
                 defaultLabel = "DEV：立刻孵化",
                 defaultDesc = "直接调用正式破壳逻辑。",

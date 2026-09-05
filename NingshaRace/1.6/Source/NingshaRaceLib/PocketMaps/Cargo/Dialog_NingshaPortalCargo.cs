@@ -5,226 +5,129 @@ using RimWorld.Planet;
 using UnityEngine;
 using Verse;
 using Verse.Sound;
+using NingshaRaceLib.PocketMaps.Cargo.UI;
+using NingshaRaceLib.UI.Controls;
+using NingshaRaceLib.UI.Foundation;
+using NingshaRaceLib.UI.Layout;
+using NingshaRaceLib.UI.Windows;
 
 namespace NingshaRaceLib.PocketMaps.Cargo
 {
-    //类职责：用原版单向装载控件呈现仅含动物与物品的跨地图货运选择窗口。
-    public sealed class Dialog_NingshaPortalCargo : Window
+    //类职责：把原版货运分组和派发模型接入凝砂页签、清单及操作区，不更改跨地图传输协议。
+    public sealed class Dialog_NingshaPortalCargo : NingshaWindow
     {
-        //枚举职责：区分货运窗口当前展示的动物页与物品页。
-        private enum CargoTab
-        {
-            Animals,
-            Items
-        }
-
-        //字段职责：定义窗口外框、页签和底部按钮之间的安全间距。
-        private const float ContentMargin = 18f;
-        private const float TabGap = 34f;
-        private const float FooterHeight = 58f;
-        private const float ButtonWidth = 160f;
-        private const float ButtonHeight = 40f;
-
-        //字段职责：记录本次货运所属的传送门。
         private readonly MapPortal portal;
-
-        //字段职责：记录负责切换货运模式的传送门组件。
         private readonly Comp_NingshaPortalCargo cargoComp;
-
-        //字段职责：保存窗口内全部可调整的单向装载项。
+        private readonly NingshaCargoListPanel list = new NingshaCargoListPanel();
         private List<TransferableOneWay> transferables;
+        private bool animalsTab = true;
 
-        //字段职责：保存动物页的原版装载控件实例。
-        private TransferableOneWayWidget animalsWidget;
+        //属性职责：按屏幕可用尺寸给清单和页脚留出空间。
+        public override Vector2 InitialSize => new Vector2(Mathf.Min(1024f, Verse.UI.screenWidth), Mathf.Min(800f, Verse.UI.screenHeight));
 
-        //字段职责：保存物品页的原版装载控件实例。
-        private TransferableOneWayWidget itemsWidget;
-
-        //字段职责：记录当前页签。
-        private CargoTab selectedTab;
-
-        //字段职责：复用页签列表以避免每帧产生临时集合。
-        private static readonly List<TabRecord> Tabs = new List<TabRecord>();
-
-        //属性职责：让货运窗口占用足够宽度和当前界面高度。
-        public override Vector2 InitialSize => new Vector2(1024f, UI.screenHeight);
-
-        //属性职责：由窗口内部统一管理安全边距。
-        protected override float Margin => 0f;
-
-        //函数职责：建立强制暂停且吸收外部输入的货运窗口。
+        //构造职责：建立强制暂停且吸收外部输入的货运窗口。
         public Dialog_NingshaPortalCargo(MapPortal portal, Comp_NingshaPortalCargo cargoComp)
         {
             this.portal = portal;
             this.cargoComp = cargoComp;
             forcePause = true;
             absorbInputAroundWindow = true;
+            closeOnAccept = false;
         }
 
-        //函数职责：窗口打开后收集一次当前地图上可发送的动物与物品。
+        //函数职责：窗口打开时收集当前地图可发送的动物和物资。
         public override void PostOpen()
         {
             base.PostOpen();
             RebuildTransferables();
         }
 
-        //函数职责：按实测标题高度划分标题、页签主体与底部按钮，并恢复所有全局绘制状态。
+        //函数职责：组合标题、双页签、搜索清单、选择统计和底部操作栏。
         public override void DoWindowContents(Rect inRect)
         {
-            GameFont oldFont = Text.Font;
-            TextAnchor oldAnchor = Text.Anchor;
-            bool oldWordWrap = Text.WordWrap;
-            Color oldColor = GUI.color;
-
-            try
+            using (new NingshaGuiScope(GameFont.Small))
             {
-                Rect outer = inRect.ContractedBy(ContentMargin);
-                string title = portal is PocketMapExit ? "向地表搬运物资" : "向地下搬运物资";
-                Text.Font = GameFont.Medium;
-                Text.Anchor = TextAnchor.MiddleCenter;
-                Text.WordWrap = true;
-                float titleHeight = Mathf.Max(35f, Text.CalcHeight(title, outer.width));
-                Widgets.Label(new Rect(outer.x, outer.y, outer.width, titleHeight), title);
-
-                Rect panel = new Rect(outer.x, outer.y + titleHeight + TabGap, outer.width, outer.height - titleHeight - TabGap);
-                Widgets.DrawMenuSection(panel);
-                DrawTabs(panel);
-
-                Rect inner = panel.ContractedBy(ContentMargin);
-                Rect footer = new Rect(inner.x, inner.yMax - FooterHeight, inner.width, FooterHeight);
-                Rect body = new Rect(inner.x, inner.y, inner.width, Mathf.Max(0f, inner.height - FooterHeight - 8f));
-                DrawBody(body);
+                Rect area = DrawShell(inRect, portal is PocketMapExit ? "向地表搬运物资" : "向地下搬运物资", "选择要搬运的动物和物品。");
+                NingshaLayout layout = new NingshaLayout(area);
+                Rect tabs = layout.Take(NingshaLayout.RowHeight(padding: 14f));
+                if (NingshaButton.Draw(NingshaLayout.Column(tabs, 0, 2), "动物", "cargo:animals", selected: animalsTab)) animalsTab = true;
+                if (NingshaButton.Draw(NingshaLayout.Column(tabs, 1, 2), "物品", "cargo:items", selected: !animalsTab)) animalsTab = false;
+                float footerHeight = NingshaLayout.RowHeight(padding: 16f) + NingshaLayout.RowHeight(GameFont.Tiny, 4f) + 8f;
+                Rect body = NingshaLayout.BodyWithFooter(layout.Remaining, footerHeight, out Rect footer);
+                list.Bind(transferables, animalsTab);
+                list.Draw(body);
                 DrawFooter(footer);
             }
-            finally
-            {
-                Text.Font = oldFont;
-                Text.Anchor = oldAnchor;
-                Text.WordWrap = oldWordWrap;
-                GUI.color = oldColor;
-            }
         }
 
-        //函数职责：响应确认快捷键并只在存在有效装载内容时关闭窗口。
+        //函数职责：仅在确认通过数量检查并产生有效货运时响应确认快捷键。
         public override void OnAcceptKeyPressed()
         {
-            if (TryAccept())
-            {
-                SoundDefOf.Tick_High.PlayOneShotOnCamera();
-                Close(false);
-            }
+            if (TryAccept()) Close(false);
         }
 
-        //函数职责：绘制动物与物品页签并切换当前装载控件。
-        private void DrawTabs(Rect panel)
-        {
-            Tabs.Clear();
-            Tabs.Add(new TabRecord("动物", () => selectedTab = CargoTab.Animals, selectedTab == CargoTab.Animals));
-            Tabs.Add(new TabRecord("物品", () => selectedTab = CargoTab.Items, selectedTab == CargoTab.Items));
-            TabDrawer.DrawTabs(panel, Tabs);
-        }
-
-        //函数职责：在独立主体区域绘制当前页签对应的原版装载列表。
-        private void DrawBody(Rect body)
-        {
-            bool anythingChanged;
-            if (selectedTab == CargoTab.Animals)
-            {
-                animalsWidget.OnGUI(body, out anythingChanged);
-            }
-            else
-            {
-                itemsWidget.OnGUI(body, out anythingChanged);
-            }
-        }
-
-        //函数职责：绘制取消、重置和确认按钮，并保证按钮区域不与滚动主体重叠。
+        //函数职责：显示全部页签选择总数，并提供取消、重置和确认操作。
         private void DrawFooter(Rect footer)
         {
-            float buttonY = footer.yMax - ButtonHeight;
-            if (Widgets.ButtonText(new Rect(footer.x, buttonY, ButtonWidth, ButtonHeight), "CancelButton".Translate()))
-            {
-                Close();
-            }
-
-            if (Widgets.ButtonText(new Rect(footer.center.x - ButtonWidth / 2f, buttonY, ButtonWidth, ButtonHeight), "ResetButton".Translate()))
-            {
-                SoundDefOf.Tick_Low.PlayOneShotOnCamera();
-                RebuildTransferables();
-            }
-
-            if (Widgets.ButtonText(new Rect(footer.xMax - ButtonWidth, buttonY, ButtonWidth, ButtonHeight), "AcceptButton".Translate()) && TryAccept())
-            {
-                SoundDefOf.Tick_High.PlayOneShotOnCamera();
-                Close(false);
-            }
+            NingshaLayout layout = new NingshaLayout(footer);
+            int groups = transferables.Count(item => item.CountToTransfer > 0);
+            int count = transferables.Sum(item => item.CountToTransfer);
+            bool invalid = NingshaCargoListPanel.HasInvalidAmount(transferables);
+            string summary = invalid ? "存在无效数量，请检查红框输入。" : "已选择 " + groups + " 组 · 共 " + count + " 只 / 件";
+            NingshaText.Label(layout.Take(NingshaLayout.RowHeight(GameFont.Tiny, 4f)), summary,
+                invalid ? NingshaPalette.Warning : NingshaPalette.Muted, GameFont.Tiny);
+            Rect row = layout.Remaining;
+            if (NingshaButton.Draw(NingshaLayout.Column(row, 0, 3), "取消", "cargo:cancel")) Close();
+            if (NingshaButton.Draw(NingshaLayout.Column(row, 1, 3), "重置清单", "cargo:reset")) RebuildTransferables();
+            if (NingshaButton.Draw(NingshaLayout.Column(row, 2, 3), "开始搬运", "cargo:accept", !invalid && groups > 0,
+                invalid ? "请先修正数量。" : groups == 0 ? "请至少选择一只动物或一件物品。" : "确认后派发搬运任务。", selected: groups > 0)
+                && TryAccept()) Close(false);
         }
 
-        //函数职责：把玩家选择写入原版传送门清单，并启动独立货运与必要的地图生成。
+        //函数职责：校验清单后交给原版传送门模型，保留独立货运和按需地图生成流程。
         private bool TryAccept()
         {
-            portal.leftToLoad = new List<TransferableOneWay>();
-            foreach (TransferableOneWay transferable in transferables)
+            if (NingshaCargoListPanel.HasInvalidAmount(transferables))
             {
-                portal.AddToTheToLoadList(transferable, transferable.CountToTransfer);
+                Messages.Message("请修正货运清单中的无效数量。", MessageTypeDefOf.RejectInput, false);
+                return false;
             }
-
-            if (!portal.LoadInProgress)
+            if (!transferables.Any(item => item.CountToTransfer > 0))
             {
                 Messages.Message("请至少选择一只动物或一件物品。", MessageTypeDefOf.RejectInput, false);
                 return false;
             }
-
+            portal.leftToLoad = new List<TransferableOneWay>();
+            foreach (TransferableOneWay item in transferables) portal.AddToTheToLoadList(item, item.CountToTransfer);
+            if (!portal.LoadInProgress) return false;
             cargoComp.ActivateCargoTransfer();
+            SoundDefOf.Tick_High.PlayOneShotOnCamera();
             return true;
         }
 
-        //函数职责：依据原版可发送动物和可达殖民地物资规则重建装载项与控件缓存。
+        //函数职责：沿用原版可发送动物和可达物资规则构建清单，不混入殖民者运输。
         private void RebuildTransferables()
         {
             transferables = new List<TransferableOneWay>();
             foreach (Pawn pawn in CaravanFormingUtility.AllSendablePawns(portal.Map, true, false, false, false, true))
             {
-                if (pawn.RaceProps.Animal && pawn.Faction == Faction.OfPlayer)
-                {
-                    AddToTransferables(pawn);
-                }
+                if (pawn.RaceProps.Animal && pawn.Faction == Faction.OfPlayer) AddToTransferables(pawn);
             }
-
-            bool isPocketMap = portal.Map.IsPocketMap;
-            foreach (Thing thing in CaravanFormingUtility.AllReachableColonyItems(portal.Map, isPocketMap, isPocketMap))
-            {
-                AddToTransferables(thing);
-            }
-
-            IEnumerable<TransferableOneWay> animals = transferables.Where(transferable => transferable.ThingDef.category == ThingCategory.Pawn);
-            IEnumerable<TransferableOneWay> items = transferables.Where(transferable => transferable.ThingDef.category != ThingCategory.Pawn);
-            animalsWidget = CreateWidget(null);
-            animalsWidget.AddSection("可发送的玩家动物", animals);
-            itemsWidget = CreateWidget(items);
+            bool pocket = portal.Map.IsPocketMap;
+            foreach (Thing thing in CaravanFormingUtility.AllReachableColonyItems(portal.Map, pocket, pocket)) AddToTransferables(thing);
+            foreach (TransferableOneWay item in transferables) item.EditBuffer = item.CountToTransfer.ToString();
         }
 
-        //函数职责：创建与原版传送门装载窗口一致的单向装载控件。
-        private TransferableOneWayWidget CreateWidget(IEnumerable<TransferableOneWay> source)
-        {
-            return new TransferableOneWayWidget(source, null, null, "TransferMapPortalColonyThingCountTip".Translate(), true,
-                IgnorePawnsInventoryMode.IgnoreIfAssignedToUnload, true, () => float.MaxValue, 0f, false, portal.Map.Tile);
-        }
-
-        //函数职责：按照原版运输分组规则合并同类 Thing，避免同一实体被重复加入。
+        //函数职责：使用原版规则把同类实体归为一项，避免重复加入同一实体。
         private void AddToTransferables(Thing thing)
         {
-            TransferableOneWay transferable = TransferableUtility.TransferableMatching(thing, transferables, TransferAsOneMode.PodsOrCaravanPacking);
-            if (transferable == null)
+            TransferableOneWay item = TransferableUtility.TransferableMatching(thing, transferables, TransferAsOneMode.PodsOrCaravanPacking);
+            if (item == null)
             {
-                transferable = new TransferableOneWay();
-                transferables.Add(transferable);
+                item = new TransferableOneWay();
+                transferables.Add(item);
             }
-
-            if (!transferable.things.Contains(thing))
-            {
-                transferable.things.Add(thing);
-            }
+            if (!item.things.Contains(thing)) item.things.Add(thing);
         }
     }
 }

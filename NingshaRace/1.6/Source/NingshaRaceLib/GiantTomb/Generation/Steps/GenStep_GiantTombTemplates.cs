@@ -45,7 +45,7 @@ namespace NingshaRaceLib.GiantTomb.Generation.Steps
                 for (int i = 0; i < data.Placements.Count; i++)
                 {
                     GiantTombPlacement placement = data.Placements[i];
-                    DesertPitGenerationProgress.SetStage("生成墓葬模块 " + (i + 1) + "/" + data.Placements.Count);
+                    DesertPitGenerationProgress.SetStage("布置墓室 " + (i + 1) + "/" + data.Placements.Count);
                     ClMapSpawnResult result = ClMapTemplateSpawner.Spawn(placement.Module.Template, map, placement.Origin, placement.Transform, options);
                     CleanupCapturedBackground(map, data, placement, result, sandstone);
                     DesertPitGenerationProgress.SetStepFraction((i + 1f) / data.Placements.Count);
@@ -102,8 +102,11 @@ namespace NingshaRaceLib.GiantTomb.Generation.Steps
             {
                 if (!data.StructureCells[map.cellIndices.CellToIndex(cell)])
                 {
-                    map.terrainGrid.SetTerrain(cell, sandstone);
-                    map.terrainGrid.SetTerrainColor(cell, null);
+                    //原版设置地形本身就清除涂色；背景已是目标地形时不重复触发地形通知。
+                    if (map.terrainGrid.TopTerrainAt(cell) != sandstone || map.terrainGrid.UnderTerrainAt(cell) != null)
+                        map.terrainGrid.SetTerrain(cell, sandstone);
+                    else if (map.terrainGrid.ColorAt(cell) != null)
+                        map.terrainGrid.SetTerrainColor(cell, null);
                 }
             }
         }

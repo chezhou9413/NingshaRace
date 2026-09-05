@@ -9,6 +9,8 @@ using NingshaRaceLib.Erosion.UI;
 using NingshaRaceLib.Erosion.Utility;
 using NingshaRaceLib.SandGolem.Tracking;
 
+using NingshaRaceLib.UI.Gizmos;
+
 namespace NingshaRaceLib.Erosion.Components
 {
     //类职责：持久化凝砂族侵蚀值，处理自然衰减并驱动满值后的实体化过程。
@@ -117,7 +119,7 @@ namespace NingshaRaceLib.Erosion.Components
 
                 if (DebugSettings.godMode && !Pawn.Dead && !transforming)
                 {
-                    yield return new Command_Action
+                    yield return new Command_NingshaAction
                     {
                         defaultLabel = "DEV: 拉满侵蚀",
                         defaultDesc = "立即把当前侵蚀值提升到最终上限，并启动满值转化流程。",

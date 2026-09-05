@@ -2,6 +2,19 @@
 <Defs>
   <!-- 文件职责：定义凝砂族沙漠地底开局使用的固定场景部件。 -->
 
+  <!-- Def 职责：配置三名必选凝砂族及备用候选人的种族和异种生成规则。 -->
+  <ScenPartDef>
+    <defName>NingshaRace_StartingPawns</defName>
+    <label>凝砂族开局成员</label>
+    <scenPartClass>NingshaRaceLib.Scenarios.Parts.ScenPart_NingshaStartingPawns</scenPartClass>
+    <pageClass>Page_ConfigureStartingPawns</pageClass>
+    <category>Fixed</category>
+    <summaryPriority>500</summaryPriority>
+    <selectionWeight>0</selectionWeight>
+    <canBeRandomlyAdded>false</canBeRandomlyAdded>
+    <canBePlayerAddedRemoved>false</canBePlayerAddedRemoved>
+  </ScenPartDef>
+
   <!-- Def 职责：跳过手动选址并把殖民地固定到沙漠世界格和地下地图生成器。 -->
   <ScenPartDef>
     <defName>NingshaRace_ForcedDesertPitStart</defName>

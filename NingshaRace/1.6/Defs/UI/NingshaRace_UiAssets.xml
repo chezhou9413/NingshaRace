@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 职责：把独立界面 Shader 包交给 CL 注册，C# 控件通过包标识取得材质并缓存砂岩底纹。 -->
+  <ChezhouLib.LibDef.UnityShaderLord>
+    <defName>NingshaRace_UiShaderLord</defName>
+    <AbPath>/1.6/AssetBundles/ningsha_ui.ab</AbPath>
+    <AbPathWindows>/1.6/AssetBundles/ningsha_ui.ab</AbPathWindows>
+    <AbPathMac>/1.6/AssetBundles/ningsha_ui_mac.ab</AbPathMac>
+    <AbPathLinux>/1.6/AssetBundles/ningsha_ui.ab</AbPathLinux>
+    <ShaderFolderName>/NingshaUI/Shaders/</ShaderFolderName>
+  </ChezhouLib.LibDef.UnityShaderLord>
+</Defs>

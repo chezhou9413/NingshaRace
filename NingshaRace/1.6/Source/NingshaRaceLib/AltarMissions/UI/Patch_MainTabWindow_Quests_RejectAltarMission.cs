@@ -5,6 +5,9 @@ using UnityEngine;
 using Verse;
 
 using NingshaRaceLib.AltarMissions.World;
+using NingshaRaceLib.UI.Controls;
+using NingshaRaceLib.UI.Foundation;
+using NingshaRaceLib.UI.Windows;
 
 namespace NingshaRaceLib.AltarMissions.UI
 {
@@ -48,27 +51,13 @@ namespace NingshaRaceLib.AltarMissions.UI
                 curY += RowAdvance;
             }
 
-            GameFont oldFont = Text.Font;
-            TextAnchor oldAnchor = Text.Anchor;
-            bool oldWordWrap = Text.WordWrap;
-            Color oldColor = GUI.color;
-            try
+            using (new NingshaGuiScope(GameFont.Small))
             {
-                Text.Font = GameFont.Small;
-                Text.Anchor = TextAnchor.MiddleCenter;
-                Text.WordWrap = false;
-                GUI.color = Color.white;
-                if (Widgets.ButtonText(new Rect(buttonX, buttonY, ButtonWidth, ButtonHeight), "拒绝指引"))
+                if (NingshaButton.Draw(new Rect(buttonX, buttonY, ButtonWidth, ButtonHeight), "拒绝指引",
+                    "altar:reject:" + ___selected.id, tip: "拒绝本次指引，已消耗的供奉不会返还。", destructive: true))
                 {
                     OpenRejectConfirmation(___selected);
                 }
-            }
-            finally
-            {
-                Text.Font = oldFont;
-                Text.Anchor = oldAnchor;
-                Text.WordWrap = oldWordWrap;
-                GUI.color = oldColor;
             }
         }
 
@@ -97,13 +86,13 @@ namespace NingshaRaceLib.AltarMissions.UI
         private static void OpenRejectConfirmation(Quest quest)
         {
             string text = "确定拒绝智慧之蛇的本次指引吗？\n\n本次供奉已经消耗的100点营养不会返还。";
-            Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation(text, delegate
+            Find.WindowStack.Add(new Dialog_NingshaConfirmation("拒绝智慧之蛇指引", text, delegate
             {
                 if (AltarMissionWorldComponent.Current?.TryRejectOffer(quest) == true)
                 {
-                    Messages.Message("已拒绝智慧之蛇的指引，祭坛任务槽已经释放。", MessageTypeDefOf.NeutralEvent, false);
+                    Messages.Message("已拒绝本次指引。再次供奉后，可以向智慧之蛇寻求新的指引。", MessageTypeDefOf.NeutralEvent, false);
                 }
-            }, destructive: true));
+            }, "确认拒绝指引"));
         }
     }
 }
