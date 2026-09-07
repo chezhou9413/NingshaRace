@@ -1,4 +1,5 @@
 using System.Collections;
+using NingshaRaceLib.DesertPit.AntColony.Generation.Chambers;
 using System.Collections.Generic;
 using RimWorld;
 using UnityEngine;
@@ -37,6 +38,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
             data.SmallRooms.Clear();
             data.Collapses.Clear();
             data.ProtectedRouteCells.Clear();
+            data.ReservedSceneCells.Clear();
             data.CaveEdgeDistances = null;
 
             List<DesertPitCaveNode> nodes = DesertPitCaveGraphUtility.BuildCaveGraph(map, data);
@@ -54,6 +56,8 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
             DesertPitGenerationProgress.SetStepFraction(0.82f);
             yield return null;
             DesertPitGenUtility.ClearSafeArea(map, data.MainCenter, 6f);
+            //蚁巢自带自然轮廓与保护岩脊，不再参加全图边缘侵蚀，防止侧壁被开出第二入口。
+            AntChamberPlanner.Plan(map, data);
             DesertPitGenUtility.BuildCaveEdgeCache(map);
             GenerateCollapses(map, data);
             DesertPitGenerationProgress.SetStepFraction(1f);

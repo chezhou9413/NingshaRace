@@ -5,19 +5,19 @@ using NingshaRaceLib.Core.Defs;
 
 namespace NingshaRaceLib.Scenarios.Parts
 {
-    //类职责：配置凝砂族开局人物，使必选成员和备用候选人均按种族异种表生成。
+    //类职责：配置凝砂族开局人物，使必选成员和备用候选人均使用基础服装、种族基因和背景故事。
     public sealed class ScenPart_NingshaStartingPawns : ScenPart_ConfigPage_ConfigureStartingPawns_KindDefs
     {
         //函数职责：保留原版必选人物生成规则，并在原版补足候选人前生成具有正确基因配置的备用成员。
         protected override void GenerateStartingPawns()
         {
-            Find.GameInitData.startingPawnKind = DefOfRefs.NingshaRace_Colonist;
+            Find.GameInitData.startingPawnKind = DefOfRefs.NingshaRace_DesertPitStarter;
             base.GenerateStartingPawns();
             while (Find.GameInitData.startingAndOptionalPawns.Count < pawnChoiceCount)
             {
                 int index = Find.GameInitData.startingAndOptionalPawns.Count;
                 PawnGenerationRequest request = StartingPawnUtility.GetGenerationRequest(index);
-                request.KindDef = DefOfRefs.NingshaRace_Colonist;
+                request.KindDef = DefOfRefs.NingshaRace_DesertPitStarter;
                 //原版默认请求强制基础人异种，清空后才能读取凝砂族种类的异种表。
                 request.ForcedXenotype = null;
                 StartingPawnUtility.SetGenerationRequest(index, request);

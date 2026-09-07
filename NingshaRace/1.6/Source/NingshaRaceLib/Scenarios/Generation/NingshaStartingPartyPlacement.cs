@@ -13,8 +13,8 @@ namespace NingshaRaceLib.Scenarios.Generation
     {
         private const float LandingRadius = 6f;
 
-        //函数职责：整理连通安全区，安置每位成员及场景物资，并核对成员能够步行到离洞绳。
-        public static void Place(Map map, PocketMapExit exit)
+        //函数职责：整理连通安全区，安置成员及已生成的物资、动物，并核对成员能够步行到离洞绳。
+        public static void Place(Map map, PocketMapExit exit, IReadOnlyList<Thing> startingSupplies)
         {
             List<Pawn> pawns = Find.GameInitData.startingAndOptionalPawns;
             foreach (Pawn pawn in pawns)
@@ -37,12 +37,9 @@ namespace NingshaRaceLib.Scenarios.Generation
                     throw new InvalidOperationException($"开局成员 {pawn.LabelShort} 无法走到离洞绳。");
             }
 
-            foreach (ScenPart part in Find.Scenario.AllParts)
-                foreach (Thing thing in part.PlayerStartingThings())
-                    PlaceStartingThing(thing, map, exit.Position, landing);
-            foreach (Pawn pawn in pawns)
-                foreach (ThingDefCount possession in Find.GameInitData.startingPossessions[pawn])
-                    PlaceStartingThing(StartingPawnUtility.GenerateStartingPossession(possession), map, exit.Position, landing);
+            //此时原版已清空临时玩家派系，只安置先前生成的实体，不再调用场景物资生成器。
+            foreach (Thing thing in startingSupplies)
+                PlaceStartingThing(thing, map, exit.Position, landing);
 
             foreach (IntVec3 cell in cells)
             {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
   <!-- 文件职责：定义凝砂族殖民者 PawnKind。 -->
-  <PawnKindDef ParentName="BasePlayerPawnKind">
+  <PawnKindDef Name="NingshaRaceColonist" ParentName="BasePlayerPawnKind">
     <defName>NingshaRace_Colonist</defName>
     <label>凝砂族殖民者</label>
     <race>NingshaRace</race>

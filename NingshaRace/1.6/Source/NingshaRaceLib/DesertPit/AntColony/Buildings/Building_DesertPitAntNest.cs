@@ -99,7 +99,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Buildings
             base.PostApplyDamage(dinfo, totalDamageDealt);
             if (totalDamageDealt > 0f && Spawned && colonyId > 0)
             {
-                Map.GetComponent<MapComponent_DesertPitAntColonies>().NotifyNestDamaged(this, colonyId, dinfo.Instigator as Pawn);
+                Map.GetComponent<MapComponent_DesertPitAntColonies>().NotifyNestDamaged(this, colonyId, dinfo.Instigator);
             }
         }
 
@@ -108,7 +108,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Buildings
         {
             if (Spawned && colonyId > 0)
             {
-                Map.GetComponent<MapComponent_DesertPitAntColonies>().NotifyNestDamaged(this, colonyId, dinfo.HasValue ? dinfo.Value.Instigator as Pawn : null);
+                Map.GetComponent<MapComponent_DesertPitAntColonies>().NotifyNestDamaged(this, colonyId, dinfo.HasValue ? dinfo.Value.Instigator : null);
             }
 
             base.Kill(dinfo, exactCulprit);

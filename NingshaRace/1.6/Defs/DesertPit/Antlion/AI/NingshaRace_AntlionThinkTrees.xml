@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!--倒地和着火使用原版应急行为，其余行为由伏击组件驱动，不继承普通动物的狩猎。-->
+  <ThinkTreeDef>
+    <defName>NingshaRace_Antlion</defName>
+    <thinkRoot Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="ThinkNode_Subtree"><treeDef>Downed</treeDef></li>
+        <li Class="ThinkNode_Subtree"><treeDef>BurningResponse</treeDef></li>
+        <li Class="NingshaRaceLib.DesertPit.Antlion.AI.JobGiver_AntlionAmbush" />
+      </subNodes>
+    </thinkRoot>
+  </ThinkTreeDef>
+  <ThinkTreeDef>
+    <defName>NingshaRace_AntlionConstant</defName>
+    <thinkRoot Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="ThinkNode_Subtree"><treeDef>Despawned</treeDef></li>
+      </subNodes>
+    </thinkRoot>
+  </ThinkTreeDef>
+  <JobDef>
+    <defName>NingshaRace_AntlionAttack</defName>
+    <driverClass>NingshaRaceLib.DesertPit.Antlion.AI.Jobs.JobDriver_AntlionAttack</driverClass>
+    <reportString>正在扑咬TargetA。</reportString>
+    <casualInterruptible>false</casualInterruptible>
+    <collideWithPawns>true</collideWithPawns>
+  </JobDef>
+  <JobDef>
+    <defName>NingshaRace_AntlionSeekSand</defName>
+    <driverClass>NingshaRaceLib.DesertPit.Antlion.AI.Jobs.JobDriver_AntlionSeekSand</driverClass>
+    <reportString>正在寻找藏身的沙地。</reportString>
+  </JobDef>
+  <JobDef>
+    <defName>NingshaRace_AntlionWait</defName>
+    <driverClass>NingshaRaceLib.DesertPit.Antlion.AI.Jobs.JobDriver_AntlionWait</driverClass>
+    <reportString>正在观察附近的动静。</reportString>
+  </JobDef>
+</Defs>

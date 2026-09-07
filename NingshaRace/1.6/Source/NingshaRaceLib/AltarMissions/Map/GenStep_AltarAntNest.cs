@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Verse;
 
 using NingshaRaceLib.DesertPit.AntColony.Generation;
+using NingshaRaceLib.DesertPit.Ecology.Generation;
 using NingshaRaceLib.DesertPit.Generation.Data;
 using NingshaRaceLib.DesertPit.Generation.Utility;
 
@@ -19,10 +20,12 @@ namespace NingshaRaceLib.AltarMissions.Map
         {
             DesertPitLayoutData data = DesertPitGenUtility.GetLayoutData();
             int level = Rand.Chance(0.5f) ? 4 : 5;
-            if (!DesertPitAntSceneUtility.TryGenerateColony(map, data, new List<IntVec3>(), level, false, out IntVec3 _))
+            if (!DesertPitAntSceneUtility.TryGenerateColony(map, data, new List<IntVec3>(), level, false, out IntVec3 center))
             {
                 throw new InvalidOperationException("清剿蚁巢任务没有找到固定蚁巢生成位置。");
             }
+            AntHabitatGeneration.SpawnMound(map, data, AntHabitatGeneration.FindMoundCell(map, data, center, 7f, 18f, true));
+            if (Rand.Chance(0.75f)) AntHabitatGeneration.SpawnRepellent(map, data, center, 16f, 26f);
         }
     }
 }

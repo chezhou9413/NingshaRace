@@ -37,7 +37,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             }
 
             float requiredNutrition = Settings.GetUpgradeNutrition(state.CurrentLevel);
-            if (requiredNutrition <= 0f || GetStoredNutrition(state, state.Queen) < requiredNutrition)
+            if (requiredNutrition <= 0f || GetStoredNutrition(state, state.Queen) < requiredNutrition + GetFoodReserve(state))
             {
                 return;
             }
@@ -112,6 +112,10 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
                 builder.Append("撤退剩余：").Append((state.RetreatUntilTick - Find.TickManager.TicksGame).ToStringTicksToPeriod());
             }
 
+            builder.AppendLine();
+            builder.Append("预留口粮：").Append(GetFoodReserve(state).ToString("0.##"));
+            builder.AppendLine();
+            builder.Append("吐酸蚁：").Append(CountCaste(state, Core.AntCaste.Acid)).Append(" / ").Append(state.Population.AcidTarget);
             return builder.ToString();
         }
     }

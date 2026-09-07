@@ -16,14 +16,17 @@ namespace NingshaRaceLib.DesertPit.AntColony.State
         //字段职责：记录当前规模需要维持的兵蚁数量。
         public int SoldierTarget;
 
+        //字段职责：记录三级以上巢群独立维护的吐酸蚁数量。
+        public int AcidTarget;
+
         //字段职责：记录完整警报允许存在的爆浆蚁上限。
         public int BoomAntCap;
 
         //字段职责：记录巢群使用的实体储藏格数量。
         public int StorageCellCount;
 
-        //属性职责：始终从工蚁与兵蚁目标之和得到常规蚁上限，避免配置彼此矛盾。
-        public int RegularAntCap => WorkerTarget + SoldierTarget;
+        //属性职责：从工蚁、兵蚁和吐酸蚁目标之和得到常规蚁上限，蚁后和爆浆蚁单独统计。
+        public int RegularAntCap => WorkerTarget + SoldierTarget + AcidTarget;
 
         //函数职责：根据蚁穴基础配置和房间倍率计算可持久化的有效规模。
         public static AntColonyPopulationSettings Create(DefModExtension_AntColony settings, float scale)
@@ -49,7 +52,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.State
             };
         }
 
-        //函数职责：按蚁巢等级建立四倍工蚁、三倍兵蚁且固定爆浆蚁和储藏格的规模配置。
+        //函数职责：按等级设置工蚁、兵蚁和三级起的吐酸蚁目标，爆浆蚁与储藏格维持固定规模。
         public static AntColonyPopulationSettings CreateForLevel(DefModExtension_AntColony settings, int level)
         {
             if (settings == null)
@@ -66,6 +69,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.State
                 Scale = level,
                 WorkerTarget = settings.workerTarget * level,
                 SoldierTarget = settings.soldierTarget * level,
+                AcidTarget = Math.Max(0, level - 2) * 2,
                 BoomAntCap = settings.boomAntCap,
                 StorageCellCount = settings.storageCellCount
             };
@@ -77,6 +81,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.State
             Scribe_Values.Look(ref Scale, "scale", 1f);
             Scribe_Values.Look(ref WorkerTarget, "workerTarget");
             Scribe_Values.Look(ref SoldierTarget, "soldierTarget");
+            Scribe_Values.Look(ref AcidTarget, "acidTarget");
             Scribe_Values.Look(ref BoomAntCap, "boomAntCap");
             Scribe_Values.Look(ref StorageCellCount, "storageCellCount");
         }

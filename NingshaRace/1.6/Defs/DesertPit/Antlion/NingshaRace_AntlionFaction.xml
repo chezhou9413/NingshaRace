@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!--蚁狮拥有独立隐藏派系，与玩家、其他派系及沙穴蚁群永久敌对。-->
+  <FactionDef ParentName="FactionBase">
+    <defName>NingshaRace_AntlionFaction</defName>
+    <label>潜沙蚁狮</label>
+    <fixedName>潜沙蚁狮</fixedName>
+    <description>独自潜伏在沙地中的捕食者，连地下蚁群也会成为它们的猎物。</description>
+    <pawnSingular>蚁狮</pawnSingular>
+    <pawnsPlural>蚁狮</pawnsPlural>
+    <humanlikeFaction>false</humanlikeFaction>
+    <hidden>true</hidden>
+    <permanentEnemy>true</permanentEnemy>
+    <autoFlee>false</autoFlee>
+    <animalsFleeDanger>false</animalsFleeDanger>
+    <canSiege>false</canSiege>
+    <canStageAttacks>false</canStageAttacks>
+    <canMakeRandomly>false</canMakeRandomly>
+    <settlementGenerationWeight>0</settlementGenerationWeight>
+    <requiredCountAtGameStart>0</requiredCountAtGameStart>
+    <maxConfigurableAtWorldCreation>0</maxConfigurableAtWorldCreation>
+    <displayInFactionSelection>false</displayInFactionSelection>
+    <techLevel>Animal</techLevel>
+    <colorSpectrum><li>(0.55,0.46,0.3)</li></colorSpectrum>
+  </FactionDef>
+</Defs>

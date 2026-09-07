@@ -4,13 +4,14 @@ using Verse;
 
 using NingshaRaceLib.Core.Defs;
 using NingshaRaceLib.DesertPit.AntColony.Config;
+using NingshaRaceLib.DesertPit.Ecology.Generation;
 using NingshaRaceLib.DesertPit.Generation.Data;
 using NingshaRaceLib.DesertPit.Generation.Progress;
 using NingshaRaceLib.DesertPit.Generation.Utility;
 
 namespace NingshaRaceLib.DesertPit.AntColony.Generation
 {
-    //类职责：在水文完成后按分帧生成协议向沙漠巨坑放置一至两个独立蚁巢场景。
+    //类职责：在预留洞室安置两座巢群、三座菌巢和入口驱蚁桩。
     public class GenStep_DesertPitAntColonies : GenStep, IDesertPitIncrementalGenStep
     {
         private const int Seed = 914027346;
@@ -25,27 +26,22 @@ namespace NingshaRaceLib.DesertPit.AntColony.Generation
             }
         }
 
-        //函数职责：生成首个必有巢群，并在概率命中且有合法位置时生成第二个巢群。
+        //函数职责：逐洞室生成巢群和配对菌巢，再生成独立菌巢与入口保护物件。
         public IEnumerable GenerateIncrementally(Map map, GenStepParams parms)
         {
             DesertPitGenUtility.SetGenerationStatus("蚁巢生态");
             DesertPitLayoutData data = DesertPitGenUtility.GetLayoutData();
-            DefModExtension_AntColony settings = DefOfRefs.NingshaRace_DesertPitAntNest.GetModExtension<DefModExtension_AntColony>();
-            List<IntVec3> centers = new List<IntVec3>();
-            IntVec3 center;
-            if (!DesertPitAntSceneUtility.TryGenerateColony(map, data, centers, out center))
+            if (data.AntChambers.Count != 2) throw new System.InvalidOperationException("沙漠巨坑缺少预先规划的两座蚁巢洞室。");
+            for (int i = 0; i < data.AntChambers.Count; i++)
             {
-                throw new System.InvalidOperationException("沙漠巨坑没有找到可生成首个蚁巢场景的位置。");
-            }
-
-            centers.Add(center);
-            yield return null;
-
-            if (Rand.Chance(settings.secondColonyChance) && DesertPitAntSceneUtility.TryGenerateColony(map, data, centers, out center))
-            {
-                centers.Add(center);
+                var room = data.AntChambers[i];
+                DesertPitAntSceneUtility.GenerateInChamber(map, data, room, i);
+                AntHabitatGeneration.SpawnMound(map, data, room.Mound);
                 yield return null;
             }
+            IntVec3 freeMound = AntHabitatGeneration.FindMoundCell(map, data, data.MainCenter, 18f, 35f, false);
+            AntHabitatGeneration.SpawnMound(map, data, freeMound);
+            AntHabitatGeneration.SpawnRepellent(map, data, data.MainCenter, 3f, 5f);
         }
     }
 }

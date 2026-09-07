@@ -62,7 +62,11 @@
         <repairHitPoints>100</repairHitPoints>
         <boomAntCap>3</boomAntCap>
         <storageCellCount>12</storageCellCount>
-        <secondColonyChance>0.45</secondColonyChance>
+        <acidNutritionCost>2</acidNutritionCost>
+        <foodReserveDays>1</foodReserveDays>
+        <foodStorageCells>4</foodStorageCells>
+        <retaliationRadius>55</retaliationRadius>
+        <retaliationDurationTicks>2500</retaliationDurationTicks>
         <alertRadius>20</alertRadius>
         <soldierPatrolRadius>12</soldierPatrolRadius>
         <workerWanderRadius>8</workerWanderRadius>

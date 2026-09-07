@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!--追加独立速度计算器，不覆盖蜕皮或其他模组已登记的移动属性项。-->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/StatDef[defName="MoveSpeed"]/parts</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/StatDef[defName="MoveSpeed"]/parts</xpath>
+      <value><li Class="NingshaRaceLib.DesertPit.Antlion.State.StatPart_AntlionAmbushSpeed" /></value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/StatDef[defName="MoveSpeed"]</xpath>
+      <value><parts><li Class="NingshaRaceLib.DesertPit.Antlion.State.StatPart_AntlionAmbushSpeed" /></parts></value>
+    </nomatch>
+  </Operation>
+</Patch>

@@ -29,7 +29,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             feedingSource = null;
             PawnKindDef kind;
             float nutritionCost;
-            if (!TryGetMissingRegularCaste(state, out kind, out nutritionCost) || GetStoredNutrition(state, queen) < nutritionCost)
+            if (!TryGetMissingRegularCaste(state, out kind, out nutritionCost) || GetStoredNutrition(state, queen) < nutritionCost + GetFoodReserve(state))
             {
                 return false;
             }
@@ -76,17 +76,9 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             return true;
         }
 
-        //函数职责：按工蚁优先、兵蚁次之的顺序确定当前需要补充的常规阶级和营养消耗。
+        //函数职责：逐阶级检查缺员，按工蚁、兵蚁、吐酸蚁顺序确定补员种类与营养消耗。
         private bool TryGetMissingRegularCaste(AntColonyState state, out PawnKindDef kind, out float nutritionCost)
         {
-            int regularCount = state.Members.Count - CountCaste(state, AntCaste.Boom);
-            if (regularCount >= state.Population.RegularAntCap)
-            {
-                kind = null;
-                nutritionCost = 0f;
-                return false;
-            }
-
             if (CountCaste(state, AntCaste.Worker) < state.Population.WorkerTarget)
             {
                 kind = DefOfRefs.NingshaRace_DesertPitWorkerAntKind;
@@ -98,6 +90,13 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             {
                 kind = DefOfRefs.NingshaRace_DesertPitSoldierAntKind;
                 nutritionCost = Settings.soldierNutritionCost;
+                return true;
+            }
+
+            if (CountCaste(state, AntCaste.Acid) < state.Population.AcidTarget)
+            {
+                kind = DefOfRefs.NingshaRace_DesertPitAcidAntKind;
+                nutritionCost = Settings.acidNutritionCost;
                 return true;
             }
 

@@ -68,6 +68,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         //函数职责：按错峰间隔更新巢群状态，并定期刷新全图可搬运物资缓存。
         public override void MapComponentTick()
         {
+            if (colonies.Count == 0) return;
             int ticks = Find.TickManager.TicksGame;
             if (ticks % 60 == map.uniqueID % 60)
             {
@@ -177,7 +178,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         }
 
         //函数职责：蚁穴受击时进入完整警报，并在新一轮警报开始时立即补满爆浆蚁。
-        public void NotifyNestDamaged(Building_DesertPitAntNest nest, int colonyId, Pawn aggressor)
+        public void NotifyNestDamaged(Building_DesertPitAntNest nest, int colonyId, Thing aggressor)
         {
             AntColonyState state;
             if (!coloniesById.TryGetValue(colonyId, out state) || state.NestDestroyed)
@@ -192,18 +193,12 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             state.LastNestDamageTick = ticks;
             state.NextRepairTick = System.Math.Max(state.NextRepairTick, ticks + Settings.repairDelayAfterDamageTicks);
             CancelInvestigation(state);
-            if (aggressor != null && !aggressor.Dead)
-            {
-                state.LastAggressor = aggressor;
-                if (!state.Intruders.Contains(aggressor))
-                {
-                    state.Intruders.Add(aggressor);
-                }
-            }
+            RememberAggressor(state, aggressor);
             if (!wasAlarmed)
             {
                 SpawnBoomAntsToCap(state);
                 state.NextBoomWaveTick = ticks + Settings.boomWaveCooldownTicks;
+                InterruptAllMembers(state);
             }
         }
 

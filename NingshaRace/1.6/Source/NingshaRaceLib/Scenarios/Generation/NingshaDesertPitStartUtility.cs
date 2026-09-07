@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using RimWorld;
 using RimWorld.Planet;
 using Verse;
@@ -11,8 +12,8 @@ namespace NingshaRaceLib.Scenarios.Generation
     //类职责：协调地表巨坑入口、地下家园与开局安置，确保两张地图拥有真实的双向连接。
     internal static class NingshaDesertPitStartUtility
     {
-        //函数职责：地表生成结束后创建地下地图，完成队伍安置并把镜头定位到成员身边。
-        public static void CreateHome(Map surface)
+        //函数职责：地表生成结束后创建地下地图，安置队伍及已准备的物资，并把镜头定位到成员身边。
+        public static void CreateHome(Map surface, IReadOnlyList<Thing> startingSupplies)
         {
             if (surface == null || surface.IsPocketMap || surface.Biome != BiomeDefOf.Desert)
                 throw new InvalidOperationException("深砂遗民开局缺少有效的地表沙漠地图。");
@@ -43,7 +44,7 @@ namespace NingshaRaceLib.Scenarios.Generation
             if (gate.exit == null || gate.exit.Map != underground || gate.exit.entrance != gate)
                 throw new InvalidOperationException("深砂遗民开局未生成正确绑定的离洞绳。");
             gate.BindStartingHome(underground);
-            NingshaStartingPartyPlacement.Place(underground, gate.exit);
+            NingshaStartingPartyPlacement.Place(underground, gate.exit, startingSupplies);
             Current.Game.CurrentMap = underground;
             Find.CameraDriver.JumpToCurrentMapLoc(Find.GameInitData.startingAndOptionalPawns[0].Position);
             Find.CameraDriver.ResetSize();

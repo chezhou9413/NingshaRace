@@ -247,7 +247,8 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
         //函数职责：判断指定格子是否允许被改造成水体或湿地。
         private static bool CanPaintWater(Map map, DesertPitLayoutData data, IntVec3 cell)
         {
-            if (!cell.InBounds(map) || !DesertPitGenUtility.IsCave(map, cell) || !cell.Standable(map) || cell.DistanceTo(data.MainCenter) < MainSafeRadius)
+            if (!cell.InBounds(map) || !DesertPitGenUtility.IsCave(map, cell) || !cell.Standable(map) || cell.DistanceTo(data.MainCenter) < MainSafeRadius
+                || data.ReservedSceneCells.Contains(cell) || data.ProtectedRouteCells.Contains(cell))
             {
                 return false;
             }

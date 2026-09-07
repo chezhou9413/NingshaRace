@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!--带细节的浅沙尘托住明暗沙粒，运动和尺寸可单独配置，不使用发光材质。-->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>NingshaRace_AntlionSandDust</defName>
+    <graphicData>
+      <texPath>Things/Mote/DustPuff</texPath>
+      <color>(0.88,0.73,0.46,0.58)</color>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.04</fadeInTime>
+    <solidTime>0.20</solidTime>
+    <fadeOutTime>0.45</fadeOutTime>
+    <growthRate>0.35</growthRate>
+    <collide>true</collide>
+    <modExtensions>
+      <li Class="NingshaRaceLib.DesertPit.Antlion.Effects.DefModExtension_AntlionSandEffects">
+        <!--间隔以更新单位计，正常速度下六十单位约为一秒；不影响生物行为检查间隔。-->
+        <buriedIntervalTicks>16</buriedIntervalTicks>
+        <transitionIntervalTicks>5</transitionIntervalTicks>
+        <!--各项是单次沙粒数量，出土瞬间另有五团短寿命沙尘，其余阶段为一至两团。-->
+        <buriedGrains>12</buriedGrains>
+        <transitionGrains>14</transitionGrains>
+        <eruptionGrains>36</eruptionGrains>
+        <!--半径和尺寸单位为格；潜伏只表现约一格范围内的流沙扰动。-->
+        <buriedRadius>0.55</buriedRadius>
+        <buriedGrainScale>0.085~0.15</buriedGrainScale>
+        <movingGrainScale>0.10~0.20</movingGrainScale>
+        <buriedDustScale>0.55~0.80</buriedDustScale>
+        <movingDustScale>0.85~1.20</movingDustScale>
+      </li>
+    </modExtensions>
+  </FleckDef>
+  <!--明暗沙粒共用短寿命行为，通过拉伸和随机转动表现细沙而非整齐光点。-->
+  <FleckDef ParentName="FleckBase_Thrown" Name="NingshaRace_AntlionSandGrainBase">
+    <defName>NingshaRace_AntlionSandGrain</defName>
+    <graphicData>
+      <texPath>Things/Mote/AirPuff</texPath>
+      <color>(0.98,0.88,0.66,1)</color>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.01</fadeInTime>
+    <solidTime>0.20</solidTime>
+    <fadeOutTime>0.40</fadeOutTime>
+    <growthRate>-0.04</growthRate>
+    <collide>true</collide>
+  </FleckDef>
+  <!--少量褐色细沙与浅色地面形成对比，不叠加大面积深色沙尘。-->
+  <FleckDef ParentName="NingshaRace_AntlionSandGrainBase">
+    <defName>NingshaRace_AntlionSandGrainDark</defName>
+    <graphicData>
+      <color>(0.48,0.35,0.19,0.9)</color>
+    </graphicData>
+  </FleckDef>
+</Defs>

@@ -18,7 +18,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Landmarks
         {
             foreach (IntVec3 cell in GenRadial.RadialCellsAround(center, radius, useCenter: true))
             {
-                if (!cell.InBounds(map) || !DesertPitGenUtility.IsCave(map, cell))
+                if (!cell.InBounds(map) || !DesertPitGenUtility.IsCave(map, cell) || DesertPitGenUtility.GetLayoutData().ReservedSceneCells.Contains(cell))
                 {
                     continue;
                 }
@@ -40,7 +40,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Landmarks
         {
             foreach (IntVec3 cell in GenRadial.RadialCellsAround(center, radius, useCenter: true))
             {
-                if (!cell.InBounds(map) || !DesertPitGenUtility.IsCave(map, cell))
+                if (!cell.InBounds(map) || !DesertPitGenUtility.IsCave(map, cell) || DesertPitGenUtility.GetLayoutData().ReservedSceneCells.Contains(cell))
                 {
                     continue;
                 }
@@ -61,7 +61,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Landmarks
         {
             foreach (IntVec3 cell in GenRadial.RadialCellsAround(center, radius, useCenter: true))
             {
-                if (!cell.InBounds(map) || !DesertPitGenUtility.IsCave(map, cell))
+                if (!cell.InBounds(map) || !DesertPitGenUtility.IsCave(map, cell) || DesertPitGenUtility.GetLayoutData().ReservedSceneCells.Contains(cell))
                 {
                     continue;
                 }

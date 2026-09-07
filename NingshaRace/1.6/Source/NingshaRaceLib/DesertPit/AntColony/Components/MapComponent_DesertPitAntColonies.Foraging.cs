@@ -5,6 +5,7 @@ using Verse.AI;
 
 using NingshaRaceLib.Core.Defs;
 using NingshaRaceLib.DesertPit.AntColony.State;
+using NingshaRaceLib.DesertPit.Ecology.Habitats;
 
 namespace NingshaRaceLib.DesertPit.AntColony.Components
 {
@@ -15,11 +16,16 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         private void RefreshForageCandidates()
         {
             forageCandidates.Clear();
+            harvestCandidates.Clear();
+            if (colonies.Count == 0) return;
+            MapComponent_AntHabitats habitats = map.GetComponent<MapComponent_AntHabitats>();
             List<Thing> allThings = map.listerThings.AllThings;
             for (int i = 0; i < allThings.Count; i++)
             {
                 Thing thing = allThings[i];
-                if (thing.Spawned && IsForageThing(thing) && !IsInAnyStorageCell(thing.Position))
+                if (!thing.Spawned || habitats.IsRepelled(thing.Position)) continue;
+                if (thing is Plant plant && CanHarvestForColony(plant)) harvestCandidates.Add(plant);
+                if (IsForageThing(thing) && !IsInAnyStorageCell(thing.Position))
                 {
                     forageCandidates.Add(thing);
                 }
@@ -77,12 +83,14 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             for (int i = 0; i < forageCandidates.Count; i++)
             {
                 Thing candidate = forageCandidates[i];
-                if (candidate == null || !candidate.Spawned || assignedForageThings.ContainsKey(candidate))
+                if (candidate == null || !candidate.Spawned || assignedForageThings.ContainsKey(candidate)
+                    || map.GetComponent<MapComponent_AntHabitats>().IsRepelled(candidate.Position))
                 {
                     continue;
                 }
 
-                if (!pawn.CanReserveAndReach(candidate, PathEndMode.ClosestTouch, Danger.Deadly))
+                float distance = pawn.Position.DistanceToSquared(candidate.Position);
+                if (distance >= bestDistance || !pawn.CanReserveAndReach(candidate, PathEndMode.ClosestTouch, Danger.Deadly))
                 {
                     continue;
                 }
@@ -94,7 +102,6 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
                     continue;
                 }
 
-                float distance = pawn.Position.DistanceToSquared(candidate.Position);
                 if (distance < bestDistance)
                 {
                     bestDistance = distance;
@@ -121,9 +128,11 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         private bool TryFindStorageCell(Pawn pawn, AntColonyState state, Thing thing, out IntVec3 cell, out int carryCount)
         {
             int pawnCapacity = pawn.carryTracker.MaxStackSpaceEver(thing.def);
+            bool food = IsStoredFood(thing);
             for (int i = 0; i < state.StorageCells.Count; i++)
             {
                 IntVec3 candidate = state.StorageCells[i];
+                if (!food && i < Settings.foodStorageCells) continue;
                 Thing occupant = GetStorageOccupant(candidate);
                 if (occupant == null || occupant.def != thing.def || occupant is Corpse || occupant.stackCount >= occupant.def.stackLimit)
                 {
@@ -143,6 +152,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             for (int i = 0; i < state.StorageCells.Count; i++)
             {
                 IntVec3 candidate = state.StorageCells[i];
+                if (!food && i < Settings.foodStorageCells) continue;
                 if (GetStorageOccupant(candidate) != null || assignedStorageCells.ContainsKey(candidate))
                 {
                     continue;

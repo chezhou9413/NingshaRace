@@ -62,7 +62,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Landmarks
         //函数职责：判断指定格子是否可以放置地貌装饰物或特效发射器。
         public static bool CanPlaceLandmarkThing(Map map, DesertPitLayoutData data, IntVec3 cell)
         {
-            if (!CanUseCaveCell(map, data, cell) || cell.GetEdifice(map) != null || cell.GetPlant(map) != null)
+            if (!CanUseCaveCell(map, data, cell) || cell.GetEdifice(map) != null || cell.GetPlant(map) != null || data.ReservedSceneCells.Contains(cell))
             {
                 return false;
             }
@@ -132,13 +132,15 @@ namespace NingshaRaceLib.DesertPit.Generation.Landmarks
         //函数职责：判断指定格子是否满足洞穴、入口安全区和基础可放置条件。
         private static bool CanUseCaveCell(Map map, DesertPitLayoutData data, IntVec3 cell)
         {
-            return cell.InBounds(map) && DesertPitGenUtility.IsCave(map, cell) && cell.Standable(map) && cell.DistanceTo(data.MainCenter) >= MainSafeRadius;
+            return cell.InBounds(map) && DesertPitGenUtility.IsCave(map, cell) && cell.Standable(map) && cell.DistanceTo(data.MainCenter) >= MainSafeRadius
+                && !data.ReservedSceneCells.Contains(cell);
         }
 
         //函数职责：判断指定洞穴格是否可以放置可拆除的沙岩块建筑。
         private static bool CanPlaceLooseThing(Map map, IntVec3 cell)
         {
-            if (!cell.InBounds(map) || !DesertPitGenUtility.IsCave(map, cell) || !cell.Standable(map) || cell.GetEdifice(map) != null)
+            if (!cell.InBounds(map) || !DesertPitGenUtility.IsCave(map, cell) || !cell.Standable(map) || cell.GetEdifice(map) != null
+                || DesertPitGenUtility.GetLayoutData().ReservedSceneCells.Contains(cell))
             {
                 return false;
             }

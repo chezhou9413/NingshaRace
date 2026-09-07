@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 定义职责：让地下开局候选人继承凝砂族基因和故事，仅穿基础内衣，不随机携带武器或科技植入物。 -->
+  <PawnKindDef ParentName="NingshaRaceColonist">
+    <defName>NingshaRace_DesertPitStarter</defName>
+    <label>凝砂族遗民</label>
+    <defaultFactionDef>NingshaRace_DesertPitPlayerFaction</defaultFactionDef>
+    <apparelRequired Inherit="False">
+      <li>NingshaRace_Apparel_Chestwrap</li>
+      <li>NingshaRace_Apparel_Shorts</li>
+    </apparelRequired>
+    <apparelTags Inherit="False" />
+    <specificApparelRequirements Inherit="False" />
+    <weaponMoney>0~0</weaponMoney>
+    <weaponTags Inherit="False" />
+    <techHediffsChance>0</techHediffsChance>
+    <techHediffsMoney>0~0</techHediffsMoney>
+  </PawnKindDef>
+</Defs>

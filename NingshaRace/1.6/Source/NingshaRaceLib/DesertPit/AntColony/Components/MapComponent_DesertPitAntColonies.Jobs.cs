@@ -22,6 +22,12 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
 
             Comp_DesertPitAntMember memberComp = pawn.TryGetComp<Comp_DesertPitAntMember>();
             AntCaste caste = memberComp.Caste;
+            //极度饥饿时仍保留进食机会，避免警报和狂暴永久遮蔽基本需求。
+            if (caste != AntCaste.Boom && pawn.needs?.food?.CurLevelPercentage < 0.12f)
+            {
+                Job urgentFood = TryCreateNeedsJob(pawn, state);
+                if (urgentFood != null) return urgentFood;
+            }
             if (IsRetreating(state, Find.TickManager.TicksGame))
             {
                 return TryCreateRetreatJob(pawn, state, caste);
@@ -36,12 +42,12 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
 
             if (state.Frenzy)
             {
-                return intruder != null ? CreateMeleeAttackJob(intruder) : CreatePatrolJob(pawn, state, Settings.soldierPatrolRadius);
+                return intruder != null ? CreateCombatJob(pawn, intruder) : TryCreateNeedsJob(pawn, state) ?? CreatePatrolJob(pawn, state, Settings.soldierPatrolRadius);
             }
 
-            if (caste == AntCaste.Soldier && intruder != null)
+            if ((caste == AntCaste.Soldier || caste == AntCaste.Acid) && intruder != null)
             {
-                return CreateMeleeAttackJob(intruder);
+                return CreateCombatJob(pawn, intruder);
             }
 
             if ((caste == AntCaste.Worker || caste == AntCaste.Queen) && intruder != null && pawn.Position.DistanceTo(intruder.Position) <= Settings.workerRetreatRadius)
@@ -75,6 +81,11 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
 
             if (caste == AntCaste.Worker)
             {
+                if (GetStoredNutrition(state) < GetFoodReserve(state) * 2f)
+                {
+                    Job harvest = TryCreateHarvestJob(pawn, state);
+                    if (harvest != null) return harvest;
+                }
                 Job forageJob = TryCreateForageJob(pawn, state);
                 return forageJob ?? CreatePatrolJob(pawn, state, Settings.workerWanderRadius);
             }
@@ -87,7 +98,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         {
             if (pawn.needs != null && pawn.needs.food != null && pawn.needs.food.CurLevelPercentage < 0.35f)
             {
-                Thing food = FindStoredFoodFor(pawn, state);
+                Thing food = FindStoredFoodFor(pawn, state) ?? FindLooseFoodFor(pawn);
                 if (food != null)
                 {
                     Job ingestJob = JobMaker.MakeJob(JobDefOf.Ingest, food);

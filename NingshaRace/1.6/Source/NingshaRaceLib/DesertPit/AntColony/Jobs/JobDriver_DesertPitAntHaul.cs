@@ -3,6 +3,7 @@ using Verse;
 using Verse.AI;
 
 using NingshaRaceLib.DesertPit.AntColony.Components;
+using NingshaRaceLib.DesertPit.Ecology.Habitats;
 
 namespace NingshaRaceLib.DesertPit.AntColony.Jobs
 {
@@ -22,6 +23,10 @@ namespace NingshaRaceLib.DesertPit.AntColony.Jobs
         //函数职责：依次前往物资、拿起指定数量、搬到巢穴储藏格并释放运行时分配。
         protected override IEnumerable<Toil> MakeNewToils()
         {
+            Map assignmentMap = Map;
+            AddFinishAction(condition => assignmentMap.GetComponent<MapComponent_DesertPitAntColonies>().ReleaseForageAssignments(pawn));
+            this.FailOn(() => pawn.carryTracker.CarriedThing == null && TargetA.Thing != null && TargetA.Thing.Spawned
+                && Map.GetComponent<MapComponent_AntHabitats>().IsRepelled(TargetA.Thing.Position));
             this.FailOnDestroyedOrNull(HaulableIndex);
             this.FailOn(delegate
             {

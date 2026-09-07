@@ -6,7 +6,7 @@ namespace NingshaRaceLib.Core.Defs
 {
     //类职责：集中声明凝砂族代码需要直接访问的 Def，避免字符串分散在各个系统里。
     [DefOf]
-    public static class DefOfRefs
+    public static partial class DefOfRefs
     {
         //字段职责：凝砂族主种族 ThingDef。
         public static ThingDef NingshaRace;
@@ -16,6 +16,9 @@ namespace NingshaRaceLib.Core.Defs
 
         //字段职责：用于生成成年凝砂族殖民者的 PawnKindDef。
         public static PawnKindDef NingshaRace_Colonist;
+
+        //字段职责：只穿基础内衣的沙漠地底开局成员与备用候选人。
+        public static PawnKindDef NingshaRace_DesertPitStarter;
 
         //字段职责：用于生成三至十七岁凝砂族儿童的 PawnKindDef。
         public static PawnKindDef NingshaRace_Child;

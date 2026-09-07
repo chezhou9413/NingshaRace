@@ -101,7 +101,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
                     continue;
                 }
 
-                if (cell.DistanceTo(data.MainCenter) < 8f || cell.GetEdifice(map) != null || cell.GetPlant(map) != null)
+                if (cell.DistanceTo(data.MainCenter) < 8f || cell.GetEdifice(map) != null || cell.GetPlant(map) != null || data.ReservedSceneCells.Contains(cell))
                 {
                     continue;
                 }
@@ -181,7 +181,8 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
                 return false;
             }
 
-            return DesertPitGenUtility.IsCave(cell) && cell.Standable(map) && cell.GetEdifice(map) == null;
+            return DesertPitGenUtility.IsCave(cell) && cell.Standable(map) && cell.GetEdifice(map) == null
+                && !DesertPitGenUtility.GetLayoutData().ReservedSceneCells.Contains(cell);
         }
 
         //函数职责：判断指定格子是否靠近塌方和碎石边缘。

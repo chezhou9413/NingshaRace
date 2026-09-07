@@ -72,8 +72,9 @@ namespace NingshaRaceLib.DesertPit.AntColony.State
         //字段职责：记录蚁后下一次允许补员的游戏 Tick。
         public int NextBirthTick;
 
-        //字段职责：引用最近攻击蚁穴的 Pawn。
-        public Pawn LastAggressor;
+        //字段职责：引用最近攻击巢群的生物或炮塔，并限定反击记忆持续时间。
+        public Thing LastAggressor;
+        public int RetaliationUntilTick;
 
         //字段职责：缓存当前领地内可以攻击的外来实体。
         public List<Thing> Intruders = new List<Thing>();
@@ -103,6 +104,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.State
             Scribe_Values.Look(ref NextBoomWaveTick, "nextBoomWaveTick", -1);
             Scribe_Values.Look(ref NextBirthTick, "nextBirthTick");
             Scribe_References.Look(ref LastAggressor, "lastAggressor");
+            Scribe_Values.Look(ref RetaliationUntilTick, "retaliationUntilTick");
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {

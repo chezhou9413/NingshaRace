@@ -6,6 +6,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Core
         Worker,
         Soldier,
         Queen,
-        Boom
+        Boom,
+        Acid
     }
 }

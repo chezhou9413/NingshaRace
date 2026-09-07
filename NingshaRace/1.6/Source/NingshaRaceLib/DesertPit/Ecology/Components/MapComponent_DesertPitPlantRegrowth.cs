@@ -5,6 +5,7 @@ using Verse;
 
 using NingshaRaceLib.DesertPit.Ecology.Config;
 using NingshaRaceLib.DesertPit.Ecology.Utility;
+using NingshaRaceLib.DesertPit.Ecology.Habitats;
 
 namespace NingshaRaceLib.DesertPit.Ecology.Components
 {
@@ -91,7 +92,7 @@ namespace NingshaRaceLib.DesertPit.Ecology.Components
                 int targetCount = 0;
                 for (int j = 0; j < plants.Count; j++)
                 {
-                    if (plants[j].Spawned)
+                    if (plants[j].Spawned && !map.GetComponent<MapComponent_AntHabitats>().IsFungalHabitat(plants[j].Position))
                     {
                         targetCount++;
                         habitatAnchors.Add(plants[j].Position);
@@ -121,7 +122,9 @@ namespace NingshaRaceLib.DesertPit.Ecology.Components
                     continue;
                 }
 
-                int current = map.listerThings.ThingsOfDef(target.PlantDef).Count;
+                int current = 0;
+                foreach (Thing plant in map.listerThings.ThingsOfDef(target.PlantDef))
+                    if (plant.Spawned && !map.GetComponent<MapComponent_AntHabitats>().IsFungalHabitat(plant.Position)) current++;
                 float missingRatio = Mathf.Max(0f, target.TargetCount - current) / target.TargetCount;
                 if (missingRatio > largestMissingRatio)
                 {
@@ -141,7 +144,7 @@ namespace NingshaRaceLib.DesertPit.Ecology.Components
             {
                 IntVec3 anchor = habitatAnchors.RandomElement();
                 IntVec3 cell = anchor + GenRadial.RadialPattern[Rand.Range(0, radialCount)];
-                if (DesertPitPlantEcologyUtility.CanRegrowPlantAt(map, cell, plantDef))
+                if (!map.GetComponent<MapComponent_AntHabitats>().IsFungalHabitat(cell) && DesertPitPlantEcologyUtility.CanRegrowPlantAt(map, cell, plantDef))
                 {
                     DesertPitPlantEcologyUtility.SpawnPlant(map, plantDef, cell, settings.initialGrowthRange);
                     return true;

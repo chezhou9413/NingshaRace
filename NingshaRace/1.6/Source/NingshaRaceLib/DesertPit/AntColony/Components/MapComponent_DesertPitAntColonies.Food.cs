@@ -1,4 +1,5 @@
 using RimWorld;
+using System.Collections.Generic;
 using Verse;
 
 using NingshaRaceLib.DesertPit.AntColony.State;
@@ -63,60 +64,46 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             return thing.def.IsNutritionGivingIngestible && !thing.def.IsDrug;
         }
 
-        //函数职责：从实体储藏格中消耗指定营养，并优先扣除补员任务实际展示的食物。
+        //函数职责：先规划完整扣款再消耗物资，整具尸体和堆叠向上取整都不能侵占保留口粮。
         private bool ConsumeStoredNutrition(AntColonyState state, Pawn eater, float requiredNutrition, Thing preferredFood)
         {
-            if (GetStoredNutrition(state, eater) < requiredNutrition)
-            {
-                return false;
-            }
-
+            float budget = GetStoredNutrition(state, eater) - GetFoodReserve(state);
+            if (budget < requiredNutrition) return false;
             float remaining = requiredNutrition;
+            List<KeyValuePair<Thing, int>> payment = new List<KeyValuePair<Thing, int>>();
             if (IsFoodStoredInColony(state, preferredFood))
-            {
-                ConsumeNutritionFromFood(preferredFood, eater, ref remaining);
-            }
-
+                PlanFoodPayment(preferredFood, eater, payment, ref remaining, ref budget);
             for (int i = 0; i < state.StorageCells.Count && remaining > 0f; i++)
             {
                 Thing food = GetStorageOccupant(state.StorageCells[i]);
-                if (food == preferredFood || !IsStoredFood(food))
-                {
-                    continue;
-                }
-
-                ConsumeNutritionFromFood(food, eater, ref remaining);
+                if (food == preferredFood || !IsStoredFood(food)) continue;
+                PlanFoodPayment(food, eater, payment, ref remaining, ref budget);
             }
-
-            return remaining <= 0f;
+            if (remaining > 0.0001f) return false;
+            foreach (KeyValuePair<Thing, int> entry in payment)
+                if (entry.Value == entry.Key.stackCount) entry.Key.Destroy();
+                else entry.Key.SplitOff(entry.Value).Destroy();
+            return true;
         }
 
         //函数职责：确认指定食物仍是当前巢群储藏格中的有效实体，避免结算已经被搬走的物资。
         private bool IsFoodStoredInColony(AntColonyState state, Thing food)
         {
-            return IsStoredFood(food) && state.StorageCells.Contains(food.Position) && GetStorageOccupant(food.Position) == food;
+            return IsStoredFood(food) && food.Spawned && food.Map == map && state.StorageCells.Contains(food.Position) && GetStorageOccupant(food.Position) == food;
         }
 
-        //函数职责：从单个食物实体扣除剩余需求，尸体整具消耗，普通堆叠按实际营养数量拆分。
-        private static void ConsumeNutritionFromFood(Thing food, Pawn eater, ref float remaining)
+        //函数职责：为单个物资计算可支付单位数，过大的尸体暂不消耗，未凑齐完整金额时不破坏任何物件。
+        private static void PlanFoodPayment(Thing food, Pawn eater, List<KeyValuePair<Thing, int>> payment, ref float remaining, ref float budget)
         {
             float nutrition = FoodUtility.NutritionForEater(eater, food);
-            if (food is Corpse)
-            {
-                remaining -= nutrition;
-                food.Destroy();
-                return;
-            }
-
-            int consumeCount = System.Math.Min(food.stackCount, UnityEngine.Mathf.CeilToInt(remaining / UnityEngine.Mathf.Max(nutrition, 0.001f)));
-            remaining -= nutrition * consumeCount;
-            if (consumeCount >= food.stackCount)
-            {
-                food.Destroy();
-                return;
-            }
-
-            food.SplitOff(consumeCount).Destroy();
+            if (nutrition <= 0f || remaining <= 0f) return;
+            int needed = UnityEngine.Mathf.CeilToInt(remaining / nutrition);
+            int affordable = UnityEngine.Mathf.FloorToInt(budget / nutrition);
+            int count = System.Math.Min(food is Corpse ? 1 : food.stackCount, System.Math.Min(needed, affordable));
+            if (count <= 0) return;
+            payment.Add(new KeyValuePair<Thing, int>(food, count));
+            remaining -= nutrition * count;
+            budget -= nutrition * count;
         }
     }
 }

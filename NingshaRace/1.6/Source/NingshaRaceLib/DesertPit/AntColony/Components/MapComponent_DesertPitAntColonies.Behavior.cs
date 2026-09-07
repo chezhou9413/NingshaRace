@@ -19,7 +19,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         //函数职责：记录工蚁或兵蚁死亡，并在未处于撤退时检查四小时百分之五十伤亡阈值。
         private void RecordRegularAntDeath(AntColonyState state, Pawn pawn, AntCaste caste)
         {
-            if (caste != AntCaste.Worker && caste != AntCaste.Soldier)
+            if (caste != AntCaste.Worker && caste != AntCaste.Soldier && caste != AntCaste.Acid)
             {
                 return;
             }
@@ -42,7 +42,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             int windowStart = ticks - Settings.retreatLossWindowTicks;
             List<AntDeathRecord> recent = state.DeathRecords.Where(record => record.Tick >= windowStart).ToList();
             int uncountedDeaths = recent.Count(record => !record.CountedForRetreat);
-            int aliveRegular = CountCaste(state, AntCaste.Worker) + CountCaste(state, AntCaste.Soldier);
+            int aliveRegular = CountCaste(state, AntCaste.Worker) + CountCaste(state, AntCaste.Soldier) + CountCaste(state, AntCaste.Acid);
             int threshold = Mathf.CeilToInt((aliveRegular + recent.Count) * Settings.retreatLossFraction);
             if (uncountedDeaths < Mathf.Max(1, threshold))
             {
@@ -153,7 +153,8 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         private static bool IsAvailableInvestigationSoldier(Pawn pawn)
         {
             Comp_DesertPitAntMember comp = pawn?.TryGetComp<Comp_DesertPitAntMember>();
-            return pawn != null && pawn.Spawned && !pawn.Dead && !pawn.Downed && pawn.MentalStateDef == null && pawn.GetLord() == null && comp != null && comp.Caste == AntCaste.Soldier;
+            return pawn != null && pawn.Spawned && !pawn.Dead && !pawn.Downed && pawn.MentalStateDef == null && pawn.GetLord() == null && comp != null
+                && (comp.Caste == AntCaste.Soldier || comp.Caste == AntCaste.Acid);
         }
 
         //函数职责：判断指定蚁巢当前是否已经拥有一支调查队。
@@ -192,9 +193,9 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         private Job TryCreateRetreatJob(Pawn pawn, AntColonyState state, AntCaste caste)
         {
             Thing nearbyIntruder = FindNearestIntruderWithinNestRadius(pawn, state, Settings.retreatDefenseRadius);
-            if ((caste == AntCaste.Soldier || caste == AntCaste.Boom) && nearbyIntruder != null)
+            if ((caste == AntCaste.Soldier || caste == AntCaste.Boom || caste == AntCaste.Acid) && nearbyIntruder != null)
             {
-                return caste == AntCaste.Boom ? CreateBoomAttackJob(nearbyIntruder) : CreateMeleeAttackJob(nearbyIntruder);
+                return caste == AntCaste.Boom ? CreateBoomAttackJob(nearbyIntruder) : CreateCombatJob(pawn, nearbyIntruder);
             }
 
             if (pawn.Position.DistanceTo(state.NestPosition) > Settings.retreatDefenseRadius)
@@ -202,7 +203,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
                 return CreateReturnToNestJob(pawn, state);
             }
 
-            return JobMaker.MakeJob(JobDefOf.Wait, 120);
+            return TryCreateNeedsJob(pawn, state) ?? JobMaker.MakeJob(JobDefOf.Wait, 120);
         }
 
         //函数职责：寻找进入蚁穴指定半径且当前成员能够抵达的最近敌对实体。
@@ -219,7 +220,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
                 }
 
                 float distance = member.Position.DistanceToSquared(candidate.Position);
-                if (distance < bestDistance && member.CanReach(candidate, PathEndMode.Touch, Danger.Deadly))
+                if (distance < bestDistance && CanEngageIntruder(member, candidate))
                 {
                     bestDistance = distance;
                     result = candidate;

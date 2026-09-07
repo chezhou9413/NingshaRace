@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!--生态建筑共用轻量表现；外观暂借用现有洞穴美术，后续只需替换贴图路径。-->
+  <ThingDef ParentName="BuildingBase" Name="NingshaRace_AntHabitatBase" Abstract="True">
+    <category>Building</category>
+    <tickerType>Normal</tickerType>
+    <drawerType>MapMeshOnly</drawerType>
+    <altitudeLayer>Building</altitudeLayer>
+    <selectable>true</selectable>
+    <rotatable>false</rotatable>
+    <useHitPoints>true</useHitPoints>
+    <destroyable>true</destroyable>
+    <passability>PassThroughOnly</passability>
+    <pathCost>20</pathCost>
+    <fillPercent>0.35</fillPercent>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <statBases>
+      <MaxHitPoints>350</MaxHitPoints>
+      <Flammability>0.25</Flammability>
+      <Mass>35</Mass>
+      <WorkToBuild>300</WorkToBuild>
+    </statBases>
+    <building>
+      <isEdifice>false</isEdifice>
+      <deconstructible>false</deconstructible>
+      <claimable>false</claimable>
+      <expandHomeArea>false</expandHomeArea>
+      <neverBuildable>true</neverBuildable>
+    </building>
+  </ThingDef>
+  <ThingDef ParentName="NingshaRace_AntHabitatBase">
+    <defName>NingshaRace_AntRepellent</defName>
+    <label>驱蚁桩</label>
+    <description>菌类和植物附着在树桩状的高大石块上，散发出蚂蚁厌恶的气味。气味浓郁时，附近物资不会被工蚁收集，但蚂蚁仍会经过和攻击。每六小时有一成概率散去气味，持续到下个周期。可以占领并搬走，无法自行建造。</description>
+    <thingClass>NingshaRaceLib.DesertPit.Ecology.Habitats.Building_AntRepellent</thingClass>
+    <size>(1,1)</size>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Building/NingshaRace/DesertPit/Decor/DesertPitStalactite03</texPath>
+      <drawSize>(2.2,2.2)</drawSize>
+      <color>(0.72,0.85,0.60)</color>
+    </graphicData>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsMisc</li>
+    </thingCategories>
+    <building>
+      <claimable>true</claimable>
+    </building>
+    <modExtensions>
+      <li Class="NingshaRaceLib.DesertPit.Ecology.Habitats.DefModExtension_AntRepellent">
+        <radius>12</radius>
+        <cycleTicks>15000</cycleTicks>
+        <failureChance>0.1</failureChance>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  <ThingDef ParentName="NingshaRace_AntHabitatBase">
+    <defName>NingshaRace_FungalMound</defName>
+    <label>共生菌巢</label>
+    <description>一截半埋在地下的古老木头，内部被菌丝和虫群改造成了温床。周围会陆续长出食用菌，附近植物生长更快，食用菌收成也更丰富。它不能搬移或建造，也不会阻挡蚂蚁通行。</description>
+    <thingClass>NingshaRaceLib.DesertPit.Ecology.Habitats.Building_FungalMound</thingClass>
+    <size>(2,1)</size>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Building/NingshaRace/DesertPit/AntColony/AntNest</texPath>
+      <drawSize>(2.8,2.1)</drawSize>
+      <color>(0.61,0.77,0.57)</color>
+    </graphicData>
+    <modExtensions>
+      <li Class="NingshaRaceLib.DesertPit.Ecology.Habitats.DefModExtension_FungalMound">
+        <!--作用半径，单位为格；生长与采收倍率分别控制植物长成速度和食用菌产量。-->
+        <radius>5</radius>
+        <growthMultiplier>2</growthMultiplier>
+        <harvestMultiplier>4</harvestMultiplier>
+        <!--每处菌巢范围内的植物总数上限；空地、通路或间距限制可能使实际数量更少。-->
+        <targetPlants>24</targetPlants>
+        <!--植物之间的最小直线距离，单位为格；1.5避开相邻八格，0不额外限制；不得超过作用半径。-->
+        <minimumPlantSpacing>1.5</minimumPlantSpacing>
+        <!--每2500计时单位为游戏内一小时；5000表示每两小时尝试补生，单次最多3株。-->
+        <regrowthIntervalTicks>5000</regrowthIntervalTicks>
+        <regrowthBatch>3</regrowthBatch>
+      </li>
+    </modExtensions>
+  </ThingDef>
+</Defs>

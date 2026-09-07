@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using NingshaRaceLib.DesertPit.AntColony.Generation.Chambers;
 using Verse;
 
 using NingshaRaceLib.Core.Defs;
@@ -36,6 +37,9 @@ namespace NingshaRaceLib.DesertPit.Generation.Data
 
         //字段职责：缓存每个地图格到最近洞壁的距离，数值大于五表示远离洞壁。
         public byte[] CaveEdgeDistances;
+
+        //字段职责：保存地形落地前确定的两座蚁巢洞室及其场景安置位置。
+        public readonly List<AntChamberLayout> AntChambers = new List<AntChamberLayout>();
 
         //函数职责：按最小间距记录一个塌方中心，避免多个塌方重叠成同一片岩堆。
         public bool TryAddCollapse(IntVec3 cell, float minimumDistance)

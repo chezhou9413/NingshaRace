@@ -32,6 +32,7 @@
       <li>NingshaRace_DesertPitPots</li>
       <li>NingshaRace_DesertPitDecorations</li>
       <li>NingshaRace_DesertPitPlants</li>
+      <li>NingshaRace_DesertPitAntlions</li>
       <li>Fog</li>
     </genSteps>
   </MapGeneratorDef>
@@ -69,6 +70,7 @@
       <li>NingshaRace_DesertPitPots</li>
       <li>NingshaRace_DesertPitDecorations</li>
       <li>NingshaRace_DesertPitPlants</li>
+      <li>NingshaRace_DesertPitAntlions</li>
       <li>Fog</li>
     </genSteps>
   </MapGeneratorDef>

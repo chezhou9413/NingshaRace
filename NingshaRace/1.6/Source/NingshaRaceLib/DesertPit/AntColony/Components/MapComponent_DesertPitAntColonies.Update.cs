@@ -62,7 +62,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
                 state.Queen = null;
             }
 
-            if (state.LastAggressor != null && (state.LastAggressor.Destroyed || state.LastAggressor.Dead))
+            if (state.LastAggressor != null && (state.LastAggressor.Destroyed || state.LastAggressor is Pawn victim && victim.Dead))
             {
                 state.LastAggressor = null;
             }
@@ -91,10 +91,9 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             AddEnemyAntNests(state, radius);
             AddVanillaHives(state, radius);
 
-            Pawn aggressor = state.LastAggressor;
-            if (aggressor != null && aggressor.Spawned && !aggressor.Dead && !IsColonyMember(aggressor, state) &&
-                aggressor.Position.DistanceTo(state.NestPosition) <= radius &&
-                (state.Frenzy || IsFullAlarm(state, Find.TickManager.TicksGame)) && !state.Intruders.Contains(aggressor))
+            Thing aggressor = state.LastAggressor;
+            if (IsValidAggressor(state, aggressor) && Find.TickManager.TicksGame < state.RetaliationUntilTick
+                && !state.Intruders.Contains(aggressor))
             {
                 state.Intruders.Add(aggressor);
             }
@@ -148,7 +147,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
                 }
 
                 float distance = member.Position.DistanceToSquared(candidate.Position);
-                if (distance < bestDistance && member.CanReach(candidate, PathEndMode.Touch, Danger.Deadly))
+                if (distance < bestDistance && CanEngageIntruder(member, candidate))
                 {
                     bestDistance = distance;
                     result = candidate;

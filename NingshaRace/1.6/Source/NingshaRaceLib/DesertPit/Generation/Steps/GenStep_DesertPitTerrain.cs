@@ -134,7 +134,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
             {
                 foreach (IntVec3 cell in GenRadial.RadialCellsAround(collapse, Rand.Range(3.5f, 6f), useCenter: true))
                 {
-                    if (!cell.InBounds(map) || !DesertPitGenUtility.IsCave(cell) || !cell.Standable(map))
+                    if (!cell.InBounds(map) || !DesertPitGenUtility.IsCave(cell) || !cell.Standable(map) || data.ReservedSceneCells.Contains(cell))
                     {
                         continue;
                     }

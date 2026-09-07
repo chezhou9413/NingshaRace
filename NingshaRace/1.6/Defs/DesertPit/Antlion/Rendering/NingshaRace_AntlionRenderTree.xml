@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!--左向原始侧图使用动物身体网格的东西双向校正，正面和背面不作镜像。-->
+  <PawnRenderTreeDef>
+    <defName>NingshaRace_AntlionRenderTree</defName>
+    <root Class="PawnRenderNodeProperties_Parent">
+      <debugLabel>根节点</debugLabel>
+      <tagDef>Root</tagDef>
+      <children>
+        <li>
+          <debugLabel>身体</debugLabel>
+          <tagDef>Body</tagDef>
+          <nodeClass>PawnRenderNode_AnimalPart_Body</nodeClass>
+          <workerClass>PawnRenderNodeWorker_AnimalBody</workerClass>
+          <useRottenColor>true</useRottenColor>
+          <drawData>
+            <dataEast><flip>true</flip></dataEast>
+            <dataWest><flip>true</flip></dataWest>
+          </drawData>
+          <children>
+            <li>
+              <debugLabel>伤口</debugLabel>
+              <nodeClass>PawnRenderNode_AnimalPart</nodeClass>
+              <workerClass>PawnRenderNodeWorker_OverlayWounds</workerClass>
+              <overlayLayer>Body</overlayLayer>
+              <useGraphic>false</useGraphic>
+              <baseLayer>3</baseLayer>
+            </li>
+            <li>
+              <debugLabel>背包</debugLabel>
+              <nodeClass>PawnRenderNode_AnimalPack</nodeClass>
+              <workerClass>PawnRenderNodeWorker_AnimalPack</workerClass>
+              <rotDrawMode>Fresh, Rotting</rotDrawMode>
+              <baseLayer>5</baseLayer>
+            </li>
+            <li>
+              <debugLabel>灭火泡沫</debugLabel>
+              <nodeClass>PawnRenderNode_AnimalPart</nodeClass>
+              <workerClass>PawnRenderNodeWorker_OverlayFirefoam</workerClass>
+              <overlayLayer>Body</overlayLayer>
+              <useGraphic>false</useGraphic>
+              <baseLayer>10</baseLayer>
+            </li>
+          </children>
+        </li>
+        <li Class="PawnRenderNodeProperties_Carried">
+          <debugLabel>搬运物品</debugLabel>
+          <workerClass>PawnRenderNodeWorker_Carried</workerClass>
+        </li>
+      </children>
+    </root>
+  </PawnRenderTreeDef>
+  <!--动画进度读取保存的阶段时间，停留模式避免固定长度抢先结束可配置动画。-->
+  <AnimationDef>
+    <defName>NingshaRace_AntlionBurrowing</defName>
+    <durationTicks>1</durationTicks>
+    <loopMode>Clamp</loopMode>
+    <keyframeParts>
+      <li>
+        <key>Body</key>
+        <value>
+          <workerType>NingshaRaceLib.DesertPit.Antlion.Rendering.AnimationWorker_AntlionBurrow</workerType>
+          <keyframes><li><tick>0</tick></li></keyframes>
+        </value>
+      </li>
+    </keyframeParts>
+  </AnimationDef>
+</Defs>

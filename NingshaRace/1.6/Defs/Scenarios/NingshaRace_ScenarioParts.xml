@@ -39,11 +39,11 @@
     <canBePlayerAddedRemoved>false</canBePlayerAddedRemoved>
   </ScenPartDef>
 
-  <!-- Def 职责：为三名凝砂族开局成员分别装备一件专属武器。 -->
+  <!-- Def 职责：为三名凝砂族开局成员分别装备一件指定材料的基础武器。 -->
   <ScenPartDef>
     <defName>NingshaRace_StartingEquipment</defName>
     <label>凝砂族开局装备</label>
-    <description>三名凝砂族分别携带蛇腹剑、飞针和沙瓶。</description>
+    <description>三名凝砂族分别携带普通品质的木棒、钢制短矛和短弓。</description>
     <category>Fixed</category>
     <scenPartClass>NingshaRaceLib.Scenarios.Parts.ScenPart_NingshaStartingEquipment</scenPartClass>
     <summaryPriority>450</summaryPriority>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!--在地形、建筑、装饰与植物完成后生成，避免后续步骤覆盖潜伏位置。-->
+  <GenStepDef>
+    <defName>NingshaRace_DesertPitAntlions</defName>
+    <order>465</order>
+    <genStep Class="NingshaRaceLib.DesertPit.Antlion.Generation.GenStep_DesertPitAntlions" />
+  </GenStepDef>
+</Defs>

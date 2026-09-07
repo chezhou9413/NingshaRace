@@ -5,6 +5,12 @@ namespace NingshaRaceLib.DesertPit.AntColony.Config
     //类职责：承载单个沙漠巨坑蚁巢的数量、活动范围、繁殖和自爆配置。
     public class DefModExtension_AntColony : DefModExtension
     {
+        //字段职责：控制吐酸蚁补员营养、保留口粮和有限受击反击距离。
+        public float acidNutritionCost = 2f;
+        public float foodReserveDays = 1f;
+        public int foodStorageCells = 4;
+        public float retaliationRadius = 55f;
+        public int retaliationDurationTicks = 2500;
         //字段职责：固定规模蚁群和一级可升级蚁群的工蚁目标数量。
         public int workerTarget = 4;
 
@@ -55,9 +61,6 @@ namespace NingshaRaceLib.DesertPit.AntColony.Config
 
         //字段职责：规定每个蚁巢使用的实体储藏格数量。
         public int storageCellCount = 12;
-
-        //字段职责：规定沙漠巨坑生成第二个独立蚁巢的概率。
-        public float secondColonyChance = 0.45f;
 
         //字段职责：规定日常领地警戒半径。
         public float alertRadius = 20f;

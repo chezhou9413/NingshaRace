@@ -106,6 +106,14 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             }
         }
 
+        //函数职责：把成员承受的实际伤害通知巢群，追踪射程外攻击者而不提升为无限范围警报。
+        public override void PostPostApplyDamage(DamageInfo dinfo, float totalDamageDealt)
+        {
+            base.PostPostApplyDamage(dinfo, totalDamageDealt);
+            if (totalDamageDealt > 0f && parent.Spawned && colonyId > 0)
+                parent.Map.GetComponent<MapComponent_DesertPitAntColonies>().NotifyMemberDamaged((Pawn)parent, dinfo.Instigator);
+        }
+
         //函数职责：选中蚂蚁时用白线连接其所属且仍存活的蚁穴。
         public override void PostDrawExtraSelectionOverlays()
         {

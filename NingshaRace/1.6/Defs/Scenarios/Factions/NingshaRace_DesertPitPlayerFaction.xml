@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 定义职责：提供深砂遗民专用的中世纪玩家派系，沿用部落基础研究，不改变原版玩家派系。 -->
+  <FactionDef ParentName="PlayerFactionBase">
+    <defName>NingshaRace_DesertPitPlayerFaction</defName>
+    <label>凝砂遗民</label>
+    <description>依靠简陋工具在沙海之下重建家园的凝砂族聚落，保留着中世纪水平的技艺。</description>
+    <isPlayer>true</isPlayer>
+    <categoryTag>Tribal</categoryTag>
+    <basicMemberKind>NingshaRace_DesertPitStarter</basicMemberKind>
+    <pawnSingular>凝砂遗民</pawnSingular>
+    <pawnsPlural>凝砂遗民</pawnsPlural>
+    <techLevel>Medieval</techLevel>
+    <factionNameMaker>NamerFactionTribal</factionNameMaker>
+    <settlementNameMaker>NamerSettlementTribal</settlementNameMaker>
+    <allowedCultures><li>Corunan</li></allowedCultures>
+    <disallowedMemes>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Transhumanist</li>
+    </disallowedMemes>
+    <disallowedPrecepts>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Nudity_Male_CoveringAnythingButGroinDisapproved</li>
+      <li MayRequire="Ludeon.RimWorld.Ideology">Nudity_Female_CoveringAnythingButGroinDisapproved</li>
+    </disallowedPrecepts>
+    <backstoryFilters>
+      <li><categories><li>NingshaRace</li></categories></li>
+    </backstoryFilters>
+    <factionIconPath>World/WorldObjects/Expanding/Village</factionIconPath>
+    <settlementTexturePath>World/WorldObjects/TribalSettlement</settlementTexturePath>
+    <forageabilityFactor>1.7</forageabilityFactor>
+    <startingResearchTags><li>TribalStart</li></startingResearchTags>
+    <startingTechprintsResearchTags>
+      <li>TribalStart</li>
+      <li>TribalStartTechprints</li>
+    </startingTechprintsResearchTags>
+    <apparelStuffFilter><thingDefs><li>Cloth</li></thingDefs></apparelStuffFilter>
+    <recipePrerequisiteTags><li>Tribal</li></recipePrerequisiteTags>
+  </FactionDef>
+</Defs>

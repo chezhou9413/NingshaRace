@@ -8,13 +8,14 @@ using NingshaRaceLib.DesertPit.AntColony.Buildings;
 using NingshaRaceLib.DesertPit.AntColony.Components;
 using NingshaRaceLib.DesertPit.AntColony.Config;
 using NingshaRaceLib.DesertPit.AntColony.State;
+using NingshaRaceLib.DesertPit.AntColony.Generation.Chambers;
 using NingshaRaceLib.DesertPit.Generation.Data;
 using NingshaRaceLib.DesertPit.Generation.Utility;
 
 namespace NingshaRaceLib.DesertPit.AntColony.Generation
 {
     //类职责：选择自然洞室位置并生成一个完整蚁穴、实体储藏、初始成员和储备物资场景。
-    public static class DesertPitAntSceneUtility
+    public static partial class DesertPitAntSceneUtility
     {
         //字段职责：规定蚁巢场景与主入口之间的最小距离。
         private const float EntranceSafeRadius = 25f;
@@ -89,9 +90,9 @@ namespace NingshaRaceLib.DesertPit.AntColony.Generation
         }
 
         //函数职责：判断一个格子是否是未占用、干燥、可站立且不属于保留路线的洞穴地面。
-        private static bool IsClearDryCaveCell(Map map, DesertPitLayoutData data, IntVec3 cell)
+        private static bool IsClearDryCaveCell(Map map, DesertPitLayoutData data, IntVec3 cell, bool ownChamber = false)
         {
-            if (!cell.InBounds(map) || !DesertPitGenUtility.IsCave(map, cell) || !cell.Standable(map) || data.ProtectedRouteCells.Contains(cell) || data.ReservedSceneCells.Contains(cell))
+            if (!cell.InBounds(map) || !DesertPitGenUtility.IsCave(map, cell) || !cell.Standable(map) || data.ProtectedRouteCells.Contains(cell) || !ownChamber && data.ReservedSceneCells.Contains(cell))
             {
                 return false;
             }
@@ -115,12 +116,12 @@ namespace NingshaRaceLib.DesertPit.AntColony.Generation
         }
 
         //函数职责：从蚁穴外沿两格的环带中收集可用实体储藏格。
-        private static List<IntVec3> CollectStorageCells(Map map, DesertPitLayoutData data, CellRect occupied)
+        private static List<IntVec3> CollectStorageCells(Map map, DesertPitLayoutData data, CellRect occupied, bool ownChamber = false)
         {
             List<IntVec3> cells = new List<IntVec3>();
             foreach (IntVec3 cell in occupied.ExpandedBy(2).EdgeCells)
             {
-                if (IsClearDryCaveCell(map, data, cell))
+                if (IsClearDryCaveCell(map, data, cell, ownChamber))
                 {
                     cells.Add(cell);
                 }
@@ -156,7 +157,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Generation
 
         //函数职责：保留巢区、生成蚁穴与初始成员，并把完整状态登记到地图组件。
         private static void GenerateScene(Map map, DesertPitLayoutData data, ThingDef nestDef, IntVec3 center, int colonyIndex,
-            int? fixedLevel, bool levelingEnabled)
+            int? fixedLevel, bool levelingEnabled, bool ownChamber = false)
         {
             DefModExtension_AntColony settings = nestDef.GetModExtension<DefModExtension_AntColony>();
             int currentLevel = fixedLevel ?? Rand.RangeInclusive(settings.initialLevelMin, settings.initialLevelMax);
@@ -166,7 +167,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Generation
             MapComponent_DesertPitAntColonies manager = map.GetComponent<MapComponent_DesertPitAntColonies>();
             Faction faction = manager.GetColonyFaction(colonyIndex);
             CellRect occupied = GenAdj.OccupiedRect(center, Rot4.North, nestDef.size);
-            List<IntVec3> storagePool = CollectStorageCells(map, data, occupied);
+            List<IntVec3> storagePool = CollectStorageCells(map, data, occupied, ownChamber);
             storagePool.Shuffle();
             List<IntVec3> storageCells = storagePool.GetRange(0, population.StorageCellCount);
             ReserveSceneArea(map, data, center);
@@ -188,9 +189,18 @@ namespace NingshaRaceLib.DesertPit.AntColony.Generation
                 members.Add(SpawnInitialMember(map, center, DefOfRefs.NingshaRace_DesertPitSoldierAntKind, faction));
             }
 
-            SpawnInitialStock(map, storageCells);
+            for (int i = 0; i < population.AcidTarget; i++)
+                members.Add(SpawnInitialMember(map, center, DefOfRefs.NingshaRace_DesertPitAcidAntKind, faction));
+
+            SpawnInitialStock(map, storageCells, members);
             manager.RegisterGeneratedColony(nest, queen, members, storageCells, faction, population, levelingEnabled, currentLevel, maximumLevel);
             ForbidSceneHaulables(map, center);
+        }
+
+        //函数职责：在已预留的厚壁洞室中放置完整巢群，不把自身预留区当作其他场景的占用。
+        public static void GenerateInChamber(Map map, DesertPitLayoutData data, AntChamberLayout room, int index)
+        {
+            GenerateScene(map, data, DefOfRefs.NingshaRace_DesertPitAntNest, room.Nest, index, null, true, true);
         }
 
         //函数职责：将蚁巢十格场景内全部可搬运物品标记为玩家禁止，包含初始物资与既有岩块。
@@ -244,51 +254,5 @@ namespace NingshaRaceLib.DesertPit.AntColony.Generation
             return pawn;
         }
 
-        //函数职责：在实体储藏格放置约三只蚂蚁所需食物和一至两堆随机贵重品。
-        private static void SpawnInitialStock(Map map, List<IntVec3> storageCells)
-        {
-            Thing jelly = ThingMaker.MakeThing(ThingDefOf.InsectJelly);
-            jelly.stackCount = Mathf.Min(75, jelly.def.stackLimit);
-            GenSpawn.Spawn(jelly, storageCells[0], map);
-
-            List<ThingDef> valuables = new List<ThingDef>
-            {
-                ThingDefOf.Silver,
-                ThingDefOf.Gold,
-                ThingDefOf.Jade,
-                ThingDefOf.ComponentIndustrial,
-                ThingDefOf.ComponentSpacer
-            };
-            int pileCount = Rand.RangeInclusive(1, 2);
-            for (int i = 0; i < pileCount; i++)
-            {
-                ThingDef def = valuables.RandomElement();
-                valuables.Remove(def);
-                Thing thing = ThingMaker.MakeThing(def);
-                thing.stackCount = InitialValuableCount(def);
-                GenSpawn.Spawn(thing, storageCells[i + 1], map);
-            }
-        }
-
-        //函数职责：按贵重品类型给出适合作为小型巢穴战利品的初始堆叠数量。
-        private static int InitialValuableCount(ThingDef def)
-        {
-            if (def == ThingDefOf.Silver)
-            {
-                return Rand.RangeInclusive(50, 120);
-            }
-
-            if (def == ThingDefOf.ComponentIndustrial)
-            {
-                return Rand.RangeInclusive(2, 5);
-            }
-
-            if (def == ThingDefOf.ComponentSpacer)
-            {
-                return Rand.RangeInclusive(1, 2);
-            }
-
-            return Rand.RangeInclusive(10, 25);
-        }
     }
 }

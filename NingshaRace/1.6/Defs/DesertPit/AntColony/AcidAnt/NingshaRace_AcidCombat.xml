@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!--酸液弹丸暂借用现有投射物，伤害与减速由真实命中结算。-->
+  <ThingDef ParentName="BaseBullet">
+    <defName>NingshaRace_AntAcidProjectile</defName>
+    <label>蚁酸</label>
+    <thingClass>NingshaRaceLib.DesertPit.AntColony.Combat.Projectile_AntAcid</thingClass>
+    <graphicData>
+      <texPath>NingshaRace/Projectiles/FlyingNeedle</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(0.7,0.7)</drawSize>
+      <color>(0.5,0.9,0.18)</color>
+    </graphicData>
+    <projectile>
+      <damageDef>AcidBurn</damageDef>
+      <damageAmountBase>30</damageAmountBase>
+      <armorPenetrationBase>0.25</armorPenetrationBase>
+      <speed>34</speed>
+    </projectile>
+  </ThingDef>
+  <HediffDef>
+    <defName>NingshaRace_AntAcidSlow</defName>
+    <label>酸液黏附</label>
+    <description>黏稠的蚁酸附着在身体上，暂时妨碍移动。</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>true</isBad>
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>1</maxSeverity>
+    <stages>
+      <li>
+        <statFactors>
+          <MoveSpeed>0.7</MoveSpeed>
+        </statFactors>
+      </li>
+    </stages>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>180</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+    </comps>
+  </HediffDef>
+  <JobDef>
+    <defName>NingshaRace_Job_DesertPitAntHarvest</defName>
+    <driverClass>NingshaRaceLib.DesertPit.AntColony.Jobs.JobDriver_DesertPitAntHarvest</driverClass>
+    <reportString>正在采收TargetA。</reportString>
+    <casualInterruptible>true</casualInterruptible>
+  </JobDef>
+</Defs>

@@ -69,7 +69,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
                 return false;
             }
 
-            if (!DesertPitGenUtility.IsCave(map, cell) || !cell.Standable(map))
+            if (!DesertPitGenUtility.IsCave(map, cell) || !cell.Standable(map) || DesertPitGenUtility.GetLayoutData().ReservedSceneCells.Contains(cell))
             {
                 return false;
             }

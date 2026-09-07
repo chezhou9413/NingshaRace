@@ -10,6 +10,14 @@
     <maxFishPopulation>0</maxFishPopulation>
     <wildAnimalsCanWanderInto>false</wildAnimalsCanWanderInto>
     <modExtensions>
+      <!--蚁狮自然生成参数；数量设为零可关闭，距离单位为格，只影响之后生成的巨坑。-->
+      <li Class="NingshaRaceLib.DesertPit.Antlion.Generation.DefModExtension_DesertPitAntlion">
+        <countRange>2~3</countRange>
+        <entranceAvoidRadius>25</entranceAvoidRadius>
+        <antNestAvoidRadius>24</antNestAvoidRadius>
+        <spacing>18</spacing>
+        <scanBatchSize>512</scanBatchSize>
+      </li>
       <li Class="NingshaRaceLib.DesertPit.Ecology.Config.DefModExtension_DesertPitEcology">
         <regrowthIntervalTicks>15000</regrowthIntervalTicks>
         <initialGrowthRange>0.15~0.35</initialGrowthRange>
