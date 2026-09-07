@@ -64,6 +64,10 @@
         <storageCellCount>12</storageCellCount>
         <acidNutritionCost>2</acidNutritionCost>
         <foodReserveDays>1</foodReserveDays>
+        <!--没有可搬食物且库存低于保底口粮的指定倍率时，工蚁才在巢周采收成熟食用植物。-->
+        <harvestRadius>16</harvestRadius>
+        <harvestMinGrowth>0.9</harvestMinGrowth>
+        <harvestReserveMultiplier>2</harvestReserveMultiplier>
         <foodStorageCells>4</foodStorageCells>
         <retaliationRadius>55</retaliationRadius>
         <retaliationDurationTicks>2500</retaliationDurationTicks>

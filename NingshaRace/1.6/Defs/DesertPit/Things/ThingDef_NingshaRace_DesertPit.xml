@@ -49,7 +49,7 @@
     <portal>
       <pocketMapGenerator>NingshaRace_DesertPitMap</pocketMapGenerator>
       <exitDef>NingshaRace_DesertPitCaveExit</exitDef>
-      <pocketMapSize>140</pocketMapSize>
+      <pocketMapSize>200</pocketMapSize>
       <enteredLetterLabel>沙漠地下洞室</enteredLetterLabel>
       <enteredLetterText>坑底通向一片被沙岩包围的地下洞室。风化的砂砾、塌落的石柱和狭窄支洞在黑暗中延伸。</enteredLetterText>
       <enteredLetterDef>NeutralEvent</enteredLetterDef>

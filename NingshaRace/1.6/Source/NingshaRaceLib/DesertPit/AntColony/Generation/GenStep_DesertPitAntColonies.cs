@@ -6,16 +6,18 @@ using NingshaRaceLib.Core.Defs;
 using NingshaRaceLib.DesertPit.AntColony.Config;
 using NingshaRaceLib.DesertPit.Ecology.Generation;
 using NingshaRaceLib.DesertPit.Generation.Data;
+using NingshaRaceLib.DesertPit.Generation.Config;
 using NingshaRaceLib.DesertPit.Generation.Progress;
 using NingshaRaceLib.DesertPit.Generation.Utility;
 
 namespace NingshaRaceLib.DesertPit.AntColony.Generation
 {
-    //类职责：在预留洞室安置两座巢群、三座菌巢和入口驱蚁桩。
+    //类职责：在预留洞室安置两座巢群、保底与可选菌巢及入口驱蚁桩。
     public class GenStep_DesertPitAntColonies : GenStep, IDesertPitIncrementalGenStep
     {
         private const int Seed = 914027346;
 
+        //属性职责：为蚁巢和伴生生态提供稳定的生成种子片段。
         public override int SeedPart => Seed;
 
         //函数职责：在原版同步地图生成入口中完整执行蚁巢场景迭代器。
@@ -41,7 +43,10 @@ namespace NingshaRaceLib.DesertPit.AntColony.Generation
             }
             IntVec3 freeMound = AntHabitatGeneration.FindMoundCell(map, data, data.MainCenter, 18f, 35f, false);
             AntHabitatGeneration.SpawnMound(map, data, freeMound);
-            AntHabitatGeneration.SpawnRepellent(map, data, data.MainCenter, 3f, 5f);
+            DefModExtension_DesertPitLayout settings = map.generatorDef.GetModExtension<DefModExtension_DesertPitLayout>();
+            //入口保护物允许落在出生干地预留区，普通散布物仍需避让该区域。
+            AntHabitatGeneration.SpawnRepellent(map, data, data.MainCenter, 3f, 5f, settings != null);
+            if (settings != null) SecondaryFungalMounds.Generate(map, data, settings);
         }
     }
 }

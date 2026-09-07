@@ -16,7 +16,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         private void RefreshForageCandidates()
         {
             forageCandidates.Clear();
-            harvestCandidates.Clear();
+            RefreshHarvestCandidates();
             if (colonies.Count == 0) return;
             MapComponent_AntHabitats habitats = map.GetComponent<MapComponent_AntHabitats>();
             List<Thing> allThings = map.listerThings.AllThings;
@@ -24,7 +24,6 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             {
                 Thing thing = allThings[i];
                 if (!thing.Spawned || habitats.IsRepelled(thing.Position)) continue;
-                if (thing is Plant plant && CanHarvestForColony(plant)) harvestCandidates.Add(plant);
                 if (IsForageThing(thing) && !IsInAnyStorageCell(thing.Position))
                 {
                     forageCandidates.Add(thing);
@@ -68,7 +67,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         }
 
         //函数职责：为工蚁选择最近可达物资和可用储藏格，并创建实体搬运工作。
-        private Job TryCreateForageJob(Pawn pawn, AntColonyState state)
+        private Job TryCreateForageJob(Pawn pawn, AntColonyState state, bool foodOnly)
         {
             Comp_DesertPitAntMember memberComp = pawn.TryGetComp<Comp_DesertPitAntMember>();
             if (memberComp == null || !memberComp.CanStartForage(Find.TickManager.TicksGame, Settings.workerHaulLimit))
@@ -83,7 +82,8 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             for (int i = 0; i < forageCandidates.Count; i++)
             {
                 Thing candidate = forageCandidates[i];
-                if (candidate == null || !candidate.Spawned || assignedForageThings.ContainsKey(candidate)
+                if (candidate == null || !candidate.Spawned || !IsForageThing(candidate) || assignedForageThings.ContainsKey(candidate)
+                    || IsStoredFood(candidate) != foodOnly
                     || map.GetComponent<MapComponent_AntHabitats>().IsRepelled(candidate.Position))
                 {
                     continue;

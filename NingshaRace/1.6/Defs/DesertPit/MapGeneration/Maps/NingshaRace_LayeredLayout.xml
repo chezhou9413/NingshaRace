@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!--普通巨坑与种族开局共用的布局参数；尺寸以二百格地图为基准，不改变任务地图。-->
+  <MapGeneratorDef Name="NingshaRace_LayeredLayoutBase" Abstract="True">
+    <modExtensions>
+      <li Class="NingshaRaceLib.DesertPit.Generation.Config.DefModExtension_DesertPitLayout">
+        <mainRadiusX>34~40</mainRadiusX>
+        <mainRadiusZ>28~34</mainRadiusZ>
+        <centralRoomCount>6~8</centralRoomCount>
+        <smallRoomRadius>9~14</smallRoomRadius>
+        <secondaryRoomRadius>18~24</secondaryRoomRadius>
+        <linkRoomCount>3~5</linkRoomCount>
+        <!--每端河谷继续向外层延伸，另在河谷两侧安排偏离主路的支洞；位置不足时减少可选洞室。-->
+        <outerRoomCount>3~5</outerRoomCount>
+        <outerRoomRadius>10~16</outerRoomRadius>
+        <branchRoomCount>2~3</branchRoomCount>
+        <!--斜河两端向地图对角方向展开的比例与曲流幅度；保留中心十二格干地，不生成笔直水渠。-->
+        <riverDiagonalReach>0.82</riverDiagonalReach>
+        <riverMeander>7</riverMeander>
+        <!--以地图半宽、半高归一化，划分内中外三层同心方形，蚁巢优先处于中层外半部。-->
+        <innerBoundary>0.33333334</innerBoundary>
+        <outerBoundary>0.6666667</outerBoundary>
+        <antPreferredLayer>0.59</antPreferredLayer>
+        <!--河宽是完整宽度；河岸和出生干地不随地图尺寸缩小。-->
+        <riverWidth>3~5</riverWidth>
+        <riverBankWidth>2</riverBankWidth>
+        <mainDryRadius>12</mainDryRadius>
+        <!--两处次要洞室分别独立等概率抽取，保留原有三处保底菌巢及稀疏种植参数。-->
+        <extraMoundsPerRoom>0~3</extraMoundsPerRoom>
+        <moundSpacing>12</moundSpacing>
+      </li>
+    </modExtensions>
+  </MapGeneratorDef>
+</Defs>

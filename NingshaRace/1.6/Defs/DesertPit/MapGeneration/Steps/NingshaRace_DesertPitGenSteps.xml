@@ -51,7 +51,7 @@
 
   <GenStepDef>
     <defName>NingshaRace_DesertPitHydrology</defName>
-    <order>453</order>
+    <order>250</order>
     <genStep Class="NingshaRaceLib.DesertPit.Generation.Steps.GenStep_DesertPitHydrology" />
   </GenStepDef>
 

@@ -25,6 +25,16 @@
         <cooldownTime>2.2</cooldownTime>
         <linkedBodyPartsGroup>Mouth</linkedBodyPartsGroup>
       </li>
+      <!--头爪或口器失效时仍可进行低伤害头撞，沿用原版昆虫的头部备用攻击规则。-->
+      <li>
+        <label>头部撞击</label>
+        <capacities><li>Blunt</li></capacities>
+        <power>3</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <chanceFactor>0.1</chanceFactor>
+      </li>
     </tools>
     <verbs>
       <li>

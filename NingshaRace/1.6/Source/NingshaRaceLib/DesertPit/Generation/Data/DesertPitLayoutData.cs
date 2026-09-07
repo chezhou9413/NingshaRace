@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using NingshaRaceLib.DesertPit.AntColony.Generation.Chambers;
+using NingshaRaceLib.DesertPit.Generation.Topology;
 using Verse;
 
 using NingshaRaceLib.Core.Defs;
@@ -40,6 +41,19 @@ namespace NingshaRaceLib.DesertPit.Generation.Data
 
         //字段职责：保存地形落地前确定的两座蚁巢洞室及其场景安置位置。
         public readonly List<AntChamberLayout> AntChambers = new List<AntChamberLayout>();
+
+        //字段职责：分层布局共用的洞室锚点和不得被蚁巢岩壁覆盖的中央核心。
+        public readonly List<DesertPitRoom> Rooms = new List<DesertPitRoom>();
+        public readonly List<DesertPitRoom> SecondaryRooms = new List<DesertPitRoom>();
+        public readonly HashSet<IntVec3> CentralCoreCells = new HashSet<IntVec3>();
+        public bool RiverRunsNorthSouth;
+        //字段职责：记录斜向河谷的横向斜率，供蚁巢按河谷两侧而非地图坐标轴选址。
+        public float RiverLateralSlope;
+
+        //字段职责：保存有序河心、浅水和完整河岸，后续生成步骤不得覆盖预留水系。
+        public readonly List<IntVec3> RiverCenterline = new List<IntVec3>();
+        public readonly HashSet<IntVec3> RiverWaterCells = new HashSet<IntVec3>();
+        public readonly HashSet<IntVec3> RiverCorridorCells = new HashSet<IntVec3>();
 
         //函数职责：按最小间距记录一个塌方中心，避免多个塌方重叠成同一片岩堆。
         public bool TryAddCollapse(IntVec3 cell, float minimumDistance)

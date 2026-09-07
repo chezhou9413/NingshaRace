@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
   <!-- 文件职责：定义沙漠巨坑口袋地图生成器及步骤顺序。 -->
-  <MapGeneratorDef>
+  <MapGeneratorDef ParentName="NingshaRace_LayeredLayoutBase">
     <defName>NingshaRace_DesertPitMap</defName>
     <label>沙漠巨坑</label>
     <isUnderground>true</isUnderground>
@@ -38,7 +38,7 @@
   </MapGeneratorDef>
 
   <!-- Def 职责：生成与地表入口相连的地下家园，成员与物资在地图完成后直接安置。 -->
-  <MapGeneratorDef>
+  <MapGeneratorDef ParentName="NingshaRace_LayeredLayoutBase">
     <defName>NingshaRace_DesertPitStartingMap</defName>
     <label>沙漠巨坑内部</label>
     <isUnderground>true</isUnderground>

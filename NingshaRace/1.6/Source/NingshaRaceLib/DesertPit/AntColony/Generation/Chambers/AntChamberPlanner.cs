@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using NingshaRaceLib.Core.Defs;
 using NingshaRaceLib.DesertPit.Generation.Data;
+using NingshaRaceLib.DesertPit.Generation.Config;
+using NingshaRaceLib.DesertPit.Generation.Hydrology;
+using UnityEngine;
 using Verse;
 
 namespace NingshaRaceLib.DesertPit.AntColony.Generation.Chambers
@@ -43,9 +46,12 @@ namespace NingshaRaceLib.DesertPit.AntColony.Generation.Chambers
             IntVec3 bestCenter = IntVec3.Invalid;
             int bestDirection = 0;
             float bestScore = float.MinValue;
+            DefModExtension_DesertPitLayout settings = map.generatorDef.GetModExtension<DefModExtension_DesertPitLayout>();
             foreach (IntVec3 center in map.AllCells)
             {
                 if (center.x % 2 != 0 || center.z % 2 != 0) continue;
+                float layer = DefModExtension_DesertPitLayout.Layer(map, center);
+                if (settings != null && (layer <= settings.innerBoundary || layer >= settings.outerBoundary)) continue;
                 for (int direction = 0; direction < 4; direction++)
                 {
                     CellRect rect = AntChamberLayout.BoundsAt(shape.Bounds, center, direction);
@@ -55,6 +61,23 @@ namespace NingshaRaceLib.DesertPit.AntColony.Generation.Chambers
                     if (CountRect(blocked, rect) != 0 && CountSpans(blocked, spans[direction], center, true) != 0) continue;
                     int crossedRoutes = CountRect(routes, rect) == 0 ? 0 : CountSpans(routes, spans[direction], center, false);
                     float score = center.DistanceTo(data.MainCenter) - mouth.DistanceTo(data.MainCenter) * 0.3f - crossedRoutes * 10f;
+                    if (settings != null)
+                    {
+                        float nestLayer = DefModExtension_DesertPitLayout.Layer(map, center + AntChamberLayout.Rotate(shape.Nest, direction));
+                        if (nestLayer <= settings.innerBoundary || nestLayer >= settings.outerBoundary) continue;
+                        //中层目标代替远离中心的奖励，第二座巢群优先选择相反半边。
+                        float lateral = DesertPitRiverPlanner.Across(data, center);
+                        Vector3 delta = center.ToVector3() - data.MainCenter.ToVector3();
+                        Vector3 side = DesertPitRiverPlanner.Side(data);
+                        float alongRiver = delta.x * -side.z + delta.z * side.x;
+                        if (data.AntChambers.Count > 0)
+                        {
+                            float firstLateral = DesertPitRiverPlanner.Across(data, data.AntChambers[0].Origin);
+                            if (lateral * firstLateral >= 0) continue;
+                        }
+                        score = -Mathf.Abs(layer - settings.antPreferredLayer) * Mathf.Min(map.Size.x, map.Size.z)
+                            - Mathf.Abs(alongRiver) * 0.25f - crossedRoutes * 2f;
+                    }
                     if (score <= bestScore) continue;
                     bestScore = score;
                     bestCenter = center;
@@ -102,13 +125,21 @@ namespace NingshaRaceLib.DesertPit.AntColony.Generation.Chambers
         //函数职责：分别缓存不可覆盖区域和既有通道数量，优先避开通道并让被截断的支洞在室外重新连接。
         private static int[,] BuildPrefix(Map map, DesertPitLayoutData data, bool routesOnly)
         {
+            bool layered = map.generatorDef.GetModExtension<DefModExtension_DesertPitLayout>() != null;
+            HashSet<IntVec3> sceneBuffer = new HashSet<IntVec3>(data.ReservedSceneCells);
+            //预留相邻一格，确保洞口的完整通行截面不紧贴河岸保护边界。
+            if (!routesOnly)
+                foreach (IntVec3 scene in data.ReservedSceneCells)
+                    foreach (IntVec3 offset in GenAdj.AdjacentCells)
+                        sceneBuffer.Add(scene + offset);
             int[,] prefix = new int[map.Size.x + 1, map.Size.z + 1];
             for (int x = 0; x < map.Size.x; x++)
                 for (int z = 0; z < map.Size.z; z++)
                 {
                     IntVec3 cell = new IntVec3(x, 0, z);
                     bool blocked = routesOnly ? data.ProtectedRouteCells.Contains(cell)
-                        : data.ReservedSceneCells.Contains(cell) || cell.DistanceToSquared(data.MainCenter) < 35 * 35;
+                        : sceneBuffer.Contains(cell) || (layered ? data.CentralCoreCells.Contains(cell)
+                            : cell.DistanceToSquared(data.MainCenter) < 35 * 35);
                     int occupied = blocked ? 1 : 0;
                     prefix[x + 1, z + 1] = occupied + prefix[x, z + 1] + prefix[x + 1, z] - prefix[x, z];
                 }

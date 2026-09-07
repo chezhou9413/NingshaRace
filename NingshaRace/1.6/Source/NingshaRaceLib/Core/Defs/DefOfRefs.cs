@@ -302,6 +302,9 @@ namespace NingshaRaceLib.Core.Defs
         //字段职责：工蚁把实体资源搬到本巢储藏格时使用的工作。
         public static JobDef NingshaRace_Job_DesertPitAntHaul;
 
+        //字段职责：蚁群成员检查攻击能力后执行的近战拦截工作。
+        public static JobDef NingshaRace_Job_DesertPitAntMelee;
+
         //字段职责：蚁后消耗巢穴食物并补充常规成员时使用的工作。
         public static JobDef NingshaRace_Job_DesertPitAntReproduce;
 

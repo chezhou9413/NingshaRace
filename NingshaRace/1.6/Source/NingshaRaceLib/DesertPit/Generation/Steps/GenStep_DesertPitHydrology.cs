@@ -7,12 +7,13 @@ using NingshaRaceLib.Core.Defs;
 using NingshaRaceLib.DesertPit.Buildings;
 using NingshaRaceLib.DesertPit.Generation.Caves;
 using NingshaRaceLib.DesertPit.Generation.Data;
+using NingshaRaceLib.DesertPit.Generation.Hydrology;
 using NingshaRaceLib.DesertPit.Generation.Landmarks;
 using NingshaRaceLib.DesertPit.Generation.Utility;
 
 namespace NingshaRaceLib.DesertPit.Generation.Steps
 {
-    //类职责：在沙漠巨坑洞穴中生成浅层地下溪流、积水池和湿润边缘地形。
+    //类职责：优先落实预先规划的贯穿浅河，为未配置分层布局的地图保留局部水文生成。
     public class GenStep_DesertPitHydrology : GenStep
     {
         //字段职责：记录当前生成步骤使用的稳定随机种子片段。
@@ -37,11 +38,16 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
         //属性职责：提供当前生成步骤的稳定随机种子片段。
         public override int SeedPart => Seed;
 
-        //函数职责：按洞室锚点生成溪流和积水池，并让边缘过渡为湿地或沼泽。
+        //函数职责：铺设已规划河槽，或按旧式洞室锚点绘制局部溪流和积水池。
         public override void Generate(Map map, GenStepParams parms)
         {
             DesertPitGenUtility.SetGenerationStatus("地下水系");
             DesertPitLayoutData data = DesertPitGenUtility.GetLayoutData();
+            if (data.RiverCenterline.Count > 0)
+            {
+                DesertPitRiverPainter.Paint(map, data);
+                return;
+            }
             TerrainDef waterMoving = DefDatabase<TerrainDef>.GetNamed("WaterMovingShallow");
             TerrainDef waterShallow = DefDatabase<TerrainDef>.GetNamed("WaterShallow");
             TerrainDef marsh = DefDatabase<TerrainDef>.GetNamed("Marsh");

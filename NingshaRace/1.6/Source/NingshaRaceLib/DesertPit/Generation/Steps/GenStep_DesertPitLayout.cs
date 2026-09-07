@@ -8,6 +8,8 @@ using Verse;
 using NingshaRaceLib.Core.Defs;
 using NingshaRaceLib.DesertPit.Buildings;
 using NingshaRaceLib.DesertPit.Generation.Caves;
+using NingshaRaceLib.DesertPit.Generation.Config;
+using NingshaRaceLib.DesertPit.Generation.Topology;
 using NingshaRaceLib.DesertPit.Generation.Data;
 using NingshaRaceLib.DesertPit.Generation.Landmarks;
 using NingshaRaceLib.DesertPit.Generation.Progress;
@@ -15,13 +17,13 @@ using NingshaRaceLib.DesertPit.Generation.Utility;
 
 namespace NingshaRaceLib.DesertPit.Generation.Steps
 {
-    //类职责：调度沙漠巨坑 V2 洞穴生成流程，并记录塌方地貌点。
+    //类职责：根据地图配置调度分层或分支洞穴布局，并记录塌方地貌点。
     public class GenStep_DesertPitLayout : GenStep, IDesertPitIncrementalGenStep
     {
         //属性职责：提供当前生成步骤的稳定随机种子片段。
         public override int SeedPart => 914027331;
 
-        //函数职责：生成主洞室、支洞、小洞室、虫道、回环、边缘侵蚀和塌方记录。
+        //函数职责：完整执行对应地图的洞群结构规划和塌方记录流程。
         public override void Generate(Map map, GenStepParams parms)
         {
             foreach (object unused in GenerateIncrementally(map, parms))
@@ -40,6 +42,16 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
             data.ProtectedRouteCells.Clear();
             data.ReservedSceneCells.Clear();
             data.CaveEdgeDistances = null;
+
+            DefModExtension_DesertPitLayout settings = map.generatorDef.GetModExtension<DefModExtension_DesertPitLayout>();
+            if (settings != null)
+            {
+                foreach (object unused in DesertPitLayeredLayout.Generate(map, data, settings)) yield return null;
+                DesertPitGenUtility.BuildCaveEdgeCache(map);
+                GenerateCollapses(map, data);
+                DesertPitGenerationProgress.SetStepFraction(1f);
+                yield break;
+            }
 
             List<DesertPitCaveNode> nodes = DesertPitCaveGraphUtility.BuildCaveGraph(map, data);
             DesertPitCaveCarver.CarveRooms(map, nodes);

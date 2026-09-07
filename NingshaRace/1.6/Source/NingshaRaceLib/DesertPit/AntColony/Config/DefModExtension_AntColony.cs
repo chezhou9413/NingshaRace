@@ -9,6 +9,10 @@ namespace NingshaRaceLib.DesertPit.AntColony.Config
         public float acidNutritionCost = 2f;
         public float foodReserveDays = 1f;
         public int foodStorageCells = 4;
+        //字段职责：限制保底采收的巢周距离、植物成熟度和库存营养门槛。
+        public float harvestRadius = 16f;
+        public float harvestMinGrowth = 0.9f;
+        public float harvestReserveMultiplier = 2f;
         public float retaliationRadius = 55f;
         public int retaliationDurationTicks = 2500;
         //字段职责：固定规模蚁群和一级可升级蚁群的工蚁目标数量。
@@ -151,6 +155,15 @@ namespace NingshaRaceLib.DesertPit.AntColony.Config
 
         //字段职责：规定爆浆蚁酸液爆炸基础伤害。
         public int boomExplosionDamage = 25;
+
+        //函数职责：校验局部采收范围与营养门槛，避免非法半径进入径向搜索。
+        public override System.Collections.Generic.IEnumerable<string> ConfigErrors()
+        {
+            foreach (string error in base.ConfigErrors()) yield return error;
+            if (!(harvestRadius > 0f && harvestRadius <= 50f)) yield return "工蚁采收半径必须大于零且不超过五十格。";
+            if (!(harvestMinGrowth > 0f && harvestMinGrowth <= 1f)) yield return "工蚁采收成熟度必须大于零且不超过一。";
+            if (!(harvestReserveMultiplier > 0f) || float.IsInfinity(harvestReserveMultiplier)) yield return "工蚁采收库存倍率必须是有限正数。";
+        }
 
         //函数职责：根据当前等级返回升到下一等级需要消耗的实体储藏营养。
         public float GetUpgradeNutrition(int currentLevel)

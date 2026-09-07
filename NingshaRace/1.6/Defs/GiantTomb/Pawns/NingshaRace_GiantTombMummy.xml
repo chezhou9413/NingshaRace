@@ -27,6 +27,14 @@
       </li>
     </tools>
     <comps>
+      <!--死亡时互斥抽取一项；数量区间包含两端，活铁对应原版 Bioferrite。-->
+      <li Class="NingshaRaceLib.Loot.Components.CompProperties_DeathLoot">
+        <entries>
+          <li><thingDef>Bioferrite</thingDef><weight>80</weight><count>12~30</count></li>
+          <li><thingDef>RawFungus</thingDef><weight>15</weight><count>20~35</count></li>
+          <li><thingDef>NingshaRace_SandHeat</thingDef><weight>5</weight><count>10</count></li>
+        </entries>
+      </li>
       <li Class="CompProperties_HoldingPlatformTarget">
         <baseEscapeIntervalMtbDays>30</baseEscapeIntervalMtbDays>
         <getsColdContainmentBonus>true</getsColdContainmentBonus>

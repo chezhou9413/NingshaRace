@@ -1,5 +1,6 @@
 using NingshaRaceLib.DesertPit.AntColony.Core;
 using NingshaRaceLib.DesertPit.AntColony.State;
+using NingshaRaceLib.DesertPit.AntColony.Combat;
 using RimWorld;
 using Verse;
 using Verse.AI;
@@ -60,7 +61,8 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         private Job CreateCombatJob(Pawn pawn, Thing target)
         {
             Verb verb = AcidVerb(pawn);
-            if (verb == null || pawn.Position.AdjacentTo8WayOrInside(target.Position)) return CreateMeleeAttackJob(target);
+            if (verb == null || pawn.Position.AdjacentTo8WayOrInside(target.Position))
+                return AntMeleeCapability.CanAttack(pawn, target) ? CreateMeleeAttackJob(target) : null;
             if (verb.CanHitTarget(target))
             {
                 Job attack = JobMaker.MakeJob(JobDefOf.AttackStatic, target);

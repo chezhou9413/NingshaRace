@@ -15,12 +15,17 @@ namespace NingshaRaceLib.DesertPit.AntColony.Jobs
         //函数职责：抵达并采收成熟植物，产物放回原地，驱蚁恢复时在收获前取消。
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            this.FailOn(() => !Map.GetComponent<MapComponent_DesertPitAntColonies>().CanHarvestForColony(TargetA.Thing as Plant));
+            this.FailOn(() => !Map.GetComponent<MapComponent_DesertPitAntColonies>().CanHarvestForColony(pawn, TargetA.Thing as Plant));
             yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
             yield return Toils_General.Wait((int)TargetA.Thing.def.plant.harvestWork).WithProgressBarToilDelay(TargetIndex.A);
             yield return Toils_General.Do(delegate
             {
                 Plant plant = (Plant)TargetA.Thing;
+                if (!Map.GetComponent<MapComponent_DesertPitAntColonies>().CanHarvestForColony(pawn, plant))
+                {
+                    EndJobWith(JobCondition.Incompletable);
+                    return;
+                }
                 int count = plant.YieldNow();
                 if (count > 0)
                 {

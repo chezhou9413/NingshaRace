@@ -42,12 +42,13 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
 
             if (state.Frenzy)
             {
-                return intruder != null ? CreateCombatJob(pawn, intruder) : TryCreateNeedsJob(pawn, state) ?? CreatePatrolJob(pawn, state, Settings.soldierPatrolRadius);
+                return intruder != null ? CreateCombatJob(pawn, intruder) ?? CreateReturnToNestJob(pawn, state)
+                    : TryCreateNeedsJob(pawn, state) ?? CreatePatrolJob(pawn, state, Settings.soldierPatrolRadius);
             }
 
             if ((caste == AntCaste.Soldier || caste == AntCaste.Acid) && intruder != null)
             {
-                return CreateCombatJob(pawn, intruder);
+                return CreateCombatJob(pawn, intruder) ?? CreateReturnToNestJob(pawn, state);
             }
 
             if ((caste == AntCaste.Worker || caste == AntCaste.Queen) && intruder != null && pawn.Position.DistanceTo(intruder.Position) <= Settings.workerRetreatRadius)
@@ -81,12 +82,14 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
 
             if (caste == AntCaste.Worker)
             {
-                if (GetStoredNutrition(state) < GetFoodReserve(state) * 2f)
+                Job foodHaul = TryCreateForageJob(pawn, state, true);
+                if (foodHaul != null) return foodHaul;
+                if (GetStoredNutrition(state) < GetFoodReserve(state) * Settings.harvestReserveMultiplier)
                 {
                     Job harvest = TryCreateHarvestJob(pawn, state);
                     if (harvest != null) return harvest;
                 }
-                Job forageJob = TryCreateForageJob(pawn, state);
+                Job forageJob = TryCreateForageJob(pawn, state, false);
                 return forageJob ?? CreatePatrolJob(pawn, state, Settings.workerWanderRadius);
             }
 
@@ -146,7 +149,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         //函数职责：创建带有有限攻击次数和失去目标后破门行为的近战拦截工作。
         private static Job CreateMeleeAttackJob(Thing target)
         {
-            Job job = JobMaker.MakeJob(JobDefOf.AttackMelee, target);
+            Job job = JobMaker.MakeJob(DefOfRefs.NingshaRace_Job_DesertPitAntMelee, target);
             job.maxNumMeleeAttacks = 1;
             job.expiryInterval = 500;
             job.attackDoorIfTargetLost = true;

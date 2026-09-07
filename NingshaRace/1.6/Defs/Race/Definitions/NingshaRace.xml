@@ -8,6 +8,14 @@
     <description>凝砂族是由砂砾、盐晶与血肉共同塑成的人形族群。他们的躯壳像被风暴压实的砂岩，行动时仍保留人类般的温度、欲望和社会关系。</description>
 
     <comps>
+      <!--只有已经成为侵蚀体的成员使用此奖励表，普通凝砂族死亡不参与。-->
+      <li Class="NingshaRaceLib.Loot.Components.CompProperties_DeathLoot">
+        <requiredMutant>NingshaRace_ErosionBodyMutant</requiredMutant>
+        <entries>
+          <li><thingDef>Bioferrite</thingDef><weight>80</weight><count>25~50</count></li>
+          <li><thingDef>NingshaRace_SandHeat</thingDef><weight>20</weight><count>15</count></li>
+        </entries>
+      </li>
       <li Class="NingshaRaceLib.Race.Components.CompProperties_NingshaInnateAbilities" />
       <li Class="NingshaRaceLib.Erosion.Components.CompProperties_NingshaErosion">
         <dailyDecay>10</dailyDecay>
