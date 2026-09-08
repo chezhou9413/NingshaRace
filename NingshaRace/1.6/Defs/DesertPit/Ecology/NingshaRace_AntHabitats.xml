@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!--生态建筑共用轻量表现；外观暂借用现有洞穴美术，后续只需替换贴图路径。-->
+  <!--生态建筑共用轻量表现；驱蚁桩与共生菌巢使用独立透明贴图，保留原图颜色和比例。-->
   <ThingDef ParentName="BuildingBase" Name="NingshaRace_AntHabitatBase" Abstract="True">
     <category>Building</category>
     <tickerType>Normal</tickerType>
@@ -36,9 +36,8 @@
     <size>(1,1)</size>
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>
-      <texPath>Things/Building/NingshaRace/DesertPit/Decor/DesertPitStalactite03</texPath>
+      <texPath>Things/Building/NingshaRace/DesertPit/Ecology/AntRepellent</texPath>
       <drawSize>(2.2,2.2)</drawSize>
-      <color>(0.72,0.85,0.60)</color>
     </graphicData>
     <minifiedDef>MinifiedThing</minifiedDef>
     <thingCategories>
@@ -63,9 +62,8 @@
     <size>(2,1)</size>
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>
-      <texPath>Things/Building/NingshaRace/DesertPit/AntColony/AntNest</texPath>
-      <drawSize>(2.8,2.1)</drawSize>
-      <color>(0.61,0.77,0.57)</color>
+      <texPath>Things/Building/NingshaRace/DesertPit/Ecology/FungalMound</texPath>
+      <drawSize>(2.8,2.8)</drawSize>
     </graphicData>
     <modExtensions>
       <li Class="NingshaRaceLib.DesertPit.Ecology.Habitats.DefModExtension_FungalMound">
