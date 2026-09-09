@@ -8,13 +8,18 @@ using NingshaRaceLib.DesertPit.Buildings;
 
 namespace NingshaRaceLib.Scenarios.Generation
 {
-    //类职责：在地表沙漠安置开局巨坑入口，保留完整通行外圈及通往地图边缘的道路。
+    //类职责：在地表沙漠安置巨坑入口，保留完整通行外圈及通往地图边缘的道路。
     internal static class NingshaStartingGatePlacement
     {
         //函数职责：优先在地表预定落点附近选择空地，没有合适位置时明确报告失败。
         public static Building_DesertPitGate Spawn(Map map)
         {
-            IntVec3 center = MapGenerator.PlayerStartSpot;
+            return Spawn(map, MapGenerator.PlayerStartSpot);
+        }
+
+        //函数职责：围绕指定位置安置巨坑入口，供开局落点和世界探索地点共用放置规则。
+        public static Building_DesertPitGate Spawn(Map map, IntVec3 center)
+        {
             Predicate<IntVec3> validator = candidate => CanPlace(map, candidate);
             if (!CellFinder.TryFindRandomCellNear(center, map, 40, validator, out IntVec3 cell)
                 && !CellFinder.TryFindRandomCell(map, validator, out cell))

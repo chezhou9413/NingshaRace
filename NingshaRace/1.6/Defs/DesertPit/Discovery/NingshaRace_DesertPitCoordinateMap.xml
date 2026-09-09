@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义一次性巨坑坐标地图和殖民者解读行为。 -->
+  <ThingDef ParentName="ResourceBase">
+    <defName>NingshaRace_DesertPitCoordinateMap</defName>
+    <label>巨坑坐标地图</label>
+    <description>一张标注沙漠巨坑位置的古老地图。解读后消耗地图并开启“寻找巨坑”任务，在世界地图上标记可供远行队探索的地点。已有寻找巨坑任务时无法再次使用。</description>
+    <thingClass>ThingWithComps</thingClass>
+    <stackLimit>1</stackLimit>
+    <graphicData>
+      <texPath>Things/Item/NingshaRace/DesertPit/CoordinateMap</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <MarketValue>500</MarketValue>
+      <Mass>0.1</Mass>
+      <MaxHitPoints>80</MaxHitPoints>
+      <Flammability>1</Flammability>
+    </statBases>
+    <thingCategories><li>Items</li></thingCategories>
+    <comps>
+      <li Class="CompProperties_Usable">
+        <useJob>UseItem</useJob>
+        <useLabel>解读巨坑坐标</useLabel>
+        <useDuration>120</useDuration>
+        <showUseGizmo>true</showUseGizmo>
+      </li>
+      <li Class="CompProperties_UseEffect">
+        <compClass>NingshaRaceLib.DesertPit.Discovery.Items.CompUseEffect_DesertPitCoordinates</compClass>
+      </li>
+    </comps>
+  </ThingDef>
+</Defs>
