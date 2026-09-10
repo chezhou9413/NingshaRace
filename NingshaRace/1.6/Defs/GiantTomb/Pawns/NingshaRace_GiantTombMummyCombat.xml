@@ -11,7 +11,7 @@
     <requiredCapacity>NingshaRace_GiantTombMummyClaw</requiredCapacity>
     <verb Class="NingshaRaceLib.GiantTomb.Pawns.Combat.VerbProperties_GiantTombMummyClaw">
       <meleeDamageDef>ScratchToxic</meleeDamageDef>
-      <petrificationSeverity>0.2</petrificationSeverity>
+      <petrificationSeverity>0.1</petrificationSeverity>
     </verb>
     <logEntryDef>MeleeAttack</logEntryDef>
     <combatLogRulesHit>Maneuver_Scratch_MeleeHit</combatLogRulesHit>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义凝砂族专属特质。
+       接入说明：特质本身通过 commonality 在随机生成时出现；若需限定仅凝砂族拥有，
+       可在凝砂族 PawnKindDef 或背景故事中通过 forcedTraits 强制指定。 -->
+
+  <TraitDef>
+    <defName>NingshaRace_SandwroughtForm</defName>
+    <commonality>0.5</commonality>
+    <degreeDatas>
+      <li>
+        <label>重蟒血脉</label>
+        <description>这具躯体里流淌着一支特殊的血脉，让此人的身体表皮拥有更厚实的鳞片与防护层，冲击与疼痛能在其中被层层卸去，代价是比旁人更加沉重迟滞。\n 根据遗留的零星史料来看，这只血脉本属于某个蛇兵领主家族，自太古王朝之时便追随苏丹征伐地底。虽说记载中这家族与血脉早已埋没在了旧耶律的黄沙之下，但如今看来，它们倒早已开枝散叶，留在了无数凝砂族的血管里。</description>
+        <degree>1</degree>
+        <statFactors>
+          <IncomingDamageFactor>0.85</IncomingDamageFactor>
+        </statFactors>
+        <statOffsets>
+          <PainShockThreshold>0.08</PainShockThreshold>
+          <MoveSpeed>-0.06</MoveSpeed>
+        </statOffsets>
+      </li>
+    </degreeDatas>
+  </TraitDef>
+
+  <TraitDef>
+    <defName>NingshaRace_SerpentineCalm</defName>
+    <commonality>0.5</commonality>
+    <degreeDatas>
+      <li>
+        <label>蛇性沉静</label>
+        <description>冷血的蛇裔血脉沉淀为一种近乎冷酷的镇定，令其近身格斗时出手精准而从容，却也让人难以亲近，不擅言谈。 \n 在独居本能被溪蜜女巫用魔药驱逐出凝砂族血脉的年代里，这种因血脉导致的冷酷常常被人们视为“灵魂过于接近邪恶本源”的象征，以至于称这些人“迟早会吞食掉自己的亲人”。不过在大侵蚀后，人们才意识到，哦，这只是一种不讨喜的性格罢了。</description>
+        <degree>1</degree>
+        <statOffsets>
+          <MeleeDodgeChance>0.05</MeleeDodgeChance>
+          <MeleeHitChance>0.03</MeleeHitChance>
+        </statOffsets>
+        <statFactors>
+          <SocialImpact>0.9</SocialImpact>
+        </statFactors>
+        <skillGains>
+          <Melee>2</Melee>
+        </skillGains>
+      </li>
+    </degreeDatas>
+  </TraitDef>
+
+
+  <TraitDef>
+    <defName>NingshaRace_ErosionAffinity</defName>
+    <commonality>0.4</commonality>
+    <degreeDatas>
+      <!-- 正档：侵蚀耐受 -->
+      <li>
+        <label>侵蚀耐受</label>
+        <description>对深层之力的抵抗更加深厚，能够容纳更多侵蚀而不致实体化，灵能感知也随之敏锐。</description>
+        <degree>1</degree>
+        <statFactors>
+          <NingshaRace_ErosionLimit>1.2</NingshaRace_ErosionLimit>
+        </statFactors>
+        <statOffsets>
+          <PsychicSensitivity>0.1</PsychicSensitivity>
+        </statOffsets>
+      </li>
+      <!-- 负档：侵蚀沉溺 -->
+      <li>
+        <label>侵蚀沉溺</label>
+        <description>体内的侵蚀早已蠢蠢欲动，灵能感知极为敏锐，却也更易触及永久实体化的边缘。</description>
+        <degree>-1</degree>
+        <statFactors>
+          <NingshaRace_ErosionLimit>0.85</NingshaRace_ErosionLimit>
+          <SocialImpact>0.9</SocialImpact>
+        </statFactors>
+        <statOffsets>
+          <PsychicSensitivity>0.25</PsychicSensitivity>
+        </statOffsets>
+        <marketValueFactorOffset>-0.1</marketValueFactorOffset>
+      </li>
+    </degreeDatas>
+  </TraitDef>
+
+  <TraitDef>
+    <defName>NingshaRace_SolitaryInstinct</defName>
+    <commonality>0.4</commonality>
+    <degreeDatas>
+      <li>
+        <label>独居本能</label>
+        <description>独居的古老本能阴魂不散，在大侵蚀后重新刻在了这些人的血脉深处。尽管其在离群独处时更加专注高效，但也几乎完全丧失了社会性与社交能力。</description>
+        <degree>1</degree>
+        <statFactors>
+          <SocialImpact>0.2</SocialImpact>
+        </statFactors>
+        <skillGains>
+          <Cooking>2</Cooking>
+          <Crafting>2</Crafting>
+          <Plants>2</Plants>
+        </skillGains>
+        <marketValueFactorOffset>-0.1</marketValueFactorOffset>
+      </li>
+    </degreeDatas>
+  </TraitDef>
+
+  <TraitDef>
+    <defName>NingshaRace_DunePredator</defName>
+    <commonality>0.5</commonality>
+    <degreeDatas>
+      <li>
+        <label>沙海猎手</label>
+        <description>自幼在沙海与地脉中狩猎，练就了凭借热感追踪猎物的本领。这样的孩子在王朝时期会被视为家族的骄傲与城邦的战斗天才，为苏丹效力取得荣华富贵的道路就在眼前；而如今，这样的孩子依然是家族的骄傲，因为她可以为家里带来食物。</description>
+        <degree>1</degree>
+        <statOffsets>
+          <ShootingAccuracyPawn>2</ShootingAccuracyPawn>
+          <MeleeHitChance>0.03</MeleeHitChance>
+        </statOffsets>
+        <statFactors>
+          <AimingDelayFactor>0.9</AimingDelayFactor>
+        </statFactors>
+        <skillGains>
+          <Shooting>3</Shooting>
+          <Melee>1</Melee>
+        </skillGains>
+      </li>
+    </degreeDatas>
+  </TraitDef>
+</Defs>

@@ -22,7 +22,7 @@
       <li>
         <label>干枯利爪</label>
         <capacities><li>NingshaRace_GiantTombMummyClaw</li></capacities>
-        <power>14</power>
+        <power>12</power>
         <cooldownTime>2.2</cooldownTime>
       </li>
     </tools>

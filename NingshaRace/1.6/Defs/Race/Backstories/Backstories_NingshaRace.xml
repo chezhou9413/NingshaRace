@@ -17,6 +17,7 @@
     <skillGains>
       <Social>2</Social>
       <Intellectual>1</Intellectual>
+      <Mining>1</Mining>
     </skillGains>
     <spawnCategories>
       <li>NingshaRace</li>
@@ -37,7 +38,7 @@
     <skillGains>
       <Plants>1</Plants>
       <Animals>1</Animals>
-      <Mining>1</Mining>
+      <Mining>3</Mining>
     </skillGains>
     <spawnCategories>
       <li>NingshaRace</li>
@@ -58,6 +59,7 @@
     <skillGains>
       <Melee>2</Melee>
       <Shooting>1</Shooting>
+      <Mining>1</Mining>
     </skillGains>
     <spawnCategories>
       <li>NingshaRace</li>
@@ -78,6 +80,7 @@
     <skillGains>
       <Social>2</Social>
       <Intellectual>1</Intellectual>
+      <Mining>2</Mining>
     </skillGains>
     <spawnCategories>
       <li>NingshaRace</li>
@@ -97,6 +100,7 @@
     <requiredWorkTags>None</requiredWorkTags>
     <skillGains>
       <Intellectual>3</Intellectual>
+      <Mining>1</Mining>
     </skillGains>
     <spawnCategories>
       <li>NingshaRace</li>
@@ -115,9 +119,10 @@
     <workDisables>None</workDisables>
     <requiredWorkTags>None</requiredWorkTags>
     <skillGains>
-      <Crafting>4</Crafting>
+      <Crafting>6</Crafting>
       <Intellectual>1</Intellectual>
       <Artistic>1</Artistic>
+      <Mining>2</Mining>
     </skillGains>
     <spawnCategories>
       <li>NingshaRace</li>
@@ -177,8 +182,8 @@
     <workDisables>None</workDisables>
     <requiredWorkTags>None</requiredWorkTags>
     <skillGains>
-      <Crafting>2</Crafting>
-      <Mining>2</Mining>
+      <Crafting>4</Crafting>
+      <Mining>4</Mining>
     </skillGains>
     <spawnCategories>
       <li>NingshaRace</li>
@@ -199,7 +204,7 @@
     <skillGains>
       <Melee>1</Melee>
       <Shooting>1</Shooting>
-      <Mining>1</Mining>
+      <Mining>2</Mining>
     </skillGains>
     <spawnCategories>
       <li>NingshaRace</li>
@@ -241,6 +246,7 @@
     <skillGains>
       <Shooting>3</Shooting>
       <Melee>4</Melee>
+      <Mining>1</Mining>
     </skillGains>
     <spawnCategories>
       <li>NingshaRace</li>
@@ -283,6 +289,7 @@
       <Intellectual>2</Intellectual>
       <Social>2</Social>
       <Melee>1</Melee>
+      <Mining>2</Mining>
     </skillGains>
     <spawnCategories>
       <li>NingshaRace</li>
@@ -302,7 +309,8 @@
     <requiredWorkTags>None</requiredWorkTags>
     <skillGains>
       <Intellectual>4</Intellectual>
-      <Crafting>1</Crafting>
+      <Crafting>6</Crafting>
+      <Mining>2</Mining>
     </skillGains>
     <spawnCategories>
       <li>NingshaRace</li>
@@ -321,8 +329,8 @@
     <workDisables>None</workDisables>
     <requiredWorkTags>None</requiredWorkTags>
     <skillGains>
-      <Crafting>4</Crafting>
-      <Mining>2</Mining>
+      <Crafting>8</Crafting>
+      <Mining>3</Mining>
     </skillGains>
     <spawnCategories>
       <li>NingshaRace</li>
@@ -343,7 +351,7 @@
     <skillGains>
       <Shooting>2</Shooting>
       <Melee>1</Melee>
-      <Mining>1</Mining>
+      <Mining>3</Mining>
     </skillGains>
     <spawnCategories>
       <li>NingshaRace</li>
@@ -364,7 +372,7 @@
     <skillGains>
       <Melee>2</Melee>
       <Shooting>2</Shooting>
-      <Mining>1</Mining>
+      <Mining>3</Mining>
     </skillGains>
     <spawnCategories>
       <li>NingshaRace</li>
@@ -385,6 +393,7 @@
     <skillGains>
       <Melee>3</Melee>
       <Cooking>2</Cooking>
+      <Mining>1</Mining>
     </skillGains>
     <spawnCategories>
       <li>NingshaRace</li>
@@ -405,6 +414,7 @@
     <skillGains>
       <Intellectual>4</Intellectual>
       <Cooking>1</Cooking>
+      <Mining>2</Mining>
     </skillGains>
     <spawnCategories>
       <li>NingshaRace</li>
@@ -423,8 +433,9 @@
     <workDisables>None</workDisables>
     <requiredWorkTags>None</requiredWorkTags>
     <skillGains>
-      <Crafting>5</Crafting>
+      <Crafting>8</Crafting>
       <Construction>2</Construction>
+      <Mining>2</Mining>
     </skillGains>
     <spawnCategories>
       <li>NingshaRace</li>
@@ -445,6 +456,7 @@
     <skillGains>
       <Melee>3</Melee>
       <Shooting>2</Shooting>
+      <Mining>1</Mining>
     </skillGains>
     <spawnCategories>
       <li>NingshaRace</li>
@@ -465,6 +477,7 @@
     <skillGains>
       <Shooting>3</Shooting>
       <Melee>3</Melee>
+      <Mining>1</Mining>
     </skillGains>
     <spawnCategories>
       <li>NingshaRace</li>
@@ -484,7 +497,7 @@
     <requiredWorkTags>None</requiredWorkTags>
     <skillGains>
       <Construction>3</Construction>
-      <Mining>2</Mining>
+      <Mining>4</Mining>
       <Plants>3</Plants>
     </skillGains>
     <spawnCategories>
@@ -507,6 +520,7 @@
       <Intellectual>2</Intellectual>
       <Plants>4</Plants>
       <Cooking>2</Cooking>
+      <Mining>2</Mining>
     </skillGains>
     <spawnCategories>
       <li>NingshaRace</li>
@@ -527,6 +541,7 @@
     <skillGains>
       <Melee>3</Melee>
       <Cooking>2</Cooking>
+      <Mining>1</Mining>
     </skillGains>
     <spawnCategories>
       <li>NingshaRace</li>
@@ -550,6 +565,7 @@
       <Melee>1</Melee>
       <Shooting>1</Shooting>
       <Intellectual>1</Intellectual>
+      <Mining>2</Mining>
     </skillGains>
     <spawnCategories>
       <li>NingshaRace</li>
@@ -591,6 +607,7 @@
       <Cooking>1</Cooking>
       <Crafting>1</Crafting>
       <Intellectual>1</Intellectual>
+      <Mining>1</Mining>
     </skillGains>
     <spawnCategories>
       <li>NingshaRace</li>
@@ -612,6 +629,7 @@
       <Plants>1</Plants>
       <Social>1</Social>
       <Intellectual>1</Intellectual>
+      <Mining>1</Mining>
     </skillGains>
     <spawnCategories>
       <li>NingshaRace</li>
@@ -632,6 +650,7 @@
     <skillGains>
       <Melee>2</Melee>
       <Shooting>1</Shooting>
+      <Mining>1</Mining>
     </skillGains>
     <spawnCategories>
       <li>NingshaRace</li>
@@ -654,6 +673,7 @@
     <skillGains>
       <Shooting>4</Shooting>
       <Melee>3</Melee>
+      <Mining>1</Mining>
     </skillGains>
     <spawnCategories>
       <li>NingshaRace</li>
