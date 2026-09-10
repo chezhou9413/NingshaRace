@@ -179,7 +179,12 @@ namespace NingshaRaceLib.Molting.Components
                     layers = HediffMaker.MakeHediff(DefOfRefs.NingshaRace_MoltingLayers, Pawn);
                     Pawn.health.AddHediff(layers);
                 }
-                layers.Severity = moltingCount;
+                if (layers.Severity != moltingCount)
+                {
+                    layers.Severity = moltingCount;
+                    //层数共用定义阶段，需要主动刷新能力缓存和健康状态。
+                    Pawn.health.Notify_HediffChanged(layers);
+                }
             }
             else if (layers != null)
             {

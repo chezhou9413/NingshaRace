@@ -1,4 +1,5 @@
 using NingshaRaceLib.Molting.Components;
+using NingshaRaceLib.Molting.Stats;
 using NingshaRaceLib.UI.Gizmos;
 
 namespace NingshaRaceLib.Molting.UI
@@ -20,6 +21,7 @@ namespace NingshaRaceLib.Molting.UI
         protected override string Help => "主动蜕皮需要" + molting.Props.nutritionCapacity.ToString("0.##")
             + "点营养，并增加一层蜕皮者状态；伤势保命需要" + molting.Props.rescueNutritionCost.ToString("0.##") + "点营养。"
             + "\n\n绿色标记表示伤势严重时保命所需的营养。主动蜕皮请点击旁边的“蜕皮”按钮。"
-            + "\n\n当前蜕皮层数：" + molting.MoltingCount + " / 20";
+            + "\n\n当前蜕皮层数：" + molting.MoltingCount + " / 20"
+            + "\n\n" + MoltingEffects.Description(molting.MoltingCount);
     }
 }

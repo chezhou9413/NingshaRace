@@ -5,7 +5,7 @@
     <defName>NingshaRace_MoltingLayers</defName>
     <label>蜕皮者</label>
     <description>该凝砂族通过一次次蜕皮强化了身体结构。具体属性修正由蜕皮次数线性计算。</description>
-    <hediffClass>HediffWithComps</hediffClass>
+    <hediffClass>NingshaRaceLib.Molting.Health.Hediff_MoltingLayers</hediffClass>
     <isBad>false</isBad>
     <maxSeverity>20</maxSeverity>
     <initialSeverity>1</initialSeverity>
