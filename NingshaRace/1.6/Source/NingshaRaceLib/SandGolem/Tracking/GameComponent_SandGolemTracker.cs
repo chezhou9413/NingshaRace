@@ -49,10 +49,10 @@ namespace NingshaRaceLib.SandGolem.Tracking
             }
         }
 
-        //函数职责：读档后清理失效引用并重建可见沙傀贴图。
+        //函数职责：把沙傀贴图重建安排到读档长事件结束后的主线程，避免后台访问渲染资源。
         public override void LoadedGame()
         {
-            RebuildRuntimeTextures();
+            LongEventHandler.ExecuteWhenFinished(RebuildRuntimeTextures);
         }
 
         //函数职责：新游戏开始后确保状态列表存在。
@@ -209,9 +209,16 @@ namespace NingshaRaceLib.SandGolem.Tracking
             golem.Drawer?.renderer?.SetAllGraphicsDirty();
         }
 
-        //函数职责：在读档后根据沙傀自身或召唤者重建运行时截图。
+        //函数职责：在主线程为仍属于当前游戏的沙傀重建截图，并恢复控制与身份状态。
         private void RebuildRuntimeTextures()
         {
+            if (!UnityData.IsInMainThread)
+            {
+                throw new System.InvalidOperationException("沙傀读档贴图只能在游戏主线程重建。");
+            }
+            //读档失败或切换游戏后放弃旧组件的回调，不使用其他游戏的渲染器重建旧角色。
+            if (!ReferenceEquals(Current, this)) return;
+
             if (states == null)
             {
                 states = new List<SandGolemRenderState>();

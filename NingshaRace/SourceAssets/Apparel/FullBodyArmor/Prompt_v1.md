@@ -1,0 +1,7 @@
+使用内置 image_gen 生成。此图为正面护甲设计稿，尚未适配游戏贴图尺寸、各朝向和穿戴分层。
+
+最终提示词：
+
+Create a fully covering protective armor apparel sprite for a RimWorld mod, using these existing CLOTHING-ONLY images as style references. Reference 1: existing leg armor, dark brown plates and outline treatment. Reference 2 and 3: existing clothing, muted palette and angular hand-painted shading.
+ONE front-facing complete body armor garment, no wearer, on transparent background. Square 1024x1024. Same pawn apparel layout as the references, with generous empty space above: collar around (512,355), shoulders around y420, waist around y580, hips y670, paired long greaves ending y975. Narrow torso and rounded hips, long close-together legs. Standard headless armless RimWorld garment sprite: collar, compact shoulder caps, chest armor, abdomen, hip plates and leg armor only.
+Opaque closed breastplate, overlapping abdomen plates over dark fabric, compact hip guards, segmented armored leggings; full coverage. Restrained stone-scale shapes appropriate to a desert stone race. Muted dark stone brown, olive-bronze edges, taupe cloth joints. Bold dark exterior outlines, broad clean painted planes, two or three shadow levels. Match existing reference artwork rather than realistic rendering. No ornate filigree, glowing elements, text, decorative corner marks, weapons, scenery, shadows on background, mannequin or person. Transparent background with genuine alpha.

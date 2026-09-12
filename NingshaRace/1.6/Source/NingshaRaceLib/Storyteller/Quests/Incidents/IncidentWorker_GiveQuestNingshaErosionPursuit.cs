@@ -1,4 +1,6 @@
+using System;
 using RimWorld;
+using RimWorld.QuestGen;
 using Verse;
 
 using NingshaRaceLib.Storyteller.Quests.Scheduling;
@@ -30,12 +32,24 @@ namespace NingshaRaceLib.Storyteller.Quests.Incidents
                 return false;
             }
 
-            bool executed = base.TryExecuteWorker(parms);
-            if (executed)
+            QuestScriptDef questDef = def.questScriptDef;
+            if (!questDef.CanRun(parms.points, parms.target)) return false;
+            bool generated = false;
+            Slate slate = new Slate();
+            slate.Set("points", parms.points);
+            //原版 QuestNode 会记录并吞掉异常，必须等根节点完成全部部件后才发布任务。
+            slate.Set("ningshaPursuitGenerated", (Action)(() => generated = true));
+            Quest quest = QuestGen.Generate(questDef, slate);
+            if (!generated)
             {
-                state.MarkOfferConsumed();
+                quest?.CleanupQuestParts();
+                Log.Error("凝砂侵蚀追杀任务生成未完成，未发布任务，也未消耗一次性任务机会。请检查此前的生成异常。");
+                return false;
             }
-            return executed;
+            Find.QuestManager.Add(quest);
+            state.MarkOfferConsumed();
+            if (!quest.hidden && questDef.sendAvailableLetter) QuestUtility.SendLetterQuestAvailable(quest);
+            return true;
         }
     }
 }

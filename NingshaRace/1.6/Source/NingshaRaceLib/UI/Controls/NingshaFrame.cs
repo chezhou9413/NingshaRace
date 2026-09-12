@@ -5,7 +5,7 @@ using NingshaRaceLib.UI.Rendering;
 
 namespace NingshaRaceLib.UI.Controls
 {
-    //类职责：绘制以静态砂岩为主体、叠加稀薄流沙、双层铜边和刻印角饰的共用容器。
+    //类职责：绘制砂岩与稀薄流沙底板，以单层细边界定共用容器。
     public static class NingshaFrame
     {
         //函数职责：为窗口、卡片或命令绘制砂岩与积沙底板，薄沙在其上流动，边框与前景内容保持固定。
@@ -23,11 +23,6 @@ namespace NingshaRaceLib.UI.Controls
                 NingshaPanelDrift.Draw(rect.ContractedBy(1f), hover, inset);
                 Color edge = Color.Lerp(NingshaPalette.Brass, NingshaPalette.Sand, hover);
                 Border(rect, edge);
-                Border(rect.ContractedBy(3f), new Color(edge.r, edge.g, edge.b, 0.28f));
-                Corner(rect.x + 2f, rect.y + 2f, 1f, 1f, edge);
-                Corner(rect.xMax - 2f, rect.y + 2f, -1f, 1f, edge);
-                Corner(rect.x + 2f, rect.yMax - 2f, 1f, -1f, edge);
-                Corner(rect.xMax - 2f, rect.yMax - 2f, -1f, -1f, edge);
             }
         }
 
@@ -40,18 +35,10 @@ namespace NingshaRaceLib.UI.Controls
             Widgets.DrawBoxSolid(new Rect(rect.xMax - 1f, rect.y, 1f, rect.height), color);
         }
 
-        //函数职责：组合相互垂直的短刻线形成古石板角饰。
-        private static void Corner(float x, float y, float dx, float dy, Color color)
-        {
-            Widgets.DrawBoxSolid(new Rect(dx > 0f ? x : x - 9f, y, 9f, 2f), color);
-            Widgets.DrawBoxSolid(new Rect(x, dy > 0f ? y : y - 9f, 2f, 9f), color);
-        }
-
-        //函数职责：绘制章节分隔线和中心刻印，建立同一面板内的视觉层级。
+        //函数职责：用单条细线分隔同一面板内的章节。
         public static void Divider(Rect rect)
         {
             Widgets.DrawBoxSolid(new Rect(rect.x, rect.center.y, rect.width, 1f), NingshaPalette.Brass);
-            Widgets.DrawBoxSolid(new Rect(rect.center.x - 3f, rect.center.y - 2f, 6f, 5f), NingshaPalette.Sand);
         }
     }
 }

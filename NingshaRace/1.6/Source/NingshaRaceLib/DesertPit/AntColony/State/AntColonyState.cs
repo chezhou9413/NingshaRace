@@ -9,6 +9,9 @@ namespace NingshaRaceLib.DesertPit.AntColony.State
     //类职责：保存一个蚁巢在地图上的实体引用、有效规模、储藏位置、警戒状态和补员计时。
     public class AntColonyState : IExposable
     {
+        //字段职责：缓存由死亡记录推导的工蚁避让区域，读档后按已保存的死亡记录重建。
+        public readonly AntWorkerDangerMemory WorkerDanger = new AntWorkerDangerMemory();
+
         //字段职责：保存地图内唯一的蚁巢编号。
         public int Id;
 

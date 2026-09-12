@@ -27,7 +27,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         private bool IsValidAggressor(AntColonyState state, Thing aggressor)
         {
             return aggressor != null && aggressor.Spawned && aggressor.Map == map && !aggressor.Destroyed
-                && !(aggressor is Pawn pawn && (pawn.Dead || IsColonyMember(pawn, state)))
+                && !(aggressor is Pawn pawn && (pawn.Dead || pawn.Downed || IsColonyMember(pawn, state)))
                 && aggressor != state.Nest
                 && aggressor.Position.DistanceToSquared(state.NestPosition) <= Settings.retaliationRadius * Settings.retaliationRadius;
         }
@@ -53,6 +53,9 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         //函数职责：允许吐酸蚁隔障碍射击当前可命中的敌人，其他情况仍要求步行接近目标。
         private static bool CanEngageIntruder(Pawn pawn, Thing target)
         {
+            //缓存刷新之间也检查倒地状态，撤退防御与常规进攻都不追击失去行动能力的目标。
+            if (target == null || !target.Spawned || target.Map != pawn.Map || target.Destroyed
+                || target is Pawn victim && (victim.Dead || victim.Downed)) return false;
             Verb verb = AcidVerb(pawn);
             return verb != null && verb.CanHitTarget(target) || pawn.CanReach(target, PathEndMode.Touch, Danger.Deadly);
         }

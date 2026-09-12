@@ -59,6 +59,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             return IsHarvestableFood(plant) && TryGetColony(pawn, out state) && !state.NestDestroyed
                 && pawn.TryGetComp<Comp_DesertPitAntMember>()?.Caste == AntCaste.Worker
                 && plant.Position.DistanceToSquared(state.NestPosition) <= Settings.harvestRadius * Settings.harvestRadius
+                && !IsWorkerForageDangerous(pawn, plant.Position)
                 && HasHarvestStorageSpace(pawn, state, plant.def.plant.harvestedThingDef);
         }
 
@@ -105,6 +106,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             foreach (Thing food in forageCandidates)
             {
                 if (!food.Spawned || !IsStoredFood(food) || !food.IngestibleNow
+                    || IsWorkerForageDangerous(pawn, food.Position)
                     || map.GetComponent<MapComponent_AntHabitats>().IsRepelled(food.Position)) continue;
                 float next = pawn.Position.DistanceToSquared(food.Position);
                 if (next >= distance || !pawn.CanReserveAndReach(food, PathEndMode.ClosestTouch, Danger.Deadly)) continue;

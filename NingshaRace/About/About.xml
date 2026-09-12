@@ -6,20 +6,27 @@
   <supportedVersions>
     <li>1.6</li>
   </supportedVersions>
-  <description>沙漠下面还有人居住。凝砂族在巨坑与洞穴中延续着衰落王朝的生活：寻找食物，养育后代，守住聚落，以及处理那些从更深处回来的东西。
+  <description>必需前置：ChezhouLib。请安装并启用与凝砂族配套的最新版本，加载顺序放在凝砂族之前。
 
-她们长着细密的鳞片与毒牙，适应沙漠、黑夜和封闭的地下环境。冷血的身体需要温暖，蜕皮能使身体逐渐强韧；受精卵则需要安置在孵化巢中，等待下一代破壳。生肉很合她们的胃口，对于肉的来源，她们也没有那么多讲究。
+沙漠下面还有人居住。凝砂族在巨坑与洞穴中寻找食物、养育后代，守着衰落王朝留下的聚落。
 
-模组内容
-• 凝砂族种族、专属基因、服装与武器，以及蜕皮和卵生机制。
-• 沙漠巨坑与地下生态。蚁群、蚁狮和埋藏的遗迹，都可能成为新邻居。
-• 智慧之蛇祭坛。献上生肉，寻求关于遗迹、蚁巢与受困同胞的启示。
-• 控砂、石化与砂傀儡等能力。深层力量伴随着侵蚀；失去意识的族人会成为袭击其他生命的侵蚀体。
-• 专属开局「深砂遗民」：三名凝砂族带着简陋物资，在随机沙漠的地下巨坑中建立家园。
-• 叙事者「索缇丝」：她会帮助流浪的同族找到你的聚落，也会尽力留出喘息的时间。侵蚀仍会追来。
+她们冷血、穴居，长着鳞片与毒牙。蜕皮使身体逐渐强韧，后代在温暖的巢中破壳。她们喜欢生肉，也不太在乎肉的来源。
 
-适用版本：RimWorld 1.6。
-需要 Harmony、Humanoid Alien Races、ChezhouLib，以及皇权、理念、生机和异象 DLC。</description>
+种族与能力
+专属基因、服装与武器，蜕皮与卵生。操纵砂石、石化敌人、召唤砂傀儡，都要面对深层侵蚀的威胁。
+
+沙海之下
+探索地下巨坑、蚁巢和古老遗迹。在智慧之蛇祭坛献上生肉，寻求指引，寻找受困的同胞。
+
+深砂遗民
+三名凝砂族，少量物资，一座陌生的地下巨坑。这就是你们的新家。
+
+叙事者：索缇丝
+她会引导同族前来投奔，为聚落争取喘息。侵蚀也会随之而来。
+
+适用版本：RimWorld 1.6
+前置模组：Harmony、HAR、ChezhouLib
+所需 DLC：皇权、理念、生机、异象</description>
   <modDependencies>
     <li>
       <packageId>brrainz.harmony</packageId>
@@ -46,6 +53,7 @@
     <li>
       <packageId>Chezhou.ChezhouLib.lib</packageId>
       <displayName>ChezhouLib</displayName>
+      <steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=3595247479</steamWorkshopUrl>
     </li>
     <li>
       <packageId>ludeon.rimworld.anomaly</packageId>

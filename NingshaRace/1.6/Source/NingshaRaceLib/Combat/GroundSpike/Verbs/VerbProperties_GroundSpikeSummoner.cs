@@ -17,8 +17,8 @@ namespace NingshaRaceLib.Combat.GroundSpike.Verbs
         //字段职责：指定地刺伤害使用的穿甲比例。
         public float armorPenetration = 0.3f;
 
-        //字段职责：指定地刺伤害类型。
-        public DamageDef damageDef = DamageDefOf.Stab;
+        //字段职责：由 XML 交叉引用解析地刺伤害类型。
+        public DamageDef damageDef;
 
         //字段职责：指定中心线两侧扩展的伤害格数。
         public int lineHalfWidth = 1;

@@ -22,6 +22,8 @@ namespace NingshaRaceLib.DesertPit.AntColony.Jobs
         protected override IEnumerable<Toil> MakeNewToils()
         {
             this.FailOnDestroyedOrNull(IntruderIndex);
+            //追击期间目标倒地或离开地图即结束任务，重新寻找仍能行动的入侵者。
+            this.FailOn(() => !IsActiveTarget());
             yield return Toils_Goto.GotoThing(IntruderIndex, PathEndMode.Touch);
             yield return Toils_General.Do(delegate
             {
@@ -35,6 +37,14 @@ namespace NingshaRaceLib.DesertPit.AntColony.Jobs
 
                 ((Pawn_DesertPitBoomAnt)pawn).Detonate();
             });
+        }
+
+        //函数职责：在追击过程中排除离图、死亡和倒地目标，保留对敌方巢穴的攻击。
+        private bool IsActiveTarget()
+        {
+            Thing target = job.GetTarget(IntruderIndex).Thing;
+            return target != null && target.Spawned && target.Map == pawn.Map && !target.Destroyed
+                && !(target is Pawn victim && (victim.Dead || victim.Downed));
         }
     }
 }

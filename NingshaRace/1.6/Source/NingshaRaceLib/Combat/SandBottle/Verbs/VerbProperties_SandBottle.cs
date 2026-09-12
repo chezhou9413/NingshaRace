@@ -17,8 +17,8 @@ namespace NingshaRaceLib.Combat.SandBottle.Verbs
         //字段职责：定义每个有效目标承受的热能基础伤害。
         public float damageAmount = 20f;
 
-        //字段职责：定义沙瓶命中目标时使用的伤害类型。
-        public DamageDef damageDef = DamageDefOf.Burn;
+        //字段职责：由 XML 交叉引用解析沙瓶命中目标时使用的伤害类型。
+        public DamageDef damageDef;
 
         //字段职责：定义沙尘滞缓状态持续的游戏 Tick 数。
         public int slowDurationTicks = 300;

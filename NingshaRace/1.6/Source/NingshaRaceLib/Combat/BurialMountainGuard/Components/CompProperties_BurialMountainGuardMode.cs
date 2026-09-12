@@ -10,7 +10,8 @@ namespace NingshaRaceLib.Combat.BurialMountainGuard.Components
         public float chargeThreshold = 100f;
         public float releaseDamageMultiplier = 0.5f;
         public float releaseRadius = 3.9f;
-        public DamageDef releaseDamageDef = DamageDefOf.Blunt;
+        //字段职责：由 XML 交叉引用解析蓄力释放使用的伤害类型。
+        public DamageDef releaseDamageDef;
         public float armorPenetration = 1f;
         public float shieldScale = 2.6f;
         public float burstScale = 7.8f;

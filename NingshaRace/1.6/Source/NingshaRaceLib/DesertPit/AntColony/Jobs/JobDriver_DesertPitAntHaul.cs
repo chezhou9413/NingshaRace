@@ -25,6 +25,9 @@ namespace NingshaRaceLib.DesertPit.AntColony.Jobs
         {
             Map assignmentMap = Map;
             AddFinishAction(condition => assignmentMap.GetComponent<MapComponent_DesertPitAntColonies>().ReleaseForageAssignments(pawn));
+            //死亡热点形成后取消尚未取货的任务，已经拿到物资的工蚁继续运回巢穴。
+            this.FailOn(() => pawn.carryTracker.CarriedThing == null && TargetA.Thing != null && TargetA.Thing.Spawned
+                && Map.GetComponent<MapComponent_DesertPitAntColonies>().IsWorkerForageDangerous(pawn, TargetA.Thing.Position));
             this.FailOn(() => pawn.carryTracker.CarriedThing == null && TargetA.Thing != null && TargetA.Thing.Spawned
                 && Map.GetComponent<MapComponent_AntHabitats>().IsRepelled(TargetA.Thing.Position));
             this.FailOnDestroyedOrNull(HaulableIndex);

@@ -10,7 +10,8 @@ namespace NingshaRaceLib.DesertPit.AntColony.Combat
         public static bool CanAttack(Pawn pawn, Thing target)
         {
             if (pawn == null || !pawn.Spawned || pawn.Dead || pawn.Downed || !pawn.kindDef.canMeleeAttack
-                || target == null || !target.Spawned || target.Map != pawn.Map) return false;
+                || target == null || !target.Spawned || target.Map != pawn.Map || target.Destroyed
+                || target is Pawn victim && (victim.Dead || victim.Downed)) return false;
             //原版列表会被下一次查询复用，必须在本函数内消费完，不跨线程或帧保存。
             var entries = pawn.meleeVerbs.GetUpdatedAvailableVerbsList(false);
             for (int i = 0; i < entries.Count; i++)

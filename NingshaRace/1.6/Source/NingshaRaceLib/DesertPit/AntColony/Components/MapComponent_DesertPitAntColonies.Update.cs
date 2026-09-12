@@ -62,7 +62,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
                 state.Queen = null;
             }
 
-            if (state.LastAggressor != null && (state.LastAggressor.Destroyed || state.LastAggressor is Pawn victim && victim.Dead))
+            if (state.LastAggressor != null && (state.LastAggressor.Destroyed || state.LastAggressor is Pawn victim && (victim.Dead || victim.Downed)))
             {
                 state.LastAggressor = null;
             }
@@ -77,7 +77,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             for (int i = 0; i < pawns.Count; i++)
             {
                 Pawn candidate = pawns[i];
-                if (candidate == null || candidate.Dead || IsColonyMember(candidate, state))
+                if (candidate == null || candidate.Dead || candidate.Downed || IsColonyMember(candidate, state))
                 {
                     continue;
                 }
@@ -141,7 +141,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             {
                 Thing candidate = state.Intruders[i];
                 Pawn pawn = candidate as Pawn;
-                if (candidate == null || !candidate.Spawned || candidate.Destroyed || pawn != null && pawn.Dead)
+                if (candidate == null || !candidate.Spawned || candidate.Destroyed || pawn != null && (pawn.Dead || pawn.Downed))
                 {
                     continue;
                 }

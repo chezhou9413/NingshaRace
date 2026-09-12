@@ -20,7 +20,7 @@ namespace NingshaRaceLib.PocketMaps.Cargo
         private readonly Comp_NingshaPortalCargo cargoComp;
         private readonly NingshaCargoListPanel list = new NingshaCargoListPanel();
         private List<TransferableOneWay> transferables;
-        private bool animalsTab = true;
+        private bool animalsTab;
 
         //属性职责：按屏幕可用尺寸给清单和页脚留出空间。
         public override Vector2 InitialSize => new Vector2(Mathf.Min(1024f, Verse.UI.screenWidth), Mathf.Min(800f, Verse.UI.screenHeight));
@@ -47,7 +47,7 @@ namespace NingshaRaceLib.PocketMaps.Cargo
         {
             using (new NingshaGuiScope(GameFont.Small))
             {
-                Rect area = DrawShell(inRect, portal is PocketMapExit ? "向地表搬运物资" : "向地下搬运物资", "选择要搬运的动物和物品。");
+                Rect area = DrawShell(inRect, portal is PocketMapExit ? "向地表搬运物资" : "向地下搬运物资");
                 NingshaLayout layout = new NingshaLayout(area);
                 Rect tabs = layout.Take(NingshaLayout.RowHeight(padding: 14f));
                 if (NingshaButton.Draw(NingshaLayout.Column(tabs, 0, 2), "动物", "cargo:animals", selected: animalsTab)) animalsTab = true;
@@ -73,7 +73,7 @@ namespace NingshaRaceLib.PocketMaps.Cargo
             int groups = transferables.Count(item => item.CountToTransfer > 0);
             int count = transferables.Sum(item => item.CountToTransfer);
             bool invalid = NingshaCargoListPanel.HasInvalidAmount(transferables);
-            string summary = invalid ? "存在无效数量，请检查红框输入。" : "已选择 " + groups + " 组 · 共 " + count + " 只 / 件";
+            string summary = invalid ? "选择数量超出库存，请重置清单。" : "已选择 " + groups + " 组 · 共 " + count + " 只 / 件";
             NingshaText.Label(layout.Take(NingshaLayout.RowHeight(GameFont.Tiny, 4f)), summary,
                 invalid ? NingshaPalette.Warning : NingshaPalette.Muted, GameFont.Tiny);
             Rect row = layout.Remaining;

@@ -22,6 +22,10 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
 
             Comp_DesertPitAntMember memberComp = pawn.TryGetComp<Comp_DesertPitAntMember>();
             AntCaste caste = memberComp.Caste;
+            //工蚁放弃危险区域任务后先回巢，避免留在死亡热点附近继续游荡。
+            if (caste == AntCaste.Worker && IsWorkerForageDangerous(pawn, pawn.Position)
+                && pawn.Position.DistanceTo(state.NestPosition) > Settings.queenLeashRadius)
+                return CreateReturnToNestJob(pawn, state);
             //极度饥饿时仍保留进食机会，避免警报和狂暴永久遮蔽基本需求。
             if (caste != AntCaste.Boom && pawn.needs?.food?.CurLevelPercentage < 0.12f)
             {
@@ -164,10 +168,13 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             return job;
         }
 
-        //函数职责：判断爆浆蚁与当前目标的距离是否已经达到配置的自爆阈值。
+        //函数职责：在引爆前确认目标仍在同图活动，并且已进入配置的自爆距离。
         public bool IsBoomInTriggerRange(Pawn boomAnt, Thing target)
         {
-            return boomAnt != null && target != null && boomAnt.Position.DistanceTo(target.Position) <= Settings.boomTriggerDistance;
+            return boomAnt != null && boomAnt.Spawned && target != null && target.Spawned
+                && target.Map == boomAnt.Map && !target.Destroyed
+                && !(target is Pawn victim && (victim.Dead || victim.Downed))
+                && boomAnt.Position.DistanceTo(target.Position) <= Settings.boomTriggerDistance;
         }
 
         //函数职责：创建成员返回蚁穴附近安全格的移动工作。
@@ -209,7 +216,9 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
                 UnityEngine.Mathf.CeilToInt(radius),
                 delegate(IntVec3 candidate)
                 {
-                    return candidate.InBounds(map) && candidate.DistanceTo(state.NestPosition) <= radius && candidate.Standable(map) && pawn.CanReach(candidate, PathEndMode.OnCell, Danger.Deadly);
+                    return candidate.InBounds(map) && candidate.DistanceTo(state.NestPosition) <= radius
+                        && !IsWorkerForageDangerous(pawn, candidate)
+                        && candidate.Standable(map) && pawn.CanReach(candidate, PathEndMode.OnCell, Danger.Deadly);
                 },
                 out cell,
                 80);

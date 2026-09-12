@@ -9,8 +9,8 @@ namespace NingshaRaceLib.Combat.GroundSpike.Abilities
         //字段职责：指定环形地刺覆盖的最大半径。
         public float radius = 2f;
 
-        //字段职责：指定地刺使用的伤害类型。
-        public DamageDef damageDef = DamageDefOf.Stab;
+        //字段职责：由 XML 交叉引用解析地刺使用的伤害类型。
+        public DamageDef damageDef;
 
         //字段职责：指定每个目标受到的固定基础伤害。
         public float damageAmount = 27f;

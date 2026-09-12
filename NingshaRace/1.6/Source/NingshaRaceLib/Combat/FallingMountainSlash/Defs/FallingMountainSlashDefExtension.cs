@@ -18,8 +18,8 @@ namespace NingshaRaceLib.Combat.FallingMountainSlash.Defs
         //字段职责：定义落地冲击对锁定目标额外造成的基础伤害。
         public float lockedTargetDamage = 40f;
 
-        //字段职责：定义落地冲击使用的伤害类型。
-        public DamageDef landingDamageDef = DamageDefOf.Cut;
+        //字段职责：由 XML 交叉引用解析落地冲击使用的伤害类型。
+        public DamageDef landingDamageDef;
 
         //字段职责：定义落地冲击使用的护甲穿透比例。
         public float landingArmorPenetration = 1f;

@@ -84,6 +84,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
                 Thing candidate = forageCandidates[i];
                 if (candidate == null || !candidate.Spawned || !IsForageThing(candidate) || assignedForageThings.ContainsKey(candidate)
                     || IsStoredFood(candidate) != foodOnly
+                    || IsWorkerForageDangerous(pawn, candidate.Position)
                     || map.GetComponent<MapComponent_AntHabitats>().IsRepelled(candidate.Position))
                 {
                     continue;

@@ -19,9 +19,14 @@ namespace NingshaRaceLib.SandGolem.Rendering
         //字段职责：控制 Pawn 在截图里的缩放比例。
         private const float CameraZoom = 1.08f;
 
-        //函数职责：捕获 Pawn 当前外观的四方向彩色贴图。
+        //函数职责：在主线程捕获 Pawn 当前外观的四方向彩色贴图，拒绝后台调用原生渲染接口。
         public static Texture2D[] CapturePawn(Pawn pawn)
         {
+            if (!UnityData.IsInMainThread)
+            {
+                throw new System.InvalidOperationException("沙傀外观截图只能在游戏主线程执行。");
+            }
+
             if (pawn == null || Find.PawnCacheRenderer == null)
             {
                 return null;

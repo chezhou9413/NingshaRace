@@ -14,14 +14,13 @@ namespace NingshaRaceLib.Storyteller.Quests.Generation
     //类职责：生成凝砂族加入者、追杀侵蚀体、延迟入场和明确成败条件组成的一次性任务。
     public sealed class QuestNode_Root_NingshaErosionPursuit : QuestNode
     {
-        private static readonly IntRange JoinerDelayTicks = new IntRange(600, 1200);
         private static readonly IntRange ErosionBodyDelayTicks = new IntRange(1800, 2400);
 
         //函数职责：确认当前世界具有可承载任务的玩家主地图、自由殖民者和实体阵营。
         protected override bool TestRunInt(Slate slate)
         {
             Map map = Find.AnyPlayerHomeMap;
-            return map != null
+            return ModsConfig.AnomalyActive && map != null
                 && Faction.OfEntities != null
                 && PawnsFinder.AllMapsCaravansAndTravellingTransporters_Alive_FreeColonists_NoSuspended.Any()
                 && RCellFinder.TryFindRandomPawnEntryCell(
@@ -58,9 +57,14 @@ namespace NingshaRaceLib.Storyteller.Quests.Generation
             PassPawnToWorld(erosionBody);
             RegisterQuestData(slate, map, walkInSpot, joiner, erosionBody);
 
-            quest.AddInvolvedFaction(Faction.OfEntities);
+            //直接建立涉及阵营部件，任务根节点此时尚未通过其他节点登记阵营。
+            QuestPart_InvolvedFactions involvedFactions = new QuestPart_InvolvedFactions();
+            involvedFactions.factions.Add(Faction.OfEntities);
+            quest.AddPart(involvedFactions);
+            NingshaPursuitGuestUtility.Register(quest, joiner);
             AddArrivalParts(quest, map, walkInSpot, joiner, erosionBody);
             AddOutcomeParts(quest, map, joiner, erosionBody);
+            slate.Get<Action>("ningshaPursuitGenerated")?.Invoke();
         }
 
         //函数职责：生成一名成年、可招募并允许建立殖民者关系的凝砂族加入者。
@@ -77,8 +81,12 @@ namespace NingshaRaceLib.Storyteller.Quests.Generation
                 canGeneratePawnRelations: true,
                 mustBeCapableOfViolence: false,
                 allowPregnant: false,
-                forceRecruitable: true);
+                forceRecruitable: true,
+                //任务人物的种族由指定类型提供，不参与其他模组的随机种族替换。
+                pawnKindDefGetter: xenotype => DefOfRefs.NingshaRace_Colonist);
             Pawn joiner = PawnGenerator.GeneratePawn(request);
+            if (joiner.def != DefOfRefs.NingshaRace)
+                throw new InvalidOperationException("追杀任务加入者种族不符：" + joiner.def.defName);
             joiner.relations.everSeenByPlayer = true;
             return joiner;
         }
@@ -139,21 +147,16 @@ namespace NingshaRaceLib.Storyteller.Quests.Generation
             Pawn joiner,
             Pawn erosionBody)
         {
-            quest.Delay(
-                JoinerDelayTicks.RandomInRange,
-                delegate
-                {
-                    quest.PawnsArrive(
+            //接受任务即让访客入场，玩家可以立即征召或指定活动区域。
+            quest.PawnsArrive(
                         Gen.YieldSingle(joiner),
                         mapParent: map.Parent,
                         arrivalMode: PawnsArrivalModeDefOf.EdgeWalkIn,
                         joinPlayer: true,
                         walkInSpot: walkInSpot,
                         customLetterLabel: "凝砂族抵达",
-                        customLetterText: joiner.LabelShortCap + "已经抵达殖民地，并永久加入了你。",
+                        customLetterText: joiner.LabelShortCap + "已经抵达，暂时接受你的指挥。你可以征召她，或安排工作和活动区域。解决追杀她的侵蚀体后，她会永久加入殖民地。",
                         sendStandardLetter: true);
-                },
-                debugLabel: "凝砂族加入者入场延迟");
 
             quest.Delay(
                 ErosionBodyDelayTicks.RandomInRange,

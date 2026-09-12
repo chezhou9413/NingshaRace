@@ -39,7 +39,9 @@ namespace NingshaRaceLib.Erosion.Utility
                 forceNoIdeo: true,
                 forceNoBackstory: true,
                 dontGiveWeapon: true,
-                forceNoGear: false);
+                forceNoGear: false,
+                //通过原版类型获取器固定任务种族，避免生成前缀改写 KindDef 后生成其他种族。
+                pawnKindDefGetter: xenotype => sourceKind);
             Pawn pawn = PawnGenerator.GeneratePawn(request);
             TurnIntoErosionBody(pawn, faction);
             return pawn;
@@ -71,7 +73,8 @@ namespace NingshaRaceLib.Erosion.Utility
             }
             if (pawn.def != DefOfRefs.NingshaRace)
             {
-                throw new InvalidOperationException("只能把凝砂族转化为侵蚀体: " + pawn);
+                throw new InvalidOperationException("只能把凝砂族转化为侵蚀体，实际种族=" + pawn.def.defName
+                    + "，实际 PawnKind=" + pawn.kindDef.defName + "，人物=" + pawn);
             }
             if (pawn.IsMutant)
             {

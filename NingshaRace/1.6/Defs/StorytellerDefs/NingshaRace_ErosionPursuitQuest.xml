@@ -31,8 +31,8 @@
     <questDescriptionRules>
       <rulesStrings>
         <li>questDescription->一名叫做[joiner_nameDef]的凝砂族正在附近逃亡。一只侵蚀体紧随其后，并且不会停止对她的追杀。
-\n如果接受，[joiner_nameDef]会从[map_definite]边缘进入并永久加入殖民地。追杀她的[erosionBody_label]随后会从相同方向抵达。
-\n在[joiner_nameDef]死亡前杀死侵蚀体，或将指定侵蚀体放上玩家的收容平台，即可完成任务。如果[joiner_nameDef]先死亡，任务将失败。</li>
+\n如果接受，[joiner_nameDef]会立即从[map_definite]边缘进入，暂时接受你的指挥。你可以征召她，或安排工作和活动区域。追杀她的[erosionBody_label]随后会从相同方向抵达。
+\n在[joiner_nameDef]死亡前杀死侵蚀体，或将指定侵蚀体放上玩家的收容平台，即可完成任务。摆脱追杀后，她会永久加入殖民地。如果[joiner_nameDef]先死亡，任务将失败。</li>
       </rulesStrings>
     </questDescriptionRules>
     <root Class="NingshaRaceLib.Storyteller.Quests.Generation.QuestNode_Root_NingshaErosionPursuit" />
