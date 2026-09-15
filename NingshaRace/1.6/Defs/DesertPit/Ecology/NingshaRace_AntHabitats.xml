@@ -50,7 +50,7 @@
       <li Class="NingshaRaceLib.DesertPit.Ecology.Habitats.DefModExtension_AntRepellent">
         <radius>12</radius>
         <cycleTicks>15000</cycleTicks>
-        <failureChance>0.1</failureChance>
+        <failureChance>0.06</failureChance>
       </li>
     </modExtensions>
   </ThingDef>
@@ -70,7 +70,7 @@
         <!--作用半径，单位为格；生长与采收倍率分别控制植物长成速度和食用菌产量。-->
         <radius>5</radius>
         <growthMultiplier>2</growthMultiplier>
-        <harvestMultiplier>4</harvestMultiplier>
+        <harvestMultiplier>2</harvestMultiplier>
         <!--每处菌巢范围内的植物总数上限；空地、通路或间距限制可能使实际数量更少。-->
         <targetPlants>24</targetPlants>
         <!--植物之间的最小直线距离，单位为格；1.5避开相邻八格，0不额外限制；不得超过作用半径。-->

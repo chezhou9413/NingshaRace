@@ -34,10 +34,12 @@
     <comps>
       <li Class="NingshaRaceLib.DesertPit.Salvage.Components.CompProperties_DesertPitSalvage">
         <options>
-          <li><thingDef>BlocksSandstone</thingDef><count>40</count><weight>50</weight></li>
-          <li><thingDef>WoodLog</thingDef><count>30</count><weight>25</weight></li>
-          <li><thingDef>Steel</thingDef><count>25</count><weight>15</weight></li>
-          <li><thingDef>ComponentIndustrial</thingDef><count>10</count><weight>10</weight></li>
+          <li><thingDef>BlocksSandstone</thingDef><count>50</count><weight>45</weight></li>
+          <li><thingDef>WoodLog</thingDef><count>40</count><weight>25</weight></li>
+          <li><thingDef>Steel</thingDef><count>30</count><weight>15</weight></li>
+          <li><thingDef>ComponentIndustrial</thingDef><count>4</count><weight>10</weight></li>
+          <li><thingDef>Gold</thingDef><count>10</count><weight>3</weight></li>
+          <li><thingDef>Jade</thingDef><count>20</count><weight>2</weight></li>
         </options>
       </li>
     </comps>

@@ -8,7 +8,7 @@ namespace NingshaRaceLib.DesertPit.Ecology.Habitats
     {
         public float radius = 12f;
         public int cycleTicks = 15000;
-        public float failureChance = 0.1f;
+        public float failureChance = 0.06f;
 
         //函数职责：在定义加载时报告不合法的范围、时长和概率。
         public override IEnumerable<string> ConfigErrors()

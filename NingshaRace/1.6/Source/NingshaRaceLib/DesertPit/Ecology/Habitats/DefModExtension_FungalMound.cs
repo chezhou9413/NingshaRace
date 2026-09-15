@@ -8,7 +8,7 @@ namespace NingshaRaceLib.DesertPit.Ecology.Habitats
     {
         public float radius = 5f;
         public float growthMultiplier = 2f;
-        public float harvestMultiplier = 4f;
+        public float harvestMultiplier = 2f;
         //字段职责：限制范围内植物总数，空地或间距不足时不强行填满。
         public int targetPlants = 24;
         //字段职责：规定生成位置与附近植物的最小直线距离，零表示不额外限制间距。
