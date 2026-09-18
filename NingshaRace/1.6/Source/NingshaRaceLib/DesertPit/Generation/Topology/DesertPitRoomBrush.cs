@@ -39,7 +39,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Topology
 
         //函数职责：用宽而短的洞口接通相邻洞室，受蚁巢阻挡时先求完整可行路线再雕刻。
         public static void Connect(Map map, DesertPitLayoutData data, IntVec3 from, IntVec3 to,
-            float width, HashSet<IntVec3> forbidden)
+            float width, HashSet<IntVec3> forbidden, float minimumRadius = 2f)
         {
             List<IntVec3> path = BuildCurvedPath(from, to);
             Func<IntVec3, bool> canPass = center => CanOpen(map, center, forbidden)
@@ -54,7 +54,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Topology
             for (int i = 0; i < path.Count; i++)
             {
                 IntVec3 center = path[i];
-                float radius = Mathf.Max(2f, width * (0.78f + 0.22f * Mathf.Sin(i * 0.13f + phase)));
+                float radius = Mathf.Max(minimumRadius, width * (0.78f + 0.22f * Mathf.Sin(i * 0.13f + phase)));
                 foreach (IntVec3 cell in GenRadial.RadialCellsAround(center, radius, true))
                 {
                     if (!CanOpen(map, cell, forbidden)) continue;

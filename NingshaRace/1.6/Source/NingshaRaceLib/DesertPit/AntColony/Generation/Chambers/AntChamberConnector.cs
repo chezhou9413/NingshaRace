@@ -34,6 +34,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Generation.Chambers
                 cell => CanCarve(cell, canOpen),
                 cell => !room.Footprint.Contains(cell) && !data.ReservedSceneCells.Contains(cell) && mainCave.Contains(cell));
             AntTunnelCarver.Carve(map, data, path, canOpen);
+            room.ExternalAccessCell = path[path.Count - 1];
         }
 
         //函数职责：保证通道宽度不越界、不穿过其他场景，也不在自身厚壁上开出第二道口。

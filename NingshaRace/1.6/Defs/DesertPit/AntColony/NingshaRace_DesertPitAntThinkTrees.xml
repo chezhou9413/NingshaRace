@@ -23,6 +23,7 @@
           <treeDef>MentalStateCritical</treeDef>
         </li>
         <li Class="ThinkNode_QueuedJob" />
+        <li Class="NingshaRaceLib.DesertPit.AntColony.AI.JobGiver_DesertPitAntPassage" />
         <li Class="ThinkNode_Subtree">
           <treeDef>LordDuty</treeDef>
         </li>

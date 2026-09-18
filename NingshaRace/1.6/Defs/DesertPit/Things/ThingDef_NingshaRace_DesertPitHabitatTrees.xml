@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!--文件职责：复用原版热带树木外观，为地下水潭岸带提供耐阴树木。-->
+  <ThingDef Name="NingshaRace_DesertPitTropicalTreeBase" ParentName="TreeBase" Abstract="True">
+    <plant>
+      <dieIfNoSunlight>false</dieIfNoSunlight>
+      <growMinGlow>0</growMinGlow>
+      <growOptimalGlow>0</growOptimalGlow>
+      <interferesWithRoof>false</interferesWithRoof>
+    </plant>
+  </ThingDef>
+  <ThingDef ParentName="NingshaRace_DesertPitTropicalTreeBase">
+    <defName>NingshaRace_DesertPitCecropia</defName>
+    <label>地下号角树</label>
+    <description>生长在地下水潭岸边的耐阴号角树。</description>
+    <graphicData>
+      <texPath>Things/Plant/TreeCecropia</texPath>
+      <graphicClass>Graphic_Random</graphicClass>
+      <shadowData><volume>(0.18, 0.3, 0.15)</volume></shadowData>
+    </graphicData>
+    <statBases><Beauty>1</Beauty><Nutrition>1.5</Nutrition></statBases>
+    <plant>
+      <growDays>14</growDays>
+      <harvestWork>510</harvestWork>
+      <harvestYield>18</harvestYield>
+      <leaflessGraphicPath>Things/Plant/TreeCecropia_Leafless</leaflessGraphicPath>
+      <immatureGraphicPath>Things/Plant/TreeCecropia_Immature</immatureGraphicPath>
+    </plant>
+  </ThingDef>
+  <ThingDef ParentName="NingshaRace_DesertPitTropicalTreeBase">
+    <defName>NingshaRace_DesertPitPalm</defName>
+    <label>地下棕榈树</label>
+    <description>适应地下湿润环境的耐阴棕榈树，不结可食用果实。</description>
+    <graphicData>
+      <texPath>Things/Plant/TreePalm</texPath>
+      <graphicClass>Graphic_Random</graphicClass>
+      <shadowData><volume>(0.18, 0.3, 0.15)</volume><offset>(0.03, 0, -0.44)</offset></shadowData>
+    </graphicData>
+    <statBases><Beauty>1</Beauty><Nutrition>1.5</Nutrition></statBases>
+    <plant>
+      <growDays>14</growDays>
+      <harvestWork>510</harvestWork>
+      <harvestYield>18</harvestYield>
+      <immatureGraphicPath>Things/Plant/TreePalm_Immature</immatureGraphicPath>
+      <maxGrowthTemperature>75</maxGrowthTemperature>
+    </plant>
+  </ThingDef>
+</Defs>

@@ -48,7 +48,11 @@ namespace NingshaRaceLib.SandGolem.Rendering
             RenderTexture previousActive = RenderTexture.active;
             try
             {
-                Find.PawnCacheRenderer.RenderPawn(pawn, renderTexture, Vector3.zero, CameraZoom, 0f, rotation, renderHead: true, renderHeadgear: true, renderClothes: true);
+                using (new SandGolemCaptureScope(pawn))
+                {
+                    Find.PawnCacheRenderer.RenderPawn(pawn, renderTexture, Vector3.zero, CameraZoom, 0f, rotation,
+                        renderHead: true, renderHeadgear: true, renderClothes: true, portrait: true);
+                }
                 Texture2D texture = new Texture2D(CaptureSize, CaptureSize, TextureFormat.RGBA32, mipChain: false);
                 RenderTexture.active = renderTexture;
                 texture.ReadPixels(new Rect(0, 0, CaptureSize, CaptureSize), 0, 0);

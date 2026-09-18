@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!--普通巨坑与种族开局共用的布局参数；尺寸以二百格地图为基准，不改变任务地图。-->
+  <!--普通巨坑与种族开局共用的布局参数；原有主次洞室尺寸以二百格地图为基准，附属洞室与生态区半径直接按格数配置。-->
   <MapGeneratorDef Name="NingshaRace_LayeredLayoutBase" Abstract="True">
     <modExtensions>
       <li Class="NingshaRaceLib.DesertPit.Generation.Config.DefModExtension_DesertPitLayout">
@@ -16,7 +16,23 @@
         <branchRoomCount>2~3</branchRoomCount>
         <!--斜河两端向地图对角方向展开的比例与曲流幅度；保留中心十二格干地，不生成笔直水渠。-->
         <riverDiagonalReach>0.82</riverDiagonalReach>
-        <riverMeander>7</riverMeander>
+        <riverMeander>12</riverMeander>
+        <riverMeanderFrequency>10</riverMeanderFrequency>
+        <!--片数与单片半径独立配置；附属洞室通过窄通道连接，保护蚁巢核心的唯一洞口。-->
+        <stoneForestCount>9~13</stoneForestCount>
+        <stoneForestRadius>7.5~11.5</stoneForestRadius>
+        <antSideRoomCount>1~3</antSideRoomCount>
+        <antSideRoomRadius>5~12</antSideRoomRadius>
+        <extraTunnelChance>0.5</extraTunnelChance>
+        <marshCount>1~3</marshCount>
+        <marshRadius>4~10</marshRadius>
+        <marshCoverage>0.8</marshCoverage>
+        <habitatRoomCount>3~7</habitatRoomCount>
+        <habitatRoomRadius>5~10</habitatRoomRadius>
+        <habitatSandfallChance>0.5</habitatSandfallChance>
+        <!--水潭概率仅在已经生成坠砂裂隙的洞室中抽取。-->
+        <habitatPondChance>0.5</habitatPondChance>
+        <habitatPondRadius>2~7</habitatPondRadius>
         <!--以地图半宽、半高归一化，划分内中外三层同心方形，蚁巢优先处于中层外半部。-->
         <innerBoundary>0.33333334</innerBoundary>
         <outerBoundary>0.6666667</outerBoundary>

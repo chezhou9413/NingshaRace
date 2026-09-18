@@ -83,11 +83,13 @@ namespace NingshaRaceLib.DesertPit.Generation.Landmarks
         //函数职责：在指定区域生成岩屑污迹，表现洞顶坠落和地面破碎。
         public static void ScatterRubble(Map map, IntVec3 center, float radius, int count)
         {
+            DesertPitLayoutData data = DesertPitGenUtility.GetLayoutData();
             int cellCount = GenRadial.NumCellsInRadius(radius);
             for (int i = 0; i < count; i++)
             {
                 IntVec3 cell = center + GenRadial.RadialPattern[Rand.RangeInclusive(0, cellCount - 1)];
-                if (cell.InBounds(map) && DesertPitGenUtility.IsCave(map, cell) && cell.Standable(map))
+                if (cell.InBounds(map) && DesertPitGenUtility.IsCave(map, cell) && cell.Standable(map)
+                    && !data.ReservedSceneCells.Contains(cell))
                 {
                     FilthMaker.TryMakeFilth(cell, map, ThingDefOf.Filth_RubbleRock, Rand.RangeInclusive(1, 3));
                 }
@@ -133,14 +135,15 @@ namespace NingshaRaceLib.DesertPit.Generation.Landmarks
         private static bool CanUseCaveCell(Map map, DesertPitLayoutData data, IntVec3 cell)
         {
             return cell.InBounds(map) && DesertPitGenUtility.IsCave(map, cell) && cell.Standable(map) && cell.DistanceTo(data.MainCenter) >= MainSafeRadius
-                && !data.ReservedSceneCells.Contains(cell);
+                && !data.ReservedSceneCells.Contains(cell) && !data.ProtectedRouteCells.Contains(cell);
         }
 
         //函数职责：判断指定洞穴格是否可以放置可拆除的沙岩块建筑。
         private static bool CanPlaceLooseThing(Map map, IntVec3 cell)
         {
             if (!cell.InBounds(map) || !DesertPitGenUtility.IsCave(map, cell) || !cell.Standable(map) || cell.GetEdifice(map) != null
-                || DesertPitGenUtility.GetLayoutData().ReservedSceneCells.Contains(cell))
+                || DesertPitGenUtility.GetLayoutData().ReservedSceneCells.Contains(cell)
+                || DesertPitGenUtility.GetLayoutData().ProtectedRouteCells.Contains(cell))
             {
                 return false;
             }

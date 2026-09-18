@@ -32,10 +32,7 @@ namespace NingshaRaceLib.Combat.SandBottle.Verbs
         //字段职责：定义粒子特效在地图平面上的整体缩放。
         public float effectScale = 0.75f;
 
-        //字段职责：定义粒子特效垂直深度相对地图平面的压缩倍率。
-        public float effectDepthScale = 0.05f;
-
-        //字段职责：定义粒子实例被 ChezhouLib 对象池回收前的秒数。
+        //字段职责：定义粒子实例自然结束后被销毁的秒数。
         public float effectLifetime = 5.5f;
 
         //构造函数职责：指定沙瓶使用的自定义远程攻击 Verb。

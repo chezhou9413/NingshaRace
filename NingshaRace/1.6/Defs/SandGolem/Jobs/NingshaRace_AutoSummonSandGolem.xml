@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：让自动召唤使用独立任务身份和原版能力施法流程。 -->
+  <JobDef ParentName="CastAbilityOnThing">
+    <defName>NingshaRace_AutoSummonSandGolem</defName>
+    <driverClass>NingshaRaceLib.SandGolem.Automation.JobDriver_AutoSummonSandGolem</driverClass>
+    <reportString>正在自动召唤沙傀。</reportString>
+  </JobDef>
+</Defs>

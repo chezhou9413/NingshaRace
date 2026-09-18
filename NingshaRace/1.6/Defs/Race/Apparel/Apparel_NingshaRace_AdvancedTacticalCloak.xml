@@ -95,10 +95,10 @@
             <alignWithHead>false</alignWithHead>
             <conditions><BodyPart><bodyPart>Torso</bodyPart></BodyPart></conditions>
             <offsets>
-              <south><layerOffset>-0.28</layerOffset><offset>(0, 0)</offset></south>
-              <north><layerOffset>-0.289</layerOffset><offset>(0, 0)</offset></north>
-              <east><layerOffset>-0.29</layerOffset><offset>(0, 0)</offset></east>
-              <west><layerOffset>-0.29</layerOffset><offset>(0, 0)</offset></west>
+              <south><layerOffset>-0.2687</layerOffset><offset>(0, 0)</offset></south>
+              <north><layerOffset>-0.2777</layerOffset><offset>(0, 0)</offset></north>
+              <east><layerOffset>-0.2787</layerOffset><offset>(0, 0)</offset></east>
+              <west><layerOffset>-0.2787</layerOffset><offset>(0, 0)</offset></west>
             </offsets>
           </li>
         </bodyAddonDefs>

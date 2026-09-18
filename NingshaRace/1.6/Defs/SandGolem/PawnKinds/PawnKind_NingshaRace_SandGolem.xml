@@ -18,7 +18,13 @@
     <backstoryCryptosleepCommonality>0</backstoryCryptosleepCommonality>
     <initialResistanceRange>0~0</initialResistanceRange>
     <initialWillRange>0~0</initialWillRange>
-    <isFighter>true</isFighter>
+    <isFighter>false</isFighter>
+    <!-- 沙傀由召唤工厂直接生成，不参与事件和战斗群组的候选选择。 -->
+    <allowInMechClusters>false</allowInMechClusters>
+    <appearsRandomlyInCombatGroups>false</appearsRandomlyInCombatGroups>
+    <maxPerGroup>0</maxPerGroup>
+    <canArriveManhunter>false</canArriveManhunter>
+    <canBeScattered>false</canBeScattered>
     <destroyGearOnDrop>true</destroyGearOnDrop>
     <canStrip>false</canStrip>
     <lifeStages>

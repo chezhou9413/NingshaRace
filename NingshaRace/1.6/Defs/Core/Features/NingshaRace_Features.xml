@@ -10,4 +10,9 @@
     <defName>NingshaRace_Enable_HARBodyAddon</defName>
     <feature>HARBodyAddon</feature>
   </ChezhouLib.LibDef.ClFeatureDeclarationDef>
+  <!-- 巨墓地图模板使用公共任务地图功能。 -->
+  <ChezhouLib.LibDef.ClFeatureDeclarationDef>
+    <defName>NingshaRace_Enable_ClCustomMission</defName>
+    <feature>ClCustomMission</feature>
+  </ChezhouLib.LibDef.ClFeatureDeclarationDef>
 </Defs>

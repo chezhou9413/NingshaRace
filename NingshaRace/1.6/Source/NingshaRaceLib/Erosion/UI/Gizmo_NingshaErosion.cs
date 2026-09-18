@@ -1,5 +1,6 @@
 using RimWorld;
 using UnityEngine;
+using Verse;
 using NingshaRaceLib.Erosion.Components;
 using NingshaRaceLib.UI.Foundation;
 using NingshaRaceLib.UI.Gizmos;
@@ -13,6 +14,9 @@ namespace NingshaRaceLib.Erosion.UI
 
         //构造职责：将侵蚀状态放到普通能力之前。
         public Gizmo_NingshaErosion() { Order = -110f; }
+
+        //属性职责：提供侵蚀条所属角色，供多选分组和角色名称显示使用。
+        protected override Pawn GroupedPawn => erosion.Pawn;
 
         //属性职责：提供侵蚀石板的标题、即时数值、自然衰减摘要和真实比例。
         protected override string Title => "侵蚀值";

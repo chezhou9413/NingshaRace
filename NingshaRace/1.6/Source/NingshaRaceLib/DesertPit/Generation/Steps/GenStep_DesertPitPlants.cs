@@ -31,6 +31,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
         {
             DesertPitGenUtility.SetGenerationStatus("洞穴植物");
             DesertPitLayoutData data = DesertPitGenUtility.GetLayoutData();
+            NingshaRaceLib.DesertPit.Generation.Habitats.DesertPitHabitatContent.Generate(map, data);
             DefModExtension_DesertPitEcology settings = DesertPitPlantEcologyUtility.GetSettings(map);
             ThingDef glowDef = DefDatabase<ThingDef>.GetNamed("NingshaRace_DesertPitGlow");
             List<IntVec3> candidates = CollectCandidates(map, data, glowDef);

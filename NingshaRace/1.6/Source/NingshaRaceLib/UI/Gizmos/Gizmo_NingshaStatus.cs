@@ -20,6 +20,15 @@ namespace NingshaRaceLib.UI.Gizmos
         protected virtual Color Accent => NingshaPalette.Sand;
         protected virtual float Threshold => -1f;
 
+        //属性职责：由需要合并的角色状态条提供所属角色，其他状态石板保持独立显示。
+        protected virtual Pawn GroupedPawn => null;
+
+        //函数职责：把同类角色状态条合并为一组，沿用原版稳定排序显示首个角色的数据。
+        public override bool GroupsWith(Gizmo other) => GroupedPawn != null && other?.GetType() == GetType();
+
+        //函数职责：详情点击仅作用于当前显示的状态条，不向组内隐藏的角色传播。
+        public override bool InheritInteractionsFrom(Gizmo other) => GroupedPawn == null && base.InheritInteractionsFrom(other);
+
         //函数职责：为状态石板预留固定宽度，同时服从 Gizmo 区域上限。
         public override float GetWidth(float maxWidth) => Mathf.Min(180f, maxWidth);
 
@@ -29,17 +38,18 @@ namespace NingshaRaceLib.UI.Gizmos
             using (new NingshaGuiScope(GameFont.Small))
             {
                 Rect rect = new Rect(topLeft.x, topLeft.y, GetWidth(maxWidth), 75f);
+                string title = parms.multipleSelected && GroupedPawn != null ? Title + " · " + GroupedPawn.LabelShortCap : Title;
                 bool hovered = Mouse.IsOver(rect);
                 NingshaFrame.Panel(rect, NingshaUiMotion.Hover("status:" + Title + ":" + topLeft, hovered));
                 NingshaLayout layout = new NingshaLayout(rect.ContractedBy(7f));
                 float line = Text.LineHeightOf(GameFont.Tiny) + 2f;
                 Rect header = layout.Take(Text.LineHeightOf(GameFont.Small) + 2f, 3f);
-                NingshaText.Label(new Rect(header.x, header.y, header.width - 18f, header.height), Title, tooltip: false);
+                NingshaText.Label(new Rect(header.x, header.y, header.width - 18f, header.height), title, tooltip: false);
                 NingshaText.Label(new Rect(header.xMax - 16f, header.y, 16f, header.height), "⋮", NingshaPalette.Brass);
                 NingshaProgress.Draw(layout.Take(line + 2f, 3f), Fraction, Value, Accent, Threshold);
                 if (layout.Remaining.height >= line)
                     NingshaText.Label(layout.Remaining, Detail, NingshaPalette.Muted, GameFont.Tiny, tooltip: false);
-                TooltipHandler.TipRegion(rect, Title + " · " + Value + "\n" + Detail + "\n\n" + Help + "\n\n点击查看详情。");
+                TooltipHandler.TipRegion(rect, title + " · " + Value + "\n" + Detail + "\n\n" + Help + "\n\n点击查看详情。");
                 if (Widgets.ButtonInvisible(rect)) return new GizmoResult(GizmoState.Interacted, Event.current);
                 return new GizmoResult(hovered ? GizmoState.Mouseover : GizmoState.Clear);
             }
@@ -48,7 +58,8 @@ namespace NingshaRaceLib.UI.Gizmos
         //函数职责：打开当前状态和规则的只读详情，不把进度条点击解释为游戏操作。
         public override void ProcessInput(Event ev)
         {
-            Find.WindowStack.Add(new Dialog_NingshaReadout(Title, Value + "\n" + Detail + "\n\n" + Help));
+            string title = GroupedPawn != null ? Title + " · " + GroupedPawn.LabelShortCap : Title;
+            Find.WindowStack.Add(new Dialog_NingshaReadout(title, Value + "\n" + Detail + "\n\n" + Help));
         }
     }
 }

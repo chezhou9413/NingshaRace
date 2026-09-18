@@ -8,6 +8,7 @@ using NingshaRaceLib.DesertPit.Buildings;
 using NingshaRaceLib.DesertPit.Generation.Caves;
 using NingshaRaceLib.DesertPit.Generation.Data;
 using NingshaRaceLib.DesertPit.Generation.Hydrology;
+using NingshaRaceLib.DesertPit.Generation.Habitats;
 using NingshaRaceLib.DesertPit.Generation.Landmarks;
 using NingshaRaceLib.DesertPit.Generation.Utility;
 
@@ -46,6 +47,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
             if (data.RiverCenterline.Count > 0)
             {
                 DesertPitRiverPainter.Paint(map, data);
+                DesertPitHabitatTerrain.Paint(map, data);
                 return;
             }
             TerrainDef waterMoving = DefDatabase<TerrainDef>.GetNamed("WaterMovingShallow");

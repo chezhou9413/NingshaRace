@@ -15,7 +15,8 @@ namespace NingshaRaceLib.Core.Effects
             Vector3 position,
             Quaternion rotation,
             Vector3 scale,
-            float lifetime)
+            float lifetime,
+            System.Action<GameObject> configure = null)
         {
             if (!abDatabase.prefabDataBase.TryGetValue(prefabKey, out GameObject prefab) || prefab == null)
             {
@@ -34,6 +35,7 @@ namespace NingshaRaceLib.Core.Effects
                 particleSystems[i].Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
             }
 
+            configure?.Invoke(instance);
             instance.SetActive(true);
             for (int i = 0; i < particleSystems.Length; i++)
             {

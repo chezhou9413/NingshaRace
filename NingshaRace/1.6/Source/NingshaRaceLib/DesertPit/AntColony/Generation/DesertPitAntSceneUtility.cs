@@ -157,7 +157,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Generation
 
         //函数职责：保留巢区、生成蚁穴与初始成员，并把完整状态登记到地图组件。
         private static void GenerateScene(Map map, DesertPitLayoutData data, ThingDef nestDef, IntVec3 center, int colonyIndex,
-            int? fixedLevel, bool levelingEnabled, bool ownChamber = false)
+            int? fixedLevel, bool levelingEnabled, bool ownChamber = false, IntVec3? passageAnchor = null)
         {
             DefModExtension_AntColony settings = nestDef.GetModExtension<DefModExtension_AntColony>();
             int currentLevel = fixedLevel ?? Rand.RangeInclusive(settings.initialLevelMin, settings.initialLevelMax);
@@ -193,14 +193,15 @@ namespace NingshaRaceLib.DesertPit.AntColony.Generation
                 members.Add(SpawnInitialMember(map, center, DefOfRefs.NingshaRace_DesertPitAcidAntKind, faction));
 
             SpawnInitialStock(map, storageCells, members);
-            manager.RegisterGeneratedColony(nest, queen, members, storageCells, faction, population, levelingEnabled, currentLevel, maximumLevel);
+            AntColonyState state = manager.RegisterGeneratedColony(nest, queen, members, storageCells, faction, population, levelingEnabled, currentLevel, maximumLevel);
+            state.PassageAnchor = passageAnchor ?? data.MainCenter;
             ForbidSceneHaulables(map, center);
         }
 
         //函数职责：在已预留的厚壁洞室中放置完整巢群，不把自身预留区当作其他场景的占用。
         public static void GenerateInChamber(Map map, DesertPitLayoutData data, AntChamberLayout room, int index)
         {
-            GenerateScene(map, data, DefOfRefs.NingshaRace_DesertPitAntNest, room.Nest, index, null, true, true);
+            GenerateScene(map, data, DefOfRefs.NingshaRace_DesertPitAntNest, room.Nest, index, null, true, true, room.ExternalAccessCell);
         }
 
         //函数职责：将蚁巢十格场景内全部可搬运物品标记为玩家禁止，包含初始物资与既有岩块。

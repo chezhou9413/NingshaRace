@@ -24,6 +24,9 @@ namespace NingshaRaceLib.DesertPit.AntColony.State
         //字段职责：即使蚁穴被毁也保留其最后位置。
         public IntVec3 NestPosition;
 
+        //字段职责：保存巢穴需要保持连通的外部洞道位置。
+        public IntVec3 PassageAnchor = IntVec3.Invalid;
+
         //字段职责：引用负责繁殖和升级营养结算的唯一蚁后。
         public Pawn Queen;
 
@@ -89,6 +92,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.State
             Scribe_References.Look(ref Faction, "faction");
             Scribe_References.Look(ref Nest, "nest");
             Scribe_Values.Look(ref NestPosition, "nestPosition");
+            Scribe_Values.Look(ref PassageAnchor, "passageAnchor", IntVec3.Invalid);
             Scribe_References.Look(ref Queen, "queen");
             Scribe_Collections.Look(ref Members, "members", LookMode.Reference);
             Scribe_Collections.Look(ref StorageCells, "storageCells", LookMode.Value);

@@ -131,6 +131,7 @@
             </li>
           </colorChannels>
 
+          <!-- 层级职责：真实头部位于约原版第 50 层，表情及前侧发片保留相对层距；后发留在身体后方。 -->
           <bodyAddons>
             <!-- 头部层职责：从 Head 到 Head4 的五套四向纹理中为每个 Pawn 持久化随机变体。 -->
             <li>
@@ -163,15 +164,15 @@
               </conditions>
               <offsets>
                 <south>
-                  <layerOffset>-0.293</layerOffset>
+                  <layerOffset>-0.2817</layerOffset>
                   <offset>(0, 0)</offset>
                 </south>
                 <north>
-                  <layerOffset>-0.293</layerOffset>
+                  <layerOffset>-0.2817</layerOffset>
                   <offset>(0, 0)</offset>
                 </north>
                 <east>
-                  <layerOffset>-0.293</layerOffset>
+                  <layerOffset>-0.2817</layerOffset>
                   <offset>(0, 0)</offset>
                 </east>
               </offsets>
@@ -200,15 +201,15 @@
               </conditions>
               <offsets>
                 <south>
-                  <layerOffset>-0.292</layerOffset>
+                  <layerOffset>-0.2807</layerOffset>
                   <offset>(0, 0)</offset>
                 </south>
                 <north>
-                  <layerOffset>-0.292</layerOffset>
+                  <layerOffset>-0.2807</layerOffset>
                   <offset>(0, 0)</offset>
                 </north>
                 <east>
-                  <layerOffset>-0.292</layerOffset>
+                  <layerOffset>-0.2807</layerOffset>
                   <offset>(0, 0)</offset>
                 </east>
               </offsets>
@@ -235,15 +236,15 @@
               </conditions>
               <offsets>
                 <south>
-                  <layerOffset>-0.269</layerOffset>
+                  <layerOffset>-0.2577</layerOffset>
                   <offset>(0, 0)</offset>
                 </south>
                 <north>
-                  <layerOffset>-0.269</layerOffset>
+                  <layerOffset>-0.2577</layerOffset>
                   <offset>(0, 0)</offset>
                 </north>
                 <east>
-                  <layerOffset>-0.269</layerOffset>
+                  <layerOffset>-0.2577</layerOffset>
                   <offset>(0, 0)</offset>
                 </east>
               </offsets>
@@ -271,15 +272,15 @@
               </conditions>
               <offsets>
                 <south>
-                  <layerOffset>-0.268</layerOffset>
+                  <layerOffset>-0.2567</layerOffset>
                   <offset>(0, 0)</offset>
                 </south>
                 <north>
-                  <layerOffset>-0.268</layerOffset>
+                  <layerOffset>-0.2567</layerOffset>
                   <offset>(0, 0)</offset>
                 </north>
                 <east>
-                  <layerOffset>-0.268</layerOffset>
+                  <layerOffset>-0.2567</layerOffset>
                   <offset>(0, 0)</offset>
                 </east>
               </offsets>

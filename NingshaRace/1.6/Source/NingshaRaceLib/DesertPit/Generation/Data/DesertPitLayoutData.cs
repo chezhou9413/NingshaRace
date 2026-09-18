@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using NingshaRaceLib.DesertPit.AntColony.Generation.Chambers;
 using NingshaRaceLib.DesertPit.Generation.Topology;
+using NingshaRaceLib.DesertPit.Generation.Habitats;
 using Verse;
 
 using NingshaRaceLib.Core.Defs;
@@ -45,6 +46,9 @@ namespace NingshaRaceLib.DesertPit.Generation.Data
         //字段职责：分层布局共用的洞室锚点和不得被蚁巢岩壁覆盖的中央核心。
         public readonly List<DesertPitRoom> Rooms = new List<DesertPitRoom>();
         public readonly List<DesertPitRoom> SecondaryRooms = new List<DesertPitRoom>();
+        //字段职责：保留附属洞室和生态区域，避免后续石林、遗迹覆盖湿地与水潭。
+        public readonly List<DesertPitRoom> AntSideRooms = new List<DesertPitRoom>();
+        public readonly List<DesertPitHabitat> Habitats = new List<DesertPitHabitat>();
         public readonly HashSet<IntVec3> CentralCoreCells = new HashSet<IntVec3>();
         public bool RiverRunsNorthSouth;
         //字段职责：记录斜向河谷的横向斜率，供蚁巢按河谷两侧而非地图坐标轴选址。

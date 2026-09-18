@@ -30,6 +30,9 @@ namespace NingshaRaceLib.DesertPit.Antlion.Components
         public Pawn Pawn => (Pawn)parent;
         public CompProperties_AntlionAmbush Props => (CompProperties_AntlionAmbush)props;
         public AntlionPhase Phase => phase;
+        //属性职责：向地图危险评估提供当前是否正在追猎玩家成员。
+        public bool ThreatensPlayer => AbleToAct && (phase == AntlionPhase.Hunting || phase == AntlionPhase.Emerging)
+            && target != null && target.Spawned && target.Map == Pawn.Map && target.Faction == Faction.OfPlayer;
         public int PhaseStartTick => phaseStartTick;
         public bool Transitioning => phase == AntlionPhase.Emerging || phase == AntlionPhase.Submerging;
         public bool AbleToAct => Pawn.Spawned && !Pawn.Dead && !Pawn.Downed && !Pawn.IsBurning();

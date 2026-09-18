@@ -29,7 +29,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Hydrology
                 float envelope = 1f - u * u;
                 float lateral = lateralMiddle + data.RiverLateralSlope * (axis - middle)
                     + bendSign * bump * envelope * envelope * envelope
-                    + settings.riverMeander * settings.Scale(map) * Mathf.Sin(u * 6f + phase) * envelope * Mathf.Abs(u);
+                    + settings.riverMeander * settings.Scale(map) * Mathf.Sin(u * settings.riverMeanderFrequency + phase) * envelope * Mathf.Abs(u);
                 //干地由真实圆形距离约束，单调主轴保证河流不会折返、自交或共用支干。
                 float axialDistance = axis - middle;
                 if (Mathf.Abs(axialDistance) < safeRadius)

@@ -24,10 +24,10 @@ namespace NingshaRaceLib.SandGolem.Rendering
             GameComponent_SandGolemTracker tracker = GameComponent_SandGolemTracker.Current;
             if (tracker == null || !tracker.TryGetState(parms.pawn, out SandGolemRenderState state))
             {
-                return null;
+                return SandGolemUnboundGraphic.MaterialFor(parms.facing);
             }
 
-            return state.MaterialFor(state.DrawFacingFor(parms.facing));
+            return state.MaterialFor(state.DrawFacingFor(parms.facing)) ?? SandGolemUnboundGraphic.MaterialFor(parms.facing);
         }
 
         //函数职责：沙傀运行时材质必须通过 NodeGetMat 取得。

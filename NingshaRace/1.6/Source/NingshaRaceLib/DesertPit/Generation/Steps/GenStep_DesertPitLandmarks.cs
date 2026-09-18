@@ -9,6 +9,7 @@ using NingshaRaceLib.DesertPit.Generation.Caves;
 using NingshaRaceLib.DesertPit.Generation.Data;
 using NingshaRaceLib.DesertPit.Generation.Landmarks;
 using NingshaRaceLib.DesertPit.Generation.Utility;
+using NingshaRaceLib.DesertPit.Generation.Config;
 
 namespace NingshaRaceLib.DesertPit.Generation.Steps
 {
@@ -32,6 +33,8 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
             List<IntVec3> centers = DesertPitLandmarkUtility.CollectCenterCandidates(map, data);
             if (centers.Count == 0)
             {
+                if (map.generatorDef.GetModExtension<DefModExtension_DesertPitLayout>() != null)
+                    throw new System.InvalidOperationException("地下地图没有可容纳石林的地貌落点。");
                 return;
             }
 
@@ -43,16 +46,19 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
         //函数职责：生成多片以钟乳石残柱为主体的密集石林地貌。
         private static void ScatterStoneForests(Map map, DesertPitLayoutData data, List<IntVec3> centers, TerrainDef sandstoneRough, ThingDef sandstoneChunk)
         {
-            int count = Mathf.Min(Rand.RangeInclusive(3, 5), centers.Count);
+            DefModExtension_DesertPitLayout settings = map.generatorDef.GetModExtension<DefModExtension_DesertPitLayout>();
+            int count = settings != null ? settings.stoneForestCount.RandomInRange : Mathf.Min(Rand.RangeInclusive(3, 5), centers.Count);
+            List<IntVec3> planned = settings != null ? DesertPitStoneForestPlanner.TakeCenters(map, data, centers, count) : null;
             for (int i = 0; i < count; i++)
             {
                 IntVec3 center;
-                if (!DesertPitLandmarkUtility.TryTakeCenter(map, data, centers, 15f, out center))
+                if (planned != null) center = planned[i];
+                else if (!DesertPitLandmarkUtility.TryTakeCenter(map, data, centers, 15f, out center))
                 {
                     return;
                 }
 
-                float radius = Rand.Range(7.5f, 11.5f);
+                float radius = settings != null ? settings.stoneForestRadius.RandomInRange : Rand.Range(7.5f, 11.5f);
                 DesertPitLandmarkTerrainUtility.PaintStoneTerrain(map, center, radius, sandstoneRough);
                 PlaceStalactiteForest(map, data, center, radius);
                 DesertPitLandmarkUtility.ScatterRubble(map, center, radius, Rand.RangeInclusive(42, 70));

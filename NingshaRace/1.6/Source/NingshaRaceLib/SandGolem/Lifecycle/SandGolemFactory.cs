@@ -43,7 +43,7 @@ namespace NingshaRaceLib.SandGolem.Lifecycle
             Pawn golem = null;
             try
             {
-                golem = PawnGenerator.GeneratePawn(request);
+                golem = SandGolemGenerationGate.GenerateForSummon(request);
                 golem.Name = new NameSingle(caster.LabelShort + "的沙傀");
                 GenSpawn.Spawn(golem, cell, caster.Map, Rot4.South);
                 golem.Rotation = Rot4.South;

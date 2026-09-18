@@ -7,7 +7,7 @@ using NingshaRaceLib.UI.Foundation;
 namespace NingshaRaceLib.UI.Gizmos
 {
     //类职责：为凝砂能力呈现符印与砂槽冷却，继承原版施法、目标选择、分组和禁用检查。
-    public sealed class Command_NingshaAbility : Command_Ability
+    public class Command_NingshaAbility : Command_Ability
     {
         private bool drawing;
 

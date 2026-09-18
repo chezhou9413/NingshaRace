@@ -18,6 +18,20 @@ namespace NingshaRaceLib.DesertPit.Generation.Config
         public IntRange branchRoomCount = new IntRange(2, 3);
         public float riverDiagonalReach = 0.82f;
         public float riverMeander = 7f;
+        public float riverMeanderFrequency = 6f;
+        public IntRange stoneForestCount = new IntRange(9, 13);
+        public FloatRange stoneForestRadius = new FloatRange(7.5f, 11.5f);
+        public IntRange antSideRoomCount = new IntRange(1, 3);
+        public FloatRange antSideRoomRadius = new FloatRange(5f, 12f);
+        public float extraTunnelChance = 0.5f;
+        public IntRange marshCount = new IntRange(1, 3);
+        public FloatRange marshRadius = new FloatRange(4f, 10f);
+        public float marshCoverage = 0.8f;
+        public IntRange habitatRoomCount = new IntRange(3, 7);
+        public FloatRange habitatRoomRadius = new FloatRange(5f, 10f);
+        public float habitatSandfallChance = 0.5f;
+        public float habitatPondChance = 0.5f;
+        public FloatRange habitatPondRadius = new FloatRange(2f, 7f);
         public float innerBoundary = 1f / 3f;
         public float outerBoundary = 2f / 3f;
         public float antPreferredLayer = 0.59f;
@@ -55,6 +69,14 @@ namespace NingshaRaceLib.DesertPit.Generation.Config
             if (!(riverDiagonalReach >= 0.5f && riverDiagonalReach <= 0.9f)
                 || !(riverMeander >= 2f && riverMeander <= 12f)) yield return "斜河端点展开比例必须为零点五至零点九，曲流幅度必须为二至十二格。";
             if (!(moundSpacing >= 12f && moundSpacing <= 30f)) yield return "菌巢最小间距必须为十二至三十格。";
+            if (!(riverMeanderFrequency >= 2f && riverMeanderFrequency <= 16f)) yield return "河流曲流频率必须为二至十六。";
+            if (!ValidCount(stoneForestCount, 1, 24) || !ValidCount(antSideRoomCount, 1, 5)
+                || !ValidCount(marshCount, 1, 6) || !ValidCount(habitatRoomCount, 1, 12)) yield return "石林或附属生态区数量超出允许范围。";
+            if (!ValidRange(stoneForestRadius) || !ValidRange(antSideRoomRadius) || !ValidRange(marshRadius)
+                || !ValidRange(habitatRoomRadius) || !ValidRange(habitatPondRadius)) yield return "附属洞室与生态区半径必须为有限正数区间。";
+            if (!(extraTunnelChance >= 0f && extraTunnelChance <= 1f) || !(marshCoverage > 0f && marshCoverage < 1f)
+                || !(habitatSandfallChance >= 0f && habitatSandfallChance <= 1f)
+                || !(habitatPondChance >= 0f && habitatPondChance <= 1f)) yield return "生态区概率及沼泽占比配置无效。";
             if (secondaryRoomRadius.max >= Mathf.Min(mainRadiusX.min, mainRadiusZ.min)) yield return "次要洞室必须小于主洞室。";
         }
 

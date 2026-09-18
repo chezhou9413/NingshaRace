@@ -1,6 +1,7 @@
 using NingshaRaceLib.Molting.Components;
 using NingshaRaceLib.Molting.Stats;
 using NingshaRaceLib.UI.Gizmos;
+using Verse;
 
 namespace NingshaRaceLib.Molting.UI
 {
@@ -11,6 +12,9 @@ namespace NingshaRaceLib.Molting.UI
 
         //构造职责：把蜕皮营养排列在侵蚀状态之后。
         public Gizmo_NingshaMoltingNutrition() { Order = -105f; }
+
+        //属性职责：提供蜕皮营养条所属角色，供多选分组和角色名称显示使用。
+        protected override Pawn GroupedPawn => molting.Pawn;
 
         //属性职责：提供营养数值、层数摘要、真实填充比例与保命阈值刻线。
         protected override string Title => "蜕皮营养";

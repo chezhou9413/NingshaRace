@@ -15,7 +15,7 @@ using NingshaRaceLib.UI.Gizmos;
 
 namespace NingshaRaceLib.SandGolem.Patches
 {
-//类职责：让玩家沙傀作为无机械师机械体接受征召和右键移动命令。
+//类职责：让玩家沙傀接受独立征召和右键移动命令。
     public static class Patch_SandGolemControl
     {
         //函数职责：判断 Pawn 是否是当前补丁允许玩家直接控制的沙傀。
@@ -141,12 +141,12 @@ namespace NingshaRaceLib.SandGolem.Patches
             }
 
             GameComponent_SandGolemTracker tracker = GameComponent_SandGolemTracker.Current;
-            if (tracker == null)
+            if (tracker == null || !tracker.TryGetState(__instance, out SandGolemRenderState state))
             {
                 return true;
             }
 
-            tracker.BeginDissolve(__instance, destroyPawn: true);
+            tracker.BeginDissolve(__instance, destroyPawn: true, notifyCaster: true);
             return false;
         }
     }
@@ -187,6 +187,7 @@ namespace NingshaRaceLib.SandGolem.Patches
 
             GameComponent_SandGolemTracker tracker = GameComponent_SandGolemTracker.Current;
             SandGolemRenderState state = null;
+            if (tracker == null || !tracker.TryGetState(__instance, out state)) yield break;
             if (tracker != null && tracker.TryGetState(__instance, out state) && state.phase != SandGolemPhase.Dissolving)
             {
                 yield return new Gizmo_SandGolemLifetime

@@ -325,19 +325,19 @@
             </conditions>
             <offsets>
               <south>
-                <layerOffset>-0.28</layerOffset>
+                <layerOffset>-0.2687</layerOffset>
                 <offset>(0, 0)</offset>
               </south>
               <north>
-                <layerOffset>-0.289</layerOffset>
+                <layerOffset>-0.2777</layerOffset>
                 <offset>(0, 0)</offset>
               </north>
               <east>
-                <layerOffset>-0.29</layerOffset>
+                <layerOffset>-0.2787</layerOffset>
                 <offset>(0, 0)</offset>
               </east>
               <west>
-                <layerOffset>-0.29</layerOffset>
+                <layerOffset>-0.2787</layerOffset>
                 <offset>(0, 0)</offset>
               </west>
             </offsets>
@@ -365,19 +365,19 @@
             </conditions>
             <offsets>
               <south>
-                <layerOffset>-0.288</layerOffset>
+                <layerOffset>-0.2767</layerOffset>
                 <offset>(0, 0)</offset>
               </south>
               <north>
-                <layerOffset>-0.288</layerOffset>
+                <layerOffset>-0.2767</layerOffset>
                 <offset>(0, 0)</offset>
               </north>
               <east>
-                <layerOffset>-0.288</layerOffset>
+                <layerOffset>-0.2767</layerOffset>
                 <offset>(0, 0)</offset>
               </east>
               <west>
-                <layerOffset>-0.27</layerOffset>
+                <layerOffset>-0.2587</layerOffset>
                 <offset>(0, 0)</offset>
               </west>
             </offsets>

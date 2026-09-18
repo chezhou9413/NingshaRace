@@ -23,13 +23,7 @@ namespace NingshaRaceLib.SandGolem.Rendering
                 return false;
             }
 
-            GameComponent_SandGolemTracker tracker = GameComponent_SandGolemTracker.Current;
-            if (tracker == null || !tracker.TryGetState(parms.pawn, out SandGolemRenderState state))
-            {
-                return false;
-            }
-
-            return state.HasMaterialFor(state.DrawFacingFor(parms.facing));
+            return true;
         }
 
         //函数职责：写入沙傀截图纹理对应的动画进度。

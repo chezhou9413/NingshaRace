@@ -8,6 +8,7 @@ using NingshaRaceLib.SandGolem.Health;
 using NingshaRaceLib.SandGolem.Lifecycle;
 using NingshaRaceLib.SandGolem.Rendering;
 using NingshaRaceLib.SandGolem.Utility;
+using NingshaRaceLib.SandGolem.Automation;
 
 namespace NingshaRaceLib.SandGolem.Tracking
 {
@@ -79,6 +80,7 @@ namespace NingshaRaceLib.SandGolem.Tracking
                 SandGolemRenderState state = states[i];
                 if (state == null || state.golem == null || state.golem.Destroyed)
                 {
+                    if (state?.caster != null) GameComponent_SandGolemAutoSummon.Current.NotifyLost(state.caster);
                     state?.DestroyRuntimeResources();
                     states.RemoveAt(i);
                     continue;
@@ -103,7 +105,7 @@ namespace NingshaRaceLib.SandGolem.Tracking
 
                 if (state.LifetimeExpiredAt(tick))
                 {
-                    BeginDissolve(state.golem, destroyPawn: true);
+                    BeginDissolve(state.golem, destroyPawn: true, notifyCaster: true);
                     continue;
                 }
 
@@ -118,6 +120,7 @@ namespace NingshaRaceLib.SandGolem.Tracking
         //函数职责：注册新沙傀并替换旧状态。
         public void Register(Pawn caster, Pawn golem, Texture2D[] textures)
         {
+            GameComponent_SandGolemAutoSummon.Current.ClearRequest(caster);
             RemoveStateForGolem(golem);
             SandGolemRenderState state = new SandGolemRenderState(caster, golem, textures);
             state.RebuildMaterials();
@@ -179,6 +182,7 @@ namespace NingshaRaceLib.SandGolem.Tracking
         //函数职责：如果召唤者已有沙傀则先收回旧沙傀，再延迟执行新召唤。
         public void RecallThenSummon(Pawn caster, IntVec3 targetCell)
         {
+            GameComponent_SandGolemAutoSummon.Current.ClearRequest(caster);
             Pawn oldGolem = GolemForCaster(caster);
             if (oldGolem == null)
             {
@@ -192,7 +196,7 @@ namespace NingshaRaceLib.SandGolem.Tracking
         }
 
         //函数职责：开始指定沙傀的消散动画。
-        public void BeginDissolve(Pawn golem, bool destroyPawn)
+        public void BeginDissolve(Pawn golem, bool destroyPawn, bool notifyCaster = false)
         {
             if (!TryGetState(golem, out SandGolemRenderState state))
             {
@@ -202,6 +206,11 @@ namespace NingshaRaceLib.SandGolem.Tracking
                 states.Add(state);
             }
 
+            if (state.phase != SandGolemPhase.Dissolving && state.caster != null)
+            {
+                if (notifyCaster) GameComponent_SandGolemAutoSummon.Current.NotifyLost(state.caster);
+                else GameComponent_SandGolemAutoSummon.Current.ClearRequest(state.caster);
+            }
             golem.jobs?.StopAll();
             SandGolemUtility.SetMovementDisabled(golem, true);
             golem.Rotation = Rot4.South;
@@ -237,8 +246,7 @@ namespace NingshaRaceLib.SandGolem.Tracking
                     continue;
                 }
 
-                Pawn captureSource = state.caster != null && !state.caster.Destroyed ? state.caster : state.golem;
-                state.ReplaceTextures(SandGolemPawnCapture.CapturePawn(captureSource));
+                state.ReplaceTextures(SandGolemSnapshotStorage.Decode(state.snapshotImages));
                 SandGolemUtility.StripNeedsAndRelations(state.golem);
                 SandGolemIdentityCleaner.Clean(state.golem);
                 SandGolemUtility.EnsurePlayerControlComponents(state.golem);

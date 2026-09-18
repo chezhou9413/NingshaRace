@@ -19,6 +19,9 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         //字段职责：记录工蚁下一次允许外出采集的游戏 Tick。
         private int nextForageTick;
 
+        //字段职责：错开各成员的破障寻路检查，避免同一帧重复搜索整张地图。
+        public int NextPassageCheckTick;
+
         //属性职责：向蚁群管理器和调试界面提供成员所属蚁巢编号。
         public int ColonyId => colonyId;
 

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using ChezhouLib.LibDef;
 using ChezhouLib.ObjectPool;
 using UnityEngine;
@@ -21,8 +22,11 @@ namespace NingshaRaceLib.SandGolem.Rendering
         //字段职责：记录当前沙傀 Pawn。
         public Pawn golem;
 
-        //字段职责：记录沙傀运行时四方向截图纹理，读档后会重新捕获。
+        //字段职责：记录沙傀运行时四方向截图纹理。
         public Texture2D[] textures;
+
+        //字段职责：保存召唤时的四方向 PNG，不依赖召唤者读档后的状态。
+        public List<string> snapshotImages;
 
         //字段职责：记录主线程创建好的四方向沙偶材质，渲染线程只读取不创建。
         public Material[] materials;
@@ -50,6 +54,7 @@ namespace NingshaRaceLib.SandGolem.Rendering
             this.caster = caster;
             this.golem = golem;
             this.textures = textures;
+            snapshotImages = SandGolemSnapshotStorage.Encode(textures);
             phase = SandGolemPhase.Gathering;
             phaseStartTick = Find.TickManager.TicksGame;
             expireTick = phaseStartTick + SandGolemUtility.AnimationTicks + SandGolemUtility.LifetimeTicks;
@@ -60,6 +65,7 @@ namespace NingshaRaceLib.SandGolem.Rendering
         {
             Scribe_References.Look(ref caster, "caster");
             Scribe_References.Look(ref golem, "golem");
+            Scribe_Collections.Look(ref snapshotImages, "snapshotImages", LookMode.Value);
             Scribe_Values.Look(ref phaseStartTick, "phaseStartTick");
             Scribe_Values.Look(ref expireTick, "expireTick", -1);
             Scribe_Values.Look(ref phase, "phase", SandGolemPhase.Gathering);

@@ -142,7 +142,7 @@ namespace NingshaRaceLib.SandGolem.Utility
         }
 
         //函数职责：判断地格是否是可召唤沙傀的沙地。
-        public static bool IsValidSandCell(IntVec3 cell, Map map, out string rejectReason)
+        public static bool IsValidSandCell(IntVec3 cell, Map map, out string rejectReason, bool checkOccupants = true)
         {
             rejectReason = null;
             if (map == null || !cell.InBounds(map))
@@ -164,7 +164,7 @@ namespace NingshaRaceLib.SandGolem.Utility
                 return false;
             }
 
-            if (cell.GetFirstPawn(map) != null)
+            if (checkOccupants && cell.GetFirstPawn(map) != null)
             {
                 rejectReason = "目标位置已有 Pawn";
                 return false;

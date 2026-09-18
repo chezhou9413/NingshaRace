@@ -155,16 +155,14 @@ namespace NingshaRaceLib.Combat.SandBottle.Utility
             //Prefab 发射轴统一为本地正 X，根节点绕 X 轴九十度贴合地图，再用 Yaw 朝向目标。
             float directionYaw = Vector3.SignedAngle(Vector3.right, attackDirection, Vector3.up);
             Quaternion rimWorldRotation = Quaternion.Euler(90f, directionYaw, 0f);
-            Vector3 effectScale = new Vector3(
-                props.effectScale,
-                props.effectScale,
-                props.effectScale * props.effectDepthScale);
+            Vector3 effectScale = Vector3.one * props.effectScale;
             DirectPrefabEffectUtility.Spawn(
                 effectKey,
                 spawnPosition,
                 rimWorldRotation,
                 effectScale,
-                props.effectLifetime);
+                props.effectLifetime,
+                SandBottleParticlePresentation.Configure);
         }
 
         //函数职责：按 XML 配置创建带来源与方向的沙瓶伤害。

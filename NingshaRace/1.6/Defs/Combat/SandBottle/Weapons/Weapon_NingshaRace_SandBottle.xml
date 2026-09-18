@@ -53,7 +53,6 @@
         <effectModId>NingshaRace</effectModId>
         <effectName>SandThrowBurst</effectName>
         <effectScale>0.75</effectScale>
-        <effectDepthScale>0.05</effectDepthScale>
         <effectLifetime>5.5</effectLifetime>
         <ai_IsWeapon>true</ai_IsWeapon>
         <requireLineOfSight>true</requireLineOfSight>

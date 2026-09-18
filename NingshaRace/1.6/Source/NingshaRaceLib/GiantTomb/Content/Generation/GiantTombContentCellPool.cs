@@ -20,6 +20,21 @@ namespace NingshaRaceLib.GiantTomb.Content.Generation
         public IReadOnlyList<IntVec3> Available => available;
         public string TemplateDefName => placement.Module.Def.defName;
 
+        //函数职责：取得房间实际连接口外侧格，作为蚁群苏醒后需要保持通行的出口。
+        public IntVec3 PassageAnchor()
+        {
+            foreach (GiantTombPlacedConnector connector in placement.Connectors)
+            {
+                if (!connector.Connected) continue;
+                foreach (IntVec3 cell in connector.Cells)
+                {
+                    IntVec3 outside = cell + connector.Direction.FacingCell;
+                    if (outside.InBounds(map) && outside.Standable(map)) return outside;
+                }
+            }
+            throw new InvalidOperationException("墓葬蚁巢房间缺少可通行的外部连接口：" + TemplateDefName);
+        }
+
         //构造函数职责：从变换后的结构掩码筛出可站立且没有实体占用的候选格。
         public GiantTombContentCellPool(Map map, GiantTombPlacement placement)
         {

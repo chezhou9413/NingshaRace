@@ -16,6 +16,8 @@ namespace NingshaRaceLib.DesertPit.AntColony.Generation.Chambers
         public IntVec3 Nest;
         public IntVec3 Mound;
         public IntVec3 Mouth;
+        //字段职责：记录通道实际接入公共洞穴的位置，供巢群保持出口连通。
+        public IntVec3 ExternalAccessCell;
 
         //函数职责：以四种朝向将洞室局部坐标转换为地图坐标。
         public IntVec3 At(int x, int z)

@@ -5,6 +5,7 @@ using NingshaRaceLib.DesertPit.AntColony.Generation.Chambers;
 using NingshaRaceLib.DesertPit.Generation.Config;
 using NingshaRaceLib.DesertPit.Generation.Data;
 using NingshaRaceLib.DesertPit.Generation.Hydrology;
+using NingshaRaceLib.DesertPit.Generation.Habitats;
 using NingshaRaceLib.DesertPit.Generation.Progress;
 using UnityEngine;
 using Verse;
@@ -36,6 +37,9 @@ namespace NingshaRaceLib.DesertPit.Generation.Topology
             if (missing > 0) Log.Warning($"[凝砂族] 河谷有 {missing} 处可选小洞室因岩层占用或重叠过密未放置，主次洞群与河流不受影响。");
             DesertPitGenerationProgress.SetStepFraction(0.9f);
             yield return null;
+            DesertPitAuxiliaryRooms.Generate(map, data, settings);
+            yield return null;
+            DesertPitMarshPlanner.Generate(map, data, settings);
             Validate(map, data, settings);
         }
 
@@ -44,6 +48,8 @@ namespace NingshaRaceLib.DesertPit.Generation.Topology
         {
             data.Rooms.Clear();
             data.SecondaryRooms.Clear();
+            data.AntSideRooms.Clear();
+            data.Habitats.Clear();
             data.CentralCoreCells.Clear();
             data.RiverCenterline.Clear();
             data.RiverWaterCells.Clear();
