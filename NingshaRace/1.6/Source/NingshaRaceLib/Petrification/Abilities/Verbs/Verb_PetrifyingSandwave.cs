@@ -24,12 +24,14 @@ namespace NingshaRaceLib.Petrification.Abilities.Verbs
         private CompAbilityEffect_PetrifyingSandwave EffectComp =>
             Ability?.CompOfType<CompAbilityEffect_PetrifyingSandwave>();
 
-        //函数职责：验证任意阵营的血肉 Pawn 或有效地面格，并拒绝同格、墙体与无视线目标。
+        //函数职责：验证施法者行动状态及血肉目标或地面格，并拒绝同格、墙体与无视线目标。
         public override bool ValidateTarget(LocalTargetInfo target, bool showMessages = true)
         {
             Pawn casterPawn = CasterPawn;
             if (casterPawn == null
                 || !casterPawn.Spawned
+                || casterPawn.Dead
+                || casterPawn.Downed
                 || !target.IsValid
                 || !target.Cell.IsValid
                 || !target.Cell.InBounds(casterPawn.Map)

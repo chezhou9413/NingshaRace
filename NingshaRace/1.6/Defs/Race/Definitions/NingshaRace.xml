@@ -12,7 +12,7 @@
       <li Class="NingshaRaceLib.Loot.Components.CompProperties_DeathLoot">
         <requiredMutant>NingshaRace_ErosionBodyMutant</requiredMutant>
         <entries>
-          <li><thingDef>Bioferrite</thingDef><weight>80</weight><count>25~50</count></li>
+          <li><thingDef>Bioferrite</thingDef><weight>80</weight><count>13~25</count></li>
           <li><thingDef>NingshaRace_SandHeat</thingDef><weight>20</weight><count>15</count></li>
         </entries>
       </li>

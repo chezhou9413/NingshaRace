@@ -19,16 +19,20 @@ namespace NingshaRaceLib.Petrification.Abilities.Components
         public new CompProperties_AbilityPetrifyingSandwave Props =>
             (CompProperties_AbilityPetrifyingSandwave)props;
 
-        //函数职责：让施法者面向目标并按释放瞬间的位置与方向结算砂潮。
+        //属性职责：让玩家和战斗决策都只能在施法者存活、落地且未倒地时选择砂潮。
+        public override bool CanCast => base.CanCast && parent.pawn.Spawned
+            && !parent.pawn.Dead && !parent.pawn.Downed;
+
+        //函数职责：在结算前确认施法者仍可行动，再按释放瞬间的位置与方向结算砂潮。
         public override void Apply(LocalTargetInfo target, LocalTargetInfo dest)
         {
-            base.Apply(target, dest);
             Pawn caster = parent.pawn;
-            if (caster == null || !caster.Spawned)
+            if (caster == null || !caster.Spawned || caster.Dead || caster.Downed)
             {
                 return;
             }
 
+            base.Apply(target, dest);
             caster.rotationTracker?.FaceTarget(target);
             Vector3 direction = PetrifyingSandwaveUtility.HorizontalDirection(
                 caster.Position.ToVector3Shifted(),

@@ -17,7 +17,7 @@
     <entitledToMedicalCare>false</entitledToMedicalCare>
     <clearMutantStatusOnDeath>false</clearMutantStatusOnDeath>
     <canTravelInCaravan>false</canTravelInCaravan>
-    <canAttackWhileCrawling>true</canAttackWhileCrawling>
+    <canAttackWhileCrawling>false</canAttackWhileCrawling>
     <respectsAllowedArea>false</respectsAllowedArea>
     <canGainXP>false</canGainXP>
     <canBeDrafted>false</canBeDrafted>
@@ -31,7 +31,7 @@
     <anomalyKnowledgeOffset>2</anomalyKnowledgeOffset>
     <knowledgeCategory>Basic</knowledgeCategory>
     <codexEntry>NingshaRace_ErosionBodyCodex</codexEntry>
-    <!-- 渲染节点职责：仅在侵蚀体状态下注入三根头部蛇体，让它们在后发上方、头部下方独立缓慢摆动。 -->
+    <!--渲染节点职责：在侵蚀体头部和前发上方绘制三根独立摆动的蛇体，局部高度与原版层号共同保持前后关系。-->
     <renderNodeProperties>
       <!-- 蛇体 A 具有完整四向素材，始终围绕贴图中的蛇尾根部摆动。 -->
       <li Class="PawnRenderNodeProperties_Spastic">
@@ -53,6 +53,7 @@
         <drawData>
           <defaultData>
             <layer>16</layer>
+            <offset>(0, 0.04, 0)</offset>
           </defaultData>
           <dataNorth>
             <pivot>(0.397, 0.555)</pivot>
@@ -94,6 +95,7 @@
         <drawData>
           <defaultData>
             <layer>15</layer>
+            <offset>(0, 0.04, 0)</offset>
           </defaultData>
           <dataNorth>
             <pivot>(0.604, 0.453)</pivot>
@@ -131,6 +133,7 @@
         <drawData>
           <defaultData>
             <layer>14</layer>
+            <offset>(0, 0.04, 0)</offset>
           </defaultData>
           <dataNorth>
             <pivot>(0.626, 0.538)</pivot>

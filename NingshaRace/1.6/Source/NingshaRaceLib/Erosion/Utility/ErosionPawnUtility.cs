@@ -26,6 +26,15 @@ namespace NingshaRaceLib.Erosion.Utility
                 && pawn.mutant.Def == DefOfRefs.NingshaRace_ErosionBodyMutant;
         }
 
+        //函数职责：在复活入口根据异变身份或永久健康标记识别侵蚀体原身。
+        public static bool HasErosionBodyIdentity(Pawn pawn)
+        {
+            return pawn != null
+                && pawn.def == DefOfRefs.NingshaRace
+                && (IsErosionBody(pawn)
+                    || pawn.health.hediffSet.HasHediff(DefOfRefs.NingshaRace_ErosionBody));
+        }
+
         //函数职责：判断凝砂之眼或召唤沙傀是否至少有一项仍处于冷却。
         public static bool HasInnateAbilityOnCooldown(Pawn pawn)
         {

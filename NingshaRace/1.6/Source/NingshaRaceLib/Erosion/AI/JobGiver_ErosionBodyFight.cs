@@ -10,6 +10,12 @@ namespace NingshaRaceLib.Erosion.AI
     //类职责：让侵蚀体主动锁定敌对 Pawn，并优先自动施放可用攻击能力后再近战追击。
     public sealed class JobGiver_ErosionBodyFight : JobGiver_AIFightEnemies
     {
+        //函数职责：仅为存活且未倒地的侵蚀体生成战斗任务。
+        protected override Job TryGiveJob(Pawn pawn)
+        {
+            return pawn.Dead || pawn.Downed ? null : base.TryGiveJob(pawn);
+        }
+
         //函数职责：把攻击目标限制为其他阵营的 Pawn，避免侵蚀体破坏无生命建筑或同阵营实体。
         protected override bool ExtraTargetValidator(Pawn pawn, Thing target)
         {

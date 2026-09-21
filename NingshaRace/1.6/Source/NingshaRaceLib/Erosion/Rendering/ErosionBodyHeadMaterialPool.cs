@@ -31,9 +31,9 @@ namespace NingshaRaceLib.Erosion.Rendering
             }
         }
 
-        //字段职责：保存原始头部材质到侵蚀黑雾材质的线程安全只读映射。
-        private static readonly ConcurrentDictionary<Material, Material> Materials =
-            new ConcurrentDictionary<Material, Material>(ManagedReferenceComparer<Material>.Instance);
+        //字段职责：保存原始头部材质到活体、尸体两种黑雾材质的线程安全只读映射。
+        private static readonly ConcurrentDictionary<Material, ErosionHeadMaterialVariants> Materials =
+            new ConcurrentDictionary<Material, ErosionHeadMaterialVariants>(ManagedReferenceComparer<Material>.Instance);
 
         //函数职责：在渲染树主线程初始化阶段预先创建头部四个朝向及隐身变体的黑雾材质。
         public static void PrewarmGraphic(Graphic graphic, Pawn pawn)
@@ -63,30 +63,30 @@ namespace NingshaRaceLib.Erosion.Rendering
                     continue;
                 }
 
-                GetOrCreateMaterial(source);
+                GetOrCreateMaterial(source, pawn.Dead);
                 Material invisibleSource = InvisibilityMatPool.GetInvisibleMat(source);
                 if (!ReferenceEquals(invisibleSource, null))
                 {
-                    GetOrCreateMaterial(invisibleSource);
+                    GetOrCreateMaterial(invisibleSource, pawn.Dead);
                 }
             }
         }
 
         //函数职责：供并行预绘制线程只读取得已经预热的黑雾材质。
-        public static Material GetMaterial(Material source)
+        public static Material GetMaterial(Material source, bool dead)
         {
             if (ReferenceEquals(source, null))
             {
                 return null;
             }
 
-            return Materials.TryGetValue(source, out Material cachedMaterial)
-                ? cachedMaterial
+            return Materials.TryGetValue(source, out ErosionHeadMaterialVariants cachedMaterials)
+                ? cachedMaterials.ForState(dead)
                 : source;
         }
 
-        //函数职责：在主线程保留原头部贴图、颜色和贴图变换并创建 CL 黑雾材质。
-        public static Material GetOrCreateMaterial(Material source)
+        //函数职责：在主线程创建活体与尸体黑雾材质，并保留原头部贴图、颜色和贴图变换。
+        public static Material GetOrCreateMaterial(Material source, bool dead)
         {
             if (!UnityData.IsInMainThread)
             {
@@ -96,9 +96,9 @@ namespace NingshaRaceLib.Erosion.Rendering
             {
                 return null;
             }
-            if (Materials.TryGetValue(source, out Material cachedMaterial))
+            if (Materials.TryGetValue(source, out ErosionHeadMaterialVariants cachedMaterials))
             {
-                return cachedMaterial;
+                return cachedMaterials.ForState(dead);
             }
 
             MaterialRequest request = new MaterialRequest(
@@ -120,8 +120,17 @@ namespace NingshaRaceLib.Erosion.Rendering
                 mainTextureScale = source.mainTextureScale,
                 mainTextureOffset = source.mainTextureOffset
             };
-            Materials[source] = erosionMaterial;
-            return erosionMaterial;
+            Material corpseMaterial = new Material(erosionMaterial)
+            {
+                name = erosionMaterial.name + "_Corpse"
+            };
+            //尸体固定在零时间相位；独立实例避免冻结共享贴图的其他存活侵蚀体。
+            corpseMaterial.SetVector("_FlowSpeed", Vector4.zero);
+            corpseMaterial.SetFloat("_PulseStrength", 0f);
+            ErosionHeadMaterialVariants variants = new ErosionHeadMaterialVariants(erosionMaterial, corpseMaterial);
+            //两种材质都在主线程配置完毕后才发布，绘制线程只选择引用。
+            Materials[source] = variants;
+            return variants.ForState(dead);
         }
 
         //函数职责：在游戏切换或退出前销毁本池拥有的侵蚀黑雾材质并清空引用。
@@ -132,12 +141,10 @@ namespace NingshaRaceLib.Erosion.Rendering
                 throw new InvalidOperationException("侵蚀体头部材质缓存只能在游戏主线程清理。");
             }
 
-            foreach (Material material in Materials.Values)
+            foreach (ErosionHeadMaterialVariants variants in Materials.Values)
             {
-                if (!ReferenceEquals(material, null))
-                {
-                    UnityEngine.Object.Destroy(material);
-                }
+                UnityEngine.Object.Destroy(variants.Alive);
+                UnityEngine.Object.Destroy(variants.Dead);
             }
             Materials.Clear();
         }

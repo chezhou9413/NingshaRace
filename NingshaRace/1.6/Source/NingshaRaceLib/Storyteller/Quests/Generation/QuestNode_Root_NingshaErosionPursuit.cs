@@ -162,15 +162,20 @@ namespace NingshaRaceLib.Storyteller.Quests.Generation
                 ErosionBodyDelayTicks.RandomInRange,
                 delegate
                 {
-                    quest.PawnsArrive(
-                        Gen.YieldSingle(erosionBody),
-                        mapParent: map.Parent,
-                        arrivalMode: PawnsArrivalModeDefOf.EdgeWalkIn,
-                        joinPlayer: false,
-                        walkInSpot: walkInSpot,
-                        customLetterLabel: "侵蚀体来袭",
-                        customLetterText: "追杀" + joiner.LabelShortCap + "的侵蚀体已经抵达。杀死或收容它才能结束追杀。",
-                        sendStandardLetter: true);
+                    QuestPart_PawnsArrive arrival = new QuestPart_PawnsArrive
+                    {
+                        inSignal = QuestGen.slate.Get<string>("inSignal"),
+                        mapParent = map.Parent,
+                        arrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn,
+                        spawnNear = walkInSpot,
+                        joinPlayer = false,
+                        customLetterLabel = "侵蚀体来袭",
+                        customLetterText = "追杀" + joiner.LabelShortCap + "的侵蚀体已经抵达。杀死或收容它才能结束追杀。",
+                        customLetterDef = LetterDefOf.ThreatBig,
+                        sendStandardLetter = true
+                    };
+                    arrival.pawns.Add(erosionBody);
+                    quest.AddPart(arrival);
                 },
                 debugLabel: "追杀侵蚀体入场延迟");
         }

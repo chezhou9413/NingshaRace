@@ -53,8 +53,8 @@ namespace NingshaRaceLib.Erosion.Rendering
             }
 
             __result = UnityData.IsInMainThread
-                ? ErosionBodyHeadMaterialPool.GetOrCreateMaterial(__result)
-                : ErosionBodyHeadMaterialPool.GetMaterial(__result);
+                ? ErosionBodyHeadMaterialPool.GetOrCreateMaterial(__result, parms.pawn.Dead)
+                : ErosionBodyHeadMaterialPool.GetMaterial(__result, parms.pawn.Dead);
         }
     }
 }

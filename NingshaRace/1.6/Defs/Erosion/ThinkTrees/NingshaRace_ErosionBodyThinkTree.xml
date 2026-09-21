@@ -10,13 +10,8 @@
         </li>
         <li Class="ThinkNode_ConditionalDowned">
           <subNodes>
-            <li Class="ThinkNode_ConditionalCanCrawl">
-              <invert>true</invert>
-              <subNodes>
-                <li Class="ThinkNode_Subtree">
-                  <treeDef>Downed</treeDef>
-                </li>
-              </subNodes>
+            <li Class="ThinkNode_Subtree">
+              <treeDef>Downed</treeDef>
             </li>
           </subNodes>
         </li>
