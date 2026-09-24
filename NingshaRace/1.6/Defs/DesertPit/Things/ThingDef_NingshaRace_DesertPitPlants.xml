@@ -31,6 +31,25 @@
     <defName>NingshaRace_DesertPitPlantA</defName>
     <label>蓝灰洞杯菌</label>
     <description>一种扎根在沙岩裂隙中的蓝灰色杯状真菌，杯缘会散出微弱冷光。</description>
+    <thingClass>NingshaRaceLib.DesertPit.Ecology.Plants.Plant_FungalGrowth</thingClass>
+    <modExtensions>
+      <li Class="NingshaRaceLib.DesertPit.Ecology.Config.DefModExtension_FungalGrowth">
+        <stages>
+          <li>
+            <maxGrowth>0.2</maxGrowth>
+            <texPath>Things/Plant/NingshaRace/DesertPit/BlueGrayCup/Growth01</texPath>
+          </li>
+          <li>
+            <maxGrowth>0.6</maxGrowth>
+            <texPath>Things/Plant/NingshaRace/DesertPit/BlueGrayCup/Growth02</texPath>
+          </li>
+          <li>
+            <maxGrowth>0.8</maxGrowth>
+            <texPath>Things/Plant/NingshaRace/DesertPit/BlueGrayCup/Growth03</texPath>
+          </li>
+        </stages>
+      </li>
+    </modExtensions>
     <plant>
       <fertilityMin>0.1</fertilityMin>
       <fertilitySensitivity>0.1</fertilitySensitivity>
@@ -84,6 +103,25 @@
     <defName>NingshaRace_DesertPitPlantC</defName>
     <label>浅青伞菇</label>
     <description>细长的伞状洞菇在无光处生长，菌盖下方透出浅青色微光。</description>
+    <thingClass>NingshaRaceLib.DesertPit.Ecology.Plants.Plant_FungalGrowth</thingClass>
+    <modExtensions>
+      <li Class="NingshaRaceLib.DesertPit.Ecology.Config.DefModExtension_FungalGrowth">
+        <stages>
+          <li>
+            <maxGrowth>0.2</maxGrowth>
+            <texPath>Things/Plant/NingshaRace/DesertPit/PaleCyanMushroom/Growth01</texPath>
+          </li>
+          <li>
+            <maxGrowth>0.6</maxGrowth>
+            <texPath>Things/Plant/NingshaRace/DesertPit/PaleCyanMushroom/Growth02</texPath>
+          </li>
+          <li>
+            <maxGrowth>0.8</maxGrowth>
+            <texPath>Things/Plant/NingshaRace/DesertPit/PaleCyanMushroom/Growth03</texPath>
+          </li>
+        </stages>
+      </li>
+    </modExtensions>
     <plant>
       <fertilityMin>0.1</fertilityMin>
       <fertilitySensitivity>0.1</fertilitySensitivity>

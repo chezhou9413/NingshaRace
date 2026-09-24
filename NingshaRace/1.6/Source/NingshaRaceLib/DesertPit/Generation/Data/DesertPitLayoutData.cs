@@ -34,6 +34,12 @@ namespace NingshaRaceLib.DesertPit.Generation.Data
         //字段职责：记录主拓扑通道中心线附近必须保持通行的格子。
         public readonly HashSet<IntVec3> ProtectedRouteCells = new HashSet<IntVec3>();
 
+        //字段职责：记录连接笔刷覆盖的通道，生成资源前扣除洞室和蚁巢占地。
+        public readonly HashSet<IntVec3> PassageCells = new HashSet<IntVec3>();
+
+        //字段职责：按雕刻顺序保存独立通道，交叉占地由先记录的通道计入配额。
+        internal readonly List<DesertPitPassage> Passages = new List<DesertPitPassage>();
+
         //字段职责：记录蚁巢等完整场景保留区，阻止后续遗迹、装饰和植物覆盖。
         public readonly HashSet<IntVec3> ReservedSceneCells = new HashSet<IntVec3>();
 

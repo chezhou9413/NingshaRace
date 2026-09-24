@@ -83,18 +83,18 @@ namespace NingshaRaceLib.DesertPit.Generation.Habitats
         //函数职责：从小洞室靠近目标的边缘开窄通道，保留洞室中心的水潭和内容空间。
         private static void ConnectEdge(Map map, DesertPitLayoutData data, DesertPitRoom room, IntVec3 target, HashSet<IntVec3> walls)
         {
-            IntVec3 edge = room.Center;
+            IntVec3 access = DesertPitPassageEndpoints.FindTarget(map, target, walls);
+            IntVec3 edge = IntVec3.Invalid;
             float best = float.MaxValue;
             foreach (IntVec3 cell in room.Floor)
             {
-                bool clear = true;
-                foreach (IntVec3 offset in GenAdj.CardinalDirections)
-                    if (walls.Contains(cell + offset)) { clear = false; break; }
-                if (!clear) continue;
-                float distance = cell.DistanceToSquared(target);
+                if (!DesertPitRoomBrush.CanPass(map, cell, walls)) continue;
+                float distance = cell.DistanceToSquared(access);
                 if (distance < best) { edge = cell; best = distance; }
             }
-            DesertPitRoomBrush.Connect(map, data, edge, target, 1.3f, walls, 1f);
+            if (!edge.IsValid)
+                throw new InvalidOperationException("地下附属洞室没有满足通道宽度的出口，中心：" + room.Center + "，目标：" + target);
+            DesertPitRoomBrush.Connect(map, data, edge, access, 1.3f, walls, 1f);
         }
 
         //函数职责：按概率给附属洞室增加通往其他洞室的第二条窄通道。

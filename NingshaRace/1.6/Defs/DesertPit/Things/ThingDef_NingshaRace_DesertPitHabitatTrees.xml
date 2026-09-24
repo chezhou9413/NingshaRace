@@ -4,15 +4,15 @@
   <ThingDef Name="NingshaRace_DesertPitTropicalTreeBase" ParentName="TreeBase" Abstract="True">
     <plant>
       <dieIfNoSunlight>false</dieIfNoSunlight>
-      <growMinGlow>0</growMinGlow>
-      <growOptimalGlow>0</growOptimalGlow>
+      <growMinGlow>0.5</growMinGlow>
+      <growOptimalGlow>0.5</growOptimalGlow>
       <interferesWithRoof>false</interferesWithRoof>
     </plant>
   </ThingDef>
   <ThingDef ParentName="NingshaRace_DesertPitTropicalTreeBase">
     <defName>NingshaRace_DesertPitCecropia</defName>
     <label>地下号角树</label>
-    <description>生长在地下水潭岸边的耐阴号角树。</description>
+    <description>生长在地下水潭岸边的号角树，需要至少百分之五十的光照才能生长。</description>
     <graphicData>
       <texPath>Things/Plant/TreeCecropia</texPath>
       <graphicClass>Graphic_Random</graphicClass>
@@ -30,7 +30,7 @@
   <ThingDef ParentName="NingshaRace_DesertPitTropicalTreeBase">
     <defName>NingshaRace_DesertPitPalm</defName>
     <label>地下棕榈树</label>
-    <description>适应地下湿润环境的耐阴棕榈树，不结可食用果实。</description>
+    <description>适应地下湿润环境的棕榈树，需要至少百分之五十的光照才能生长，不结可食用果实。</description>
     <graphicData>
       <texPath>Things/Plant/TreePalm</texPath>
       <graphicClass>Graphic_Random</graphicClass>

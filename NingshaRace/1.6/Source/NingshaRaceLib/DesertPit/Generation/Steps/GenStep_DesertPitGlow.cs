@@ -8,6 +8,7 @@ using NingshaRaceLib.DesertPit.Buildings;
 using NingshaRaceLib.DesertPit.Generation.Caves;
 using NingshaRaceLib.DesertPit.Generation.Data;
 using NingshaRaceLib.DesertPit.Generation.Landmarks;
+using NingshaRaceLib.DesertPit.Generation.Lighting;
 using NingshaRaceLib.DesertPit.Generation.Utility;
 
 namespace NingshaRaceLib.DesertPit.Generation.Steps
@@ -23,15 +24,17 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
         {
             DesertPitGenUtility.SetGenerationStatus("天光裂隙");
             ThingDef glowDef = DefDatabase<ThingDef>.GetNamed("NingshaRace_DesertPitGlow");
+            NingshaRaceLib.DesertPit.Generation.Habitats.DesertPitHabitatLight.Generate(map, DesertPitGenUtility.GetLayoutData(), glowDef);
             List<IntVec3> candidates = CollectGlowCandidates(map, glowDef);
             int count = Mathf.Min(Rand.RangeInclusive(5, 9), candidates.Count);
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < count && candidates.Count > 0; i++)
             {
                 IntVec3 cell = candidates.RandomElement();
                 candidates.Remove(cell);
                 GenSpawn.Spawn(glowDef, cell, map);
                 RemoveNearbyCandidates(candidates, cell, 13f);
             }
+            DesertPitGenerationLighting.Refresh(map);
         }
 
         //函数职责：收集全洞穴中可放置天光裂隙的候选格。

@@ -9,6 +9,7 @@ using NingshaRaceLib.DesertPit.Generation.Caves;
 using NingshaRaceLib.DesertPit.Generation.Data;
 using NingshaRaceLib.DesertPit.Generation.Landmarks;
 using NingshaRaceLib.DesertPit.Generation.Utility;
+using NingshaRaceLib.DesertPit.Generation.Resources;
 
 namespace NingshaRaceLib.DesertPit.Generation.Steps
 {
@@ -31,23 +32,19 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
             DesertPitLayoutData data = DesertPitGenUtility.GetLayoutData();
             ThingDef glowDef = DefDatabase<ThingDef>.GetNamed("NingshaRace_DesertPitGlow");
             List<IntVec3> candidates = CollectCandidates(map, data, glowDef);
-            if (candidates.Count == 0)
-            {
-                return;
-            }
-
+            Queue<ThingDef> pending = DesertPitDecorationQuota.Create();
             List<IntVec3> placed = new List<IntVec3>();
-            int targetCount = Mathf.Min(Rand.RangeInclusive(105, 155), candidates.Count);
-            int clusterCount = Mathf.Min(Rand.RangeInclusive(22, 34), candidates.Count);
-            int crystalTarget = Mathf.Min(Rand.RangeInclusive(1, 3), Mathf.Max(1, targetCount / 18));
-            int crystalPlaced = 0;
-            for (int i = 0; i < clusterCount && placed.Count < targetCount; i++)
+            int targetCount = pending.Count;
+            if (candidates.Count < targetCount)
+                throw new System.InvalidOperationException("普通洞穴散饰可用格不足，目标：" + targetCount + "，可用：" + candidates.Count);
+            int clusterCount = Mathf.Min(Rand.RangeInclusive(44, 68), candidates.Count);
+            for (int i = 0; i < clusterCount && pending.Count > 0; i++)
             {
                 IntVec3 center = candidates.RandomElementByWeight((IntVec3 cell) => ClusterCenterWeight(map, data, cell));
-                ScatterCluster(map, data, candidates, placed, center, targetCount, crystalTarget, ref crystalPlaced);
+                ScatterCluster(map, data, candidates, placed, center, pending);
             }
 
-            FillRemainingDecorations(map, data, candidates, placed, targetCount, crystalTarget, ref crystalPlaced);
+            FillRemainingDecorations(map, data, candidates, placed, pending, targetCount);
         }
 
         //函数职责：收集所有可放置洞穴装饰物的基础候选格。
@@ -66,51 +63,43 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
         }
 
         //函数职责：在指定簇心附近生成三到八个适合当前地貌的装饰物。
-        private static void ScatterCluster(Map map, DesertPitLayoutData data, List<IntVec3> candidates, List<IntVec3> placed, IntVec3 center, int targetCount, int crystalTarget, ref int crystalPlaced)
+        private static void ScatterCluster(Map map, DesertPitLayoutData data, List<IntVec3> candidates, List<IntVec3> placed, IntVec3 center, Queue<ThingDef> pending)
         {
             int count = Rand.RangeInclusive(3, 8);
             float radius = Rand.Range(4f, 8f);
-            for (int i = 0; i < count && placed.Count < targetCount; i++)
+            for (int i = 0; i < count && pending.Count > 0; i++)
             {
-                ThingDef decorationDef = DesertPitDecorationUtility.ChooseDecorationDef(crystalPlaced < crystalTarget);
+                ThingDef decorationDef = pending.Peek();
                 IntVec3 cell;
                 if (TryFindClusterCell(map, data, candidates, placed, center, radius, decorationDef, out cell))
                 {
                     SpawnDecoration(map, decorationDef, cell);
                     placed.Add(cell);
                     candidates.Remove(cell);
-                    if (DesertPitDecorationUtility.IsCrystal(decorationDef))
-                    {
-                        crystalPlaced++;
-                    }
+                    pending.Dequeue();
                 }
             }
         }
 
         //函数职责：簇群未达到目标数量时补足少量零散装饰物。
-        private static void FillRemainingDecorations(Map map, DesertPitLayoutData data, List<IntVec3> candidates, List<IntVec3> placed, int targetCount, int crystalTarget, ref int crystalPlaced)
+        private static void FillRemainingDecorations(Map map, DesertPitLayoutData data, List<IntVec3> candidates, List<IntVec3> placed, Queue<ThingDef> pending, int targetCount)
         {
-            int guard = 0;
-            while (placed.Count < targetCount && candidates.Count > 0 && guard < 900)
+            while (pending.Count > 0)
             {
-                ThingDef decorationDef = DesertPitDecorationUtility.ChooseDecorationDef(crystalPlaced < crystalTarget);
+                ThingDef decorationDef = pending.Peek();
                 IntVec3 cell;
                 if (TryFindAnyCell(map, data, candidates, placed, decorationDef, out cell))
                 {
                     SpawnDecoration(map, decorationDef, cell);
                     placed.Add(cell);
                     candidates.Remove(cell);
-                    if (DesertPitDecorationUtility.IsCrystal(decorationDef))
-                    {
-                        crystalPlaced++;
-                    }
+                    pending.Dequeue();
                 }
                 else
                 {
-                    break;
+                    throw new System.InvalidOperationException("普通洞穴散饰无法放置" + decorationDef.label
+                        + "，目标总数：" + targetCount + "，已放置：" + placed.Count + "，符合间距的剩余合法格：0。");
                 }
-
-                guard++;
             }
         }
 

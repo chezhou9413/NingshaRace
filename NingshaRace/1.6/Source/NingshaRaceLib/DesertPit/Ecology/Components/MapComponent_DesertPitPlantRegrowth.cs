@@ -21,7 +21,7 @@ namespace NingshaRaceLib.DesertPit.Ecology.Components
         //字段职责：记录下一次尝试补生植物的游戏 Tick。
         private int nextRegrowthTick;
 
-        //字段职责：保存初始植物位置作为后续补生搜索的栖息地锚点。
+        //字段职责：保存普通菌群共用的初始栖息地，巨菇位置由各物种目标独立保存。
         private List<IntVec3> habitatAnchors = new List<IntVec3>();
 
         //构造函数职责：把洞穴菌群再生组件绑定到指定地图。
@@ -44,7 +44,7 @@ namespace NingshaRaceLib.DesertPit.Ecology.Components
             }
         }
 
-        //函数职责：新地图或旧存档首次启用时，以当前支持植物建立生态容量和栖息地锚点。
+        //函数职责：在地图首次初始化时，以实际生成植物建立各类生态容量和栖息地锚点。
         public override void FinalizeInit()
         {
             base.FinalizeInit();
@@ -59,7 +59,7 @@ namespace NingshaRaceLib.DesertPit.Ecology.Components
         //函数职责：在再生计时到达后检查菌群缺口，并最多补生一株幼株。
         public override void MapComponentTick()
         {
-            if (!initialized || !IsDesertPitMap() || plantTargets.Count == 0 || habitatAnchors.Count == 0)
+            if (!initialized || plantTargets.Count == 0)
             {
                 return;
             }
@@ -72,10 +72,10 @@ namespace NingshaRaceLib.DesertPit.Ecology.Components
 
             DefModExtension_DesertPitEcology settings = DesertPitPlantEcologyUtility.GetSettings(map);
             nextRegrowthTick = ticks + settings.regrowthIntervalTicks;
-            ThingDef missingPlant = FindMostUnderrepresentedPlant();
-            if (missingPlant != null)
+            foreach (DesertPitPlantTarget target in FindUnderrepresentedPlants())
             {
-                TryRegrowOnePlant(settings, missingPlant);
+                //某类栖息地被建造占用时继续检查其他缺失种类，每轮总计仍只补一株。
+                if (TryRegrowOnePlant(settings, target)) break;
             }
         }
 
@@ -83,37 +83,32 @@ namespace NingshaRaceLib.DesertPit.Ecology.Components
         private void InitializeEcology()
         {
             DefModExtension_DesertPitEcology settings = DesertPitPlantEcologyUtility.GetSettings(map);
-            habitatAnchors.Clear();
             plantTargets.Clear();
-            for (int i = 0; i < settings.plants.Count; i++)
-            {
-                ThingDef plantDef = settings.plants[i].plant;
-                List<Thing> plants = map.listerThings.ThingsOfDef(plantDef);
-                int targetCount = 0;
-                for (int j = 0; j < plants.Count; j++)
-                {
-                    if (plants[j].Spawned && !map.GetComponent<MapComponent_AntHabitats>().IsFungalHabitat(plants[j].Position))
-                    {
-                        targetCount++;
-                        habitatAnchors.Add(plants[j].Position);
-                    }
-                }
-
-                if (targetCount > 0)
-                {
-                    plantTargets.Add(new DesertPitPlantTarget(plantDef, targetCount));
-                }
-            }
+            habitatAnchors.Clear();
+            foreach (DesertPitPlantWeight entry in settings.plants) RegisterTarget(entry.plant, false);
+            foreach (DesertPitGiantFungus entry in settings.giantFungi) RegisterTarget(entry.plant, true);
 
             initialized = true;
             nextRegrowthTick = Find.TickManager.TicksGame + settings.regrowthIntervalTicks;
         }
 
-        //函数职责：按照缺失比例选择最需要恢复的植物，防止食药菌被装饰种永久替代。
-        private ThingDef FindMostUnderrepresentedPlant()
+        //函数职责：记录温床外的实际数量，普通菌群共享位置而巨菇分别保留原生位置。
+        private void RegisterTarget(ThingDef plantDef, bool giant)
         {
-            ThingDef result = null;
-            float largestMissingRatio = 0f;
+            List<IntVec3> anchors = new List<IntVec3>();
+            MapComponent_AntHabitats habitats = map.GetComponent<MapComponent_AntHabitats>();
+            foreach (Thing plant in map.listerThings.ThingsOfDef(plantDef))
+                if (plant.Spawned && !habitats.IsFungalHabitat(plant.Position)) anchors.Add(plant.Position);
+            if (anchors.Count > 0)
+                plantTargets.Add(new DesertPitPlantTarget(plantDef, anchors.Count, giant ? anchors : null));
+            if (!giant) habitatAnchors.AddRange(anchors);
+        }
+
+        //函数职责：按缺失比例降序返回待补生种类，保持各物种自己的数量上限。
+        private List<DesertPitPlantTarget> FindUnderrepresentedPlants()
+        {
+            List<KeyValuePair<DesertPitPlantTarget, float>> missing = new List<KeyValuePair<DesertPitPlantTarget, float>>();
+            MapComponent_AntHabitats habitats = map.GetComponent<MapComponent_AntHabitats>();
             for (int i = 0; i < plantTargets.Count; i++)
             {
                 DesertPitPlantTarget target = plantTargets[i];
@@ -124,29 +119,31 @@ namespace NingshaRaceLib.DesertPit.Ecology.Components
 
                 int current = 0;
                 foreach (Thing plant in map.listerThings.ThingsOfDef(target.PlantDef))
-                    if (plant.Spawned && !map.GetComponent<MapComponent_AntHabitats>().IsFungalHabitat(plant.Position)) current++;
+                    if (plant.Spawned && !habitats.IsFungalHabitat(plant.Position)) current++;
                 float missingRatio = Mathf.Max(0f, target.TargetCount - current) / target.TargetCount;
-                if (missingRatio > largestMissingRatio)
-                {
-                    largestMissingRatio = missingRatio;
-                    result = target.PlantDef;
-                }
+                if (missingRatio > 0f) missing.Add(new KeyValuePair<DesertPitPlantTarget, float>(target, missingRatio));
             }
-
+            missing.Sort((a, b) => b.Value.CompareTo(a.Value));
+            List<DesertPitPlantTarget> result = new List<DesertPitPlantTarget>();
+            foreach (var entry in missing) result.Add(entry.Key);
             return result;
         }
 
-        //函数职责：围绕随机初始栖息地搜索合法空格，并补生指定的缺失植物幼株。
-        private bool TryRegrowOnePlant(DefModExtension_DesertPitEcology settings, ThingDef plantDef)
+        //函数职责：围绕初始栖息地补生幼株，巨菇使用同类锚点并满足开阔度与树木间距。
+        private bool TryRegrowOnePlant(DefModExtension_DesertPitEcology settings, DesertPitPlantTarget target)
         {
+            DesertPitGiantFungus fungus = DesertPitGiantFungusUtility.Find(settings, target.PlantDef);
+            List<IntVec3> anchors = fungus == null ? habitatAnchors : target.GiantHabitatAnchors;
             int radialCount = GenRadial.NumCellsInRadius(settings.habitatRadius);
             for (int i = 0; i < settings.placementAttempts; i++)
             {
-                IntVec3 anchor = habitatAnchors.RandomElement();
+                IntVec3 anchor = anchors.RandomElement();
                 IntVec3 cell = anchor + GenRadial.RadialPattern[Rand.Range(0, radialCount)];
-                if (!map.GetComponent<MapComponent_AntHabitats>().IsFungalHabitat(cell) && DesertPitPlantEcologyUtility.CanRegrowPlantAt(map, cell, plantDef))
+                if (!map.GetComponent<MapComponent_AntHabitats>().IsFungalHabitat(cell)
+                    && DesertPitPlantEcologyUtility.CanRegrowPlantAt(map, cell, target.PlantDef)
+                    && (fungus == null || DesertPitGiantFungusUtility.HasSpace(map, cell, fungus)))
                 {
-                    DesertPitPlantEcologyUtility.SpawnPlant(map, plantDef, cell, settings.initialGrowthRange);
+                    DesertPitPlantEcologyUtility.SpawnPlant(map, target.PlantDef, cell, settings.initialGrowthRange);
                     return true;
                 }
             }

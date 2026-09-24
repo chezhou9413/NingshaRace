@@ -34,13 +34,14 @@ namespace NingshaRaceLib.DesertPit.Generation.Topology
             DesertPitGenerationProgress.SetStepFraction(0.75f);
             yield return null;
             missing += DesertPitSecondaryRooms.Generate(map, data, settings, true);
-            if (missing > 0) Log.Warning($"[凝砂族] 河谷有 {missing} 处可选小洞室因岩层占用或重叠过密未放置，主次洞群与河流不受影响。");
             DesertPitGenerationProgress.SetStepFraction(0.9f);
             yield return null;
             DesertPitAuxiliaryRooms.Generate(map, data, settings);
             yield return null;
             DesertPitMarshPlanner.Generate(map, data, settings);
             Validate(map, data, settings);
+            //可选洞室允许随空间减少，必要布局通过连通验收后只记录正常的生成结果。
+            if (missing > 0) Log.Message($"[凝砂族] 河谷按可用空间生成，省略 {missing} 处可选小洞室；必要主次洞群、蚁巢和河流已通过布局检查。");
         }
 
         //函数职责：清空仅用于本次布局的结构缓存，不触及其他地图和存档对象。

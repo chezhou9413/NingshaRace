@@ -60,7 +60,8 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
 
                 float radius = settings != null ? settings.stoneForestRadius.RandomInRange : Rand.Range(7.5f, 11.5f);
                 DesertPitLandmarkTerrainUtility.PaintStoneTerrain(map, center, radius, sandstoneRough);
-                PlaceStalactiteForest(map, data, center, radius);
+                int target = settings != null ? DesertPitStoneForestDensity.Target(map, data, center, radius) : Rand.RangeInclusive(42, 62);
+                PlaceStalactiteForest(map, data, center, radius, target);
                 DesertPitLandmarkUtility.ScatterRubble(map, center, radius, Rand.RangeInclusive(42, 70));
                 DesertPitLandmarkUtility.ScatterChunks(map, center, radius, sandstoneChunk, Rand.RangeInclusive(4, 8));
             }
@@ -108,11 +109,12 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
         }
 
         //函数职责：在石林区域密集放置不同形态的钟乳石残柱。
-        private static void PlaceStalactiteForest(Map map, DesertPitLayoutData data, IntVec3 center, float radius)
+        private static void PlaceStalactiteForest(Map map, DesertPitLayoutData data, IntVec3 center, float radius, int target)
         {
             List<IntVec3> placed = new List<IntVec3>();
             List<IntVec3> candidates = DesertPitLandmarkPlacementUtility.CollectLocalCandidates(map, data, center, radius);
-            int target = Mathf.Min(Rand.RangeInclusive(42, 62), candidates.Count);
+            if (candidates.Count < target)
+                throw new System.InvalidOperationException("石林" + center + "可用格不足，目标：" + target + "，可用：" + candidates.Count);
             int guard = 0;
             while (placed.Count < target && candidates.Count > 0 && guard < target * 5)
             {
@@ -126,6 +128,9 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
 
                 guard++;
             }
+            if (placed.Count < target)
+                throw new System.InvalidOperationException("石林" + center + "未达到面积配额，目标：" + target
+                    + "，已放置：" + placed.Count + "，待检查候选格：" + candidates.Count);
         }
 
         //函数职责：在水晶簇区域放置不同尺寸的发光砂晶。

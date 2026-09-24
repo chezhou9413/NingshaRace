@@ -40,6 +40,8 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
             data.SmallRooms.Clear();
             data.Collapses.Clear();
             data.ProtectedRouteCells.Clear();
+            data.PassageCells.Clear();
+            data.Passages.Clear();
             data.ReservedSceneCells.Clear();
             data.CaveEdgeDistances = null;
 

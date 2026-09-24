@@ -52,9 +52,11 @@ namespace NingshaRaceLib.DesertPit.AntColony.Generation.Chambers
             foreach (IntVec3 cell in connected)
             {
                 MapGenerator.Caves[cell] = 2f;
+                data.PassageCells.Add(cell);
                 data.ReservedSceneCells.Add(cell);
                 data.ProtectedRouteCells.Add(cell);
             }
+            data.Passages.Add(new DesertPitPassage(path, connected));
         }
     }
 }

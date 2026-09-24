@@ -44,7 +44,7 @@ namespace NingshaRaceLib.DesertPit.Ecology.Utility
                 }
             }
 
-            return false;
+            return DesertPitGiantFungusUtility.Find(settings, plantDef) != null;
         }
 
         //函数职责：按照生态配置权重选择一种可生成的洞穴植物。

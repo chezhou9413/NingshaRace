@@ -36,6 +36,19 @@
           <li><plant>Bryolux</plant><weight>13</weight></li>
           <li><plant>Agarilux</plant><weight>10</weight></li>
         </plants>
+        <!--巨菇按标准二百格地图的独立配额散布，后续与普通菌群共用再生调度。-->
+        <giantFungi>
+          <li>
+            <plant>NingshaRace_GiantTimberMushroom</plant>
+            <countRange>18~28</countRange>
+            <spacing>4</spacing>
+          </li>
+          <li>
+            <plant>NingshaRace_DroopingGlowMushroom</plant>
+            <countRange>12~18</countRange>
+            <spacing>4</spacing>
+          </li>
+        </giantFungi>
       </li>
       <li Class="NingshaRaceLib.DesertPit.Ecology.Config.DefModExtension_DesertPitFauna">
         <hiveCount>1</hiveCount>

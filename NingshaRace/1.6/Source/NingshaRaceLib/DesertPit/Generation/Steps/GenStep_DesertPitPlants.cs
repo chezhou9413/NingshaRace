@@ -6,6 +6,7 @@ using Verse;
 using NingshaRaceLib.Core.Defs;
 using NingshaRaceLib.DesertPit.Buildings;
 using NingshaRaceLib.DesertPit.Ecology.Config;
+using NingshaRaceLib.DesertPit.Ecology.Generation;
 using NingshaRaceLib.DesertPit.Ecology.Utility;
 using NingshaRaceLib.DesertPit.Generation.Caves;
 using NingshaRaceLib.DesertPit.Generation.Data;
@@ -32,22 +33,20 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
             DesertPitGenUtility.SetGenerationStatus("洞穴植物");
             DesertPitLayoutData data = DesertPitGenUtility.GetLayoutData();
             NingshaRaceLib.DesertPit.Generation.Habitats.DesertPitHabitatContent.Generate(map, data);
+            NingshaRaceLib.DesertPit.Generation.Resources.DesertPitPassageResources.Generate(map, data);
             DefModExtension_DesertPitEcology settings = DesertPitPlantEcologyUtility.GetSettings(map);
             ThingDef glowDef = DefDatabase<ThingDef>.GetNamed("NingshaRace_DesertPitGlow");
             List<IntVec3> candidates = CollectCandidates(map, data, glowDef);
-            if (candidates.Count == 0)
-            {
-                return;
-            }
-
             List<IntVec3> placed = new List<IntVec3>();
-            int targetCount = Mathf.Min(Rand.RangeInclusive(70, 105), candidates.Count);
-            int foodCount = Rand.RangeInclusive(24, 32);
-            int medicineCount = Rand.RangeInclusive(6, 10);
+            int targetCount = Rand.RangeInclusive(140, 210);
+            if (candidates.Count < targetCount)
+                throw new System.InvalidOperationException("普通洞穴植物可用格不足，目标：" + targetCount + "，可用：" + candidates.Count);
+            int foodCount = Rand.RangeInclusive(48, 64);
+            int medicineCount = Rand.RangeInclusive(12, 20);
             PlaceGuaranteedPlants(map, data, candidates, placed, DefOfRefs.NingshaRace_DesertPitPlantA, foodCount / 2, "食用菌A");
             PlaceGuaranteedPlants(map, data, candidates, placed, DefOfRefs.NingshaRace_DesertPitPlantC, foodCount - foodCount / 2, "食用菌C");
             PlaceGuaranteedPlants(map, data, candidates, placed, DefOfRefs.NingshaRace_DesertPitPlantD, medicineCount, "药用菌");
-            int clusterCount = Mathf.Min(Rand.RangeInclusive(16, 24), candidates.Count);
+            int clusterCount = Mathf.Min(Rand.RangeInclusive(32, 48), candidates.Count);
             for (int i = 0; i < clusterCount && placed.Count < targetCount && candidates.Count > 0; i++)
             {
                 IntVec3 center = candidates.RandomElementByWeight((IntVec3 cell) => ClusterCenterWeight(map, data, cell));
@@ -59,6 +58,9 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
             {
                 throw new System.InvalidOperationException("沙漠巨坑洞穴植物未达到生态总量，目标数量：" + targetCount + "，实际数量：" + placed.Count + "。");
             }
+            DesertPitGiantFungi.Generate(map, data, settings);
+            NingshaRaceLib.DesertPit.Generation.Resources.DesertPitRoomEdgeResources.Generate(map, data);
+            NingshaRaceLib.DesertPit.Generation.Habitats.DesertPitHabitatPlants.ValidateLight(map, data);
         }
 
         //函数职责：为生存所需植物放置指定数量的成熟植株，无法满足时直接报告地图生成错误。
@@ -69,7 +71,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Steps
                 IntVec3 cell;
                 if (!TryFindAnyCell(map, data, candidates, placed, plantDef, IsLargePlant(plantDef), out cell))
                 {
-                    throw new System.InvalidOperationException("沙漠巨坑无法生成足量" + resourceLabel + "，目标数量：" + count + "。");
+                    throw new System.InvalidOperationException("普通洞穴植物无法生成足量" + resourceLabel + "，目标：" + count + "，已放置：" + i + "，剩余合法格：0。");
                 }
 
                 DesertPitPlantEcologyUtility.SpawnPlant(map, plantDef, cell, new FloatRange(1f, 1f));

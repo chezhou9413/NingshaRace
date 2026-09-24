@@ -19,13 +19,13 @@ namespace NingshaRaceLib.DesertPit.Generation.Config
         public float riverDiagonalReach = 0.82f;
         public float riverMeander = 7f;
         public float riverMeanderFrequency = 6f;
-        public IntRange stoneForestCount = new IntRange(9, 13);
-        public FloatRange stoneForestRadius = new FloatRange(7.5f, 11.5f);
+        public IntRange stoneForestCount = new IntRange(11, 13);
+        public FloatRange stoneForestRadius = new FloatRange(9f, 13f);
         public IntRange antSideRoomCount = new IntRange(1, 3);
         public FloatRange antSideRoomRadius = new FloatRange(5f, 12f);
         public float extraTunnelChance = 0.5f;
         public IntRange marshCount = new IntRange(1, 3);
-        public FloatRange marshRadius = new FloatRange(4f, 10f);
+        public FloatRange marshRadius = new FloatRange(8f, 15f);
         public float marshCoverage = 0.8f;
         public IntRange habitatRoomCount = new IntRange(3, 7);
         public FloatRange habitatRoomRadius = new FloatRange(5f, 10f);

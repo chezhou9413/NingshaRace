@@ -41,16 +41,17 @@ namespace NingshaRaceLib.DesertPit.Generation.Topology
         public static void Connect(Map map, DesertPitLayoutData data, IntVec3 from, IntVec3 to,
             float width, HashSet<IntVec3> forbidden, float minimumRadius = 2f)
         {
+            Func<IntVec3, bool> canPass = center => CanPass(map, center, forbidden);
+            if (!canPass(from) || !canPass(to))
+                throw new InvalidOperationException("地下通道端点没有满足宽度的净空，起点：" + from + "，终点：" + to);
             List<IntVec3> path = BuildCurvedPath(from, to);
-            Func<IntVec3, bool> canPass = center => CanOpen(map, center, forbidden)
-                && CanOpen(map, center + IntVec3.North, forbidden) && CanOpen(map, center + IntVec3.South, forbidden)
-                && CanOpen(map, center + IntVec3.East, forbidden) && CanOpen(map, center + IntVec3.West, forbidden);
             bool obstructed = false;
             foreach (IntVec3 cell in path)
                 if (!canPass(cell)) { obstructed = true; break; }
             if (obstructed)
                 path = AntTunnelPathfinder.Find(map, new[] { from }, canPass, cell => cell == to);
             float phase = Rand.Range(0f, 6.28f);
+            HashSet<IntVec3> floor = new HashSet<IntVec3>();
             for (int i = 0; i < path.Count; i++)
             {
                 IntVec3 center = path[i];
@@ -59,10 +60,13 @@ namespace NingshaRaceLib.DesertPit.Generation.Topology
                 {
                     if (!CanOpen(map, cell, forbidden)) continue;
                     MapGenerator.Caves[cell] = 1f;
+                    data.PassageCells.Add(cell);
+                    floor.Add(cell);
                     //仅保护步行核心，两旁宽洞口仍允许生成正常洞穴内容。
                     if (cell.DistanceToSquared(center) <= 2.25f) data.ProtectedRouteCells.Add(cell);
                 }
             }
+            data.Passages.Add(new DesertPitPassage(path, floor));
         }
 
         //函数职责：沿平滑偏转的中心线串联宽窄洞口，按四邻接补齐采样间隙而不是切出直线走廊。
@@ -95,6 +99,12 @@ namespace NingshaRaceLib.DesertPit.Generation.Topology
         //函数职责：判断普通洞室笔刷是否允许使用地图中的指定格子。
         private static bool CanOpen(Map map, IntVec3 cell, HashSet<IntVec3> forbidden)
             => cell.InBounds(map) && (forbidden == null || !forbidden.Contains(cell));
+
+        //函数职责：统一检查通道中心及四邻格净空，供端点选择、曲线检测和寻路使用。
+        internal static bool CanPass(Map map, IntVec3 center, HashSet<IntVec3> forbidden)
+            => CanOpen(map, center, forbidden)
+                && CanOpen(map, center + IntVec3.North, forbidden) && CanOpen(map, center + IntVec3.South, forbidden)
+                && CanOpen(map, center + IntVec3.East, forbidden) && CanOpen(map, center + IntVec3.West, forbidden);
 
         //函数职责：移除被岩脊隔开的轮廓边角，确保实际洞室全部四邻接连通。
         private static void KeepConnected(DesertPitRoom room)

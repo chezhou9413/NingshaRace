@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!--湿地岩石保留粗糙砂岩外观，以裂隙内的少量菌质为沼泽菌群提供生长肥力。-->
+  <TerrainDef>
+    <defName>NingshaRace_DesertPitMarshRock</defName>
+    <label>湿地砂岩</label>
+    <description>沼泽中的粗糙砂岩，裂隙内积累了少量可供菌类生长的腐殖质。</description>
+    <texturePath>Terrain/Surfaces/RoughStone</texturePath>
+    <edgeType>FadeRough</edgeType>
+    <renderPrecedence>195</renderPrecedence>
+    <categoryType>Stone</categoryType>
+    <natural>true</natural>
+    <color>(160,143,112)</color>
+    <pathCost>2</pathCost>
+    <fertility>0.15</fertility>
+    <scatterType>Rocky</scatterType>
+    <filthAcceptanceMask>Terrain,Unnatural</filthAcceptanceMask>
+    <statBases><Beauty>-1</Beauty></statBases>
+    <affordances><li>Light</li><li>Medium</li><li>Heavy</li><li>Walkable</li></affordances>
+    <tags><li>NaturalRock</li></tags>
+  </TerrainDef>
+</Defs>
