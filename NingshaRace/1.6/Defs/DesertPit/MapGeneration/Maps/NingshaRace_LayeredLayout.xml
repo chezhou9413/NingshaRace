@@ -18,6 +18,8 @@
         <riverDiagonalReach>0.82</riverDiagonalReach>
         <riverMeander>12</riverMeander>
         <riverMeanderFrequency>10</riverMeanderFrequency>
+        <!--河流两岸分别按连续噪声凹凸，保留最低河宽与实际水面外的干岸。-->
+        <riverEdgeNoise>1.1</riverEdgeNoise>
         <!--片数与单片半径独立配置；附属洞室通过窄通道连接，保护蚁巢核心的唯一洞口。-->
         <stoneForestCount>11~13</stoneForestCount>
         <stoneForestRadius>9~13</stoneForestRadius>
@@ -33,6 +35,8 @@
         <!--水潭概率仅在已经生成坠砂裂隙的洞室中抽取。-->
         <habitatPondChance>0.5</habitatPondChance>
         <habitatPondRadius>2~7</habitatPondRadius>
+        <!--水潭采用不等长轴与环形边界噪声，保留洞壁干岸和通道。-->
+        <habitatPondEdgeNoise>0.28</habitatPondEdgeNoise>
         <!--以地图半宽、半高归一化，划分内中外三层同心方形，蚁巢优先处于中层外半部。-->
         <innerBoundary>0.33333334</innerBoundary>
         <outerBoundary>0.6666667</outerBoundary>

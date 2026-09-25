@@ -52,7 +52,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Habitats
                 DesertPitHabitat habitat = new DesertPitHabitat { room = room, sandfall = sandfall, pond = pond };
                 habitat.floor.UnionWith(room.Floor);
                 habitat.floor.ExceptWith(data.ReservedSceneCells);
-                if (habitat.pond) PlanPond(data, habitat, settings);
+                if (habitat.pond) DesertPitPondPlanner.Plan(data, habitat, settings);
                 data.Habitats.Add(habitat);
                 data.ReservedSceneCells.UnionWith(habitat.floor);
                 walls.UnionWith(habitat.floor);
@@ -123,18 +123,5 @@ namespace NingshaRaceLib.DesertPit.Generation.Habitats
             }
         }
 
-        //函数职责：根据实际洞壁限制中央水潭半径，保留泥土岸带和已有通道。
-        private static void PlanPond(DesertPitLayoutData data, DesertPitHabitat habitat, DefModExtension_DesertPitLayout settings)
-        {
-            float clearance = Mathf.Min(habitat.room.RadiusX, habitat.room.RadiusZ);
-            foreach (IntVec3 cell in habitat.floor)
-                foreach (IntVec3 offset in GenAdj.CardinalDirections)
-                    if (!habitat.floor.Contains(cell + offset)) clearance = Mathf.Min(clearance, (cell + offset).DistanceTo(habitat.room.Center));
-            float radius = Mathf.Min(settings.habitatPondRadius.RandomInRange, clearance - 1f);
-            if (radius < settings.habitatPondRadius.min)
-                throw new InvalidOperationException("生态洞室无法容纳水潭与岸带，请增大生态洞室半径。");
-            foreach (IntVec3 cell in GenRadial.RadialCellsAround(habitat.room.Center, radius, true))
-                if (habitat.floor.Contains(cell) && !data.ProtectedRouteCells.Contains(cell)) habitat.water.Add(cell);
-        }
     }
 }

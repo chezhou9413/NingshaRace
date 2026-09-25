@@ -3,7 +3,6 @@ using NingshaRaceLib.DesertPit.Generation.Config;
 using NingshaRaceLib.DesertPit.Generation.Data;
 using UnityEngine;
 using Verse;
-using Verse.Noise;
 
 namespace NingshaRaceLib.DesertPit.Generation.Hydrology
 {
@@ -20,7 +19,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Hydrology
             float sign = Rand.Bool ? 1f : -1f;
             data.RiverLateralSlope = sign * settings.riverDiagonalReach * lateralLast / last;
             float bendSign = Rand.Bool ? 1f : -1f;
-            float safeRadius = settings.mainDryRadius + settings.riverWidth.max * 0.5f + 2f;
+            float safeRadius = settings.mainDryRadius + settings.riverWidth.max * 0.5f + settings.riverEdgeNoise + 2f;
             float bump = (safeRadius + 5f) * Mathf.Sqrt(1f + data.RiverLateralSlope * data.RiverLateralSlope);
             float phase = Rand.Range(0f, Mathf.PI * 2f);
             for (int axis = 0; axis <= last; axis++)
@@ -46,7 +45,7 @@ namespace NingshaRaceLib.DesertPit.Generation.Hydrology
                     foreach (IntVec3 cell in GenSight.PointsOnLineOfSight(data.RiverCenterline[data.RiverCenterline.Count - 1], next))
                         if (cell != data.RiverCenterline[data.RiverCenterline.Count - 1]) data.RiverCenterline.Add(cell);
             }
-            ReserveCorridor(map, data, settings);
+            DesertPitRiverBanks.Reserve(map, data, settings);
         }
 
         //函数职责：确认完整蚁巢没有覆盖预留河谷后开挖水道，保持所有地图写入在生成线程完成。
@@ -57,25 +56,6 @@ namespace NingshaRaceLib.DesertPit.Generation.Hydrology
                     if (data.RiverCorridorCells.Contains(cell))
                         throw new InvalidOperationException("蚁巢岩层侵入了预留斜向河谷，请检查中层布局参数。");
             foreach (IntVec3 cell in data.RiverCorridorCells) MapGenerator.Caves[cell] = 1f;
-        }
-
-        //函数职责：沿真实河心记录变宽水面与两侧岸线，供蚁巢选址和后续场景生成共同避让。
-        private static void ReserveCorridor(Map map, DesertPitLayoutData data, DefModExtension_DesertPitLayout settings)
-        {
-            ModuleBase noise = new Perlin(0.055, 2.0, 0.5, 2, Rand.Int, QualityMode.Medium);
-            foreach (IntVec3 center in data.RiverCenterline)
-            {
-                float t = Mathf.Clamp01(0.5f + 0.5f * (float)noise.GetValue(center.x, 0, center.z));
-                float radius = Mathf.Lerp(settings.riverWidth.min, settings.riverWidth.max, t) * 0.5f;
-                foreach (IntVec3 cell in GenRadial.RadialCellsAround(center, radius + settings.riverBankWidth, true))
-                {
-                    if (!cell.InBounds(map)) continue;
-                    data.RiverCorridorCells.Add(cell);
-                    data.ReservedSceneCells.Add(cell);
-                    data.ProtectedRouteCells.Add(cell);
-                    if (cell.DistanceToSquared(center) <= radius * radius) data.RiverWaterCells.Add(cell);
-                }
-            }
         }
 
         //函数职责：取得河道主方向坐标，统一处理从两组相对边缘进入地图的河流。

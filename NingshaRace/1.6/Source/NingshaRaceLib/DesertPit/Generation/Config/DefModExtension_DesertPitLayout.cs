@@ -19,6 +19,8 @@ namespace NingshaRaceLib.DesertPit.Generation.Config
         public float riverDiagonalReach = 0.82f;
         public float riverMeander = 7f;
         public float riverMeanderFrequency = 6f;
+        //河流岸线的最大半径扰动，以地图格为单位。
+        public float riverEdgeNoise = 1.1f;
         public IntRange stoneForestCount = new IntRange(11, 13);
         public FloatRange stoneForestRadius = new FloatRange(9f, 13f);
         public IntRange antSideRoomCount = new IntRange(1, 3);
@@ -32,6 +34,8 @@ namespace NingshaRaceLib.DesertPit.Generation.Config
         public float habitatSandfallChance = 0.5f;
         public float habitatPondChance = 0.5f;
         public FloatRange habitatPondRadius = new FloatRange(2f, 7f);
+        //生态水潭边界半径的相对扰动幅度。
+        public float habitatPondEdgeNoise = 0.28f;
         public float innerBoundary = 1f / 3f;
         public float outerBoundary = 2f / 3f;
         public float antPreferredLayer = 0.59f;
@@ -70,6 +74,9 @@ namespace NingshaRaceLib.DesertPit.Generation.Config
                 || !(riverMeander >= 2f && riverMeander <= 12f)) yield return "斜河端点展开比例必须为零点五至零点九，曲流幅度必须为二至十二格。";
             if (!(moundSpacing >= 12f && moundSpacing <= 30f)) yield return "菌巢最小间距必须为十二至三十格。";
             if (!(riverMeanderFrequency >= 2f && riverMeanderFrequency <= 16f)) yield return "河流曲流频率必须为二至十六。";
+            if (!(riverEdgeNoise >= 0f && riverEdgeNoise <= 1.5f)
+                || !(habitatPondEdgeNoise >= 0f && habitatPondEdgeNoise <= 0.45f))
+                yield return "河流岸线扰动必须为零至一点五格，水潭边界扰动必须为零至百分之四十五。";
             if (!ValidCount(stoneForestCount, 1, 24) || !ValidCount(antSideRoomCount, 1, 5)
                 || !ValidCount(marshCount, 1, 6) || !ValidCount(habitatRoomCount, 1, 12)) yield return "石林或附属生态区数量超出允许范围。";
             if (!ValidRange(stoneForestRadius) || !ValidRange(antSideRoomRadius) || !ValidRange(marshRadius)
