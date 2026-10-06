@@ -12,6 +12,12 @@ namespace NingshaRaceLib.DesertPit.AntColony.Jobs
     {
         private const TargetIndex IntruderIndex = TargetIndex.A;
 
+        //沿途发现更近的敌人时允许转向，同一目标则继续追击。
+        public override bool IsContinuation(Job next)
+        {
+            return job.targetA == next.targetA;
+        }
+
         //函数职责：爆浆蚁允许共同追击同一目标，因此不独占预留目标。
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
@@ -44,7 +50,8 @@ namespace NingshaRaceLib.DesertPit.AntColony.Jobs
         {
             Thing target = job.GetTarget(IntruderIndex).Thing;
             return target != null && target.Spawned && target.Map == pawn.Map && !target.Destroyed
-                && !(target is Pawn victim && (victim.Dead || victim.Downed));
+                && !(target is Pawn victim && (victim.Dead || victim.Downed))
+                && Map.GetComponent<MapComponent_DesertPitAntColonies>().CanContinueColonyAttack(pawn, target);
         }
     }
 }

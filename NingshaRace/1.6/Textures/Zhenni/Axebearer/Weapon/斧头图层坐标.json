@@ -1,0 +1,35 @@
+{
+  "source": "D:\\QQ\\刀兵测试 (3).psd",
+  "origin": [
+    723,
+    1031
+  ],
+  "canvas": [
+    576,
+    576
+  ],
+  "layers": [
+    {
+      "id": "Axe",
+      "layer": "图层 4",
+      "bbox": [
+        863,
+        1127,
+        1076,
+        1576
+      ],
+      "output": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.6\\Textures\\Zhenni\\Axebearer\\Weapon\\Axebearer_Axe.png"
+    },
+    {
+      "id": "AxeFlame",
+      "layer": "火苗4 副本 5",
+      "bbox": [
+        909,
+        1063,
+        1159,
+        1213
+      ],
+      "output": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.6\\Textures\\Zhenni\\Axebearer\\Weapon\\Axebearer_AxeFlame.png"
+    }
+  ]
+}

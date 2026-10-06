@@ -84,8 +84,8 @@ namespace NingshaRaceLib.DesertPit.AntColony.Config
         //字段职责：规定蚁穴被毁后狂暴成员的搜敌半径。
         public float frenzyRadius = 40f;
 
-        //字段职责：规定撤退期间允许防御的蚁穴近距离半径。
-        public float retreatDefenseRadius = 6f;
+        //撤退期间只防御蚁穴十五格内可见的敌人。
+        public float retreatDefenseRadius = 15f;
 
         //字段职责：规定常规成员伤亡统计的四小时窗口。
         public int retreatLossWindowTicks = 10000;
@@ -126,8 +126,12 @@ namespace NingshaRaceLib.DesertPit.AntColony.Config
         //字段职责：规定工蚁每批次允许完成的搬运次数。
         public int workerHaulLimit = 3;
 
-        //字段职责：规定工蚁完成一个搬运批次后的冷却。
-        public int workerHaulCooldownTicks = 2500;
+        //工蚁完成三趟搬运后休整半天。
+        public int workerHaulCooldownTicks = 30000;
+
+        //工蚁每半天挖出一批物资，产物与概率由蚁穴定义提供。
+        public int workerResourceIntervalTicks = 30000;
+        public System.Collections.Generic.List<AntWorkerResourceYield> workerResourceYields;
 
         //字段职责：规定蚁后单次繁殖工作的持续时间。
         public int reproductionWorkTicks = 600;

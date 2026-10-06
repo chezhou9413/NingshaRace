@@ -17,7 +17,12 @@ namespace NingshaRaceLib.DesertPit.AntColony.Jobs
         {
             this.FailOn(() => !Map.GetComponent<MapComponent_DesertPitAntColonies>().CanHarvestForColony(pawn, TargetA.Thing as Plant));
             yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
-            yield return Toils_General.Wait((int)TargetA.Thing.def.plant.harvestWork).WithProgressBarToilDelay(TargetIndex.A);
+            Toil harvest = Toils_General.Wait((int)TargetA.Thing.def.plant.harvestWork)
+                .WithProgressBarToilDelay(TargetIndex.A);
+            harvest.WithEffect(TargetA.Thing.def.plant.IsTree ? EffecterDefOf.Harvest_Tree : EffecterDefOf.Harvest_Plant,
+                TargetIndex.A);
+            harvest.PlaySustainerOrSound(() => TargetA.Thing.def.plant.soundHarvesting);
+            yield return harvest;
             yield return Toils_General.Do(delegate
             {
                 Plant plant = (Plant)TargetA.Thing;
@@ -36,7 +41,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Jobs
                         throw new System.InvalidOperationException("工蚁采收的食物无法放回地图。");
                 }
                 plant.PlantCollected(pawn, PlantDestructionMode.Chop);
-                Map.GetComponent<MapComponent_DesertPitAntColonies>().NotifyFungusHarvested();
+                Map.GetComponent<MapComponent_DesertPitAntColonies>().NotifyFungusHarvested(pawn);
             });
         }
     }

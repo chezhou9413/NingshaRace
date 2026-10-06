@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 伤害和攻速交给原版近战工具，动画仅对齐出手和接触时间。 -->
+  <ThingDef ParentName="BaseMeleeWeapon_Sharp">
+    <defName>NingshaRace_Zhenni_Axebearer_Axe</defName>
+    <label>持斧者幽斧</label>
+    <description>震尼持斧者的幽焰战斧，沉重的斧刃会在挥动时拖出紫焰；脱离持斧者后便会消散。</description>
+    <graphicData>
+      <texPath>Zhenni/Axebearer/Weapon/Axebearer_Axe</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Cutout</shaderType>
+      <drawSize>(1.05, 1.05)</drawSize>
+    </graphicData>
+    <!-- 贴图柄轴朝上；四向额外握持校准和刃段坐标保存在动作定义中。 -->
+    <equippedAngleOffset>15</equippedAngleOffset>
+    <recipeMaker IsNull="True" />
+    <destroyOnDrop>true</destroyOnDrop>
+    <tradeability>None</tradeability>
+    <smeltable>false</smeltable>
+    <burnableByRecipe>false</burnableByRecipe>
+    <relicChance>0</relicChance>
+    <statBases>
+      <Mass>3.6</Mass>
+      <MarketValue>100</MarketValue>
+      <Flammability>0</Flammability>
+      <DeteriorationRate>0</DeteriorationRate>
+    </statBases>
+    <weaponTags><li>NingshaRaceAxebearerAxe</li></weaponTags>
+    <tools><li>
+      <label>幽斧刃</label>
+      <capacities><li>Cut</li></capacities>
+      <power>36</power>
+      <armorPenetration>0.4</armorPenetration>
+      <cooldownTime>2.8</cooldownTime>
+    </li></tools>
+  </ThingDef>
+</Defs>

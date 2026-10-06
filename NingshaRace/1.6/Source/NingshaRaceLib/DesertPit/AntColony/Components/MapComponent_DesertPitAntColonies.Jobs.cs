@@ -86,13 +86,15 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
 
             if (caste == AntCaste.Worker)
             {
-                Job foodHaul = TryCreateForageJob(pawn, state, true);
-                if (foodHaul != null) return foodHaul;
-                if (GetStoredNutrition(state) < GetFoodReserve(state) * Settings.harvestReserveMultiplier)
+                if (state.HarvestRequested)
                 {
                     Job harvest = TryCreateHarvestJob(pawn, state);
                     if (harvest != null) return harvest;
                 }
+                Job foodHaul = TryCreateForageJob(pawn, state, true);
+                if (foodHaul != null) return foodHaul;
+                Job dig = TryCreateResourceDigJob(pawn);
+                if (dig != null) return dig;
                 Job forageJob = TryCreateForageJob(pawn, state, false);
                 return forageJob ?? CreatePatrolJob(pawn, state, Settings.workerWanderRadius);
             }
@@ -154,6 +156,8 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         private static Job CreateMeleeAttackJob(Thing target)
         {
             Job job = JobMaker.MakeJob(DefOfRefs.NingshaRace_Job_DesertPitAntMelee, target);
+            //第二目标标记巢群战斗，破障任务仍独立检查近战能力。
+            job.targetB = target;
             job.maxNumMeleeAttacks = 1;
             job.expiryInterval = 500;
             job.attackDoorIfTargetLost = true;
@@ -168,12 +172,13 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             return job;
         }
 
-        //函数职责：在引爆前确认目标仍在同图活动，并且已进入配置的自爆距离。
+        //引爆前再次确认目标仍在允许防御的区域，且进入实际自爆距离。
         public bool IsBoomInTriggerRange(Pawn boomAnt, Thing target)
         {
             return boomAnt != null && boomAnt.Spawned && target != null && target.Spawned
                 && target.Map == boomAnt.Map && !target.Destroyed
                 && !(target is Pawn victim && (victim.Dead || victim.Downed))
+                && CanContinueColonyAttack(boomAnt, target)
                 && boomAnt.Position.DistanceTo(target.Position) <= Settings.boomTriggerDistance;
         }
 

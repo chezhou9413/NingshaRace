@@ -1,0 +1,11 @@
+近战预警闪光素材
+
+素材：1.6/Textures/Combat/MeleeAnimation/MeleeChargeStar.png
+生成方式：内置 imagegen，transparent_background=true。
+参考图：用户提供的 codex-clipboard-be2534ac-9c99-4507-9635-7631f2beabe9.png。
+原始输出：exec-8c89833c-460a-40b5-b3e5-2ee056f026e2.png。
+用途：震尼拥刀者近战蓄力预警，白色亮芯、细长十字尖芒和主体紫焰光晕。
+保留生成输出的 RGBA 通道；运行时使用单张平面和原版 MoteGlow 加色绘制。
+
+最终提示词
+Use case: stylized-concept. Create one production 2D game VFX sprite based on the CENTRAL FLASH in the supplied reference image. The supplied image is a style reference only. Extract the visual idea of its dazzling white-pink center, long thin horizontal flare, tall narrow vertical flare, smooth lilac/violet light aura, and a few very short secondary slivers close to the core. Produce one coherent four-point cross-star flash, centered on a square transparent RGBA canvas, preferably 1024x1024. The horizontal rays are needle-sharp and longer than the vertical rays. Around the compact dazzling core, smooth concave shoulders connect all four rays into a single luminous silhouette, with gentle lavender bloom feathering seamlessly into zero alpha. Bright pearl-white core, pale violet shoulders, saturated cool purple outer halo consistent with a purple ghost-flame enemy. Crisp recognizable tips plus very soft airy glow: match the reference's concentrated magical flash, not a fuzzy round sparkle. No rectangles or intersecting beam strips; no seams. Do not recreate the surrounding circular frame, diamonds, UI, character, weapon, blue orb, or background in the reference. No ring, text, lens flare discs, smoke or detached particles. Preserve at least 12% truly transparent margin around every edge. Do not bake a black, white, or checkerboard background; all faint purple light must be real smoothly varying transparency.

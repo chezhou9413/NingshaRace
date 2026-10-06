@@ -1,6 +1,7 @@
 using NingshaRaceLib.DesertPit.AntColony.Core;
 using NingshaRaceLib.DesertPit.AntColony.State;
 using NingshaRaceLib.DesertPit.AntColony.Combat;
+using NingshaRaceLib.Core.Defs;
 using RimWorld;
 using Verse;
 using Verse.AI;
@@ -68,12 +69,21 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
                 return AntMeleeCapability.CanAttack(pawn, target) ? CreateMeleeAttackJob(target) : null;
             if (verb.CanHitTarget(target))
             {
-                Job attack = JobMaker.MakeJob(JobDefOf.AttackStatic, target);
+                Job attack = JobMaker.MakeJob(DefOfRefs.NingshaRace_Job_DesertPitAntShoot, target);
                 attack.verbToUse = verb;
                 attack.maxNumStaticAttacks = 1;
                 attack.expiryInterval = 500;
                 attack.endIfCantShootTargetFromCurPos = true;
                 return attack;
+            }
+            if (pawn.CurJobDef == DefOfRefs.NingshaRace_Job_DesertPitAntCombatMove
+                && pawn.CurJob.targetB.Thing == target)
+            {
+                Job continuing = JobMaker.MakeJob(DefOfRefs.NingshaRace_Job_DesertPitAntCombatMove,
+                    pawn.CurJob.targetA.Cell, target);
+                continuing.expiryInterval = 250;
+                continuing.locomotionUrgency = LocomotionUrgency.Jog;
+                return continuing;
             }
             if (CastPositionFinder.TryFindCastPosition(new CastPositionRequest
             {
@@ -83,7 +93,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
                 wantCoverFromTarget = false
             }, out IntVec3 position) && position != pawn.Position)
             {
-                Job move = JobMaker.MakeJob(JobDefOf.Goto, position);
+                Job move = JobMaker.MakeJob(DefOfRefs.NingshaRace_Job_DesertPitAntCombatMove, position, target);
                 move.expiryInterval = 250;
                 move.locomotionUrgency = LocomotionUrgency.Jog;
                 return move;

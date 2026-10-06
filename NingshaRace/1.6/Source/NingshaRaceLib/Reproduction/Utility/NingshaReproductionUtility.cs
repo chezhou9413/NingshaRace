@@ -7,6 +7,7 @@ using Verse;
 using NingshaRaceLib.Core.Defs;
 using NingshaRaceLib.Reproduction.Components;
 using NingshaRaceLib.Molting.Components;
+using NingshaRaceLib.Erosion.Utility;
 
 namespace NingshaRaceLib.Reproduction.Utility
 {
@@ -43,12 +44,18 @@ namespace NingshaRaceLib.Reproduction.Utility
                 || pawn.health.hediffSet.HasHediff(HediffDefOf.PregnancyLaborPushing);
         }
 
-        //函数职责：创建指定 Def 的凝砂卵，并放到 Pawn 所在地图或玩家商队库存中。
+        //只有保留生育能力的凝砂能够创建卵，并放到地图或玩家商队库存中。
         public static bool TryCreateAndPlaceEgg(Pawn pawn, ThingDef eggDef, out Thing egg)
         {
             if (pawn == null || eggDef == null)
             {
                 Log.Error("[NingshaRace] 创建凝砂卵时缺少 Pawn 或卵 Def。");
+                egg = null;
+                return false;
+            }
+
+            if (ErosionPawnUtility.HasErosionBodyIdentity(pawn))
+            {
                 egg = null;
                 return false;
             }
@@ -119,7 +126,7 @@ namespace NingshaRaceLib.Reproduction.Utility
             return CreateBirthEgg(mother, father, preventLetter, clearPregnancyState: false);
         }
 
-        //函数职责：集中创建生产受精卵，并按调用来源决定是否主动清理尚未进入生产的孕期。
+        //排除侵蚀体，创建生产受精卵，并按调用来源清理尚未进入生产的孕期。
         private static Thing CreateBirthEgg(Pawn mother, Pawn father, bool preventLetter, bool clearPregnancyState)
         {
             if (!IsNingsha(mother))
@@ -127,6 +134,8 @@ namespace NingshaRaceLib.Reproduction.Utility
                 Log.Error("[NingshaRace] 只有凝砂族能够通过凝砂生产流程排出受精卵。");
                 return null;
             }
+
+            if (ErosionPawnUtility.HasErosionBodyIdentity(mother)) return null;
 
             Thing egg = CreateFertilizedEgg(mother, father, mother.Faction);
             if (egg == null || !TryPlaceEggForPawn(mother, egg))

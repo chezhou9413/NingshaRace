@@ -189,7 +189,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             }
         }
 
-        //函数职责：在撤退阶段仅让兵蚁与爆浆蚁攻击进入蚁穴六格内的敌人，其余成员返巢等待。
+        //撤退时兵蚁、吐酸蚁和爆浆蚁只防御蚁穴十五格内可见的敌人。
         private Job TryCreateRetreatJob(Pawn pawn, AntColonyState state, AntCaste caste)
         {
             Thing nearbyIntruder = FindNearestIntruderWithinNestRadius(pawn, state, Settings.retreatDefenseRadius);
@@ -220,7 +220,8 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
                 }
 
                 float distance = member.Position.DistanceToSquared(candidate.Position);
-                if (distance < bestDistance && CanEngageIntruder(member, candidate))
+                if (distance < bestDistance && CanContinueColonyAttack(member, candidate)
+                    && CanEngageIntruder(member, candidate))
                 {
                     bestDistance = distance;
                     result = candidate;

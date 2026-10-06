@@ -1,0 +1,446 @@
+{
+  "sourcePSD": "D:\\QQ\\刀兵测试 (3).psd",
+  "cleanedPSD": "E:\\ModdevMics\\Assets\\Zhenni\\Bladebearer\\刀兵四向_3_星光与火星分离.psd",
+  "southSourceRect": [
+    971,
+    382,
+    2059,
+    1470
+  ],
+  "newTextureCount": 24,
+  "addedPartCount": 36,
+  "layers": [
+    {
+      "id": "Cape_East",
+      "sourceLayer": "斗篷 副本 2",
+      "sourceBounds": [
+        314,
+        782,
+        866,
+        1344
+      ],
+      "sourceRect": [
+        269.5,
+        388,
+        1357.5,
+        1476
+      ],
+      "texture": "Zhenni/Bladebearer/Pawn/Bladebearer_Cape_east",
+      "removedSparkComponents": 0
+    },
+    {
+      "id": "FlameBody_East",
+      "sourceLayer": "火焰躯体 副本 2",
+      "sourceBounds": [
+        609,
+        783,
+        818,
+        1452
+      ],
+      "sourceRect": [
+        269.5,
+        388,
+        1357.5,
+        1476
+      ],
+      "texture": "Zhenni/Bladebearer/Pawn/Bladebearer_FlameBody_east",
+      "removedSparkComponents": 0
+    },
+    {
+      "id": "Flame4_East",
+      "sourceLayer": "火苗4 副本 2",
+      "sourceBounds": [
+        558,
+        1160,
+        754,
+        1450
+      ],
+      "sourceRect": [
+        269.5,
+        388,
+        1357.5,
+        1476
+      ],
+      "texture": "Zhenni/Bladebearer/Pawn/Bladebearer_Flame4_east",
+      "removedSparkComponents": 0
+    },
+    {
+      "id": "Head_East",
+      "sourceLayer": "图层 6",
+      "sourceBounds": [
+        553,
+        539,
+        928,
+        842
+      ],
+      "sourceRect": [
+        269.5,
+        388,
+        1357.5,
+        1476
+      ],
+      "texture": "Zhenni/Bladebearer/Pawn/Bladebearer_Head_east",
+      "removedSparkComponents": 0
+    },
+    {
+      "id": "Body_East",
+      "sourceLayer": "图层 9",
+      "sourceBounds": [
+        493,
+        791,
+        856,
+        1322
+      ],
+      "sourceRect": [
+        269.5,
+        388,
+        1357.5,
+        1476
+      ],
+      "texture": "Zhenni/Bladebearer/Pawn/Bladebearer_Body_east",
+      "removedSparkComponents": 0
+    },
+    {
+      "id": "Flame2_East",
+      "sourceLayer": "火苗2 副本",
+      "sourceBounds": [
+        594,
+        823,
+        736,
+        913
+      ],
+      "sourceRect": [
+        269.5,
+        388,
+        1357.5,
+        1476
+      ],
+      "texture": "Zhenni/Bladebearer/Pawn/Bladebearer_Flame2_east",
+      "removedSparkComponents": 0
+    },
+    {
+      "id": "Flame1_East",
+      "sourceLayer": "火苗1 副本",
+      "sourceBounds": [
+        733,
+        774,
+        814,
+        823
+      ],
+      "sourceRect": [
+        269.5,
+        388,
+        1357.5,
+        1476
+      ],
+      "texture": "Zhenni/Bladebearer/Pawn/Bladebearer_Flame1_east",
+      "removedSparkComponents": 0
+    },
+    {
+      "id": "Flame3_East",
+      "sourceLayer": "火苗3 副本",
+      "sourceBounds": [
+        542,
+        896,
+        759,
+        1046
+      ],
+      "sourceRect": [
+        269.5,
+        388,
+        1357.5,
+        1476
+      ],
+      "texture": "Zhenni/Bladebearer/Pawn/Bladebearer_Flame3_east",
+      "removedSparkComponents": 0
+    },
+    {
+      "id": "Glow_East",
+      "sourceLayer": "特效 副本 2",
+      "sourceBounds": [
+        306,
+        401,
+        1311,
+        1393
+      ],
+      "sourceRect": [
+        269.5,
+        388,
+        1357.5,
+        1476
+      ],
+      "texture": "Zhenni/Bladebearer/Pawn/Bladebearer_Glow_east",
+      "removedSparkComponents": 264
+    },
+    {
+      "id": "Cape_West",
+      "sourceLayer": "斗篷 副本 3",
+      "sourceBounds": [
+        2626,
+        779,
+        3178,
+        1341
+      ],
+      "sourceRect": [
+        2269.5,
+        385,
+        3357.5,
+        1473
+      ],
+      "texture": "Zhenni/Bladebearer/Pawn/Bladebearer_Cape_west",
+      "removedSparkComponents": 0
+    },
+    {
+      "id": "FlameBody_West",
+      "sourceLayer": "火焰躯体 副本 3",
+      "sourceBounds": [
+        2674,
+        780,
+        2883,
+        1449
+      ],
+      "sourceRect": [
+        2269.5,
+        385,
+        3357.5,
+        1473
+      ],
+      "texture": "Zhenni/Bladebearer/Pawn/Bladebearer_FlameBody_west",
+      "removedSparkComponents": 0
+    },
+    {
+      "id": "Flame4_West",
+      "sourceLayer": "火苗4 副本 4",
+      "sourceBounds": [
+        2738,
+        1157,
+        2934,
+        1447
+      ],
+      "sourceRect": [
+        2269.5,
+        385,
+        3357.5,
+        1473
+      ],
+      "texture": "Zhenni/Bladebearer/Pawn/Bladebearer_Flame4_west",
+      "removedSparkComponents": 0
+    },
+    {
+      "id": "Head_West",
+      "sourceLayer": "图层 6 副本",
+      "sourceBounds": [
+        2564,
+        536,
+        2939,
+        839
+      ],
+      "sourceRect": [
+        2269.5,
+        385,
+        3357.5,
+        1473
+      ],
+      "texture": "Zhenni/Bladebearer/Pawn/Bladebearer_Head_west",
+      "removedSparkComponents": 0
+    },
+    {
+      "id": "HeadDetail_West",
+      "sourceLayer": "图层 5",
+      "sourceBounds": [
+        2627,
+        557,
+        2828,
+        664
+      ],
+      "sourceRect": [
+        2269.5,
+        385,
+        3357.5,
+        1473
+      ],
+      "texture": "Zhenni/Bladebearer/Pawn/Bladebearer_HeadDetail_west",
+      "removedSparkComponents": 0
+    },
+    {
+      "id": "Body_West",
+      "sourceLayer": "图层 9 副本",
+      "sourceBounds": [
+        2472,
+        747,
+        2947,
+        1292
+      ],
+      "sourceRect": [
+        2269.5,
+        385,
+        3357.5,
+        1473
+      ],
+      "texture": "Zhenni/Bladebearer/Pawn/Bladebearer_Body_west",
+      "removedSparkComponents": 0
+    },
+    {
+      "id": "Flame1_West",
+      "sourceLayer": "火苗1 副本 2",
+      "sourceBounds": [
+        2575,
+        767,
+        2852,
+        820
+      ],
+      "sourceRect": [
+        2269.5,
+        385,
+        3357.5,
+        1473
+      ],
+      "texture": "Zhenni/Bladebearer/Pawn/Bladebearer_Flame1_west",
+      "removedSparkComponents": 0
+    },
+    {
+      "id": "Flame3_West",
+      "sourceLayer": "火苗3 副本 2",
+      "sourceBounds": [
+        2736,
+        905,
+        2953,
+        1055
+      ],
+      "sourceRect": [
+        2269.5,
+        385,
+        3357.5,
+        1473
+      ],
+      "texture": "Zhenni/Bladebearer/Pawn/Bladebearer_Flame3_west",
+      "removedSparkComponents": 0
+    },
+    {
+      "id": "Glow_West",
+      "sourceLayer": "特效 副本 3",
+      "sourceBounds": [
+        2183,
+        404,
+        3188,
+        1396
+      ],
+      "sourceRect": [
+        2183,
+        385,
+        3271,
+        1473
+      ],
+      "texture": "Zhenni/Bladebearer/Pawn/Bladebearer_Glow_west",
+      "removedSparkComponents": 264
+    },
+    {
+      "id": "Glow_North",
+      "sourceLayer": "特效 副本",
+      "sourceBounds": [
+        1590,
+        401,
+        2595,
+        1399
+      ],
+      "sourceRect": [
+        1590,
+        381,
+        2678,
+        1469
+      ],
+      "texture": "Zhenni/Bladebearer/Pawn/Bladebearer_Glow_north",
+      "removedSparkComponents": 337
+    },
+    {
+      "id": "FlameBody_North",
+      "sourceLayer": "火焰躯体 副本",
+      "sourceBounds": [
+        1985,
+        780,
+        2232,
+        1448
+      ],
+      "sourceRect": [
+        1643,
+        381,
+        2731,
+        1469
+      ],
+      "texture": "Zhenni/Bladebearer/Pawn/Bladebearer_FlameBody_north",
+      "removedSparkComponents": 0
+    },
+    {
+      "id": "Flame4_North",
+      "sourceLayer": "火苗4 副本 3",
+      "sourceBounds": [
+        2003,
+        1108,
+        2203,
+        1395
+      ],
+      "sourceRect": [
+        1643,
+        381,
+        2731,
+        1469
+      ],
+      "texture": "Zhenni/Bladebearer/Pawn/Bladebearer_Flame4_north",
+      "removedSparkComponents": 0
+    },
+    {
+      "id": "Body_North",
+      "sourceLayer": "身体 副本 2",
+      "sourceBounds": [
+        1889,
+        771,
+        2386,
+        1265
+      ],
+      "sourceRect": [
+        1643,
+        381,
+        2731,
+        1469
+      ],
+      "texture": "Zhenni/Bladebearer/Pawn/Bladebearer_Body_north",
+      "removedSparkComponents": 0
+    },
+    {
+      "id": "Cape_North",
+      "sourceLayer": "斗篷 副本",
+      "sourceBounds": [
+        1861,
+        819,
+        2470,
+        1376
+      ],
+      "sourceRect": [
+        1643,
+        381,
+        2731,
+        1469
+      ],
+      "texture": "Zhenni/Bladebearer/Pawn/Bladebearer_Cape_north",
+      "removedSparkComponents": 0
+    },
+    {
+      "id": "Head_North",
+      "sourceLayer": "图层 3 副本",
+      "sourceBounds": [
+        1582,
+        532,
+        2314,
+        845
+      ],
+      "sourceRect": [
+        1643,
+        381,
+        2731,
+        1469
+      ],
+      "texture": "Zhenni/Bladebearer/Pawn/Bladebearer_Head_north",
+      "removedSparkComponents": 0
+    }
+  ]
+}

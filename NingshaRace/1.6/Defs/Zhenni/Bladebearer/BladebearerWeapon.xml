@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 专属装备走原版近战工具；弃置即销毁，不进入生产或交易。 -->
+  <ThingDef ParentName="BaseMeleeWeapon_Sharp">
+    <defName>NingshaRace_Zhenni_Bladebearer_Dagger</defName>
+    <label>拥刀者幽刃</label>
+    <description>震尼拥刀者握持的幽焰弯刃，脱离它便会消散。</description>
+    <graphicData>
+      <texPath>Zhenni/Bladebearer/Weapon/Bladebearer_Dagger</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Cutout</shaderType>
+      <drawSize>(0.9,0.9)</drawSize>
+    </graphicData>
+    <!-- 原图刀尖朝上：90 度贴图补偿加原版短刀的 -65 度持握倾角。 -->
+    <equippedAngleOffset>25</equippedAngleOffset>
+    <recipeMaker IsNull="True" />
+    <destroyOnDrop>true</destroyOnDrop>
+    <tradeability>None</tradeability>
+    <smeltable>false</smeltable>
+    <burnableByRecipe>false</burnableByRecipe>
+    <relicChance>0</relicChance>
+    <statBases>
+      <Mass>1.6</Mass>
+      <MarketValue>100</MarketValue>
+      <Flammability>0</Flammability>
+      <DeteriorationRate>0</DeteriorationRate>
+    </statBases>
+    <weaponTags><li>NingshaRaceBladebearerDagger</li></weaponTags>
+    <tools>
+      <li>
+        <label>幽刃</label>
+        <capacities><li>Cut</li></capacities>
+        <power>20</power>
+        <armorPenetration>0.3</armorPenetration>
+        <cooldownTime>1.8</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+</Defs>

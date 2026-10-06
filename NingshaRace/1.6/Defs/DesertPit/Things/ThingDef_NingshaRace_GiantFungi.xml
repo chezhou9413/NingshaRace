@@ -2,7 +2,7 @@
 <Defs>
   <!--文件职责：定义适应地下明暗环境的两种单株巨菇，复用原版植物生长和采收。-->
   <ThingDef Name="NingshaRace_GiantFungusBase" ParentName="TreeBase" Abstract="True">
-    <thingClass>Plant</thingClass>
+    <thingClass>NingshaRaceLib.DesertPit.Ecology.Plants.Plant_DesertPit</thingClass>
     <size>(1,1)</size>
     <neverMultiSelect>false</neverMultiSelect>
     <minifiedDef IsNull="True" />
@@ -19,7 +19,8 @@
       <BeautyOutdoors>3</BeautyOutdoors>
     </statBases>
     <plant>
-      <fertilityMin>0.01</fertilityMin>
+      <completelyIgnoreFertility>true</completelyIgnoreFertility>
+      <fertilityMin>0</fertilityMin>
       <fertilitySensitivity>0.15</fertilitySensitivity>
       <growMinGlow>0</growMinGlow>
       <growOptimalGlow>0</growOptimalGlow>
@@ -48,6 +49,7 @@
     <description>生长在地下洞室中的巨型木质真菌。厚实的菌柄和菌盖富含坚韧纤维，成熟后可以砍伐取得木材。它不依赖阳光，也能耐受洞中的天光。</description>
     <graphicData>
       <texPath>Things/Plant/NingshaRace/DesertPit/GiantTimberMushroom</texPath>
+      <drawOffset>(-0.008,0,0.380)</drawOffset>
     </graphicData>
     <plant>
       <growDays>20</growDays>
@@ -66,6 +68,7 @@
     <description>高大的地下巨菇，菌盖下垂挂着散发黄绿微光的坠萤果。果实可以采摘食用，采果后菌体仍会继续生长并再次结果。它适应无光洞室，也能耐受天光。</description>
     <graphicData>
       <texPath>Things/Plant/NingshaRace/DesertPit/DroopingGlowMushroom</texPath>
+      <drawOffset>(-0.018,0,0.376)</drawOffset>
       <drawSize>(1.45,1.45)</drawSize>
     </graphicData>
     <statBases>

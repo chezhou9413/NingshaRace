@@ -3,6 +3,7 @@ using NingshaRaceLib.Core.Defs;
 using NingshaRaceLib.DesertPit.AntColony.Core;
 using NingshaRaceLib.DesertPit.AntColony.State;
 using NingshaRaceLib.DesertPit.Ecology.Habitats;
+using NingshaRaceLib.DesertPit.Ecology.Plants;
 using RimWorld;
 using Verse;
 using Verse.AI;
@@ -13,6 +14,42 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
     public partial class MapComponent_DesertPitAntColonies
     {
         private readonly Dictionary<int, List<Plant>> harvestCandidates = new Dictionary<int, List<Plant>>();
+
+        //按地图当地时间安排下一次十二点检查。
+        private int NextLocalNoonTick(int now)
+        {
+            int remaining = GenDate.TicksPerDay / 2 - GenLocalDate.DayTick(map);
+            if (remaining <= 0) remaining += GenDate.TicksPerDay;
+            return now + remaining;
+        }
+
+        //正午缺粮时给全巢工蚁下发采菇指令，达到储备目标后结束指令。
+        private void UpdateHarvestOrder(AntColonyState state, int now)
+        {
+            if (state.NestDestroyed)
+            {
+                state.HarvestRequested = false;
+                return;
+            }
+            bool lacksFood = GetStoredNutrition(state) < GetFoodReserve(state) * Settings.harvestReserveMultiplier;
+            if (!lacksFood) state.HarvestRequested = false;
+            if (now < state.NextHarvestOrderTick) return;
+            state.NextHarvestOrderTick = NextLocalNoonTick(now);
+            state.HarvestRequested = lacksFood;
+            if (!lacksFood) return;
+            RefreshHarvestCandidates();
+            foreach (Pawn worker in state.Members)
+            {
+                if (!worker.Spawned || worker.Dead || worker.Downed || worker.InMentalState
+                    || worker.TryGetComp<Comp_DesertPitAntMember>().Caste != AntCaste.Worker
+                    || worker.carryTracker.CarriedThing != null) continue;
+                JobDef current = worker.CurJobDef;
+                if (current == JobDefOf.Goto || current == JobDefOf.Wait
+                    || current == DefOfRefs.NingshaRace_Job_DesertPitAntHaul
+                    || current == DefOfRefs.NingshaRace_Job_DesertPitAntDigResource)
+                    worker.jobs.EndCurrentJob(JobCondition.InterruptForced, startNewJob: false);
+            }
+        }
 
         //函数职责：按照现有存活成员实际每日饥饿消耗预留口粮，升级、修复和繁殖共用此底线。
         private float GetFoodReserve(AntColonyState state)
@@ -42,10 +79,11 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             }
         }
 
-        //函数职责：识别达到指定成熟度且原版允许采收的健康食用植物。
+        //仅采收巢周九成成熟的野生食用菌，不割玩家种植作物。
         private bool IsHarvestableFood(Plant plant)
         {
-            return plant != null && plant.Spawned && plant.Map == map && plant.Growth >= Settings.harvestMinGrowth
+            return plant is Plant_DesertPit && plant.Spawned && plant.Map == map && !plant.sown
+                && plant.Growth >= Settings.harvestMinGrowth
                 && plant.HarvestableNow && plant.CanYieldNow()
                 && plant.def.plant.harvestedThingDef?.IsNutritionGivingIngestible == true
                 && !plant.def.plant.harvestedThingDef.IsDrug
@@ -57,6 +95,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         {
             AntColonyState state;
             return IsHarvestableFood(plant) && TryGetColony(pawn, out state) && !state.NestDestroyed
+                && state.HarvestRequested
                 && pawn.TryGetComp<Comp_DesertPitAntMember>()?.Caste == AntCaste.Worker
                 && plant.Position.DistanceToSquared(state.NestPosition) <= Settings.harvestRadius * Settings.harvestRadius
                 && !IsWorkerForageDangerous(pawn, plant.Position)
@@ -95,8 +134,14 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             return best == null ? null : JobMaker.MakeJob(DefOfRefs.NingshaRace_Job_DesertPitAntHarvest, best);
         }
 
-        //函数职责：采收产生真实物品后立即更新物资缓存，使下一步能够搬运或进食。
-        public void NotifyFungusHarvested() => RefreshForageCandidates();
+        //采收后立即安排食物入库，让采菇指令能补充库存而不是只留下散落产物。
+        public void NotifyFungusHarvested(Pawn worker)
+        {
+            RefreshForageCandidates();
+            if (!TryGetColony(worker, out AntColonyState state)) return;
+            Job haul = TryCreateForageJob(worker, state, true);
+            if (haul != null) worker.jobs.jobQueue.EnqueueFirst(haul);
+        }
 
         //函数职责：储藏断粮时允许成员吃未入库食物，但不取食驱蚁范围内玩家的储备。
         private Thing FindLooseFoodFor(Pawn pawn)

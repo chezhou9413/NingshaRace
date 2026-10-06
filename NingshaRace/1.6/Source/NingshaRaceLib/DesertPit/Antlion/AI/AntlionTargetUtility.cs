@@ -1,3 +1,4 @@
+using System;
 using NingshaRaceLib.Core.Defs;
 using NingshaRaceLib.DesertPit.Antlion.Components;
 using Verse;
@@ -16,9 +17,9 @@ namespace NingshaRaceLib.DesertPit.Antlion.AI
                 && !prey.RaceProps.IsMechanoid && (prey.RaceProps.Humanlike || prey.RaceProps.Animal);
         }
 
-        //函数职责：按距离顺序扫描附近格子，不建立全图 Pawn 列表，不跨墙或关闭的门触发。
+        //按距离扫描局部猎物，地下容器可用实际出土格验证追击路径。
         public static Pawn FindNearest(Map map, IntVec3 origin, CompProperties_AntlionAmbush props,
-            IntVec3 anchor, Pawn excluded = null)
+            IntVec3 anchor, Pawn excluded = null, Func<Pawn, bool> canReach = null)
         {
             int count = GenRadial.NumCellsInRadius(props.triggerRadius);
             for (int i = 0; i < count; i++)
@@ -31,7 +32,7 @@ namespace NingshaRaceLib.DesertPit.Antlion.AI
                     Pawn prey = things[j] as Pawn;
                     if (prey == excluded || !IsPrey(prey, map)) continue;
                     if (GenSight.LineOfSight(origin, cell, map, skipFirstCell: true)
-                        && CanReach(map, origin, prey, PathEndMode.Touch)) return prey;
+                        && (canReach != null ? canReach(prey) : CanReach(map, origin, prey, PathEndMode.Touch))) return prey;
                 }
             }
             return null;

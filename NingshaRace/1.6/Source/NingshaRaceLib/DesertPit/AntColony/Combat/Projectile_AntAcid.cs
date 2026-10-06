@@ -22,6 +22,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Combat
         //函数职责：结算真实命中后刷新唯一的酸液黏附状态，不叠加多份移动惩罚。
         protected override void Impact(Thing hitThing, bool blockedByShield = false)
         {
+            AntAcidTrailUtility.EmitImpact(Map, ExactPosition, thingIDNumber);
             base.Impact(hitThing, blockedByShield);
             if (blockedByShield || !(hitThing is Pawn pawn) || pawn.Dead || pawn.Destroyed) return;
             Hediff slow = pawn.health.hediffSet.GetFirstHediffOfDef(DefOfRefs.NingshaRace_AntAcidSlow);

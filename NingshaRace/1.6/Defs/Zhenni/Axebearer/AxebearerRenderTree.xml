@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <PawnRenderTreeDef>
+    <defName>NingshaRace_Zhenni_Axebearer_RenderTree</defName>
+    <root Class="PawnRenderNodeProperties_Parent">
+      <debugLabel>震尼持斧者四向根节点</debugLabel>
+      <tagDef>Root</tagDef>
+      <pawnType>Any</pawnType>
+      <drawSize>(1, 1)</drawSize>
+    </root>
+  </PawnRenderTreeDef>
+</Defs>

@@ -59,6 +59,7 @@
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>
       <texPath>Things/Building/NingshaRace/DesertPit/Relics/NingshaRace_TotemStatue01</texPath>
+      <drawOffset>(-0.015,0,0.636)</drawOffset>
       <drawSize>(1.55,1.55)</drawSize>
       <shadowData>
         <volume>(0.7,0.8,0.7)</volume>
@@ -73,6 +74,7 @@
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>
       <texPath>Things/Building/NingshaRace/DesertPit/Relics/NingshaRace_TotemStatue02</texPath>
+      <drawOffset>(-0.026,0,0.729)</drawOffset>
       <drawSize>(1.55,1.55)</drawSize>
       <shadowData>
         <volume>(0.7,0.8,0.7)</volume>
@@ -87,6 +89,7 @@
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>
       <texPath>Things/Building/NingshaRace/DesertPit/Relics/NingshaRace_TotemStatue03</texPath>
+      <drawOffset>(-0.004,0,0.729)</drawOffset>
       <drawSize>(1.55,1.55)</drawSize>
       <shadowData>
         <volume>(0.7,0.8,0.7)</volume>

@@ -13,6 +13,10 @@ namespace NingshaRaceLib.Core.Defs
         public static FleckDef NingshaRace_AntAcidTrailMist;
         public static FleckDef NingshaRace_AntAcidTrailDroplet;
         public static JobDef NingshaRace_Job_DesertPitAntHarvest;
+        //工蚁挖掘与吐酸蚁射击、寻找射击点的专用任务。
+        public static JobDef NingshaRace_Job_DesertPitAntDigResource;
+        public static JobDef NingshaRace_Job_DesertPitAntShoot;
+        public static JobDef NingshaRace_Job_DesertPitAntCombatMove;
         public static ThingDef RawFungus;
     }
 }

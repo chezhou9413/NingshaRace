@@ -4,6 +4,7 @@ using UnityEngine;
 using Verse;
 
 using NingshaRaceLib.Reproduction.Utility;
+using NingshaRaceLib.Erosion.Utility;
 
 using NingshaRaceLib.UI.Gizmos;
 
@@ -58,7 +59,7 @@ namespace NingshaRaceLib.Reproduction.Components
         //函数职责：显示排卵百分比与当前暂停原因。
         public override string CompInspectStringExtra()
         {
-            if (Pawn.gender != Gender.Female || Pawn.Dead)
+            if (Pawn.gender != Gender.Female || Pawn.Dead || ErosionPawnUtility.HasErosionBodyIdentity(Pawn))
             {
                 return null;
             }
@@ -80,7 +81,7 @@ namespace NingshaRaceLib.Reproduction.Components
                 yield return gizmo;
             }
 
-            if (!DebugSettings.godMode || Pawn.gender != Gender.Female)
+            if (!DebugSettings.godMode || Pawn.gender != Gender.Female || ErosionPawnUtility.HasErosionBodyIdentity(Pawn))
             {
                 yield break;
             }
@@ -147,9 +148,15 @@ namespace NingshaRaceLib.Reproduction.Components
             cycleInitialized = true;
         }
 
-        //函数职责：检查性别、年龄、生育能力和孕期状态是否允许推进排卵周期。
+        //检查侵蚀身份、性别、年龄、生育能力和孕期状态是否允许推进排卵周期。
         private bool CanAdvanceCycle(out string pauseReason)
         {
+            if (ErosionPawnUtility.HasErosionBodyIdentity(Pawn))
+            {
+                pauseReason = "侵蚀体不能产卵。";
+                return false;
+            }
+
             if (Pawn.Dead)
             {
                 pauseReason = "NingshaRace_EggCyclePauseDead".Translate();

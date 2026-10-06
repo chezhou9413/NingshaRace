@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ChezhouLib.LibDef.UnityShaderLord>
+    <defName>NingshaRace_Combat_MeleeAnimationAssets</defName>
+    <AbPath>/1.6/AssetBundles/ningsha_melee.ab</AbPath>
+    <AbPathWindows>/1.6/AssetBundles/ningsha_melee.ab</AbPathWindows>
+    <ShaderFolderName>/Combat/MeleeAnimation/Shader/</ShaderFolderName>
+    <ImageFolderName>/Combat/MeleeAnimation/Textures/</ImageFolderName>
+  </ChezhouLib.LibDef.UnityShaderLord>
+</Defs>

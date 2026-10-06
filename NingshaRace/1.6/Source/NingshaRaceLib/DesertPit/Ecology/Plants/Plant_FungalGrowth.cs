@@ -5,8 +5,8 @@ using Verse;
 
 namespace NingshaRaceLib.DesertPit.Ecology.Plants
 {
-    //类职责：让洞穴食用菌随真实成长率切换造型，并同步刷新野生和种植菌类的地图网格。
-    public sealed class Plant_FungalGrowth : Plant
+    //让洞穴食用菌随成长率切换造型，并保持各阶段根部与占地格对齐。
+    public sealed class Plant_FungalGrowth : Plant_DesertPit
     {
         private DefModExtension_FungalGrowth growthSettings;
 

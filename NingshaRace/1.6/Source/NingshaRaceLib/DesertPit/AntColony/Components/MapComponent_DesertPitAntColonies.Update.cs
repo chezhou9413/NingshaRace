@@ -21,6 +21,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
                 PruneInvalidMembers(state);
                 PruneDeathRecords(state, ticks);
                 RefreshIntruders(state);
+                UpdateHarvestOrder(state, ticks);
                 TryRepairNest(state, ticks);
                 TryUpgradeColony(state, ticks);
                 TryDispatchInvestigation(state, ticks);

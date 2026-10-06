@@ -13,6 +13,8 @@
         <li Class="ThinkNode_Subtree">
           <treeDef>Downed</treeDef>
         </li>
+        <!-- 动画期间保持等待，停止任务一次后不再领取搬运工作。 -->
+        <li Class="NingshaRaceLib.SandGolem.AI.JobGiver_SandGolemAnimationWait" />
         <!-- 沙傀优先执行玩家手动下达的排队命令。 -->
         <li Class="ThinkNode_QueuedJob" />
         <!-- 玩家征召沙傀时只处理站位和直接命令。 -->

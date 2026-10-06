@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 刀兵资源使用独立包，置换图保留线性和循环采样设置。 -->
+  <ChezhouLib.LibDef.UnityShaderLord>
+    <defName>NingshaRace_Zhenni_Bladebearer_ShaderLord</defName>
+    <AbPath>/1.6/AssetBundles/ningsha_zhenni_bladebearer.ab</AbPath>
+    <AbPathWindows>/1.6/AssetBundles/ningsha_zhenni_bladebearer.ab</AbPathWindows>
+    <ShaderFolderName>/Zhenni/Bladebearer/Shader/</ShaderFolderName>
+    <ImageFolderName>/Zhenni/Bladebearer/Textures/</ImageFolderName>
+  </ChezhouLib.LibDef.UnityShaderLord>
+  <PawnRenderTreeDef>
+    <defName>NingshaRace_Zhenni_Bladebearer_RenderTree</defName>
+    <root Class="PawnRenderNodeProperties_Parent">
+      <debugLabel>震尼拥刀者四向根节点</debugLabel>
+      <tagDef>Root</tagDef>
+      <pawnType>Any</pawnType>
+      <drawSize>(1, 1)</drawSize>
+    </root>
+  </PawnRenderTreeDef>
+</Defs>

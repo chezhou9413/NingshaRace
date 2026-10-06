@@ -35,10 +35,11 @@ namespace NingshaRaceLib.DesertPit.Generation.Resources
             return cells.GetRange(0, actual);
         }
 
-        //函数职责：为通道和连接口菌株铺设一格沙土沉积，确保岩石通道里的植物具备生长肥力。
+        //在通道和连接口放置菌株，能够直接扎根岩面的植物保留原地面。
         public static void Plant(Map map, IntVec3 cell, ThingDef plant)
         {
-            if (map.fertilityGrid.FertilityAt(cell) < plant.plant.fertilityMin)
+            if (!plant.plant.completelyIgnoreFertility
+                && map.fertilityGrid.FertilityAt(cell) < plant.plant.fertilityMin)
                 map.terrainGrid.SetTerrain(cell, TerrainDefOf.Sand);
             if (!DesertPitPlantEcologyUtility.CanPlacePlant(map, cell, plant, false))
                 throw new InvalidOperationException("地下资源区无法种植" + plant.label + "，坐标：" + cell);
