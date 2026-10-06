@@ -2,6 +2,7 @@
 <Defs>
   <!-- 文件职责：定义沙漠巨坑地下洞穴中使用的凝砂发光装饰植物。 -->
   <ThingDef ParentName="CavePlantBase" Name="NingshaRace_DesertPitPlantBase" Abstract="True">
+    <thingClass>NingshaRaceLib.DesertPit.Ecology.Plants.Plant_DesertPit</thingClass>
     <category>Plant</category>
     <selectable>true</selectable>
     <pathCost>14</pathCost>
@@ -13,7 +14,9 @@
       <Nutrition>0.1</Nutrition>
     </statBases>
     <plant>
-      <fertilityMin>0.01</fertilityMin>
+      <!--菌类不依赖土壤肥力，实际地面范围由洞穴植物的种植检查限定。-->
+      <completelyIgnoreFertility>true</completelyIgnoreFertility>
+      <fertilityMin>0</fertilityMin>
       <fertilitySensitivity>0.05</fertilitySensitivity>
       <growDays>30</growDays>
       <dieIfLeafless>true</dieIfLeafless>
@@ -38,20 +41,23 @@
           <li>
             <maxGrowth>0.2</maxGrowth>
             <texPath>Things/Plant/NingshaRace/DesertPit/BlueGrayCup/Growth01</texPath>
+            <drawOffset>(0.027,0,0.462)</drawOffset>
           </li>
           <li>
             <maxGrowth>0.6</maxGrowth>
             <texPath>Things/Plant/NingshaRace/DesertPit/BlueGrayCup/Growth02</texPath>
+            <drawOffset>(0.020,0,0.481)</drawOffset>
           </li>
           <li>
             <maxGrowth>0.8</maxGrowth>
             <texPath>Things/Plant/NingshaRace/DesertPit/BlueGrayCup/Growth03</texPath>
+            <drawOffset>(-0.005,0,0.488)</drawOffset>
           </li>
         </stages>
       </li>
     </modExtensions>
     <plant>
-      <fertilityMin>0.1</fertilityMin>
+      <fertilityMin>0</fertilityMin>
       <fertilitySensitivity>0.1</fertilitySensitivity>
       <growDays>6</growDays>
       <growMinGlow>0</growMinGlow>
@@ -71,6 +77,7 @@
     </plant>
     <graphicData>
       <texPath>Things/Plant/NingshaRace/DesertPit/DesertPitPlant01</texPath>
+      <drawOffset>(-0.031,0,0.498)</drawOffset>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(1.45,1.45)</drawSize>
     </graphicData>
@@ -88,6 +95,7 @@
     <description>半透明的白色晶芽从软沙中探出，顶端凝聚着冰冷的幽光。</description>
     <graphicData>
       <texPath>Things/Plant/NingshaRace/DesertPit/DesertPitPlant02</texPath>
+      <drawOffset>(0.047,0,0.440)</drawOffset>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(1.35,1.35)</drawSize>
     </graphicData>
@@ -110,20 +118,23 @@
           <li>
             <maxGrowth>0.2</maxGrowth>
             <texPath>Things/Plant/NingshaRace/DesertPit/PaleCyanMushroom/Growth01</texPath>
+            <drawOffset>(0.103,0,0.549)</drawOffset>
           </li>
           <li>
             <maxGrowth>0.6</maxGrowth>
             <texPath>Things/Plant/NingshaRace/DesertPit/PaleCyanMushroom/Growth02</texPath>
+            <drawOffset>(0.105,0,0.549)</drawOffset>
           </li>
           <li>
             <maxGrowth>0.8</maxGrowth>
             <texPath>Things/Plant/NingshaRace/DesertPit/PaleCyanMushroom/Growth03</texPath>
+            <drawOffset>(0.079,0,0.549)</drawOffset>
           </li>
         </stages>
       </li>
     </modExtensions>
     <plant>
-      <fertilityMin>0.1</fertilityMin>
+      <fertilityMin>0</fertilityMin>
       <fertilitySensitivity>0.1</fertilitySensitivity>
       <growDays>6</growDays>
       <growMinGlow>0</growMinGlow>
@@ -143,6 +154,7 @@
     </plant>
     <graphicData>
       <texPath>Things/Plant/NingshaRace/DesertPit/DesertPitPlant03</texPath>
+      <drawOffset>(0.055,0,0.560)</drawOffset>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(1.45,1.45)</drawSize>
     </graphicData>
@@ -159,7 +171,7 @@
     <label>紫辉花簇菌</label>
     <description>盘状菌体上长出细小花簇，蓝紫色光点像被封在沙晶中的星屑。</description>
     <plant>
-      <fertilityMin>0.1</fertilityMin>
+      <fertilityMin>0</fertilityMin>
       <fertilitySensitivity>0.1</fertilitySensitivity>
       <growDays>9</growDays>
       <growMinGlow>0</growMinGlow>
@@ -179,6 +191,7 @@
     </plant>
     <graphicData>
       <texPath>Things/Plant/NingshaRace/DesertPit/DesertPitPlant04</texPath>
+      <drawOffset>(-0.117,0,0.423)</drawOffset>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(1.55,1.55)</drawSize>
     </graphicData>
@@ -196,6 +209,7 @@
     <description>卵形晶囊包裹着枯枝般的内芯，根部会向周围投出柔和的黄绿色光。</description>
     <graphicData>
       <texPath>Things/Plant/NingshaRace/DesertPit/DesertPitPlant05</texPath>
+      <drawOffset>(-0.132,0,0.516)</drawOffset>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(1.35,1.35)</drawSize>
     </graphicData>

@@ -9,7 +9,7 @@ using NingshaRaceLib.UI.Gizmos;
 
 namespace NingshaRaceLib.PocketMaps.Cargo
 {
-    //类职责：管理传送门的独立货运模式、按钮、进入锁定和存档状态。
+    //管理传送门的货运模式、进入锁定和装载清单。
     [StaticConstructorOnStartup]
     public sealed class Comp_NingshaPortalCargo : ThingComp
     {
@@ -30,6 +30,46 @@ namespace NingshaRaceLib.PocketMaps.Cargo
         {
             base.PostExposeData();
             Scribe_Values.Look(ref cargoTransferActive, "cargoTransferActive", false);
+        }
+
+        //从待装载清单移除已销毁或离开本地图的对象，不让不存在的货物锁住任务。
+        public override void CompTick()
+        {
+            base.CompTick();
+            if (!parent.IsHashIntervalTick(60)) return;
+            if (!Portal.LoadInProgress)
+            {
+                ClearCargoMode();
+                return;
+            }
+
+            bool lostCargo = false;
+            for (int i = Portal.leftToLoad.Count - 1; i >= 0; i--)
+            {
+                TransferableOneWay transfer = Portal.leftToLoad[i];
+                transfer.things.RemoveAll(thing => thing == null || thing.Destroyed
+                    || thing.MapHeld != parent.Map || (thing is Pawn pawn && pawn.Dead));
+                int available = transfer.MaxCount;
+                if (transfer.CountToTransfer > available)
+                {
+                    transfer.AdjustTo(available);
+                    lostCargo = true;
+                }
+                if (transfer.CountToTransfer <= 0) Portal.leftToLoad.RemoveAt(i);
+            }
+
+            if (!Portal.LoadInProgress) ClearCargoMode();
+            if (lostCargo)
+            {
+                Messages.Message("部分待搬运物资或动物已被销毁、死亡或离开本地图，已从传送门装载清单移除。",
+                    parent, MessageTypeDefOf.NeutralEvent);
+            }
+        }
+
+        //任务结束、取消或切换到整队进入时清除独立货运标记。
+        public void ClearCargoMode()
+        {
+            cargoTransferActive = false;
         }
 
         //函数职责：提供独立货运按钮，并在其他装载或地图生成期间给出明确禁用原因。
@@ -84,7 +124,7 @@ namespace NingshaRaceLib.PocketMaps.Cargo
                 Portal.CancelLoad();
             }
 
-            cargoTransferActive = false;
+            ClearCargoMode();
         }
 
         //函数职责：打开只选择动物和物品的凝砂族货运窗口。

@@ -139,10 +139,13 @@ namespace NingshaRaceLib.DesertPit.Antlion.Components
             StatDefOf.MoveSpeed.Worker.ClearCacheForThing(Pawn);
         }
 
-        //函数职责：从容器出土后记录唯一追击锚点并开始可受伤的出土阶段。
+        //从容器出土后保留猎物，清除回程任务并开始可受伤的出土阶段。
         public void BeginEmerging(Pawn prey)
         {
             target = prey;
+            abandonedTarget = null;
+            targetReachable = true;
+            sandDestination = IntVec3.Invalid;
             anchor = Pawn.Position;
             phase = AntlionPhase.Emerging;
             phaseStartTick = Find.TickManager.TicksGame;
@@ -152,6 +155,7 @@ namespace NingshaRaceLib.DesertPit.Antlion.Components
             Pawn.Rotation = Rot4.FromAngleFlat((prey.Position - Pawn.Position).ToVector3().AngleFlat());
             AntlionSandEffects.Erupt(Pawn.Map, Pawn.Position, parent.thingIDNumber);
             AntlionAnimationUtility.Synchronize(this);
+            StopOwnJob();
         }
 
         //函数职责：结束本模块派发的任务，保留原版倒地和着火应急任务。

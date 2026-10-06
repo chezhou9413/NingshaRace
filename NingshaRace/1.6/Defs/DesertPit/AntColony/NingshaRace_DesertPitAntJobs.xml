@@ -32,4 +32,24 @@
     <casualInterruptible>false</casualInterruptible>
     <playerInterruptible>false</playerInterruptible>
   </JobDef>
+  <JobDef>
+    <defName>NingshaRace_Job_DesertPitAntDigResource</defName>
+    <driverClass>NingshaRaceLib.DesertPit.AntColony.Jobs.JobDriver_DesertPitAntDigResource</driverClass>
+    <reportString>正在从地底挖出资源。</reportString>
+    <casualInterruptible>true</casualInterruptible>
+    <playerInterruptible>false</playerInterruptible>
+  </JobDef>
+  <JobDef>
+    <defName>NingshaRace_Job_DesertPitAntShoot</defName>
+    <driverClass>NingshaRaceLib.DesertPit.AntColony.Jobs.JobDriver_DesertPitAntShoot</driverClass>
+    <reportString>正在向 TargetA 喷吐酸液。</reportString>
+    <alwaysShowWeapon>true</alwaysShowWeapon>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+  <JobDef>
+    <defName>NingshaRace_Job_DesertPitAntCombatMove</defName>
+    <driverClass>NingshaRaceLib.DesertPit.AntColony.Jobs.JobDriver_DesertPitAntCombatMove</driverClass>
+    <reportString>正在寻找喷酸位置。</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
 </Defs>

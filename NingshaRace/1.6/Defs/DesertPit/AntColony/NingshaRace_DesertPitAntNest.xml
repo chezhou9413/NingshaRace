@@ -64,7 +64,7 @@
         <storageCellCount>12</storageCellCount>
         <acidNutritionCost>2</acidNutritionCost>
         <foodReserveDays>1</foodReserveDays>
-        <!--没有可搬食物且库存低于保底口粮的指定倍率时，工蚁才在巢周采收成熟食用植物。-->
+        <!--每天当地时间十二点检查库存，缺粮时优先采收巢周九成成熟的野生食用菌。-->
         <harvestRadius>16</harvestRadius>
         <harvestMinGrowth>0.9</harvestMinGrowth>
         <harvestReserveMultiplier>2</harvestReserveMultiplier>
@@ -77,7 +77,7 @@
         <queenLeashRadius>5</queenLeashRadius>
         <workerRetreatRadius>8</workerRetreatRadius>
         <frenzyRadius>40</frenzyRadius>
-        <retreatDefenseRadius>6</retreatDefenseRadius>
+        <retreatDefenseRadius>15</retreatDefenseRadius>
         <retreatLossWindowTicks>10000</retreatLossWindowTicks>
         <retreatDurationTicks>10000</retreatDurationTicks>
         <retreatLossFraction>0.5</retreatLossFraction>
@@ -91,7 +91,17 @@
         <investigationDefendTicks>2500</investigationDefendTicks>
         <investigationMaxSquadSize>6</investigationMaxSquadSize>
         <workerHaulLimit>3</workerHaulLimit>
-        <workerHaulCooldownTicks>2500</workerHaulCooldownTicks>
+        <workerHaulCooldownTicks>30000</workerHaulCooldownTicks>
+        <workerResourceIntervalTicks>30000</workerResourceIntervalTicks>
+        <workerResourceYields>
+          <li><thingDef>Steel</thingDef><count>5</count><weight>30</weight></li>
+          <li><thingDef>WoodLog</thingDef><count>5</count><weight>50</weight></li>
+          <li><thingDef>ComponentIndustrial</thingDef><count>2</count><weight>10</weight></li>
+          <li><thingDef>Jade</thingDef><count>3</count><weight>5</weight></li>
+          <li><thingDef>Gold</thingDef><count>3</count><weight>3</weight></li>
+          <li><thingDef>ComponentSpacer</thingDef><count>1</count><weight>1</weight></li>
+          <li><count>0</count><weight>31</weight></li>
+        </workerResourceYields>
         <reproductionWorkTicks>600</reproductionWorkTicks>
         <reproductionCooldownTicks>2500</reproductionCooldownTicks>
         <workerNutritionCost>1</workerNutritionCost>

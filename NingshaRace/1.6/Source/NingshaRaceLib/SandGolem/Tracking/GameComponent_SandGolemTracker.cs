@@ -89,7 +89,7 @@ namespace NingshaRaceLib.SandGolem.Tracking
                 SandGolemUtility.MaintainIdentity(state.golem, tick);
                 if (state.LocksFacingAndMovement())
                 {
-                    SandGolemUtility.LockFacingAndMovement(state.golem, state.phase == SandGolemPhase.Dissolving);
+                    SandGolemUtility.LockFacingAndMovement(state.golem, stopJobs: false);
                 }
                 else if (state.golem.pather?.debugDisabled == true)
                 {
@@ -206,7 +206,13 @@ namespace NingshaRaceLib.SandGolem.Tracking
                 states.Add(state);
             }
 
-            if (state.phase != SandGolemPhase.Dissolving && state.caster != null)
+            if (state.phase == SandGolemPhase.Dissolving)
+            {
+                state.destroyAfterDissolve |= destroyPawn;
+                return;
+            }
+
+            if (state.caster != null)
             {
                 if (notifyCaster) GameComponent_SandGolemAutoSummon.Current.NotifyLost(state.caster);
                 else GameComponent_SandGolemAutoSummon.Current.ClearRequest(state.caster);

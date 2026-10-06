@@ -52,6 +52,7 @@
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>
       <texPath>Things/Building/NingshaRace/DesertPit/Decor/DesertPitStalactite01</texPath>
+      <drawOffset>(-0.007,0,0.644)</drawOffset>
       <drawSize>(1.35,1.35)</drawSize>
     </graphicData>
   </ThingDef>
@@ -63,6 +64,7 @@
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>
       <texPath>Things/Building/NingshaRace/DesertPit/Decor/DesertPitStalactite02</texPath>
+      <drawOffset>(-0.044,0,0.272)</drawOffset>
       <drawSize>(1.15,1.15)</drawSize>
     </graphicData>
   </ThingDef>
@@ -74,6 +76,7 @@
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>
       <texPath>Things/Building/NingshaRace/DesertPit/Decor/DesertPitStalactite03</texPath>
+      <drawOffset>(0.010,0,0.647)</drawOffset>
       <drawSize>(1.35,1.35)</drawSize>
     </graphicData>
   </ThingDef>
@@ -85,6 +88,7 @@
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>
       <texPath>Things/Building/NingshaRace/DesertPit/Decor/DesertPitStalactite04</texPath>
+      <drawOffset>(0.004,0,0.365)</drawOffset>
       <drawSize>(1.3,1.3)</drawSize>
     </graphicData>
   </ThingDef>
@@ -98,6 +102,7 @@
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>
       <texPath>Things/Building/NingshaRace/DesertPit/Decor/DesertPitStalactite05</texPath>
+      <drawOffset>(-0.082,0,0.824)</drawOffset>
       <drawSize>(1.65,1.65)</drawSize>
     </graphicData>
   </ThingDef>
@@ -109,6 +114,7 @@
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>
       <texPath>Things/Building/NingshaRace/DesertPit/Decor/DesertPitStalactite06</texPath>
+      <drawOffset>(-0.081,0,0.285)</drawOffset>
       <drawSize>(1.2,1.2)</drawSize>
     </graphicData>
   </ThingDef>
@@ -122,6 +128,7 @@
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>
       <texPath>Things/Building/NingshaRace/DesertPit/Decor/DesertPitBones01</texPath>
+      <drawOffset>(0.073,0,0.470)</drawOffset>
       <drawSize>(1.3,1.3)</drawSize>
     </graphicData>
   </ThingDef>
@@ -135,6 +142,7 @@
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>
       <texPath>Things/Building/NingshaRace/DesertPit/Decor/DesertPitBones02</texPath>
+      <drawOffset>(0.025,0,0.234)</drawOffset>
       <drawSize>(1.35,1.35)</drawSize>
     </graphicData>
   </ThingDef>
@@ -153,6 +161,7 @@
       <graphicClass>Graphic_Single</graphicClass>
       <texPath>Things/Building/NingshaRace/DesertPit/Decor/DesertPitGlowCrystal</texPath>
       <drawSize>(1.45,1.45)</drawSize>
+      <drawOffset>(0.076,0,0.464)</drawOffset>
     </graphicData>
     <comps>
       <li Class="CompProperties_Glower">
@@ -176,6 +185,7 @@
       <graphicClass>Graphic_Single</graphicClass>
       <texPath>Things/Building/NingshaRace/DesertPit/Decor/DesertPitGlowCrystal</texPath>
       <drawSize>(1.05,1.05)</drawSize>
+      <drawOffset>(0.055,0,0.336)</drawOffset>
     </graphicData>
     <comps>
       <li Class="CompProperties_Glower">
@@ -199,6 +209,7 @@
       <graphicClass>Graphic_Single</graphicClass>
       <texPath>Things/Building/NingshaRace/DesertPit/Decor/DesertPitGlowCrystal</texPath>
       <drawSize>(1.8,1.8)</drawSize>
+      <drawOffset>(0.094,0,0.576)</drawOffset>
     </graphicData>
     <comps>
       <li Class="CompProperties_Glower">
@@ -222,6 +233,7 @@
       <graphicClass>Graphic_Single</graphicClass>
       <texPath>Things/Building/NingshaRace/DesertPit/Decor/DesertPitGlowCrystal</texPath>
       <drawSize>(1.55,1.55)</drawSize>
+      <drawOffset>(0.081,0,0.496)</drawOffset>
     </graphicData>
     <comps>
       <li Class="CompProperties_Glower">

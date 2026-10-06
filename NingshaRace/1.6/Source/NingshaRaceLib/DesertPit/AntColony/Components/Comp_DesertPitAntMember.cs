@@ -22,6 +22,9 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         //字段职责：错开各成员的破障寻路检查，避免同一帧重复搜索整张地图。
         public int NextPassageCheckTick;
 
+        //每只工蚁独立计算下一次挖出资源的时间。
+        public int NextResourceDigTick;
+
         //属性职责：向蚁群管理器和调试界面提供成员所属蚁巢编号。
         public int ColonyId => colonyId;
 
@@ -32,6 +35,8 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         public void AssignColony(int id)
         {
             colonyId = id;
+            if (Caste == AntCaste.Worker)
+                NextResourceDigTick = Find.TickManager.TicksGame + 30000;
         }
 
         //函数职责：判断工蚁是否已经结束搬运冷却并允许申请下一趟采集工作。
@@ -78,6 +83,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             Scribe_Values.Look(ref colonyId, "colonyId");
             Scribe_Values.Look(ref completedHaulsThisCycle, "completedHaulsThisCycle");
             Scribe_Values.Look(ref nextForageTick, "nextForageTick");
+            Scribe_Values.Look(ref NextResourceDigTick, "nextResourceDigTick");
         }
 
         //函数职责：成员进入地图时向对应地图组件恢复运行时索引。

@@ -64,9 +64,15 @@ namespace NingshaRaceLib.SandGolem.Patches
         [HarmonyPatch(typeof(Pawn), nameof(Pawn.CanTakeOrder), MethodType.Getter)]
         public static class Patch_Pawn_CanTakeOrder
         {
-            //函数职责：沙傀未倒地且不处于精神状态时允许接收玩家命令。
+            //沙傀完成动画后才允许接收玩家命令。
             public static void Postfix(Pawn __instance, ref bool __result)
             {
+                if (SandGolemUtility.IsMovementLockedSandGolem(__instance))
+                {
+                    __result = false;
+                    return;
+                }
+
                 if (__result || !IsPlayerControlledSandGolem(__instance) || !__instance.Spawned || __instance.Downed || __instance.InMentalState)
                 {
                     return;

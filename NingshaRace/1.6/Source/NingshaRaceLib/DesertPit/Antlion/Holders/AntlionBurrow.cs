@@ -6,6 +6,7 @@ using NingshaRaceLib.DesertPit.Antlion.AI;
 using NingshaRaceLib.DesertPit.Antlion.Components;
 using NingshaRaceLib.DesertPit.Antlion.Effects;
 using Verse;
+using Verse.AI;
 
 namespace NingshaRaceLib.DesertPit.Antlion.Holders
 {
@@ -47,7 +48,7 @@ namespace NingshaRaceLib.DesertPit.Antlion.Holders
             ThingOwnerUtility.AppendThingHoldersFromThings(outChildren, contents);
         }
 
-        //函数职责：错峰进行小半径检查并播放稀疏沙粒，不更新地下 Pawn 的战斗或治疗逻辑。
+        //错峰检查附近猎物，只有找到可追击的安全出土格才释放蚁狮。
         protected override void Tick()
         {
             base.Tick();
@@ -62,12 +63,17 @@ namespace NingshaRaceLib.DesertPit.Antlion.Holders
             AntlionSandEffects.TickBuried(Map, Position, thingIDNumber);
             if ((now + thingIDNumber) % comp.Props.scanIntervalTicks != 0) return;
 
-            //铺地或占用潜伏格后只尝试安全释放原实体，不破坏覆盖的建筑，也不隔墙寻找出口。
-            bool displaced = !AntlionSandUtility.CanBurrowAt(Map, Position, comp.Props, this);
+            //生物踩占不是洞穴被破坏，冷却期间继续潜伏，避免无目标出土后立即下潜。
+            bool displaced = !AntlionSandUtility.CanBurrowAt(Map, Position, comp.Props, this, ignorePawns: true);
+            IntVec3 cell = IntVec3.Invalid;
             Pawn prey = now >= rearmAtTick
-                ? AntlionTargetUtility.FindNearest(Map, Position, comp.Props, Position) : null;
+                ? AntlionTargetUtility.FindNearest(Map, Position, comp.Props, Position, canReach: candidate =>
+                {
+                    cell = FindSurfaceCell(candidate);
+                    return cell.IsValid;
+                }) : null;
             if (!displaced && prey == null) return;
-            IntVec3 cell = FindSurfaceCell();
+            if (prey == null) cell = FindSurfaceCell(null);
             if (!cell.IsValid) return;
             Pawn released;
             if (!contents.TryDrop(pawn, cell, Map, ThingPlaceMode.Direct, out released))
@@ -77,16 +83,24 @@ namespace NingshaRaceLib.DesertPit.Antlion.Holders
             Destroy();
         }
 
-        //函数职责：优先原格出土，被 Pawn 占据时只使用相邻且可直达的空格，不挤走实体。
-        private IntVec3 FindSurfaceCell()
+        //优先原格出土，踩占时选择朝向猎物且可追击的相邻格，避免固定向左释放。
+        private IntVec3 FindSurfaceCell(Pawn prey)
         {
+            IntVec3 nearest = IntVec3.Invalid;
+            int nearestDistance = int.MaxValue;
             for (int i = 0; i < 9; i++)
             {
                 IntVec3 cell = Position + GenRadial.RadialPattern[i];
-                if (AntlionSandUtility.CanSurfaceAt(Map, cell, this)
-                    && GenSight.LineOfSight(Position, cell, Map, skipFirstCell: false)) return cell;
+                if (!AntlionSandUtility.CanSurfaceAt(Map, cell, this)
+                    || !GenSight.LineOfSight(Position, cell, Map, skipFirstCell: false)) continue;
+                if (prey != null && !AntlionTargetUtility.CanReach(Map, cell, prey, PathEndMode.Touch)) continue;
+                if (i == 0 || prey == null) return cell;
+                int distance = cell.DistanceToSquared(prey.Position);
+                if (distance >= nearestDistance) continue;
+                nearest = cell;
+                nearestDistance = distance;
             }
-            return IntVec3.Invalid;
+            return nearest;
         }
 
         //函数职责：创建地下容器后转移原 Pawn 的唯一所有权，不重生、不治疗、不覆盖地面实体。

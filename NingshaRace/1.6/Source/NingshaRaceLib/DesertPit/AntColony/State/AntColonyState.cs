@@ -78,6 +78,10 @@ namespace NingshaRaceLib.DesertPit.AntColony.State
         //字段职责：记录蚁后下一次允许补员的游戏 Tick。
         public int NextBirthTick;
 
+        //下一次正午采收检查及尚未完成的缺粮采收指令。
+        public int NextHarvestOrderTick;
+        public bool HarvestRequested;
+
         //字段职责：引用最近攻击巢群的生物或炮塔，并限定反击记忆持续时间。
         public Thing LastAggressor;
         public int RetaliationUntilTick;
@@ -110,6 +114,8 @@ namespace NingshaRaceLib.DesertPit.AntColony.State
             Scribe_Values.Look(ref LastNestDamageTick, "lastNestDamageTick", -1);
             Scribe_Values.Look(ref NextBoomWaveTick, "nextBoomWaveTick", -1);
             Scribe_Values.Look(ref NextBirthTick, "nextBirthTick");
+            Scribe_Values.Look(ref NextHarvestOrderTick, "nextHarvestOrderTick");
+            Scribe_Values.Look(ref HarvestRequested, "harvestRequested");
             Scribe_References.Look(ref LastAggressor, "lastAggressor");
             Scribe_Values.Look(ref RetaliationUntilTick, "retaliationUntilTick");
 

@@ -45,7 +45,8 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
                 return true;
             }
 
-            return thing.def == ThingDefOf.Silver ||
+            return thing.def == ThingDefOf.Steel || thing.def == ThingDefOf.WoodLog ||
+                   thing.def == ThingDefOf.Silver ||
                    thing.def == ThingDefOf.Gold ||
                    thing.def == ThingDefOf.Jade ||
                    thing.def == ThingDefOf.ComponentIndustrial ||

@@ -1,0 +1,2066 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Defs>
+  <NingshaRaceLib.Zhenni.Bladebearer.BladebearerAppearanceDef>
+    <defName>NingshaRace_Zhenni_Axebearer_Appearance</defName>
+    <label>震尼持斧者默认外观</label>
+    <parts>
+      <li>
+        <id>Cape</id>
+        <label>斗篷</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_Cape_south</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>true</flame>
+        <particle>false</particle>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>40</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0.037583895, -0.0456375852)</displacement>
+        <root>(0.439617872, 0.589883268)</root>
+        <tip>(0.435988128, 0.00549682)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.382550329</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.12</detailStrength>
+        <breakup>0.2080537</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>0</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>South</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>FlameBody</id>
+        <label>火焰躯体</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_FlameBody_south</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>true</flame>
+        <particle>false</particle>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>42</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0.09, 0.018)</displacement>
+        <root>(0.437707782, 0.5701693)</root>
+        <tip>(0.430786371, 0)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.42281878</speed>
+        <flowAngle>-0.05834961</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0.6375839</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>0.371</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>South</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>Head</id>
+        <label>头部</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_Head_south</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>true</writeDepth>
+        <flame>false</flame>
+        <particle>false</particle>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>44</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.5, 0.1)</root>
+        <tip>(0.5, 0.9)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.9</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>0.742</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>South</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>Body</id>
+        <label>身体</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_Body_south</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>true</writeDepth>
+        <flame>false</flame>
+        <particle>false</particle>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>46</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.5, 0.1)</root>
+        <tip>(0.5, 0.9)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.9</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>1.113</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>South</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>Flame4</id>
+        <label>火苗4</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_Flame4_south</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>true</flame>
+        <particle>false</particle>
+        <position>(-0.02060215, 0.0639337152)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>48</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(-0.07248322, -0.187919468)</displacement>
+        <root>(0.4422321, 0)</root>
+        <tip>(0.442232132, 0.292676777)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.342281878</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0.8187919</breakup>
+        <breakupScale>(2.021745, 1.29751682)</breakupScale>
+        <phase>1.484</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>South</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>Flame3</id>
+        <label>火苗3</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_Flame3_south</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>true</flame>
+        <particle>false</particle>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>50</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0.02, 0.05)</displacement>
+        <root>(0.389644474, 0.365992218)</root>
+        <tip>(0.6231618, 0.5009191)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.42281878</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0.624161065</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>1.855</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>South</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>Flame2</id>
+        <label>火苗2</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_Flame2_south</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>true</flame>
+        <particle>false</particle>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>52</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0.018, 0.05)</displacement>
+        <root>(0.424884856, 0.4923892)</root>
+        <tip>(0.175050974, 0.630868554)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.402684569</speed>
+        <flowAngle>0.313293457</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0.4161074</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>2.226</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>South</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>Flame1</id>
+        <label>火苗1</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_Flame1_south</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>true</flame>
+        <particle>false</particle>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>54</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0.012, 0.06)</displacement>
+        <root>(0.3963324, 0.6008885)</root>
+        <tip>(0.7318236, 0.6008885)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.382550329</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0.95</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>2.597</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>South</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>Glow</id>
+        <label>头部星光</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_Glow_south</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>false</flame>
+        <particle>false</particle>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>56</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>1</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.5, 0.1)</root>
+        <tip>(0.5, 0.9)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.9</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>2.968</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0.18</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>South</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>HeadSparks</id>
+        <label>头部动态粒子</label>
+        <texture>Zhenni/Bladebearer/Weapon/Bladebearer_DaggerSparks</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>false</flame>
+        <particle>true</particle>
+        <particleFlame>Flame1</particleFlame>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>55.2</layer>
+        <color>(0.7, 0.38, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.445, 0.60)</root>
+        <tip>(0.62, 0.83)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.42281878</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>0.371</phase>
+        <bloomIntensity>0.28</bloomIntensity>
+        <bloomThreshold>0.65</bloomThreshold>
+        <particleRate>24</particleRate>
+        <particleLifetime>2.4</particleLifetime>
+        <particleSpeed>0.22</particleSpeed>
+        <particleSize>0.010</particleSize>
+        <particleSpread>55</particleSpread>
+        <particleRadius>0.015</particleRadius>
+        <particleSway>0.03</particleSway>
+        <facing>South</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>ChestSparks</id>
+        <label>胸前动态粒子</label>
+        <texture>Zhenni/Bladebearer/Weapon/Bladebearer_DaggerSparks</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>false</flame>
+        <particle>true</particle>
+        <particleFlame>Flame3</particleFlame>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>55.4</layer>
+        <color>(0.7, 0.38, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.44, 0.41)</root>
+        <tip>(0.67, 0.56)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.42281878</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>0.371</phase>
+        <bloomIntensity>0.28</bloomIntensity>
+        <bloomThreshold>0.65</bloomThreshold>
+        <particleRate>26</particleRate>
+        <particleLifetime>2.4</particleLifetime>
+        <particleSpeed>0.23</particleSpeed>
+        <particleSize>0.010</particleSize>
+        <particleSpread>40</particleSpread>
+        <particleRadius>0.015</particleRadius>
+        <particleSway>0.032</particleSway>
+        <facing>South</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>CapeSparks</id>
+        <label>披风动态粒子</label>
+        <texture>Zhenni/Bladebearer/Weapon/Bladebearer_DaggerSparks</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>false</flame>
+        <particle>true</particle>
+        <particleFlame>Cape</particleFlame>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>41</layer>
+        <color>(0.7, 0.38, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.30, 0.39)</root>
+        <tip>(0.15, 0.13)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.42281878</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>0.371</phase>
+        <bloomIntensity>0.25</bloomIntensity>
+        <bloomThreshold>0.65</bloomThreshold>
+        <particleRate>18</particleRate>
+        <particleLifetime>2.6</particleLifetime>
+        <particleSpeed>0.21</particleSpeed>
+        <particleSize>0.011</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.018</particleRadius>
+        <particleSway>0.038</particleSway>
+        <facing>South</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>LowerSparks</id>
+        <label>下摆动态粒子</label>
+        <texture>Zhenni/Bladebearer/Weapon/Bladebearer_DaggerSparks</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>false</flame>
+        <particle>true</particle>
+        <particleFlame>Flame4</particleFlame>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>43</layer>
+        <color>(0.7, 0.38, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.44, 0.065)</root>
+        <tip>(0.61, 0.24)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.42281878</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>0.371</phase>
+        <bloomIntensity>0.28</bloomIntensity>
+        <bloomThreshold>0.65</bloomThreshold>
+        <particleRate>22</particleRate>
+        <particleLifetime>2.4</particleLifetime>
+        <particleSpeed>0.22</particleSpeed>
+        <particleSize>0.010</particleSize>
+        <particleSpread>50</particleSpread>
+        <particleRadius>0.015</particleRadius>
+        <particleSway>0.032</particleSway>
+        <facing>South</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>Cape_East</id>
+        <label>右侧 · 斗篷</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_Cape_east</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>true</flame>
+        <particle>false</particle>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>40</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0.037583895, -0.0456375852)</displacement>
+        <root>(0.33440253, 0.65317305)</root>
+        <tip>(0.33111252, 0.036990715)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.382550329</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.12</detailStrength>
+        <breakup>0.2080537</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>0</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>East</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>FlameBody_East</id>
+        <label>右侧 · 火焰躯体</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_FlameBody_east</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>true</flame>
+        <particle>false</particle>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>42</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0.09, 0.018)</displacement>
+        <root>(0.39932033, 0.57375131)</root>
+        <tip>(0.39346375, 0.0027284585)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.42281878</speed>
+        <flowAngle>-0.05834961</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0.6375839</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>0.371</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>East</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>Flame4_East</id>
+        <label>右侧 · 火苗4</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_Flame4_east</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>true</flame>
+        <particle>false</particle>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>48</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0.07248322, -0.18791947)</displacement>
+        <root>(0.36591401, 0)</root>
+        <tip>(0.36591398, 0.25090751)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.342281878</speed>
+        <flowAngle>-0.0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0.8187919</breakup>
+        <breakupScale>(2.021745, 1.29751682)</breakupScale>
+        <phase>1.484</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>East</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>Head_East</id>
+        <label>右侧 · 头部</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_Head_east</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>true</writeDepth>
+        <flame>false</flame>
+        <particle>false</particle>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>44</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.5, 0.1)</root>
+        <tip>(0.5, 0.9)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.9</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>0.742</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>East</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>Body_East</id>
+        <label>右侧 · 身体</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_Body_east</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>true</writeDepth>
+        <flame>false</flame>
+        <particle>false</particle>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>46</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.5, 0.1)</root>
+        <tip>(0.5, 0.9)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.9</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>1.113</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>East</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>Flame2_East</id>
+        <label>右侧 · 火苗2</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_Flame2_east</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>true</flame>
+        <particle>false</particle>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>52</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0.018, 0.05)</displacement>
+        <root>(0.46670471, 0.49882302)</root>
+        <tip>(0.21687083, 0.63730238)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.402684569</speed>
+        <flowAngle>0.313293457</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0.4161074</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>2.226</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>East</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>Flame1_East</id>
+        <label>右侧 · 火苗1</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_Flame1_east</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>true</flame>
+        <particle>false</particle>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>54</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0.012, 0.06)</displacement>
+        <root>(0.43428309, 0.61213235)</root>
+        <tip>(0.50045956, 0.63786765)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.382550329</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0.95</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>2.597</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>East</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>Flame3_East</id>
+        <label>右侧 · 火苗3</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_Flame3_east</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>true</flame>
+        <particle>false</particle>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>50</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(-0.02, 0.05)</displacement>
+        <root>(0.49316803, 0.38713192)</root>
+        <tip>(0.2596507, 0.52205881)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.42281878</speed>
+        <flowAngle>-0.0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0.624161065</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>1.855</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>East</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>Glow_East</id>
+        <label>右侧 · 头部星光</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_Glow_east</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>false</flame>
+        <particle>false</particle>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>56</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>1</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.5, 0.1)</root>
+        <tip>(0.5, 0.9)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.9</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>2.968</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0.18</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>East</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>HeadSparks_East</id>
+        <label>右侧 · 头部动态粒子</label>
+        <texture>Zhenni/Bladebearer/Weapon/Bladebearer_DaggerSparks</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>false</flame>
+        <particle>true</particle>
+        <particleFlame>Flame1_East</particleFlame>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>55.2</layer>
+        <color>(0.7, 0.38, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.52987132, 0.62316176)</root>
+        <tip>(0.61994485, 0.83547794)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.42281878</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>0.371</phase>
+        <bloomIntensity>0.28</bloomIntensity>
+        <bloomThreshold>0.65</bloomThreshold>
+        <particleRate>24</particleRate>
+        <particleLifetime>2.4</particleLifetime>
+        <particleSpeed>0.22</particleSpeed>
+        <particleSize>0.010</particleSize>
+        <particleSpread>55</particleSpread>
+        <particleRadius>0.015</particleRadius>
+        <particleSway>0.03</particleSway>
+        <facing>East</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>ChestSparks_East</id>
+        <label>右侧 · 胸前动态粒子</label>
+        <texture>Zhenni/Bladebearer/Weapon/Bladebearer_DaggerSparks</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>false</flame>
+        <particle>true</particle>
+        <particleFlame>Flame3_East</particleFlame>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>55.4</layer>
+        <color>(0.7, 0.38, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.42049632, 0.43290441)</root>
+        <tip>(0.26056985, 0.57536765)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.42281878</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>0.371</phase>
+        <bloomIntensity>0.28</bloomIntensity>
+        <bloomThreshold>0.65</bloomThreshold>
+        <particleRate>26</particleRate>
+        <particleLifetime>2.4</particleLifetime>
+        <particleSpeed>0.23</particleSpeed>
+        <particleSize>0.010</particleSize>
+        <particleSpread>40</particleSpread>
+        <particleRadius>0.015</particleRadius>
+        <particleSway>0.032</particleSway>
+        <facing>East</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>CapeSparks_East</id>
+        <label>右侧 · 披风动态粒子</label>
+        <texture>Zhenni/Bladebearer/Weapon/Bladebearer_DaggerSparks</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>false</flame>
+        <particle>true</particle>
+        <particleFlame>Cape_East</particleFlame>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>41</layer>
+        <color>(0.7, 0.38, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.25229779, 0.30422794)</root>
+        <tip>(0.062040441, 0.13786765)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.42281878</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>0.371</phase>
+        <bloomIntensity>0.25</bloomIntensity>
+        <bloomThreshold>0.65</bloomThreshold>
+        <particleRate>18</particleRate>
+        <particleLifetime>2.6</particleLifetime>
+        <particleSpeed>0.21</particleSpeed>
+        <particleSize>0.011</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.018</particleRadius>
+        <particleSway>0.038</particleSway>
+        <facing>East</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>LowerSparks_East</id>
+        <label>右侧 · 下摆动态粒子</label>
+        <texture>Zhenni/Bladebearer/Weapon/Bladebearer_DaggerSparks</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>false</flame>
+        <particle>true</particle>
+        <particleFlame>Flame4_East</particleFlame>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>43</layer>
+        <color>(0.7, 0.38, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.38832721, 0.058823529)</root>
+        <tip>(0.25597426, 0.24724265)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.42281878</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>0.371</phase>
+        <bloomIntensity>0.28</bloomIntensity>
+        <bloomThreshold>0.65</bloomThreshold>
+        <particleRate>22</particleRate>
+        <particleLifetime>2.4</particleLifetime>
+        <particleSpeed>0.22</particleSpeed>
+        <particleSize>0.010</particleSize>
+        <particleSpread>50</particleSpread>
+        <particleRadius>0.015</particleRadius>
+        <particleSway>0.032</particleSway>
+        <facing>East</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>Cape_West</id>
+        <label>左侧 · 斗篷</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_Cape_west</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>true</flame>
+        <particle>false</particle>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>40</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(-0.037583895, -0.045637585)</displacement>
+        <root>(0.54151658, 0.65317305)</root>
+        <tip>(0.5448066, 0.036990715)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.382550329</speed>
+        <flowAngle>-0.0</flowAngle>
+        <detailStrength>0.12</detailStrength>
+        <breakup>0.2080537</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>0</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>West</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>FlameBody_West</id>
+        <label>左侧 · 火焰躯体</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_FlameBody_west</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>true</flame>
+        <particle>false</particle>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>42</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(-0.09, 0.018)</displacement>
+        <root>(0.47659879, 0.57375131)</root>
+        <tip>(0.48245537, 0.0027284585)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.42281878</speed>
+        <flowAngle>0.05834961</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0.6375839</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>0.371</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>West</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>Flame4_West</id>
+        <label>左侧 · 火苗4</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_Flame4_west</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>true</flame>
+        <particle>false</particle>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>48</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(-0.07248322, -0.187919468)</displacement>
+        <root>(0.51000511, 0)</root>
+        <tip>(0.51000514, 0.25090751)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.342281878</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0.8187919</breakup>
+        <breakupScale>(2.021745, 1.29751682)</breakupScale>
+        <phase>1.484</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>West</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>Head_West</id>
+        <label>左侧 · 头部</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_Head_west</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>true</writeDepth>
+        <flame>false</flame>
+        <particle>false</particle>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>44</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.5, 0.1)</root>
+        <tip>(0.5, 0.9)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.9</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>0.742</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>West</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>HeadDetail_West</id>
+        <label>左侧 · 头盔补绘</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_HeadDetail_west</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>true</writeDepth>
+        <flame>false</flame>
+        <particle>false</particle>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>44.2</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.5, 0.1)</root>
+        <tip>(0.5, 0.9)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.9</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>0.742</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>West</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>Body_West</id>
+        <label>左侧 · 身体</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_Body_west</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>true</writeDepth>
+        <flame>false</flame>
+        <particle>false</particle>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>46</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.5, 0.1)</root>
+        <tip>(0.5, 0.9)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.9</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>1.113</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>West</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>Flame1_West</id>
+        <label>左侧 · 火苗1</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_Flame1_west</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>true</flame>
+        <particle>false</particle>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>54</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(-0.012, 0.06)</displacement>
+        <root>(0.4921841, 0.61350481)</root>
+        <tip>(0.17173216, 0.61350481)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.382550329</speed>
+        <flowAngle>-0.0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0.95</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>2.597</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>West</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>Flame3_West</id>
+        <label>左侧 · 火苗3</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_Flame3_west</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>true</flame>
+        <particle>false</particle>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>50</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0.02, 0.05)</displacement>
+        <root>(0.38550844, 0.37610251)</root>
+        <tip>(0.61902577, 0.51102939)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.42281878</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0.624161065</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>1.855</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>West</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>Glow_West</id>
+        <label>左侧 · 头部星光</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_Glow_west</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>false</flame>
+        <particle>false</particle>
+        <position>(-0.14310662, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>56</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>1</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.5, 0.1)</root>
+        <tip>(0.5, 0.9)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.9</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>2.968</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0.18</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>West</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>HeadSparks_West</id>
+        <label>左侧 · 头部动态粒子</label>
+        <texture>Zhenni/Bladebearer/Weapon/Bladebearer_DaggerSparks</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>false</flame>
+        <particle>true</particle>
+        <particleFlame>Flame1_West</particleFlame>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>55.2</layer>
+        <color>(0.7, 0.38, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.3203125, 0.62867647)</root>
+        <tip>(0.20266544, 0.828125)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.42281878</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>0.371</phase>
+        <bloomIntensity>0.28</bloomIntensity>
+        <bloomThreshold>0.65</bloomThreshold>
+        <particleRate>24</particleRate>
+        <particleLifetime>2.4</particleLifetime>
+        <particleSpeed>0.22</particleSpeed>
+        <particleSize>0.010</particleSize>
+        <particleSpread>55</particleSpread>
+        <particleRadius>0.015</particleRadius>
+        <particleSway>0.03</particleSway>
+        <facing>West</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>ChestSparks_West</id>
+        <label>左侧 · 胸前动态粒子</label>
+        <texture>Zhenni/Bladebearer/Weapon/Bladebearer_DaggerSparks</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>false</flame>
+        <particle>true</particle>
+        <particleFlame>Flame3_West</particleFlame>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>55.4</layer>
+        <color>(0.7, 0.38, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.45542279, 0.43106618)</root>
+        <tip>(0.62545956, 0.55606618)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.42281878</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>0.371</phase>
+        <bloomIntensity>0.28</bloomIntensity>
+        <bloomThreshold>0.65</bloomThreshold>
+        <particleRate>26</particleRate>
+        <particleLifetime>2.4</particleLifetime>
+        <particleSpeed>0.23</particleSpeed>
+        <particleSize>0.010</particleSize>
+        <particleSpread>40</particleSpread>
+        <particleRadius>0.015</particleRadius>
+        <particleSway>0.032</particleSway>
+        <facing>West</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>CapeSparks_West</id>
+        <label>左侧 · 披风动态粒子</label>
+        <texture>Zhenni/Bladebearer/Weapon/Bladebearer_DaggerSparks</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>false</flame>
+        <particle>true</particle>
+        <particleFlame>Cape_West</particleFlame>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>41</layer>
+        <color>(0.7, 0.38, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.60523897, 0.30698529)</root>
+        <tip>(0.80928309, 0.15900735)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.42281878</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>0.371</phase>
+        <bloomIntensity>0.25</bloomIntensity>
+        <bloomThreshold>0.65</bloomThreshold>
+        <particleRate>18</particleRate>
+        <particleLifetime>2.6</particleLifetime>
+        <particleSpeed>0.21</particleSpeed>
+        <particleSize>0.011</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.018</particleRadius>
+        <particleSway>0.038</particleSway>
+        <facing>West</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>LowerSparks_West</id>
+        <label>左侧 · 下摆动态粒子</label>
+        <texture>Zhenni/Bladebearer/Weapon/Bladebearer_DaggerSparks</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>false</flame>
+        <particle>true</particle>
+        <particleFlame>Flame4_West</particleFlame>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>43</layer>
+        <color>(0.7, 0.38, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.47840074, 0.061580882)</root>
+        <tip>(0.61167279, 0.25091912)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.42281878</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>0.371</phase>
+        <bloomIntensity>0.28</bloomIntensity>
+        <bloomThreshold>0.65</bloomThreshold>
+        <particleRate>22</particleRate>
+        <particleLifetime>2.4</particleLifetime>
+        <particleSpeed>0.22</particleSpeed>
+        <particleSize>0.010</particleSize>
+        <particleSpread>50</particleSpread>
+        <particleRadius>0.015</particleRadius>
+        <particleSway>0.032</particleSway>
+        <facing>West</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>Glow_North</id>
+        <label>背面 · 头部星光</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_Glow_north</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>false</flame>
+        <particle>false</particle>
+        <position>(-0.087683824, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>40</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>1</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.5, 0.1)</root>
+        <tip>(0.5, 0.9)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.9</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>2.968</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0.18</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>North</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>FlameBody_North</id>
+        <label>背面 · 火焰躯体</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_FlameBody_north</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>true</flame>
+        <particle>false</particle>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>42</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0.09, 0.018)</displacement>
+        <root>(0.41748719, 0.5701693)</root>
+        <tip>(0.41056578, 0)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.42281878</speed>
+        <flowAngle>-0.05834961</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0.6375839</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>0.371</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>North</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>Flame4_North</id>
+        <label>背面 · 火苗4</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_Flame4_north</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>true</flame>
+        <particle>false</particle>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>44</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(-0.07248322, -0.187919468)</displacement>
+        <root>(0.41190122, 0)</root>
+        <tip>(0.41190125, 0.29267678)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.342281878</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0.8187919</breakup>
+        <breakupScale>(2.021745, 1.29751682)</breakupScale>
+        <phase>1.484</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>North</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>Body_North</id>
+        <label>背面 · 身体</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_Body_north</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>true</writeDepth>
+        <flame>false</flame>
+        <particle>false</particle>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>46</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.5, 0.1)</root>
+        <tip>(0.5, 0.9)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.9</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>1.113</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>North</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>Cape_North</id>
+        <label>背面 · 斗篷</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_Cape_north</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>true</flame>
+        <particle>false</particle>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>50</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0.037583895, -0.0456375852)</displacement>
+        <root>(0.43382353, 0.57444853)</root>
+        <tip>(0.61764706, 0.109375)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.382550329</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.12</detailStrength>
+        <breakup>0.2080537</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>0</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>North</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>Head_North</id>
+        <label>背面 · 头部</label>
+        <texture>Zhenni/Bladebearer/Pawn/Bladebearer_Head_north</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>true</writeDepth>
+        <flame>false</flame>
+        <particle>false</particle>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>54</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.5, 0.1)</root>
+        <tip>(0.5, 0.9)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.9</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>0.742</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>North</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>HeadSparks_North</id>
+        <label>背面 · 头部动态粒子</label>
+        <texture>Zhenni/Bladebearer/Weapon/Bladebearer_DaggerSparks</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>false</flame>
+        <particle>true</particle>
+        <particleFlame>Cape_North</particleFlame>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>53.5</layer>
+        <color>(0.7, 0.38, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.42003676, 0.60386029)</root>
+        <tip>(0.31893382, 0.84742647)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.42281878</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>0.371</phase>
+        <bloomIntensity>0.28</bloomIntensity>
+        <bloomThreshold>0.65</bloomThreshold>
+        <particleRate>24</particleRate>
+        <particleLifetime>2.4</particleLifetime>
+        <particleSpeed>0.22</particleSpeed>
+        <particleSize>0.010</particleSize>
+        <particleSpread>55</particleSpread>
+        <particleRadius>0.015</particleRadius>
+        <particleSway>0.03</particleSway>
+        <facing>North</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>ChestSparks_North</id>
+        <label>背面 · 胸前动态粒子</label>
+        <texture>Zhenni/Bladebearer/Weapon/Bladebearer_DaggerSparks</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>false</flame>
+        <particle>true</particle>
+        <particleFlame>FlameBody_North</particleFlame>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>43</layer>
+        <color>(0.7, 0.38, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.42922794, 0.26930147)</root>
+        <tip>(0.24540441, 0.39430147)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.42281878</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>0.371</phase>
+        <bloomIntensity>0.28</bloomIntensity>
+        <bloomThreshold>0.65</bloomThreshold>
+        <particleRate>26</particleRate>
+        <particleLifetime>2.4</particleLifetime>
+        <particleSpeed>0.23</particleSpeed>
+        <particleSize>0.010</particleSize>
+        <particleSpread>40</particleSpread>
+        <particleRadius>0.015</particleRadius>
+        <particleSway>0.032</particleSway>
+        <facing>North</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>CapeSparks_North</id>
+        <label>背面 · 披风动态粒子</label>
+        <texture>Zhenni/Bladebearer/Weapon/Bladebearer_DaggerSparks</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>false</flame>
+        <particle>true</particle>
+        <particleFlame>Cape_North</particleFlame>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>51</layer>
+        <color>(0.7, 0.38, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.57628676, 0.24724265)</root>
+        <tip>(0.75551471, 0.077205882)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.42281878</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>0.371</phase>
+        <bloomIntensity>0.25</bloomIntensity>
+        <bloomThreshold>0.65</bloomThreshold>
+        <particleRate>18</particleRate>
+        <particleLifetime>2.6</particleLifetime>
+        <particleSpeed>0.21</particleSpeed>
+        <particleSize>0.011</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.018</particleRadius>
+        <particleSway>0.038</particleSway>
+        <facing>North</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>LowerSparks_North</id>
+        <label>背面 · 下摆动态粒子</label>
+        <texture>Zhenni/Bladebearer/Weapon/Bladebearer_DaggerSparks</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>false</flame>
+        <particle>true</particle>
+        <particleFlame>Flame4_North</particleFlame>
+        <position>(0, 0.15)</position>
+        <size>(1.8, 1.8)</size>
+        <angle>0</angle>
+        <layer>45</layer>
+        <color>(0.7, 0.38, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.43933824, 0.045036765)</root>
+        <tip>(0.59742647, 0.24816176)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.42281878</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>0.371</phase>
+        <bloomIntensity>0.28</bloomIntensity>
+        <bloomThreshold>0.65</bloomThreshold>
+        <particleRate>22</particleRate>
+        <particleLifetime>2.4</particleLifetime>
+        <particleSpeed>0.22</particleSpeed>
+        <particleSize>0.010</particleSize>
+        <particleSpread>50</particleSpread>
+        <particleRadius>0.015</particleRadius>
+        <particleSway>0.032</particleSway>
+        <facing>North</facing>
+        <attachment>Body</attachment>
+      </li>
+      <li>
+        <id>Axe</id>
+        <label>战斧</label>
+        <texture>Zhenni/Axebearer/Weapon/Axebearer_Axe</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>true</writeDepth>
+        <flame>false</flame>
+        <particle>false</particle>
+        <position>(0, 0)</position>
+        <size>(1.05, 1.05)</size>
+        <angle>0</angle>
+        <layer>0</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.5, 0.1)</root>
+        <tip>(0.5, 0.9)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.9</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>3.339</phase>
+        <bloomIntensity>0.65</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>All</facing>
+        <attachment>Weapon</attachment>
+      </li>
+      <li>
+        <id>AxeFlame</id>
+        <label>斧刃火焰</label>
+        <texture>Zhenni/Axebearer/Weapon/Axebearer_AxeFlame</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>true</flame>
+        <particle>false</particle>
+        <position>(0, 0)</position>
+        <size>(1.05, 1.05)</size>
+        <angle>0</angle>
+        <layer>2</layer>
+        <color>(1, 1, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0.065, 0.03)</displacement>
+        <root>(0.453125, 0.758681)</root>
+        <tip>(0.725694, 0.921875)</tip>
+        <rootLock>0.2</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.48</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.25</detailStrength>
+        <breakup>0.8</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>3.71</phase>
+        <bloomIntensity>0.8</bloomIntensity>
+        <bloomThreshold>0.5</bloomThreshold>
+        <particleRate>14</particleRate>
+        <particleLifetime>1.3</particleLifetime>
+        <particleSpeed>0.17</particleSpeed>
+        <particleSize>0.009</particleSize>
+        <particleSpread>45</particleSpread>
+        <particleRadius>0.025</particleRadius>
+        <particleSway>0.018</particleSway>
+        <facing>All</facing>
+        <attachment>Weapon</attachment>
+      </li>
+      <li>
+        <id>AxeSparks</id>
+        <label>斧刃动态火星</label>
+        <texture>Zhenni/Axebearer/Weapon/Axebearer_AxeFlame</texture>
+        <displacementTexture>BladebearerDisplacement</displacementTexture>
+        <enabled>true</enabled>
+        <writeDepth>false</writeDepth>
+        <flame>false</flame>
+        <particle>true</particle>
+        <particleFlame>AxeFlame</particleFlame>
+        <position>(0, 0)</position>
+        <size>(1.05, 1.05)</size>
+        <angle>0</angle>
+        <layer>4</layer>
+        <color>(0.7, 0.38, 1, 1)</color>
+        <additive>0</additive>
+        <displacement>(0, 0)</displacement>
+        <root>(0.453125, 0.758681)</root>
+        <tip>(0.725694, 0.921875)</tip>
+        <rootLock>0.1</rootLock>
+        <bendPower>0.8</bendPower>
+        <noiseScale>(0.5, 0.7)</noiseScale>
+        <speed>0.9</speed>
+        <flowAngle>0</flowAngle>
+        <detailStrength>0.35</detailStrength>
+        <breakup>0</breakup>
+        <breakupScale>(1.8, 2.2)</breakupScale>
+        <phase>4.081</phase>
+        <bloomIntensity>0.27</bloomIntensity>
+        <bloomThreshold>0.65</bloomThreshold>
+        <particleRate>18</particleRate>
+        <particleLifetime>2.5</particleLifetime>
+        <particleSpeed>0.2</particleSpeed>
+        <particleSize>0.011</particleSize>
+        <particleSpread>35</particleSpread>
+        <particleRadius>0.015</particleRadius>
+        <particleSway>0.048</particleSway>
+        <facing>All</facing>
+        <attachment>Weapon</attachment>
+      </li>
+    </parts>
+  </NingshaRaceLib.Zhenni.Bladebearer.BladebearerAppearanceDef>
+</Defs>

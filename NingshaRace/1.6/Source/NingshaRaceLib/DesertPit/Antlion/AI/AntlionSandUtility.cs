@@ -20,9 +20,9 @@ namespace NingshaRaceLib.DesertPit.Antlion.AI
             return true;
         }
 
-        //函数职责：检查沙地、通行和实体占用，允许正在下潜的蚁狮占据自身格子。
+        //下潜时检查全部占用，已潜伏时允许生物踩过而不强制释放蚁狮。
         public static bool CanBurrowAt(Map map, IntVec3 cell, CompProperties_AntlionAmbush props,
-            Thing occupant = null)
+            Thing occupant = null, bool ignorePawns = false)
         {
             if (!cell.InBounds(map) || !cell.Standable(map) || !props.burrowTerrains.Contains(cell.GetTerrain(map)))
                 return false;
@@ -31,7 +31,7 @@ namespace NingshaRaceLib.DesertPit.Antlion.AI
             {
                 Thing thing = things[i];
                 if (thing == occupant) continue;
-                if (thing is Pawn || thing is Building || thing is AntlionBurrow
+                if ((thing is Pawn && !ignorePawns) || thing is Building || thing is AntlionBurrow
                     || thing is Plant || thing.def.category == ThingCategory.Item) return false;
             }
             return true;

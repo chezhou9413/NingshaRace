@@ -103,6 +103,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
                 CurrentLevel = currentLevel,
                 MaxLevel = maximumLevel,
                 NextRepairTick = Find.TickManager.TicksGame + Settings.repairIntervalTicks,
+                NextHarvestOrderTick = NextLocalNoonTick(Find.TickManager.TicksGame),
                 NextBirthTick = Find.TickManager.TicksGame + Settings.reproductionCooldownTicks
             };
 

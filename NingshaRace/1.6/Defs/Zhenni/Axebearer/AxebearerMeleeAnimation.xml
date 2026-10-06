@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <NingshaRaceLib.Combat.MeleeAnimation.MeleeAnimationDef>
+    <defName>NingshaRace_Zhenni_Axebearer_MeleeAnimation</defName>
+    <label>震尼持斧者近战动作</label>
+    <mirrorBlade>true</mirrorBlade>
+    <bodyPivot>(0, -0.45)</bodyPivot>
+    <!-- 576 像素共同画布：握住柄部，轨迹只采样弯曲斧刃的有效切削段。 -->
+    <grip>(0.491319, 0.350694)</grip>
+    <bladeStart>(0.326389, 0.545139)</bladeStart>
+    <bladeEnd>(0.260417, 0.810764)</bladeEnd>
+    <handSouth>(-0.04, 0)</handSouth>
+    <handEast>(-0.05, 0.06)</handEast>
+    <handWest>(-0.13, 0.035)</handWest>
+    <handNorth>(-0.26, 0)</handNorth>
+    <holdAngleSouth>45</holdAngleSouth>
+    <holdAngleEast>45</holdAngleEast>
+    <holdAngleWest>45</holdAngleWest>
+    <holdAngleNorth>45</holdAngleNorth>
+    <!-- 前摇较长，出斧和追随段连续；接触时刻对应斧刃朝向目标的一帧。 -->
+    <moves>
+      <li>
+        <id>OverheadCleave</id>
+        <label>坠焰重劈</label>
+        <weight>1.2</weight>
+        <duration>2</duration>
+        <contact>0.57</contact>
+        <hitstop>0</hitstop>
+        <strikeCount>1</strikeCount>
+        <strikeInterval>0.18</strikeInterval>
+        <trailLifetime>0.55</trailLifetime>
+        <trailWidth>1.35</trailWidth>
+        <trailIntensity>1.4</trailIntensity>
+        <flameDistortion>0.95</flameDistortion>
+        <effectSpeed>0.24</effectSpeed>
+        <chargeIntensity>0.9</chargeIntensity>
+        <chargeReady>0.34</chargeReady>
+        <chargeFlash>1.8</chargeFlash>
+        <chargeScale>1.3</chargeScale>
+        <bloom>0.8</bloom>
+        <sparks>18</sparks>
+        <sparkLifetime>1.3</sparkLifetime>
+        <sparkSpeed>0.14</sparkSpeed>
+        <sparkSize>0.011</sparkSize>
+        <color>(0.59, 0.12, 1, 0.9)</color>
+        <directions>
+          <li>
+            <facing>South</facing>
+            <offset>(0, 0)</offset>
+            <angle>0</angle>
+            <layer>90</layer>
+            <keys>
+              <li><time>0</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+              <li><time>0.2</time><angle>-191</angle><position>(0, 0.16)</position><body>(0, 0.037)</body><lean>-5</lean><trail>0</trail></li>
+              <li><time>0.34</time><angle>-239</angle><position>(0, 0.28)</position><body>(0, 0.078)</body><lean>-9</lean><trail>0</trail></li>
+              <li><time>0.46</time><angle>-250</angle><position>(0, 0.31)</position><body>(0, 0.1)</body><lean>-10</lean><trail>0</trail></li>
+              <li><time>0.57</time><angle>-89</angle><position>(0, -0.28)</position><body>(0, -0.133)</body><lean>11</lean><trail>1</trail></li>
+              <li><time>0.74</time><angle>95</angle><position>(0, -0.36)</position><body>(0, -0.1)</body><lean>9</lean><trail>0.86</trail></li>
+              <li><time>0.87</time><angle>68</angle><position>(0, -0.23)</position><body>(0, -0.052)</body><lean>5</lean><trail>0.12</trail></li>
+              <li><time>1</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+            </keys>
+          </li>
+          <li>
+            <facing>East</facing>
+            <offset>(0, 0)</offset>
+            <angle>0</angle>
+            <layer>90</layer>
+            <keys>
+              <li><time>0</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+              <li><time>0.2</time><angle>-191</angle><position>(-0.03, 0.13)</position><body>(-0.025, 0.012)</body><lean>5</lean><trail>0</trail></li>
+              <li><time>0.34</time><angle>-239</angle><position>(-0.07, 0.21)</position><body>(-0.055, 0.023)</body><lean>9</lean><trail>0</trail></li>
+              <li><time>0.46</time><angle>-250</angle><position>(-0.08, 0.23)</position><body>(-0.07, 0.03)</body><lean>10</lean><trail>0</trail></li>
+              <li><time>0.57</time><angle>-89</angle><position>(0.24, -0.04)</position><body>(0.12, -0.013)</body><lean>-11</lean><trail>1</trail></li>
+              <li><time>0.74</time><angle>95</angle><position>(0.17, -0.19)</position><body>(0.08, -0.02)</body><lean>-9</lean><trail>0.86</trail></li>
+              <li><time>0.87</time><angle>68</angle><position>(0.09, -0.14)</position><body>(0.04, -0.012)</body><lean>-5</lean><trail>0.12</trail></li>
+              <li><time>1</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+            </keys>
+          </li>
+          <li>
+            <facing>West</facing>
+            <offset>(0, 0)</offset>
+            <angle>0</angle>
+            <layer>90</layer>
+            <keys>
+              <li><time>0</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+              <li><time>0.2</time><angle>-191</angle><position>(0.03, 0.13)</position><body>(0.025, 0.012)</body><lean>-5</lean><trail>0</trail></li>
+              <li><time>0.34</time><angle>-239</angle><position>(0.07, 0.21)</position><body>(0.055, 0.023)</body><lean>-9</lean><trail>0</trail></li>
+              <li><time>0.46</time><angle>-250</angle><position>(0.08, 0.23)</position><body>(0.07, 0.03)</body><lean>-10</lean><trail>0</trail></li>
+              <li><time>0.57</time><angle>-89</angle><position>(-0.24, -0.04)</position><body>(-0.12, -0.013)</body><lean>11</lean><trail>1</trail></li>
+              <li><time>0.74</time><angle>95</angle><position>(-0.17, -0.19)</position><body>(-0.08, -0.02)</body><lean>9</lean><trail>0.86</trail></li>
+              <li><time>0.87</time><angle>68</angle><position>(-0.09, -0.14)</position><body>(-0.04, -0.012)</body><lean>5</lean><trail>0.12</trail></li>
+              <li><time>1</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+            </keys>
+          </li>
+          <li>
+            <facing>North</facing>
+            <offset>(0, 0)</offset>
+            <angle>0</angle>
+            <layer>-10</layer>
+            <keys>
+              <li><time>0</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+              <li><time>0.2</time><angle>-191</angle><position>(0, 0.1)</position><body>(0, -0.013)</body><lean>5</lean><trail>0</trail></li>
+              <li><time>0.34</time><angle>-239</angle><position>(0, 0.14)</position><body>(0, -0.032)</body><lean>9</lean><trail>0</trail></li>
+              <li><time>0.46</time><angle>-250</angle><position>(0, 0.15)</position><body>(0, -0.04)</body><lean>10</lean><trail>0</trail></li>
+              <li><time>0.57</time><angle>-89</angle><position>(0, 0.2)</position><body>(0, 0.107)</body><lean>-11</lean><trail>1</trail></li>
+              <li><time>0.74</time><angle>95</angle><position>(0, -0.02)</position><body>(0, 0.06)</body><lean>-9</lean><trail>0.86</trail></li>
+              <li><time>0.87</time><angle>68</angle><position>(0, -0.05)</position><body>(0, 0.028)</body><lean>-5</lean><trail>0.12</trail></li>
+              <li><time>1</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+            </keys>
+          </li>
+        </directions>
+      </li>
+      <li>
+        <id>WideSweep</id>
+        <label>裂焰横扫</label>
+        <weight>1.1</weight>
+        <duration>1.9</duration>
+        <contact>0.55</contact>
+        <hitstop>0</hitstop>
+        <strikeCount>1</strikeCount>
+        <strikeInterval>0.18</strikeInterval>
+        <trailLifetime>0.55</trailLifetime>
+        <trailWidth>1.45</trailWidth>
+        <trailIntensity>1.4</trailIntensity>
+        <flameDistortion>0.95</flameDistortion>
+        <effectSpeed>0.24</effectSpeed>
+        <chargeIntensity>0.9</chargeIntensity>
+        <chargeReady>0.34</chargeReady>
+        <chargeFlash>1.8</chargeFlash>
+        <chargeScale>1.3</chargeScale>
+        <bloom>0.8</bloom>
+        <sparks>18</sparks>
+        <sparkLifetime>1.3</sparkLifetime>
+        <sparkSpeed>0.14</sparkSpeed>
+        <sparkSize>0.011</sparkSize>
+        <color>(0.59, 0.12, 1, 0.9)</color>
+        <directions>
+          <li>
+            <facing>South</facing>
+            <offset>(0, 0)</offset>
+            <angle>0</angle>
+            <layer>90</layer>
+            <keys>
+              <li><time>0</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+              <li><time>0.18</time><angle>-188</angle><position>(0, 0.085)</position><body>(0, 0.035)</body><lean>-6</lean><trail>0</trail></li>
+              <li><time>0.34</time><angle>-232</angle><position>(0, 0.175)</position><body>(0, 0.066)</body><lean>-11</lean><trail>0</trail></li>
+              <li><time>0.44</time><angle>-242</angle><position>(0, 0.205)</position><body>(0, 0.084)</body><lean>-12</lean><trail>0</trail></li>
+              <li><time>0.55</time><angle>-89</angle><position>(0, -0.28)</position><body>(0, -0.12)</body><lean>12</lean><trail>1</trail></li>
+              <li><time>0.72</time><angle>88</angle><position>(0, -0.205)</position><body>(0, -0.083)</body><lean>10</lean><trail>0.88</trail></li>
+              <li><time>0.86</time><angle>65</angle><position>(0, -0.065)</position><body>(0, -0.029)</body><lean>4</lean><trail>0.14</trail></li>
+              <li><time>1</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+            </keys>
+          </li>
+          <li>
+            <facing>East</facing>
+            <offset>(0, 0)</offset>
+            <angle>0</angle>
+            <layer>90</layer>
+            <keys>
+              <li><time>0</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+              <li><time>0.18</time><angle>-188</angle><position>(-0.07, 0.015)</position><body>(-0.035, 0)</body><lean>6</lean><trail>0</trail></li>
+              <li><time>0.34</time><angle>-232</angle><position>(-0.12, 0.055)</position><body>(-0.06, 0.006)</body><lean>11</lean><trail>0</trail></li>
+              <li><time>0.44</time><angle>-242</angle><position>(-0.14, 0.065)</position><body>(-0.075, 0.009)</body><lean>12</lean><trail>0</trail></li>
+              <li><time>0.55</time><angle>-89</angle><position>(0.29, 0.01)</position><body>(0.12, 0)</body><lean>-12</lean><trail>1</trail></li>
+              <li><time>0.72</time><angle>88</angle><position>(0.16, -0.045)</position><body>(0.075, -0.008)</body><lean>-10</lean><trail>0.88</trail></li>
+              <li><time>0.86</time><angle>65</angle><position>(0.045, -0.02)</position><body>(0.025, -0.004)</body><lean>-4</lean><trail>0.14</trail></li>
+              <li><time>1</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+            </keys>
+          </li>
+          <li>
+            <facing>West</facing>
+            <offset>(0, 0)</offset>
+            <angle>0</angle>
+            <layer>90</layer>
+            <keys>
+              <li><time>0</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+              <li><time>0.18</time><angle>-188</angle><position>(0.07, 0.015)</position><body>(0.035, 0)</body><lean>-6</lean><trail>0</trail></li>
+              <li><time>0.34</time><angle>-232</angle><position>(0.12, 0.055)</position><body>(0.06, 0.006)</body><lean>-11</lean><trail>0</trail></li>
+              <li><time>0.44</time><angle>-242</angle><position>(0.14, 0.065)</position><body>(0.075, 0.009)</body><lean>-12</lean><trail>0</trail></li>
+              <li><time>0.55</time><angle>-89</angle><position>(-0.29, 0.01)</position><body>(-0.12, 0)</body><lean>12</lean><trail>1</trail></li>
+              <li><time>0.72</time><angle>88</angle><position>(-0.16, -0.045)</position><body>(-0.075, -0.008)</body><lean>10</lean><trail>0.88</trail></li>
+              <li><time>0.86</time><angle>65</angle><position>(-0.045, -0.02)</position><body>(-0.025, -0.004)</body><lean>4</lean><trail>0.14</trail></li>
+              <li><time>1</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+            </keys>
+          </li>
+          <li>
+            <facing>North</facing>
+            <offset>(0, 0)</offset>
+            <angle>0</angle>
+            <layer>-10</layer>
+            <keys>
+              <li><time>0</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+              <li><time>0.18</time><angle>-188</angle><position>(0, -0.055)</position><body>(0, -0.035)</body><lean>6</lean><trail>0</trail></li>
+              <li><time>0.34</time><angle>-232</angle><position>(0, -0.065)</position><body>(0, -0.054)</body><lean>11</lean><trail>0</trail></li>
+              <li><time>0.44</time><angle>-242</angle><position>(0, -0.075)</position><body>(0, -0.066)</body><lean>12</lean><trail>0</trail></li>
+              <li><time>0.55</time><angle>-89</angle><position>(0, 0.3)</position><body>(0, 0.12)</body><lean>-12</lean><trail>1</trail></li>
+              <li><time>0.72</time><angle>88</angle><position>(0, 0.115)</position><body>(0, 0.067)</body><lean>-10</lean><trail>0.88</trail></li>
+              <li><time>0.86</time><angle>65</angle><position>(0, 0.025)</position><body>(0, 0.021)</body><lean>-4</lean><trail>0.14</trail></li>
+              <li><time>1</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+            </keys>
+          </li>
+        </directions>
+      </li>
+      <li>
+        <id>RisingCleave</id>
+        <label>低焰上撩</label>
+        <weight>0.85</weight>
+        <duration>1.85</duration>
+        <contact>0.57</contact>
+        <hitstop>0</hitstop>
+        <strikeCount>1</strikeCount>
+        <strikeInterval>0.18</strikeInterval>
+        <trailLifetime>0.55</trailLifetime>
+        <trailWidth>1.2</trailWidth>
+        <trailIntensity>1.4</trailIntensity>
+        <flameDistortion>0.95</flameDistortion>
+        <effectSpeed>0.24</effectSpeed>
+        <chargeIntensity>0.9</chargeIntensity>
+        <chargeReady>0.34</chargeReady>
+        <chargeFlash>1.8</chargeFlash>
+        <chargeScale>1.3</chargeScale>
+        <bloom>0.8</bloom>
+        <sparks>18</sparks>
+        <sparkLifetime>1.3</sparkLifetime>
+        <sparkSpeed>0.14</sparkSpeed>
+        <sparkSize>0.011</sparkSize>
+        <color>(0.59, 0.12, 1, 0.9)</color>
+        <directions>
+          <li>
+            <facing>South</facing>
+            <offset>(0, 0)</offset>
+            <angle>0</angle>
+            <layer>90</layer>
+            <keys>
+              <li><time>0</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+              <li><time>0.18</time><angle>-190</angle><position>(0, -0.13)</position><body>(0, 0)</body><lean>-5</lean><trail>0</trail></li>
+              <li><time>0.34</time><angle>-243</angle><position>(0, -0.165)</position><body>(0, 0.01)</body><lean>-9</lean><trail>0</trail></li>
+              <li><time>0.45</time><angle>-252</angle><position>(0, -0.17)</position><body>(0, 0.019)</body><lean>-10</lean><trail>0</trail></li>
+              <li><time>0.57</time><angle>-89</angle><position>(0, -0.225)</position><body>(0, -0.105)</body><lean>10</lean><trail>1</trail></li>
+              <li><time>0.73</time><angle>72</angle><position>(0, 0.09)</position><body>(0, -0.035)</body><lean>9</lean><trail>0.86</trail></li>
+              <li><time>0.86</time><angle>53</angle><position>(0, 0.13)</position><body>(0, -0.005)</body><lean>4</lean><trail>0.1</trail></li>
+              <li><time>1</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+            </keys>
+          </li>
+          <li>
+            <facing>East</facing>
+            <offset>(0, 0)</offset>
+            <angle>0</angle>
+            <layer>90</layer>
+            <keys>
+              <li><time>0</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+              <li><time>0.18</time><angle>-190</angle><position>(-0.03, -0.16)</position><body>(-0.025, -0.025)</body><lean>5</lean><trail>0</trail></li>
+              <li><time>0.34</time><angle>-243</angle><position>(-0.065, -0.23)</position><body>(-0.05, -0.04)</body><lean>9</lean><trail>0</trail></li>
+              <li><time>0.45</time><angle>-252</angle><position>(-0.08, -0.25)</position><body>(-0.065, -0.046)</body><lean>10</lean><trail>0</trail></li>
+              <li><time>0.57</time><angle>-89</angle><position>(0.25, 0.025)</position><body>(0.11, 0.005)</body><lean>-10</lean><trail>1</trail></li>
+              <li><time>0.73</time><angle>72</angle><position>(0.16, 0.25)</position><body>(0.075, 0.04)</body><lean>-9</lean><trail>0.86</trail></li>
+              <li><time>0.86</time><angle>53</angle><position>(0.06, 0.19)</position><body>(0.03, 0.025)</body><lean>-4</lean><trail>0.1</trail></li>
+              <li><time>1</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+            </keys>
+          </li>
+          <li>
+            <facing>West</facing>
+            <offset>(0, 0)</offset>
+            <angle>0</angle>
+            <layer>90</layer>
+            <keys>
+              <li><time>0</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+              <li><time>0.18</time><angle>-190</angle><position>(0.03, -0.16)</position><body>(0.025, -0.025)</body><lean>-5</lean><trail>0</trail></li>
+              <li><time>0.34</time><angle>-243</angle><position>(0.065, -0.23)</position><body>(0.05, -0.04)</body><lean>-9</lean><trail>0</trail></li>
+              <li><time>0.45</time><angle>-252</angle><position>(0.08, -0.25)</position><body>(0.065, -0.046)</body><lean>-10</lean><trail>0</trail></li>
+              <li><time>0.57</time><angle>-89</angle><position>(-0.25, 0.025)</position><body>(-0.11, 0.005)</body><lean>10</lean><trail>1</trail></li>
+              <li><time>0.73</time><angle>72</angle><position>(-0.16, 0.25)</position><body>(-0.075, 0.04)</body><lean>9</lean><trail>0.86</trail></li>
+              <li><time>0.86</time><angle>53</angle><position>(-0.06, 0.19)</position><body>(-0.03, 0.025)</body><lean>4</lean><trail>0.1</trail></li>
+              <li><time>1</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+            </keys>
+          </li>
+          <li>
+            <facing>North</facing>
+            <offset>(0, 0)</offset>
+            <angle>0</angle>
+            <layer>-10</layer>
+            <keys>
+              <li><time>0</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+              <li><time>0.18</time><angle>-190</angle><position>(0, -0.19)</position><body>(0, -0.05)</body><lean>5</lean><trail>0</trail></li>
+              <li><time>0.34</time><angle>-243</angle><position>(0, -0.295)</position><body>(0, -0.09)</body><lean>9</lean><trail>0</trail></li>
+              <li><time>0.45</time><angle>-252</angle><position>(0, -0.33)</position><body>(0, -0.111)</body><lean>10</lean><trail>0</trail></li>
+              <li><time>0.57</time><angle>-89</angle><position>(0, 0.275)</position><body>(0, 0.115)</body><lean>-10</lean><trail>1</trail></li>
+              <li><time>0.73</time><angle>72</angle><position>(0, 0.41)</position><body>(0, 0.115)</body><lean>-9</lean><trail>0.86</trail></li>
+              <li><time>0.86</time><angle>53</angle><position>(0, 0.25)</position><body>(0, 0.055)</body><lean>-4</lean><trail>0.1</trail></li>
+              <li><time>1</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+            </keys>
+          </li>
+        </directions>
+      </li>
+      <li>
+        <id>AdvancingChop</id>
+        <label>踏焰压斩</label>
+        <weight>1</weight>
+        <duration>1.95</duration>
+        <contact>0.6</contact>
+        <hitstop>0</hitstop>
+        <strikeCount>1</strikeCount>
+        <strikeInterval>0.18</strikeInterval>
+        <trailLifetime>0.55</trailLifetime>
+        <trailWidth>1.35</trailWidth>
+        <trailIntensity>1.4</trailIntensity>
+        <flameDistortion>0.95</flameDistortion>
+        <effectSpeed>0.24</effectSpeed>
+        <chargeIntensity>0.9</chargeIntensity>
+        <chargeReady>0.34</chargeReady>
+        <chargeFlash>1.8</chargeFlash>
+        <chargeScale>1.3</chargeScale>
+        <bloom>0.8</bloom>
+        <sparks>18</sparks>
+        <sparkLifetime>1.3</sparkLifetime>
+        <sparkSpeed>0.14</sparkSpeed>
+        <sparkSize>0.011</sparkSize>
+        <color>(0.59, 0.12, 1, 0.9)</color>
+        <directions>
+          <li>
+            <facing>South</facing>
+            <offset>(0, 0)</offset>
+            <angle>0</angle>
+            <layer>90</layer>
+            <keys>
+              <li><time>0</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+              <li><time>0.2</time><angle>-170</angle><position>(0, 0.175)</position><body>(0, 0.047)</body><lean>-5</lean><trail>0</trail></li>
+              <li><time>0.36</time><angle>-223</angle><position>(0, 0.275)</position><body>(0, 0.094)</body><lean>-9</lean><trail>0</trail></li>
+              <li><time>0.48</time><angle>-234</angle><position>(0, 0.305)</position><body>(0, 0.107)</body><lean>-10</lean><trail>0</trail></li>
+              <li><time>0.6</time><angle>-89</angle><position>(0, -0.365)</position><body>(0, -0.148)</body><lean>12</lean><trail>1</trail></li>
+              <li><time>0.76</time><angle>84</angle><position>(0, -0.385)</position><body>(0, -0.126)</body><lean>9</lean><trail>0.86</trail></li>
+              <li><time>0.88</time><angle>52</angle><position>(0, -0.22)</position><body>(0, -0.07)</body><lean>5</lean><trail>0.12</trail></li>
+              <li><time>1</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+            </keys>
+          </li>
+          <li>
+            <facing>East</facing>
+            <offset>(0, 0)</offset>
+            <angle>0</angle>
+            <layer>90</layer>
+            <keys>
+              <li><time>0</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+              <li><time>0.2</time><angle>-170</angle><position>(-0.08, 0.095)</position><body>(-0.035, 0.012)</body><lean>5</lean><trail>0</trail></li>
+              <li><time>0.36</time><angle>-223</angle><position>(-0.13, 0.145)</position><body>(-0.07, 0.024)</body><lean>9</lean><trail>0</trail></li>
+              <li><time>0.48</time><angle>-234</angle><position>(-0.145, 0.16)</position><body>(-0.08, 0.027)</body><lean>10</lean><trail>0</trail></li>
+              <li><time>0.6</time><angle>-89</angle><position>(0.33, -0.035)</position><body>(0.14, -0.008)</body><lean>-12</lean><trail>1</trail></li>
+              <li><time>0.76</time><angle>84</angle><position>(0.235, -0.15)</position><body>(0.11, -0.016)</body><lean>-9</lean><trail>0.86</trail></li>
+              <li><time>0.88</time><angle>52</angle><position>(0.12, -0.1)</position><body>(0.06, -0.01)</body><lean>-5</lean><trail>0.12</trail></li>
+              <li><time>1</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+            </keys>
+          </li>
+          <li>
+            <facing>West</facing>
+            <offset>(0, 0)</offset>
+            <angle>0</angle>
+            <layer>90</layer>
+            <keys>
+              <li><time>0</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+              <li><time>0.2</time><angle>-170</angle><position>(0.08, 0.095)</position><body>(0.035, 0.012)</body><lean>-5</lean><trail>0</trail></li>
+              <li><time>0.36</time><angle>-223</angle><position>(0.13, 0.145)</position><body>(0.07, 0.024)</body><lean>-9</lean><trail>0</trail></li>
+              <li><time>0.48</time><angle>-234</angle><position>(0.145, 0.16)</position><body>(0.08, 0.027)</body><lean>-10</lean><trail>0</trail></li>
+              <li><time>0.6</time><angle>-89</angle><position>(-0.33, -0.035)</position><body>(-0.14, -0.008)</body><lean>12</lean><trail>1</trail></li>
+              <li><time>0.76</time><angle>84</angle><position>(-0.235, -0.15)</position><body>(-0.11, -0.016)</body><lean>9</lean><trail>0.86</trail></li>
+              <li><time>0.88</time><angle>52</angle><position>(-0.12, -0.1)</position><body>(-0.06, -0.01)</body><lean>5</lean><trail>0.12</trail></li>
+              <li><time>1</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+            </keys>
+          </li>
+          <li>
+            <facing>North</facing>
+            <offset>(0, 0)</offset>
+            <angle>0</angle>
+            <layer>-10</layer>
+            <keys>
+              <li><time>0</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+              <li><time>0.2</time><angle>-170</angle><position>(0, 0.015)</position><body>(0, -0.023)</body><lean>5</lean><trail>0</trail></li>
+              <li><time>0.36</time><angle>-223</angle><position>(0, 0.015)</position><body>(0, -0.046)</body><lean>9</lean><trail>0</trail></li>
+              <li><time>0.48</time><angle>-234</angle><position>(0, 0.015)</position><body>(0, -0.053)</body><lean>10</lean><trail>0</trail></li>
+              <li><time>0.6</time><angle>-89</angle><position>(0, 0.295)</position><body>(0, 0.132)</body><lean>-12</lean><trail>1</trail></li>
+              <li><time>0.76</time><angle>84</angle><position>(0, 0.085)</position><body>(0, 0.094)</body><lean>-9</lean><trail>0.86</trail></li>
+              <li><time>0.88</time><angle>52</angle><position>(0, 0.02)</position><body>(0, 0.05)</body><lean>-5</lean><trail>0.12</trail></li>
+              <li><time>1</time><angle>0</angle><position>(0, 0)</position><body>(0, 0)</body><lean>0</lean><trail>0</trail></li>
+            </keys>
+          </li>
+        </directions>
+      </li>
+    </moves>
+  </NingshaRaceLib.Combat.MeleeAnimation.MeleeAnimationDef>
+</Defs>

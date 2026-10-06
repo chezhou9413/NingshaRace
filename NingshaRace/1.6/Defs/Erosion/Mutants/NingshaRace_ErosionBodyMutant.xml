@@ -31,33 +31,32 @@
     <anomalyKnowledgeOffset>2</anomalyKnowledgeOffset>
     <knowledgeCategory>Basic</knowledgeCategory>
     <codexEntry>NingshaRace_ErosionBodyCodex</codexEntry>
-    <!--渲染节点职责：在侵蚀体头部和前发上方绘制三根独立摆动的蛇体，局部高度与原版层号共同保持前后关系。-->
+    <!--蛇尾藏在头发与脸部之后，外侧蛇头从轮廓周围伸出。-->
     <renderNodeProperties>
-      <!-- 蛇体 A 具有完整四向素材，始终围绕贴图中的蛇尾根部摆动。 -->
-      <li Class="PawnRenderNodeProperties_Spastic">
+      <!--蛇体 A 使用四向原画，连接点采用左下角 UV。-->
+      <li Class="NingshaRaceLib.Erosion.Rendering.PawnRenderNodeProperties_ErosionSnake">
         <debugLabel>侵蚀体蛇头 A</debugLabel>
         <texPath>NingshaRace/Erosion/SnakeHeads/ErosionSnakeHeadA</texPath>
         <parentTagDef>Head</parentTagDef>
         <linkedBodyPartsGroup>FullHead</linkedBodyPartsGroup>
         <pawnType>HumanlikeOnly</pawnType>
-        <drawSize>1.65</drawSize>
+        <drawSize>1.5</drawSize>
         <overrideMeshSize>(1, 1)</overrideMeshSize>
         <workerClass>NingshaRaceLib.Erosion.Rendering.PawnRenderNodeWorker_ErosionSnake</workerClass>
         <rotDrawMode>Fresh, Rotting</rotDrawMode>
         <useRottenColor>true</useRottenColor>
-        <rotateFacing>false</rotateFacing>
-        <rotationRange>-12~12</rotationRange>
-        <scaleRange>0.92~1.08</scaleRange>
-        <durationTicksRange>20~45</durationTicksRange>
-        <nextSpasmTicksRange>5~25</nextSpasmTicksRange>
+        <swayAngle>7</swayAngle>
+        <swayPeriod>6</swayPeriod>
+        <swayPhase>0</swayPhase>
+        <sideAngleFactor>0.65</sideAngleFactor>
         <drawData>
           <defaultData>
-            <layer>16</layer>
-            <offset>(0, 0.04, 0)</offset>
+            <layer>36</layer>
+            <offset>(0, 0, 0)</offset>
           </defaultData>
           <dataNorth>
             <pivot>(0.397, 0.555)</pivot>
-            <layer>16</layer>
+            <layer>36</layer>
           </dataNorth>
           <dataEast>
             <pivot>(0.445, 0.443)</pivot>
@@ -67,11 +66,12 @@
           </dataSouth>
           <dataWest>
             <pivot>(0.435, 0.452)</pivot>
+            <offset>(-0.045, 0, -0.06)</offset>
           </dataWest>
         </drawData>
       </li>
-      <!-- 蛇体 B 只在正面、背面和右侧可见，对应原始素材提供的三个观察方向。 -->
-      <li Class="PawnRenderNodeProperties_Spastic">
+      <!--蛇体 B 左侧使用右侧素材的原版西向镜像，并同步镜像连接点。-->
+      <li Class="NingshaRaceLib.Erosion.Rendering.PawnRenderNodeProperties_ErosionSnake">
         <debugLabel>侵蚀体蛇头 B</debugLabel>
         <texPath>NingshaRace/Erosion/SnakeHeads/ErosionSnakeHeadB</texPath>
         <parentTagDef>Head</parentTagDef>
@@ -81,25 +81,25 @@
           <li>North</li>
           <li>East</li>
           <li>South</li>
+          <li>West</li>
         </visibleFacing>
-        <drawSize>1.65</drawSize>
+        <drawSize>1.5</drawSize>
         <overrideMeshSize>(1, 1)</overrideMeshSize>
         <workerClass>NingshaRaceLib.Erosion.Rendering.PawnRenderNodeWorker_ErosionSnake</workerClass>
         <rotDrawMode>Fresh, Rotting</rotDrawMode>
         <useRottenColor>true</useRottenColor>
-        <rotateFacing>false</rotateFacing>
-        <rotationRange>-10~10</rotationRange>
-        <scaleRange>0.94~1.06</scaleRange>
-        <durationTicksRange>24~50</durationTicksRange>
-        <nextSpasmTicksRange>8~28</nextSpasmTicksRange>
+        <swayAngle>9</swayAngle>
+        <swayPeriod>6</swayPeriod>
+        <swayPhase>2.1</swayPhase>
+        <sideAngleFactor>0.65</sideAngleFactor>
         <drawData>
           <defaultData>
-            <layer>15</layer>
-            <offset>(0, 0.04, 0)</offset>
+            <layer>35</layer>
+            <offset>(0, 0, 0)</offset>
           </defaultData>
           <dataNorth>
             <pivot>(0.604, 0.453)</pivot>
-            <layer>15</layer>
+            <layer>35</layer>
           </dataNorth>
           <dataEast>
             <pivot>(0.478, 0.441)</pivot>
@@ -107,10 +107,14 @@
           <dataSouth>
             <pivot>(0.396, 0.451)</pivot>
           </dataSouth>
+          <dataWest>
+            <pivot>(0.478, 0.441)</pivot>
+            <offset>(-0.17, 0, 0.08)</offset>
+          </dataWest>
         </drawData>
       </li>
-      <!-- 蛇体 C 只在正面和背面出现，避免缺少侧面素材时使用错误的方向贴图。 -->
-      <li Class="PawnRenderNodeProperties_Spastic">
+      <!--蛇体 C 在侧面藏于头后，保留前后方向原画。-->
+      <li Class="NingshaRaceLib.Erosion.Rendering.PawnRenderNodeProperties_ErosionSnake">
         <debugLabel>侵蚀体蛇头 C</debugLabel>
         <texPath>NingshaRace/Erosion/SnakeHeads/ErosionSnakeHeadC</texPath>
         <parentTagDef>Head</parentTagDef>
@@ -120,24 +124,23 @@
           <li>North</li>
           <li>South</li>
         </visibleFacing>
-        <drawSize>1.65</drawSize>
+        <drawSize>1.5</drawSize>
         <overrideMeshSize>(1, 1)</overrideMeshSize>
         <workerClass>NingshaRaceLib.Erosion.Rendering.PawnRenderNodeWorker_ErosionSnake</workerClass>
         <rotDrawMode>Fresh, Rotting</rotDrawMode>
         <useRottenColor>true</useRottenColor>
-        <rotateFacing>false</rotateFacing>
-        <rotationRange>-14~14</rotationRange>
-        <scaleRange>0.93~1.07</scaleRange>
-        <durationTicksRange>18~42</durationTicksRange>
-        <nextSpasmTicksRange>6~24</nextSpasmTicksRange>
+        <swayAngle>10</swayAngle>
+        <swayPeriod>6</swayPeriod>
+        <swayPhase>4.2</swayPhase>
+        <sideAngleFactor>0.65</sideAngleFactor>
         <drawData>
           <defaultData>
-            <layer>14</layer>
-            <offset>(0, 0.04, 0)</offset>
+            <layer>34</layer>
+            <offset>(0, 0, 0)</offset>
           </defaultData>
           <dataNorth>
             <pivot>(0.626, 0.538)</pivot>
-            <layer>14</layer>
+            <layer>34</layer>
           </dataNorth>
           <dataSouth>
             <pivot>(0.374, 0.539)</pivot>

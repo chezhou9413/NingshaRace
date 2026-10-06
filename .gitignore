@@ -22,3 +22,7 @@ Thumbs.db
 # 本地日志和临时文件
 *.log
 *.tmp
+
+# Python 工具运行缓存
+__pycache__/
+*.py[cod]

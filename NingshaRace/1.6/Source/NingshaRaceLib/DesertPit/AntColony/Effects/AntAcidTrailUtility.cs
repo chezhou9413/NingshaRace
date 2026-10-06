@@ -11,6 +11,28 @@ namespace NingshaRaceLib.DesertPit.AntColony.Effects
         private const float ParticleSpacing = 0.22f;
         private const int MaxSamplesPerStep = 6;
 
+        //酸液实际撞击时短暂喷散雾气与液滴，盾牌拦截也显示飞溅。
+        public static void EmitImpact(Map map, Vector3 position, int projectileId)
+        {
+            IntVec3 cell = position.ToIntVec3();
+            if (map != Find.CurrentMap || !cell.InBounds(map) || cell.Fogged(map)
+                || !Find.CameraDriver.CurrentViewRect.Contains(cell)) return;
+            Rand.PushState(Gen.HashCombineInt(projectileId, Find.TickManager.TicksGame));
+            try
+            {
+                EmitMist(map, position, Rand.Range(0f, 360f));
+                for (int i = 0; i < 6; i++)
+                {
+                    Vector3 direction = Quaternion.AngleAxis(i * 60f, Vector3.up) * Vector3.forward;
+                    EmitDroplet(map, position, direction, new Vector3(direction.z, 0f, -direction.x));
+                }
+            }
+            finally
+            {
+                Rand.PopState();
+            }
+        }
+
         //函数职责：在当前地图已揭雾的可见弹道内有限采样，并隔离粒子系统消耗的视觉随机数。
         public static void EmitSegment(Map map, Vector3 from, Vector3 to, int projectileId)
         {
