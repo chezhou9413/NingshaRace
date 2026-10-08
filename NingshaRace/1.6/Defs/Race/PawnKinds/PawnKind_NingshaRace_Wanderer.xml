@@ -33,7 +33,7 @@
     <chemicalAddictionChance>0.06</chemicalAddictionChance>
     <combatPower>30</combatPower>
     <forceNormalGearQuality>true</forceNormalGearQuality>
-    <humanPregnancyChance>0.06</humanPregnancyChance>
+    <humanPregnancyChance>0</humanPregnancyChance>
     <initialResistanceRange>13~21</initialResistanceRange>
     <initialWillRange>0~0</initialWillRange>
     <isFighter>false</isFighter>

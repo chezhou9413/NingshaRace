@@ -493,7 +493,7 @@
         <color>(0.7, 0.38, 1, 1)</color>
         <additive>0</additive>
         <displacement>(0, 0)</displacement>
-        <root>(0.445, 0.60)</root>
+        <root>(0.445, 0.6)</root>
         <tip>(0.62, 0.83)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
@@ -509,7 +509,7 @@
         <particleRate>24</particleRate>
         <particleLifetime>2.4</particleLifetime>
         <particleSpeed>0.22</particleSpeed>
-        <particleSize>0.010</particleSize>
+        <particleSize>0.01</particleSize>
         <particleSpread>55</particleSpread>
         <particleRadius>0.015</particleRadius>
         <particleSway>0.03</particleSway>
@@ -549,7 +549,7 @@
         <particleRate>26</particleRate>
         <particleLifetime>2.4</particleLifetime>
         <particleSpeed>0.23</particleSpeed>
-        <particleSize>0.010</particleSize>
+        <particleSize>0.01</particleSize>
         <particleSpread>40</particleSpread>
         <particleRadius>0.015</particleRadius>
         <particleSway>0.032</particleSway>
@@ -573,7 +573,7 @@
         <color>(0.7, 0.38, 1, 1)</color>
         <additive>0</additive>
         <displacement>(0, 0)</displacement>
-        <root>(0.30, 0.39)</root>
+        <root>(0.3, 0.39)</root>
         <tip>(0.15, 0.13)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
@@ -629,7 +629,7 @@
         <particleRate>22</particleRate>
         <particleLifetime>2.4</particleLifetime>
         <particleSpeed>0.22</particleSpeed>
-        <particleSize>0.010</particleSize>
+        <particleSize>0.01</particleSize>
         <particleSpread>50</particleSpread>
         <particleRadius>0.015</particleRadius>
         <particleSway>0.032</particleSway>
@@ -652,8 +652,8 @@
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
         <displacement>(0.037583895, -0.0456375852)</displacement>
-        <root>(0.33440253, 0.65317305)</root>
-        <tip>(0.33111252, 0.036990715)</tip>
+        <root>(0.334402531, 0.653173)</root>
+        <tip>(0.331112534, 0.0369907133)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
@@ -691,8 +691,8 @@
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
         <displacement>(0.09, 0.018)</displacement>
-        <root>(0.39932033, 0.57375131)</root>
-        <tip>(0.39346375, 0.0027284585)</tip>
+        <root>(0.399320334, 0.57375133)</root>
+        <tip>(0.393463761, 0.00272845849)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
@@ -729,14 +729,14 @@
         <layer>48</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(0.07248322, -0.18791947)</displacement>
-        <root>(0.36591401, 0)</root>
-        <tip>(0.36591398, 0.25090751)</tip>
+        <displacement>(0.07248322, -0.187919468)</displacement>
+        <root>(0.365914017, 0)</root>
+        <tip>(0.365914, 0.2509075)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
         <speed>0.342281878</speed>
-        <flowAngle>-0.0</flowAngle>
+        <flowAngle>0</flowAngle>
         <detailStrength>0.35</detailStrength>
         <breakup>0.8187919</breakup>
         <breakupScale>(2.021745, 1.29751682)</breakupScale>
@@ -847,8 +847,8 @@
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
         <displacement>(0.018, 0.05)</displacement>
-        <root>(0.46670471, 0.49882302)</root>
-        <tip>(0.21687083, 0.63730238)</tip>
+        <root>(0.4667047, 0.498823017)</root>
+        <tip>(0.216870829, 0.6373024)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
@@ -925,13 +925,13 @@
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
         <displacement>(-0.02, 0.05)</displacement>
-        <root>(0.49316803, 0.38713192)</root>
-        <tip>(0.2596507, 0.52205881)</tip>
+        <root>(0.493168026, 0.387131929)</root>
+        <tip>(0.2596507, 0.5220588)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
         <speed>0.42281878</speed>
-        <flowAngle>-0.0</flowAngle>
+        <flowAngle>0</flowAngle>
         <detailStrength>0.35</detailStrength>
         <breakup>0.624161065</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
@@ -1023,7 +1023,7 @@
         <particleRate>24</particleRate>
         <particleLifetime>2.4</particleLifetime>
         <particleSpeed>0.22</particleSpeed>
-        <particleSize>0.010</particleSize>
+        <particleSize>0.01</particleSize>
         <particleSpread>55</particleSpread>
         <particleRadius>0.015</particleRadius>
         <particleSway>0.03</particleSway>
@@ -1047,8 +1047,8 @@
         <color>(0.7, 0.38, 1, 1)</color>
         <additive>0</additive>
         <displacement>(0, 0)</displacement>
-        <root>(0.42049632, 0.43290441)</root>
-        <tip>(0.26056985, 0.57536765)</tip>
+        <root>(0.4204963, 0.432904422)</root>
+        <tip>(0.260569841, 0.5753676)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
@@ -1063,7 +1063,7 @@
         <particleRate>26</particleRate>
         <particleLifetime>2.4</particleLifetime>
         <particleSpeed>0.23</particleSpeed>
-        <particleSize>0.010</particleSize>
+        <particleSize>0.01</particleSize>
         <particleSpread>40</particleSpread>
         <particleRadius>0.015</particleRadius>
         <particleSway>0.032</particleSway>
@@ -1087,8 +1087,8 @@
         <color>(0.7, 0.38, 1, 1)</color>
         <additive>0</additive>
         <displacement>(0, 0)</displacement>
-        <root>(0.25229779, 0.30422794)</root>
-        <tip>(0.062040441, 0.13786765)</tip>
+        <root>(0.2522978, 0.304227948)</root>
+        <tip>(0.06204044, 0.137867644)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
@@ -1127,8 +1127,8 @@
         <color>(0.7, 0.38, 1, 1)</color>
         <additive>0</additive>
         <displacement>(0, 0)</displacement>
-        <root>(0.38832721, 0.058823529)</root>
-        <tip>(0.25597426, 0.24724265)</tip>
+        <root>(0.3883272, 0.05882353)</root>
+        <tip>(0.255974263, 0.247242644)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
@@ -1143,7 +1143,7 @@
         <particleRate>22</particleRate>
         <particleLifetime>2.4</particleLifetime>
         <particleSpeed>0.22</particleSpeed>
-        <particleSize>0.010</particleSize>
+        <particleSize>0.01</particleSize>
         <particleSpread>50</particleSpread>
         <particleRadius>0.015</particleRadius>
         <particleSway>0.032</particleSway>
@@ -1165,14 +1165,14 @@
         <layer>40</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(-0.037583895, -0.045637585)</displacement>
-        <root>(0.54151658, 0.65317305)</root>
-        <tip>(0.5448066, 0.036990715)</tip>
+        <displacement>(-0.037583895, -0.0456375852)</displacement>
+        <root>(0.5415166, 0.653173)</root>
+        <tip>(0.5448066, 0.0369907133)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
         <speed>0.382550329</speed>
-        <flowAngle>-0.0</flowAngle>
+        <flowAngle>0</flowAngle>
         <detailStrength>0.12</detailStrength>
         <breakup>0.2080537</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
@@ -1205,8 +1205,8 @@
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
         <displacement>(-0.09, 0.018)</displacement>
-        <root>(0.47659879, 0.57375131)</root>
-        <tip>(0.48245537, 0.0027284585)</tip>
+        <root>(0.4765988, 0.57375133)</root>
+        <tip>(0.482455373, 0.00272845849)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
@@ -1244,8 +1244,8 @@
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
         <displacement>(-0.07248322, -0.187919468)</displacement>
-        <root>(0.51000511, 0)</root>
-        <tip>(0.51000514, 0.25090751)</tip>
+        <root>(0.5100051, 0)</root>
+        <tip>(0.5100051, 0.2509075)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
@@ -1406,7 +1406,7 @@
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
         <speed>0.382550329</speed>
-        <flowAngle>-0.0</flowAngle>
+        <flowAngle>0</flowAngle>
         <detailStrength>0.35</detailStrength>
         <breakup>0.95</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
@@ -1439,8 +1439,8 @@
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
         <displacement>(0.02, 0.05)</displacement>
-        <root>(0.38550844, 0.37610251)</root>
-        <tip>(0.61902577, 0.51102939)</tip>
+        <root>(0.385508448, 0.3761025)</root>
+        <tip>(0.619025767, 0.511029363)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
@@ -1537,7 +1537,7 @@
         <particleRate>24</particleRate>
         <particleLifetime>2.4</particleLifetime>
         <particleSpeed>0.22</particleSpeed>
-        <particleSize>0.010</particleSize>
+        <particleSize>0.01</particleSize>
         <particleSpread>55</particleSpread>
         <particleRadius>0.015</particleRadius>
         <particleSway>0.03</particleSway>
@@ -1561,8 +1561,8 @@
         <color>(0.7, 0.38, 1, 1)</color>
         <additive>0</additive>
         <displacement>(0, 0)</displacement>
-        <root>(0.45542279, 0.43106618)</root>
-        <tip>(0.62545956, 0.55606618)</tip>
+        <root>(0.4554228, 0.4310662)</root>
+        <tip>(0.625459552, 0.556066155)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
@@ -1577,7 +1577,7 @@
         <particleRate>26</particleRate>
         <particleLifetime>2.4</particleLifetime>
         <particleSpeed>0.23</particleSpeed>
-        <particleSize>0.010</particleSize>
+        <particleSize>0.01</particleSize>
         <particleSpread>40</particleSpread>
         <particleRadius>0.015</particleRadius>
         <particleSway>0.032</particleSway>
@@ -1601,8 +1601,8 @@
         <color>(0.7, 0.38, 1, 1)</color>
         <additive>0</additive>
         <displacement>(0, 0)</displacement>
-        <root>(0.60523897, 0.30698529)</root>
-        <tip>(0.80928309, 0.15900735)</tip>
+        <root>(0.605239, 0.3069853)</root>
+        <tip>(0.8092831, 0.159007356)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
@@ -1641,8 +1641,8 @@
         <color>(0.7, 0.38, 1, 1)</color>
         <additive>0</additive>
         <displacement>(0, 0)</displacement>
-        <root>(0.47840074, 0.061580882)</root>
-        <tip>(0.61167279, 0.25091912)</tip>
+        <root>(0.478400737, 0.06158088)</root>
+        <tip>(0.6116728, 0.250919133)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
@@ -1657,7 +1657,7 @@
         <particleRate>22</particleRate>
         <particleLifetime>2.4</particleLifetime>
         <particleSpeed>0.22</particleSpeed>
-        <particleSize>0.010</particleSize>
+        <particleSize>0.01</particleSize>
         <particleSpread>50</particleSpread>
         <particleRadius>0.015</particleRadius>
         <particleSway>0.032</particleSway>
@@ -1673,7 +1673,7 @@
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>false</particle>
-        <position>(-0.094301471, 0.15)</position>
+        <position>(-0.09430147, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>40</layer>
@@ -1722,8 +1722,8 @@
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
         <displacement>(0.09, 0.018)</displacement>
-        <root>(0.41748719, 0.5701693)</root>
-        <tip>(0.41056578, 0)</tip>
+        <root>(0.4174872, 0.5701693)</root>
+        <tip>(0.4105658, 0)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
@@ -1761,8 +1761,8 @@
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
         <displacement>(-0.07248322, -0.187919468)</displacement>
-        <root>(0.41190122, 0)</root>
-        <tip>(0.41190125, 0.29267678)</tip>
+        <root>(0.4119012, 0)</root>
+        <tip>(0.411901236, 0.292676777)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
@@ -1918,8 +1918,8 @@
         <color>(0.7, 0.38, 1, 1)</color>
         <additive>0</additive>
         <displacement>(0, 0)</displacement>
-        <root>(0.32352941, 0.62224265)</root>
-        <tip>(0.15808824, 0.67463235)</tip>
+        <root>(0.323529422, 0.6222426)</root>
+        <tip>(0.158088237, 0.6746324)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
@@ -1934,7 +1934,7 @@
         <particleRate>24</particleRate>
         <particleLifetime>2.4</particleLifetime>
         <particleSpeed>0.22</particleSpeed>
-        <particleSize>0.010</particleSize>
+        <particleSize>0.01</particleSize>
         <particleSpread>55</particleSpread>
         <particleRadius>0.015</particleRadius>
         <particleSway>0.03</particleSway>
@@ -1958,8 +1958,8 @@
         <color>(0.7, 0.38, 1, 1)</color>
         <additive>0</additive>
         <displacement>(0, 0)</displacement>
-        <root>(0.34650735, 0.43290441)</root>
-        <tip>(0.21783088, 0.56893382)</tip>
+        <root>(0.346507341, 0.432904422)</root>
+        <tip>(0.217830881, 0.568933845)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
@@ -1974,7 +1974,7 @@
         <particleRate>26</particleRate>
         <particleLifetime>2.4</particleLifetime>
         <particleSpeed>0.23</particleSpeed>
-        <particleSize>0.010</particleSize>
+        <particleSize>0.01</particleSize>
         <particleSpread>40</particleSpread>
         <particleRadius>0.015</particleRadius>
         <particleSway>0.032</particleSway>
@@ -1998,8 +1998,8 @@
         <color>(0.7, 0.38, 1, 1)</color>
         <additive>0</additive>
         <displacement>(0, 0)</displacement>
-        <root>(0.57628676, 0.24724265)</root>
-        <tip>(0.75551471, 0.077205882)</tip>
+        <root>(0.576286733, 0.247242644)</root>
+        <tip>(0.7555147, 0.07720588)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
@@ -2038,8 +2038,8 @@
         <color>(0.7, 0.38, 1, 1)</color>
         <additive>0</additive>
         <displacement>(0, 0)</displacement>
-        <root>(0.43933824, 0.045036765)</root>
-        <tip>(0.59742647, 0.24816176)</tip>
+        <root>(0.439338237, 0.0450367667)</root>
+        <tip>(0.5974265, 0.248161763)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
@@ -2054,7 +2054,7 @@
         <particleRate>22</particleRate>
         <particleLifetime>2.4</particleLifetime>
         <particleSpeed>0.22</particleSpeed>
-        <particleSize>0.010</particleSize>
+        <particleSize>0.01</particleSize>
         <particleSpread>50</particleSpread>
         <particleRadius>0.015</particleRadius>
         <particleSway>0.032</particleSway>
@@ -2077,8 +2077,8 @@
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
         <displacement>(0.018, 0.05)</displacement>
-        <root>(0.51930147, 0.54319853)</root>
-        <tip>(0.63143382, 0.60386029)</tip>
+        <root>(0.50323087, 0.541645944)</root>
+        <tip>(0.693854451, 0.582032263)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
@@ -2109,20 +2109,20 @@
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
-        <position>(0, 0.15)</position>
+        <position>(0.0335570462, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>40.4</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(-0.012, 0.06)</displacement>
-        <root>(0.42922794, 0.609375)</root>
-        <tip>(0.22334559, 0.63419118)</tip>
+        <displacement>(0.0107382555, 0.0187919475)</displacement>
+        <root>(0.508375943, 0.569108665)</root>
+        <tip>(0.181755617, 0.6353423)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>0.382550329</speed>
-        <flowAngle>-0.0</flowAngle>
+        <speed>0.463087261</speed>
+        <flowAngle>0</flowAngle>
         <detailStrength>0.35</detailStrength>
         <breakup>0.95</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
@@ -2155,13 +2155,13 @@
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
         <displacement>(-0.02, 0.05)</displacement>
-        <root>(0.42003676, 0.39889706)</root>
-        <tip>(0.24264706, 0.49724265)</tip>
+        <root>(0.505627453, 0.359099716)</root>
+        <tip>(0.1744595, 0.494797826)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
         <speed>0.42281878</speed>
-        <flowAngle>-0.0</flowAngle>
+        <flowAngle>0</flowAngle>
         <detailStrength>0.35</detailStrength>
         <breakup>0.624161065</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
@@ -2195,8 +2195,8 @@
         <color>(0.7, 0.38, 1, 1)</color>
         <additive>0</additive>
         <displacement>(0, 0)</displacement>
-        <root>(0.55790441, 0.56158088)</root>
-        <tip>(0.66819853, 0.63327206)</tip>
+        <root>(0.5579044, 0.5615809)</root>
+        <tip>(0.6681985, 0.633272052)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
@@ -2211,7 +2211,7 @@
         <particleRate>18</particleRate>
         <particleLifetime>2.4</particleLifetime>
         <particleSpeed>0.22</particleSpeed>
-        <particleSize>0.010</particleSize>
+        <particleSize>0.01</particleSize>
         <particleSpread>55</particleSpread>
         <particleRadius>0.015</particleRadius>
         <particleSway>0.03</particleSway>
