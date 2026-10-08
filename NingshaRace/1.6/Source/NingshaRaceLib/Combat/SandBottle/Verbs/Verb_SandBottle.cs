@@ -48,7 +48,14 @@ namespace NingshaRaceLib.Combat.SandBottle.Verbs
             return SandBottleCombatUtility.IsValidDamageTarget(CasterPawn, targetThing);
         }
 
-        //函数职责：固定当前喷砂方向，播放粒子并立即结算扇形内全部有效目标。
+        //让右键攻击和自动索敌也排除不可攻击建筑。
+        public override bool CanHitTargetFrom(IntVec3 root, LocalTargetInfo target)
+        {
+            return SandBottleCombatUtility.IsValidDamageTarget(CasterPawn, target.Thing)
+                && base.CanHitTargetFrom(root, target);
+        }
+
+        //固定当前喷砂方向，播放粒子并结算伤害。
         protected override bool TryCastShot()
         {
             if (!CasterIsPawn

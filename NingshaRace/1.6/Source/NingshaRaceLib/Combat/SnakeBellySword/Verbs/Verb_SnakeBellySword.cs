@@ -7,10 +7,11 @@ using NingshaRaceLib.Combat.SnakeBellySword.Rendering;
 using NingshaRaceLib.Combat.SnakeBellySword.Tracking;
 using NingshaRaceLib.Combat.SnakeBellySword.Utility;
 using NingshaRaceLib.Core.Defs;
+using NingshaRaceLib.Combat.Utility;
 
 namespace NingshaRaceLib.Combat.SnakeBellySword.Verbs
 {
-    //类职责：提供蛇腹剑五格远程式扇形攻击，并把攻击交给战斗工具类处理。
+    //提供蛇腹剑的远距离扇形挥击。
     public class Verb_SnakeBellySword : Verb
     {
         //属性职责：返回当前 Verb 使用的蛇腹剑专属参数。
@@ -19,7 +20,7 @@ namespace NingshaRaceLib.Combat.SnakeBellySword.Verbs
         //属性职责：让原版把蛇腹剑视为可在远距离使用的武器。
         public override bool IsMeleeAttack => false;
 
-        //函数职责：绘制五格射程环和实际生效的九十度扇形预览。
+        //绘制实际射程环和九十度扇形预览。
         public override void DrawHighlight(LocalTargetInfo target)
         {
             base.DrawHighlight(target);
@@ -44,10 +45,14 @@ namespace NingshaRaceLib.Combat.SnakeBellySword.Verbs
                 return false;
             }
 
-            Thing targetThing = target.Thing;
-            return targetThing != null
-                && targetThing != CasterPawn
-                && (targetThing is Pawn || targetThing.def.category == ThingCategory.Building);
+            return NingshaDamageTargetUtility.IsValid(CasterPawn, target.Thing);
+        }
+
+        //让右键攻击、自动索敌与手动选取使用相同的目标限制。
+        public override bool CanHitTargetFrom(IntVec3 root, LocalTargetInfo target)
+        {
+            return NingshaDamageTargetUtility.IsValid(CasterPawn, target.Thing)
+                && base.CanHitTargetFrom(root, target);
         }
 
         //函数职责：完成攻击者面向并启动与动画帧同步的三段攻击。
@@ -59,8 +64,7 @@ namespace NingshaRaceLib.Combat.SnakeBellySword.Verbs
             }
 
             Thing primaryTarget = currentTarget.Thing;
-            if (primaryTarget == CasterPawn
-                || (primaryTarget.def.category != ThingCategory.Pawn && primaryTarget.def.category != ThingCategory.Building)
+            if (!NingshaDamageTargetUtility.IsValid(CasterPawn, primaryTarget)
                 || !CanHitTarget(currentTarget))
             {
                 return false;
@@ -72,17 +76,9 @@ namespace NingshaRaceLib.Combat.SnakeBellySword.Verbs
             GameComponent_SnakeBellySwordAttacks.Current.Register(this, attackDirection);
 
             lastShotTick = Find.TickManager.TicksGame;
+            //一次完整挥击只计一次近战经验，不随三段伤害重复发放。
+            CasterPawn.skills?.Learn(SkillDefOf.Melee, 200f * verbProps.AdjustedFullCycleTime(this, CasterPawn));
             return true;
-        }
-
-        //函数职责：让蛇腹剑攻击使用近战技能获得经验。
-        public override void WarmupComplete()
-        {
-            base.WarmupComplete();
-            if (CasterIsPawn && CasterPawn.skills != null)
-            {
-                CasterPawn.skills.Learn(SkillDefOf.Melee, 200f * verbProps.AdjustedFullCycleTime(this, CasterPawn));
-            }
         }
     }
 }

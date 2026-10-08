@@ -51,7 +51,14 @@ namespace NingshaRaceLib.Combat.GroundSpike.Verbs
             return targetThing == null || GroundSpikeCombatUtility.IsDamageTarget(CasterPawn, targetThing);
         }
 
-        //函数职责：固定击退方向并把逐行直线地刺任务登记到游戏组件。
+        //空地仍可施放，实体目标须满足与伤害扫描相同的限制。
+        public override bool CanHitTargetFrom(IntVec3 root, LocalTargetInfo target)
+        {
+            return (!target.HasThing || GroundSpikeCombatUtility.IsDamageTarget(CasterPawn, target.Thing))
+                && base.CanHitTargetFrom(root, target);
+        }
+
+        //固定击退方向并把逐行直线地刺任务登记到游戏组件。
         protected override bool TryCastShot()
         {
             if (!CasterIsPawn

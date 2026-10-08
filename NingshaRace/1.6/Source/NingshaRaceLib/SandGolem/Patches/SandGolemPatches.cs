@@ -152,7 +152,7 @@ namespace NingshaRaceLib.SandGolem.Patches
                 return true;
             }
 
-            tracker.BeginDissolve(__instance, destroyPawn: true, notifyCaster: true);
+            tracker.BeginDissolve(__instance, notifyCaster: true);
             return false;
         }
     }
@@ -209,7 +209,7 @@ namespace NingshaRaceLib.SandGolem.Patches
                 icon = RecallIcon,
                 action = delegate
                 {
-                    tracker?.BeginDissolve(__instance, destroyPawn: true);
+                    tracker?.BeginDissolve(__instance);
                 }
             };
 

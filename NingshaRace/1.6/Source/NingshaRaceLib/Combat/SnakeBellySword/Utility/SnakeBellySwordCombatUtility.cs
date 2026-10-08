@@ -7,6 +7,7 @@ using NingshaRaceLib.Combat.SnakeBellySword.Rendering;
 using NingshaRaceLib.Combat.SnakeBellySword.Tracking;
 using NingshaRaceLib.Combat.SnakeBellySword.Verbs;
 using NingshaRaceLib.Core.Defs;
+using NingshaRaceLib.Combat.Utility;
 
 namespace NingshaRaceLib.Combat.SnakeBellySword.Utility
 {
@@ -95,14 +96,8 @@ namespace NingshaRaceLib.Combat.SnakeBellySword.Utility
                 for (int i = 0; i < things.Count; i++)
                 {
                     Thing target = things[i];
-                    bool isPawn = target is Pawn;
                     bool isBuilding = target.def.category == ThingCategory.Building;
-                    if (target == attacker || !target.Spawned || (!isPawn && !isBuilding) || addedTargets.Contains(target))
-                    {
-                        continue;
-                    }
-
-                    if (target is Pawn targetPawn && targetPawn.Dead)
+                    if (!NingshaDamageTargetUtility.IsValid(attacker, target) || addedTargets.Contains(target))
                     {
                         continue;
                     }

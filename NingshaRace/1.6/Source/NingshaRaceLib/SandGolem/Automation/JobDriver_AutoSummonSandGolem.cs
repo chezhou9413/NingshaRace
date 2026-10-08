@@ -17,7 +17,7 @@ namespace NingshaRaceLib.SandGolem.Automation
         {
             this.FailOn(() => !GameComponent_SandGolemAutoSummon.Current.Enabled(pawn) || pawn.Drafted
                 || pawn.Downed || pawn.InMentalState || !SandGolemAutoSummonTarget.IsHomeSand(pawn, job.targetA.Cell, true)
-                || GameComponent_SandGolemTracker.Current.GolemForCaster(pawn) != null || !job.ability.CanCast);
+                || GameComponent_SandGolemTracker.Current.HasSummonForCaster(pawn) || !job.ability.CanCast);
             yield return Toils_General.Do(ChooseCastCell);
             yield return Toils_Goto.GotoCell(TargetIndex.C, PathEndMode.OnCell);
             //基础施法任务会在完成时记录冷却，直接调用它的工作步骤以免绕过能力规则。

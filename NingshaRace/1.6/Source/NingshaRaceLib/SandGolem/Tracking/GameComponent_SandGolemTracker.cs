@@ -1,372 +1,243 @@
+using System;
 using System.Collections.Generic;
 using RimWorld;
 using UnityEngine;
 using Verse;
-
-using NingshaRaceLib.Core.Defs;
-using NingshaRaceLib.SandGolem.Health;
+using NingshaRaceLib.SandGolem.Automation;
 using NingshaRaceLib.SandGolem.Lifecycle;
 using NingshaRaceLib.SandGolem.Rendering;
 using NingshaRaceLib.SandGolem.Utility;
-using NingshaRaceLib.SandGolem.Automation;
 
 namespace NingshaRaceLib.SandGolem.Tracking
 {
-    //类职责：维护所有沙傀与召唤者的映射、动画推进和读档后的运行时贴图重建。
+    //维护召唤者、稳定沙傀和不依赖实体的聚散动画。
     public class GameComponent_SandGolemTracker : GameComponent
     {
-        //字段职责：保存当前所有沙傀状态。
         private List<SandGolemRenderState> states = new List<SandGolemRenderState>();
-
-        //字段职责：保存等待旧沙傀消散后执行的新召唤请求。
         private List<PendingSandGolemSummon> pendingSummons = new List<PendingSandGolemSummon>();
 
-        //构造函数职责：让 RimWorld 创建游戏组件。
-        public GameComponent_SandGolemTracker(Game game)
-        {
-        }
+        //供游戏创建跟踪组件。
+        public GameComponent_SandGolemTracker(Game game) { }
 
-        //函数职责：获取当前游戏里的沙傀跟踪组件。
-        public static GameComponent_SandGolemTracker Current
-        {
-            get
-            {
-                return Verse.Current.Game?.GetComponent<GameComponent_SandGolemTracker>();
-            }
-        }
+        //取得当前游戏中的跟踪组件。
+        public static GameComponent_SandGolemTracker Current => Verse.Current.Game?.GetComponent<GameComponent_SandGolemTracker>();
 
-        //函数职责：保存和读取沙傀状态列表。
+        //保存动画位置、截图、实体引用和延迟召唤。
         public override void ExposeData()
         {
             Scribe_Collections.Look(ref states, "states", LookMode.Deep);
             Scribe_Collections.Look(ref pendingSummons, "pendingSummons", LookMode.Deep);
-            if (Scribe.mode == LoadSaveMode.PostLoadInit && states == null)
-            {
-                states = new List<SandGolemRenderState>();
-            }
-            if (Scribe.mode == LoadSaveMode.PostLoadInit && pendingSummons == null)
-            {
-                pendingSummons = new List<PendingSandGolemSummon>();
-            }
+            if (Scribe.mode != LoadSaveMode.PostLoadInit) return;
+            if (states == null) states = new List<SandGolemRenderState>();
+            if (pendingSummons == null) pendingSummons = new List<PendingSandGolemSummon>();
         }
 
-        //函数职责：把沙傀贴图重建安排到读档长事件结束后的主线程，避免后台访问渲染资源。
-        public override void LoadedGame()
+        //在读档长事件结束后的主线程重建 Unity 资源。
+        public override void LoadedGame() => LongEventHandler.ExecuteWhenFinished(RebuildRuntimeTextures);
+
+        //纯动画逐帧绘制，游戏暂停时保持当前进度。
+        public override void GameComponentUpdate()
         {
-            LongEventHandler.ExecuteWhenFinished(RebuildRuntimeTextures);
+            int tick = Find.TickManager.TicksGame;
+            foreach (SandGolemRenderState state in states) SandGolemAnimationRenderer.Draw(state, tick);
         }
 
-        //函数职责：新游戏开始后确保状态列表存在。
-        public override void StartedNewGame()
-        {
-            if (states == null)
-            {
-                states = new List<SandGolemRenderState>();
-            }
-            if (pendingSummons == null)
-            {
-                pendingSummons = new List<PendingSandGolemSummon>();
-            }
-        }
-
-        //函数职责：每 Tick 推进沙傀汇聚和消散阶段。
+        //聚拢完成才生成实体，消散阶段只推进画面。
         public override void GameComponentTick()
         {
             int tick = Find.TickManager.TicksGame;
-            TickPendingSummons(tick);
-
             for (int i = states.Count - 1; i >= 0; i--)
             {
                 SandGolemRenderState state = states[i];
-                if (state == null || state.golem == null || state.golem.Destroyed)
+                if (!IsStateValid(state))
                 {
-                    if (state?.caster != null) GameComponent_SandGolemAutoSummon.Current.NotifyLost(state.caster);
-                    state?.DestroyRuntimeResources();
-                    states.RemoveAt(i);
+                    if (state.phase == SandGolemPhase.Stable && state.caster != null)
+                        GameComponent_SandGolemAutoSummon.Current.NotifyLost(state.caster);
+                    RemoveState(i);
                     continue;
                 }
-
-                SandGolemUtility.MaintainIdentity(state.golem, tick);
-                if (state.LocksFacingAndMovement())
-                {
-                    SandGolemUtility.LockFacingAndMovement(state.golem, stopJobs: false);
-                }
-                else if (state.golem.pather?.debugDisabled == true)
-                {
-                    SandGolemUtility.RestoreControlAfterMovementLock(state.golem);
-                }
-
                 if (state.phase == SandGolemPhase.Gathering && state.PhaseFinished(tick))
                 {
-                    state.MarkStable();
-                    SandGolemUtility.RestoreControlAfterMovementLock(state.golem);
-                    continue;
+                    if (!CompleteGathering(state)) RemoveState(i);
                 }
-
-                if (state.LifetimeExpiredAt(tick))
+                else if (state.phase == SandGolemPhase.Dissolving && state.PhaseFinished(tick))
+                    RemoveState(i);
+                else if (state.phase == SandGolemPhase.Stable)
                 {
-                    BeginDissolve(state.golem, destroyPawn: true, notifyCaster: true);
-                    continue;
-                }
-
-                if (state.phase == SandGolemPhase.Dissolving && state.PhaseFinished(tick))
-                {
-                    FinishDissolve(state);
-                    states.RemoveAt(i);
+                    SandGolemUtility.MaintainIdentity(state.golem, tick);
+                    if (state.LifetimeExpiredAt(tick)) BeginDissolve(state.golem, notifyCaster: true);
                 }
             }
+            TickPendingSummons(tick);
         }
 
-        //函数职责：注册新沙傀并替换旧状态。
-        public void Register(Pawn caster, Pawn golem, Texture2D[] textures)
+        //实体与动画采用不同的有效性条件，动画不需要保留 Pawn。
+        private static bool IsStateValid(SandGolemRenderState state)
         {
-            GameComponent_SandGolemAutoSummon.Current.ClearRequest(caster);
-            RemoveStateForGolem(golem);
-            SandGolemRenderState state = new SandGolemRenderState(caster, golem, textures);
-            state.RebuildMaterials();
-            states.Add(state);
-            SandGolemUtility.LockFacingAndMovement(golem, stopJobs: true);
+            if (state.phase == SandGolemPhase.Stable) return state.golem != null && !state.golem.Destroyed;
+            return state.animationMap != null && Find.Maps.Contains(state.animationMap)
+                && (state.phase == SandGolemPhase.Dissolving || IsCasterValid(state.caster));
         }
 
-        //函数职责：尝试获取指定 Pawn 的沙傀渲染状态。
+        //召唤者死亡或被销毁时停止未完成的召唤。
+        private static bool IsCasterValid(Pawn caster) => caster != null && !caster.Destroyed && !caster.Dead;
+
+        //查询稳定实体对应的渲染状态。
         public bool TryGetState(Pawn golem, out SandGolemRenderState state)
         {
-            state = null;
-            if (golem == null)
-            {
-                return false;
-            }
-
-            for (int i = 0; i < states.Count; i++)
-            {
-                if (states[i]?.golem == golem)
-                {
-                    state = states[i];
-                    return true;
-                }
-            }
-
-            return false;
+            state = golem == null ? null : states.Find(item => item.golem == golem);
+            return state != null;
         }
 
-        //函数职责：获取召唤者当前维持的沙傀。
+        //返回召唤者当前可控制的实体。
         public Pawn GolemForCaster(Pawn caster)
         {
-            if (caster == null)
-            {
-                return null;
-            }
-
-            for (int i = 0; i < states.Count; i++)
-            {
-                SandGolemRenderState state = states[i];
-                if (state?.caster == caster && state.golem != null && !state.golem.Destroyed)
-                {
-                    return state.golem;
-                }
-            }
-
-            return null;
+            return states.Find(state => state.caster == caster && state.golem != null && !state.golem.Destroyed)?.golem;
         }
 
-        //函数职责：开始收回召唤者当前沙傀。
+        //自动召唤同时识别聚散动画和等待请求，避免重复施法。
+        public bool HasSummonForCaster(Pawn caster)
+        {
+            return states.Exists(state => state.caster == caster)
+                || pendingSummons.Exists(pending => pending.caster == caster);
+        }
+
+        //收回实体，或取消尚未成形的召唤。
         public void RecallGolemForCaster(Pawn caster)
         {
-            Pawn golem = GolemForCaster(caster);
-            if (golem != null)
-            {
-                BeginDissolve(golem, destroyPawn: true);
-            }
+            GameComponent_SandGolemAutoSummon.Current.ClearRequest(caster);
+            pendingSummons.RemoveAll(pending => pending.caster == caster);
+            int index = states.FindIndex(state => state.caster == caster);
+            if (index < 0) return;
+            if (states[index].golem != null) BeginDissolve(states[index].golem);
+            else if (states[index].phase == SandGolemPhase.Gathering) RemoveState(index);
         }
 
-        //函数职责：如果召唤者已有沙傀则先收回旧沙傀，再延迟执行新召唤。
+        //替换召唤先等待旧沙傀消散，目标地图固定在施法时。
         public void RecallThenSummon(Pawn caster, IntVec3 targetCell)
         {
             GameComponent_SandGolemAutoSummon.Current.ClearRequest(caster);
-            Pawn oldGolem = GolemForCaster(caster);
-            if (oldGolem == null)
+            pendingSummons.RemoveAll(pending => pending.caster == caster);
+            int index = states.FindIndex(state => state.caster == caster);
+            if (index >= 0 && states[index].phase == SandGolemPhase.Gathering)
             {
-                TrySpawnGolemLogged(caster, targetCell);
+                RemoveState(index);
+                index = -1;
+            }
+            if (index < 0)
+            {
+                StartGathering(caster, caster.Map, targetCell);
                 return;
             }
-
-            BeginDissolve(oldGolem, destroyPawn: true);
-            RemovePendingForCaster(caster);
-            pendingSummons.Add(new PendingSandGolemSummon(caster, targetCell, Find.TickManager.TicksGame + SandGolemUtility.AnimationTicks));
+            SandGolemRenderState old = states[index];
+            if (old.golem != null) BeginDissolve(old.golem);
+            pendingSummons.Add(new PendingSandGolemSummon(caster, targetCell,
+                old.phaseStartTick + SandGolemUtility.AnimationTicks));
         }
 
-        //函数职责：开始指定沙傀的消散动画。
-        public void BeginDissolve(Pawn golem, bool destroyPawn, bool notifyCaster = false)
+        //先保存原位置，再立即销毁实体；后续动画不会被选取或受击。
+        public void BeginDissolve(Pawn golem, bool notifyCaster = false)
         {
-            if (!TryGetState(golem, out SandGolemRenderState state))
-            {
-                Texture2D[] textures = SandGolemPawnCapture.CapturePawn(golem);
-                state = new SandGolemRenderState(null, golem, textures);
-                state.RebuildMaterials();
-                states.Add(state);
-            }
-
-            if (state.phase == SandGolemPhase.Dissolving)
-            {
-                state.destroyAfterDissolve |= destroyPawn;
-                return;
-            }
-
+            if (!TryGetState(golem, out SandGolemRenderState state)) return;
+            state.BeginDissolve();
+            state.golem = null;
             if (state.caster != null)
             {
                 if (notifyCaster) GameComponent_SandGolemAutoSummon.Current.NotifyLost(state.caster);
                 else GameComponent_SandGolemAutoSummon.Current.ClearRequest(state.caster);
             }
-            golem.jobs?.StopAll();
-            SandGolemUtility.SetMovementDisabled(golem, true);
-            golem.Rotation = Rot4.South;
-            state.BeginDissolve(destroyPawn);
-            golem.Drawer?.renderer?.SetAllGraphicsDirty();
+            golem.Destroy(DestroyMode.Vanish);
         }
 
-        //函数职责：在主线程为仍属于当前游戏的沙傀重建截图，并恢复控制与身份状态。
+        //截图由状态持有，动画阶段不生成 Pawn。
+        private void StartGathering(Pawn caster, Map map, IntVec3 targetCell)
+        {
+            if (!IsCasterValid(caster) || map == null || !Find.Maps.Contains(map)
+                || !SandGolemUtility.IsValidSandCell(targetCell, map, out _)) return;
+            Texture2D[] textures = null;
+            SandGolemRenderState state = null;
+            try
+            {
+                textures = SandGolemPawnCapture.CapturePawn(caster);
+                state = new SandGolemRenderState(caster, map, targetCell, textures);
+                state.RebuildMaterials();
+                states.Add(state);
+            }
+            catch (Exception ex)
+            {
+                if (state != null) state.DestroyRuntimeResources();
+                else if (textures != null)
+                    foreach (Texture2D texture in textures) UnityEngine.Object.Destroy(texture);
+                Log.Error("沙傀聚拢失败，已终止本次召唤请求: " + ex);
+            }
+        }
+
+        //动画结束时复查地格，在原地图生成唯一实体并交接已有材质。
+        private static bool CompleteGathering(SandGolemRenderState state)
+        {
+            IntVec3 cell = state.animationPosition.ToIntVec3();
+            if (!SandGolemUtility.IsValidSandCell(cell, state.animationMap, out string reason))
+            {
+                Messages.Message("沙傀未能成形：" + reason, MessageTypeDefOf.RejectInput, false);
+                return false;
+            }
+            try
+            {
+                state.golem = SandGolemFactory.SpawnGolem(state.caster, state.animationMap, cell);
+                state.MarkStable();
+                SandGolemUtility.RestoreControlAfterMovementLock(state.golem);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                if (state.golem != null && !state.golem.Destroyed) state.golem.Destroy(DestroyMode.Vanish);
+                Log.Error("沙傀生成失败，已终止本次召唤请求: " + ex);
+                return false;
+            }
+        }
+
+        //等待旧沙傀消散后在原先指定的地图开始聚拢。
+        private void TickPendingSummons(int tick)
+        {
+            for (int i = pendingSummons.Count - 1; i >= 0; i--)
+            {
+                PendingSandGolemSummon pending = pendingSummons[i];
+                if (IsCasterValid(pending.caster) && tick < pending.executeTick) continue;
+                pendingSummons.RemoveAt(i);
+                StartGathering(pending.caster, pending.map, pending.targetCell);
+            }
+        }
+
+        //读档时分别恢复纯动画与稳定实体，不把无实体动画当作失效记录。
         private void RebuildRuntimeTextures()
         {
-            if (!UnityData.IsInMainThread)
-            {
-                throw new System.InvalidOperationException("沙傀读档贴图只能在游戏主线程重建。");
-            }
-            //读档失败或切换游戏后放弃旧组件的回调，不使用其他游戏的渲染器重建旧角色。
+            if (!UnityData.IsInMainThread) throw new InvalidOperationException("沙傀读档贴图只能在游戏主线程重建。");
             if (!ReferenceEquals(Current, this)) return;
-
-            if (states == null)
-            {
-                states = new List<SandGolemRenderState>();
-            }
-            if (pendingSummons == null)
-            {
-                pendingSummons = new List<PendingSandGolemSummon>();
-            }
             for (int i = states.Count - 1; i >= 0; i--)
             {
                 SandGolemRenderState state = states[i];
-                if (state?.golem == null || state.golem.Destroyed)
-                {
-                    state?.DestroyRuntimeResources();
-                    states.RemoveAt(i);
-                    continue;
-                }
-
+                if (!IsStateValid(state)) { RemoveState(i); continue; }
                 state.ReplaceTextures(SandGolemSnapshotStorage.Decode(state.snapshotImages));
+                if (state.golem == null) continue;
                 SandGolemUtility.StripNeedsAndRelations(state.golem);
                 SandGolemIdentityCleaner.Clean(state.golem);
                 SandGolemUtility.EnsurePlayerControlComponents(state.golem);
-                SandGolemUtility.SetMovementDisabled(state.golem, state.LocksFacingAndMovement());
                 state.golem.Drawer?.renderer?.SetAllGraphicsDirty();
             }
         }
 
-        //函数职责：完成消散并销毁沙傀 Pawn。
-        private static void FinishDissolve(SandGolemRenderState state)
+        //移除记录并释放它独占的截图和材质。
+        private void RemoveState(int index)
         {
-            Pawn golem = state.golem;
-            if (golem == null || golem.Destroyed)
-            {
-                state.DestroyRuntimeResources();
-                return;
-            }
-
-            SandGolemUtility.SetMovementDisabled(golem, false);
-            if (state.destroyAfterDissolve)
-            {
-                if (golem.Spawned)
-                {
-                    golem.DeSpawn(DestroyMode.Vanish);
-                }
-
-                golem.Destroy(DestroyMode.Vanish);
-            }
-
-            state.DestroyRuntimeResources();
+            states[index].DestroyRuntimeResources();
+            states.RemoveAt(index);
         }
 
-        //函数职责：移除指定沙傀的旧状态。
-        private void RemoveStateForGolem(Pawn golem)
-        {
-            for (int i = states.Count - 1; i >= 0; i--)
-            {
-                if (states[i]?.golem == golem)
-                {
-                    states[i]?.DestroyRuntimeResources();
-                    states.RemoveAt(i);
-                }
-            }
-        }
-
-        //函数职责：在当前游戏释放前销毁所有沙傀状态持有的运行时材质和截图纹理。
+        //切换游戏前在主线程释放全部运行时资源。
         public void ReleaseRuntimeResources()
         {
-            if (!UnityData.IsInMainThread)
-            {
-                throw new System.InvalidOperationException("沙傀运行时资源只能在游戏主线程清理。");
-            }
-
-            for (int i = 0; i < states.Count; i++)
-            {
-                states[i]?.DestroyRuntimeResources();
-            }
-        }
-
-        //函数职责：执行已经到期的延迟召唤请求。
-        private void TickPendingSummons(int tick)
-        {
-            if (pendingSummons == null)
-            {
-                pendingSummons = new List<PendingSandGolemSummon>();
-            }
-
-            for (int i = pendingSummons.Count - 1; i >= 0; i--)
-            {
-                PendingSandGolemSummon pending = pendingSummons[i];
-                if (pending == null || pending.caster == null || pending.caster.Destroyed)
-                {
-                    pendingSummons.RemoveAt(i);
-                    continue;
-                }
-
-                if (tick < pending.executeTick)
-                {
-                    continue;
-                }
-
-                if (pending.caster.Map != null && SandGolemUtility.IsValidSandCell(pending.targetCell, pending.caster.Map, out _))
-                {
-                    TrySpawnGolemLogged(pending.caster, pending.targetCell);
-                }
-
-                pendingSummons.RemoveAt(i);
-            }
-        }
-
-        //函数职责：执行一次沙傀生成并把异常记录为单条错误，避免失败请求每 Tick 重复抛出。
-        private static Pawn TrySpawnGolemLogged(Pawn caster, IntVec3 targetCell)
-        {
-            try
-            {
-                return SandGolemFactory.SpawnGolem(caster, targetCell);
-            }
-            catch (System.Exception ex)
-            {
-                Log.Error("沙傀召唤失败，已终止本次召唤请求: " + ex);
-                return null;
-            }
-        }
-
-        //函数职责：移除召唤者尚未执行的旧召唤请求。
-        private void RemovePendingForCaster(Pawn caster)
-        {
-            for (int i = pendingSummons.Count - 1; i >= 0; i--)
-            {
-                if (pendingSummons[i]?.caster == caster)
-                {
-                    pendingSummons.RemoveAt(i);
-                }
-            }
+            if (!UnityData.IsInMainThread) throw new InvalidOperationException("沙傀运行时资源只能在游戏主线程清理。");
+            foreach (SandGolemRenderState state in states) state.DestroyRuntimeResources();
         }
     }
 }

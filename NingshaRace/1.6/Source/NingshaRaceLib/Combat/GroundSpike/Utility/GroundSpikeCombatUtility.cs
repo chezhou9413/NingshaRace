@@ -7,6 +7,7 @@ using NingshaRaceLib.Combat.GroundSpike.Rendering;
 using NingshaRaceLib.Combat.GroundSpike.Tracking;
 using NingshaRaceLib.Combat.GroundSpike.Verbs;
 using NingshaRaceLib.Core.Defs;
+using NingshaRaceLib.Combat.Utility;
 
 namespace NingshaRaceLib.Combat.GroundSpike.Utility
 {
@@ -80,7 +81,7 @@ namespace NingshaRaceLib.Combat.GroundSpike.Utility
         //函数职责：判断地图对象是否为本次地刺攻击允许伤害的敌对目标。
         public static bool IsDamageTarget(Pawn attacker, Thing target)
         {
-            if (target == null || target == attacker || target.Destroyed || !target.Spawned || !target.HostileTo(attacker))
+            if (!NingshaDamageTargetUtility.IsValid(attacker, target) || !target.HostileTo(attacker))
             {
                 return false;
             }

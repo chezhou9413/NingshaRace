@@ -5,6 +5,9 @@
     <defName>NingshaRace_DesertPitStarter</defName>
     <label>凝砂族遗民</label>
     <defaultFactionDef>NingshaRace_DesertPitPlayerFaction</defaultFactionDef>
+    <minGenerationAge>18</minGenerationAge>
+    <maxGenerationAge>30</maxGenerationAge>
+    <backstoryCryptosleepCommonality>0</backstoryCryptosleepCommonality>
     <apparelRequired Inherit="False">
       <li>NingshaRace_Apparel_Chestwrap</li>
       <li>NingshaRace_Apparel_Shorts</li>

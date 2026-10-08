@@ -14,6 +14,9 @@ namespace NingshaRaceLib.SandGolem.Lifecycle
         //字段职责：记录等待召唤新沙傀的施法者。
         public Pawn caster;
 
+        //施法时的地图，避免等待期间施法者换图导致召唤位置错置。
+        public Map map;
+
         //字段职责：记录新沙傀目标地格。
         public IntVec3 targetCell;
 
@@ -29,6 +32,7 @@ namespace NingshaRaceLib.SandGolem.Lifecycle
         public PendingSandGolemSummon(Pawn caster, IntVec3 targetCell, int executeTick)
         {
             this.caster = caster;
+            map = caster.Map;
             this.targetCell = targetCell;
             this.executeTick = executeTick;
         }
@@ -37,6 +41,7 @@ namespace NingshaRaceLib.SandGolem.Lifecycle
         public void ExposeData()
         {
             Scribe_References.Look(ref caster, "caster");
+            Scribe_References.Look(ref map, "map");
             Scribe_Values.Look(ref targetCell, "targetCell");
             Scribe_Values.Look(ref executeTick, "executeTick");
         }

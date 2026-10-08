@@ -65,7 +65,7 @@
           <canTargetPlants>false</canTargetPlants>
           <canTargetFires>false</canTargetFires>
           <canTargetCorpses>false</canTargetCorpses>
-          <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+          <mapObjectTargetsMustBeAutoAttackable>true</mapObjectTargetsMustBeAutoAttackable>
         </targetParams>
       </li>
     </verbs>

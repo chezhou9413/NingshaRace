@@ -63,14 +63,14 @@ namespace NingshaRaceLib.SandGolem.Health
             absorbedDamage += totalDamageDealt;
             if (absorbedDamage >= DamageLimit)
             {
-                GameComponent_SandGolemTracker.Current?.BeginDissolve(Pawn, destroyPawn: true);
+                GameComponent_SandGolemTracker.Current?.BeginDissolve(Pawn, notifyCaster: true);
             }
         }
 
         //函数职责：沙傀死亡时启动消散记录。
         public override void Notify_PawnDied(DamageInfo? dinfo, Hediff culprit = null)
         {
-            GameComponent_SandGolemTracker.Current?.BeginDissolve(Pawn, destroyPawn: true);
+            GameComponent_SandGolemTracker.Current?.BeginDissolve(Pawn, notifyCaster: true);
         }
     }
 }

@@ -21,6 +21,25 @@ namespace NingshaRaceLib.DesertPit.Discovery.World
         //属性职责：保持永久探索地点的父对象与地下入口关联，不转换成定居点。
         public override AcceptanceReport CanBeSettled => "巨坑探索地点不能转换为定居点。";
 
+        //允许从世界地图主动放弃整个巨坑地点。
+        public override IEnumerable<Gizmo> GetGizmos()
+        {
+            foreach (Gizmo gizmo in base.GetGizmos()) yield return gizmo;
+            yield return DesertPitAbandonUtility.CreateCommand(this);
+        }
+
+        //未进入的地点没有地表地图，同样可以终止任务并移除标记。
+        public override void Abandon(bool wasGravshipLaunch)
+        {
+            DesertPitAbandonUtility.RemoveUndergroundMaps(this);
+            if (discoveryQuest != null && (discoveryQuest.State == QuestState.Ongoing
+                || discoveryQuest.State == QuestState.NotYetAccepted))
+                discoveryQuest.End(QuestEndOutcome.Fail);
+            gate = null;
+            if (HasMap) base.Abandon(wasGravshipLaunch);
+            else Destroy();
+        }
+
         //函数职责：保存地图尺寸、任务引用和抵达完成标记。
         public override void ExposeData()
         {

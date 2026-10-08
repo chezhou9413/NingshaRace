@@ -5,6 +5,7 @@ using Verse;
 
 using NingshaRaceLib.Core.Defs;
 using NingshaRaceLib.GiantTomb.Generation;
+using NingshaRaceLib.GiantTomb.Content.Generation;
 
 namespace NingshaRaceLib.AltarMissions.Map
 {
@@ -34,11 +35,14 @@ namespace NingshaRaceLib.AltarMissions.Map
             GenSpawn.Spawn(weapon, cells[1], map);
 
             int enemyCount = Rand.RangeInclusive(2, 4);
+            List<Pawn> enemies = new List<Pawn>();
             for (int i = 0; i < enemyCount; i++)
             {
                 Pawn enemy = PawnGenerator.GeneratePawn(DefOfRefs.NingshaRace_GiantTombMummyKind, Faction.OfAncientsHostile);
                 GenSpawn.Spawn(enemy, cells[i + 2], map, Rot4.Random);
+                enemies.Add(enemy);
             }
+            GiantTombDormancyUtility.PutToSleep(map, enemies);
         }
 
         //函数职责：收集已经完成模板、内容和岩层填充后仍可放置物品或Pawn的结构格。

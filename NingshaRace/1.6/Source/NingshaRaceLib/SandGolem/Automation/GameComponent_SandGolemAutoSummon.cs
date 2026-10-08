@@ -50,7 +50,7 @@ namespace NingshaRaceLib.SandGolem.Automation
                 return;
             }
             states.Add(new SandGolemAutoSummonState { caster = pawn, homeSand = cell,
-                pending = GameComponent_SandGolemTracker.Current.GolemForCaster(pawn) == null });
+                pending = !GameComponent_SandGolemTracker.Current.HasSummonForCaster(pawn) });
             Schedule(StateFor(pawn));
         }
 
@@ -117,7 +117,7 @@ namespace NingshaRaceLib.SandGolem.Automation
         {
             Pawn pawn = state.caster;
             if (!state.pending || !pawn.Spawned || pawn.Drafted || pawn.Downed || pawn.InMentalState
-                || GameComponent_SandGolemTracker.Current.GolemForCaster(pawn) != null) return;
+                || GameComponent_SandGolemTracker.Current.HasSummonForCaster(pawn)) return;
             Ability ability = pawn.abilities?.GetAbility(DefOfRefs.NingshaRace_Ability_SummonSandGolem);
             if (ability == null || !ability.CanQueueCast || ability.GizmoDisabled(out _)) return;
             if (!SandGolemAutoSummonTarget.TryFind(pawn, true, out IntVec3 cell)) return;

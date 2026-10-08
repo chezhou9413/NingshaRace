@@ -40,8 +40,9 @@ namespace NingshaRaceLib.SandGolem.Rendering
         //字段职责：记录沙傀当前生命周期阶段。
         public SandGolemPhase phase;
 
-        //字段职责：记录消散完成后是否销毁 Pawn。
-        public bool destroyAfterDissolve;
+        //聚散动画固定在施放或消失时的地图位置，不依赖 Pawn 实体。
+        public Map animationMap;
+        public Vector3 animationPosition;
 
         //构造函数职责：为 Scribe 反序列化提供空实例。
         public SandGolemRenderState()
@@ -49,10 +50,11 @@ namespace NingshaRaceLib.SandGolem.Rendering
         }
 
         //构造函数职责：创建指定召唤者和沙傀的运行时状态。
-        public SandGolemRenderState(Pawn caster, Pawn golem, Texture2D[] textures)
+        public SandGolemRenderState(Pawn caster, Map map, IntVec3 cell, Texture2D[] textures)
         {
             this.caster = caster;
-            this.golem = golem;
+            animationMap = map;
+            animationPosition = cell.ToVector3ShiftedWithAltitude(AltitudeLayer.Pawn);
             this.textures = textures;
             snapshotImages = SandGolemSnapshotStorage.Encode(textures);
             phase = SandGolemPhase.Gathering;
@@ -69,7 +71,8 @@ namespace NingshaRaceLib.SandGolem.Rendering
             Scribe_Values.Look(ref phaseStartTick, "phaseStartTick");
             Scribe_Values.Look(ref expireTick, "expireTick", -1);
             Scribe_Values.Look(ref phase, "phase", SandGolemPhase.Gathering);
-            Scribe_Values.Look(ref destroyAfterDissolve, "destroyAfterDissolve");
+            Scribe_References.Look(ref animationMap, "animationMap");
+            Scribe_Values.Look(ref animationPosition, "animationPosition");
         }
 
         //函数职责：按当前朝向返回沙傀截图纹理。
@@ -249,21 +252,17 @@ namespace NingshaRaceLib.SandGolem.Rendering
         public void MarkStable()
         {
             phase = SandGolemPhase.Stable;
+            animationMap = null;
             phaseStartTick = Find.TickManager.TicksGame;
         }
 
         //函数职责：切换到沙傀消散阶段。
-        public void BeginDissolve(bool destroyPawn)
+        public void BeginDissolve()
         {
-            if (phase == SandGolemPhase.Dissolving)
-            {
-                destroyAfterDissolve = destroyAfterDissolve || destroyPawn;
-                return;
-            }
-
+            animationMap = golem.MapHeld;
+            animationPosition = golem.DrawPos;
             phase = SandGolemPhase.Dissolving;
             phaseStartTick = Find.TickManager.TicksGame;
-            destroyAfterDissolve = destroyPawn;
         }
     }
 

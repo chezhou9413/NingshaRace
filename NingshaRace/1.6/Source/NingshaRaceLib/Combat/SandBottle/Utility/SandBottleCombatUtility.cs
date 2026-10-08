@@ -7,6 +7,7 @@ using NingshaRaceLib.Combat.SandBottle.Verbs;
 using NingshaRaceLib.Core.Defs;
 using NingshaRaceLib.Core.Effects;
 using NingshaRaceLib.Petrification.Utility;
+using NingshaRaceLib.Combat.Utility;
 
 namespace NingshaRaceLib.Combat.SandBottle.Utility
 {
@@ -54,21 +55,7 @@ namespace NingshaRaceLib.Combat.SandBottle.Utility
         //函数职责：判断目标是否为攻击者同地图上的存活 Pawn 或建筑，不限制所属阵营。
         public static bool IsValidDamageTarget(Pawn attacker, Thing target)
         {
-            if (attacker == null
-                || target == null
-                || target == attacker
-                || !target.Spawned
-                || target.Map != attacker.Map)
-            {
-                return false;
-            }
-
-            if (target is Pawn pawn)
-            {
-                return !pawn.Dead;
-            }
-
-            return target.def.category == ThingCategory.Building;
+            return NingshaDamageTargetUtility.IsValid(attacker, target);
         }
 
         //函数职责：扫描固定方向扇形中的唯一 Pawn 与建筑，并确保每个目标都与攻击起点保持视线连通。

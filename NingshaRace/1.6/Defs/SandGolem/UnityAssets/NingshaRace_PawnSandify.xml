@@ -8,10 +8,18 @@
     <ImageFolderName>/image/</ImageFolderName>
   </ChezhouLib.LibDef.UnityShaderLord>
 
+  <ChezhouLib.LibDef.UnityShaderLord>
+    <defName>NingshaRace_SandGolemShaderLord</defName>
+    <AbPath>/1.6/AssetBundles/ningsha_sandgolem.ab</AbPath>
+    <AbPathMac>/1.6/AssetBundles/ningsha_sandgolem_mac.ab</AbPathMac>
+    <ShaderFolderName>/SandGolem/Shader/</ShaderFolderName>
+    <ImageFolderName>/SandGolem/Image/</ImageFolderName>
+  </ChezhouLib.LibDef.UnityShaderLord>
+
   <ChezhouLib.LibDef.ClShaderMaterial>
     <defName>NingshaRace_PawnSandify_Material</defName>
     <label>凝砂族沙偶材质</label>
-    <shaderName>NingshaRace/Pawn/Sandify</shaderName>
+    <shaderName>NingshaRace/Pawn/WindSandify</shaderName>
     <resModID>chezhou.race.ningsharace</resModID>
     <shaderParameters>
       <li>
@@ -48,19 +56,19 @@
       </li>
       <li>
         <parameterName>_ParticleScale</parameterName>
-        <parameterValue>380</parameterValue>
+        <parameterValue>140</parameterValue>
       </li>
       <li>
         <parameterName>_ParticleSize</parameterName>
-        <parameterValue>0.95</parameterValue>
+        <parameterValue>0.62</parameterValue>
       </li>
       <li>
         <parameterName>_ParticleJitter</parameterName>
-        <parameterValue>0</parameterValue>
+        <parameterValue>0.6</parameterValue>
       </li>
       <li>
         <parameterName>_ParticleDensity</parameterName>
-        <parameterValue>1</parameterValue>
+        <parameterValue>0.72</parameterValue>
       </li>
       <li>
         <parameterName>_SolidHold</parameterName>
