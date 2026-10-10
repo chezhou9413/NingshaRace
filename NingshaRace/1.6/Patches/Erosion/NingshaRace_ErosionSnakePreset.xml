@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationSequence">
+    <operations>
+      <li Class="PatchOperationConditional">
+        <xpath>Defs/MutantDef[defName='NingshaRace_ErosionBodyMutant']/renderNodeProperties/li[texPath='NingshaRace/Erosion/SnakeHeads/ErosionSnakeHeadA']/*[self::drawData or self::visibleFacing or self::swayByFacing]</xpath>
+        <match Class="PatchOperationRemove">
+          <xpath>Defs/MutantDef[defName='NingshaRace_ErosionBodyMutant']/renderNodeProperties/li[texPath='NingshaRace/Erosion/SnakeHeads/ErosionSnakeHeadA']/*[self::drawData or self::visibleFacing or self::swayByFacing]</xpath>
+        </match>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>Defs/MutantDef[defName='NingshaRace_ErosionBodyMutant']/renderNodeProperties/li[texPath='NingshaRace/Erosion/SnakeHeads/ErosionSnakeHeadA']</xpath>
+        <value>
+          <drawData>
+            <scale>1</scale>
+            <childScale>1</childScale>
+            <scaleOffsetByBodySize>false</scaleOffsetByBodySize>
+            <useBodyPartAnchor>false</useBodyPartAnchor>
+            <dataNorth>
+              <offset>(0, 0, 0)</offset>
+              <pivot>(0.397, 0.555)</pivot>
+              <rotationOffset>0</rotationOffset>
+              <layer>36</layer>
+              <flip>false</flip>
+            </dataNorth>
+            <dataEast>
+              <offset>(0.065, 0, 0.065)</offset>
+              <pivot>(0.445, 0.443)</pivot>
+              <rotationOffset>-3</rotationOffset>
+              <layer>95</layer>
+              <flip>false</flip>
+            </dataEast>
+            <dataSouth>
+              <offset>(0, 0, 0)</offset>
+              <pivot>(0.596, 0.554)</pivot>
+              <rotationOffset>0</rotationOffset>
+              <layer>11.2</layer>
+              <flip>false</flip>
+            </dataSouth>
+            <dataWest>
+              <offset>(0, 0, -0.01)</offset>
+              <pivot>(0.435, 0.452)</pivot>
+              <rotationOffset>-17</rotationOffset>
+              <layer>89.4</layer>
+              <flip>false</flip>
+            </dataWest>
+          </drawData>
+          <visibleFacing>
+            <li>North</li>
+            <li>East</li>
+            <li>South</li>
+            <li>West</li>
+          </visibleFacing>
+          <swayByFacing>
+            <li>
+              <facing>North</facing>
+              <angle>7</angle>
+              <period>6</period>
+              <phase>0</phase>
+            </li>
+            <li>
+              <facing>East</facing>
+              <angle>4.54999971</angle>
+              <period>6</period>
+              <phase>0</phase>
+            </li>
+            <li>
+              <facing>South</facing>
+              <angle>7</angle>
+              <period>6</period>
+              <phase>0</phase>
+            </li>
+            <li>
+              <facing>West</facing>
+              <angle>4.54999971</angle>
+              <period>6</period>
+              <phase>0</phase>
+            </li>
+          </swayByFacing>
+        </value>
+      </li>
+      <li Class="PatchOperationConditional">
+        <xpath>Defs/MutantDef[defName='NingshaRace_ErosionBodyMutant']/renderNodeProperties/li[texPath='NingshaRace/Erosion/SnakeHeads/ErosionSnakeHeadB']/*[self::drawData or self::visibleFacing or self::swayByFacing]</xpath>
+        <match Class="PatchOperationRemove">
+          <xpath>Defs/MutantDef[defName='NingshaRace_ErosionBodyMutant']/renderNodeProperties/li[texPath='NingshaRace/Erosion/SnakeHeads/ErosionSnakeHeadB']/*[self::drawData or self::visibleFacing or self::swayByFacing]</xpath>
+        </match>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>Defs/MutantDef[defName='NingshaRace_ErosionBodyMutant']/renderNodeProperties/li[texPath='NingshaRace/Erosion/SnakeHeads/ErosionSnakeHeadB']</xpath>
+        <value>
+          <drawData>
+            <scale>1</scale>
+            <childScale>1</childScale>
+            <scaleOffsetByBodySize>false</scaleOffsetByBodySize>
+            <useBodyPartAnchor>false</useBodyPartAnchor>
+            <dataNorth>
+              <offset>(0, 0, 0)</offset>
+              <pivot>(0.604, 0.453)</pivot>
+              <rotationOffset>0</rotationOffset>
+              <layer>35</layer>
+              <flip>false</flip>
+            </dataNorth>
+            <dataEast>
+              <offset>(0.13499999, 0, 0.08)</offset>
+              <pivot>(0.478, 0.441)</pivot>
+              <rotationOffset>4</rotationOffset>
+              <layer>35</layer>
+              <flip>false</flip>
+            </dataEast>
+            <dataSouth>
+              <offset>(0, 0, 0)</offset>
+              <pivot>(0.396, 0.451)</pivot>
+              <rotationOffset>0</rotationOffset>
+              <layer>106.1</layer>
+              <flip>false</flip>
+            </dataSouth>
+            <dataWest>
+              <offset>(-0.145, 0, 0.0899999961)</offset>
+              <pivot>(0.478, 0.441)</pivot>
+              <rotationOffset>0</rotationOffset>
+              <layer>35</layer>
+              <flip>false</flip>
+            </dataWest>
+          </drawData>
+          <visibleFacing>
+            <li>North</li>
+            <li>East</li>
+            <li>South</li>
+            <li>West</li>
+          </visibleFacing>
+          <swayByFacing>
+            <li>
+              <facing>North</facing>
+              <angle>9</angle>
+              <period>6</period>
+              <phase>2.1</phase>
+            </li>
+            <li>
+              <facing>East</facing>
+              <angle>5.85</angle>
+              <period>6</period>
+              <phase>2.1</phase>
+            </li>
+            <li>
+              <facing>South</facing>
+              <angle>9</angle>
+              <period>6</period>
+              <phase>2.1</phase>
+            </li>
+            <li>
+              <facing>West</facing>
+              <angle>5.85</angle>
+              <period>6</period>
+              <phase>2.1</phase>
+            </li>
+          </swayByFacing>
+        </value>
+      </li>
+      <li Class="PatchOperationConditional">
+        <xpath>Defs/MutantDef[defName='NingshaRace_ErosionBodyMutant']/renderNodeProperties/li[texPath='NingshaRace/Erosion/SnakeHeads/ErosionSnakeHeadC']/*[self::drawData or self::visibleFacing or self::swayByFacing]</xpath>
+        <match Class="PatchOperationRemove">
+          <xpath>Defs/MutantDef[defName='NingshaRace_ErosionBodyMutant']/renderNodeProperties/li[texPath='NingshaRace/Erosion/SnakeHeads/ErosionSnakeHeadC']/*[self::drawData or self::visibleFacing or self::swayByFacing]</xpath>
+        </match>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>Defs/MutantDef[defName='NingshaRace_ErosionBodyMutant']/renderNodeProperties/li[texPath='NingshaRace/Erosion/SnakeHeads/ErosionSnakeHeadC']</xpath>
+        <value>
+          <drawData>
+            <scale>1</scale>
+            <childScale>1</childScale>
+            <scaleOffsetByBodySize>false</scaleOffsetByBodySize>
+            <useBodyPartAnchor>false</useBodyPartAnchor>
+            <dataNorth>
+              <offset>(0, 0, 0)</offset>
+              <pivot>(0.626, 0.538)</pivot>
+              <rotationOffset>0</rotationOffset>
+              <layer>34</layer>
+              <flip>false</flip>
+            </dataNorth>
+            <dataEast>
+              <offset>(0, 0, 0)</offset>
+              <pivot>(0.5, 0.5)</pivot>
+              <rotationOffset>0</rotationOffset>
+              <layer>34</layer>
+              <flip>false</flip>
+            </dataEast>
+            <dataSouth>
+              <offset>(0, 0, 0)</offset>
+              <pivot>(0.374, 0.539)</pivot>
+              <rotationOffset>0</rotationOffset>
+              <layer>34</layer>
+              <flip>false</flip>
+            </dataSouth>
+            <dataWest>
+              <offset>(0, 0, 0)</offset>
+              <pivot>(0.5, 0.5)</pivot>
+              <rotationOffset>0</rotationOffset>
+              <layer>34</layer>
+              <flip>false</flip>
+            </dataWest>
+          </drawData>
+          <visibleFacing>
+            <li>North</li>
+            <li>South</li>
+          </visibleFacing>
+          <swayByFacing>
+            <li>
+              <facing>North</facing>
+              <angle>10</angle>
+              <period>6</period>
+              <phase>4.2</phase>
+            </li>
+            <li>
+              <facing>East</facing>
+              <angle>6.5</angle>
+              <period>6</period>
+              <phase>4.2</phase>
+            </li>
+            <li>
+              <facing>South</facing>
+              <angle>10</angle>
+              <period>6</period>
+              <phase>4.2</phase>
+            </li>
+            <li>
+              <facing>West</facing>
+              <angle>6.5</angle>
+              <period>6</period>
+              <phase>4.2</phase>
+            </li>
+          </swayByFacing>
+        </value>
+      </li>
+    </operations>
+  </Operation>
+</Patch>

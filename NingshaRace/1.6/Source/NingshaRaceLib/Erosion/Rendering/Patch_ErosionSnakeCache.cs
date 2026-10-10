@@ -4,7 +4,7 @@ using Verse;
 
 namespace NingshaRaceLib.Erosion.Rendering
 {
-    //活体蛇头每帧重算摆动，避免远景人物图集把动画固定成单帧。
+    //活体黑雾与凝砂蛇头每帧更新，避免远景人物图集把动画固定成单帧。
     [HarmonyPatch(typeof(PawnRenderer), "PawnNeedsHediffMaterial")]
     public static class Patch_ErosionSnakeCache
     {

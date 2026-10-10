@@ -10,6 +10,7 @@ using NingshaRaceLib.Core.Defs;
 namespace NingshaRaceLib.Erosion.Rendering
 {
     //类职责：在主线程创建并缓存侵蚀体头部的 CL 黑雾材质，供并行预绘制线程只读使用。
+    [StaticConstructorOnStartup]
     public static class ErosionBodyHeadMaterialPool
     {
         //类职责：按托管引用比较 Unity 材质，避免后台线程调用 UnityEngine.Object 重载逻辑。
@@ -34,6 +35,10 @@ namespace NingshaRaceLib.Erosion.Rendering
         //字段职责：保存原始头部材质到活体、尸体两种黑雾材质的线程安全只读映射。
         private static readonly ConcurrentDictionary<Material, ErosionHeadMaterialVariants> Materials =
             new ConcurrentDictionary<Material, ErosionHeadMaterialVariants>(ManagedReferenceComparer<Material>.Instance);
+
+        //主线程绘制时识别本池的输出，避免重复套用黑雾并正确切换尸体材质。
+        private static readonly Dictionary<Material, ErosionHeadMaterialVariants> OwnedMaterials =
+            new Dictionary<Material, ErosionHeadMaterialVariants>(ManagedReferenceComparer<Material>.Instance);
 
         //函数职责：在渲染树主线程初始化阶段预先创建头部四个朝向及隐身变体的黑雾材质。
         public static void PrewarmGraphic(Graphic graphic, Pawn pawn)
@@ -96,6 +101,10 @@ namespace NingshaRaceLib.Erosion.Rendering
             {
                 return null;
             }
+            if (OwnedMaterials.TryGetValue(source, out ErosionHeadMaterialVariants ownedMaterials))
+            {
+                return ownedMaterials.ForState(dead);
+            }
             if (Materials.TryGetValue(source, out ErosionHeadMaterialVariants cachedMaterials))
             {
                 return cachedMaterials.ForState(dead);
@@ -120,6 +129,19 @@ namespace NingshaRaceLib.Erosion.Rendering
                 mainTextureScale = source.mainTextureScale,
                 mainTextureOffset = source.mainTextureOffset
             };
+            //HAR 遮罩的红、绿通道分别承载两种肤色；无遮罩时保持整图染色。
+            Texture mask = source.HasProperty(ShaderPropertyIDs.MaskTex)
+                ? source.GetTexture(ShaderPropertyIDs.MaskTex) : null;
+            erosionMaterial.SetFloat("_UseMask", mask != null ? 1f : 0f);
+            if (mask != null)
+            {
+                erosionMaterial.SetTexture(ShaderPropertyIDs.MaskTex, mask);
+                erosionMaterial.SetTextureScale("_MaskTex", source.GetTextureScale("_MaskTex"));
+                erosionMaterial.SetTextureOffset("_MaskTex", source.GetTextureOffset("_MaskTex"));
+                erosionMaterial.SetColor(ShaderPropertyIDs.ColorTwo,
+                    source.HasProperty(ShaderPropertyIDs.ColorTwo)
+                        ? source.GetColor(ShaderPropertyIDs.ColorTwo) : source.color);
+            }
             Material corpseMaterial = new Material(erosionMaterial)
             {
                 name = erosionMaterial.name + "_Corpse"
@@ -128,6 +150,8 @@ namespace NingshaRaceLib.Erosion.Rendering
             corpseMaterial.SetVector("_FlowSpeed", Vector4.zero);
             corpseMaterial.SetFloat("_PulseStrength", 0f);
             ErosionHeadMaterialVariants variants = new ErosionHeadMaterialVariants(erosionMaterial, corpseMaterial);
+            OwnedMaterials.Add(erosionMaterial, variants);
+            OwnedMaterials.Add(corpseMaterial, variants);
             //两种材质都在主线程配置完毕后才发布，绘制线程只选择引用。
             Materials[source] = variants;
             return variants.ForState(dead);
@@ -147,6 +171,7 @@ namespace NingshaRaceLib.Erosion.Rendering
                 UnityEngine.Object.Destroy(variants.Dead);
             }
             Materials.Clear();
+            OwnedMaterials.Clear();
         }
     }
 }

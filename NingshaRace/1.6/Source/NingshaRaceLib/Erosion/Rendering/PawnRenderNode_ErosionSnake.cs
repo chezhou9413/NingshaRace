@@ -1,5 +1,6 @@
 using UnityEngine;
 using Verse;
+using NingshaRaceLib.Erosion.Editor;
 
 namespace NingshaRaceLib.Erosion.Rendering
 {
@@ -8,7 +9,7 @@ namespace NingshaRaceLib.Erosion.Rendering
     {
         //复用原版图形、材质与网格缓存。
         public PawnRenderNode_ErosionSnake(Pawn pawn, PawnRenderNodeProperties props, PawnRenderTree tree)
-            : base(pawn, props, tree) { }
+            : base(pawn, ErosionSnakeEditorSession.PropertiesFor(pawn, props), tree) { }
 
         //与蛇头材质使用同一个有效朝向。
         public override Mesh GetMesh(PawnDrawParms parms)

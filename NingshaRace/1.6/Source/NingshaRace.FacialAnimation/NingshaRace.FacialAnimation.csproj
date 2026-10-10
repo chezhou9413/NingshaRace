@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{493017AC-DF45-480D-A0D5-B6405804799E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>NingshaRaceLib.Compatibility.FA</RootNamespace>
+    <AssemblyName>NingshaRace.FacialAnimation</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <LangVersion>latest</LangVersion>
+    <Deterministic>true</Deterministic>
+    <OutputPath>..\..\..\Compat\FacialAnimation\Assemblies\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Assembly-CSharp">
+      <HintPath>E:\捷豹\rimworlddll\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>E:\捷豹\rimworlddll\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>E:\捷豹\rimworlddll\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FacialAnimation">
+      <HintPath>E:\steam\steamapps\workshop\content\294100\1635901197\1.6\Assemblies\FacialAnimation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <ProjectReference Include="..\NingshaRaceLib\NingshaRaceLib.csproj">
+      <Project>{D90CC9A9-CB0A-4FFB-92EC-E7D0A669525B}</Project>
+      <Name>NingshaRaceLib</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <Compile Include="**\*.cs" Exclude="obj\**\*.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

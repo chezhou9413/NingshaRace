@@ -1,7 +1,7 @@
 ManifestFileVersion: 0
-CRC: 3590799840
+CRC: 2884431643
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: ningsharace_mac.ab
+      Name: ningsharace.ab
       Dependencies: {}

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!-- 文件职责：定义凝砂族永久实体化后的侵蚀体 Mutant。 -->
+  <!-- 定义人形角色被侵蚀后永久实体化的异变身份。 -->
   <MutantDef ParentName="BaseMutantEntity">
     <defName>NingshaRace_ErosionBodyMutant</defName>
     <label>侵蚀体</label>
-    <description>侵蚀值达到极限后诞生的异常实体。原有意识已经消失，只留下会无差别追猎其他生命的凝砂躯壳。它能以极短间隔发动侵蚀凝砂之眼，但不会召唤沙傀。</description>
+    <description>侵蚀吞没意识后诞生的异常实体。原有意识已经消失，只留下会无差别追猎其他生命的躯壳。它能以极短间隔发动侵蚀凝砂之眼，但不会召唤沙傀；只有凝砂族原身会生出蛇首。</description>
     <hediff>NingshaRace_ErosionBody</hediff>
     <thinkTree>NingshaRace_ErosionBody</thinkTree>
     <thinkTreeConstant>NingshaRace_ErosionBodyConstant</thinkTreeConstant>

@@ -6,6 +6,7 @@ using Verse.Sound;
 
 using NingshaRaceLib.Core.Defs;
 using NingshaRaceLib.Erosion.UI;
+using NingshaRaceLib.Erosion.Editor;
 using NingshaRaceLib.Erosion.Utility;
 using NingshaRaceLib.SandGolem.Tracking;
 
@@ -107,9 +108,18 @@ namespace NingshaRaceLib.Erosion.Components
             }
         }
 
-        //函数职责：为普通玩家凝砂族提供只读状态条，并在上帝模式下提供满侵蚀测试按钮。
+        //提供侵蚀状态与开发工具，侵蚀体可直接打开蛇头编辑器。
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
+            if (Prefs.DevMode && Pawn.Spawned && ErosionPawnUtility.IsNingshaErosionBody(Pawn))
+            {
+                yield return new Command_NingshaAction
+                {
+                    defaultLabel = "DEV: 蛇头编辑",
+                    defaultDesc = "分别调整三个蛇头的四向位置、图层和摆动动画，并导出 XML 参数。",
+                    action = () => Find.WindowStack.Add(new Window_ErosionSnakeEditor(Pawn))
+                };
+            }
             if (ErosionPawnUtility.IsNormalPlayerNingsha(Pawn))
             {
                 yield return new Gizmo_NingshaErosion

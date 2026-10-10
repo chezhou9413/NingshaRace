@@ -6,7 +6,7 @@ using NingshaRaceLib.Erosion.Rendering;
 
 namespace NingshaRaceLib.Erosion.Effects
 {
-    //类职责：在凝砂头部节点完成地图绘制后取得最终矩阵，并把准确的头部锚点交给侵蚀烟雾管理器。
+    //在侵蚀体头部节点完成地图绘制后，把最终矩阵交给烟雾管理器。
     [HarmonyPatch(typeof(PawnRenderNodeWorker), nameof(PawnRenderNodeWorker.PostDraw))]
     public static class Patch_ErosionHeadEffectRendering
     {

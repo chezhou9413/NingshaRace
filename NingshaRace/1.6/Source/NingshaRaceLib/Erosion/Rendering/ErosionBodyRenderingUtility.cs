@@ -5,7 +5,7 @@ using NingshaRaceLib.Erosion.Utility;
 
 namespace NingshaRaceLib.Erosion.Rendering
 {
-    //类职责：识别侵蚀体需要隐藏或替换材质的 HAR 头部附加层。
+    //识别人形侵蚀体的实际头部及凝砂专用表情层。
     public static class ErosionBodyRenderingUtility
     {
         //字段职责：标识承载凝砂族完整头部贴图的 HAR BodyAddon。
@@ -14,18 +14,19 @@ namespace NingshaRaceLib.Erosion.Rendering
         //字段职责：标识侵蚀体状态下不再绘制的脸部表情 HAR BodyAddon。
         private const string FaceExpressionBodyAddonName = "NingshaRace_FaceExpression";
 
-        //函数职责：判断渲染节点是否为侵蚀体当前使用的凝砂族头部附加层。
+        //标准人形与 HAR 使用头部节点，凝砂使用完整头部 BodyAddon。
         public static bool IsErosionHeadNode(PawnRenderNode node, Pawn pawn)
         {
-            return ErosionPawnUtility.IsErosionBody(pawn)
-                && TryGetBodyAddonName(node, out string addonName)
-                && addonName == HeadBodyAddonName;
+            if (!ErosionPawnUtility.IsErosionBody(pawn)) return false;
+            if (ErosionPawnUtility.IsNingshaErosionBody(pawn))
+                return TryGetBodyAddonName(node, out string addonName) && addonName == HeadBodyAddonName;
+            return node is PawnRenderNode_Head;
         }
 
         //函数职责：判断渲染节点是否为侵蚀体应当隐藏的脸部表情附加层。
         public static bool IsErosionFaceExpressionNode(PawnRenderNode node, Pawn pawn)
         {
-            return ErosionPawnUtility.IsErosionBody(pawn)
+            return ErosionPawnUtility.IsNingshaErosionBody(pawn)
                 && TryGetBodyAddonName(node, out string addonName)
                 && addonName == FaceExpressionBodyAddonName;
         }

@@ -24,7 +24,7 @@ namespace NingshaRaceLib.Erosion.Rendering
     [HarmonyPatch(typeof(PawnRenderNode), "EnsureMaterialVariantsInitialized", new[] { typeof(Graphic) })]
     public static class Patch_ErosionBodyHeadMaterialPrewarm
     {
-        //函数职责：只为侵蚀体的凝砂族头部图形创建四向黑雾材质缓存。
+        //为侵蚀体实际使用的头部图形创建四向黑雾材质缓存。
         [HarmonyPostfix]
         public static void Postfix(PawnRenderNode __instance, Graphic g)
         {

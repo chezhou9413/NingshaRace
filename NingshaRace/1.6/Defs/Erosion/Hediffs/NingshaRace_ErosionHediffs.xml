@@ -39,7 +39,7 @@
   <HediffDef>
     <defName>NingshaRace_ErosionBody</defName>
     <label>侵蚀体</label>
-    <description>侵蚀已经永久吞没这个凝砂族的意识。它如今是由深层力量驱动、会无差别袭击其他生命的异常实体。</description>
+    <description>侵蚀已经永久吞没了这个人的意识。它如今是由深层力量驱动、会无差别袭击其他生命的异常实体。</description>
     <hediffClass>HediffWithComps</hediffClass>
     <everCurableByItem>false</everCurableByItem>
     <duplicationAllowed>false</duplicationAllowed>

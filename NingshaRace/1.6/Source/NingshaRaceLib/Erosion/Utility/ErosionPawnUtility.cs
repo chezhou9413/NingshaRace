@@ -17,20 +17,26 @@ namespace NingshaRaceLib.Erosion.Utility
                 && !pawn.IsMutant;
         }
 
-        //函数职责：判断 Pawn 是否已经永久转化为凝砂族侵蚀体。
+        //根据人形角色的异变身份识别侵蚀体，不限制原身种族。
         public static bool IsErosionBody(Pawn pawn)
         {
             return pawn != null
-                && pawn.def == DefOfRefs.NingshaRace
+                && pawn.RaceProps.Humanlike
                 && pawn.IsMutant
                 && pawn.mutant.Def == DefOfRefs.NingshaRace_ErosionBodyMutant;
+        }
+
+        //只有凝砂族侵蚀体拥有蛇头及对应编辑入口。
+        public static bool IsNingshaErosionBody(Pawn pawn)
+        {
+            return IsErosionBody(pawn) && pawn.def == DefOfRefs.NingshaRace;
         }
 
         //函数职责：在复活入口根据异变身份或永久健康标记识别侵蚀体原身。
         public static bool HasErosionBodyIdentity(Pawn pawn)
         {
             return pawn != null
-                && pawn.def == DefOfRefs.NingshaRace
+                && pawn.RaceProps.Humanlike
                 && (IsErosionBody(pawn)
                     || pawn.health.hediffSet.HasHediff(DefOfRefs.NingshaRace_ErosionBody));
         }

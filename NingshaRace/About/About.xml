@@ -69,5 +69,6 @@
     <li>Chezhou.ChezhouLib.lib</li>
     <li>ludeon.rimworld.anomaly</li>
     <li>ASEL.MonolynRace</li>
+    <li>Nals.FacialAnimation</li>
   </loadAfter>
 </ModMetaData>

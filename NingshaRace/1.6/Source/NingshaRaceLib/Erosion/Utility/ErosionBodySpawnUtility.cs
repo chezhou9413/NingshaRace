@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using RimWorld;
 using RimWorld.Planet;
 using Verse;
@@ -7,10 +8,10 @@ using NingshaRaceLib.Core.Defs;
 
 namespace NingshaRaceLib.Erosion.Utility
 {
-    //类职责：集中完成侵蚀体原身生成、原版Mutant转化、实体阵营分配和地图落点。
+    //生成各人形种族的侵蚀体，完成原版异变转化和实体阵营分配。
     public static class ErosionBodySpawnUtility
     {
-        //函数职责：生成一名穿戴PawnKind凝砂服装、无武器和轻量背景数据的未落地侵蚀体。
+        //生成保留原身服装、无武器的侵蚀体，未指定原身时仍使用凝砂族。
         public static Pawn Generate(PawnKindDef pawnKind = null, Faction faction = null, PlanetTile? tile = null)
         {
             if (!ModsConfig.AnomalyActive)
@@ -19,9 +20,9 @@ namespace NingshaRaceLib.Erosion.Utility
             }
 
             PawnKindDef sourceKind = pawnKind ?? DefOfRefs.NingshaRace_Colonist;
-            if (sourceKind.race != DefOfRefs.NingshaRace)
+            if (!sourceKind.RaceProps.Humanlike || sourceKind.mutant != null)
             {
-                throw new InvalidOperationException("侵蚀体原身必须是凝砂族 PawnKind: " + sourceKind.defName);
+                throw new InvalidOperationException("侵蚀体原身必须是未预设异变的人形 PawnKind: " + sourceKind.defName);
             }
 
             PawnGenerationRequest request = new PawnGenerationRequest(
@@ -43,8 +44,23 @@ namespace NingshaRaceLib.Erosion.Utility
                 //通过原版类型获取器固定任务种族，避免生成前缀改写 KindDef 后生成其他种族。
                 pawnKindDefGetter: xenotype => sourceKind);
             Pawn pawn = PawnGenerator.GeneratePawn(request);
+            if (pawn.def != sourceKind.race)
+            {
+                throw new InvalidOperationException("侵蚀体原身生成结果与指定种族不符，指定="
+                    + sourceKind.race.defName + "，实际=" + pawn.def.defName);
+            }
             TurnIntoErosionBody(pawn, faction);
             return pawn;
+        }
+
+        //先等概率选择非凝砂人形种族，再选择该种族允许调试生成的普通原身。
+        public static PawnKindDef RandomNonNingshaKind()
+        {
+            var races = DefDatabase<PawnKindDef>.AllDefsListForReading
+                .Where(kind => kind.showInDebugSpawner && kind.RaceProps.Humanlike
+                    && kind.race != DefOfRefs.NingshaRace && kind.mutant == null)
+                .GroupBy(kind => kind.race).ToList();
+            return races.Count == 0 ? null : races.RandomElement().RandomElement();
         }
 
         //函数职责：在指定地图空格快速生成并放置一名侵蚀体。
@@ -64,21 +80,25 @@ namespace NingshaRaceLib.Erosion.Utility
             return pawn;
         }
 
-        //函数职责：把现有凝砂族永久转化为侵蚀体并分配目标实体阵营。
+        //说明不能转化的实际原因，供调试入口与转化流程共用。
+        public static string ConversionRejectionReason(Pawn pawn)
+        {
+            if (!ModsConfig.AnomalyActive) return "转化为侵蚀体需要启用异象 DLC。";
+            if (pawn == null) return "请选择一名人形角色。";
+            if (pawn.Dead || pawn.Destroyed) return "只能转化存活的角色。";
+            if (!pawn.RaceProps.Humanlike) return "只能把人形角色转化为侵蚀体。";
+            if (ErosionPawnUtility.IsErosionBody(pawn)) return "该角色已经是侵蚀体。";
+            if (pawn.IsMutant) return "该角色已有其他异变身份，不能直接转化为侵蚀体。";
+            return null;
+        }
+
+        //把现有人形角色永久转化为侵蚀体并分配目标实体阵营。
         public static void TurnIntoErosionBody(Pawn pawn, Faction faction = null)
         {
-            if (pawn == null)
+            string rejection = ConversionRejectionReason(pawn);
+            if (rejection != null)
             {
-                throw new ArgumentNullException(nameof(pawn));
-            }
-            if (pawn.def != DefOfRefs.NingshaRace)
-            {
-                throw new InvalidOperationException("只能把凝砂族转化为侵蚀体，实际种族=" + pawn.def.defName
-                    + "，实际 PawnKind=" + pawn.kindDef.defName + "，人物=" + pawn);
-            }
-            if (pawn.IsMutant)
-            {
-                throw new InvalidOperationException("不能重复转化已经是 Mutant 的 Pawn: " + pawn);
+                throw new InvalidOperationException(rejection);
             }
 
             Faction targetFaction = faction ?? Faction.OfEntities;
