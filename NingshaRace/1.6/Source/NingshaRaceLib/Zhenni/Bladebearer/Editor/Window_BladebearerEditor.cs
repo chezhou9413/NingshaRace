@@ -63,6 +63,8 @@ namespace NingshaRaceLib.Zhenni.Bladebearer
         //大窗口使用三列，小窗口把部件与参数切为侧栏页签。
         public override void DoWindowContents(Rect rect)
         {
+            //关闭按钮会先释放草稿；关闭后的同帧绘制与已排队输入不能再访问编辑会话。
+            if (!IsOpen) return;
             GameFont font = Text.Font; TextAnchor anchor = Text.Anchor; bool wrap = Text.WordWrap; Color color = GUI.color;
             try
             {

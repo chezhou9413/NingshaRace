@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 持斧者与拥刀者是独立实体，共享震尼系列的瞬移和分层渲染。 -->
+  <ThingDef ParentName="BasePawn">
+    <defName>NingshaRace_Zhenni_Axebearer_Pawn</defName>
+    <label>震尼持斧者</label>
+    <description>幽焰托起的古老甲胄，握持一柄沉重的长柄战斧。震尼持斧者能够在紫焰中消散，重新聚合在敌人身旁。它的出招较慢，却会以大幅度的劈斩撕开防御。斧刃蓄势时浮现的紫色星光，是避开下一次重击的短暂机会。\n\n倒地后可被收容研究；死亡时甲胄和战斧一同消散，不留下尸体或可拾取的装备。</description>
+    <uiIconPath>UI/CodexEntries/NingshaRace/Zhenni/Axebearer/Axebearer</uiIconPath>
+    <hiddenWhileUndiscovered>true</hiddenWhileUndiscovered>
+    <tradeability>None</tradeability>
+    <comps>
+      <li Class="NingshaRaceLib.Zhenni.Bladebearer.CompProperties_BladebearerAppearance">
+        <appearance>NingshaRace_Zhenni_Axebearer_Appearance</appearance>
+        <weapon>NingshaRace_Zhenni_Axebearer_Axe</weapon>
+        <weaponPart>Axe</weaponPart>
+      </li>
+      <li Class="NingshaRaceLib.Combat.MeleeAnimation.CompProperties_MeleeAnimation">
+        <animation>NingshaRace_Zhenni_Axebearer_MeleeAnimation</animation>
+        <weapon>NingshaRace_Zhenni_Axebearer_Axe</weapon>
+      </li>
+      <li Class="NingshaRaceLib.Zhenni.Bladebearer.CompProperties_BladebearerPhaseStep">
+        <cooldownTicks>300</cooldownTicks>
+        <arrivalTicks>30</arrivalTicks>
+        <minRange>3.5</minRange>
+        <maxRange>12</maxRange>
+        <departureSeconds>0.48</departureSeconds>
+        <deathSeconds>1.25</deathSeconds>
+      </li>
+      <li Class="CompProperties_HoldingPlatformTarget">
+        <baseEscapeIntervalMtbDays>30</baseEscapeIntervalMtbDays>
+        <getsColdContainmentBonus>true</getsColdContainmentBonus>
+      </li>
+      <li Class="CompProperties_Studiable">
+        <frequencyTicks>120000</frequencyTicks>
+        <knowledgeCategory>Advanced</knowledgeCategory>
+        <minMonolithLevelForStudy>1</minMonolithLevelForStudy>
+        <anomalyKnowledge>2</anomalyKnowledge>
+        <requiresHoldingPlatform>true</requiresHoldingPlatform>
+      </li>
+      <li Class="CompProperties_ProducesBioferrite"><bioferriteDensity>1.5</bioferriteDensity></li>
+    </comps>
+    <inspectorTabs><li>ITab_StudyNotes</li></inspectorTabs>
+    <statBases>
+      <MarketValue>0</MarketValue>
+      <Mass>60</Mass>
+      <MoveSpeed>4.2</MoveSpeed>
+      <ArmorRating_Sharp>0.55</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.35</ArmorRating_Blunt>
+      <MinimumContainmentStrength>65</MinimumContainmentStrength>
+      <Flammability>0</Flammability>
+      <MeatAmount>0</MeatAmount>
+      <ComfyTemperatureMin>-100</ComfyTemperatureMin>
+      <ComfyTemperatureMax>100</ComfyTemperatureMax>
+    </statBases>
+    <race>
+      <thinkTreeMain>Fleshbeast</thinkTreeMain>
+      <thinkTreeConstant>FleshbeastConstant</thinkTreeConstant>
+      <intelligence>ToolUser</intelligence>
+      <fleshType>EntityMechanical</fleshType>
+      <body>Human</body>
+      <renderTree>NingshaRace_Zhenni_Axebearer_RenderTree</renderTree>
+      <hasGenders>false</hasGenders>
+      <hasCorpse>false</hasCorpse>
+      <baseHungerRate>0</baseHungerRate>
+      <trainability>None</trainability>
+      <disableIgniteVerb>true</disableIgniteVerb>
+      <needsRest>false</needsRest>
+      <foodType>None</foodType>
+      <alwaysAwake>true</alwaysAwake>
+      <isImmuneToInfections>true</isImmuneToInfections>
+      <baseBodySize>1</baseBodySize>
+      <baseHealthScale>2</baseHealthScale>
+      <lifeExpectancy>1000</lifeExpectancy>
+      <bloodDef>Filth_MachineBits</bloodDef>
+      <bloodSmearDef>Filth_MachineBits</bloodSmearDef>
+      <hediffGiverSets><li>AnomalyEntity</li></hediffGiverSets>
+      <lifeStageAges><li><def>EntityFullyFormed</def><minAge>0</minAge></li></lifeStageAges>
+    </race>
+  </ThingDef>
+  <PawnKindDef>
+    <defName>NingshaRace_Zhenni_Axebearer_Kind</defName>
+    <label>震尼持斧者</label>
+    <race>NingshaRace_Zhenni_Axebearer_Pawn</race>
+    <defaultFactionDef>Entities</defaultFactionDef>
+    <overrideDebugActionCategory>Entity</overrideDebugActionCategory>
+    <combatPower>220</combatPower>
+    <isFighter>true</isFighter>
+    <destroyGearOnDrop>true</destroyGearOnDrop>
+    <allowInMechClusters>false</allowInMechClusters>
+    <appearsRandomlyInCombatGroups>false</appearsRandomlyInCombatGroups>
+    <maxPerGroup>0</maxPerGroup>
+    <canArriveManhunter>false</canArriveManhunter>
+    <canBeScattered>false</canBeScattered>
+    <apparelMoney>0~0</apparelMoney>
+    <weaponMoney>100~100</weaponMoney>
+    <weaponTags><li>NingshaRaceAxebearerAxe</li></weaponTags>
+    <techHediffsChance>0</techHediffsChance>
+    <lifeStages>
+      <li><bodyGraphicData>
+        <texPath>Zhenni/Bladebearer/Pawn/Bladebearer_Body_south</texPath>
+        <graphicClass>Graphic_Single</graphicClass>
+        <shaderType>Cutout</shaderType>
+        <drawSize>1.8</drawSize>
+      </bodyGraphicData></li>
+    </lifeStages>
+  </PawnKindDef>
+  <EntityCodexEntryDef>
+    <defName>NingshaRace_Zhenni_Axebearer_Codex</defName>
+    <label>震尼持斧者</label>
+    <useDescriptionFrom>NingshaRace_Zhenni_Axebearer_Pawn</useDescriptionFrom>
+    <category>Advanced</category>
+    <uiIconPath>UI/CodexEntries/NingshaRace/Zhenni/Axebearer/Axebearer</uiIconPath>
+    <discoveryType>Unfog</discoveryType>
+    <orderInCategory>902</orderInCategory>
+    <linkedThings><li>NingshaRace_Zhenni_Axebearer_Pawn</li></linkedThings>
+  </EntityCodexEntryDef>
+</Defs>

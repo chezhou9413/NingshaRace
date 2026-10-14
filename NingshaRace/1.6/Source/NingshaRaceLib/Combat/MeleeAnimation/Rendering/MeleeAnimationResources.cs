@@ -18,7 +18,7 @@ namespace NingshaRaceLib.Combat.MeleeAnimation
             InitiaUnityShaderLord.EnsureInitialized();
             const string package = "chezhou.race.ningsharace";
             Shader shader = abDatabase.GetShader("NingshaRace/Combat/MeleeFlameTrail", package);
-            if (shader == null || !shader.isSupported) throw new InvalidOperationException("近战刀光 Shader 无法加载：ningsha_melee.ab。");
+            if (shader == null || !shader.isSupported) throw new InvalidOperationException("近战刀光 Shader 无法加载：NingshaRace/Combat/MeleeFlameTrail。");
             if (!abDatabase.Texture2dDataBase.TryGetValue(package + "=>MeleeFlameDisplacement", out noise))
                 throw new InvalidOperationException("近战框架缺少 MeleeFlameDisplacement 置换图。");
             world = new Material(shader) { name = "近战火焰刀光", hideFlags = HideFlags.HideAndDontSave,

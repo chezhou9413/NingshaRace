@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- Def 职责：定义只容纳一枚凝砂卵并推进孵化的自然恒温巢。 -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>NingshaRace_HatchNest</defName>
+    <label>凝砂孵化巢</label>
+    <description>用柔软材料和凝砂卵壳搭成的孵化巢。放入其中的凝砂卵不会被当作食材取用；受精卵会在零至五十摄氏度之间继续孵化。</description>
+    <thingClass>NingshaRaceLib.Reproduction.Buildings.Building_NingshaHatchNest</thingClass>
+    <category>Building</category>
+    <tickerType>Normal</tickerType>
+    <graphicData>
+      <texPath>NingshaRace/Reproduction/NingshaHatchNest</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Cutout</shaderType>
+      <drawSize>(1.4,1.4)</drawSize>
+    </graphicData>
+    <size>(1,1)</size>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.35</fillPercent>
+    <rotatable>false</rotatable>
+    <selectable>true</selectable>
+    <designationCategory>Misc</designationCategory>
+    <uiOrder>2080</uiOrder>
+    <costList>
+      <WoodLog>40</WoodLog>
+      <Cloth>20</Cloth>
+    </costList>
+    <statBases>
+      <MaxHitPoints>80</MaxHitPoints>
+      <WorkToBuild>1200</WorkToBuild>
+      <Flammability>1</Flammability>
+      <Mass>5</Mass>
+    </statBases>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <filthLeaving>Filth_RubbleBuilding</filthLeaving>
+    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsMisc</li>
+    </thingCategories>
+  </ThingDef>
+</Defs>

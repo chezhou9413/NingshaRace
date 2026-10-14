@@ -14,6 +14,7 @@ namespace NingshaRaceLib.Combat.BurialMountainGuard.Patches
 {
     //类职责：给装备葬岳的 Pawn 追加格挡模式切换按钮。
     [HarmonyPatch(typeof(Pawn), nameof(Pawn.GetGizmos))]
+    [Verse.StaticConstructorOnStartup]
     public static class Patch_BurialMountainGuardGizmos
     {
         //字段职责：缓存首次显示格挡按钮时取得的图标，避免补丁类型初始化阶段访问 Unity 资源。

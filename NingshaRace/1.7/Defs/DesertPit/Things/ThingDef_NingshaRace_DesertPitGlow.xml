@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义沙漠巨坑地下洞穴使用的稀疏天光裂隙。 -->
+  <ThingDef>
+    <defName>NingshaRace_DesertPitGlow</defName>
+    <label>天光裂隙</label>
+    <description>从沙岩穹顶缝隙中垂落的天光。</description>
+    <thingClass>Building</thingClass>
+    <category>Building</category>
+    <drawerType>None</drawerType>
+    <altitudeLayer>Building</altitudeLayer>
+    <selectable>false</selectable>
+    <rotatable>false</rotatable>
+    <tickerType>Normal</tickerType>
+    <destroyable>false</destroyable>
+    <useHitPoints>false</useHitPoints>
+    <passability>Standable</passability>
+    <fillPercent>0</fillPercent>
+    <canOverlapZones>true</canOverlapZones>
+    <building>
+      <deconstructible>false</deconstructible>
+      <isTargetable>false</isTargetable>
+      <isInert>true</isInert>
+      <claimable>false</claimable>
+      <expandHomeArea>false</expandHomeArea>
+    </building>
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>10</glowRadius>
+        <glowColor>(150,162,176,0)</glowColor>
+      </li>
+      <li Class="CompProperties_Effecter">
+        <effecterDef>UndercaveMapExitLightshafts</effecterDef>
+      </li>
+    </comps>
+    <statBases>
+      <Flammability>0</Flammability>
+    </statBases>
+  </ThingDef>
+</Defs>

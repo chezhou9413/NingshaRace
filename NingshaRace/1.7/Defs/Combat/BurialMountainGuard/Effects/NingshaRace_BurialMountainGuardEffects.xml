@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义葬岳格挡的常驻护盾和满蓄力爆发 Mote。 -->
+  <ThingDef ParentName="MoteBase">
+    <defName>NingshaRace_Mote_BurialMountainGuardShield</defName>
+    <label>葬岳菲涅尔护盾</label>
+    <thingClass>NingshaRaceLib.Combat.BurialMountainGuard.Rendering.Mote_BurialMountainGuardShield</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <graphicData>
+      <texPath>UI/Misc/BadTexture</texPath>
+      <graphicClass>Graphic_Mote</graphicClass>
+      <shaderType>NingshaRace_BurialMountainGuardShield_ShaderPro</shaderType>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <mote>
+      <fadeInTime>0.12</fadeInTime>
+      <solidTime>999999</solidTime>
+      <fadeOutTime>0.18</fadeOutTime>
+      <needsMaintenance>true</needsMaintenance>
+      <fadeOutUnmaintained>true</fadeOutUnmaintained>
+    </mote>
+  </ThingDef>
+
+  <ThingDef ParentName="MoteBase">
+    <defName>NingshaRace_Mote_BurialMountainGuardBurst</defName>
+    <label>葬岳格挡爆发</label>
+    <thingClass>NingshaRaceLib.Combat.BurialMountainGuard.Rendering.Mote_BurialMountainGuardBurst</thingClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <graphicData>
+      <texPath>UI/Misc/BadTexture</texPath>
+      <graphicClass>Graphic_Mote</graphicClass>
+      <shaderType>NingshaRace_BurialMountainGuardBurst_ShaderPro</shaderType>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <mote>
+      <fadeInTime>0</fadeInTime>
+      <solidTime>0.45</solidTime>
+      <fadeOutTime>0.2</fadeOutTime>
+    </mote>
+  </ThingDef>
+</Defs>

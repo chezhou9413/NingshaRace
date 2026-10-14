@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义智慧之蛇祭坛的自动供奉和任务交互工作。 -->
+  <JobDef>
+    <defName>NingshaRace_Job_FillWisdomSerpentAltar</defName>
+    <driverClass>NingshaRaceLib.Altar.Jobs.JobDriver_FillWisdomSerpentAltar</driverClass>
+    <reportString>正在将 TargetA 供奉给 TargetB。</reportString>
+    <casualInterruptible>true</casualInterruptible>
+    <playerInterruptible>true</playerInterruptible>
+  </JobDef>
+  <JobDef>
+    <defName>NingshaRace_Job_ConsultWisdomSerpentAltar</defName>
+    <driverClass>NingshaRaceLib.Altar.Jobs.JobDriver_ConsultWisdomSerpentAltar</driverClass>
+    <reportString>正在向 TargetA 祈求智慧之蛇的指引。</reportString>
+    <casualInterruptible>false</casualInterruptible>
+    <playerInterruptible>true</playerInterruptible>
+  </JobDef>
+  <WorkGiverDef>
+    <defName>NingshaRace_WorkGiver_FillWisdomSerpentAltar</defName>
+    <label>补充祭坛供奉</label>
+    <giverClass>NingshaRaceLib.Altar.Jobs.WorkGiver_FillWisdomSerpentAltar</giverClass>
+    <workType>Hauling</workType>
+    <priorityInType>88</priorityInType>
+    <verb>供奉</verb>
+    <gerund>正在补充智慧之蛇祭坛</gerund>
+    <requiredCapacities><li>Manipulation</li></requiredCapacities>
+  </WorkGiverDef>
+</Defs>

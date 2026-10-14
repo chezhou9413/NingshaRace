@@ -24,6 +24,7 @@ namespace NingshaRaceLib.Zhenni.Bladebearer
             {
                 if (!node.Worker.CanDrawNow(node, ActiveParms)) continue;
                 Matrix4x4 partMatrix = matrix * PartTransform(node.Part);
+#if !RW_1_7
                 if (!node.Part.particle)
                 {
                     Material material = BladebearerResources.Material(node.Part, node.DepthOnly, ActiveParms.DrawNow);
@@ -34,6 +35,7 @@ namespace NingshaRaceLib.Zhenni.Bladebearer
                     if (ActiveParms.DrawNow && !node.DepthOnly && node.Owner.CapturePreview)
                         node.Owner.Projections[node.Part.id] = BladebearerProjection.Capture(partMatrix, Find.PawnCacheCamera);
                 }
+#endif
                 node.Worker.PostDraw(node, ActiveParms, BladebearerResources.Mesh, partMatrix);
             }
         }

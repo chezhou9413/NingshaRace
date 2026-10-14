@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义可永久重访的沙漠巨坑地表地点。 -->
+  <WorldObjectDef>
+    <defName>NingshaRace_DesertPitDiscovery</defName>
+    <label>沙漠巨坑</label>
+    <description>古老坐标地图标注的沙漠巨坑。远行队可从这里进入地表，再沿巨坑入口探索地下洞室。地点与已生成的地图永久保留。</description>
+    <worldObjectClass>NingshaRaceLib.DesertPit.Discovery.World.WorldObject_DesertPitDiscovery</worldObjectClass>
+    <canHaveFaction>false</canHaveFaction>
+    <canHaveMap>true</canHaveMap>
+    <mapGenerator>Encounter</mapGenerator>
+    <texture>Things/Item/NingshaRace/DesertPit/CoordinateMap</texture>
+    <expandingIcon>true</expandingIcon>
+    <expandingIconTexture>Things/Item/NingshaRace/DesertPit/CoordinateMap</expandingIconTexture>
+    <expandingIconPriority>5</expandingIconPriority>
+    <comps><li Class="WorldObjectCompProperties_FormCaravan" /></comps>
+  </WorldObjectDef>
+</Defs>

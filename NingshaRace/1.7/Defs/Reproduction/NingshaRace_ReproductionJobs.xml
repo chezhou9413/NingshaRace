@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- Job 职责：让搬运者将一枚凝砂卵放入空闲孵化巢。 -->
+  <JobDef>
+    <defName>NingshaRace_Job_PlaceEggInHatchNest</defName>
+    <driverClass>NingshaRaceLib.Reproduction.Jobs.JobDriver_PlaceEggInHatchNest</driverClass>
+    <reportString>正在将 TargetA 放入 TargetB。</reportString>
+    <casualInterruptible>true</casualInterruptible>
+    <playerInterruptible>true</playerInterruptible>
+  </JobDef>
+
+  <!-- WorkGiver 职责：为自动装填或玩家强制搬运寻找空闲凝砂孵化巢。 -->
+  <WorkGiverDef>
+    <defName>NingshaRace_WorkGiver_FillHatchNest</defName>
+    <label>安置凝砂卵</label>
+    <giverClass>NingshaRaceLib.Reproduction.Jobs.WorkGiver_FillHatchNest</giverClass>
+    <workType>Hauling</workType>
+    <priorityInType>90</priorityInType>
+    <verb>安置</verb>
+    <gerund>正在安置凝砂卵</gerund>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+  </WorkGiverDef>
+</Defs>

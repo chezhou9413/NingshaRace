@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义飞针弹道、物理伤害和石化进度参数。 -->
+
+  <!-- Def 职责：以高速单针命中目标，并为存活血肉 Pawn 累积四分之一石化进度。 -->
+  <ThingDef ParentName="BaseBullet">
+    <defName>NingshaRace_Projectile_FlyingNeedle</defName>
+    <label>飞针</label>
+    <thingClass>NingshaRaceLib.Combat.FlyingNeedle.Projectiles.Projectile_FlyingNeedle</thingClass>
+    <graphicData>
+      <texPath>NingshaRace/Projectiles/FlyingNeedle</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Cutout</shaderType>
+      <drawSize>(0.22,0.7)</drawSize>
+    </graphicData>
+    <projectile Class="NingshaRaceLib.Combat.FlyingNeedle.Projectiles.ProjectileProperties_FlyingNeedle">
+      <damageDef>Stab</damageDef>
+      <damageAmountBase>4</damageAmountBase>
+      <armorPenetrationBase>0.08</armorPenetrationBase>
+      <speed>80</speed>
+      <stoppingPower>0.1</stoppingPower>
+      <petrificationSeverity>0.25</petrificationSeverity>
+    </projectile>
+  </ThingDef>
+</Defs>

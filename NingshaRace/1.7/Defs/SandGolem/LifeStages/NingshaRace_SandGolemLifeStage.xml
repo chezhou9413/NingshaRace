@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义沙傀唯一的成年生命阶段。 -->
+  <LifeStageDef>
+    <defName>NingshaRace_SandGolemAdult</defName>
+    <label>沙傀</label>
+    <visible>false</visible>
+    <developmentalStage>Adult</developmentalStage>
+    <workerClass>LifeStageWorker</workerClass>
+    <canDoRandomMentalBreaks>false</canDoRandomMentalBreaks>
+    <canVoluntarilySleep>false</canVoluntarilySleep>
+    <canSleepWhenStarving>false</canSleepWhenStarving>
+    <canInitiateSocialInteraction>false</canInitiateSocialInteraction>
+    <silhouetteGraphicData>
+      <texPath>Things/Pawn/Humanlike/Silhouettes/Silhouette_HumanAdult</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1</drawSize>
+    </silhouetteGraphicData>
+  </LifeStageDef>
+</Defs>

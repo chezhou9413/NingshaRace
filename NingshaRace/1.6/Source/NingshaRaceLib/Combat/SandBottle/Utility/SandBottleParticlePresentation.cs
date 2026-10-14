@@ -8,6 +8,9 @@ namespace NingshaRaceLib.Combat.SandBottle.Utility
         //函数职责：仅调整本次特效实例，保留资源包中其他使用者的共享预制体和材质。
         public static void Configure(GameObject instance)
         {
+#if RW_1_7
+            SandBottleParticleMaterials ownedMaterials = instance.AddComponent<SandBottleParticleMaterials>();
+#endif
             foreach (ParticleSystem particles in instance.GetComponentsInChildren<ParticleSystem>(true))
             {
                 ParticleSystem.MainModule main = particles.main;
@@ -34,10 +37,18 @@ namespace NingshaRaceLib.Combat.SandBottle.Utility
                 Material material = renderer.sharedMaterial;
                 if (material != null && material.HasProperty("_Alpha"))
                 {
+#if RW_1_7
+                    //粒子 Renderer 不支持属性块，为此实例保留独立材质并随特效释放。
+                    Material local = new Material(material);
+                    local.SetFloat("_Alpha", material.GetFloat("_Alpha") * 0.45f);
+                    ownedMaterials.Add(local);
+                    renderer.sharedMaterial = local;
+#else
                     MaterialPropertyBlock block = new MaterialPropertyBlock();
                     renderer.GetPropertyBlock(block);
                     block.SetFloat("_Alpha", material.GetFloat("_Alpha") * 0.45f);
                     renderer.SetPropertyBlock(block);
+#endif
                 }
             }
         }

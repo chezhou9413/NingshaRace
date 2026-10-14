@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义智慧之蛇祭坛直接发布且不设超时的三类任务。 -->
+  <QuestScriptDef>
+    <defName>NingshaRace_Quest_AltarSmallRuins</defName><rootSelectionWeight>0</rootSelectionWeight><rootMinPoints>0</rootMinPoints><expireDaysRange>-1</expireDaysRange>
+    <questNameRules><rulesStrings><li>questName->智慧之蛇：小型遗迹</li></rulesStrings></questNameRules>
+    <questDescriptionRules><rulesStrings><li>questDescription->智慧之蛇指出了距主定居点四至十格的一座小型地下凝砂墓葬。
+\n进入遗迹并消灭全部主动敌对威胁即可完成任务。遗迹保证包含10至50份沙之热和一件普通或良好品质的凝砂武器，所有实体战利品需自行搬运。</li></rulesStrings></questDescriptionRules>
+    <root Class="NingshaRaceLib.AltarMissions.Generation.QuestNode_Root_AltarMission"><missionType>SmallRuins</missionType></root>
+  </QuestScriptDef>
+  <QuestScriptDef>
+    <defName>NingshaRace_Quest_AltarAntNest</defName><rootSelectionWeight>0</rootSelectionWeight><rootMinPoints>0</rootMinPoints><expireDaysRange>-1</expireDaysRange>
+    <questNameRules><rulesStrings><li>questName->智慧之蛇：清剿蚁巢</li></rulesStrings></questNameRules>
+    <questDescriptionRules><rulesStrings><li>questDescription->智慧之蛇发现了一处距主定居点四至十格的大型地下蚁巢。
+\n地图内只有一个固定四级或五级蚁穴，营养升级关闭但补员、修复、撤退和战斗逻辑仍然有效。摧毁目标蚁穴即可完成任务，无需清理逃散成员。</li></rulesStrings></questDescriptionRules>
+    <root Class="NingshaRaceLib.AltarMissions.Generation.QuestNode_Root_AltarMission"><missionType>AntNest</missionType></root>
+  </QuestScriptDef>
+  <QuestScriptDef>
+    <defName>NingshaRace_Quest_AltarRescueKinsfolk</defName><rootSelectionWeight>0</rootSelectionWeight><rootMinPoints>0</rootMinPoints><expireDaysRange>-1</expireDaysRange><rootIncreasesPopulation>true</rootIncreasesPopulation>
+    <questNameRules><rulesStrings><li>questName->智慧之蛇：解救同胞</li></rulesStrings></questNameRules>
+    <questDescriptionRules><rulesStrings><li>questDescription->智慧之蛇感知到距主定居点四至十格有一至三名凝砂族同胞受困，地点可能位于地表或地下。
+\n玩家入场后，数量为待救者三倍的侵蚀体将从四角向中央推进。杀死全部指定侵蚀体且至少保住一名同胞即可成功，幸存者会正式加入殖民地；全部待救者死亡则失败。</li></rulesStrings></questDescriptionRules>
+    <root Class="NingshaRaceLib.AltarMissions.Generation.QuestNode_Root_AltarMission"><missionType>RescueKinsfolk</missionType></root>
+  </QuestScriptDef>
+</Defs>

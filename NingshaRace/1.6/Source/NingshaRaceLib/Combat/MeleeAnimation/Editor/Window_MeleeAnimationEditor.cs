@@ -50,6 +50,8 @@ namespace NingshaRaceLib.Combat.MeleeAnimation
         //预览和参数各自拥有可用空间，长路径独立换行，不挤占底部按钮。
         public override void DoWindowContents(Rect rect)
         {
+            //原版关闭键和右上角关闭按钮可在本次内容回调前释放草稿。
+            if (!IsOpen) return;
             GameFont font = Text.Font; TextAnchor anchor = Text.Anchor; bool wrap = Text.WordWrap; Color color = GUI.color;
             try
             {
@@ -65,7 +67,8 @@ namespace NingshaRaceLib.Combat.MeleeAnimation
                 fileName = Widgets.TextField(new Rect(0, y, Mathf.Max(50, start - 8), Row), fileName);
                 if (Widgets.ButtonText(new Rect(start, y, 100, Row), "导出 XML")) Export();
                 if (Widgets.ButtonText(new Rect(start + 106, y, 100, Row), "导入 XML")) ChooseImport();
-                if (Widgets.ButtonText(new Rect(start + 212, y, 100, Row), "关闭")) Close();
+                if (Widgets.ButtonText(new Rect(start + 212, y, 100, Row), "关闭"))
+                { Close(); if (!IsOpen) return; }
                 y += Row + 6;
                 Widgets.Label(new Rect(0, y, rect.width - 100, pathHeight), MeleeAnimationPresetXml.DirectoryPath);
                 if (Widgets.ButtonText(new Rect(rect.width - 94, y, 94, Row), "复制目录")) GUIUtility.systemCopyBuffer = MeleeAnimationPresetXml.DirectoryPath;

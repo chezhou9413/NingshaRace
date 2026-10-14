@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义凝砂族从婴儿到成年的全部专用生命阶段。 -->
+
+  <!-- Def 职责：承载凝砂族零至两岁的婴儿行为、体型与生理参数。 -->
+  <LifeStageDef>
+    <defName>NingshaRace_HumanlikeBaby</defName>
+    <label>凝砂婴儿</label>
+    <bodySizeFactor>0.2</bodySizeFactor>
+    <bodyWidth>0.95</bodyWidth>
+    <bodyDrawOffset>(0, 0, -0.03)</bodyDrawOffset>
+    <voxPitch>1.6</voxPitch>
+    <headSizeFactor>0.5</headSizeFactor>
+    <eyeSizeFactor>0.7</eyeSizeFactor>
+    <foodMaxFactor>0.625</foodMaxFactor>
+    <hungerRateFactor>0.125</hungerRateFactor>
+    <healthScaleFactor>0.2</healthScaleFactor>
+    <marketValueFactor>0.5</marketValueFactor>
+    <meleeDamageFactor>0.5</meleeDamageFactor>
+    <developmentalStage>Baby</developmentalStage>
+    <fallAsleepMaxThresholdOverride>0.60</fallAsleepMaxThresholdOverride>
+    <naturalWakeThresholdOverride>1</naturalWakeThresholdOverride>
+    <alwaysDowned>true</alwaysDowned>
+    <claimable>true</claimable>
+    <involuntarySleepIsNegativeEvent>false</involuntarySleepIsNegativeEvent>
+    <thinkTreeMainOverride MayRequire="Ludeon.RimWorld.Biotech">HumanlikeBaby</thinkTreeMainOverride>
+    <thinkTreeConstantOverride MayRequire="Ludeon.RimWorld.Biotech">HumanlikeBabyConstant</thinkTreeConstantOverride>
+    <canDoRandomMentalBreaks>false</canDoRandomMentalBreaks>
+    <canSleepWhileHeld>true</canSleepWhileHeld>
+    <canVoluntarilySleep>false</canVoluntarilySleep>
+    <canSleepWhenStarving>false</canSleepWhenStarving>
+    <canInitiateSocialInteraction>false</canInitiateSocialInteraction>
+    <customMoodTipString>心情表示婴儿当前的快乐或压力程度。心情较低时更容易哭闹，心情较高时更容易咯咯发笑。</customMoodTipString>
+    <silhouetteGraphicData>
+      <texPath>Things/Pawn/Humanlike/Silhouettes/Silhouette_HumanBaby</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1</drawSize>
+    </silhouetteGraphicData>
+    <statFactors>
+      <MoveSpeed>0.2</MoveSpeed>
+    </statFactors>
+    <statOffsets>
+      <ComfyTemperatureMin>-46</ComfyTemperatureMin>
+      <ComfyTemperatureMax>4</ComfyTemperatureMax>
+    </statOffsets>
+    <involuntarySleepMTBDaysFromRest>
+      <points>
+        <li>(0.00, 0)</li>
+        <li>(0.01, 0.01)</li>
+        <li>(0.15, 0.166)</li>
+        <li>(0.30, 1)</li>
+        <li>(0.59, 10)</li>
+        <li>(0.60, Infinity)</li>
+      </points>
+    </involuntarySleepMTBDaysFromRest>
+    <hairStyleFilter>
+      <whitelist>false</whitelist>
+      <tags><li>Balding</li></tags>
+    </hairStyleFilter>
+  </LifeStageDef>
+
+  <!-- Def 职责：承载凝砂族三至八岁的儿童行为、体型与成长参数。 -->
+  <LifeStageDef>
+    <defName>NingshaRace_HumanlikeChild</defName>
+    <label>凝砂儿童</label>
+    <workerClass MayRequire="Ludeon.RimWorld.Biotech">LifeStageWorker_HumanlikeChild</workerClass>
+    <bodySizeFactor>0.35</bodySizeFactor>
+    <bodyWidth>1.125</bodyWidth>
+    <bodyDrawOffset>(0, 0, -0.1)</bodyDrawOffset>
+    <voxPitch>1.2</voxPitch>
+    <headSizeFactor>0.75</headSizeFactor>
+    <eyeSizeFactor>0.85</eyeSizeFactor>
+    <healthScaleFactor>0.5</healthScaleFactor>
+    <foodMaxFactor>2.286</foodMaxFactor>
+    <hungerRateFactor>0.8</hungerRateFactor>
+    <marketValueFactor>0.9</marketValueFactor>
+    <meleeDamageFactor>0.7</meleeDamageFactor>
+    <developmentalStage>Child</developmentalStage>
+    <equipmentDrawDistanceFactor>0.55</equipmentDrawDistanceFactor>
+    <sittingOffset>0.3</sittingOffset>
+    <silhouetteGraphicData>
+      <texPath>Things/Pawn/Humanlike/Silhouettes/Silhouette_HumanChild</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1</drawSize>
+    </silhouetteGraphicData>
+    <statFactors>
+      <MoveSpeed>0.75</MoveSpeed>
+    </statFactors>
+    <hairStyleFilter>
+      <whitelist>false</whitelist>
+      <tags><li>Balding</li></tags>
+    </hairStyleFilter>
+  </LifeStageDef>
+
+  <!-- Def 职责：承载凝砂族九至十二岁的少年行为、体型与成长参数。 -->
+  <LifeStageDef>
+    <defName>NingshaRace_HumanlikePreTeenager</defName>
+    <label>凝砂少年</label>
+    <workerClass MayRequire="Ludeon.RimWorld.Biotech">LifeStageWorker_HumanlikeChild</workerClass>
+    <bodySizeFactor>0.58</bodySizeFactor>
+    <bodyWidth>1.125</bodyWidth>
+    <bodyDrawOffset>(0, 0, -0.1)</bodyDrawOffset>
+    <voxPitch>1.2</voxPitch>
+    <headSizeFactor>0.75</headSizeFactor>
+    <eyeSizeFactor>0.85</eyeSizeFactor>
+    <healthScaleFactor>0.7</healthScaleFactor>
+    <foodMaxFactor>1.552</foodMaxFactor>
+    <hungerRateFactor>0.9</hungerRateFactor>
+    <marketValueFactor>0.95</marketValueFactor>
+    <meleeDamageFactor>0.725</meleeDamageFactor>
+    <developmentalStage>Child</developmentalStage>
+    <equipmentDrawDistanceFactor>0.55</equipmentDrawDistanceFactor>
+    <sittingOffset>0.3</sittingOffset>
+    <silhouetteGraphicData>
+      <texPath>Things/Pawn/Humanlike/Silhouettes/Silhouette_HumanChild</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1</drawSize>
+    </silhouetteGraphicData>
+    <statFactors>
+      <MoveSpeed>0.85</MoveSpeed>
+    </statFactors>
+    <hairStyleFilter>
+      <whitelist>false</whitelist>
+      <tags><li>Balding</li></tags>
+    </hairStyleFilter>
+  </LifeStageDef>
+
+  <!-- Def 职责：承载凝砂族十三至十七岁的青年行为、体型与成长参数。 -->
+  <LifeStageDef>
+    <defName>NingshaRace_HumanlikeTeenager</defName>
+    <label>凝砂青年</label>
+    <adjective>青年</adjective>
+    <workerClass MayRequire="Ludeon.RimWorld.Biotech">LifeStageWorker_HumanlikeChild</workerClass>
+    <reproductive>false</reproductive>
+    <developmentalStage>Child</developmentalStage>
+    <bodySizeFactor>0.8</bodySizeFactor>
+    <healthScaleFactor>0.9</healthScaleFactor>
+    <foodMaxFactor>1.25</foodMaxFactor>
+    <meleeDamageFactor>0.75</meleeDamageFactor>
+    <equipmentDrawDistanceFactor>0.65</equipmentDrawDistanceFactor>
+    <sittingOffset>0.23</sittingOffset>
+    <silhouetteGraphicData>
+      <texPath>Things/Pawn/Humanlike/Silhouettes/Silhouette_HumanChild</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1</drawSize>
+    </silhouetteGraphicData>
+    <statFactors>
+      <MoveSpeed>0.95</MoveSpeed>
+    </statFactors>
+    <hairStyleFilter>
+      <whitelist>false</whitelist>
+      <tags><li>Balding</li></tags>
+    </hairStyleFilter>
+  </LifeStageDef>
+
+  <!-- Def 职责：承载凝砂族十八岁起的成年行为、繁殖能力与体型参数。 -->
+  <LifeStageDef>
+    <defName>NingshaRace_HumanlikeAdult</defName>
+    <label>凝砂成年人</label>
+    <workerClass>NingshaRaceLib.Race.LifeStages.LifeStageWorker_NingshaAdult</workerClass>
+    <visible>false</visible>
+    <reproductive>true</reproductive>
+    <developmentalStage>Adult</developmentalStage>
+    <sittingOffset>0.18</sittingOffset>
+    <silhouetteGraphicData>
+      <texPath>Things/Pawn/Humanlike/Silhouettes/Silhouette_HumanAdult</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>1</drawSize>
+    </silhouetteGraphicData>
+  </LifeStageDef>
+</Defs>

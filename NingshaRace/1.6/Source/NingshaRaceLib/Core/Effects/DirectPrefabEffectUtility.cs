@@ -42,7 +42,11 @@ namespace NingshaRaceLib.Core.Effects
                 particleSystems[i].Play(false);
             }
 
+#if RW_1_7
+            instance.AddComponent<PrefabEffectLifetime>().Begin(Mathf.Max(0.1f, lifetime));
+#else
             Object.Destroy(instance, Mathf.Max(0.1f, lifetime));
+#endif
         }
     }
 }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义沙傀用于维持身份和伤害阈值的标记状态。 -->
+  <HediffDef>
+    <defName>NingshaRace_SandGolemMarker</defName>
+    <label>沙傀</label>
+    <description>由凝砂术临时塑成的沙偶，没有常规需求、关系和疲劳。</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <disablesNeeds>
+          <li>Mood</li>
+          <li>Food</li>
+          <li>Rest</li>
+          <li>Joy</li>
+          <li>Beauty</li>
+          <li>Comfort</li>
+          <li>Outdoors</li>
+          <li>Indoors</li>
+          <li>RoomSize</li>
+          <li>Learning</li>
+          <li>Play</li>
+          <li MayRequire="Ludeon.RimWorld.Biotech">MechEnergy</li>
+        </disablesNeeds>
+      </li>
+    </stages>
+    <comps>
+      <li Class="NingshaRaceLib.SandGolem.Health.HediffCompProperties_SandGolemMarker" />
+    </comps>
+  </HediffDef>
+</Defs>

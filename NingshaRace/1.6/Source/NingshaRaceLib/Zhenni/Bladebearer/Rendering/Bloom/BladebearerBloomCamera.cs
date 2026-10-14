@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using Verse;
 
+#if !RW_1_7
 namespace NingshaRaceLib.Zhenni.Bladebearer
 {
     //在地图相机透明阶段之后捕获可见火焰，沿用地图深度，再在图像回调中合成辉光。
@@ -130,3 +131,4 @@ namespace NingshaRaceLib.Zhenni.Bladebearer
         }
     }
 }
+#endif

@@ -1,0 +1,153 @@
+{
+  "schema": "ChezhouLib.ClMapTemplateMetadata",
+  "version": 2,
+  "name": "储藏室2",
+  "sourceFile": "储藏室2.clmap",
+  "thumbnailFile": "储藏室2.preview.png",
+  "binaryBytes": 1127,
+  "templateSize": {
+    "width": 11,
+    "height": 9,
+    "cellCount": 99
+  },
+  "coordinateSystem": {
+    "origin": "lowerLeft",
+    "xDirection": "east",
+    "zDirection": "north",
+    "rowOrder": "northToSouth"
+  },
+  "structureFootprint": {
+    "empty": false,
+    "minX": 0,
+    "minZ": 0,
+    "maxX": 10,
+    "maxZ": 8,
+    "width": 11,
+    "height": 9,
+    "occupiedCellCount": 90
+  },
+  "wallDoorLegend": {
+    "0": "empty",
+    "1": "wall",
+    "2": "door"
+  },
+  "wallDoorGrid": [
+    "01121111110",
+    "11000000011",
+    "10000000001",
+    "10000000001",
+    "10000000001",
+    "10000000001",
+    "10001000011",
+    "11001000011",
+    "01111112110"
+  ],
+  "occupancyLegend": {
+    "0": "empty",
+    "1": "artificialFloorOrBuilding"
+  },
+  "occupancyGrid": [
+    "01111111110",
+    "11111111111",
+    "11110111111",
+    "11111101111",
+    "11111111111",
+    "11111110011",
+    "11111101111",
+    "11111111111",
+    "01111111110"
+  ],
+  "walkabilityLegend": {
+    "0": "outsideOrNoArtificialFloor",
+    "1": "walkableFloor",
+    "2": "wall",
+    "3": "door",
+    "4": "otherImpassable"
+  },
+  "walkabilityGrid": [
+    "02232222220",
+    "22111111122",
+    "21410111112",
+    "21111101112",
+    "21111111112",
+    "21111110012",
+    "21112101122",
+    "22112111122",
+    "02222223220"
+  ],
+  "inferredConnectors": [
+    {
+      "type": "Door",
+      "direction": "North",
+      "x": 3,
+      "z": 8,
+      "width": 1,
+      "startX": 3,
+      "startZ": 8,
+      "endX": 3,
+      "endZ": 8
+    },
+    {
+      "type": "Door",
+      "direction": "South",
+      "x": 7,
+      "z": 0,
+      "width": 1,
+      "startX": 7,
+      "startZ": 0,
+      "endX": 7,
+      "endZ": 0
+    }
+  ],
+  "materials": [
+    {
+      "defName": "BlocksGranite",
+      "label": "花岗岩砖",
+      "stuffUnits": 84,
+      "fixedCostUnits": 48,
+      "totalEstimatedUnits": 132
+    },
+    {
+      "defName": "BlocksMarble",
+      "label": "大理石砖",
+      "stuffUnits": 0,
+      "fixedCostUnits": 32,
+      "totalEstimatedUnits": 32
+    },
+    {
+      "defName": "BlocksSandstone",
+      "label": "砂岩砖",
+      "stuffUnits": 175,
+      "fixedCostUnits": 140,
+      "totalEstimatedUnits": 315
+    },
+    {
+      "defName": "BlocksSlate",
+      "label": "板岩砖",
+      "stuffUnits": 114,
+      "fixedCostUnits": 32,
+      "totalEstimatedUnits": 146
+    },
+    {
+      "defName": "Steel",
+      "label": "钢铁",
+      "stuffUnits": 50,
+      "fixedCostUnits": 0,
+      "totalEstimatedUnits": 50
+    },
+    {
+      "defName": "WoodLog",
+      "label": "原木",
+      "stuffUnits": 0,
+      "fixedCostUnits": 20,
+      "totalEstimatedUnits": 20
+    },
+    {
+      "defName": "WoolBison",
+      "label": "野牛毛",
+      "stuffUnits": 40,
+      "fixedCostUnits": 0,
+      "totalEstimatedUnits": 40
+    }
+  ]
+}

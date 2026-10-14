@@ -1,10 +1,12 @@
 using System;
 using ChezhouLib.ALLmap;
+using ChezhouLib.Startup;
 using UnityEngine;
 
 namespace NingshaRaceLib.UI.Rendering
 {
     //类职责：通过 CL 加载风沙着色器，每帧最多生成一次所有面板共用的完整背景。
+    [Verse.StaticConstructorOnStartup]
     internal static class NingshaDriftSurface
     {
         public const int Width = 512;
@@ -38,6 +40,7 @@ namespace NingshaRaceLib.UI.Rendering
         //职责：创建唯一风沙材质和无深度全幅纹理，绑定噪声与自由细沙，资源失败时直接报告错误。
         private static void CreateResources()
         {
+            InitiaUnityShaderLord.EnsureInitialized();
             Shader shader = abDatabase.GetShader("Ningsha/UI/DriftingSand", "chezhou.race.ningsharace");
             if (shader == null || !shader.isSupported)
                 throw new InvalidOperationException("凝砂 UI 缺少或无法使用 DriftingSand Shader，请检查 ningsha_ui.ab 和 UnityShaderLord 声明。");

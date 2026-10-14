@@ -132,7 +132,7 @@ namespace NingshaRaceLib.Combat.SandBottle.Utility
             }
         }
 
-        //函数职责：从 ChezhouLib 普通预制体表直接创建抛沙特效并朝攻击方向播放。
+        //按攻击方向播放沙瓶特效，1.7 使用 CL 明文粒子。
         public static void SpawnEffect(Verb_SandBottle verb, Vector3 attackDirection)
         {
             VerbProperties_SandBottle props = verb.Props;
@@ -142,6 +142,10 @@ namespace NingshaRaceLib.Combat.SandBottle.Utility
             //Prefab 发射轴统一为本地正 X，根节点绕 X 轴九十度贴合地图，再用 Yaw 朝向目标。
             float directionYaw = Vector3.SignedAngle(Vector3.right, attackDirection, Vector3.up);
             Quaternion rimWorldRotation = Quaternion.Euler(90f, directionYaw, 0f);
+#if RW_1_7
+            NingshaParticleUtility.Spawn(effectKey, verb.CasterPawn.Map, spawnPosition,
+                rimWorldRotation, props.effectScale, props.effectLifetime);
+#else
             Vector3 effectScale = Vector3.one * props.effectScale;
             DirectPrefabEffectUtility.Spawn(
                 effectKey,
@@ -150,6 +154,7 @@ namespace NingshaRaceLib.Combat.SandBottle.Utility
                 effectScale,
                 props.effectLifetime,
                 SandBottleParticlePresentation.Configure);
+#endif
         }
 
         //函数职责：按 XML 配置创建带来源与方向的沙瓶伤害。

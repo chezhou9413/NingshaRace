@@ -64,16 +64,26 @@ namespace NingshaRaceLib.Zhenni.Bladebearer
                         BladebearerShaderParameters.ApplyPhase(dissolve, block);
                         if (layer.Part.writeDepth) Graphics.DrawMesh(BladebearerResources.Mesh, layer.Matrix,
                             BladebearerResources.Material(layer.Part, true, false), 0, null, 0, block);
+#if RW_1_7
+                        BladebearerRimUnityBloom.Draw(BladebearerResources.Mesh, layer.Matrix,
+                            BladebearerResources.PhaseColor, layer.Part.HasBloom, false, block);
+#else
                         Graphics.DrawMesh(BladebearerResources.Mesh, layer.Matrix,
                             BladebearerResources.PhaseColor, 0, null, 0, block);
                         BladebearerBloomSources.Record(map, layer.Part, BladebearerResources.Mesh,
                             layer.Matrix, layer.Tint, layer.Time + age * 0.35f, dissolve);
+#endif
                     }
                     block.SetFloat("_PhaseAge", age); block.SetFloat("_PhaseDuration", effect.Duration);
                     block.SetFloat("_PhaseLifetime", effect.Lifetime); block.SetFloat("_PhaseAssemble", effect.Assemble ? 1 : 0);
                     block.SetFloat("_PhaseInitial", layer.Dissolve);
+#if RW_1_7
+                    BladebearerRimUnityBloom.Draw(BladebearerPhaseResources.Embers, layer.Matrix,
+                        BladebearerPhaseResources.EmberMaterial, true, false, block);
+#else
                     Graphics.DrawMesh(BladebearerPhaseResources.Embers, layer.Matrix,
                         BladebearerPhaseResources.EmberMaterial, 0, null, 0, block);
+#endif
                 }
             }
         }

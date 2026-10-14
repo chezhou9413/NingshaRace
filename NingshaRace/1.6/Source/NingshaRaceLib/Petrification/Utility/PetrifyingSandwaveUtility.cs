@@ -169,7 +169,7 @@ namespace NingshaRaceLib.Petrification.Utility
             return targets;
         }
 
-        //函数职责：从 ChezhouLib 普通预制体表播放朝目标方向推进的砂潮主体。
+        //播放朝目标方向推进的砂潮主体。
         private static void SpawnWaveEffect(
             Pawn caster,
             Vector3 direction,
@@ -179,6 +179,7 @@ namespace NingshaRaceLib.Petrification.Utility
             position.y = AltitudeLayer.MoteOverheadLow.AltitudeFor() + 0.02f;
             float yaw = Vector3.SignedAngle(Vector3.right, direction, Vector3.up);
             SpawnEffect(
+                caster.Map,
                 props.effectModId,
                 props.waveEffectName,
                 position,
@@ -200,6 +201,7 @@ namespace NingshaRaceLib.Petrification.Utility
                 props.maxHitEffectScale,
                 Mathf.InverseLerp(props.edgeSeverity, 1f, severity));
             SpawnEffect(
+                target.Map,
                 props.effectModId,
                 props.hitEffectName,
                 position,
@@ -208,8 +210,9 @@ namespace NingshaRaceLib.Petrification.Utility
                 props.hitEffectLifetime);
         }
 
-        //函数职责：按显式资源 key 直接创建一次性粒子实例并设置变换与生命周期。
+        //按显式效果键播放粒子，1.7 使用 CL 明文配方。
         private static void SpawnEffect(
+            Map map,
             string modId,
             string effectName,
             Vector3 position,
@@ -218,12 +221,16 @@ namespace NingshaRaceLib.Petrification.Utility
             float lifetime)
         {
             string effectKey = modId + "_" + effectName;
+#if RW_1_7
+            NingshaParticleUtility.Spawn(effectKey, map, position, rotation, scale, lifetime);
+#else
             DirectPrefabEffectUtility.Spawn(
                 effectKey,
                 position,
                 rotation,
                 Vector3.one * scale,
                 lifetime);
+#endif
         }
 
         //函数职责：把地图平面上的任意方向归一化，并为同格输入提供稳定默认方向。

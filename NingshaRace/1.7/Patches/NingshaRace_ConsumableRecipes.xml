@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- 文件职责：把两种凝砂料理配方挂接到营火、燃料灶和电灶。 -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="Campfire"]/recipes</xpath>
+    <value><li>NingshaRace_CookMushroomFlatbread</li><li>NingshaRace_CookScorchingEarthStew</li></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="FueledStove"]/recipes</xpath>
+    <value><li>NingshaRace_CookMushroomFlatbread</li><li>NingshaRace_CookScorchingEarthStew</li></value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="ElectricStove"]/recipes</xpath>
+    <value><li>NingshaRace_CookMushroomFlatbread</li><li>NingshaRace_CookScorchingEarthStew</li></value>
+  </Operation>
+</Patch>

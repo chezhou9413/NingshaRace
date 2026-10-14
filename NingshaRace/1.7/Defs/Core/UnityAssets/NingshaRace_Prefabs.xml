@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：显式挂载凝砂族使用的 Unity 粒子预制体，避免扫描整个特效目录。 -->
+</Defs>

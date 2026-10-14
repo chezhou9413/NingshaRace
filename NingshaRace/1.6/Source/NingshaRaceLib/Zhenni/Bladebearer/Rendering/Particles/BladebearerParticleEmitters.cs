@@ -27,7 +27,11 @@ namespace NingshaRaceLib.Zhenni.Bladebearer
             Color tint = parms.tint;
             if (!parms.DrawNow) tint.a *= 1 - (node.Owner.Phase?.Arrival ?? 0);
             BladebearerShaderParameters.ApplyParticles(node.Part, tint, emitter.Properties, parms.DrawNow ? material : null);
+#if RW_1_7
+            BladebearerRimUnityBloom.Draw(emitter.Mesh, matrix, material, true, parms.DrawNow, emitter.Properties);
+#else
             GenDraw.DrawMeshNowOrLater(emitter.Mesh, matrix, material, parms.DrawNow, emitter.Properties);
+#endif
             return emitter.Mesh;
         }
 

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <NingshaRace_EggCycleProgress>排卵进度：{0}</NingshaRace_EggCycleProgress>
+  <NingshaRace_EggCyclePaused>排卵暂停：{0}</NingshaRace_EggCyclePaused>
+  <NingshaRace_EggCyclePauseDead>已死亡</NingshaRace_EggCyclePauseDead>
+  <NingshaRace_EggCyclePauseGender>仅雌性凝砂能够排卵</NingshaRace_EggCyclePauseGender>
+  <NingshaRace_EggCyclePauseAge>尚未进入成年生育阶段</NingshaRace_EggCyclePauseAge>
+  <NingshaRace_EggCyclePausePregnancy>正在怀孕或生产</NingshaRace_EggCyclePausePregnancy>
+  <NingshaRace_EggCyclePauseSterile>已绝育或失去生育能力</NingshaRace_EggCyclePauseSterile>
+  <NingshaRace_MessageLaidUnfertilizedEgg>{PAWN_labelShort}排出了一枚未受精凝砂卵。</NingshaRace_MessageLaidUnfertilizedEgg>
+
+  <NingshaRace_HatchProgress>孵化进度：{0}</NingshaRace_HatchProgress>
+  <NingshaRace_HatchTimeRemaining>预计剩余时间：{0}</NingshaRace_HatchTimeRemaining>
+  <NingshaRace_HatchPausedOutsideNest>孵化暂停：受精卵不在凝砂孵化巢内</NingshaRace_HatchPausedOutsideNest>
+  <NingshaRace_HatchPausedTemperature>孵化暂停：当前温度 {0}，有效范围为 0℃ 至 50℃</NingshaRace_HatchPausedTemperature>
+  <NingshaRace_HatchNestEmpty>内容物：空</NingshaRace_HatchNestEmpty>
+  <NingshaRace_HatchNestContents>内容物：{0}</NingshaRace_HatchNestContents>
+  <NingshaRace_UnfertilizedEggCannotHatch>无法孵化：这是一枚未受精凝砂卵</NingshaRace_UnfertilizedEggCannotHatch>
+  <NingshaRace_HatchNestAutoLoadLabel>自动装填凝砂卵</NingshaRace_HatchNestAutoLoadLabel>
+  <NingshaRace_HatchNestAutoLoadDescription>允许搬运者自动把一枚可用的凝砂卵放入空巢。关闭时仍可通过右键命令强制装填。</NingshaRace_HatchNestAutoLoadDescription>
+  <NingshaRace_EjectEggLabel>弹出凝砂卵</NingshaRace_EjectEggLabel>
+  <NingshaRace_EjectEggDescription>把巢内的凝砂卵放回地图，使其重新参与普通食物与搬运搜索。</NingshaRace_EjectEggDescription>
+
+  <NingshaRace_UnknownFather>未知父亲</NingshaRace_UnknownFather>
+  <NingshaRace_EggBirthLetterLabel>凝砂产下受精卵</NingshaRace_EggBirthLetterLabel>
+  <NingshaRace_EggBirthLetterText>{0}完成了妊娠，并产下一枚记录父亲 {1} 的受精凝砂卵。将卵放入温度合适的孵化巢即可继续孵化。</NingshaRace_EggBirthLetterText>
+  <NingshaRace_HatchLetterLabel>凝砂破壳</NingshaRace_HatchLetterLabel>
+  <NingshaRace_HatchLetterText>{0}从凝砂卵中破壳而出，并已直接进入儿童阶段。</NingshaRace_HatchLetterText>
+</LanguageData>

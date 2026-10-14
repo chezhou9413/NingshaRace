@@ -15,7 +15,7 @@ namespace NingshaRaceLib.UI.Controls
             using (new NingshaGuiScope(GameFont.Small))
             {
                 GUI.color = inset ? new Color(0.64f, 0.64f, 0.64f) : Color.white;
-                GUI.DrawTextureWithTexCoords(rect, NingshaUiAssets.Stone,
+                NingshaTiledTexture.Draw(rect, NingshaUiAssets.Stone,
                     new Rect(0f, 0f, rect.width / 256f, rect.height / 256f));
                 GUI.color = Color.white;
                 //静态细沙与边缘积沙承载面板质感，透明流沙只提供轻微运动。

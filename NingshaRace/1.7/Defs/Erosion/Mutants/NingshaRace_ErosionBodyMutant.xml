@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 定义人形角色被侵蚀后永久实体化的异变身份。 -->
+  <MutantDef ParentName="BaseMutantEntity">
+    <defName>NingshaRace_ErosionBodyMutant</defName>
+    <label>侵蚀体</label>
+    <description>侵蚀吞没意识后诞生的异常实体。原有意识已经消失，只留下会无差别追猎其他生命的躯壳。它能以极短间隔发动侵蚀凝砂之眼，但不会召唤沙傀；只有凝砂族原身会生出蛇首。</description>
+    <hediff>NingshaRace_ErosionBody</hediff>
+    <thinkTree>NingshaRace_ErosionBody</thinkTree>
+    <thinkTreeConstant>NingshaRace_ErosionBodyConstant</thinkTreeConstant>
+    <namePrefix>侵蚀体 </namePrefix>
+    <defaultFaction>Entities</defaultFaction>
+    <standingAnimation>ShamblerSway</standingAnimation>
+    <canOpenDoors>false</canOpenDoors>
+    <makesFootprints>false</makesFootprints>
+    <tameable>false</tameable>
+    <entitledToMedicalCare>false</entitledToMedicalCare>
+    <clearMutantStatusOnDeath>false</clearMutantStatusOnDeath>
+    <canTravelInCaravan>false</canTravelInCaravan>
+    <canAttackWhileCrawling>false</canAttackWhileCrawling>
+    <respectsAllowedArea>false</respectsAllowedArea>
+    <canGainXP>false</canGainXP>
+    <canBeDrafted>false</canBeDrafted>
+    <disableHostilityResponse>true</disableHostilityResponse>
+    <deathOnDownedChance>0.25</deathOnDownedChance>
+    <bloodDef>Filth_DarkBlood</bloodDef>
+    <bloodSmearDef>Filth_DarkBloodSmear</bloodSmearDef>
+    <woundColor>(0.28, 0.12, 0.34, 1)</woundColor>
+    <skinColorTint>(0.22, 0.10, 0.30, 1)</skinColorTint>
+    <skinColorTintStrength>0.55</skinColorTintStrength>
+    <anomalyKnowledgeOffset>2</anomalyKnowledgeOffset>
+    <knowledgeCategory>Basic</knowledgeCategory>
+    <codexEntry>NingshaRace_ErosionBodyCodex</codexEntry>
+    <!--蛇尾藏在头发与脸部之后，外侧蛇头从轮廓周围伸出。-->
+    <renderNodeProperties>
+      <!--蛇体 A 使用四向原画，连接点采用左下角 UV。-->
+      <li Class="NingshaRaceLib.Erosion.Rendering.PawnRenderNodeProperties_ErosionSnake">
+        <debugLabel>侵蚀体蛇头 A</debugLabel>
+        <texPath>NingshaRace/Erosion/SnakeHeads/ErosionSnakeHeadA</texPath>
+        <parentTagDef>Head</parentTagDef>
+        <linkedBodyPartsGroup>FullHead</linkedBodyPartsGroup>
+        <pawnType>HumanlikeOnly</pawnType>
+        <drawSize>1.5</drawSize>
+        <overrideMeshSize>(1, 1)</overrideMeshSize>
+        <workerClass>NingshaRaceLib.Erosion.Rendering.PawnRenderNodeWorker_ErosionSnake</workerClass>
+        <rotDrawMode>Fresh, Rotting</rotDrawMode>
+        <useRottenColor>true</useRottenColor>
+        <swayAngle>7</swayAngle>
+        <swayPeriod>6</swayPeriod>
+        <swayPhase>0</swayPhase>
+        <sideAngleFactor>0.65</sideAngleFactor>
+        <drawData>
+          <defaultData>
+            <layer>36</layer>
+            <offset>(0, 0, 0)</offset>
+          </defaultData>
+          <dataNorth>
+            <pivot>(0.397, 0.555)</pivot>
+            <layer>36</layer>
+          </dataNorth>
+          <dataEast>
+            <pivot>(0.445, 0.443)</pivot>
+          </dataEast>
+          <dataSouth>
+            <pivot>(0.596, 0.554)</pivot>
+          </dataSouth>
+          <dataWest>
+            <pivot>(0.435, 0.452)</pivot>
+            <offset>(-0.045, 0, -0.06)</offset>
+          </dataWest>
+        </drawData>
+      </li>
+      <!--蛇体 B 左侧使用右侧素材的原版西向镜像，并同步镜像连接点。-->
+      <li Class="NingshaRaceLib.Erosion.Rendering.PawnRenderNodeProperties_ErosionSnake">
+        <debugLabel>侵蚀体蛇头 B</debugLabel>
+        <texPath>NingshaRace/Erosion/SnakeHeads/ErosionSnakeHeadB</texPath>
+        <parentTagDef>Head</parentTagDef>
+        <linkedBodyPartsGroup>FullHead</linkedBodyPartsGroup>
+        <pawnType>HumanlikeOnly</pawnType>
+        <visibleFacing>
+          <li>North</li>
+          <li>East</li>
+          <li>South</li>
+          <li>West</li>
+        </visibleFacing>
+        <drawSize>1.5</drawSize>
+        <overrideMeshSize>(1, 1)</overrideMeshSize>
+        <workerClass>NingshaRaceLib.Erosion.Rendering.PawnRenderNodeWorker_ErosionSnake</workerClass>
+        <rotDrawMode>Fresh, Rotting</rotDrawMode>
+        <useRottenColor>true</useRottenColor>
+        <swayAngle>9</swayAngle>
+        <swayPeriod>6</swayPeriod>
+        <swayPhase>2.1</swayPhase>
+        <sideAngleFactor>0.65</sideAngleFactor>
+        <drawData>
+          <defaultData>
+            <layer>35</layer>
+            <offset>(0, 0, 0)</offset>
+          </defaultData>
+          <dataNorth>
+            <pivot>(0.604, 0.453)</pivot>
+            <layer>35</layer>
+          </dataNorth>
+          <dataEast>
+            <pivot>(0.478, 0.441)</pivot>
+          </dataEast>
+          <dataSouth>
+            <pivot>(0.396, 0.451)</pivot>
+          </dataSouth>
+          <dataWest>
+            <pivot>(0.478, 0.441)</pivot>
+            <offset>(-0.17, 0, 0.08)</offset>
+          </dataWest>
+        </drawData>
+      </li>
+      <!--蛇体 C 在侧面藏于头后，保留前后方向原画。-->
+      <li Class="NingshaRaceLib.Erosion.Rendering.PawnRenderNodeProperties_ErosionSnake">
+        <debugLabel>侵蚀体蛇头 C</debugLabel>
+        <texPath>NingshaRace/Erosion/SnakeHeads/ErosionSnakeHeadC</texPath>
+        <parentTagDef>Head</parentTagDef>
+        <linkedBodyPartsGroup>FullHead</linkedBodyPartsGroup>
+        <pawnType>HumanlikeOnly</pawnType>
+        <visibleFacing>
+          <li>North</li>
+          <li>South</li>
+        </visibleFacing>
+        <drawSize>1.5</drawSize>
+        <overrideMeshSize>(1, 1)</overrideMeshSize>
+        <workerClass>NingshaRaceLib.Erosion.Rendering.PawnRenderNodeWorker_ErosionSnake</workerClass>
+        <rotDrawMode>Fresh, Rotting</rotDrawMode>
+        <useRottenColor>true</useRottenColor>
+        <swayAngle>10</swayAngle>
+        <swayPeriod>6</swayPeriod>
+        <swayPhase>4.2</swayPhase>
+        <sideAngleFactor>0.65</sideAngleFactor>
+        <drawData>
+          <defaultData>
+            <layer>34</layer>
+            <offset>(0, 0, 0)</offset>
+          </defaultData>
+          <dataNorth>
+            <pivot>(0.626, 0.538)</pivot>
+            <layer>34</layer>
+          </dataNorth>
+          <dataSouth>
+            <pivot>(0.374, 0.539)</pivot>
+          </dataSouth>
+        </drawData>
+      </li>
+    </renderNodeProperties>
+    <abilities>
+      <li>NingshaRace_Ability_ErosionBodyPetrifyingSandwave</li>
+    </abilities>
+    <abilityWhitelist>
+      <li>NingshaRace_Ability_ErosionBodyPetrifyingSandwave</li>
+    </abilityWhitelist>
+    <tools>
+      <li>
+        <label>左爪</label>
+        <labelNoLocation>砂爪</labelNoLocation>
+        <capacities>
+          <li>Scratch</li>
+        </capacities>
+        <power>8.2</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+        <chanceFactor>1.5</chanceFactor>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+      <li>
+        <label>右爪</label>
+        <labelNoLocation>砂爪</labelNoLocation>
+        <capacities>
+          <li>Scratch</li>
+        </capacities>
+        <power>8.2</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+        <chanceFactor>1.5</chanceFactor>
+        <alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+      </li>
+    </tools>
+  </MutantDef>
+</Defs>

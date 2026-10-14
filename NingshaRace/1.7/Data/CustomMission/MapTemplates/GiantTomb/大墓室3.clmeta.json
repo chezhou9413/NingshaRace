@@ -1,0 +1,188 @@
+{
+  "schema": "ChezhouLib.ClMapTemplateMetadata",
+  "version": 2,
+  "name": "大墓室3",
+  "sourceFile": "大墓室3.clmap",
+  "thumbnailFile": "大墓室3.preview.png",
+  "binaryBytes": 1362,
+  "templateSize": {
+    "width": 16,
+    "height": 24,
+    "cellCount": 384
+  },
+  "coordinateSystem": {
+    "origin": "lowerLeft",
+    "xDirection": "east",
+    "zDirection": "north",
+    "rowOrder": "northToSouth"
+  },
+  "structureFootprint": {
+    "empty": false,
+    "minX": 0,
+    "minZ": 0,
+    "maxX": 15,
+    "maxZ": 23,
+    "width": 16,
+    "height": 24,
+    "occupiedCellCount": 239
+  },
+  "wallDoorLegend": { "0": "empty", "1": "wall", "2": "door" },
+  "wallDoorGrid": [
+    "0000001111000000",
+    "0000011001100000",
+    "0000110000110000",
+    "0000100000010000",
+    "0111100000011110",
+    "1101000000001011",
+    "1000000000000001",
+    "1000000000000001",
+    "1000000000000001",
+    "1000000000000001",
+    "1000000000000001",
+    "1000000000000001",
+    "1000000000000001",
+    "1000000000000001",
+    "1000000000000001",
+    "1100000000000011",
+    "0111000000001110",
+    "0001000000001000",
+    "0001000000001000",
+    "0001100000011000",
+    "0000110000110000",
+    "0000010000100000",
+    "0000010000100000",
+    "0000011221100000"
+  ],
+  "occupancyLegend": { "0": "empty", "1": "artificialFloorOrBuilding" },
+  "occupancyGrid": [
+    "0000001111000000",
+    "0000011111100000",
+    "0000111111110000",
+    "0000111111110000",
+    "0111111111111110",
+    "1111111111111111",
+    "1110111111110111",
+    "1110001111110111",
+    "1010111011110111",
+    "1110111111110111",
+    "1110111101010111",
+    "1110111101100111",
+    "1110011111110111",
+    "1110111111110111",
+    "1110001110000111",
+    "1111100111011111",
+    "0111101011011110",
+    "0001101111011000",
+    "0001100111011000",
+    "0001101111011000",
+    "0000111110110000",
+    "0000011111100000",
+    "0000010111100000",
+    "0000011111100000"
+  ],
+  "walkabilityLegend": { "0": "outsideOrNoArtificialFloor", "1": "walkableFloor", "2": "wall", "3": "door", "4": "otherImpassable" },
+  "walkabilityGrid": [
+    "0000002222000000",
+    "0000022112200000",
+    "0000221111220000",
+    "0000211111120000",
+    "0222211111122220",
+    "2212111111112122",
+    "2110111111110112",
+    "2110001141110112",
+    "2010111011110112",
+    "2110111101110412",
+    "2140111104410112",
+    "2114411104100112",
+    "2144011111110112",
+    "2010111111140112",
+    "2110001110000102",
+    "2211140111011122",
+    "0222101011012220",
+    "0002101111012000",
+    "0002100114012000",
+    "0002201114022000",
+    "0000221110220000",
+    "0000021111200000",
+    "0000020111200000",
+    "0000022332200000"
+  ],
+  "inferredConnectors": [
+    {
+      "type": "Door",
+      "direction": "South",
+      "x": 7,
+      "z": 0,
+      "width": 2,
+      "startX": 7,
+      "startZ": 0,
+      "endX": 8,
+      "endZ": 0
+    }
+  ],
+  "materials": [
+    {
+      "defName": "BlocksGranite",
+      "label": "花岗岩砖",
+      "stuffUnits": 40,
+      "fixedCostUnits": 128,
+      "totalEstimatedUnits": 168
+    },
+    {
+      "defName": "BlocksLimestone",
+      "label": "石灰岩砖",
+      "stuffUnits": 0,
+      "fixedCostUnits": 16,
+      "totalEstimatedUnits": 16
+    },
+    {
+      "defName": "BlocksMarble",
+      "label": "大理石砖",
+      "stuffUnits": 0,
+      "fixedCostUnits": 4,
+      "totalEstimatedUnits": 4
+    },
+    {
+      "defName": "BlocksSandstone",
+      "label": "砂岩砖",
+      "stuffUnits": 425,
+      "fixedCostUnits": 32,
+      "totalEstimatedUnits": 457
+    },
+    {
+      "defName": "BlocksSlate",
+      "label": "板岩砖",
+      "stuffUnits": 0,
+      "fixedCostUnits": 620,
+      "totalEstimatedUnits": 620
+    },
+    {
+      "defName": "Cloth",
+      "label": "布",
+      "stuffUnits": 0,
+      "fixedCostUnits": 525,
+      "totalEstimatedUnits": 525
+    },
+    {
+      "defName": "Gold",
+      "label": "黄金",
+      "stuffUnits": 0,
+      "fixedCostUnits": 50,
+      "totalEstimatedUnits": 50
+    },
+    {
+      "defName": "Steel",
+      "label": "钢铁",
+      "stuffUnits": 50,
+      "fixedCostUnits": 0,
+      "totalEstimatedUnits": 50
+    },
+    {
+      "defName": "WoodLog",
+      "label": "原木",
+      "stuffUnits": 0,
+      "fixedCostUnits": 80,
+      "totalEstimatedUnits": 80
+    }
+  ]
+}

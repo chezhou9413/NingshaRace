@@ -1,0 +1,12 @@
+<Defs>
+  <ChezhouLib.LibDef.ClAssetLord>
+    <defName>NingshaRace_PrefabAssets</defName>
+    <rimUnityBundle>ningsharace</rimUnityBundle>
+    <unityAssetMount>
+      <li><key>NingshaRace_SandThrowBurst</key><value>Assets/Prefabs/VFX/SandThrowBurst.prefab</value></li>
+      <li><key>NingshaRace_PetrifyingSandwave</key><value>Assets/Prefabs/VFX/PetrifyingSandwave.prefab</value></li>
+      <li><key>NingshaRace_PetrifyingSandHit</key><value>Assets/Prefabs/VFX/PetrifyingSandHit.prefab</value></li>
+      <li><key>NingshaRace_QinshiYanwu</key><value>Assets/Prefabs/VFX/qinshiyanwu.prefab</value></li>
+    </unityAssetMount>
+  </ChezhouLib.LibDef.ClAssetLord>
+</Defs>

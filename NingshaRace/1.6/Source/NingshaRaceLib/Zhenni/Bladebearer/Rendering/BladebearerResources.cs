@@ -16,7 +16,9 @@ namespace NingshaRaceLib.Zhenni.Bladebearer
         private static readonly Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
         private static readonly Material colorMaterial, unlitMaterial, depthMaterial, previewColor, previewDepth;
         private static readonly Material particleMaterial, previewParticle;
+#if !RW_1_7
         internal static readonly Material BloomSource, PreviewBloomSource;
+#endif
         internal static readonly Mesh Mesh;
         internal static Material PhaseColor => unlitMaterial;
 
@@ -35,8 +37,10 @@ namespace NingshaRaceLib.Zhenni.Bladebearer
             particleMaterial = Create("NingshaRace/Zhenni/Bladebearer/Particles");
             particleMaterial.renderQueue = unlitMaterial.renderQueue;
             previewParticle = new Material(particleMaterial);
+#if !RW_1_7
             BloomSource = Create("NingshaRace/Zhenni/Bladebearer/BloomSource");
             PreviewBloomSource = new Material(BloomSource);
+#endif
             previewColor = new Material(colorMaterial);
             previewDepth = new Material(depthMaterial);
             Mesh = MeshMakerPlanes.NewPlaneMesh(1f, false, false);
@@ -45,12 +49,12 @@ namespace NingshaRaceLib.Zhenni.Bladebearer
                 foreach (BladebearerPart part in def.parts) ValidateTextures(part);
         }
 
-        //明确报告未打包或不支持的 Shader。
+        //明确报告未登记或不支持的 Shader。
         internal static Material Create(string name)
         {
             Shader shader = abDatabase.GetShader(name, PackageId);
             if (shader == null || !shader.isSupported)
-                throw new InvalidOperationException("震尼拥刀者 Shader 无法加载：" + name + "，请检查 ningsha_zhenni_bladebearer.ab。");
+                throw new InvalidOperationException("震尼拥刀者 Shader 无法加载：" + name + "，请检查 Shader 资源清单。");
             return new Material(shader) { name = name, hideFlags = HideFlags.HideAndDontSave };
         }
 
@@ -77,9 +81,9 @@ namespace NingshaRaceLib.Zhenni.Bladebearer
         internal static Texture2D Noise(string name)
         {
             if (!abDatabase.Texture2dDataBase.TryGetValue(PackageId + "=>" + name, out Texture2D texture))
-                throw new InvalidOperationException("置换图未注册：" + name + "，需要加入震尼拥刀者 AssetBundle。");
+                throw new InvalidOperationException("置换图未注册：" + name + "，请检查震尼拥刀者资源清单。");
             if (!texture.isReadable)
-                throw new InvalidOperationException("置换图「" + name + "」不可读取；请开启 Read/Write 并重新构建震尼拥刀者 AssetBundle。");
+                throw new InvalidOperationException("置换图「" + name + "」不可读取；资源加载器需要保留 CPU 像素。");
             return texture;
         }
 
@@ -90,7 +94,7 @@ namespace NingshaRaceLib.Zhenni.Bladebearer
             catch (InvalidOperationException e) { throw new InvalidOperationException("部件「" + part.label + "」：" + e.Message, e); }
         }
 
-        //提供本 Mod 已打包置换图的选择列表。
+        //提供本 Mod 已登记置换图的选择列表。
         internal static IEnumerable<string> NoiseNames() => abDatabase.Texture2dDataBase.Keys
             .Where(k => k.StartsWith(PackageId + "=>", StringComparison.Ordinal))
             .Select(k => k.Substring(PackageId.Length + 2)).OrderBy(k => k);

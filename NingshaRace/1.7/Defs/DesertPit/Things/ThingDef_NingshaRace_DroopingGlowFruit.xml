@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!--文件职责：定义坠萤巨伞菇产出的可食用果实，沿用原版食物、搬运、腐烂和发光组件。-->
+  <ThingDef ParentName="PlantFoodRawBase">
+    <defName>NingshaRace_DroopingGlowFruit</defName>
+    <label>坠萤果</label>
+    <description>从坠萤巨伞菇下采得的荧光果实，果肉饱满，散发柔和的黄绿色微光。可以直接食用，也可以作为素食食材烹饪。</description>
+    <graphicData>
+      <texPath>Things/Item/NingshaRace/DesertPit/DroopingGlowFruit</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <stackLimit>75</stackLimit>
+    <possessionCount>10</possessionCount>
+    <statBases>
+      <MarketValue>1.2</MarketValue>
+      <Mass>0.027</Mass>
+      <Nutrition>0.05</Nutrition>
+    </statBases>
+    <ingestible>
+      <preferability>RawTasty</preferability>
+      <tasteThought IsNull="True" />
+      <foodType>VegetableOrFruit</foodType>
+    </ingestible>
+    <comps>
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>14</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>2</glowRadius>
+        <glowColor>(126,160,56,0)</glowColor>
+      </li>
+    </comps>
+  </ThingDef>
+</Defs>

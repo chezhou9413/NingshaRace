@@ -5,6 +5,7 @@ using NingshaRaceLib.Core.Defs;
 namespace NingshaRaceLib.SandGolem.Rendering
 {
     //直接绘制聚散阶段的截图，没有可选取或受击的 Pawn。
+    [Verse.StaticConstructorOnStartup]
     internal static class SandGolemAnimationRenderer
     {
         private static readonly int ProgressId = Shader.PropertyToID("_SandProgress");

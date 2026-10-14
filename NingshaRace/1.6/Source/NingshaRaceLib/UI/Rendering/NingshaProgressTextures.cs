@@ -4,6 +4,7 @@ using UnityEngine;
 namespace NingshaRaceLib.UI.Rendering
 {
     //类职责：缓存进度条共用的柔边、沉积渐变和流光纹理，不在逐帧绘制时分配图片。
+    [Verse.StaticConstructorOnStartup]
     internal static class NingshaProgressTextures
     {
         private static Texture2D rounded;

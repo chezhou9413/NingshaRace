@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- Def 职责：定义可作为食材使用的未受精凝砂卵。 -->
+  <ThingDef ParentName="EggUnfertBase">
+    <defName>NingshaRace_EggUnfertilized</defName>
+    <label>凝砂卵（未受精）</label>
+    <description>凝砂族周期性排出的未受精卵。它无法孵化，但富含营养，可以直接作为烹饪食材。</description>
+    <thingClass>ThingWithComps</thingClass>
+    <graphicData>
+      <texPath>NingshaRace/Reproduction/NingshaEgg</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <stackLimit>25</stackLimit>
+    <tickerType>Rare</tickerType>
+    <statBases>
+      <MaxHitPoints>30</MaxHitPoints>
+      <Flammability>0.7</Flammability>
+      <DeteriorationRate>2</DeteriorationRate>
+      <Mass>0.5</Mass>
+      <Nutrition>0.5</Nutrition>
+      <FoodPoisonChanceFixedHuman>0.02</FoodPoisonChanceFixedHuman>
+      <MarketValue>10</MarketValue>
+    </statBases>
+    <ingestible>
+      <foodType>AnimalProduct</foodType>
+      <ingestEffect>EatMeat</ingestEffect>
+      <ingestSound>RawMeat_Eat</ingestSound>
+      <tasteThought>AteRawFood</tasteThought>
+      <preferability>RawBad</preferability>
+    </ingestible>
+    <thingCategories Inherit="False">
+      <li>EggsUnfertilized</li>
+    </thingCategories>
+    <comps Inherit="False">
+      <li Class="CompProperties_Forbiddable" />
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>15</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- Def 职责：定义携带父母数据与孵化进度的受精凝砂卵。 -->
+  <ThingDef ParentName="EggFertBase">
+    <defName>NingshaRace_EggFertilized</defName>
+    <label>凝砂卵（已受精）</label>
+    <description>一枚孕育着凝砂族新生命的受精卵。只有放入孵化巢并保持适宜温度，内部生命才会继续发育；在巢外时它仍可作为烹饪食材。</description>
+    <thingClass>ThingWithComps</thingClass>
+    <graphicData>
+      <texPath>NingshaRace/Reproduction/NingshaEgg</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <stackLimit>1</stackLimit>
+    <tickerType>Normal</tickerType>
+    <statBases>
+      <MaxHitPoints>30</MaxHitPoints>
+      <Flammability>0.7</Flammability>
+      <DeteriorationRate>2</DeteriorationRate>
+      <Mass>0.5</Mass>
+      <Nutrition>0.5</Nutrition>
+      <FoodPoisonChanceFixedHuman>0.02</FoodPoisonChanceFixedHuman>
+      <MarketValue>20</MarketValue>
+    </statBases>
+    <ingestible>
+      <foodType>AnimalProduct</foodType>
+      <ingestEffect>EatMeat</ingestEffect>
+      <ingestSound>RawMeat_Eat</ingestSound>
+      <tasteThought>AteRawFood</tasteThought>
+      <preferability>RawBad</preferability>
+    </ingestible>
+    <thingCategories Inherit="False">
+      <li>EggsFertilized</li>
+    </thingCategories>
+    <comps Inherit="False">
+      <li Class="CompProperties_Forbiddable" />
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>30</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+      <li Class="CompProperties_HasPawnSources">
+        <affectLabel>false</affectLabel>
+      </li>
+      <li Class="NingshaRaceLib.Reproduction.Components.CompProperties_NingshaEmbryo">
+        <hatchDays>12</hatchDays>
+        <minimumTemperature>0</minimumTemperature>
+        <maximumTemperature>50</maximumTemperature>
+      </li>
+    </comps>
+  </ThingDef>
+</Defs>

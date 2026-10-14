@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义凝砂族专用 Pawn 渲染节点树，放大根节点并保留人形身体、头部、服装、伤口和状态覆盖节点。 -->
+  <PawnRenderTreeDef>
+    <defName>NingshaRenderTree</defName>
+    <root Class="PawnRenderNodeProperties_Parent">
+      <debugLabel>Ningsha root</debugLabel>
+      <tagDef>Root</tagDef>
+      <drawSize>(1.1, 1.1)</drawSize>
+      <children>
+        <!-- 身体节点负责绘制身体、躯干服装、身体纹身和身体覆盖效果。 -->
+        <li>
+          <debugLabel>Ningsha body</debugLabel>
+          <nodeClass>PawnRenderNode_Body</nodeClass>
+          <workerClass>PawnRenderNodeWorker_Body</workerClass>
+          <tagDef>Body</tagDef>
+          <skipFlag>Body</skipFlag>
+          <colorType>Custom</colorType>
+          <color>(255,255,255)</color>
+          <useRottenColor>true</useRottenColor>
+          <children>
+            <!-- 身体纹身节点负责绘制意识形态身体纹身。 -->
+            <li Class="PawnRenderNodeProperties_Tattoo" MayRequire="Ludeon.RimWorld.Ideology">
+              <debugLabel>Ningsha body tattoo</debugLabel>
+              <nodeClass>PawnRenderNode_Tattoo_Body</nodeClass>
+              <workerClass>PawnRenderNodeWorker_Body_Tattoo</workerClass>
+              <colorType>Skin</colorType>
+              <useRottenColor>true</useRottenColor>
+              <baseLayer>2</baseLayer>
+              <rotDrawMode>Fresh, Rotting</rotDrawMode>
+            </li>
+            <!-- 身体伤口前置节点负责在服装下方绘制身体伤口。 -->
+            <li Class="PawnRenderNodeProperties_Overlay">
+              <debugLabel>Ningsha wounds pre apparel</debugLabel>
+              <workerClass>PawnRenderNodeWorker_OverlayWounds</workerClass>
+              <overlayLayer>Body</overlayLayer>
+              <baseLayer>8</baseLayer>
+            </li>
+            <!-- 婴儿包裹节点负责绘制 Biotech 婴儿包布。 -->
+            <li Class="PawnRenderNodeProperties_Swaddle" MayRequire="Ludeon.RimWorld.Biotech">
+              <debugLabel>Ningsha baby swaddle</debugLabel>
+              <nodeClass>PawnRenderNode_Swaddle</nodeClass>
+              <workerClass>PawnRenderNodeWorker_Swaddle</workerClass>
+              <texPath>Things/Pawn/Humanlike/Apparel/SwaddledBaby/Swaddled_Child</texPath>
+              <swaddleColorOffset>0.1</swaddleColorOffset>
+              <brightnessRange>0.6~0.89</brightnessRange>
+              <baseLayer>10</baseLayer>
+            </li>
+            <!-- 身体服装根节点负责承载躯干服装。 -->
+            <li Class="PawnRenderNodeProperties_Parent">
+              <debugLabel>Ningsha apparel body root</debugLabel>
+              <tagDef>ApparelBody</tagDef>
+              <baseLayer>20</baseLayer>
+            </li>
+            <!-- 身体伤口后置节点负责在服装上方绘制身体伤口。 -->
+            <li Class="PawnRenderNodeProperties_Overlay">
+              <debugLabel>Ningsha wounds post apparel</debugLabel>
+              <workerClass>PawnRenderNodeWorker_OverlayWounds</workerClass>
+              <overlayOverApparel>true</overlayOverApparel>
+              <overlayLayer>Body</overlayLayer>
+              <baseLayer>30</baseLayer>
+            </li>
+            <!-- 灭火泡沫节点负责绘制身体上的泡沫覆盖效果。 -->
+            <li Class="PawnRenderNodeProperties_Overlay">
+              <debugLabel>Ningsha body firefoam</debugLabel>
+              <workerClass>PawnRenderNodeWorker_OverlayFirefoam</workerClass>
+              <overlayLayer>Body</overlayLayer>
+              <baseLayer>40</baseLayer>
+            </li>
+          </children>
+        </li>
+
+        <!-- 头部残肢节点负责头部缺失时的断口显示。 -->
+        <li>
+          <debugLabel>Ningsha head stump</debugLabel>
+          <nodeClass>PawnRenderNode_Stump</nodeClass>
+          <workerClass>PawnRenderNodeWorker_Stump</workerClass>
+          <texPath>Things/Pawn/Humanlike/Heads/None_Average_Stump</texPath>
+          <baseLayer>50</baseLayer>
+          <colorType>Custom</colorType>
+          <color>(255,255,255)</color>
+          <skipFlag>Head</skipFlag>
+          <useRottenColor>true</useRottenColor>
+          <rotDrawMode>Fresh, Rotting</rotDrawMode>
+        </li>
+
+        <!-- 头部节点负责承载头部、胡须、原版发型占位、头部服装和头部覆盖效果。 -->
+        <li>
+          <debugLabel>Ningsha head</debugLabel>
+          <nodeClass>PawnRenderNode_Head</nodeClass>
+          <workerClass>PawnRenderNodeWorker_Head</workerClass>
+          <tagDef>Head</tagDef>
+          <skipFlag>Head</skipFlag>
+          <baseLayer>50</baseLayer>
+          <colorType>Custom</colorType>
+          <color>(255,255,255)</color>
+          <useRottenColor>true</useRottenColor>
+          <children>
+            <!-- 头部纹身节点负责绘制意识形态头部纹身。 -->
+            <li Class="PawnRenderNodeProperties_Tattoo" MayRequire="Ludeon.RimWorld.Ideology">
+              <debugLabel>Ningsha head tattoo</debugLabel>
+              <nodeClass>PawnRenderNode_Tattoo_Head</nodeClass>
+              <workerClass>PawnRenderNodeWorker_Tattoo_Head</workerClass>
+              <rotDrawMode>Fresh, Rotting</rotDrawMode>
+              <colorType>Skin</colorType>
+              <baseLayer>52</baseLayer>
+            </li>
+            <!-- 胡须节点保留渲染位置，种族配置会禁止随机胡须。 -->
+            <li>
+              <debugLabel>Ningsha beard</debugLabel>
+              <nodeClass>PawnRenderNode_Beard</nodeClass>
+              <workerClass>PawnRenderNodeWorker_Beard</workerClass>
+              <rotDrawMode>Fresh, Rotting</rotDrawMode>
+              <colorType>Hair</colorType>
+              <skipFlag>Beard</skipFlag>
+              <baseLayer>60</baseLayer>
+            </li>
+            <!-- 原版发型节点保留渲染位置，凝砂族通过 HAR 身体附加层绘制专用头发。 -->
+            <li>
+              <debugLabel>Ningsha vanilla hair slot</debugLabel>
+              <nodeClass>PawnRenderNode_Hair</nodeClass>
+              <workerClass>PawnRenderNodeWorker_FlipWhenCrawling</workerClass>
+              <rotDrawMode>Fresh, Rotting</rotDrawMode>
+              <colorType>Hair</colorType>
+              <skipFlag>Hair</skipFlag>
+              <baseLayer>62</baseLayer>
+            </li>
+            <!-- 头部伤口节点负责绘制头部伤口。 -->
+            <li Class="PawnRenderNodeProperties_Overlay">
+              <debugLabel>Ningsha head wounds</debugLabel>
+              <workerClass>PawnRenderNodeWorker_OverlayWounds</workerClass>
+              <overlayLayer>Head</overlayLayer>
+              <baseLayer>65</baseLayer>
+            </li>
+            <!-- 头部服装根节点负责承载帽子和头盔。 -->
+            <li Class="PawnRenderNodeProperties_Parent">
+              <debugLabel>Ningsha apparel head root</debugLabel>
+              <tagDef>ApparelHead</tagDef>
+              <baseLayer>70</baseLayer>
+            </li>
+            <!-- 头部灭火泡沫节点负责绘制头部泡沫覆盖效果。 -->
+            <li Class="PawnRenderNodeProperties_Overlay">
+              <debugLabel>Ningsha head firefoam</debugLabel>
+              <workerClass>PawnRenderNodeWorker_OverlayFirefoam</workerClass>
+              <overlayLayer>Head</overlayLayer>
+              <baseLayer>85</baseLayer>
+            </li>
+            <!-- 状态覆盖节点负责绘制眩晕、倒地等头顶状态。 -->
+            <li Class="PawnRenderNodeProperties_Overlay">
+              <debugLabel>Ningsha status overlay</debugLabel>
+              <workerClass>PawnRenderNodeWorker_OverlayStatus</workerClass>
+              <baseLayer>100</baseLayer>
+            </li>
+          </children>
+        </li>
+
+        <!-- 携带物节点负责绘制武器和搬运物。 -->
+        <li Class="PawnRenderNodeProperties_Carried">
+          <debugLabel>Ningsha carried thing</debugLabel>
+          <workerClass>PawnRenderNodeWorker_Carried</workerClass>
+        </li>
+      </children>
+    </root>
+  </PawnRenderTreeDef>
+</Defs>

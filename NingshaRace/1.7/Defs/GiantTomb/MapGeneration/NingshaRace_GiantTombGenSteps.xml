@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义巨型墓葬从布局到迷雾的独立地图生成步骤。 -->
+  <GenStepDef>
+    <defName>NingshaRace_GiantTombLayoutStep</defName><order>100</order>
+    <genStep Class="NingshaRaceLib.GiantTomb.Generation.Steps.GenStep_GiantTombLayout">
+      <layoutDef>NingshaRace_GiantTombLayout</layoutDef>
+    </genStep>
+  </GenStepDef>
+  <GenStepDef>
+    <defName>NingshaRace_GiantTombFoundation</defName><order>200</order>
+    <genStep Class="NingshaRaceLib.GiantTomb.Generation.Steps.GenStep_GiantTombFoundation" />
+  </GenStepDef>
+  <GenStepDef>
+    <defName>NingshaRace_GiantTombTemplates</defName><order>300</order>
+    <genStep Class="NingshaRaceLib.GiantTomb.Generation.Steps.GenStep_GiantTombTemplates" />
+  </GenStepDef>
+  <GenStepDef>
+    <defName>NingshaRace_GiantTombContents</defName><order>350</order>
+    <genStep Class="NingshaRaceLib.GiantTomb.Generation.Steps.GenStep_GiantTombContents">
+      <catalogDef>NingshaRace_GiantTombContentCatalog</catalogDef>
+    </genStep>
+  </GenStepDef>
+  <GenStepDef>
+    <defName>NingshaRace_GiantTombRockFill</defName><order>400</order>
+    <genStep Class="NingshaRaceLib.GiantTomb.Generation.Steps.GenStep_GiantTombRockFill" />
+  </GenStepDef>
+  <GenStepDef>
+    <defName>NingshaRace_GiantTombMinerals</defName><order>410</order>
+    <genStep Class="NingshaRaceLib.GiantTomb.Generation.Steps.GenStep_GiantTombMinerals" />
+  </GenStepDef>
+  <GenStepDef>
+    <defName>NingshaRace_GiantTombExit</defName><order>500</order>
+    <genStep Class="NingshaRaceLib.GiantTomb.Generation.Steps.GenStep_GiantTombExit" />
+  </GenStepDef>
+</Defs>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!--普通巨坑与种族开局共用的布局参数；原有主次洞室尺寸以二百格地图为基准，附属洞室与生态区半径直接按格数配置。-->
+  <MapGeneratorDef Name="NingshaRace_LayeredLayoutBase" Abstract="True">
+    <modExtensions>
+      <li Class="NingshaRaceLib.DesertPit.Generation.Config.DefModExtension_DesertPitLayout">
+        <mainRadiusX>34~40</mainRadiusX>
+        <mainRadiusZ>28~34</mainRadiusZ>
+        <centralRoomCount>6~8</centralRoomCount>
+        <smallRoomRadius>9~14</smallRoomRadius>
+        <secondaryRoomRadius>18~24</secondaryRoomRadius>
+        <linkRoomCount>3~5</linkRoomCount>
+        <!--每端河谷继续向外层延伸，另在河谷两侧安排偏离主路的支洞；位置不足时减少可选洞室。-->
+        <outerRoomCount>3~5</outerRoomCount>
+        <outerRoomRadius>10~16</outerRoomRadius>
+        <branchRoomCount>2~3</branchRoomCount>
+        <!--斜河两端向地图对角方向展开的比例与曲流幅度；保留中心十二格干地，不生成笔直水渠。-->
+        <riverDiagonalReach>0.82</riverDiagonalReach>
+        <riverMeander>12</riverMeander>
+        <riverMeanderFrequency>10</riverMeanderFrequency>
+        <!--河流两岸分别按连续噪声凹凸，保留最低河宽与实际水面外的干岸。-->
+        <riverEdgeNoise>1.1</riverEdgeNoise>
+        <!--片数与单片半径独立配置；附属洞室通过窄通道连接，保护蚁巢核心的唯一洞口。-->
+        <stoneForestCount>11~13</stoneForestCount>
+        <stoneForestRadius>9~13</stoneForestRadius>
+        <antSideRoomCount>1~3</antSideRoomCount>
+        <antSideRoomRadius>5~12</antSideRoomRadius>
+        <extraTunnelChance>0.5</extraTunnelChance>
+        <marshCount>1~3</marshCount>
+        <marshRadius>8~15</marshRadius>
+        <marshCoverage>0.8</marshCoverage>
+        <habitatRoomCount>3~7</habitatRoomCount>
+        <habitatRoomRadius>5~10</habitatRoomRadius>
+        <habitatSandfallChance>0.5</habitatSandfallChance>
+        <!--水潭概率仅在已经生成坠砂裂隙的洞室中抽取。-->
+        <habitatPondChance>0.5</habitatPondChance>
+        <habitatPondRadius>2~7</habitatPondRadius>
+        <!--水潭采用不等长轴与环形边界噪声，保留洞壁干岸和通道。-->
+        <habitatPondEdgeNoise>0.28</habitatPondEdgeNoise>
+        <!--以地图半宽、半高归一化，划分内中外三层同心方形，蚁巢优先处于中层外半部。-->
+        <innerBoundary>0.33333334</innerBoundary>
+        <outerBoundary>0.6666667</outerBoundary>
+        <antPreferredLayer>0.59</antPreferredLayer>
+        <!--河宽是完整宽度；河岸和出生干地不随地图尺寸缩小。-->
+        <riverWidth>3~5</riverWidth>
+        <riverBankWidth>2</riverBankWidth>
+        <mainDryRadius>12</mainDryRadius>
+        <!--两处次要洞室分别独立等概率抽取，保留原有三处保底菌巢及稀疏种植参数。-->
+        <extraMoundsPerRoom>0~3</extraMoundsPerRoom>
+        <moundSpacing>12</moundSpacing>
+      </li>
+    </modExtensions>
+  </MapGeneratorDef>
+</Defs>

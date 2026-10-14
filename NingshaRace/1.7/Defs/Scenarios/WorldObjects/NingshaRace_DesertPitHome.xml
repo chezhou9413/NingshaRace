@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- Def 职责：保存可作为玩家家园的巨坑内部，与地表聚落共享位置但不重复绘制世界地标。 -->
+  <WorldObjectDef>
+    <defName>NingshaRace_DesertPitHome</defName>
+    <label>沙漠巨坑内部</label>
+    <worldObjectClass>PocketMapParent</worldObjectClass>
+    <canBePlayerHome>true</canBePlayerHome>
+    <validLaunchTarget>false</validLaunchTarget>
+  </WorldObjectDef>
+</Defs>

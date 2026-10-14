@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义沙漠巨坑塌方区可由玩家拆除并回收资源的大小岩块。 -->
+  <ThingDef ParentName="NingshaRace_DesertPitDecorationBase">
+    <defName>NingshaRace_DesertPitCollapsedRockLarge</defName>
+    <label>塌落岩堆</label>
+    <description>从洞顶坠落后紧密堆积的大型砂岩，可由殖民者拆除并回收地下遗留资源。</description>
+    <rotatable>true</rotatable>
+    <randomizeRotationOnSpawn>true</randomizeRotationOnSpawn>
+    <passability>Impassable</passability>
+    <pathCost>0</pathCost>
+    <fillPercent>1</fillPercent>
+    <canOverlapZones>false</canOverlapZones>
+    <blockLight>true</blockLight>
+    <blockWind>true</blockWind>
+    <coversFloor>true</coversFloor>
+    <graphicData>
+      <texPath>Things/Building/Natural/CollapsedRocks</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3,3)</drawSize>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>500</MaxHitPoints>
+      <WorkToBuild>600</WorkToBuild>
+      <Beauty>-8</Beauty>
+      <Flammability>0</Flammability>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="NingshaRace_DesertPitDecorationBase">
+    <defName>NingshaRace_DesertPitSandstoneRubbleSmall</defName>
+    <label>砂岩碎石</label>
+    <description>散落在洞穴塌方边缘的小型砂岩碎块，可由殖民者拆除并回收地下遗留资源。</description>
+    <rotatable>true</rotatable>
+    <randomizeRotationOnSpawn>true</randomizeRotationOnSpawn>
+    <passability>PassThroughOnly</passability>
+    <pathCost>42</pathCost>
+    <fillPercent>0.5</fillPercent>
+    <canOverlapZones>false</canOverlapZones>
+    <graphicData>
+      <texPath>Things/Item/Chunk/ChunkStone</texPath>
+      <graphicClass>Graphic_Random</graphicClass>
+      <flipExtraRotation>80</flipExtraRotation>
+      <color>(126,104,94)</color>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <WorkToBuild>250</WorkToBuild>
+      <Beauty>-4</Beauty>
+      <Flammability>0</Flammability>
+    </statBases>
+  </ThingDef>
+</Defs>

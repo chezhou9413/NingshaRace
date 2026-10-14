@@ -1,0 +1,108 @@
+{
+  "schema": "ChezhouLib.ClMapTemplateMetadata",
+  "version": 2,
+  "name": "墓室2",
+  "sourceFile": "墓室2.clmap",
+  "thumbnailFile": "墓室2.preview.png",
+  "binaryBytes": 826,
+  "templateSize": {
+    "width": 8,
+    "height": 7,
+    "cellCount": 56
+  },
+  "coordinateSystem": {
+    "origin": "lowerLeft",
+    "xDirection": "east",
+    "zDirection": "north",
+    "rowOrder": "northToSouth"
+  },
+  "structureFootprint": {
+    "empty": false,
+    "minX": 0,
+    "minZ": 0,
+    "maxX": 7,
+    "maxZ": 6,
+    "width": 8,
+    "height": 7,
+    "occupiedCellCount": 52
+  },
+  "wallDoorLegend": {
+    "0": "empty",
+    "1": "wall",
+    "2": "door"
+  },
+  "wallDoorGrid": [
+    "01111110",
+    "11000011",
+    "10000001",
+    "10000001",
+    "10000001",
+    "11000011",
+    "01112110"
+  ],
+  "occupancyLegend": {
+    "0": "empty",
+    "1": "artificialFloorOrBuilding"
+  },
+  "occupancyGrid": [
+    "01111110",
+    "11111111",
+    "11111111",
+    "11111111",
+    "11111111",
+    "11111111",
+    "01111110"
+  ],
+  "walkabilityLegend": {
+    "0": "outsideOrNoArtificialFloor",
+    "1": "walkableFloor",
+    "2": "wall",
+    "3": "door",
+    "4": "otherImpassable"
+  },
+  "walkabilityGrid": [
+    "02222220",
+    "22111122",
+    "21111112",
+    "21111112",
+    "21111112",
+    "22111122",
+    "02223220"
+  ],
+  "inferredConnectors": [
+    {
+      "type": "Door",
+      "direction": "South",
+      "x": 4,
+      "z": 0,
+      "width": 1,
+      "startX": 4,
+      "startZ": 0,
+      "endX": 4,
+      "endZ": 0
+    }
+  ],
+  "materials": [
+    {
+      "defName": "BlocksGranite",
+      "label": "花岗岩砖",
+      "stuffUnits": 0,
+      "fixedCostUnits": 24,
+      "totalEstimatedUnits": 24
+    },
+    {
+      "defName": "BlocksSandstone",
+      "label": "砂岩砖",
+      "stuffUnits": 150,
+      "fixedCostUnits": 84,
+      "totalEstimatedUnits": 234
+    },
+    {
+      "defName": "BlocksSlate",
+      "label": "板岩砖",
+      "stuffUnits": 60,
+      "fixedCostUnits": 0,
+      "totalEstimatedUnits": 60
+    }
+  ]
+}

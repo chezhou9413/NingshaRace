@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义200乘200巨型墓葬使用的独立地下生物群系和口袋地图生成器。 -->
+  <BiomeDef ParentName="Biome_Underground">
+    <defName>NingshaRace_GiantTombBiome</defName>
+    <label>凝砂巨型墓葬</label>
+    <description>深埋在砂岩层中的凝砂族墓葬群，厚重岩顶下分布着彼此连通的仪式厅与墓室。</description>
+    <animalDensity>0</animalDensity><plantDensity>0</plantDensity><maxFishPopulation>0</maxFishPopulation>
+    <wildAnimalsCanWanderInto>false</wildAnimalsCanWanderInto>
+  </BiomeDef>
+
+  <MapGeneratorDef>
+    <defName>NingshaRace_GiantTombMap</defName>
+    <label>凝砂巨型墓葬</label>
+    <isUnderground>true</isUnderground>
+    <ignoreAreaRevealedLetter>true</ignoreAreaRevealedLetter>
+    <disableCallAid>true</disableCallAid>
+    <roofDef>RoofRockThick</roofDef>
+    <defaultUnderGridTerrain>Sandstone_Rough</defaultUnderGridTerrain>
+    <pocketMapProperties>
+      <biome>NingshaRace_GiantTombBiome</biome><temperature>24</temperature><tileMutators />
+    </pocketMapProperties>
+    <genSteps>
+      <li>NingshaRace_GiantTombLayoutStep</li><li>NingshaRace_GiantTombFoundation</li>
+      <li>NingshaRace_GiantTombTemplates</li><li>NingshaRace_GiantTombContents</li><li>NingshaRace_GiantTombRockFill</li>
+      <li>NingshaRace_GiantTombMinerals</li><li>NingshaRace_GiantTombExit</li><li>Fog</li>
+    </genSteps>
+  </MapGeneratorDef>
+</Defs>

@@ -3,6 +3,7 @@ using UnityEngine;
 namespace NingshaRaceLib.UI.Rendering
 {
     //类职责：缓存可平铺的四尺度噪声，让风沙着色器通过少量纹理取样表现连续翻卷。
+    [Verse.StaticConstructorOnStartup]
     internal static class NingshaStormNoise
     {
         private const int Size = 256;

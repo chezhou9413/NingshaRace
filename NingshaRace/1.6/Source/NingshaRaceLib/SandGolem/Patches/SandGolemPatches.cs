@@ -159,6 +159,7 @@ namespace NingshaRaceLib.SandGolem.Patches
 
 //类职责：给沙傀选择面板添加手动收回按钮。
     [HarmonyPatch(typeof(Pawn), nameof(Pawn.GetGizmos))]
+    [Verse.StaticConstructorOnStartup]
     public static class Patch_SandGolemGizmos
     {
         //字段职责：缓存首次显示收回按钮时取得的技能图标，避免补丁类型初始化阶段访问 Unity 资源。

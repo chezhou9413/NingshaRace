@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!--酸雾使用原版软边粒子沿弹道连成短尾迹，颜色与淡出时间均可直接配置。-->
+  <FleckDef ParentName="FleckBase">
+    <defName>NingshaRace_AntAcidTrailMist</defName>
+    <graphicData>
+      <texPath>Things/Mote/AirPuff</texPath>
+      <color>(0.42,0.95,0.12,0.82)</color>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <!--时间单位为游戏内秒，尾迹在约四分之一秒内淡出，不长期遮盖战场。-->
+    <fadeInTime>0.01</fadeInTime>
+    <solidTime>0.03</solidTime>
+    <fadeOutTime>0.2</fadeOutTime>
+    <growthRate>0.15</growthRate>
+  </FleckDef>
+  <!--酸滴使用原版酸液粒子，在尾迹附近轻微散开后消失，不产生额外伤害或地面污物。-->
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>NingshaRace_AntAcidTrailDroplet</defName>
+    <graphicData>
+      <texPath>Things/Mote/AcidSpray</texPath>
+      <color>(0.58,1,0.18,0.95)</color>
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <altitudeLayerIncOffset>0.01</altitudeLayerIncOffset>
+    <fadeInTime>0</fadeInTime>
+    <solidTime>0.04</solidTime>
+    <fadeOutTime>0.22</fadeOutTime>
+    <growthRate>0.1</growthRate>
+  </FleckDef>
+</Defs>

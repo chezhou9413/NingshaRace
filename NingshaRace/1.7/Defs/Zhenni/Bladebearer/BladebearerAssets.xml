@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 刀兵资源使用独立包，置换图保留线性和循环采样设置。 -->
+  <PawnRenderTreeDef>
+    <defName>NingshaRace_Zhenni_Bladebearer_RenderTree</defName>
+    <root Class="PawnRenderNodeProperties_Parent">
+      <debugLabel>震尼拥刀者四向根节点</debugLabel>
+      <tagDef>Root</tagDef>
+      <pawnType>Any</pawnType>
+      <drawSize>(1, 1)</drawSize>
+    </root>
+  </PawnRenderTreeDef>
+</Defs>

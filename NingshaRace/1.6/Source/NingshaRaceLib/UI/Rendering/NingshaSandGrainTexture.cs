@@ -3,6 +3,7 @@ using UnityEngine;
 namespace NingshaRaceLib.UI.Rendering
 {
     //类职责：缓存自由散布的细沙形状，避免固定格子、统一大小与一致朝向形成排列感。
+    [Verse.StaticConstructorOnStartup]
     internal static class NingshaSandGrainTexture
     {
         private const int Size = 512;

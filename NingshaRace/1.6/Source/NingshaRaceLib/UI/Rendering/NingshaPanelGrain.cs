@@ -4,6 +4,7 @@ using Verse;
 namespace NingshaRaceLib.UI.Rendering
 {
     //类职责：缓存并绘制面板的细沙颗粒与边缘积沙，不参与文字布局或游戏随机数计算。
+    [Verse.StaticConstructorOnStartup]
     internal static class NingshaPanelGrain
     {
         private const int TileSize = 128;
@@ -25,7 +26,7 @@ namespace NingshaRaceLib.UI.Rendering
                 float strength = inset ? 0.48f : compact ? 0.58f : 0.76f;
                 GUI.color = new Color(1f, 1f, 1f, strength);
                 if (surface == null) surface = CreateTexture(TileSize, TileSize, false, false);
-                GUI.DrawTextureWithTexCoords(rect, surface,
+                NingshaTiledTexture.Draw(rect, surface,
                     new Rect(0f, 0f, rect.width / TileSize, rect.height / TileSize));
                 if (!compact) DrawEdges(rect, strength * 0.65f);
             }
@@ -43,13 +44,13 @@ namespace NingshaRaceLib.UI.Rendering
             GUI.color = new Color(1f, 1f, 1f, strength);
             float width = rect.width / TileSize;
             float height = rect.height / TileSize;
-            GUI.DrawTextureWithTexCoords(new Rect(rect.x, rect.y, rect.width, EdgeSize),
+            NingshaTiledTexture.Draw(new Rect(rect.x, rect.y, rect.width, EdgeSize),
                 horizontalEdge, new Rect(0f, 0f, width, 1f));
-            GUI.DrawTextureWithTexCoords(new Rect(rect.x, rect.yMax - EdgeSize, rect.width, EdgeSize),
+            NingshaTiledTexture.Draw(new Rect(rect.x, rect.yMax - EdgeSize, rect.width, EdgeSize),
                 horizontalEdge, new Rect(0f, 1f, width, -1f));
-            GUI.DrawTextureWithTexCoords(new Rect(rect.x, rect.y, EdgeSize, rect.height),
+            NingshaTiledTexture.Draw(new Rect(rect.x, rect.y, EdgeSize, rect.height),
                 verticalEdge, new Rect(0f, 0f, 1f, height));
-            GUI.DrawTextureWithTexCoords(new Rect(rect.xMax - EdgeSize, rect.y, EdgeSize, rect.height),
+            NingshaTiledTexture.Draw(new Rect(rect.xMax - EdgeSize, rect.y, EdgeSize, rect.height),
                 verticalEdge, new Rect(1f, 0f, -1f, height));
         }
 

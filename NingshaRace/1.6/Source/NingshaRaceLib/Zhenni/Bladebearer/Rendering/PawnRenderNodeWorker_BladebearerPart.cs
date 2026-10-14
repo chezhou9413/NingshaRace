@@ -19,8 +19,13 @@ namespace NingshaRaceLib.Zhenni.Bladebearer
         public override void AppendDrawRequests(PawnRenderNode node, PawnDrawParms parms, List<PawnGraphicDrawRequest> requests)
         {
             var n = (PawnRenderNode_BladebearerPart)node;
+#if RW_1_7
+            //1.7 在 PostDraw 中按 RimUnity 辉光层提交，原版仍负责计算最终矩阵。
+            requests.Add(new PawnGraphicDrawRequest(node, BladebearerResources.Mesh, null));
+#else
             requests.Add(new PawnGraphicDrawRequest(node, BladebearerResources.Mesh,
                 n.Part.particle ? null : BladebearerResources.Material(n.Part, n.DepthOnly, parms.DrawNow)));
+#endif
         }
 
         //不让原版 PreDraw 写入共享材质颜色；完整参数由下方统一处理。
@@ -31,6 +36,15 @@ namespace NingshaRaceLib.Zhenni.Bladebearer
         {
             base.PostDraw(node, parms, mesh, matrix);
             var n = (PawnRenderNode_BladebearerPart)node;
+#if RW_1_7
+            if (!n.Part.particle)
+            {
+                var material = BladebearerResources.Material(n.Part, n.DepthOnly, parms.DrawNow);
+                GetMaterialPropertyBlock(n, material, parms);
+                BladebearerRimUnityBloom.Draw(mesh, matrix, material, n.Part.HasBloom && !n.DepthOnly, parms.DrawNow, n.MatPropBlock);
+                n.MatPropBlock.Clear();
+            }
+#endif
             if (n.DepthOnly) return;
             if (!parms.DrawNow) n.Owner.Phase?.Snapshot.Record(n, matrix, parms.tint);
             if (n.Part.particle)
@@ -40,11 +54,13 @@ namespace NingshaRaceLib.Zhenni.Bladebearer
                 mesh = n.Owner.Particles.Draw(n, parms, matrix);
                 if (mesh == null) return;
             }
+#if !RW_1_7
             if (parms.DrawNow)
             {
                 if (n.Owner.CapturePreview) BladebearerBloomPreview.Record(n, mesh, matrix, parms.tint);
             }
             else BladebearerBloomSources.Record(n, mesh, matrix, parms.tint);
+#endif
         }
 
         //在实际绘制主线程传递参数，并记录预览投影供拖动手柄使用。

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义沙漠巨坑地下能源循环使用的自然资源建筑。 -->
+  <ThingDef ParentName="BuildingNaturalBase">
+    <defName>NingshaRace_DesertPitOilSeep</defName>
+    <label>油砂渗洞</label>
+    <description>富含油质的洞穴裂口。深层压力会周期性将可燃油质挤出地表，凝结成可收集的化合燃料。</description>
+    <thingClass>NingshaRaceLib.DesertPit.Resources.Buildings.Building_DesertPitOilSeep</thingClass>
+    <category>Building</category>
+    <drawerType>MapMeshOnly</drawerType>
+    <altitudeLayer>Floor</altitudeLayer>
+    <selectable>true</selectable>
+    <rotatable>false</rotatable>
+    <size>(2,2)</size>
+    <passability>PassThroughOnly</passability>
+    <pathCost>20</pathCost>
+    <destroyable>false</destroyable>
+    <useHitPoints>false</useHitPoints>
+    <blockPlants>true</blockPlants>
+    <neverOverlapFloors>true</neverOverlapFloors>
+    <scatterableOnMapGen>false</scatterableOnMapGen>
+    <tickerType>Normal</tickerType>
+    <building>
+      <isEdifice>false</isEdifice>
+      <artificialForMeditationPurposes>false</artificialForMeditationPurposes>
+      <deconstructible>false</deconstructible>
+      <claimable>false</claimable>
+      <expandHomeArea>false</expandHomeArea>
+    </building>
+    <graphicData>
+      <texPath>Things/Building/Natural/SteamGeyser</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Transparent</shaderType>
+      <drawSize>(4,4)</drawSize>
+    </graphicData>
+    <comps>
+      <li Class="CompProperties_Spawner">
+        <thingToSpawn>Chemfuel</thingToSpawn>
+        <spawnCount>25</spawnCount>
+        <spawnIntervalRange>
+          <min>180000</min>
+          <max>300000</max>
+        </spawnIntervalRange>
+        <spawnMaxAdjacent>75</spawnMaxAdjacent>
+        <spawnForbidden>false</spawnForbidden>
+        <writeTimeLeftToSpawn>true</writeTimeLeftToSpawn>
+        <saveKeysPrefix>ningshaOilSeep</saveKeysPrefix>
+      </li>
+    </comps>
+  </ThingDef>
+</Defs>

@@ -9,7 +9,11 @@ namespace NingshaRaceLib.Zhenni.Bladebearer
     {
         private static BladebearerBloomPreview active;
         private readonly BladebearerBloomDraws draws = new BladebearerBloomDraws();
+#if RW_1_7
+        private BladebearerBloomPreviewRenderer nativeRenderer;
+#else
         private BladebearerBloomProcessor processor;
+#endif
         private RenderTexture target;
         private Exception error;
 
@@ -23,6 +27,21 @@ namespace NingshaRaceLib.Zhenni.Bladebearer
         internal static void Record(PawnRenderNode_BladebearerPart node, Mesh mesh, Matrix4x4 matrix, Color tint)
         { active?.draws.Add(node, mesh, matrix, tint); }
 
+#if RW_1_7
+        //拦截原生烘焙入口，只有当前编辑器拥有的目标才使用选择性辉光。
+        internal static bool RenderNative(RenderTexture target, System.Collections.Generic.IReadOnlyList<Waylith.Rendering.MeshDrawCommand> commands,
+            Waylith.Rendering.CameraView view, Rect viewport, Color? background)
+        {
+            if (active == null || active.target != target || !active.draws.HasEmission) return false;
+            try
+            {
+                active.nativeRenderer ??= new BladebearerBloomPreviewRenderer(BladebearerBloomCamera.ShaderDirectory);
+                active.nativeRenderer.Render(target, commands, view, viewport, background, active.draws);
+            }
+            catch (Exception e) { active.error = e; }
+            return true;
+        }
+#else
         //Unity 相机回调的异常交回窗口显示，不悄悄丢失辉光。
         internal static void RenderActive()
         {
@@ -64,6 +83,7 @@ namespace NingshaRaceLib.Zhenni.Bladebearer
             }
         }
 
+#endif
         //把回调中的错误送入现有窗口错误提示。
         internal void CheckError()
         { if (error != null) throw new InvalidOperationException("辉光预览失败：" + error.Message, error); }
@@ -73,6 +93,13 @@ namespace NingshaRaceLib.Zhenni.Bladebearer
 
         //随窗口或预览尺寸变化释放资源。
         public void Dispose()
-        { End(); draws.Clear(true); processor?.Dispose(); processor = null; }
+        {
+            End(); draws.Clear(true);
+#if RW_1_7
+            nativeRenderer?.Dispose(); nativeRenderer = null;
+#else
+            processor?.Dispose(); processor = null;
+#endif
+        }
     }
 }

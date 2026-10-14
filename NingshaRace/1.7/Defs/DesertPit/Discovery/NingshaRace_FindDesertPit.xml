@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：定义由坐标地图开启且没有时限的巨坑探索任务。 -->
+  <QuestScriptDef>
+    <defName>NingshaRace_FindDesertPit</defName>
+    <label>寻找巨坑</label>
+    <root Class="NingshaRaceLib.DesertPit.Discovery.Quests.QuestNode_FindDesertPit" />
+    <randomlySelectable>false</randomlySelectable>
+    <autoAccept>true</autoAccept>
+    <endOnColonyMove>false</endOnColonyMove>
+    <sendAvailableLetter>false</sendAvailableLetter>
+  </QuestScriptDef>
+</Defs>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 文件职责：声明侵蚀体头部使用的上层侵蚀黑雾 CL 材质模板与 RimWorld ShaderTypeDef。 -->
+  <ChezhouLib.LibDef.ClShaderMaterial>
+    <defName>NingshaRace_UpperErosionBlackFog_Material</defName>
+    <label>侵蚀体头部黑雾材质</label>
+    <shaderName>NingshaRace/Plane/UpperErosionBlackFog</shaderName>
+    <resModID>chezhou.race.ningsharace</resModID>
+    <shaderParameters>
+      <!-- _MainTex 由 RimWorld 当前头部方向和随机变体动态提供。 -->
+      <li>
+        <parameterName>_AutoFitBox</parameterName>
+        <parameterValue>1</parameterValue>
+      </li>
+      <li>
+        <parameterName>_PixelAlphaThreshold</parameterName>
+        <parameterValue>0.099</parameterValue>
+      </li>
+      <li>
+        <parameterName>_BoxPadding</parameterName>
+        <parameterValue>0</parameterValue>
+      </li>
+      <li>
+        <parameterName>_FogStartY</parameterName>
+        <parameterValue>0.186</parameterValue>
+      </li>
+      <li>
+        <parameterName>_FogDensity</parameterName>
+        <parameterValue>1</parameterValue>
+      </li>
+      <li>
+        <parameterName>_BoundaryWarp</parameterName>
+        <parameterValue>0.107</parameterValue>
+      </li>
+      <li>
+        <parameterName>_ShapeSoftness</parameterName>
+        <parameterValue>0.117</parameterValue>
+      </li>
+      <li>
+        <parameterName>_NoiseScale</parameterName>
+        <parameterValue>21.4</parameterValue>
+      </li>
+      <li>
+        <parameterName>_NoiseDetail</parameterName>
+        <parameterValue>0.72</parameterValue>
+      </li>
+      <li>
+        <parameterName>_WarpStrength</parameterName>
+        <parameterValue>0.785</parameterValue>
+      </li>
+      <li>
+        <parameterName>_ErosionThreshold</parameterName>
+        <parameterValue>0.407</parameterValue>
+      </li>
+      <li>
+        <parameterName>_ErosionSoftness</parameterName>
+        <parameterValue>0.155</parameterValue>
+      </li>
+      <li>
+        <parameterName>_PulseStrength</parameterName>
+        <parameterValue>0</parameterValue>
+      </li>
+      <li>
+        <parameterName>_Color</parameterName>
+        <parameterValue>(1.000, 1.000, 1.000, 1.000)</parameterValue>
+      </li>
+      <li>
+        <parameterName>_FogColor</parameterName>
+        <parameterValue>(0.000, 0.000, 0.000, 0.960)</parameterValue>
+      </li>
+      <li>
+        <parameterName>_FlowSpeed</parameterName>
+        <parameterValue>(0.13, 0.28, 0.00, 0.00)</parameterValue>
+      </li>
+    </shaderParameters>
+  </ChezhouLib.LibDef.ClShaderMaterial>
+
+  <!-- Def 职责：把 CL 黑雾材质暴露为 Pawn 材质请求可使用的 ShaderTypeDef。 -->
+  <ChezhouLib.LibDef.ClShaderPro>
+    <defName>NingshaRace_UpperErosionBlackFog_ShaderPro</defName>
+    <ClShaderMaterial>NingshaRace_UpperErosionBlackFog_Material</ClShaderMaterial>
+    <shaderPath>Map/Cutout</shaderPath>
+  </ChezhouLib.LibDef.ClShaderPro>
+</Defs>

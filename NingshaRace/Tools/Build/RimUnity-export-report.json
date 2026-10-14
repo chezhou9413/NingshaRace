@@ -1,0 +1,177 @@
+[
+  {
+    "bundle": null,
+    "path": "Assets/Combat/MeleeAnimation/Shader/MeleeFlameTrail.shader",
+    "type": "Shader",
+    "status": "exported",
+    "error": null
+  },
+  {
+    "bundle": null,
+    "path": "Assets/NingshaUI/Shaders/DriftingSand.shader",
+    "type": "Shader",
+    "status": "exported",
+    "error": null
+  },
+  {
+    "bundle": null,
+    "path": "Assets/NingshaUI/Shaders/WeatheredSandstone.shader",
+    "type": "Shader",
+    "status": "exported",
+    "error": null
+  },
+  {
+    "bundle": null,
+    "path": "Assets/SandGolem/Shader/PawnWindSandify.shader",
+    "type": "Shader",
+    "status": "exported",
+    "error": null
+  },
+  {
+    "bundle": null,
+    "path": "Assets/Shader/BlackHoleRaymarch.shader",
+    "type": "Shader",
+    "status": "exported",
+    "error": null
+  },
+  {
+    "bundle": null,
+    "path": "Assets/Shader/BurialMountainGuardBurst.shader",
+    "type": "Shader",
+    "status": "exported",
+    "error": null
+  },
+  {
+    "bundle": null,
+    "path": "Assets/Shader/BurialMountainGuardShield.shader",
+    "type": "Shader",
+    "status": "exported",
+    "error": null
+  },
+  {
+    "bundle": null,
+    "path": "Assets/Shader/PawnPetrify.shader",
+    "type": "Shader",
+    "status": "exported",
+    "error": null
+  },
+  {
+    "bundle": null,
+    "path": "Assets/Shader/PawnSandify.shader",
+    "type": "Shader",
+    "status": "exported",
+    "error": null
+  },
+  {
+    "bundle": null,
+    "path": "Assets/Shader/RavenFireDark.shader",
+    "type": "Shader",
+    "status": "exported",
+    "error": null
+  },
+  {
+    "bundle": null,
+    "path": "Assets/Shader/RavenGhostFire.shader",
+    "type": "Shader",
+    "status": "exported",
+    "error": null
+  },
+  {
+    "bundle": null,
+    "path": "Assets/Shader/SandDustParticle.shader",
+    "type": "Shader",
+    "status": "exported",
+    "error": null
+  },
+  {
+    "bundle": null,
+    "path": "Assets/Shader/TankLiquid2D.shader",
+    "type": "Shader",
+    "status": "exported",
+    "error": null
+  },
+  {
+    "bundle": null,
+    "path": "Assets/Shader/TerraCrescentSlash.shader",
+    "type": "Shader",
+    "status": "exported",
+    "error": null
+  },
+  {
+    "bundle": null,
+    "path": "Assets/Shader/UpperErosionBlackFog.shader",
+    "type": "Shader",
+    "status": "exported",
+    "error": null
+  },
+  {
+    "bundle": null,
+    "path": "Assets/Zhenni/Bladebearer/Shader/BladebearerDepth.shader",
+    "type": "Shader",
+    "status": "exported",
+    "error": null
+  },
+  {
+    "bundle": null,
+    "path": "Assets/Zhenni/Bladebearer/Shader/BladebearerFlame.shader",
+    "type": "Shader",
+    "status": "exported",
+    "error": null
+  },
+  {
+    "bundle": null,
+    "path": "Assets/Zhenni/Bladebearer/Shader/BladebearerParticles.shader",
+    "type": "Shader",
+    "status": "exported",
+    "error": null
+  },
+  {
+    "bundle": null,
+    "path": "Assets/Zhenni/Bladebearer/Shader/BladebearerPhaseEmbers.shader",
+    "type": "Shader",
+    "status": "exported",
+    "error": null
+  },
+  {
+    "bundle": null,
+    "path": "Assets/Prefabs/VFX/SandThrowBurst.prefab",
+    "type": "GameObject",
+    "status": "exported",
+    "error": null
+  },
+  {
+    "bundle": null,
+    "path": "Assets/Prefabs/VFX/PetrifyingSandwave.prefab",
+    "type": "GameObject",
+    "status": "exported",
+    "error": null
+  },
+  {
+    "bundle": null,
+    "path": "Assets/Prefabs/VFX/PetrifyingSandHit.prefab",
+    "type": "GameObject",
+    "status": "exported",
+    "error": null
+  },
+  {
+    "bundle": null,
+    "path": "Assets/Prefabs/VFX/qinshiyanwu.prefab",
+    "type": "GameObject",
+    "status": "exported",
+    "error": null
+  },
+  {
+    "bundle": null,
+    "path": "Assets/Combat/MeleeAnimation/Textures/MeleeFlameDisplacement.png",
+    "type": "Texture2D",
+    "status": "exported",
+    "error": null
+  },
+  {
+    "bundle": null,
+    "path": "Assets/Zhenni/Bladebearer/Textures/BladebearerDisplacement.png",
+    "type": "Texture2D",
+    "status": "exported",
+    "error": null
+  }
+]

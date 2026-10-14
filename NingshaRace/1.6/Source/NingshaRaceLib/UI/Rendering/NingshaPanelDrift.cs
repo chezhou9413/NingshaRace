@@ -21,7 +21,7 @@ namespace NingshaRaceLib.UI.Rendering
                 //以左上角为取样锚点，按界面像素平铺，拖动或拉大面板不会拉伸沙粒。
                 float uvWidth = rect.width / NingshaDriftSurface.Width;
                 float uvHeight = rect.height / NingshaDriftSurface.Height;
-                GUI.DrawTextureWithTexCoords(rect, surface, new Rect(0f, 1f - uvHeight, uvWidth, uvHeight));
+                NingshaTiledTexture.Draw(rect, surface, new Rect(0f, 1f - uvHeight, uvWidth, uvHeight));
             }
             finally
             {
