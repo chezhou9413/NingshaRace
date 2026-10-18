@@ -52,6 +52,7 @@ RimWorld 1.7与特效
 • 增加凝砂侵蚀体蛇头编辑器，可调整四个朝向的姿态与摆动，并导出预设；补充其他人形种族侵蚀体的调试生成入口。
 
 更新说明
+1.7需要能够运行于该版本的HAR；启用Facial Animation时，也需要对应版本的FA。请同步更新前置并重启游戏后使用。当前1.7代码已完成编译与资源静态检查，尚未完成完整游戏内验证。
 以上1.7资源加载与RimUnity前置要求仅针对1.7，1.6继续使用原有加载方式。</body>
   </NingshaRaceLib.Announcements.Data.NingshaAnnouncementDef>
 </Defs>

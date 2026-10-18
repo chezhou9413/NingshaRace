@@ -121,13 +121,11 @@ namespace NingshaRaceLib.Petrification.Health
             runtimePresentationInitialized = false;
         }
 
-        //函数职责：Pawn 死亡时立即停止完全石化锁定和石化材质覆盖。
+        //死亡后健康状态不再推进，直接移除石化并通过 PostRemoved 解除显示与行动锁定。
         public override void Notify_PawnDied(DamageInfo? dinfo, Hediff culprit = null)
         {
             base.Notify_PawnDied(dinfo, culprit);
-            EndRuntimePresentation();
-            fullPetrificationEndTick = -1;
-            runtimePresentationInitialized = false;
+            pawn.health.RemoveHediff(this);
         }
 
         //函数职责：在地图开始正常推进后恢复读档 Pawn 的石化材质，避免存档载入阶段安装 Harmony 补丁。
@@ -180,10 +178,10 @@ namespace NingshaRaceLib.Petrification.Health
             MarkGraphicsDirty();
         }
 
-        //函数职责：在完全石化开始时终止 Job、路径、姿态、飞行和渲染动画。
+        //停止行动，卧床时保留任务和床位预订，冻结期间由工作补丁暂停推进。
         private void StopCurrentActions()
         {
-            pawn?.jobs?.StopAll();
+            pawn?.jobs?.StopAll(ifLayingKeepLaying: true);
             pawn?.pather?.StopDead();
             pawn?.stances?.CancelBusyStanceHard();
             pawn?.flight?.ForceLand();

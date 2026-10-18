@@ -114,12 +114,14 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
                     ingestJob.count = food is Corpse ? 1 : System.Math.Min(food.stackCount, FoodUtility.WillIngestStackCountOf(pawn, food.def, FoodUtility.NutritionForEater(pawn, food)));
                     return ingestJob;
                 }
+                Job harvest = TryCreateHarvestJob(pawn, state, forEating: true);
+                if (harvest != null) return harvest;
             }
 
             if (pawn.needs != null && pawn.needs.rest != null && pawn.needs.rest.CurLevelPercentage < 0.2f)
             {
                 IntVec3 restCell;
-                if (TryFindColonyCell(pawn, state, Settings.queenLeashRadius, out restCell))
+                if (TryFindColonyCell(pawn, state, Settings.queenLeashRadius, out restCell, forRest: true))
                 {
                     return JobMaker.MakeJob(JobDefOf.LayDown, restCell);
                 }
@@ -136,7 +138,8 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             for (int i = 0; i < state.StorageCells.Count; i++)
             {
                 Thing food = GetStorageOccupant(state.StorageCells[i]);
-                if (!IsStoredFood(food) || !food.IngestibleNow || !pawn.CanReserveAndReach(food, PathEndMode.ClosestTouch, Danger.Deadly))
+                if (!IsStoredFood(food) || !food.IngestibleNow || !pawn.RaceProps.CanEverEat(food)
+                    || !pawn.CanReserveAndReach(food, PathEndMode.ClosestTouch, Danger.Deadly))
                 {
                     continue;
                 }
@@ -213,7 +216,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         }
 
         //函数职责：在蚁穴周围寻找地图内、可站立且成员能够抵达的活动格。
-        private bool TryFindColonyCell(Pawn pawn, AntColonyState state, float radius, out IntVec3 cell)
+        private bool TryFindColonyCell(Pawn pawn, AntColonyState state, float radius, out IntVec3 cell, bool forRest = false)
         {
             return CellFinder.TryFindRandomCellNear(
                 state.NestPosition,
@@ -223,6 +226,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
                 {
                     return candidate.InBounds(map) && candidate.DistanceTo(state.NestPosition) <= radius
                         && !IsWorkerForageDangerous(pawn, candidate)
+                        && (!forRest || (pawn.CanReserve(candidate) && candidate.GetFirstPawn(map) == null))
                         && candidate.Standable(map) && pawn.CanReach(candidate, PathEndMode.OnCell, Danger.Deadly);
                 },
                 out cell,

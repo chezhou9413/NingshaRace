@@ -31,9 +31,12 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
                 state.HarvestRequested = false;
                 return;
             }
-            bool lacksFood = GetStoredNutrition(state) < GetFoodReserve(state) * Settings.harvestReserveMultiplier;
+            float stored = GetStoredNutrition(state);
+            float reserve = GetFoodReserve(state);
+            bool lacksFood = stored < reserve * Settings.harvestReserveMultiplier;
             if (!lacksFood) state.HarvestRequested = false;
-            if (now < state.NextHarvestOrderTick) return;
+            //口粮低于基本储备时立即补粮，正常储备仍按正午计划采收。
+            if (now < state.NextHarvestOrderTick && (stored >= reserve || state.HarvestRequested)) return;
             state.NextHarvestOrderTick = NextLocalNoonTick(now);
             state.HarvestRequested = lacksFood;
             if (!lacksFood) return;
@@ -90,15 +93,18 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
                 && !map.GetComponent<MapComponent_AntHabitats>().IsRepelled(plant.Position);
         }
 
-        //函数职责：为任务选择、持续执行和最终结算统一验证所属巢群、范围、驱蚁影响及储藏空间。
-        public bool CanHarvestForColony(Pawn pawn, Plant plant)
+        //普通采收需要库位；饥饿的蚁后和工蚁可以直接采菇进食。
+        public bool CanHarvestForColony(Pawn pawn, Plant plant, bool forEating = false)
         {
-            AntColonyState state;
-            return IsHarvestableFood(plant) && TryGetColony(pawn, out state) && !state.NestDestroyed
-                && state.HarvestRequested
-                && pawn.TryGetComp<Comp_DesertPitAntMember>()?.Caste == AntCaste.Worker
-                && plant.Position.DistanceToSquared(state.NestPosition) <= Settings.harvestRadius * Settings.harvestRadius
-                && !IsWorkerForageDangerous(pawn, plant.Position)
+            if (!IsHarvestableFood(plant) || !TryGetColony(pawn, out AntColonyState state) || state.NestDestroyed
+                || plant.Position.DistanceToSquared(state.NestPosition) > Settings.harvestRadius * Settings.harvestRadius
+                || IsWorkerForageDangerous(pawn, plant.Position)) return false;
+            AntCaste caste = pawn.GetComp<Comp_DesertPitAntMember>().Caste;
+            if (forEating)
+                return (caste == AntCaste.Queen || caste == AntCaste.Worker)
+                    && pawn.needs.food.CurLevelPercentage < 0.35f
+                    && pawn.RaceProps.CanEverEat(plant.def.plant.harvestedThingDef);
+            return caste == AntCaste.Worker && state.HarvestRequested
                 && HasHarvestStorageSpace(pawn, state, plant.def.plant.harvestedThingDef);
         }
 
@@ -115,29 +121,45 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             return false;
         }
 
-        //函数职责：为有空闲搬运额度的工蚁选择最近可达的成熟食用菌，不搬走整株植物。
-        private Job TryCreateHarvestJob(Pawn pawn, AntColonyState state)
+        //选择成熟食用菌，紧急口粮与自行进食不受普通搬运冷却限制。
+        private Job TryCreateHarvestJob(Pawn pawn, AntColonyState state, bool forEating = false)
         {
-            if (!pawn.TryGetComp<Comp_DesertPitAntMember>().CanStartForage(Find.TickManager.TicksGame, Settings.workerHaulLimit)) return null;
+            if (!forEating && GetStoredNutrition(state) >= GetFoodReserve(state)
+                && !pawn.GetComp<Comp_DesertPitAntMember>().CanStartForage(Find.TickManager.TicksGame, Settings.workerHaulLimit)) return null;
             List<Plant> candidates;
             if (!harvestCandidates.TryGetValue(state.Id, out candidates)) return null;
             Plant best = null;
             float distance = float.MaxValue;
             foreach (Plant plant in candidates)
             {
-                if (!CanHarvestForColony(pawn, plant)) continue;
+                if (!CanHarvestForColony(pawn, plant, forEating)) continue;
                 float next = pawn.Position.DistanceToSquared(plant.Position);
                 if (next >= distance || !pawn.CanReserveAndReach(plant, PathEndMode.Touch, Danger.Deadly)) continue;
                 best = plant;
                 distance = next;
             }
-            return best == null ? null : JobMaker.MakeJob(DefOfRefs.NingshaRace_Job_DesertPitAntHarvest, best);
+            if (best == null) return null;
+            Job job = JobMaker.MakeJob(DefOfRefs.NingshaRace_Job_DesertPitAntHarvest, best);
+            //目标 B 为直接食用产物的蚂蚁，空目标表示采收入库。
+            if (forEating) job.targetB = pawn;
+            return job;
         }
 
         //采收后立即安排食物入库，让采菇指令能补充库存而不是只留下散落产物。
-        public void NotifyFungusHarvested(Pawn worker)
+        public void NotifyFungusHarvested(Pawn worker, Thing food, bool forEating)
         {
             RefreshForageCandidates();
+            if (forEating)
+            {
+                if (food != null && worker.CanReserveAndReach(food, PathEndMode.ClosestTouch, Danger.Deadly))
+                {
+                    Job ingest = JobMaker.MakeJob(JobDefOf.Ingest, food);
+                    ingest.count = System.Math.Min(food.stackCount, FoodUtility.WillIngestStackCountOf(worker,
+                        food.def, FoodUtility.NutritionForEater(worker, food)));
+                    worker.jobs.jobQueue.EnqueueFirst(ingest);
+                }
+                return;
+            }
             if (!TryGetColony(worker, out AntColonyState state)) return;
             Job haul = TryCreateForageJob(worker, state, true);
             if (haul != null) worker.jobs.jobQueue.EnqueueFirst(haul);
@@ -150,7 +172,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             float distance = float.MaxValue;
             foreach (Thing food in forageCandidates)
             {
-                if (!food.Spawned || !IsStoredFood(food) || !food.IngestibleNow
+                if (!food.Spawned || !IsStoredFood(food) || !food.IngestibleNow || !pawn.RaceProps.CanEverEat(food)
                     || IsWorkerForageDangerous(pawn, food.Position)
                     || map.GetComponent<MapComponent_AntHabitats>().IsRepelled(food.Position)) continue;
                 float next = pawn.Position.DistanceToSquared(food.Position);

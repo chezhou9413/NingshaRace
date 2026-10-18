@@ -16,6 +16,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         {
             Comp_DesertPitAntMember member = pawn.GetComp<Comp_DesertPitAntMember>();
             if (member.Caste != AntCaste.Worker || Find.TickManager.TicksGame < member.NextResourceDigTick) return null;
+            if (!pawn.CanReserve(pawn.Position)) return null;
             return JobMaker.MakeJob(DefOfRefs.NingshaRace_Job_DesertPitAntDigResource, pawn.Position);
         }
 

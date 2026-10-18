@@ -100,6 +100,11 @@ namespace NingshaRaceLib.SandGolem.Automation
                     continue;
                 }
                 if (!pawn.Spawned || pawn.Downed || pawn.InMentalState) continue;
+                if (ShouldDeferForRest(pawn))
+                {
+                    ClearQueued(pawn);
+                    continue;
+                }
                 bool reachable = SandGolemAutoSummonTarget.IsHomeSand(pawn, state.homeSand, false)
                     && pawn.CanReach(state.homeSand, PathEndMode.Touch, Danger.Some);
                 if (!reachable && !SandGolemAutoSummonTarget.TryFind(pawn, false, out state.homeSand))
@@ -117,6 +122,7 @@ namespace NingshaRaceLib.SandGolem.Automation
         {
             Pawn pawn = state.caster;
             if (!state.pending || !pawn.Spawned || pawn.Drafted || pawn.Downed || pawn.InMentalState
+                || ShouldDeferForRest(pawn)
                 || GameComponent_SandGolemTracker.Current.HasSummonForCaster(pawn)) return;
             Ability ability = pawn.abilities?.GetAbility(DefOfRefs.NingshaRace_Ability_SummonSandGolem);
             if (ability == null || !ability.CanQueueCast || ability.GizmoDisabled(out _)) return;
@@ -124,6 +130,14 @@ namespace NingshaRaceLib.SandGolem.Automation
             Job job = ability.GetJob(cell, LocalTargetInfo.Invalid);
             job.def = AutoJob;
             pawn.jobs.jobQueue.EnqueueFirst(job, JobTag.Misc);
+        }
+
+        //疲劳、睡眠和卧床治疗优先于自动补召，保留请求等恢复后再执行。
+        internal static bool ShouldDeferForRest(Pawn pawn)
+        {
+            return !pawn.Awake() || pawn.GetPosture().Laying()
+                || pawn.CurJobDef == JobDefOf.LayDown
+                || (pawn.needs.rest != null && pawn.needs.rest.CurCategory != RestCategory.Rested);
         }
 
         //函数职责：向右侧信件栏说明无可用居住区沙地导致自动召唤关闭。

@@ -6,6 +6,10 @@
     <label>侵蚀体</label>
     <description>侵蚀吞没意识后诞生的异常实体。原有意识已经消失，只留下会无差别追猎其他生命的躯壳。它能以极短间隔发动侵蚀凝砂之眼，但不会召唤沙傀；只有凝砂族原身会生出蛇首。</description>
     <hediff>NingshaRace_ErosionBody</hediff>
+    <removesHediffs>
+      <li>Hypothermia</li>
+      <li>HypothermicSlowdown</li>
+    </removesHediffs>
     <thinkTree>NingshaRace_ErosionBody</thinkTree>
     <thinkTreeConstant>NingshaRace_ErosionBodyConstant</thinkTreeConstant>
     <namePrefix>侵蚀体 </namePrefix>

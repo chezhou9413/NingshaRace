@@ -16,6 +16,7 @@ namespace NingshaRaceLib.SandGolem.Automation
         protected override IEnumerable<Toil> MakeNewToils()
         {
             this.FailOn(() => !GameComponent_SandGolemAutoSummon.Current.Enabled(pawn) || pawn.Drafted
+                || GameComponent_SandGolemAutoSummon.ShouldDeferForRest(pawn)
                 || pawn.Downed || pawn.InMentalState || !SandGolemAutoSummonTarget.IsHomeSand(pawn, job.targetA.Cell, true)
                 || GameComponent_SandGolemTracker.Current.HasSummonForCaster(pawn) || !job.ability.CanCast);
             yield return Toils_General.Do(ChooseCastCell);

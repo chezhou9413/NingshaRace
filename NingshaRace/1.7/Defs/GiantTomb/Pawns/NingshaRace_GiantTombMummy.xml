@@ -51,8 +51,8 @@
       </li>
     </comps>
     <race>
-      <thinkTreeMain>Animal</thinkTreeMain>
-      <thinkTreeConstant>AnimalConstant</thinkTreeConstant>
+      <thinkTreeMain>Fleshbeast</thinkTreeMain>
+      <thinkTreeConstant>FleshbeastConstant</thinkTreeConstant>
       <body>Human</body>
       <baseBodySize>1</baseBodySize>
       <baseHungerRate>0</baseHungerRate>

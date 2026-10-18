@@ -149,7 +149,8 @@ namespace NingshaRaceLib.SandGolem.Lifecycle
                 BattleExitTickField?.SetValue(pawn.records, 0);
             }
             pawn.mindState?.mentalStateHandler?.Reset();
-            pawn.guest?.SetGuestStatus(null);
+            //新生成的沙傀没有访客身份，无需触发跨地图床位归属清理。
+            if (pawn.HostFaction != null) pawn.guest.SetGuestStatus(null);
         }
     }
 }

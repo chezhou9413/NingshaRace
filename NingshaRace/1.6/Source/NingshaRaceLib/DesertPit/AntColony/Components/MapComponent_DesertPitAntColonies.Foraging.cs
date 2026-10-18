@@ -71,7 +71,8 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         private Job TryCreateForageJob(Pawn pawn, AntColonyState state, bool foodOnly)
         {
             Comp_DesertPitAntMember memberComp = pawn.TryGetComp<Comp_DesertPitAntMember>();
-            if (memberComp == null || !memberComp.CanStartForage(Find.TickManager.TicksGame, Settings.workerHaulLimit))
+            if (memberComp == null || (!(foodOnly && GetStoredNutrition(state) < GetFoodReserve(state))
+                && !memberComp.CanStartForage(Find.TickManager.TicksGame, Settings.workerHaulLimit)))
             {
                 return null;
             }

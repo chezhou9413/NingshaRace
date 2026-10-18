@@ -42,6 +42,10 @@
             <capacity>Sight</capacity>
             <setMax>0</setMax>
           </li>
+          <li>
+            <capacity>Talking</capacity>
+            <setMax>0</setMax>
+          </li>
         </capMods>
       </li>
     </stages>
