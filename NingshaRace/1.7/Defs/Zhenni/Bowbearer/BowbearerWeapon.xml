@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 幽弓使用原版单发与命中判定，火焰只影响显示。 -->
+  <ThingDef ParentName="BaseWeaponNeolithic">
+    <defName>NingshaRace_Zhenni_Bowbearer_Bow</defName>
+    <label>挽弓者幽弓</label>
+    <description>震尼挽弓者的幽焰之弓。每射出三支普通幽箭，下一箭便凝聚为强化箭；更长的蓄力伴随紫色星芒预警，命中后在半径两格内爆开。</description>
+    <graphicData><texPath>Zhenni/Bowbearer/Weapon/BowGrip</texPath><graphicClass>Graphic_Single</graphicClass><drawSize>1.5</drawSize></graphicData>
+    <equippedAngleOffset>-30</equippedAngleOffset>
+    <recipeMaker IsNull="True" />
+    <thingSetMakerTags IsNull="True" />
+    <destroyOnDrop>true</destroyOnDrop><tradeability>None</tradeability>
+    <smeltable>false</smeltable><burnableByRecipe>false</burnableByRecipe><relicChance>0</relicChance>
+    <soundInteract>Bow_Large</soundInteract>
+    <statBases>
+      <Mass>3</Mass><MarketValue>100</MarketValue><Flammability>0</Flammability><DeteriorationRate>0</DeteriorationRate>
+      <AccuracyTouch>0.65</AccuracyTouch><AccuracyShort>0.85</AccuracyShort><AccuracyMedium>0.75</AccuracyMedium><AccuracyLong>0.50</AccuracyLong>
+      <RangedWeapon_Cooldown>1.5</RangedWeapon_Cooldown>
+    </statBases>
+    <weaponTags><li>NingshaRaceBowbearerBow</li></weaponTags>
+    <weaponClasses><li>Ranged</li><li>RangedHeavy</li></weaponClasses>
+    <verbs><li>
+      <verbClass>NingshaRaceLib.Zhenni.Bowbearer.Verb_BowbearerShoot</verbClass>
+      <hasStandardCommand>true</hasStandardCommand><defaultProjectile>NingshaRace_Zhenni_Bowbearer_Arrow</defaultProjectile>
+      <warmupTime>2</warmupTime><range>29.9</range><burstShotCount>1</burstShotCount><soundCast>Bow_Large</soundCast>
+    </li></verbs>
+    <tools><li><label>弓身</label><capacities><li>Blunt</li><li>Poke</li></capacities><power>9</power><cooldownTime>2</cooldownTime></li></tools>
+  </ThingDef>
+  <ThingDef ParentName="BaseProjectileNeolithic">
+    <defName>NingshaRace_Zhenni_Bowbearer_Arrow</defName><label>幽焰箭</label>
+    <thingClass>NingshaRaceLib.Zhenni.Bowbearer.Projectile_BowbearerArrow</thingClass>
+    <graphicData><texPath>Zhenni/Bowbearer/Projectile/arrowHead</texPath><graphicClass>Graphic_Single</graphicClass></graphicData>
+    <projectile>
+      <damageDef>Arrow</damageDef><damageAmountBase>17</damageAmountBase><armorPenetrationBase>0.15</armorPenetrationBase>
+      <stoppingPower>1.5</stoppingPower><speed>49</speed><arcHeightFactor>0</arcHeightFactor><shadowSize>0</shadowSize>
+    </projectile>
+  </ThingDef>
+  <ThingDef ParentName="BaseProjectileNeolithic">
+    <defName>NingshaRace_Zhenni_Bowbearer_EmpoweredArrow</defName><label>凝焰爆裂箭</label>
+    <thingClass>NingshaRaceLib.Zhenni.Bowbearer.Projectile_BowbearerEmpoweredArrow</thingClass>
+    <graphicData><texPath>Zhenni/Bowbearer/Projectile/arrowHead</texPath><graphicClass>Graphic_Single</graphicClass></graphicData>
+    <projectile>
+      <damageDef>Bomb</damageDef><damageAmountBase>17</damageAmountBase><armorPenetrationBase>0.15</armorPenetrationBase>
+      <stoppingPower>1.5</stoppingPower><speed>49</speed><arcHeightFactor>0</arcHeightFactor><shadowSize>0</shadowSize>
+      <explosionRadius>2</explosionRadius><explosionDamageFalloff>false</explosionDamageFalloff>
+      <soundExplode>Explosion_Bomb</soundExplode><doExplosionVFX>false</doExplosionVFX>
+      <explosionChanceToStartFire>0</explosionChanceToStartFire><screenShakeFactor>0.15</screenShakeFactor>
+    </projectile>
+  </ThingDef>
+</Defs>

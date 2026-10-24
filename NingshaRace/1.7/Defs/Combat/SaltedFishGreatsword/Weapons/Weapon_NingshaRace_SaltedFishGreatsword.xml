@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 鱼尾用于握持，鱼头刺击，外露的鱼骨用于劈砍。 -->
+  <ThingDef ParentName="BaseMeleeWeapon_Sharp_Quality">
+    <defName>NingshaRace_SaltedFishGreatsword</defName>
+    <label>咸鱼大剑</label>
+    <description>一条硬得能当大剑挥舞的咸鱼。握住鱼尾，便能用坚硬的鱼头刺击，或用外露的鱼骨劈砍。看起来不太体面，打起来却很有分量。</description>
+    <recipeMaker IsNull="True" />
+    <smeltable>false</smeltable>
+    <tradeability>None</tradeability>
+    <graphicData>
+      <texPath>NingshaRace/Weapons/SaltedFishGreatsword</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Cutout</shaderType>
+      <drawSize>(1.5,1.5)</drawSize>
+    </graphicData>
+    <!-- 参照盖布巨剑：鱼头朝右上，鱼尾握点位于 (140,372)/512，沿用其装备角度与距离。 -->
+    <equippedAngleOffset>0</equippedAngleOffset>
+    <equippedDistanceOffset>0.5</equippedDistanceOffset>
+    <techLevel>Neolithic</techLevel>
+    <statBases>
+      <MaxHitPoints>160</MaxHitPoints>
+      <Mass>2.2</Mass>
+      <MarketValue>320</MarketValue>
+      <MeleeWeapon_DamageMultiplier>1</MeleeWeapon_DamageMultiplier>
+    </statBases>
+    <weaponTags Inherit="False">
+      <li>NingshaRaceSaltedFishGreatsword</li>
+    </weaponTags>
+    <tools Inherit="False">
+      <li>
+        <label>鱼尾</label>
+        <capacities><li>Blunt</li></capacities>
+        <power>9</power>
+        <cooldownTime>2</cooldownTime>
+      </li>
+      <li>
+        <label>鱼头</label>
+        <capacities><li>Stab</li></capacities>
+        <power>18</power>
+        <cooldownTime>2.6</cooldownTime>
+      </li>
+      <li>
+        <label>鱼骨</label>
+        <capacities><li>Cut</li></capacities>
+        <power>23</power>
+        <cooldownTime>2.6</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+</Defs>

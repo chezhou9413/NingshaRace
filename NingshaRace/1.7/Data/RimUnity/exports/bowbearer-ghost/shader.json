@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "shaderName": "NingshaRace/Zhenni/Bowbearer/Ghost",
+  "profile": "world",
+  "uiMasks": false,
+  "colorSpace": "Linear",
+  "grabTexture": null,
+  "geometry": null,
+  "vertexEntry": "vert",
+  "fragmentEntry": "frag",
+  "vertexFile": "shader.vert.glsl",
+  "fragmentFile": "shader.frag.glsl",
+  "arrays": {},
+  "properties": [
+    {
+      "name": "_Color",
+      "displayName": "紫焰颜色与亮度",
+      "type": "Color",
+      "attributes": [],
+      "defaultValue": [
+        0.7,
+        0.38,
+        1,
+        1
+      ],
+      "defaultTexture": null,
+      "range": null
+    },
+    {
+      "name": "_Intensity",
+      "displayName": "发光强度",
+      "type": "Float",
+      "attributes": [],
+      "defaultValue": [
+        1
+      ],
+      "defaultTexture": null,
+      "range": null
+    },
+    {
+      "name": "_DisplacementTex",
+      "displayName": "流动噪声",
+      "type": "2D",
+      "attributes": [],
+      "defaultValue": null,
+      "defaultTexture": "gray",
+      "range": null
+    },
+    {
+      "name": "_EffectTime",
+      "displayName": "游戏时间",
+      "type": "Float",
+      "attributes": [],
+      "defaultValue": [
+        0
+      ],
+      "defaultTexture": null,
+      "range": null
+    },
+    {
+      "name": "_Distortion",
+      "displayName": "扰动",
+      "type": "Float",
+      "attributes": [],
+      "defaultValue": [
+        0.65
+      ],
+      "defaultTexture": null,
+      "range": null
+    },
+    {
+      "name": "_Glow",
+      "displayName": "辉光",
+      "type": "Float",
+      "attributes": [],
+      "defaultValue": [
+        1.2
+      ],
+      "defaultTexture": null,
+      "range": null
+    },
+    {
+      "name": "_Mode",
+      "displayName": "螺旋或爆焰",
+      "type": "Float",
+      "attributes": [],
+      "defaultValue": [
+        0
+      ],
+      "defaultTexture": null,
+      "range": null
+    },
+    {
+      "name": "_Progress",
+      "displayName": "爆焰进度",
+      "type": "Float",
+      "attributes": [],
+      "defaultValue": [
+        0
+      ],
+      "defaultTexture": null,
+      "range": null
+    },
+    {
+      "name": "_Seed",
+      "displayName": "相位",
+      "type": "Float",
+      "attributes": [],
+      "defaultValue": [
+        0
+      ],
+      "defaultTexture": null,
+      "range": null
+    }
+  ],
+  "tags": {
+    "Queue": "Transparent",
+    "RenderType": "Transparent"
+  },
+  "states": {
+    "Cull": "Off",
+    "ZWrite": "Off",
+    "ZTest": "LEqual",
+    "Blend": "One OneMinusSrcAlpha"
+  },
+  "keywords": [],
+  "keywordGroups": [],
+  "approximations": [
+    "程序按 Linear 计算后编码到宿主 UNorm 场景；透明叠加沿用宿主的 Gamma 混合，HDR 超出场景格式范围的部分仍会截断。",
+    "常量正整数幂 2～64 使用乘法展开；负底数按整数幂计算，属于旧 Shader 写法的兼容处理，并非 HLSL pow 的负底数语义保证。"
+  ]
+}

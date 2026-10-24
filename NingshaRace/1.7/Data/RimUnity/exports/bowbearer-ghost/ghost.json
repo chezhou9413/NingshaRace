@@ -1,0 +1,28 @@
+{
+  "formatVersion": 1,
+  "key": "RimUnity_Custom_BowbearerGhost_2b12736da40b6ed93f95e46570993b40b59dd43c73015843088dc9959bf7c5d1",
+  "sourceName": "NingshaRace/Zhenni/Bowbearer/Ghost",
+  "profile": "world",
+  "colorSpace": "Linear",
+  "vertexFile": "exports/bowbearer-ghost/shader.vert.glsl",
+  "fragmentFile": "exports/bowbearer-ghost/shader.frag.glsl",
+  "descriptorFile": "exports/bowbearer-ghost/shader.json",
+  "defaults": [],
+  "keywords": [],
+  "approximations": [
+    "程序按 Linear 计算后编码到宿主 UNorm 场景；透明叠加沿用宿主的 Gamma 混合，HDR 超出场景格式范围的部分仍会截断。",
+    "常量正整数幂 2～64 使用乘法展开；负底数按整数幂计算，属于旧 Shader 写法的兼容处理，并非 HLSL pow 的负底数语义保证。"
+  ],
+  "blend": true,
+  "depthTest": true,
+  "depthWrite": false,
+  "colorWrite": true,
+  "srcColor": "One",
+  "dstColor": "OneMinusSrcAlpha",
+  "srcAlpha": "One",
+  "dstAlpha": "OneMinusSrcAlpha",
+  "colorOp": "Add",
+  "alphaOp": "Add",
+  "cull": "None",
+  "renderQueue": 3000
+}

@@ -5,7 +5,7 @@
     <OutputPath>../../Compat/FacialAnimation/Assemblies/</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="../../../1.6/Source/NingshaRace.FacialAnimation/**/*.cs" Exclude="../../../1.6/Source/NingshaRace.FacialAnimation/obj/**/*.cs;../../../1.6/Source/NingshaRace.FacialAnimation/bin/**/*.cs" />
+    <Compile Include="**/*.cs" Exclude="obj/**/*.cs;bin/**/*.cs" />
     <Reference Include="FacialAnimation" HintPath="$(ChezhouLibDir)/Source/.build/references/1.7/FacialAnimation.dll" />
     <ProjectReference Include="../NingshaRaceLib/NingshaRaceLib.csproj" />
   </ItemGroup>

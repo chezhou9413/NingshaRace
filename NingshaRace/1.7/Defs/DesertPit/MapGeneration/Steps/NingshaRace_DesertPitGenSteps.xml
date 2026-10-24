@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
+  <GenStepDef>
+    <defName>NingshaRace_DesertPitRegionalEcology</defName>
+    <order>350</order>
+    <genStep Class="NingshaRaceLib.DesertPit.Generation.Steps.GenStep_DesertPitRegionalEcology" />
+  </GenStepDef>
+
+  <GenStepDef>
+    <defName>NingshaRace_DesertPitCaveBase</defName>
+    <order>100</order>
+    <genStep Class="NingshaRaceLib.DesertPit.Generation.Steps.GenStep_DesertPitCaveBase" />
+  </GenStepDef>
+
   <!-- 文件职责：定义沙漠巨坑口袋地图使用的自定义生成步骤。 -->
   <GenStepDef>
     <defName>NingshaRace_DesertPitLayout</defName>

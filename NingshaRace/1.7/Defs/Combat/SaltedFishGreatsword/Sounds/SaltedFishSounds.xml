@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <SoundDef>
+    <defName>NingshaRace_SaltedFishBoing</defName>
+    <context>MapOnly</context>
+    <maxSimultaneous>3</maxSimultaneous>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>Combat/SaltedFishGreatsword/SaltedFishBoing</clipPath>
+          </li>
+        </grains>
+        <volumeRange>28~34</volumeRange>
+        <pitchRange>0.92~1.12</pitchRange>
+      </li>
+    </subSounds>
+  </SoundDef>
+</Defs>

@@ -4,10 +4,9 @@
   <author>chezhou</author>
   <packageId>chezhou.race.ningsharace</packageId>
   <supportedVersions>
-    <li>1.6</li>
     <li>1.7</li>
   </supportedVersions>
-  <description>必需前置：ChezhouLib。1.7 还需要 RimUnity，加载顺序为 Harmony → RimUnity → ChezhouLib → 凝砂族，HAR 也须在凝砂族之前。
+  <description>必需前置：ChezhouLib、RimUnity。加载顺序为 Harmony → RimUnity → ChezhouLib → 凝砂族，HAR 也须在凝砂族之前。
 
 沙漠下面还有人居住。凝砂族在巨坑与洞穴中寻找食物、养育后代，守着衰落王朝留下的聚落。
 
@@ -17,7 +16,7 @@
 专属基因、服装与武器，蜕皮与卵生。操纵砂石、石化敌人、召唤砂傀儡，都要面对深层侵蚀的威胁。
 
 沙海之下
-探索地下巨坑、蚁巢和古老遗迹。在智慧之蛇祭坛献上生肉，寻求指引，寻找受困的同胞。
+探索由洞室、曲折通道、河湖和岩柱组成的地下巨坑。沿水系分布的绿洲、受光岸带、灰暗菌林与深暗洞穴拥有不同植被，并生长着天然菌床、近远蚁巢及地下能源点。
 
 深砂遗民
 三名凝砂族，少量物资，一座陌生的地下巨坑。这就是你们的新家。
@@ -25,10 +24,14 @@
 叙事者：索缇丝
 她会引导同族前来投奔，为聚落争取喘息。侵蚀也会随之而来。
 
-适用版本：RimWorld 1.6、1.7（1.7 需要对应版本的 CL 与 HAR）
-前置模组：Harmony、HAR、ChezhouLib；1.7 额外需要 RimUnity
+适用版本：RimWorld 1.7（需要对应版本的 CL 与 HAR）
+前置模组：Harmony、RimUnity、HAR、ChezhouLib
 所需 DLC：皇权、理念、生机、异象</description>
   <modDependencies>
+    <li>
+      <packageId>Chezhou.RimUnity</packageId>
+      <displayName>RimUnity</displayName>
+    </li>
     <li>
       <packageId>brrainz.harmony</packageId>
       <displayName>Harmony</displayName>

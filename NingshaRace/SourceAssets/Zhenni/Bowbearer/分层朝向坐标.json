@@ -1,0 +1,1013 @@
+{
+  "source": "D:\\QQ\\弓兵测试(三视图).psd",
+  "layers": [
+    {
+      "layer": "匣子",
+      "bounds": [
+        1207,
+        679,
+        1912,
+        982
+      ],
+      "rect": [
+        1016,
+        210,
+        2104,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Quiver_south.png"
+    },
+    {
+      "layer": "火苗7 副本 2",
+      "bounds": [
+        1189,
+        748,
+        1283,
+        836
+      ],
+      "rect": [
+        1016,
+        210,
+        2104,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Flame7_south.png"
+    },
+    {
+      "layer": "火苗6 副本 2",
+      "bounds": [
+        1810,
+        809,
+        1969,
+        909
+      ],
+      "rect": [
+        1016,
+        210,
+        2104,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Flame6_south.png"
+    },
+    {
+      "layer": "火苗5 副本 2",
+      "bounds": [
+        1156,
+        627,
+        1341,
+        823
+      ],
+      "rect": [
+        1016,
+        210,
+        2104,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Flame5_south.png"
+    },
+    {
+      "layer": "斗篷内部",
+      "bounds": [
+        1281,
+        533,
+        1834,
+        1110
+      ],
+      "rect": [
+        1016,
+        210,
+        2104,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_CapeInner_south.png"
+    },
+    {
+      "layer": "火焰躯体 副本",
+      "bounds": [
+        1465,
+        570,
+        1669,
+        1238
+      ],
+      "rect": [
+        1016,
+        210,
+        2104,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_FlameBody_south.png"
+    },
+    {
+      "layer": "火苗4 副本",
+      "bounds": [
+        1489,
+        897,
+        1689,
+        1184
+      ],
+      "rect": [
+        1016,
+        210,
+        2104,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Flame4_south.png"
+    },
+    {
+      "layer": "头",
+      "bounds": [
+        1411,
+        315,
+        2100,
+        628
+      ],
+      "rect": [
+        1016,
+        210,
+        2104,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Head_south.png"
+    },
+    {
+      "layer": "身体",
+      "bounds": [
+        1426,
+        583,
+        1665,
+        993
+      ],
+      "rect": [
+        1016,
+        210,
+        2104,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Body_south.png"
+    },
+    {
+      "layer": "斗篷外部",
+      "bounds": [
+        1264,
+        307,
+        1888,
+        1188
+      ],
+      "rect": [
+        1016,
+        210,
+        2104,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_CapeOuter_south.png"
+    },
+    {
+      "layer": "火苗3 副本",
+      "bounds": [
+        1554,
+        559,
+        1771,
+        709
+      ],
+      "rect": [
+        1016,
+        210,
+        2104,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Flame3_south.png"
+    },
+    {
+      "layer": "火苗2 副本",
+      "bounds": [
+        1379,
+        549,
+        1669,
+        602
+      ],
+      "rect": [
+        1016,
+        210,
+        2104,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Flame2_south.png"
+    },
+    {
+      "layer": "火苗1 副本",
+      "bounds": [
+        1614,
+        279,
+        1773,
+        379
+      ],
+      "rect": [
+        1016,
+        210,
+        2104,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Flame1_south.png"
+    },
+    {
+      "layer": "特效",
+      "bounds": [
+        1081,
+        574,
+        2081,
+        595
+      ],
+      "rect": [
+        1016,
+        210,
+        2104,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Glow_south.png"
+    },
+    {
+      "layer": "斗篷边",
+      "bounds": [
+        2541,
+        438,
+        2681,
+        680
+      ],
+      "rect": [
+        1911,
+        210,
+        2999,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_CapeEdge_east.png"
+    },
+    {
+      "layer": "斗篷内",
+      "bounds": [
+        2157,
+        606,
+        2707,
+        1150
+      ],
+      "rect": [
+        1911,
+        210,
+        2999,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_CapeInner_east.png"
+    },
+    {
+      "layer": "火焰躯体 副本 3",
+      "bounds": [
+        2338,
+        591,
+        2547,
+        1260
+      ],
+      "rect": [
+        1911,
+        210,
+        2999,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_FlameBody_east.png"
+    },
+    {
+      "layer": "头",
+      "bounds": [
+        2360,
+        335,
+        2680,
+        639
+      ],
+      "rect": [
+        1911,
+        210,
+        2999,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Head_east.png"
+    },
+    {
+      "layer": "火苗6 副本 6",
+      "bounds": [
+        2547,
+        579,
+        2764,
+        729
+      ],
+      "rect": [
+        1911,
+        210,
+        2999,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Flame6_east.png"
+    },
+    {
+      "layer": "火苗5 副本 5",
+      "bounds": [
+        2289,
+        949,
+        2485,
+        1239
+      ],
+      "rect": [
+        1911,
+        210,
+        2999,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Flame5_east.png"
+    },
+    {
+      "layer": "身体",
+      "bounds": [
+        1570,
+        586,
+        2609,
+        1021
+      ],
+      "rect": [
+        1911,
+        210,
+        2999,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Body_east.png"
+    },
+    {
+      "layer": "火苗4 副本 5",
+      "bounds": [
+        2495,
+        243,
+        2630,
+        379
+      ],
+      "rect": [
+        1911,
+        210,
+        2999,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Flame4_east.png"
+    },
+    {
+      "layer": "斗篷外",
+      "bounds": [
+        2126,
+        302,
+        2713,
+        1267
+      ],
+      "rect": [
+        1911,
+        210,
+        2999,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_CapeOuter_east.png"
+    },
+    {
+      "layer": "火苗3 副本 5",
+      "bounds": [
+        2236,
+        636,
+        2430,
+        819
+      ],
+      "rect": [
+        1911,
+        210,
+        2999,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Flame3_east.png"
+    },
+    {
+      "layer": "火苗2 副本 6",
+      "bounds": [
+        2242,
+        795,
+        2352,
+        858
+      ],
+      "rect": [
+        1911,
+        210,
+        2999,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Flame2_east.png"
+    },
+    {
+      "layer": "匣子",
+      "bounds": [
+        2067,
+        653,
+        2328,
+        1019
+      ],
+      "rect": [
+        1911,
+        210,
+        2999,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Quiver_east.png"
+    },
+    {
+      "layer": "火苗1 副本 2",
+      "bounds": [
+        2403,
+        542,
+        2687,
+        624
+      ],
+      "rect": [
+        1911,
+        210,
+        2999,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Flame1_east.png"
+    },
+    {
+      "layer": "特效",
+      "bounds": [
+        2054,
+        570,
+        3054,
+        591
+      ],
+      "rect": [
+        1911,
+        210,
+        2999,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Glow_east.png"
+    },
+    {
+      "layer": "斗篷边",
+      "bounds": [
+        403,
+        309,
+        637,
+        675
+      ],
+      "rect": [
+        106,
+        210,
+        1194,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_CapeEdge_west.png"
+    },
+    {
+      "layer": "斗篷内部",
+      "bounds": [
+        377,
+        325,
+        927,
+        1145
+      ],
+      "rect": [
+        106,
+        210,
+        1194,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_CapeInner_west.png"
+    },
+    {
+      "layer": "火焰躯体 副本 4",
+      "bounds": [
+        537,
+        586,
+        746,
+        1255
+      ],
+      "rect": [
+        106,
+        210,
+        1194,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_FlameBody_west.png"
+    },
+    {
+      "layer": "火苗6 副本 8",
+      "bounds": [
+        599,
+        944,
+        795,
+        1234
+      ],
+      "rect": [
+        106,
+        210,
+        1194,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Flame6_west.png"
+    },
+    {
+      "layer": "头",
+      "bounds": [
+        404,
+        330,
+        724,
+        634
+      ],
+      "rect": [
+        106,
+        210,
+        1194,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Head_west.png"
+    },
+    {
+      "layer": "身体",
+      "bounds": [
+        475,
+        581,
+        736,
+        1004
+      ],
+      "rect": [
+        106,
+        210,
+        1194,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Body_west.png"
+    },
+    {
+      "layer": "斗篷",
+      "bounds": [
+        371,
+        297,
+        958,
+        1262
+      ],
+      "rect": [
+        106,
+        210,
+        1194,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_CapeOuter_west.png"
+    },
+    {
+      "layer": "火苗5副本 7",
+      "bounds": [
+        760,
+        820,
+        919,
+        920
+      ],
+      "rect": [
+        106,
+        210,
+        1194,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Flame5_west.png"
+    },
+    {
+      "layer": "火苗4副本 7",
+      "bounds": [
+        540,
+        549,
+        735,
+        731
+      ],
+      "rect": [
+        106,
+        210,
+        1194,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Flame4_west.png"
+    },
+    {
+      "layer": "匣子",
+      "bounds": [
+        746,
+        635,
+        1046,
+        977
+      ],
+      "rect": [
+        106,
+        210,
+        1194,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Quiver_west.png"
+    },
+    {
+      "layer": "火苗2 副本 4",
+      "bounds": [
+        427,
+        569,
+        513,
+        611
+      ],
+      "rect": [
+        106,
+        210,
+        1194,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Flame2_west.png"
+    },
+    {
+      "layer": "火苗1 副本 6",
+      "bounds": [
+        547,
+        240,
+        682,
+        376
+      ],
+      "rect": [
+        106,
+        210,
+        1194,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Flame1_west.png"
+    },
+    {
+      "layer": "特效",
+      "bounds": [
+        30,
+        565,
+        1030,
+        586
+      ],
+      "rect": [
+        30,
+        210,
+        1118,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Glow_west.png"
+    },
+    {
+      "layer": "特效",
+      "bounds": [
+        2917,
+        573,
+        3917,
+        594
+      ],
+      "rect": [
+        2856,
+        210,
+        3944,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Glow_north.png"
+    },
+    {
+      "layer": "火苗6 副本 4",
+      "bounds": [
+        3169,
+        581,
+        3386,
+        731
+      ],
+      "rect": [
+        2856,
+        210,
+        3944,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Flame6_north.png"
+    },
+    {
+      "layer": "火焰躯体 副本 2",
+      "bounds": [
+        3295,
+        587,
+        3500,
+        1256
+      ],
+      "rect": [
+        2856,
+        210,
+        3944,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_FlameBody_north.png"
+    },
+    {
+      "layer": "火苗5 副本 3",
+      "bounds": [
+        3272,
+        918,
+        3472,
+        1204
+      ],
+      "rect": [
+        2856,
+        210,
+        3944,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Flame5_north.png"
+    },
+    {
+      "layer": "头",
+      "bounds": [
+        3234,
+        338,
+        3545,
+        653
+      ],
+      "rect": [
+        2856,
+        210,
+        3944,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Head_north.png"
+    },
+    {
+      "layer": "斗篷",
+      "bounds": [
+        3091,
+        336,
+        3710,
+        1229
+      ],
+      "rect": [
+        2856,
+        210,
+        3944,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_CapeOuter_north.png"
+    },
+    {
+      "layer": "火苗4 副本 3",
+      "bounds": [
+        3174,
+        306,
+        3335,
+        409
+      ],
+      "rect": [
+        2856,
+        210,
+        3944,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Flame4_north.png"
+    },
+    {
+      "layer": "火苗3 副本 4",
+      "bounds": [
+        2968,
+        821,
+        3130,
+        923
+      ],
+      "rect": [
+        2856,
+        210,
+        3944,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Flame3_north.png"
+    },
+    {
+      "layer": "火苗2 副本 4",
+      "bounds": [
+        3704,
+        779,
+        3799,
+        867
+      ],
+      "rect": [
+        2856,
+        210,
+        3944,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Flame2_north.png"
+    },
+    {
+      "layer": "火苗1 副本 3",
+      "bounds": [
+        3631,
+        632,
+        3817,
+        827
+      ],
+      "rect": [
+        2856,
+        210,
+        3944,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Flame1_north.png"
+    },
+    {
+      "layer": "匣子",
+      "bounds": [
+        3049,
+        709,
+        3757,
+        1017
+      ],
+      "rect": [
+        2856,
+        210,
+        3944,
+        1298
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Pawn\\Bowbearer_Quiver_north.png"
+    },
+    {
+      "layer": "图层 14 副本 4",
+      "bounds": [
+        807,
+        1331,
+        1157,
+        1918
+      ],
+      "rect": [
+        760,
+        1280,
+        1680,
+        2200
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Weapon\\BowUpper0.png"
+    },
+    {
+      "layer": "图层 14 副本 3",
+      "bounds": [
+        1150,
+        2001,
+        1532,
+        2181
+      ],
+      "rect": [
+        760,
+        1280,
+        1680,
+        2200
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Weapon\\BowLower0.png"
+    },
+    {
+      "layer": "图层 14 副本 8",
+      "bounds": [
+        1167,
+        1954,
+        1521,
+        2129
+      ],
+      "rect": [
+        760,
+        1280,
+        1680,
+        2200
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Weapon\\BowUpper1.png"
+    },
+    {
+      "layer": "图层 14 副本 7",
+      "bounds": [
+        892,
+        1392,
+        1163,
+        1902
+      ],
+      "rect": [
+        760,
+        1280,
+        1680,
+        2200
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Weapon\\BowLower1.png"
+    },
+    {
+      "layer": "图层 14 副本 10",
+      "bounds": [
+        1163,
+        1984,
+        1524,
+        2138
+      ],
+      "rect": [
+        760,
+        1280,
+        1680,
+        2200
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Weapon\\BowUpper2.png"
+    },
+    {
+      "layer": "图层 14 副本 9",
+      "bounds": [
+        856,
+        1375,
+        1161,
+        1902
+      ],
+      "rect": [
+        760,
+        1280,
+        1680,
+        2200
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Weapon\\BowLower2.png"
+    },
+    {
+      "layer": "图层 14 副本 5",
+      "bounds": [
+        1150,
+        2001,
+        1554,
+        2169
+      ],
+      "rect": [
+        760,
+        1280,
+        1680,
+        2200
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Weapon\\BowUpper3.png"
+    },
+    {
+      "layer": "图层 14 副本 6",
+      "bounds": [
+        832,
+        1368,
+        1157,
+        1918
+      ],
+      "rect": [
+        760,
+        1280,
+        1680,
+        2200
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Weapon\\BowLower3.png"
+    },
+    {
+      "layer": "握把",
+      "bounds": [
+        1032,
+        1834,
+        1264,
+        2034
+      ],
+      "rect": [
+        760,
+        1280,
+        1680,
+        2200
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Weapon\\BowGrip.png"
+    },
+    {
+      "layer": "箭头",
+      "bounds": [
+        1573,
+        1525,
+        1882,
+        1686
+      ],
+      "rect": [
+        1500,
+        1100,
+        2600,
+        2200
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Projectile\\arrowHead.png"
+    },
+    {
+      "layer": "箭尾",
+      "bounds": [
+        1663,
+        1581,
+        2520,
+        1681
+      ],
+      "rect": [
+        1500,
+        1100,
+        2600,
+        2200
+      ],
+      "file": "E:\\RimModDev\\NingshaRace\\NingshaRace\\1.7\\Textures\\Zhenni\\Bowbearer\\Projectile\\arrowTail.png"
+    }
+  ]
+}

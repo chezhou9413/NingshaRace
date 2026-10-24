@@ -10,9 +10,9 @@
     <maxFishPopulation>0</maxFishPopulation>
     <wildAnimalsCanWanderInto>false</wildAnimalsCanWanderInto>
     <modExtensions>
-      <!--蚁狮初始数量与每日补充参数；按数量上限维持种群，每轮最多补充一只，数量设为零可关闭。-->
+      <!--当前生态填充保留巢群，不生成或补充游荡蚁狮。-->
       <li Class="NingshaRaceLib.DesertPit.Antlion.Generation.DefModExtension_DesertPitAntlion">
-        <countRange>3~4</countRange>
+        <countRange>0~0</countRange>
         <entranceAvoidRadius>25</entranceAvoidRadius>
         <antNestAvoidRadius>24</antNestAvoidRadius>
         <spacing>18</spacing>

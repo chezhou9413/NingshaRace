@@ -22,6 +22,8 @@
       <dieIfLeafless>true</dieIfLeafless>
       <neverBlightable>true</neverBlightable>
       <cavePlant>true</cavePlant>
+      <!--凝砂菌类可分布在天光与灰暗岸带，原版畏光菌仍仅生长于暗处。-->
+      <diesToLight>false</diesToLight>
       <topWindExposure>0.02</topWindExposure>
       <visualSizeRange>0.75~1.0</visualSizeRange>
       <wildClusterRadius>4</wildClusterRadius>

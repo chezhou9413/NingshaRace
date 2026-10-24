@@ -5,10 +5,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="../../../1.6/Source/NingshaRaceLib/**/*.cs" Exclude="../../../1.6/Source/NingshaRaceLib/obj/**/*.cs;../../../1.6/Source/NingshaRaceLib/bin/**/*.cs" />
     <Compile Include="**/*.cs" Exclude="obj/**/*.cs;bin/**/*.cs" />
-    <Compile Remove="../../../1.6/Source/NingshaRaceLib/Zhenni/Bladebearer/Rendering/Bloom/**/*.cs;../../../1.6/Source/NingshaRaceLib/Zhenni/Bladebearer/Editor/BladebearerBloomPreview.cs" />
-    <Compile Remove="../../../1.6/Source/NingshaRaceLib/Core/Effects/*.cs;../../../1.6/Source/NingshaRaceLib/Erosion/Effects/ErosionHeadEffectManager.cs;../../../1.6/Source/NingshaRaceLib/Erosion/Effects/ErosionHeadEffectFollower.cs;../../../1.6/Source/NingshaRaceLib/Combat/SandBottle/Utility/SandBottleParticlePresentation.cs;../../../1.6/Source/NingshaRaceLib/Combat/SandBottle/Utility/SandBottleParticleMaterials.cs" />
     <Reference Include="ChezhouLib" HintPath="$(ChezhouLibDir)/1.7/Assemblies/ChezhouLib.dll" />
     <Reference Include="ChezhouLib.RimUnity" HintPath="$(ChezhouLibDir)/1.7/RimUnityCompat/Assemblies/ChezhouLib.RimUnity.dll" />
     <Reference Include="RimUnity.Core" HintPath="$(RimUnityDir)/1.7/Assemblies/RimUnity.Core.dll" />

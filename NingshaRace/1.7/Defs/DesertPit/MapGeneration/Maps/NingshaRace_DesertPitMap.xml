@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!-- 文件职责：定义沙漠巨坑口袋地图生成器及步骤顺序。 -->
-  <MapGeneratorDef ParentName="NingshaRace_LayeredLayoutBase">
+  <!--普通巨坑与地下开局共用 v14 洞穴基座及沿水系展开的分区生态。-->
+  <MapGeneratorDef>
     <defName>NingshaRace_DesertPitMap</defName>
     <label>沙漠巨坑</label>
     <isUnderground>true</isUnderground>
@@ -15,30 +15,15 @@
       <tileMutators />
     </pocketMapProperties>
     <genSteps>
-      <li>NingshaRace_DesertPitLayout</li>
-      <li>NingshaRace_DesertPitTerrain</li>
+      <li>NingshaRace_DesertPitCaveBase</li>
       <li>NingshaRace_DesertPitExit</li>
-      <li>NingshaRace_DesertPitScatter</li>
-      <li>NingshaRace_DesertPitMineralVeins</li>
-      <li>NingshaRace_DesertPitGlow</li>
-      <li>NingshaRace_DesertPitLandmarks</li>
-      <li>NingshaRace_DesertPitHydrology</li>
-      <li>NingshaRace_DesertPitEnergySites</li>
-      <li>NingshaRace_DesertPitWisdomSerpentAltar</li>
-      <li>NingshaRace_GiantTombCoffinEntrance</li>
-      <li>NingshaRace_DesertPitAntColonies</li>
-      <li>NingshaRace_DesertPitCaveEcology</li>
-      <li>NingshaRace_DesertPitRelics</li>
-      <li>NingshaRace_DesertPitPots</li>
-      <li>NingshaRace_DesertPitDecorations</li>
-      <li>NingshaRace_DesertPitPlants</li>
-      <li>NingshaRace_DesertPitAntlions</li>
+      <li>NingshaRace_DesertPitRegionalEcology</li>
       <li>Fog</li>
     </genSteps>
   </MapGeneratorDef>
 
   <!-- Def 职责：生成与地表入口相连的地下家园，成员与物资在地图完成后直接安置。 -->
-  <MapGeneratorDef ParentName="NingshaRace_LayeredLayoutBase">
+  <MapGeneratorDef>
     <defName>NingshaRace_DesertPitStartingMap</defName>
     <label>沙漠巨坑内部</label>
     <isUnderground>true</isUnderground>
@@ -53,24 +38,9 @@
       <tileMutators />
     </pocketMapProperties>
     <genSteps>
-      <li>NingshaRace_DesertPitLayout</li>
-      <li>NingshaRace_DesertPitTerrain</li>
+      <li>NingshaRace_DesertPitCaveBase</li>
       <li>NingshaRace_DesertPitExit</li>
-      <li>NingshaRace_DesertPitScatter</li>
-      <li>NingshaRace_DesertPitMineralVeins</li>
-      <li>NingshaRace_DesertPitGlow</li>
-      <li>NingshaRace_DesertPitLandmarks</li>
-      <li>NingshaRace_DesertPitHydrology</li>
-      <li>NingshaRace_DesertPitEnergySites</li>
-      <li>NingshaRace_DesertPitWisdomSerpentAltar</li>
-      <li>NingshaRace_GiantTombCoffinEntrance</li>
-      <li>NingshaRace_DesertPitAntColonies</li>
-      <li>NingshaRace_DesertPitCaveEcology</li>
-      <li>NingshaRace_DesertPitRelics</li>
-      <li>NingshaRace_DesertPitPots</li>
-      <li>NingshaRace_DesertPitDecorations</li>
-      <li>NingshaRace_DesertPitPlants</li>
-      <li>NingshaRace_DesertPitAntlions</li>
+      <li>NingshaRace_DesertPitRegionalEcology</li>
       <li>Fog</li>
     </genSteps>
   </MapGeneratorDef>
