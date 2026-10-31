@@ -23,9 +23,8 @@ namespace NingshaRaceLib.Zhenni.Bladebearer
         internal string WeaponPartId => ((CompProperties_BladebearerAppearance)props).weaponPart;
         internal Pawn Pawn => (Pawn)parent;
         internal CompBladebearerPhaseStep Phase => Pawn.TryGetComp<CompBladebearerPhaseStep>();
-        internal float AnimationTime => Draft != null || CapturePreview ? Clock
-            : Pawn.TryGetComp<NingshaRaceLib.Zhenni.Bowbearer.CompBowbearerShooting>() != null
-                ? Find.TickManager.TicksGame / 60f : Time.realtimeSinceStartup;
+        //地图上的震尼外观特效统一按现实时间播放，编辑预览使用独立时钟。
+        internal float AnimationTime => Draft != null || CapturePreview ? Clock : Time.realtimeSinceStartup;
 
         //拥刀者的选择性辉光通过通用预览接口参与相机绘制。
         public void BeginMeleePreview(RenderTexture target, float time)

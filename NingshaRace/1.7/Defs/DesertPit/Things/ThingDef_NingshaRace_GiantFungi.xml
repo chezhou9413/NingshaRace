@@ -27,6 +27,8 @@
       <dieIfNoSunlight>false</dieIfNoSunlight>
       <diesToLight>false</diesToLight>
       <cavePlant>true</cavePlant>
+      <!--仅由凝砂地下生态生成，不参与地表地图的原版洞穴植物池。-->
+      <cavePlantWeight>0</cavePlantWeight>
       <neverBlightable>true</neverBlightable>
       <interferesWithRoof>false</interferesWithRoof>
       <forceIsTree>true</forceIsTree>

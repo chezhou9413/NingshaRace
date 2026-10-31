@@ -22,6 +22,8 @@
       <dieIfLeafless>true</dieIfLeafless>
       <neverBlightable>true</neverBlightable>
       <cavePlant>true</cavePlant>
+      <!--仅由凝砂地下生态生成，不参与地表地图的原版洞穴植物池。-->
+      <cavePlantWeight>0</cavePlantWeight>
       <!--凝砂菌类可分布在天光与灰暗岸带，原版畏光菌仍仅生长于暗处。-->
       <diesToLight>false</diesToLight>
       <topWindExposure>0.02</topWindExposure>

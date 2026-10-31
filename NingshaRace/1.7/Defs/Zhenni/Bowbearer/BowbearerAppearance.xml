@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <Defs>
   <NingshaRaceLib.Zhenni.Bladebearer.BladebearerAppearanceDef>
     <defName>NingshaRace_Zhenni_Bowbearer_Appearance</defName>
@@ -8,11 +8,14 @@
         <id>Quiver_South</id>
         <label>South · 匣子</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Quiver_south</texture>
+        <facing>South</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>true</writeDepth>
         <flame>false</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
@@ -33,6 +36,9 @@
         <phase>6.574</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -40,18 +46,19 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>South</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Flame7_South</id>
         <label>South · 火苗7 副本 2</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame7_south</texture>
+        <facing>South</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
@@ -59,19 +66,22 @@
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
         <displacement>(0.02515625, 0.04)</displacement>
-        <root>(0.2336719, 0.4397461)</root>
-        <tip>(0.1635938, 0.5011719)</tip>
+        <root>(0.26382574, 0.4070512)</root>
+        <tip>(0.13764252, 0.52395624)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.442953</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.54362416</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
         <phase>6.92</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -79,38 +89,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>South</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Flame6_South</id>
         <label>South · 火苗6 副本 2</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame6_south</texture>
+        <facing>South</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>42</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(0.04210938, 0.04)</displacement>
-        <root>(0.7516016, 0.3728711)</root>
-        <tip>(0.8689062, 0.4444141)</tip>
+        <displacement>(-0.018791944, 0.013422817)</displacement>
+        <root>(0.7049273, 0.35571516)</root>
+        <tip>(0.8688416, 0.43798158)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.442953</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.7785235</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>7.265999999999999</phase>
+        <phase>7.266</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -118,38 +132,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>South</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Flame5_South</id>
         <label>South · 火苗5 副本 2</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame5_south</texture>
+        <facing>South</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>44</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(0.04785156, 0.06254883)</displacement>
-        <root>(0.2714844, 0.469668)</root>
-        <tip>(0.1381836, 0.6019141)</tip>
+        <displacement>(0, 0.053691298)</displacement>
+        <root>(0.3478717, 0.393229)</root>
+        <tip>(0.09074377, 0.6338441)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.442953</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>7.611999999999999</phase>
+        <phase>7.612</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -157,38 +175,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>South</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>CapeInner_South</id>
         <label>South · 斗篷内部</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_CapeInner_south</texture>
+        <facing>South</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>46</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(.05, -.06)</displacement>
-        <root>(0.4970703, 0.6607031)</root>
-        <tip>(0.4970703, 0.1940625)</tip>
+        <displacement>(0.05, -0.06)</displacement>
+        <root>(0.48517403, 0.86066943)</root>
+        <tip>(0.4932513, 0.112717636)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>0.382550329</speed>
+        <speed>0.38255033</speed>
         <flowAngle>0</flowAngle>
         <detailStrength>0.12</detailStrength>
         <breakup>0.2080537</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>7.957999999999999</phase>
+        <phase>7.958</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -196,38 +218,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>South</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>FlameBody_South</id>
         <label>South · 火焰躯体 副本</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_FlameBody_south</texture>
+        <facing>South</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>48</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(.11, .05)</displacement>
+        <displacement>(0.11, 0.05)</displacement>
         <root>(0.5058594, 0.6207813)</root>
         <tip>(0.5058594, 0.06794922)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
+        <speed>0.40268457</speed>
         <flowAngle>-0.05834961</flowAngle>
         <detailStrength>0.35</detailStrength>
         <breakup>0.6375839</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>8.303999999999998</phase>
+        <phase>8.304</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -235,38 +261,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>South</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Flame4_South</id>
         <label>South · 火苗4 副本</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame4_south</texture>
+        <facing>South</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
-        <position>(0, 0.15)</position>
+        <particleFlame></particleFlame>
+        <position>(-0.03244915, 0.015934769)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>50</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(0.05222656, 0.09)</displacement>
-        <root>(0.5258789, 0.13625)</root>
-        <tip>(0.6042188, 0.3532617)</tip>
+        <displacement>(-0.07248324, -0.13422817)</displacement>
+        <root>(0.5233471, 0.026879253)</root>
+        <tip>(0.5209137, 0.35838702)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.442953</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.8187919</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>8.649999999999999</phase>
+        <phase>8.65</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -274,18 +304,19 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>South</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Head_South</id>
         <label>South · 头</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Head_south</texture>
+        <facing>South</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>true</writeDepth>
         <flame>false</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
@@ -303,9 +334,12 @@
         <detailStrength>0.12</detailStrength>
         <breakup>0</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>8.995999999999999</phase>
+        <phase>8.996</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -313,18 +347,19 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>South</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Body_South</id>
         <label>South · 身体</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Body_south</texture>
+        <facing>South</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>true</writeDepth>
         <flame>false</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
@@ -342,9 +377,12 @@
         <detailStrength>0.12</detailStrength>
         <breakup>0</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>9.341999999999999</phase>
+        <phase>9.342</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -352,28 +390,29 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>South</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>CapeOuter_South</id>
         <label>South · 斗篷外部</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_CapeOuter_south</texture>
+        <facing>South</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>true</writeDepth>
         <flame>false</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>56</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(0.008, 0.012)</displacement>
+        <displacement>(0.021476507, 0.012)</displacement>
         <root>(0.5147059, 0.7893842)</root>
         <tip>(0.5147059, 0.1982721)</tip>
-        <rootLock>.45</rootLock>
+        <rootLock>0.45</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
         <speed>0.6</speed>
@@ -381,9 +420,12 @@
         <detailStrength>0.12</detailStrength>
         <breakup>0</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>9.687999999999999</phase>
+        <phase>9.688</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -391,38 +433,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>South</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Flame3_South</id>
         <label>South · 火苗3 副本</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame3_south</texture>
+        <facing>South</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>58</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(0.05660156, 0.04921875)</displacement>
-        <root>(0.5245313, 0.564375)</root>
-        <tip>(0.682207, 0.6684375)</tip>
+        <displacement>(-0.037583888, -0.005369127)</displacement>
+        <root>(0.44338867, 0.52696157)</root>
+        <tip>(0.697371, 0.64412373)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.46308723</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>10.033999999999999</phase>
+        <phase>10.034</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -430,38 +476,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>South</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Flame2_South</id>
         <label>South · 火苗2 副本</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame2_south</texture>
+        <facing>South</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
-        <position>(0, 0.15)</position>
+        <particleFlame></particleFlame>
+        <position>(-0.008996612, 0.14820056)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>60</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(0.065, 0.04)</displacement>
-        <root>(0.5584375, 0.6468359)</root>
-        <tip>(0.3482031, 0.6844141)</tip>
+        <displacement>(0.034899324, 0.02416104)</displacement>
+        <root>(0.58022183, 0.6189086)</root>
+        <tip>(0.25434813, 0.7098733)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.42281878</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>10.379999999999999</phase>
+        <phase>10.38</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -469,38 +519,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>South</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Flame1_South</id>
         <label>South · 火苗1 副本</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame1_south</texture>
+        <facing>South</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>62</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(0.04210938, 0.04)</displacement>
-        <root>(0.5719141, 0.8608008)</root>
-        <tip>(0.6892187, 0.9308984)</tip>
+        <displacement>(-0.00805369, 0.045637608)</displacement>
+        <root>(0.5032515, 0.8288271)</root>
+        <tip>(0.7491561, 0.9677732)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.40268457</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>10.725999999999999</phase>
+        <phase>10.726</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -508,24 +562,25 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>South</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Glow_South</id>
         <label>South · 特效</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Glow_south</texture>
+        <facing>South</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>64</layer>
         <color>(1, 1, 1, 1)</color>
-        <additive>.85</additive>
+        <additive>0.85</additive>
         <displacement>(0, 0)</displacement>
         <root>(0.5193015, 0.662546)</root>
         <tip>(0.5193015, 0.6484559)</tip>
@@ -540,6 +595,9 @@
         <phase>11.072</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0.15</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -547,20 +605,19 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>South</facing>
-        <attachment>Body</attachment>
-        <lightIntensity>1</lightIntensity>
-        <lightFlickerStrength>.15</lightFlickerStrength>
       </li>
       <li>
         <id>CapeEdge_East</id>
         <label>East · 斗篷边</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_CapeEdge_east</texture>
+        <facing>East</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>true</writeDepth>
         <flame>false</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
@@ -581,6 +638,9 @@
         <phase>6.574</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -588,31 +648,32 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>East</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>CapeInner_East</id>
         <label>East · 斗篷内</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_CapeInner_east</texture>
+        <facing>East</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>40</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(.05, -.06)</displacement>
+        <displacement>(0.05, -0.06)</displacement>
         <root>(0.4780273, 0.5975391)</root>
         <tip>(0.4780273, 0.1558203)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>0.382550329</speed>
+        <speed>0.38255033</speed>
         <flowAngle>0</flowAngle>
         <detailStrength>0.12</detailStrength>
         <breakup>0.2080537</breakup>
@@ -620,6 +681,9 @@
         <phase>6.92</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -627,38 +691,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>East</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>FlameBody_East</id>
         <label>East · 火焰躯体 副本 3</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_FlameBody_east</texture>
+        <facing>East</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>42</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(.11, .05)</displacement>
+        <displacement>(0.11, 0.05)</displacement>
         <root>(0.4897461, 0.6020703)</root>
         <tip>(0.4897461, 0.04748047)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
+        <speed>0.38255033</speed>
         <flowAngle>-0.05834961</flowAngle>
         <detailStrength>0.35</detailStrength>
         <breakup>0.6375839</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>7.265999999999999</phase>
+        <phase>7.266</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -666,18 +734,19 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>East</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Head_East</id>
         <label>East · 头</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Head_east</texture>
+        <facing>East</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>true</writeDepth>
         <flame>false</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
@@ -695,9 +764,12 @@
         <detailStrength>0.12</detailStrength>
         <breakup>0</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>7.611999999999999</phase>
+        <phase>7.612</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -705,38 +777,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>East</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Flame6_East</id>
         <label>East · 火苗6 副本 6</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame6_east</texture>
+        <facing>East</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>46</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(0.05660156, 0.04921875)</displacement>
-        <root>(0.614375, 0.5458203)</root>
-        <tip>(0.7720508, 0.6498828)</tip>
+        <displacement>(0.03221479, -0.075167775)</displacement>
+        <root>(0.51500094, 0.5042385)</root>
+        <tip>(0.8998524, 0.68816763)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.40268457</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>7.957999999999999</phase>
+        <phase>7.958</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -744,38 +820,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>East</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Flame5_East</id>
         <label>East · 火苗5 副本 5</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame5_east</texture>
+        <facing>East</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
-        <position>(0, 0.15)</position>
+        <particleFlame></particleFlame>
+        <position>(-0.043737333, 0.12335348)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>48</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(0.05140625, 0.09)</displacement>
-        <root>(0.4384766, 0.08582031)</root>
-        <tip>(0.3613672, 0.3052344)</tip>
+        <displacement>(-0.07785234, -0.14765102)</displacement>
+        <root>(0.44905567, 0)</root>
+        <tip>(0.45341754, 0.3410782)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.40268457</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>8.303999999999998</phase>
+        <phase>8.304</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -783,18 +863,19 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>East</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Body_East</id>
         <label>East · 身体</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Body_east</texture>
+        <facing>East</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>true</writeDepth>
         <flame>false</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
@@ -812,9 +893,12 @@
         <detailStrength>0.12</detailStrength>
         <breakup>0</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>8.649999999999999</phase>
+        <phase>8.65</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -822,38 +906,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>East</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Flame4_East</id>
         <label>East · 火苗4 副本 5</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame4_east</texture>
+        <facing>East</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>52</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(0.03554688, 0.04375)</displacement>
-        <root>(0.6417969, 0.8672266)</root>
-        <tip>(0.5427734, 0.9597266)</tip>
+        <displacement>(0.026845634, 0)</displacement>
+        <root>(0.69450814, 0.7989428)</root>
+        <tip>(0.5142865, 0.99340653)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.442953</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>8.995999999999999</phase>
+        <phase>8.996</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -861,18 +949,19 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>East</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>CapeOuter_East</id>
         <label>East · 斗篷外</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_CapeOuter_east</texture>
+        <facing>East</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>true</writeDepth>
         <flame>false</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
@@ -882,7 +971,7 @@
         <displacement>(0.008, 0.012)</displacement>
         <root>(0.4673713, 0.7823989)</root>
         <tip>(0.4673713, 0.1349265)</tip>
-        <rootLock>.45</rootLock>
+        <rootLock>0.45</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
         <speed>0.6</speed>
@@ -890,9 +979,12 @@
         <detailStrength>0.12</detailStrength>
         <breakup>0</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>9.341999999999999</phase>
+        <phase>9.342</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -900,38 +992,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>East</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Flame3_East</id>
         <label>East · 火苗3 副本 5</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame3_east</texture>
+        <facing>East</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>56</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(0.0503125, 0.05947266)</displacement>
-        <root>(0.3266016, 0.4690625)</root>
-        <tip>(0.4667578, 0.5948047)</tip>
+        <displacement>(0.08859062, 0.01610738)</displacement>
+        <root>(0.28937337, 0.45099998)</root>
+        <tip>(0.5592692, 0.6309304)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.442953</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>9.687999999999999</phase>
+        <phase>9.688</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -939,38 +1035,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>East</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Flame2_East</id>
         <label>East · 火苗2 副本 6</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame2_east</texture>
+        <facing>East</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>58</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(0.0284375, 0.04)</displacement>
-        <root>(0.3199609, 0.4151953)</root>
-        <tip>(0.3991797, 0.46)</tip>
+        <displacement>(0.03221479, 0.005369127)</displacement>
+        <root>(0.26738185, 0.40701696)</root>
+        <tip>(0.40932706, 0.44900075)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.38255033</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>10.033999999999999</phase>
+        <phase>10.034</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -978,18 +1078,19 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>East</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Quiver_East</id>
         <label>East · 匣子</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Quiver_east</texture>
+        <facing>East</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>true</writeDepth>
         <flame>false</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
@@ -1007,9 +1108,12 @@
         <detailStrength>0.12</detailStrength>
         <breakup>0</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>10.379999999999999</phase>
+        <phase>10.38</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -1017,38 +1121,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>East</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Flame1_East</id>
         <label>East · 火苗1 副本 2</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame1_east</texture>
+        <facing>East</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>62</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(0.065, 0.04)</displacement>
-        <root>(0.6728125, 0.6322266)</root>
-        <tip>(0.4679102, 0.6900391)</tip>
+        <displacement>(-0.034899324, 0.04026848)</displacement>
+        <root>(0.67208314, 0.59987265)</root>
+        <tip>(0.41416883, 0.6965905)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.442953</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>10.725999999999999</phase>
+        <phase>10.726</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -1056,24 +1164,25 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>East</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Glow_East</id>
         <label>East · 特效</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Glow_east</texture>
+        <facing>East</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>64</layer>
         <color>(1, 1, 1, 1)</color>
-        <additive>.85</additive>
+        <additive>0.85</additive>
         <displacement>(0, 0)</displacement>
         <root>(0.5909926, 0.6662224)</root>
         <tip>(0.5909926, 0.6521324)</tip>
@@ -1088,6 +1197,9 @@
         <phase>11.072</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0.15</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -1095,20 +1207,19 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>East</facing>
-        <attachment>Body</attachment>
-        <lightIntensity>1</lightIntensity>
-        <lightFlickerStrength>.15</lightFlickerStrength>
       </li>
       <li>
         <id>CapeEdge_West</id>
         <label>West · 斗篷边</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_CapeEdge_west</texture>
+        <facing>West</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>true</writeDepth>
         <flame>false</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
@@ -1129,6 +1240,9 @@
         <phase>6.574</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -1136,31 +1250,32 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>West</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>CapeInner_West</id>
         <label>West · 斗篷内部</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_CapeInner_west</texture>
+        <facing>West</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>40</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(.05, -.06)</displacement>
+        <displacement>(0.05, -0.06)</displacement>
         <root>(0.5024414, 0.6078125)</root>
         <tip>(0.5024414, 0.1609375)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>0.382550329</speed>
+        <speed>0.38255033</speed>
         <flowAngle>0</flowAngle>
         <detailStrength>0.12</detailStrength>
         <breakup>0.2080537</breakup>
@@ -1168,6 +1283,9 @@
         <phase>6.92</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -1175,38 +1293,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>West</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>FlameBody_West</id>
         <label>West · 火焰躯体 副本 4</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_FlameBody_west</texture>
+        <facing>West</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>42</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(.11, .05)</displacement>
+        <displacement>(0.11, 0.05)</displacement>
         <root>(0.4912109, 0.6050781)</root>
         <tip>(0.4912109, 0.05136719)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
+        <speed>0.48322147</speed>
         <flowAngle>-0.05834961</flowAngle>
         <detailStrength>0.35</detailStrength>
         <breakup>0.6375839</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>7.265999999999999</phase>
+        <phase>7.266</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -1214,38 +1336,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>West</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Flame6_West</id>
         <label>West · 火苗6 副本 8</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame6_west</texture>
+        <facing>West</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
-        <position>(0, 0.15)</position>
+        <particleFlame></particleFlame>
+        <position>(-0.01108986, 0.098695345)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>44</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(0.05058594, 0.09)</displacement>
-        <root>(0.543457, 0.09058594)</root>
-        <tip>(0.6193359, 0.3091992)</tip>
+        <displacement>(-0.06979865, -0.13691276)</displacement>
+        <root>(0.5446966, 0)</root>
+        <tip>(0.5301577, 0.30915162)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.65</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>7.611999999999999</phase>
+        <phase>7.612</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -1253,18 +1379,19 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>West</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Head_West</id>
         <label>West · 头</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Head_west</texture>
+        <facing>West</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>true</writeDepth>
         <flame>false</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
@@ -1282,9 +1409,12 @@
         <detailStrength>0.12</detailStrength>
         <breakup>0</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>7.957999999999999</phase>
+        <phase>7.958</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -1292,18 +1422,19 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>West</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Body_West</id>
         <label>West · 身体</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Body_west</texture>
+        <facing>West</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>true</writeDepth>
         <flame>false</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
@@ -1321,9 +1452,12 @@
         <detailStrength>0.12</detailStrength>
         <breakup>0</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>8.303999999999998</phase>
+        <phase>8.304</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -1331,18 +1465,19 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>West</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>CapeOuter_West</id>
         <label>West · 斗篷</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_CapeOuter_west</texture>
+        <facing>West</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>true</writeDepth>
         <flame>false</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
@@ -1352,7 +1487,7 @@
         <displacement>(0.008, 0.012)</displacement>
         <root>(0.5133272, 0.7869945)</root>
         <tip>(0.5133272, 0.1395221)</tip>
-        <rootLock>.45</rootLock>
+        <rootLock>0.45</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
         <speed>0.6</speed>
@@ -1360,9 +1495,12 @@
         <detailStrength>0.12</detailStrength>
         <breakup>0</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>8.649999999999999</phase>
+        <phase>8.65</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -1370,38 +1508,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>West</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Flame5_West</id>
         <label>West · 火苗5副本 7</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame5_west</texture>
+        <facing>West</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>52</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(0.04210938, 0.04)</displacement>
-        <root>(0.7249609, 0.3621289)</root>
-        <tip>(0.6076563, 0.4336719)</tip>
+        <displacement>(0.026845634, 0.029530197)</displacement>
+        <root>(0.8117092, 0.33173248)</root>
+        <tip>(0.52382064, 0.44968677)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.42281878</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>8.995999999999999</phase>
+        <phase>8.996</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -1409,18 +1551,19 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>West</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Flame4_West</id>
         <label>West · 火苗4副本 7</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame4_west</texture>
+        <facing>West</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
@@ -1428,19 +1571,22 @@
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
         <displacement>(0.05058594, 0.05947266)</displacement>
-        <root>(0.4263672, 0.5491406)</root>
-        <tip>(0.5672852, 0.6748828)</tip>
+        <root>(0.3029062, 0.469679)</root>
+        <tip>(0.7827204, 0.77556044)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.42281878</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>9.341999999999999</phase>
+        <phase>9.342</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -1448,18 +1594,19 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>West</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Quiver_West</id>
         <label>West · 匣子</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Quiver_west</texture>
+        <facing>West</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>true</writeDepth>
         <flame>false</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
@@ -1477,9 +1624,12 @@
         <detailStrength>0.12</detailStrength>
         <breakup>0</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>9.687999999999999</phase>
+        <phase>9.688</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -1487,38 +1637,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>West</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Flame2_West</id>
         <label>West · 火苗2 副本 4</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame2_west</texture>
+        <facing>West</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>60</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(0.025, 0.04)</displacement>
-        <root>(0.3621875, 0.6370898)</root>
-        <tip>(0.2997266, 0.6667188)</tip>
+        <displacement>(0, 0.04)</displacement>
+        <root>(0.4054843, 0.6264426)</root>
+        <tip>(0.22178617, 0.6782208)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.40268457</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>10.379999999999999</phase>
+        <phase>10.38</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -1526,38 +1680,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>West</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Flame1_West</id>
         <label>West · 火苗1 副本 6</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame1_west</texture>
+        <facing>West</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>62</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(0.03472656, 0.04443359)</displacement>
-        <root>(0.4251172, 0.8695312)</root>
-        <tip>(0.5218555, 0.9634766)</tip>
+        <displacement>(-0.013422817, 0.026845634)</displacement>
+        <root>(0.3578849, 0.81054693)</root>
+        <tip>(0.55081016, 1)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.42281878</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>10.725999999999999</phase>
+        <phase>10.726</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -1565,24 +1723,25 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>West</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Glow_West</id>
         <label>West · 特效</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Glow_west</texture>
+        <facing>West</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(-0.1257353, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>64</layer>
         <color>(1, 1, 1, 1)</color>
-        <additive>.85</additive>
+        <additive>0.85</additive>
         <displacement>(0, 0)</displacement>
         <root>(0.4595588, 0.670818)</root>
         <tip>(0.4595588, 0.6567279)</tip>
@@ -1597,6 +1756,9 @@
         <phase>11.072</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0.15</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -1604,26 +1766,25 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>West</facing>
-        <attachment>Body</attachment>
-        <lightIntensity>1</lightIntensity>
-        <lightFlickerStrength>.15</lightFlickerStrength>
       </li>
       <li>
         <id>Glow_North</id>
         <label>North · 特效</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Glow_north</texture>
+        <facing>North</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>38</layer>
         <color>(1, 1, 1, 1)</color>
-        <additive>.85</additive>
+        <additive>0.85</additive>
         <displacement>(0, 0)</displacement>
         <root>(0.515625, 0.6634651)</root>
         <tip>(0.515625, 0.649375)</tip>
@@ -1638,6 +1799,9 @@
         <phase>6.574</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0.15</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -1645,40 +1809,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>North</facing>
-        <attachment>Body</attachment>
-        <lightIntensity>1</lightIntensity>
-        <lightFlickerStrength>.15</lightFlickerStrength>
       </li>
       <li>
         <id>Flame6_North</id>
         <label>North · 火苗6 副本 4</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame6_north</texture>
+        <facing>North</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>40</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(0.05660156, 0.04921875)</displacement>
-        <root>(0.4569141, 0.5438672)</root>
-        <tip>(0.2992383, 0.6479297)</tip>
+        <displacement>(0.029530197, 0.0026845336)</displacement>
+        <root>(0.4965444, 0.51578367)</root>
+        <tip>(0.18775058, 0.7127509)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.38255033</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
         <phase>6.92</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -1686,38 +1852,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>North</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>FlameBody_North</id>
         <label>North · 火焰躯体 副本 2</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_FlameBody_north</texture>
+        <facing>North</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>42</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(.11, .05)</displacement>
+        <displacement>(0.11, 0.05)</displacement>
         <root>(0.4975586, 0.6050781)</root>
         <tip>(0.4975586, 0.05136719)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
+        <speed>0.38255033</speed>
         <flowAngle>-0.05834961</flowAngle>
         <detailStrength>0.35</detailStrength>
         <breakup>0.6375839</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>7.265999999999999</phase>
+        <phase>7.266</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -1725,38 +1895,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>North</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Flame5_North</id>
         <label>North · 火苗5 副本 3</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame5_north</texture>
+        <facing>North</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
-        <position>(0, 0.15)</position>
+        <particleFlame></particleFlame>
+        <position>(-0.023946116, 0.03944401)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>44</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(0.05222656, 0.09)</displacement>
-        <root>(0.4750977, 0.1167187)</root>
-        <tip>(0.3967578, 0.3337305)</tip>
+        <displacement>(-0.08859059, -0.1315436)</displacement>
+        <root>(0.4699412, 0)</root>
+        <tip>(0.47459936, 0.343573)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.40268457</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>7.611999999999999</phase>
+        <phase>7.612</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -1764,18 +1938,19 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>North</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Head_North</id>
         <label>North · 头</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Head_north</texture>
+        <facing>North</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>true</writeDepth>
         <flame>false</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
@@ -1793,9 +1968,12 @@
         <detailStrength>0.12</detailStrength>
         <breakup>0</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>7.957999999999999</phase>
+        <phase>7.958</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -1803,18 +1981,19 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>North</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>CapeOuter_North</id>
         <label>North · 斗篷</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_CapeOuter_north</texture>
+        <facing>North</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>true</writeDepth>
         <flame>false</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
@@ -1824,7 +2003,7 @@
         <displacement>(0.008, 0.012)</displacement>
         <root>(0.5004596, 0.7610754)</root>
         <tip>(0.5004596, 0.1619118)</tip>
-        <rootLock>.45</rootLock>
+        <rootLock>0.45</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
         <speed>0.6</speed>
@@ -1832,9 +2011,12 @@
         <detailStrength>0.12</detailStrength>
         <breakup>0</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>8.303999999999998</phase>
+        <phase>8.304</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -1842,38 +2024,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>North</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Flame4_North</id>
         <label>North · 火苗4 副本 3</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame4_north</texture>
+        <facing>North</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>50</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(0.04238281, 0.04)</displacement>
-        <root>(0.4181641, 0.8330078)</root>
-        <tip>(0.3000977, 0.9052734)</tip>
+        <displacement>(0.04238281, 0.021476507)</displacement>
+        <root>(0.50162745, 0.7915378)</root>
+        <tip>(0.1953751, 0.96944374)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.42281878</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>8.649999999999999</phase>
+        <phase>8.65</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -1881,38 +2067,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>North</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Flame3_North</id>
         <label>North · 火苗3 副本 4</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame3_north</texture>
+        <facing>North</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>52</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(0.0415625, 0.04)</displacement>
-        <root>(0.2272266, 0.3608008)</root>
-        <tip>(0.1114453, 0.4308984)</tip>
+        <displacement>(0.053691298, 0.00805369)</displacement>
+        <root>(0.3199548, 0.31030637)</root>
+        <tip>(0, 0.49329525)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.40268457</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>8.995999999999999</phase>
+        <phase>8.996</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -1920,38 +2110,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>North</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Flame2_North</id>
         <label>North · 火苗2 副本 4</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame2_north</texture>
+        <facing>North</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>54</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(0.025, 0.04)</displacement>
+        <displacement>(-0.010738254, -0.00805369)</displacement>
         <root>(0.7933594, 0.4096484)</root>
-        <tip>(0.8619141, 0.4717969)</tip>
+        <tip>(0.90930575, 0.4838526)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.48322147</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>9.341999999999999</phase>
+        <phase>9.342</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -1959,38 +2153,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>North</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Flame1_North</id>
         <label>North · 火苗1 副本 3</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame1_north</texture>
+        <facing>North</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>56</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(0.048125, 0.06357422)</displacement>
-        <root>(0.7384375, 0.4633594)</root>
-        <tip>(0.8725, 0.5977734)</tip>
+        <displacement>(0.04026848, 0.034899324)</displacement>
+        <root>(0.66959774, 0.41585702)</root>
+        <tip>(0.99547136, 0.70674413)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.42281878</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>9.687999999999999</phase>
+        <phase>9.688</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -1998,18 +2196,19 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>North</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>Quiver_North</id>
         <label>North · 匣子</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Quiver_north</texture>
+        <facing>North</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>true</writeDepth>
         <flame>false</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
@@ -2027,9 +2226,12 @@
         <detailStrength>0.12</detailStrength>
         <breakup>0</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>10.033999999999999</phase>
+        <phase>10.034</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -2037,38 +2239,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>North</facing>
-        <attachment>Body</attachment>
       </li>
       <li>
         <id>BowUpper0</id>
         <label>上弓臂 · 帧0</label>
         <texture>Zhenni/Bowbearer/Weapon/BowUpper0</texture>
+        <facing>All</facing>
+        <attachment>Weapon</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0)</position>
         <size>(1.5, 1.5)</size>
         <angle>0</angle>
         <layer>2</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(.065, .09)</displacement>
-        <root>(.42, .34)</root>
-        <tip>(.15, .92)</tip>
-        <rootLock>.06</rootLock>
-        <bendPower>.65</bendPower>
+        <displacement>(0.05637583, -0.053691268)</displacement>
+        <root>(0.47545347, 0.19647096)</root>
+        <tip>(0.0011708336, 0.91449046)</tip>
+        <rootLock>0.06</rootLock>
+        <bendPower>0.65</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.85</speed>
-        <flowAngle>0</flowAngle>
-        <detailStrength>.5</detailStrength>
-        <breakup>.85</breakup>
+        <speed>0.46308723</speed>
+        <flowAngle>1.471344</flowAngle>
+        <detailStrength>0.5</detailStrength>
+        <breakup>0.85</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
         <phase>0.346</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -2076,38 +2282,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>All</facing>
-        <attachment>Weapon</attachment>
       </li>
       <li>
         <id>BowLower0</id>
         <label>下弓臂 · 帧0</label>
         <texture>Zhenni/Bowbearer/Weapon/BowLower0</texture>
+        <facing>All</facing>
+        <attachment>Weapon</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0)</position>
         <size>(1.5, 1.5)</size>
         <angle>0</angle>
         <layer>3</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(.065, .09)</displacement>
-        <root>(.5, .2)</root>
-        <tip>(.84, .08)</tip>
-        <rootLock>.06</rootLock>
-        <bendPower>.65</bendPower>
+        <displacement>(0.0805369, 0.005369127)</displacement>
+        <root>(0.42610222, 0.24419118)</root>
+        <tip>(0.7377452, 0)</tip>
+        <rootLock>0.06</rootLock>
+        <bendPower>0.65</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.85</speed>
+        <speed>0.442953</speed>
         <flowAngle>0</flowAngle>
-        <detailStrength>.5</detailStrength>
-        <breakup>.85</breakup>
+        <detailStrength>0.5</detailStrength>
+        <breakup>0.85</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>0.5189999999999999</phase>
+        <phase>0.519</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -2115,38 +2325,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>All</facing>
-        <attachment>Weapon</attachment>
       </li>
       <li>
         <id>BowUpper1</id>
         <label>上弓臂 · 帧1</label>
         <texture>Zhenni/Bowbearer/Weapon/BowUpper1</texture>
+        <facing>All</facing>
+        <attachment>Weapon</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0)</position>
         <size>(1.5, 1.5)</size>
         <angle>0</angle>
         <layer>2</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(.065, .09)</displacement>
-        <root>(.42, .34)</root>
-        <tip>(.15, .92)</tip>
-        <rootLock>.06</rootLock>
-        <bendPower>.65</bendPower>
+        <displacement>(0.065, 0.09)</displacement>
+        <root>(0.42, 0.34)</root>
+        <tip>(0.15, 0.92)</tip>
+        <rootLock>0.06</rootLock>
+        <bendPower>0.65</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.85</speed>
+        <speed>0.85</speed>
         <flowAngle>0</flowAngle>
-        <detailStrength>.5</detailStrength>
-        <breakup>.85</breakup>
+        <detailStrength>0.5</detailStrength>
+        <breakup>0.85</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
         <phase>0.346</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -2154,38 +2368,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>All</facing>
-        <attachment>Weapon</attachment>
       </li>
       <li>
         <id>BowLower1</id>
         <label>下弓臂 · 帧1</label>
         <texture>Zhenni/Bowbearer/Weapon/BowLower1</texture>
+        <facing>All</facing>
+        <attachment>Weapon</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0)</position>
         <size>(1.5, 1.5)</size>
         <angle>0</angle>
         <layer>3</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(.065, .09)</displacement>
-        <root>(.5, .2)</root>
-        <tip>(.84, .08)</tip>
-        <rootLock>.06</rootLock>
-        <bendPower>.65</bendPower>
+        <displacement>(0.065, 0.09)</displacement>
+        <root>(0.5, 0.2)</root>
+        <tip>(0.84, 0.08)</tip>
+        <rootLock>0.06</rootLock>
+        <bendPower>0.65</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.85</speed>
+        <speed>0.85</speed>
         <flowAngle>0</flowAngle>
-        <detailStrength>.5</detailStrength>
-        <breakup>.85</breakup>
+        <detailStrength>0.5</detailStrength>
+        <breakup>0.85</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>0.5189999999999999</phase>
+        <phase>0.519</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -2193,38 +2411,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>All</facing>
-        <attachment>Weapon</attachment>
       </li>
       <li>
         <id>BowUpper2</id>
         <label>上弓臂 · 帧2</label>
         <texture>Zhenni/Bowbearer/Weapon/BowUpper2</texture>
+        <facing>All</facing>
+        <attachment>Weapon</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0)</position>
         <size>(1.5, 1.5)</size>
         <angle>0</angle>
         <layer>2</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(.065, .09)</displacement>
-        <root>(.42, .34)</root>
-        <tip>(.15, .92)</tip>
-        <rootLock>.06</rootLock>
-        <bendPower>.65</bendPower>
+        <displacement>(0.065, 0.09)</displacement>
+        <root>(0.42, 0.34)</root>
+        <tip>(0.15, 0.92)</tip>
+        <rootLock>0.06</rootLock>
+        <bendPower>0.65</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.85</speed>
+        <speed>0.85</speed>
         <flowAngle>0</flowAngle>
-        <detailStrength>.5</detailStrength>
-        <breakup>.85</breakup>
+        <detailStrength>0.5</detailStrength>
+        <breakup>0.85</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
         <phase>0.346</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -2232,38 +2454,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>All</facing>
-        <attachment>Weapon</attachment>
       </li>
       <li>
         <id>BowLower2</id>
         <label>下弓臂 · 帧2</label>
         <texture>Zhenni/Bowbearer/Weapon/BowLower2</texture>
+        <facing>All</facing>
+        <attachment>Weapon</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0)</position>
         <size>(1.5, 1.5)</size>
         <angle>0</angle>
         <layer>3</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(.065, .09)</displacement>
-        <root>(.5, .2)</root>
-        <tip>(.84, .08)</tip>
-        <rootLock>.06</rootLock>
-        <bendPower>.65</bendPower>
+        <displacement>(0.065, 0.09)</displacement>
+        <root>(0.5, 0.2)</root>
+        <tip>(0.84, 0.08)</tip>
+        <rootLock>0.06</rootLock>
+        <bendPower>0.65</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.85</speed>
+        <speed>0.85</speed>
         <flowAngle>0</flowAngle>
-        <detailStrength>.5</detailStrength>
-        <breakup>.85</breakup>
+        <detailStrength>0.5</detailStrength>
+        <breakup>0.85</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>0.5189999999999999</phase>
+        <phase>0.519</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -2271,38 +2497,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>All</facing>
-        <attachment>Weapon</attachment>
       </li>
       <li>
         <id>BowUpper3</id>
         <label>上弓臂 · 帧3</label>
         <texture>Zhenni/Bowbearer/Weapon/BowUpper3</texture>
+        <facing>All</facing>
+        <attachment>Weapon</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0)</position>
         <size>(1.5, 1.5)</size>
         <angle>0</angle>
         <layer>2</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(.065, .09)</displacement>
-        <root>(.42, .34)</root>
-        <tip>(.15, .92)</tip>
-        <rootLock>.06</rootLock>
-        <bendPower>.65</bendPower>
+        <displacement>(0.065, 0.09)</displacement>
+        <root>(0.42, 0.34)</root>
+        <tip>(0.15, 0.92)</tip>
+        <rootLock>0.06</rootLock>
+        <bendPower>0.65</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.85</speed>
+        <speed>0.85</speed>
         <flowAngle>0</flowAngle>
-        <detailStrength>.5</detailStrength>
-        <breakup>.85</breakup>
+        <detailStrength>0.5</detailStrength>
+        <breakup>0.85</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
         <phase>0.346</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -2310,38 +2540,42 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>All</facing>
-        <attachment>Weapon</attachment>
       </li>
       <li>
         <id>BowLower3</id>
         <label>下弓臂 · 帧3</label>
         <texture>Zhenni/Bowbearer/Weapon/BowLower3</texture>
+        <facing>All</facing>
+        <attachment>Weapon</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>true</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0)</position>
         <size>(1.5, 1.5)</size>
         <angle>0</angle>
         <layer>3</layer>
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
-        <displacement>(.065, .09)</displacement>
-        <root>(.5, .2)</root>
-        <tip>(.84, .08)</tip>
-        <rootLock>.06</rootLock>
-        <bendPower>.65</bendPower>
+        <displacement>(0.065, 0.09)</displacement>
+        <root>(0.5, 0.2)</root>
+        <tip>(0.84, 0.08)</tip>
+        <rootLock>0.06</rootLock>
+        <bendPower>0.65</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.85</speed>
+        <speed>0.85</speed>
         <flowAngle>0</flowAngle>
-        <detailStrength>.5</detailStrength>
-        <breakup>.85</breakup>
+        <detailStrength>0.5</detailStrength>
+        <breakup>0.85</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>0.5189999999999999</phase>
+        <phase>0.519</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -2349,18 +2583,19 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>All</facing>
-        <attachment>Weapon</attachment>
       </li>
       <li>
         <id>BowGrip</id>
         <label>弓握把</label>
         <texture>Zhenni/Bowbearer/Weapon/BowGrip</texture>
+        <facing>All</facing>
+        <attachment>Weapon</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>true</writeDepth>
         <flame>false</flame>
         <particle>false</particle>
+        <particleFlame></particleFlame>
         <position>(0, 0)</position>
         <size>(1.5, 1.5)</size>
         <angle>0</angle>
@@ -2368,8 +2603,8 @@
         <color>(1, 1, 1, 1)</color>
         <additive>0</additive>
         <displacement>(0, 0)</displacement>
-        <root>(0.439617872, 0.589883268)</root>
-        <tip>(0.435988128, 0.00549682)</tip>
+        <root>(0.43961787, 0.58988327)</root>
+        <tip>(0.43598813, 0.00549682)</tip>
         <rootLock>0.18</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
@@ -2381,6 +2616,9 @@
         <phase>0.865</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.3</particleLifetime>
         <particleSpeed>0.17</particleSpeed>
@@ -2388,23 +2626,24 @@
         <particleSpread>45</particleSpread>
         <particleRadius>0.025</particleRadius>
         <particleSway>0.018</particleSway>
-        <facing>All</facing>
-        <attachment>Weapon</attachment>
       </li>
       <li>
         <id>Ash_Flame7_South</id>
         <label>South · 火苗7 副本 2 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame7_south</texture>
+        <facing>South</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
+        <particleFlame>Flame7_South</particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
         <displacement>(0.02515625, 0.04)</displacement>
         <root>(0.2091446, 0.4612451)</root>
@@ -2412,40 +2651,42 @@
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.65</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
         <phase>6.92</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.01</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>South</facing>
-        <attachment>Body</attachment>
-        <particleFlame>Flame7_South</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_Flame6_South</id>
         <label>South · 火苗6 副本 2 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame6_south</texture>
+        <facing>South</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
+        <particleFlame>Flame6_South</particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
         <displacement>(0.04210938, 0.04)</displacement>
         <root>(0.7926582, 0.3979111)</root>
@@ -2453,40 +2694,42 @@
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.65</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>7.265999999999999</phase>
+        <phase>7.266</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.01</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>South</facing>
-        <attachment>Body</attachment>
-        <particleFlame>Flame6_South</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_Flame5_South</id>
         <label>South · 火苗5 副本 2 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame5_south</texture>
+        <facing>South</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
+        <particleFlame>Flame5_South</particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
         <displacement>(0.04785156, 0.06254883)</displacement>
         <root>(0.2248291, 0.5159541)</root>
@@ -2494,122 +2737,128 @@
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.65</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>7.611999999999999</phase>
+        <phase>7.612</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.01</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>South</facing>
-        <attachment>Body</attachment>
-        <particleFlame>Flame5_South</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_CapeInner_South</id>
         <label>South · 斗篷内部 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_CapeInner_south</texture>
+        <facing>South</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
+        <particleFlame>CapeInner_South</particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
-        <displacement>(.05, -.06)</displacement>
+        <displacement>(0.05, -0.06)</displacement>
         <root>(0.4970703, 0.4973789)</root>
         <tip>(0.4970703, 0.1940625)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>0.382550329</speed>
+        <speed>0.38255033</speed>
         <flowAngle>0</flowAngle>
         <detailStrength>0.12</detailStrength>
         <breakup>0.2080537</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>7.957999999999999</phase>
+        <phase>7.958</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>28</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.011</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>South</facing>
-        <attachment>Body</attachment>
-        <particleFlame>CapeInner_South</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_FlameBody_South</id>
         <label>South · 火焰躯体 副本 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_FlameBody_south</texture>
+        <facing>South</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
+        <particleFlame>FlameBody_South</particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
-        <displacement>(.11, .05)</displacement>
+        <displacement>(0.11, 0.05)</displacement>
         <root>(0.5058594, 0.4272901)</root>
         <tip>(0.5058594, 0.06794922)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
+        <speed>0.65</speed>
         <flowAngle>-0.05834961</flowAngle>
         <detailStrength>0.35</detailStrength>
         <breakup>0.6375839</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>8.303999999999998</phase>
+        <phase>8.304</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>28</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.01</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>South</facing>
-        <attachment>Body</attachment>
-        <particleFlame>FlameBody_South</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_Flame4_South</id>
         <label>South · 火苗4 副本 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame4_south</texture>
+        <facing>South</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
+        <particleFlame>Flame4_South</particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
         <displacement>(0.05222656, 0.09)</displacement>
         <root>(0.5532979, 0.2122041)</root>
@@ -2617,40 +2866,42 @@
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.65</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>8.649999999999999</phase>
+        <phase>8.65</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.01</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>South</facing>
-        <attachment>Body</attachment>
-        <particleFlame>Flame4_South</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_Flame3_South</id>
         <label>South · 火苗3 副本 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame3_south</texture>
+        <facing>South</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
+        <particleFlame>Flame3_South</particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
         <displacement>(0.05660156, 0.04921875)</displacement>
         <root>(0.5797178, 0.6007969)</root>
@@ -2658,40 +2909,42 @@
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.65</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>10.033999999999999</phase>
+        <phase>10.034</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.01</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>South</facing>
-        <attachment>Body</attachment>
-        <particleFlame>Flame3_South</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_Flame2_South</id>
         <label>South · 火苗2 副本 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame2_south</texture>
+        <facing>South</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
+        <particleFlame>Flame2_South</particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
         <displacement>(0.065, 0.04)</displacement>
         <root>(0.4848555, 0.6599883)</root>
@@ -2699,40 +2952,42 @@
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.65</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>10.379999999999999</phase>
+        <phase>10.38</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.01</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>South</facing>
-        <attachment>Body</attachment>
-        <particleFlame>Flame2_South</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_Flame1_South</id>
         <label>South · 火苗1 副本 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame1_south</texture>
+        <facing>South</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
+        <particleFlame>Flame1_South</particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
         <displacement>(0.04210938, 0.04)</displacement>
         <root>(0.6129707, 0.885335)</root>
@@ -2740,48 +2995,50 @@
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.65</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>10.725999999999999</phase>
+        <phase>10.726</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.01</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>South</facing>
-        <attachment>Body</attachment>
-        <particleFlame>Flame1_South</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_CapeInner_East</id>
         <label>East · 斗篷内 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_CapeInner_east</texture>
+        <facing>East</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
-        <position>(0, 0.15)</position>
+        <particleFlame>CapeInner_East</particleFlame>
+        <position>(0.017446695, 0.007517252)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
-        <displacement>(.05, -.06)</displacement>
+        <displacement>(0.05, -0.06)</displacement>
         <root>(0.4780273, 0.4429375)</root>
         <tip>(0.4780273, 0.1558203)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>0.382550329</speed>
+        <speed>0.38255033</speed>
         <flowAngle>0</flowAngle>
         <detailStrength>0.12</detailStrength>
         <breakup>0.2080537</breakup>
@@ -2789,73 +3046,77 @@
         <phase>6.92</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>28</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.011</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>East</facing>
-        <attachment>Body</attachment>
-        <particleFlame>CapeInner_East</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_FlameBody_East</id>
         <label>East · 火焰躯体 副本 3 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_FlameBody_east</texture>
+        <facing>East</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
+        <particleFlame>FlameBody_East</particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
-        <displacement>(.11, .05)</displacement>
+        <displacement>(0.11, 0.05)</displacement>
         <root>(0.4897461, 0.4079639)</root>
         <tip>(0.4897461, 0.04748047)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
+        <speed>0.65</speed>
         <flowAngle>-0.05834961</flowAngle>
         <detailStrength>0.35</detailStrength>
         <breakup>0.6375839</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>7.265999999999999</phase>
+        <phase>7.266</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>28</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.01</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>East</facing>
-        <attachment>Body</attachment>
-        <particleFlame>FlameBody_East</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_Flame6_East</id>
         <label>East · 火苗6 副本 6 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame6_east</texture>
+        <facing>East</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
+        <particleFlame>Flame6_East</particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
         <displacement>(0.05660156, 0.04921875)</displacement>
         <root>(0.6695615, 0.5822422)</root>
@@ -2863,40 +3124,42 @@
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.65</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>7.957999999999999</phase>
+        <phase>7.958</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.01</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>East</facing>
-        <attachment>Body</attachment>
-        <particleFlame>Flame6_East</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_Flame5_East</id>
         <label>East · 火苗5 副本 5 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame5_east</texture>
+        <facing>East</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
+        <particleFlame>Flame5_East</particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
         <displacement>(0.05140625, 0.09)</displacement>
         <root>(0.4114883, 0.1626152)</root>
@@ -2904,40 +3167,42 @@
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.65</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>8.303999999999998</phase>
+        <phase>8.304</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.01</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>East</facing>
-        <attachment>Body</attachment>
-        <particleFlame>Flame5_East</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_Flame4_East</id>
         <label>East · 火苗4 副本 5 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame4_east</texture>
+        <facing>East</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
+        <particleFlame>Flame4_East</particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
         <displacement>(0.03554688, 0.04375)</displacement>
         <root>(0.6071387, 0.8996016)</root>
@@ -2945,40 +3210,42 @@
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.65</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>8.995999999999999</phase>
+        <phase>8.996</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.01</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>East</facing>
-        <attachment>Body</attachment>
-        <particleFlame>Flame4_East</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_Flame3_East</id>
         <label>East · 火苗3 副本 5 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame3_east</texture>
+        <facing>East</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
+        <particleFlame>Flame3_East</particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
         <displacement>(0.0503125, 0.05947266)</displacement>
         <root>(0.3756563, 0.5130723)</root>
@@ -2986,40 +3253,42 @@
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.65</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>9.687999999999999</phase>
+        <phase>9.688</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.01</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>East</facing>
-        <attachment>Body</attachment>
-        <particleFlame>Flame3_East</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_Flame2_East</id>
         <label>East · 火苗2 副本 6 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame2_east</texture>
+        <facing>East</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
+        <particleFlame>Flame2_East</particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
         <displacement>(0.0284375, 0.04)</displacement>
         <root>(0.3476875, 0.4308769)</root>
@@ -3027,40 +3296,42 @@
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.65</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>10.033999999999999</phase>
+        <phase>10.034</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.01</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>East</facing>
-        <attachment>Body</attachment>
-        <particleFlame>Flame2_East</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_Flame1_East</id>
         <label>East · 火苗1 副本 2 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame1_east</texture>
+        <facing>East</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
+        <particleFlame>Flame1_East</particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
         <displacement>(0.065, 0.04)</displacement>
         <root>(0.6010967, 0.652461)</root>
@@ -3068,48 +3339,50 @@
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.65</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>10.725999999999999</phase>
+        <phase>10.726</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.01</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>East</facing>
-        <attachment>Body</attachment>
-        <particleFlame>Flame1_East</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_CapeInner_West</id>
         <label>West · 斗篷内部 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_CapeInner_west</texture>
+        <facing>West</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
+        <particleFlame>CapeInner_West</particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
-        <displacement>(.05, -.06)</displacement>
+        <displacement>(0.05, -0.06)</displacement>
         <root>(0.5024414, 0.4514063)</root>
         <tip>(0.5024414, 0.1609375)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>0.382550329</speed>
+        <speed>0.38255033</speed>
         <flowAngle>0</flowAngle>
         <detailStrength>0.12</detailStrength>
         <breakup>0.2080537</breakup>
@@ -3117,73 +3390,77 @@
         <phase>6.92</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>28</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.011</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>West</facing>
-        <attachment>Body</attachment>
-        <particleFlame>CapeInner_West</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_FlameBody_West</id>
         <label>West · 火焰躯体 副本 4 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_FlameBody_west</texture>
+        <facing>West</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
+        <particleFlame>FlameBody_West</particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
-        <displacement>(.11, .05)</displacement>
+        <displacement>(0.11, 0.05)</displacement>
         <root>(0.4912109, 0.4112793)</root>
         <tip>(0.4912109, 0.05136719)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
+        <speed>0.65</speed>
         <flowAngle>-0.05834961</flowAngle>
         <detailStrength>0.35</detailStrength>
         <breakup>0.6375839</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>7.265999999999999</phase>
+        <phase>7.266</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>28</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.01</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>West</facing>
-        <attachment>Body</attachment>
-        <particleFlame>FlameBody_West</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_Flame6_West</id>
         <label>West · 火苗6 副本 8 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame6_west</texture>
+        <facing>West</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
+        <particleFlame>Flame6_West</particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
         <displacement>(0.05058594, 0.09)</displacement>
         <root>(0.5700146, 0.1671006)</root>
@@ -3191,40 +3468,42 @@
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.65</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>7.611999999999999</phase>
+        <phase>7.612</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.01</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>West</facing>
-        <attachment>Body</attachment>
-        <particleFlame>Flame6_West</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_Flame5_West</id>
         <label>West · 火苗5副本 7 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame5_west</texture>
+        <facing>West</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
+        <particleFlame>Flame5_West</particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
         <displacement>(0.04210938, 0.04)</displacement>
         <root>(0.6839043, 0.3871689)</root>
@@ -3232,40 +3511,42 @@
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.65</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>8.995999999999999</phase>
+        <phase>8.996</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.01</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>West</facing>
-        <attachment>Body</attachment>
-        <particleFlame>Flame5_West</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_Flame4_West</id>
         <label>West · 火苗4副本 7 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame4_west</texture>
+        <facing>West</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
+        <particleFlame>Flame4_West</particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
         <displacement>(0.05058594, 0.05947266)</displacement>
         <root>(0.4756885, 0.5931504)</root>
@@ -3273,40 +3554,42 @@
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.65</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>9.341999999999999</phase>
+        <phase>9.342</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.01</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>West</facing>
-        <attachment>Body</attachment>
-        <particleFlame>Flame4_West</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_Flame2_West</id>
         <label>West · 火苗2 副本 4 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame2_west</texture>
+        <facing>West</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
+        <particleFlame>Flame2_West</particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
         <displacement>(0.025, 0.04)</displacement>
         <root>(0.3403262, 0.64746)</root>
@@ -3314,40 +3597,42 @@
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.65</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>10.379999999999999</phase>
+        <phase>10.38</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.01</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>West</facing>
-        <attachment>Body</attachment>
-        <particleFlame>Flame2_West</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_Flame1_West</id>
         <label>West · 火苗1 副本 6 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame1_west</texture>
+        <facing>West</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
+        <particleFlame>Flame1_West</particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
         <displacement>(0.03472656, 0.04443359)</displacement>
         <root>(0.4589756, 0.9024121)</root>
@@ -3355,40 +3640,42 @@
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.65</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>10.725999999999999</phase>
+        <phase>10.726</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.01</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>West</facing>
-        <attachment>Body</attachment>
-        <particleFlame>Flame1_West</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_Flame6_North</id>
         <label>North · 火苗6 副本 4 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame6_north</texture>
+        <facing>North</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
+        <particleFlame>Flame6_North</particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
         <displacement>(0.05660156, 0.04921875)</displacement>
         <root>(0.4017276, 0.5802891)</root>
@@ -3396,81 +3683,85 @@
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.65</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
         <phase>6.92</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.01</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>North</facing>
-        <attachment>Body</attachment>
-        <particleFlame>Flame6_North</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_FlameBody_North</id>
         <label>North · 火焰躯体 副本 2 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_FlameBody_north</texture>
+        <facing>North</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
+        <particleFlame>FlameBody_North</particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
-        <displacement>(.11, .05)</displacement>
+        <displacement>(0.11, 0.05)</displacement>
         <root>(0.4975586, 0.4112793)</root>
         <tip>(0.4975586, 0.05136719)</tip>
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
+        <speed>0.65</speed>
         <flowAngle>-0.05834961</flowAngle>
         <detailStrength>0.35</detailStrength>
         <breakup>0.6375839</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>7.265999999999999</phase>
+        <phase>7.266</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>28</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.01</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>North</facing>
-        <attachment>Body</attachment>
-        <particleFlame>FlameBody_North</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_Flame5_North</id>
         <label>North · 火苗5 副本 3 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame5_north</texture>
+        <facing>North</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
+        <particleFlame>Flame5_North</particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
         <displacement>(0.05222656, 0.09)</displacement>
         <root>(0.4476787, 0.1926728)</root>
@@ -3478,40 +3769,42 @@
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.65</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>7.611999999999999</phase>
+        <phase>7.612</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.01</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>North</facing>
-        <attachment>Body</attachment>
-        <particleFlame>Flame5_North</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_Flame4_North</id>
         <label>North · 火苗4 副本 3 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame4_north</texture>
+        <facing>North</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
+        <particleFlame>Flame4_North</particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
         <displacement>(0.04238281, 0.04)</displacement>
         <root>(0.3768409, 0.8583008)</root>
@@ -3519,40 +3812,42 @@
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.65</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>8.649999999999999</phase>
+        <phase>8.65</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.01</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>North</facing>
-        <attachment>Body</attachment>
-        <particleFlame>Flame4_North</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_Flame3_North</id>
         <label>North · 火苗3 副本 4 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame3_north</texture>
+        <facing>North</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
+        <particleFlame>Flame3_North</particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
         <displacement>(0.0415625, 0.04)</displacement>
         <root>(0.1867031, 0.385335)</root>
@@ -3560,40 +3855,42 @@
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.65</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>8.995999999999999</phase>
+        <phase>8.996</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.01</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>North</facing>
-        <attachment>Body</attachment>
-        <particleFlame>Flame3_North</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_Flame2_North</id>
         <label>North · 火苗2 副本 4 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame2_north</texture>
+        <facing>North</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
+        <particleFlame>Flame2_North</particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
         <displacement>(0.025, 0.04)</displacement>
         <root>(0.8173535, 0.4314004)</root>
@@ -3601,40 +3898,42 @@
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.65</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>9.341999999999999</phase>
+        <phase>9.342</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.01</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>North</facing>
-        <attachment>Body</attachment>
-        <particleFlame>Flame2_North</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_Flame1_North</id>
         <label>North · 火苗1 副本 3 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Pawn/Bowbearer_Flame1_north</texture>
+        <facing>North</facing>
+        <attachment>Body</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
+        <particleFlame>Flame1_North</particleFlame>
         <position>(0, 0.15)</position>
         <size>(1.8, 1.8)</size>
         <angle>0</angle>
         <layer>80</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
         <displacement>(0.048125, 0.06357422)</displacement>
         <root>(0.7853594, 0.5104043)</root>
@@ -3642,107 +3941,110 @@
         <rootLock>0.1</rootLock>
         <bendPower>0.8</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.65</speed>
-        <flowAngle>0.313293457</flowAngle>
+        <speed>0.65</speed>
+        <flowAngle>0.31329346</flowAngle>
         <detailStrength>0.35</detailStrength>
-        <breakup>.75</breakup>
+        <breakup>0.75</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>9.687999999999999</phase>
+        <phase>9.688</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>14</particleRate>
         <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleSpeed>0.28</particleSpeed>
         <particleSize>0.01</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>North</facing>
-        <attachment>Body</attachment>
-        <particleFlame>Flame1_North</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_BowUpper0</id>
         <label>上弓臂 · 帧0 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Weapon/BowUpper0</texture>
+        <facing>All</facing>
+        <attachment>Weapon</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
-        <position>(0, 0)</position>
+        <particleFlame>BowUpper0</particleFlame>
+        <position>(0.059884295, -0.31288248)</position>
         <size>(1.5, 1.5)</size>
         <angle>0</angle>
         <layer>8</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
-        <displacement>(.065, .09)</displacement>
+        <displacement>(0.065, 0.09)</displacement>
         <root>(0.3255, 0.543)</root>
-        <tip>(.15, .92)</tip>
-        <rootLock>.06</rootLock>
-        <bendPower>.65</bendPower>
+        <tip>(0.02871172, 0.8909755)</tip>
+        <rootLock>0.06</rootLock>
+        <bendPower>0.65</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.85</speed>
+        <speed>0.85</speed>
         <flowAngle>0</flowAngle>
-        <detailStrength>.5</detailStrength>
-        <breakup>.85</breakup>
+        <detailStrength>0.5</detailStrength>
+        <breakup>0.85</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
         <phase>0.346</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>28</particleRate>
-        <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleLifetime>1.1412753</particleLifetime>
+        <particleSpeed>0.26308724</particleSpeed>
         <particleSize>0.0084</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>All</facing>
-        <attachment>Weapon</attachment>
-        <particleFlame>BowUpper0</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
       <li>
         <id>Ash_BowLower0</id>
         <label>下弓臂 · 帧0 · 灰烬</label>
         <texture>Zhenni/Bowbearer/Weapon/BowLower0</texture>
+        <facing>All</facing>
+        <attachment>Weapon</attachment>
         <displacementTexture>BladebearerDisplacement</displacementTexture>
         <enabled>true</enabled>
         <writeDepth>false</writeDepth>
         <flame>false</flame>
         <particle>true</particle>
-        <position>(0, 0)</position>
+        <particleFlame>BowLower0</particleFlame>
+        <position>(-0.21324733, 0.055769786)</position>
         <size>(1.5, 1.5)</size>
         <angle>0</angle>
         <layer>8</layer>
-        <color>(.62, .52, .74, 1)</color>
+        <color>(0.62, 0.52, 0.74, 1)</color>
         <additive>0</additive>
-        <displacement>(.065, .09)</displacement>
+        <displacement>(0.065, 0.09)</displacement>
         <root>(0.619, 0.158)</root>
-        <tip>(.84, .08)</tip>
-        <rootLock>.06</rootLock>
-        <bendPower>.65</bendPower>
+        <tip>(0.7639407, 0)</tip>
+        <rootLock>0.06</rootLock>
+        <bendPower>0.65</bendPower>
         <noiseScale>(0.5, 0.7)</noiseScale>
-        <speed>.85</speed>
+        <speed>0.85</speed>
         <flowAngle>0</flowAngle>
-        <detailStrength>.5</detailStrength>
-        <breakup>.85</breakup>
+        <detailStrength>0.5</detailStrength>
+        <breakup>0.85</breakup>
         <breakupScale>(1.8, 2.2)</breakupScale>
-        <phase>0.5189999999999999</phase>
+        <phase>0.519</phase>
         <bloomIntensity>0.8</bloomIntensity>
         <bloomThreshold>0.5</bloomThreshold>
+        <lightIntensity>1.2</lightIntensity>
+        <lightFlickerStrength>0</lightFlickerStrength>
+        <lightFlickerFrequency>1.3</lightFlickerFrequency>
         <particleRate>28</particleRate>
-        <particleLifetime>1.1</particleLifetime>
-        <particleSpeed>.28</particleSpeed>
+        <particleLifetime>1.3164431</particleLifetime>
+        <particleSpeed>0.26577184</particleSpeed>
         <particleSize>0.0084</particleSize>
         <particleSpread>65</particleSpread>
-        <particleRadius>.035</particleRadius>
-        <particleSway>.055</particleSway>
-        <facing>All</facing>
-        <attachment>Weapon</attachment>
-        <particleFlame>BowLower0</particleFlame>
-        <lightIntensity>1.2</lightIntensity>
+        <particleRadius>0.035</particleRadius>
+        <particleSway>0.055</particleSway>
       </li>
     </parts>
   </NingshaRaceLib.Zhenni.Bladebearer.BladebearerAppearanceDef>

@@ -19,6 +19,21 @@ internal static class BowbearerWeaponDraws
     //预览瞄准角与实际四向一致。
     internal static float PreviewAim(Rot4 facing) => facing.AsInt * 90f;
 
+    //待机横持，实际瞄准与放箭回位继续沿用原版持械矩阵。
+    private static bool IdlePose(CompBowbearerShooting owner, PawnDrawParms parms)
+    {
+        float released = owner.SinceRelease;
+        if (owner.Progress >= 0 || released >= 0 && released < owner.Settings.releaseSeconds + owner.Settings.recoverySeconds)
+            return false;
+        if (owner.PreviewActive || parms.DrawNow) return true;
+        return parms.flags.HasFlag(PawnRenderFlags.NeverAimWeapon)
+            || owner.Pawn.stances.curStance is not Stance_Busy stance || stance.neverAimWeapon || !stance.focusTarg.IsValid;
+    }
+
+    //横持握点靠近腰前，侧面沿对应的手臂向外移动。
+    private static Vector2 IdleHand(Rot4 facing) => facing.AsInt switch
+    { 0 => new(-.14f, -.08f), 1 => new(.34f, -.08f), 2 => new(.14f, -.08f), _ => new(-.34f, -.08f) };
+
     //最终装备矩阵负责朝向，局部调整负责握点和短暂回位。
     internal static void Draw(Mesh sourceMesh, Matrix4x4 basis, Context context)
     {
@@ -28,14 +43,23 @@ internal static class BowbearerWeaponDraws
         var node = context.Node;
         var gripPart = node.Parts.First(p => !p.DepthOnly && p.Part.id == node.Owner.WeaponPartId).Part;
         Vector2 drawSize = owner.Pawn.equipment.Primary.Graphic.drawSize;
+        bool idle = IdlePose(owner, parms);
+        if (idle)
+        {
+            float altitude = basis.m13;
+            bool west = parms.facing == Rot4.West;
+            basis = parms.matrix * Matrix4x4.TRS(Vector3.zero, Quaternion.AngleAxis(west ? 40f : -40f, Vector3.up),
+                new Vector3(west ? -drawSize.x : drawSize.x, 1, drawSize.y));
+            basis.m13 = altitude;
+        }
         basis.SetColumn(1, new Vector4(0, 1, 0, 0));
-        //原稿弓腹朝左，先反转横向再叠加原版的左右持械镜像，保留上下弓臂关系。
-        if (sourceMesh != MeshPool.plane10Flip) basis *= Matrix4x4.Scale(new Vector3(-1, 1, 1));
+        //瞄准时原稿弓腹朝左，先反转横向再叠加原版的左右持械镜像。
+        if (!idle && sourceMesh != MeshPool.plane10Flip) basis *= Matrix4x4.Scale(new Vector3(-1, 1, 1));
         Vector3 localGrip = PartMatrix(gripPart, drawSize).MultiplyPoint3x4(new Vector3(settings.grip.x - .5f, 0, settings.grip.y - .5f));
         basis = basis * Matrix4x4.Translate(localGrip)
             * Matrix4x4.Rotate(Quaternion.AngleAxis(settings.Angle(parms.facing) + owner.Recoil(), Vector3.up))
             * Matrix4x4.Translate(-localGrip);
-        Vector2 hand = settings.Hand(parms.facing);
+        Vector2 hand = idle ? IdleHand(parms.facing) : settings.Hand(parms.facing);
         Vector3 target = parms.matrix.MultiplyPoint3x4(new Vector3(hand.x, 0, hand.y));
         Vector3 grip = basis.MultiplyPoint3x4(localGrip);
         basis.m03 += target.x - grip.x; basis.m23 += target.z - grip.z;
