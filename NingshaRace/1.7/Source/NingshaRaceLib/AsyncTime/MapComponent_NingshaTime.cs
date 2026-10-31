@@ -43,6 +43,7 @@ public sealed class MapComponent_NingshaTime : MapComponent
         rate = value;
         if (value > 0f) resumeRate = value;
         if (value == 0f) remainder = 0d;
+        MapTimePatches.SetPatchesEnabled(true);
     }
 
     //首次接管与载入后的队列重建都通过同一入口完成。
@@ -133,6 +134,7 @@ public sealed class MapComponent_NingshaTime : MapComponent
     //载入后重建队列，暂停地图也能正确接收后续出生和注销。
     public override void FinalizeInit()
     {
+        if (requested) MapTimePatches.SetPatchesEnabled(true);
         if (enabled) Prepare();
     }
 

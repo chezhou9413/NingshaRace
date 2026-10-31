@@ -1,9 +1,11 @@
 using NingshaRaceLib.Zhenni.Bladebearer;
 using UnityEngine;
+using Verse;
 
 namespace NingshaRaceLib.Zhenni.Bowbearer;
 
 //螺旋与命中使用独立紫焰材质，地图和预览分别持有实例。
+[StaticConstructorOnStartup]
 internal static class BowbearerWeaponMaterials
 {
     private static Material ghost, previewGhost;

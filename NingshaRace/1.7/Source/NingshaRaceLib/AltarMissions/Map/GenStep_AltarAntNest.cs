@@ -24,7 +24,6 @@ namespace NingshaRaceLib.AltarMissions.Map
             {
                 throw new InvalidOperationException("清剿蚁巢任务没有找到固定蚁巢生成位置。");
             }
-            AntHabitatGeneration.SpawnMound(map, data, AntHabitatGeneration.FindMoundCell(map, data, center, 7f, 18f, true));
             if (Rand.Chance(0.75f)) AntHabitatGeneration.SpawnRepellent(map, data, center, 16f, 26f);
         }
     }

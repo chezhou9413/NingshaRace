@@ -20,7 +20,6 @@
     <description>已储备足够营养，可在可治疗的致命伤势发生时消耗营养保命。</description>
     <hediffClass>NingshaRaceLib.Molting.Health.Hediff_MoltingRescueReady</hediffClass>
     <isBad>false</isBad>
-    <preventsDeath>true</preventsDeath>
     <scenarioCanAdd>false</scenarioCanAdd>
   </HediffDef>
 </Defs>

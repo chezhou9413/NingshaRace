@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Verse;
+using NingshaRaceLib.DesertPit.AntColony.Buildings;
 
 namespace NingshaRaceLib.DesertPit.Ecology.Habitats
 {
@@ -35,28 +36,18 @@ namespace NingshaRaceLib.DesertPit.Ecology.Habitats
         {
             float multiplier = 1f;
             for (int i = 0; i < habitats.Count; i++)
-                if (habitats[i] is Building_FungalMound mound && mound.Spawned
+                if (habitats[i] is Building_AntHoneyTower mound && mound.Spawned
                     && cell.DistanceToSquared(mound.Position) <= mound.Radius * mound.Radius)
                     multiplier = Mathf.Max(multiplier, mound.Settings.growthMultiplier);
             return multiplier;
         }
 
         //函数职责：取得本格食用菌采收倍率，多个菌巢重叠时只取最大值。
-        public float HarvestMultiplierAt(IntVec3 cell)
-        {
-            float multiplier = 1f;
-            for (int i = 0; i < habitats.Count; i++)
-                if (habitats[i] is Building_FungalMound mound && mound.Spawned
-                    && cell.DistanceToSquared(mound.Position) <= mound.Radius * mound.Radius)
-                    multiplier = Mathf.Max(multiplier, mound.Settings.harvestMultiplier);
-            return multiplier;
-        }
-
         //函数职责：报告菌巢栖息地，供采食与普通野生菌群分开维护。
         public bool IsFungalHabitat(IntVec3 cell)
         {
             for (int i = 0; i < habitats.Count; i++)
-                if (habitats[i] is Building_FungalMound mound && mound.Spawned
+                if (habitats[i] is Building_AntHoneyTower mound && mound.Spawned
                     && cell.DistanceToSquared(mound.Position) <= mound.Radius * mound.Radius) return true;
             return false;
         }

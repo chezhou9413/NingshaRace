@@ -45,9 +45,6 @@
         <riverWidth>3~5</riverWidth>
         <riverBankWidth>2</riverBankWidth>
         <mainDryRadius>12</mainDryRadius>
-        <!--两处次要洞室分别独立等概率抽取，保留原有三处保底菌巢及稀疏种植参数。-->
-        <extraMoundsPerRoom>0~3</extraMoundsPerRoom>
-        <moundSpacing>12</moundSpacing>
       </li>
     </modExtensions>
   </MapGeneratorDef>

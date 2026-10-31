@@ -1,0 +1,107 @@
+[
+  {
+    "name": "BreakerAnt_south",
+    "source": "C:/Users/30978/.codex/generated_images/01a1912d-efa1-7de3-917c-5d89acdaa56b/exec-3c0f8319-d39e-42fe-9d42-e0633f8f357b.png",
+    "prompt": "以现有兵蚁正面为参考，制作更大、更粗壮的破军蚁正面：盾牌状宽头、重甲肩部、六条粗腿、炭黑灰配色、厚黑描边，RimWorld俯视2.5D，透明背景，无文字无人手。",
+    "output": "1.7/Textures/Things/Pawn/Animal/NingshaRace/DesertPit/AntColony/BreakerAnt/BreakerAnt_south.png",
+    "status": "AI贴图占位"
+  },
+  {
+    "name": "BreakerAnt_north",
+    "source": "C:\\Users\\30978\\.codex\\generated_images\\01a1912d-efa1-7de3-917c-5d89acdaa56b\\exec-c5a52ab7-53d8-4942-8464-33243affce2c.png",
+    "prompt": "Create the NORTH rear-facing view of exactly the armored Breaker Ant in reference 1, using reference 2 only for the RimWorld north-view camera and anatomy layout. Face upward away from viewer, abdomen in the foreground lower half and small head/antennae farther toward the top, six robust insect legs spread symmetrically. Maintain the same broad heavy charcoal-gray armor plates, wedge head and oversized mandibles as reference 1. Orthographic slightly overhead game sprite, thick black contour, restrained painterly shading, no human anatomy or hands. 禁止出现手部：不画手掌、手指、拳头、手套手形、机械手或手形夹爪。One creature on square transparent canvas, identical scale and center to reference 1, all limbs fully visible with 8% safe margins, no shadows, no text.",
+    "output": "1.7/Textures/Things/Pawn/Animal/NingshaRace/DesertPit/AntColony/BreakerAnt/BreakerAnt_north.png",
+    "status": "AI贴图占位"
+  },
+  {
+    "name": "BreakerAnt_east",
+    "source": "C:\\Users\\30978\\.codex\\generated_images\\01a1912d-efa1-7de3-917c-5d89acdaa56b\\exec-5f831325-3e77-4aa2-a397-569bb20f769e.png",
+    "prompt": "Make an EAST side-view sprite of the exact Breaker Ant design in reference 1. Reference 2 specifies the side-view camera and right-facing orientation only. Head and huge ram-like blunt mandibles on the RIGHT, large armored abdomen LEFT. Retain broad wedge head, thick segmented charcoal-gray armor plates and six stout natural insect legs. Show complete insect, orthographic slightly overhead RimWorld sprite, heavy black contour and restrained gray painterly shading. Center on transparent square canvas, safe 8% margins, same overall scale as front/rear views. No wings, no text, no ground shadow. 禁止出现手部：不画手掌、手指、拳头、握持武器的手、手套手形、机械手或手形夹爪。",
+    "output": "1.7/Textures/Things/Pawn/Animal/NingshaRace/DesertPit/AntColony/BreakerAnt/BreakerAnt_east.png",
+    "status": "AI贴图占位"
+  },
+  {
+    "name": "FlyingAnt_south",
+    "source": "C:\\Users\\30978\\.codex\\generated_images\\01a1912d-efa1-7de3-917c-5d89acdaa56b\\exec-bc6288fe-8127-4f2d-ac87-564619ae2cf5.png",
+    "prompt": "Edit the reference RimWorld soldier ant into a distinct Flying Scythe Ant / 飞镰蚁 SOUTH view, facing down toward viewer. Keep orthographic slightly overhead ant sprite composition and charcoal warm-gray thick black outlined painterly style. Design a slim agile ant with smaller segmented abdomen, lightweight thorax, six long slim pointed insect legs, two long curved sickle-like mandibles extending forward from the mouth, and a pair of narrow folded translucent smoky insect wings along the back. Natural insect anatomy, absolutely no human hands or humanoid limbs. 禁止出现手部：不画手掌、手指、拳头、握持武器的手、手套手形、机械手或手形夹爪。Sickle shapes are mouth mandibles only, not held weapons. One complete centered creature, transparent square background, 8% safe margins. No text, no scenery, no shadow. Simple shapes recognizable at 64px.",
+    "output": "1.7/Textures/Things/Pawn/Animal/NingshaRace/DesertPit/AntColony/FlyingAnt/FlyingAnt_south.png",
+    "status": "AI贴图占位"
+  },
+  {
+    "name": "FlyingAnt_north",
+    "source": "C:\\Users\\30978\\.codex\\generated_images\\01a1912d-efa1-7de3-917c-5d89acdaa56b\\exec-7a312bb2-2402-4e0e-aae5-66120169867c.png",
+    "prompt": "Create the NORTH rear-facing view of the exact Flying Scythe Ant in reference 1; reference 2 provides only the RimWorld north-view anatomy and perspective. The ant faces UP away from viewer: head and antennae at top, slim segmented pointed abdomen in foreground bottom, two narrow smoky translucent wings folded backward over abdomen, six long slim natural insect legs. Preserve reference 1 charcoal warm gray chitin, sickle-shaped mouth mandibles, thick black outer contour, restrained painterly shading. One creature on transparent square canvas; full limbs visible, 8% safe margins, same consistent center and scale as reference 1. No text, scenery, or floor shadow. 禁止出现手部：不画手掌、手指、拳头、手套手形、机械手或手形夹爪。",
+    "output": "1.7/Textures/Things/Pawn/Animal/NingshaRace/DesertPit/AntColony/FlyingAnt/FlyingAnt_north.png",
+    "status": "AI贴图占位"
+  },
+  {
+    "name": "FlyingAnt_east",
+    "source": "C:\\Users\\30978\\.codex\\generated_images\\01a1912d-efa1-7de3-917c-5d89acdaa56b\\exec-6dc4cc99-126c-4e09-a35c-8508ed61002b.png",
+    "prompt": "Create the EAST right-facing side view of the exact Flying Scythe Ant from reference 1. Reference 2 specifies only side-view orientation and camera. Slim head with long curved sickle mandibles points RIGHT, narrow segmented abdomen LEFT, two narrow smoky insect wings folded backward along the back, six slim natural insect legs with far-side legs partly occluded. Preserve charcoal warm gray shell, heavy black outline and restrained painterly shading. Orthographic slightly overhead RimWorld creature sprite, consistent size/center, square transparent canvas and 8% safe margins around complete silhouette. No human hands, no held weapons, no text, no scenery or shadow. 禁止出现手部：不画手掌、手指、拳头、握持武器的手、手套手形、机械手或手形夹爪。",
+    "output": "1.7/Textures/Things/Pawn/Animal/NingshaRace/DesertPit/AntColony/FlyingAnt/FlyingAnt_east.png",
+    "status": "AI贴图占位"
+  },
+  {
+    "name": "StoragePit",
+    "source": "C:\\Users\\30978\\.codex\\generated_images\\01a1912d-efa1-7de3-917c-5d89acdaa56b\\exec-e8ce8b0c-ac05-48f5-9535-3ab8d848d28a.png",
+    "prompt": "Transform the reference ant-nest artwork into a distinct small ANT STORAGE PIT for the same RimWorld mod. Keep its earthy warm-gray/brown stone and packed-soil material, heavy black outline and restrained textured painterly shading. Building sprite seen orthographically from slightly overhead, designed for a 2x2 tile footprint: a LOW broad rounded excavation rim, deep dark central cavity containing a few visible rock chunks and sealed amber food nodules, thin organic rib-like supports. Clearly a hollow storage pit, not a tall tower and not a nest colony. Center the full structure on transparent square background, low height, safe 8% margins, no text, no scenery or cast shadow. Keep readable at 64 pixels.",
+    "output": "1.7/Textures/Things/Building/NingshaRace/DesertPit/AntColony/StoragePit.png",
+    "status": "AI贴图占位"
+  },
+  {
+    "name": "AcidTurret",
+    "source": "C:\\Users\\30978\\.codex\\generated_images\\01a1912d-efa1-7de3-917c-5d89acdaa56b\\exec-83fc4594-fd47-4ae6-a17c-5ddc06a03fa9.png",
+    "prompt": "Edit the reference ant-nest material into a RimWorld stationary ACID-SPITTING ANT turret building sprite. A compact 1x1-tile organic defense: one charcoal-gray ant head with two small feelers and a short open acid-spitting mouth, a swollen muted emerald-green acid sac behind the head, rooted into a low ring of warm brown stone and packed earth. Six short pointed insect legs brace into the base, no humanoid hands. Same thick black outline and restrained painterly textures as the reference; orthographic slightly overhead front-facing view, simple readable silhouette. One complete object centered on transparent square canvas with 8% margins. No projectile, no text, no scenery or shadow. 禁止出现手部：不画手掌、手指、拳头、机械手或手形夹爪。",
+    "output": "1.7/Textures/Things/Building/NingshaRace/DesertPit/AntColony/AcidTurret.png",
+    "status": "AI贴图占位"
+  },
+  {
+    "name": "EmeraldHoneydew_a",
+    "source": "C:\\Users\\30978\\.codex\\generated_images\\01a1912d-efa1-7de3-917c-5d89acdaa56b\\exec-ae8c13f4-147d-4895-b201-199bf01c3975.png",
+    "prompt": "Create ONE RimWorld inventory item sprite of a single blob of emerald honeydew produced by giant ants. Green jelly-like solid organic nectar nugget with two curved GOLD veins, squat irregular oval, small glossy highlight, dark thick hand-drawn outline, limited shaded green palette. 2.5D overhead view matching vanilla RimWorld hand-painted resources. Readable at 32 pixels. No jar, no plate, no background, no text, no UI, no ground shadow. Centered large with 15% transparent margin. Transparent PNG.",
+    "output": "1.7/Textures/Things/Item/NingshaRace/AntColony/EmeraldHoneydew/EmeraldHoneydew_a.png",
+    "status": "AI贴图占位"
+  },
+  {
+    "name": "EmeraldHoneydew_b",
+    "source": "C:\\Users\\30978\\.codex\\generated_images\\01a1912d-efa1-7de3-917c-5d89acdaa56b\\exec-b49f9991-8e22-4588-a5f2-5c2a833c557b.png",
+    "prompt": "Make the STACK variant for this RimWorld item, preserving exactly the green jelly nugget and GOLD curved veins, thick black outline and hand-painted shading. Show a compact pile of FIVE individual emerald honeydew nuggets, overlapping naturally, no container. Same overhead 2.5D game inventory perspective, readable at 32px. Center pile with 15 percent empty margin. Transparent PNG background, no ground, no shadow, no text.",
+    "output": "1.7/Textures/Things/Item/NingshaRace/AntColony/EmeraldHoneydew/EmeraldHoneydew_b.png",
+    "status": "AI贴图占位"
+  },
+  {
+    "name": "BurstHoneydew_a",
+    "source": "C:\\Users\\30978\\.codex\\generated_images\\01a1912d-efa1-7de3-917c-5d89acdaa56b\\exec-b9567259-abf1-434a-921c-6975e8db4fc3.png",
+    "prompt": "ONE RimWorld game inventory sprite: one squat irregular blob of explosive ant honeydew, GOLDEN yellow amber jelly with TWO vivid RED curved veins. No green anywhere. Thick dark outline, simple hand-painted 2.5D overhead resource icon, clear highlights and limited shadows, recognisable at 32px. No bottle no plate no symbols no writing no ground shadow. Center with transparent margins. Transparent PNG.",
+    "output": "1.7/Textures/Things/Item/NingshaRace/AntColony/BurstHoneydew/BurstHoneydew_a.png",
+    "status": "AI贴图占位"
+  },
+  {
+    "name": "BurstHoneydew_b",
+    "source": "C:\\Users\\30978\\.codex\\generated_images\\01a1912d-efa1-7de3-917c-5d89acdaa56b\\exec-41d05352-5f36-415b-9c8f-412f67a977e2.png",
+    "prompt": "Create the STACK variant of exactly this golden-yellow explosive ant honeydew with RED veins. A compact overlapping pile of five separate golden jelly nuggets, no green, same thick outline hand-painted RimWorld resource sprite, simplified readable at 32px, overhead 2.5D. Transparent PNG with 15 percent padding, no ground shadow, no container, no text.",
+    "output": "1.7/Textures/Things/Item/NingshaRace/AntColony/BurstHoneydew/BurstHoneydew_b.png",
+    "status": "AI贴图占位"
+  },
+  {
+    "name": "BlackCarapace_a",
+    "source": "C:\\Users\\30978\\.codex\\generated_images\\01a1912d-efa1-7de3-917c-5d89acdaa56b\\exec-2578e8ea-df7c-4e50-9815-0e316dff65ea.png",
+    "prompt": "Create ONE RimWorld resource item sprite: a single detached black giant-ant carapace plate. Broad curved oval shell fragment with 3 segmented ridges, charcoal-black base, warm gray highlights, thick dark hand-drawn outline, a small broken edge exposing beige chitin, no blood. Plain natural chitin, not a helmet or metal armor, no limbs or complete insect. Vanilla RimWorld hand-painted 2.5D overhead item style readable at 32 pixels. Center with generous transparent padding, no shadow, no floor, no text. Transparent PNG.",
+    "output": "1.7/Textures/Things/Item/NingshaRace/AntColony/BlackCarapace/BlackCarapace_a.png",
+    "status": "AI贴图占位"
+  },
+  {
+    "name": "BlackCarapace_b",
+    "source": "C:\\Users\\30978\\.codex\\generated_images\\01a1912d-efa1-7de3-917c-5d89acdaa56b\\exec-d88aa559-d5cb-45d8-ab78-969d5642a8a0.png",
+    "prompt": "Create STACK variant of this exact black ant chitin shell resource: a compact natural overlapping pile of FOUR detached curved charcoal black carapace plates, gray highlights and small rough beige cut edges. Thick outlines, simplified RimWorld overhead 2.5D item style, clearly shell fragments not complete beetles. Centered large with 15% transparent margins. Transparent PNG no ground no cast shadow no text no container.",
+    "output": "1.7/Textures/Things/Item/NingshaRace/AntColony/BlackCarapace/BlackCarapace_b.png",
+    "status": "AI贴图占位"
+  },
+  {
+    "name": "AntGround",
+    "source": "C:\\Users\\30978\\.codex\\generated_images\\01a1912d-efa1-7de3-917c-5d89acdaa56b\\exec-4d2cf53e-3ebb-4d46-a063-35877a4682cb.png",
+    "prompt": "Create a 1024x1024-style SQUARE SEAMLESS TILEABLE game terrain texture for RimWorld. Reference 1 is the actual original Flesh floor: copy its flat orthographic format, full-canvas coverage, small subtle organic cellular pattern and restrained detail density. Reference 2 supplies ONLY the dark purple-black palette and ant-nest chitin-fiber motif, NOT its isolated patch shape. The output must fill EVERY pixel including all four edges with continuous dark violet-black nest floor, fully opaque. NO transparent padding, NO island outline, NO border, NO central mound, no perspective, no highlights implying height. Seamless edges with natural meandering organic membranes and subtle vein ridges, muted eggplant purple, charcoal shadows, small low contrast cells. Hand-painted flat game terrain readable under pawns and buildings, not a macro photograph. Gentle even lighting and consistent brightness across edges. No objects, text or symbols.",
+    "output": "1.7/Textures/Terrain/Surfaces/NingshaRace/AntGround.png",
+    "status": "AI贴图占位"
+  }
+]

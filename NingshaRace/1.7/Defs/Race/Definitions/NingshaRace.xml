@@ -285,7 +285,7 @@
                 </east>
               </offsets>
             </li>
-            <!-- 后发层职责：跟随前发变体编号和发色，在身体后方绘制配套后发。 -->
+            <!-- 后发跟随前发变体和发色，躺入遮盖身体的床铺时隐藏。 -->
             <li>
               <name>NingshaRace_HairBack</name>
               <userCustomizable>false</userCustomizable>
@@ -305,6 +305,11 @@
                 <BodyPart>
                   <bodyPart>Head</bodyPart>
                 </BodyPart>
+                <Posture>
+                  <drawnStanding>true</drawnStanding>
+                  <drawnLaying>true</drawnLaying>
+                  <drawnInBed>false</drawnInBed>
+                </Posture>
               </conditions>
               <offsets>
                 <south>
@@ -452,7 +457,7 @@
       <manhunterOnDamageChance>0.5</manhunterOnDamageChance>
       <manhunterOnTameFailChance>0.1</manhunterOnTameFailChance>
       <soundCallIntervalRange>2000~5000</soundCallIntervalRange>
-      <canBecomeShambler>true</canBecomeShambler>
+      <canBecomeShambler>false</canBecomeShambler>
       <hasUnnaturalCorpse>true</hasUnnaturalCorpse>
       <hediffGiverSets>
         <li>OrganicStandard</li>

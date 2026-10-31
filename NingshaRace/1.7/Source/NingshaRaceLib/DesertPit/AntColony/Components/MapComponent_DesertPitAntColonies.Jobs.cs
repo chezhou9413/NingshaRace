@@ -17,16 +17,18 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             AntColonyState state;
             if (!TryGetColony(pawn, out state))
             {
-                return null;
+                return TryCreateOrphanJob(pawn);
             }
 
             Comp_DesertPitAntMember memberComp = pawn.TryGetComp<Comp_DesertPitAntMember>();
             AntCaste caste = memberComp.Caste;
+            if (caste == AntCaste.Queen && IsFullAlarm(state, Find.TickManager.TicksGame))
+                return JobMaker.MakeJob(DefOfRefs.NingshaRace_Job_AntEnterNest, state.Nest);
             //工蚁放弃危险区域任务后先回巢，避免留在死亡热点附近继续游荡。
             if (caste == AntCaste.Worker && IsWorkerForageDangerous(pawn, pawn.Position)
                 && pawn.Position.DistanceTo(state.NestPosition) > Settings.queenLeashRadius)
                 return CreateReturnToNestJob(pawn, state);
-            //极度饥饿时仍保留进食机会，避免警报和狂暴永久遮蔽基本需求。
+            //极度饥饿时仍保留进食机会，避免警报永久遮蔽基本需求。
             if (caste != AntCaste.Boom && pawn.needs?.food?.CurLevelPercentage < 0.12f)
             {
                 Job urgentFood = TryCreateNeedsJob(pawn, state);
@@ -37,20 +39,18 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
                 return TryCreateRetreatJob(pawn, state, caste);
             }
 
-            Thing intruder = FindNearestIntruder(pawn, state);
+            Thing intruder = caste == AntCaste.Worker || caste == AntCaste.Queen
+                ? FindNearbyWorkerThreat(pawn, state) : FindNearestIntruder(pawn, state);
 
             if (caste == AntCaste.Boom)
             {
-                return intruder != null ? CreateBoomAttackJob(intruder) : CreatePatrolJob(pawn, state, Settings.workerWanderRadius);
+                return intruder != null ? CreateBoomAttackJob(intruder)
+                    : !IsFullAlarm(state, Find.TickManager.TicksGame)
+                        ? JobMaker.MakeJob(DefOfRefs.NingshaRace_Job_AntEnterNest, state.Nest)
+                        : CreatePatrolJob(pawn, state, 7f);
             }
 
-            if (state.Frenzy)
-            {
-                return intruder != null ? CreateCombatJob(pawn, intruder) ?? CreateReturnToNestJob(pawn, state)
-                    : TryCreateNeedsJob(pawn, state) ?? CreatePatrolJob(pawn, state, Settings.soldierPatrolRadius);
-            }
-
-            if ((caste == AntCaste.Soldier || caste == AntCaste.Acid) && intruder != null)
+            if (IsCombatCaste(caste) && intruder != null)
             {
                 return CreateCombatJob(pawn, intruder) ?? CreateReturnToNestJob(pawn, state);
             }
@@ -65,16 +65,12 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             {
                 return needsJob;
             }
+            if (IsFullAlarm(state, Find.TickManager.TicksGame)) return CreateGuardJob(pawn, state);
 
             if (caste == AntCaste.Queen)
             {
-                Thing reproductionFood;
-                if (!state.NestDestroyed && state.Nest != null && !state.Nest.Destroyed && Find.TickManager.TicksGame >= state.NextBirthTick && CanStartReproduction(pawn, state, out reproductionFood))
-                {
-                    Job job = JobMaker.MakeJob(DefOfRefs.NingshaRace_Job_DesertPitAntReproduce, state.Nest, reproductionFood);
-                    job.count = Settings.reproductionWorkTicks;
-                    return job;
-                }
+                Job hatch = ClaimTask(pawn, state);
+                if (hatch != null) return hatch;
 
                 if (pawn.Position.DistanceTo(state.NestPosition) > Settings.queenLeashRadius)
                 {
@@ -86,17 +82,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
 
             if (caste == AntCaste.Worker)
             {
-                if (state.HarvestRequested)
-                {
-                    Job harvest = TryCreateHarvestJob(pawn, state);
-                    if (harvest != null) return harvest;
-                }
-                Job foodHaul = TryCreateForageJob(pawn, state, true);
-                if (foodHaul != null) return foodHaul;
-                Job dig = TryCreateResourceDigJob(pawn);
-                if (dig != null) return dig;
-                Job forageJob = TryCreateForageJob(pawn, state, false);
-                return forageJob ?? CreatePatrolJob(pawn, state, Settings.workerWanderRadius);
+                return ClaimTask(pawn, state) ?? CreatePatrolJob(pawn, state, Settings.workerWanderRadius);
             }
 
             return CreatePatrolJob(pawn, state, Settings.soldierPatrolRadius);
@@ -105,23 +91,23 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         //函数职责：在巢群实体储藏格中寻找可食用物资，或让过度疲劳的成员在巢穴附近休息。
         private Job TryCreateNeedsJob(Pawn pawn, AntColonyState state)
         {
-            if (pawn.needs != null && pawn.needs.food != null && pawn.needs.food.CurLevelPercentage < 0.35f)
+            if (pawn.needs != null && pawn.needs.food != null && pawn.needs.food.CurLevelPercentage < 0.3f)
             {
                 Thing food = FindStoredFoodFor(pawn, state) ?? FindLooseFoodFor(pawn);
                 if (food != null)
                 {
+                    if (food.ParentHolder is Buildings.Building_AntColonyStructure container)
+                        return JobMaker.MakeJob(DefOfRefs.NingshaRace_Job_AntTakeFood, container, food);
                     Job ingestJob = JobMaker.MakeJob(JobDefOf.Ingest, food);
                     ingestJob.count = food is Corpse ? 1 : System.Math.Min(food.stackCount, FoodUtility.WillIngestStackCountOf(pawn, food.def, FoodUtility.NutritionForEater(pawn, food)));
                     return ingestJob;
                 }
-                Job harvest = TryCreateHarvestJob(pawn, state, forEating: true);
-                if (harvest != null) return harvest;
             }
 
             if (pawn.needs != null && pawn.needs.rest != null && pawn.needs.rest.CurLevelPercentage < 0.2f)
             {
                 IntVec3 restCell;
-                if (TryFindColonyCell(pawn, state, Settings.queenLeashRadius, out restCell, forRest: true))
+                if (TryFindColonyCell(pawn, state, 7f, out restCell, forRest: true))
                 {
                     return JobMaker.MakeJob(JobDefOf.LayDown, restCell);
                 }
@@ -133,26 +119,19 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         //函数职责：从本巢实体储藏格中寻找当前成员可以预留并抵达的新鲜食物。
         private Thing FindStoredFoodFor(Pawn pawn, AntColonyState state)
         {
-            Thing result = null;
-            float bestDistance = float.MaxValue;
-            for (int i = 0; i < state.StorageCells.Count; i++)
+            foreach (Thing food in StoredFoods(state))
             {
-                Thing food = GetStorageOccupant(state.StorageCells[i]);
+                Thing access = food.Spawned ? food : food.ParentHolder as Thing;
                 if (!IsStoredFood(food) || !food.IngestibleNow || !pawn.RaceProps.CanEverEat(food)
-                    || !pawn.CanReserveAndReach(food, PathEndMode.ClosestTouch, Danger.Deadly))
+                    || access == null || !pawn.CanReserveAndReach(access, PathEndMode.ClosestTouch, Danger.Deadly))
                 {
                     continue;
                 }
 
-                float distance = pawn.Position.DistanceToSquared(food.Position);
-                if (distance < bestDistance)
-                {
-                    bestDistance = distance;
-                    result = food;
-                }
+                return food;
             }
 
-            return result;
+            return null;
         }
 
         //函数职责：创建带有有限攻击次数和失去目标后破门行为的近战拦截工作。

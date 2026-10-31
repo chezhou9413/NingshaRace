@@ -31,7 +31,7 @@ internal static class CaveEndRooms
         return (gap, anchor, parent);
     }
 
-    //八方向水域距离保守估计完整干地洞室所需的净空。
+    //八方向水域距离只用于快速排除中心附近积水，完整轮廓另行检查。
     private static int[] Clearance(byte[] cells, int n)
     {
         var distance = new int[cells.Length]; var queue = new int[cells.Length]; int head = 0, tail = 0;
@@ -119,63 +119,118 @@ internal static class CaveEndRooms
         return indices;
     }
 
-    //使用实际可走路径验收两处末端空洞，失败时保留明确原因。
+    //近、远洞室仍使用原来的独立随机流和轮廓，不随候选尝试次数变化。
+    private static (Shape Shape, double[] Knots, string Seed) RoomShape(CaveSettings settings, bool far)
+    {
+        string seed = settings.Seed + ":nest:" + (far ? "far" : "near");
+        var random = Random(seed); double rx = settings.Size * (.041 + random() * .009), ry = rx * (.8 + random() * .35);
+        var shape = new Shape(0, 0, rx, ry, random() * Math.PI);
+        var knots = Enumerable.Range(0, 11).Select(_ => .78 + random() * .48).ToArray();
+        return (shape, knots, seed);
+    }
+
+    //估计距离只排序；仅以确定不可能满足的直线下界和内接干地净空排除候选。
+    private static List<(int Cell, double Score)> Candidates(byte[] cells, int start, CaveSettings settings,
+        Shape shape, int[] clearance, int[] walking, int[] gap, int[] anchor, bool far, int farCell = -1, int separation = 0)
+    {
+        int n = settings.Size, extent = (int)Math.Ceiling(Math.Max(shape.Rx, shape.Ry) * 1.45), margin = extent + 3;
+        int inner = (int)Math.Floor(Math.Min(shape.Rx, shape.Ry) * (.78 - .065 * CaveSettings.Roughness) / Math.Sqrt(2));
+        var candidates = new List<(int Cell, double Score)>();
+        for (int y = margin; y < n - margin; y++)
+            for (int x = margin; x < n - margin; x++)
+            {
+                int i = y * n + x;
+                if (cells[i] != 0 || anchor[i] < 0 || clearance[i] <= inner) continue;
+                if (!far && Math.Abs(x - start % n) + Math.Abs(y - start / n) > n * .4) continue;
+                if (farCell >= 0 && Length(x - farCell % n, y - farCell / n) < separation) continue;
+                double estimated = walking[anchor[i]] + gap[i], target = (far ? .95 : .3) * n;
+                double neck = extent * (far ? 1.6 : .85);
+                candidates.Add((i, Math.Abs(estimated - target) * .65 + Math.Abs(gap[i] - neck) * 1.6));
+            }
+        return candidates.OrderBy(c => c.Score).ThenBy(c => c.Cell).ToList();
+    }
+
+    //完整洞室和弯折洞颈都不得覆盖水面，只记录本次需要开掘的岩体。
+    private static (List<int> Floor, List<Point> Path, int[] Changed)? Prepare(int center, Shape shape, double[] knots,
+        string seed, int[] parent, byte[] cells, CaveSettings settings, bool far)
+    {
+        var footprint = Footprint(center, shape, knots, Hash(seed), settings.Size);
+        if (footprint.Any(i => cells[i] >= 2)) return null;
+        var path = Connector(center, parent, settings, far);
+        if (path.Count == 0) return null;
+        var neck = Corridor(path, cells, settings.Size);
+        if (neck == null) return null;
+        neck.UnionWith(footprint);
+        return (footprint, path, neck.Where(i => cells[i] == 0).ToArray());
+    }
+
+    //候选只写自己的岩体格，失败或取消时可以精确恢复。
+    private static void SetCells(byte[] cells, int[] changed, byte value)
+    {
+        foreach (int i in changed) cells[i] = value;
+    }
+
+    //两处同时满足约束后才提交，生态读取顺序始终为近洞、远洞。
+    private static void Commit(CavePlan plan, int center, Shape shape, List<int> floor, List<Point> path, int n)
+    {
+        plan.Rooms.Add(new Shape((center % n + .5) / n, (center / n + .5) / n,
+            shape.Rx / n, shape.Ry / n, shape.Angle) { Nest = true });
+        plan.EndRooms.Add(new CavePlan.EndRoom { Center = center, Floor = floor, Connector = path });
+    }
+
+    //先寻找受约束更多的远洞，再联合选择近洞；任一组合失败均恢复后继续搜索。
     internal static IEnumerable Carve(byte[] cells, int start, CavePlan plan, CaveSettings settings)
     {
-        int n = settings.Size, nearCell = -1; var clearance = Clearance(cells, n);
-        var chosenRooms = new List<Shape>();
-        foreach (bool far in new[] { false, true })
+        int n = settings.Size, farAttempts = 0, farValid = 0, nearAttempts = 0;
+        var clearance = Clearance(cells, n);
+        var near = RoomShape(settings, false); var far = RoomShape(settings, true);
+        int separation = (int)Math.Ceiling(Math.Max(far.Shape.Rx, far.Shape.Ry) * 1.45) * 3;
+        var walk = CaveRaster.Walking(cells, n, start);
+        var links = Connections(cells, n, walk.Distance);
+        double minimumFar = Math.Max(n * .7, Math.Ceiling(n * .25) * 3);
+        bool committed = false;
+        foreach (var farCandidate in Candidates(cells, start, settings, far.Shape, clearance,
+            walk.Distance, links.Gap, links.Anchor, true))
         {
-            string role = far ? "far" : "near", seed = settings.Seed + ":nest:" + role;
-            var random = Random(seed); double rx = n * (.041 + random() * .009), ry = rx * (.8 + random() * .35);
-            var shape = new Shape(0, 0, rx, ry, random() * Math.PI);
-            var knots = Enumerable.Range(0, 11).Select(_ => .78 + random() * .48).ToArray();
-            var walk = CaveRaster.Walking(cells, n, start);
-            var links = Connections(cells, n, walk.Distance);
-            int extent = (int)Math.Ceiling(Math.Max(rx, ry) * 1.45), margin = extent + 3;
-            int step = Math.Max(2, (int)Math.Floor(n / 100.0 + .5));
-            var candidates = new List<(int Cell, double Score)>();
-            for (int y = margin; y < n - margin; y += step)
-                for (int x = margin; x < n - margin; x += step)
-                {
-                    int i = y * n + x;
-                    if (links.Anchor[i] < 0 || clearance[i] <= extent) continue;
-                    double euclidean = Length(x - start % n, y - start / n), estimated = walk.Distance[links.Anchor[i]] + links.Gap[i];
-                    if (!far && (euclidean < n * .22 || euclidean > n * .38 || estimated > n * .46)) continue;
-                    if (far && (euclidean < n * .4 || estimated < n * .7)) continue;
-                    if (chosenRooms.Exists(r => Length(x - r.X * n, y - r.Y * n) < extent * 3)) continue;
-                    double target = (far ? .95 : .3) * n, neck = extent * (far ? 1.6 : .85);
-                    candidates.Add((i, Math.Abs(estimated - target) * .65 + Math.Abs(links.Gap[i] - neck) * 1.6));
-                }
-            bool found = false; int attempts = 0;
-            foreach (var candidate in candidates.OrderBy(c => c.Score))
+            if (++farAttempts % 8 == 0) yield return null;
+            var farPrepared = Prepare(farCandidate.Cell, far.Shape, far.Knots, far.Seed, links.Parent, cells, settings, true);
+            if (!farPrepared.HasValue) continue;
+            var farRoom = farPrepared.Value;
+            SetCells(cells, farRoom.Changed, 1);
+            try
             {
-                var footprint = Footprint(candidate.Cell, shape, knots, Hash(seed), n);
-                var path = Connector(candidate.Cell, links.Parent, settings, far);
-                var neck = Corridor(path, cells, n);
-                if (neck == null) continue;
-                neck.UnionWith(footprint);
-                var changed = neck.Where(i => cells[i] == 0).ToArray();
-                foreach (int i in changed) cells[i] = 1;
-                var check = CaveRaster.Walking(cells, n, start);
-                int distance = check.Distance[candidate.Cell], nearDistance = far ? check.Distance[nearCell] : 0;
-                bool valid = far ? distance >= Math.Max(n * .7, nearDistance * 3) && nearDistance >= n * .25 && nearDistance <= n * .4 :
-                    distance >= n * .25 && distance <= n * .4;
-                if (valid)
+                var farWalk = CaveRaster.Walking(cells, n, start);
+                //新增近洞只可能缩短已有路线，不足最低远洞距离的候选无需继续配对。
+                if (farWalk.Distance[farCandidate.Cell] < minimumFar) continue;
+                farValid++;
+                var nearLinks = Connections(cells, n, farWalk.Distance);
+                foreach (var nearCandidate in Candidates(cells, start, settings, near.Shape, clearance,
+                    farWalk.Distance, nearLinks.Gap, nearLinks.Anchor, false, farCandidate.Cell, separation))
                 {
-                    var room = new Shape((candidate.Cell % n + .5) / n, (candidate.Cell / n + .5) / n, rx / n, ry / n, shape.Angle);
-                    room.Nest = true;
-                    chosenRooms.Add(room); plan.Rooms.Add(room);
-                    plan.EndRooms.Add(new CavePlan.EndRoom { Center = candidate.Cell, Floor = footprint, Connector = path });
-                    if (!far) nearCell = candidate.Cell;
-                    found = true; break;
+                    if (++nearAttempts % 8 == 0) yield return null;
+                    var nearPrepared = Prepare(nearCandidate.Cell, near.Shape, near.Knots, near.Seed,
+                        nearLinks.Parent, cells, settings, false);
+                    if (!nearPrepared.HasValue) continue;
+                    var nearRoom = nearPrepared.Value;
+                    SetCells(cells, nearRoom.Changed, 1);
+                    try
+                    {
+                        var check = CaveRaster.Walking(cells, n, start);
+                        int nearDistance = check.Distance[nearCandidate.Cell], farDistance = check.Distance[farCandidate.Cell];
+                        if (nearDistance < n * .25 || nearDistance > n * .4
+                            || farDistance < Math.Max(n * .7, nearDistance * 3)) continue;
+                        Commit(plan, nearCandidate.Cell, near.Shape, nearRoom.Floor, nearRoom.Path, n);
+                        Commit(plan, farCandidate.Cell, far.Shape, farRoom.Floor, farRoom.Path, n);
+                        committed = true;
+                        yield break;
+                    }
+                    finally { if (!committed) SetCells(cells, nearRoom.Changed, 0); }
                 }
-                foreach (int i in changed) cells[i] = 0;
-                //候选之间保持当前地图完整，便于生成进度窗口处理一帧。
-                if (++attempts % 8 == 0) yield return null;
             }
-            if (!found) throw new InvalidOperationException("当前地形无法同时容纳近、远两个干燥末端洞室。");
-            yield return null;
+            finally { if (!committed) SetCells(cells, farRoom.Changed, 0); }
         }
+        throw new InvalidOperationException($"无法找到满足干燥与步行距离的近远洞室组合：模板 {settings.Template}，种子 {settings.Seed}，"
+            + $"尺寸 {n}；远洞候选 {farAttempts}，达标远洞 {farValid}，近洞组合 {nearAttempts}。"
+            + $"近洞要求 {n * .25:0.#}～{n * .4:0.#} 格，远洞至少 {minimumFar:0.#} 格且不少于近洞三倍。");
     }
 }

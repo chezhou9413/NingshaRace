@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
+  <ThingDef ParentName="BaseInsect" Name="NingshaRace_AntBase" Abstract="True">
+    <race>
+      <thinkTreeMain>NingshaRace_DesertPitAnt</thinkTreeMain>
+      <thinkTreeConstant>NingshaRace_DesertPitAntConstant</thinkTreeConstant>
+      <useMeatFrom>Megaspider</useMeatFrom>
+      <trainability>None</trainability>
+    </race>
+  </ThingDef>
   <!-- 文件职责：定义沙漠巨坑蚁后、工蚁、兵蚁和爆浆蚁的种族与生成种类。 -->
-  <ThingDef ParentName="BaseInsect">
+  <ThingDef ParentName="NingshaRace_AntBase">
     <defName>NingshaRace_DesertPitWorkerAnt</defName>
     <label>洞穴工蚁</label>
     <description>负责搜寻食物和贵重物资并搬回地下蚁穴的工蚁。它不擅长正面战斗，受到威胁时会优先退回巢群。</description>
@@ -18,7 +26,9 @@
     <tools>
       <li>
         <label>颚齿</label>
-        <capacities><li>Bite</li></capacities>
+        <capacities>
+          <li>Bite</li>
+        </capacities>
         <power>4</power>
         <cooldownTime>2</cooldownTime>
         <linkedBodyPartsGroup>Mouth</linkedBodyPartsGroup>
@@ -26,7 +36,9 @@
       <!--头爪或口器失效时仍可进行低伤害头撞，沿用原版昆虫的头部备用攻击规则。-->
       <li>
         <label>头部撞击</label>
-        <capacities><li>Blunt</li></capacities>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
         <power>2</power>
         <cooldownTime>2</cooldownTime>
         <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
@@ -35,15 +47,11 @@
       </li>
     </tools>
     <race>
-      <thinkTreeMain>NingshaRace_DesertPitAnt</thinkTreeMain>
-      <thinkTreeConstant>NingshaRace_DesertPitAntConstant</thinkTreeConstant>
       <body>BeetleLike</body>
       <baseBodySize>0.8</baseBodySize>
       <baseHungerRate>0.18</baseHungerRate>
       <baseHealthScale>1.2</baseHealthScale>
-      <useMeatFrom>Megaspider</useMeatFrom>
       <lifeExpectancy>6</lifeExpectancy>
-      <trainability>None</trainability>
       <lifeStageAges>
         <li>
           <def>EusocialInsectAdult</def>
@@ -64,8 +72,7 @@
       </li>
     </comps>
   </ThingDef>
-
-  <ThingDef ParentName="BaseInsect">
+  <ThingDef ParentName="NingshaRace_AntBase">
     <defName>NingshaRace_DesertPitSoldierAnt</defName>
     <label>洞穴兵蚁</label>
     <description>围绕地下蚁穴巡逻的大型兵蚁，会拦截任何进入领地的外来生物。</description>
@@ -82,7 +89,9 @@
     <tools>
       <li>
         <label>战斗颚</label>
-        <capacities><li>Cut</li></capacities>
+        <capacities>
+          <li>Cut</li>
+        </capacities>
         <power>10</power>
         <cooldownTime>2.2</cooldownTime>
         <linkedBodyPartsGroup>HeadClaw</linkedBodyPartsGroup>
@@ -90,7 +99,9 @@
       <!--头爪或口器失效时仍可进行低伤害头撞，沿用原版昆虫的头部备用攻击规则。-->
       <li>
         <label>头部撞击</label>
-        <capacities><li>Blunt</li></capacities>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
         <power>4</power>
         <cooldownTime>2</cooldownTime>
         <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
@@ -99,15 +110,11 @@
       </li>
     </tools>
     <race>
-      <thinkTreeMain>NingshaRace_DesertPitAnt</thinkTreeMain>
-      <thinkTreeConstant>NingshaRace_DesertPitAntConstant</thinkTreeConstant>
       <body>BeetleLikeWithClaw</body>
       <baseBodySize>1.2</baseBodySize>
       <baseHungerRate>0.24</baseHungerRate>
       <baseHealthScale>2.2</baseHealthScale>
-      <useMeatFrom>Megaspider</useMeatFrom>
       <lifeExpectancy>7</lifeExpectancy>
-      <trainability>None</trainability>
       <lifeStageAges>
         <li>
           <def>EusocialInsectAdult</def>
@@ -128,8 +135,7 @@
       </li>
     </comps>
   </ThingDef>
-
-  <ThingDef ParentName="BaseInsect">
+  <ThingDef ParentName="NingshaRace_AntBase">
     <defName>NingshaRace_DesertPitQueenAnt</defName>
     <label>洞穴蚁后</label>
     <description>维持整个地下巢群的蚁后。它会消耗蚁穴储备的食物，直接补充死亡的工蚁和兵蚁。</description>
@@ -146,7 +152,9 @@
     <tools>
       <li>
         <label>蚁后巨颚</label>
-        <capacities><li>Cut</li></capacities>
+        <capacities>
+          <li>Cut</li>
+        </capacities>
         <power>12</power>
         <cooldownTime>2.8</cooldownTime>
         <linkedBodyPartsGroup>HeadClaw</linkedBodyPartsGroup>
@@ -154,7 +162,9 @@
       <!--头爪或口器失效时仍可进行低伤害头撞，沿用原版昆虫的头部备用攻击规则。-->
       <li>
         <label>头部撞击</label>
-        <capacities><li>Blunt</li></capacities>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
         <power>5</power>
         <cooldownTime>2</cooldownTime>
         <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
@@ -163,15 +173,11 @@
       </li>
     </tools>
     <race>
-      <thinkTreeMain>NingshaRace_DesertPitAnt</thinkTreeMain>
-      <thinkTreeConstant>NingshaRace_DesertPitAntConstant</thinkTreeConstant>
       <body>BeetleLikeWithClaw</body>
       <baseBodySize>2</baseBodySize>
       <baseHungerRate>0.3</baseHungerRate>
       <baseHealthScale>3.5</baseHealthScale>
-      <useMeatFrom>Megaspider</useMeatFrom>
       <lifeExpectancy>12</lifeExpectancy>
-      <trainability>None</trainability>
       <lifeStageAges>
         <li>
           <def>EusocialInsectAdult</def>
@@ -192,8 +198,7 @@
       </li>
     </comps>
   </ThingDef>
-
-  <ThingDef ParentName="BaseInsect">
+  <ThingDef ParentName="NingshaRace_AntBase">
     <defName>NingshaRace_DesertPitBoomAnt</defName>
     <label>爆浆蚁</label>
     <description>腹部积蓄着高压酸液的防御蚁。蚁穴受袭时它会扑向入侵者，并在接近或死亡时爆裂。</description>
@@ -211,7 +216,9 @@
     <tools>
       <li>
         <label>小颚</label>
-        <capacities><li>Bite</li></capacities>
+        <capacities>
+          <li>Bite</li>
+        </capacities>
         <power>3</power>
         <cooldownTime>2</cooldownTime>
         <linkedBodyPartsGroup>Mouth</linkedBodyPartsGroup>
@@ -219,7 +226,9 @@
       <!--头爪或口器失效时仍可进行低伤害头撞，沿用原版昆虫的头部备用攻击规则。-->
       <li>
         <label>头部撞击</label>
-        <capacities><li>Blunt</li></capacities>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
         <power>1</power>
         <cooldownTime>2</cooldownTime>
         <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
@@ -228,15 +237,11 @@
       </li>
     </tools>
     <race>
-      <thinkTreeMain>NingshaRace_DesertPitAnt</thinkTreeMain>
-      <thinkTreeConstant>NingshaRace_DesertPitAntConstant</thinkTreeConstant>
       <body>BeetleLike</body>
       <baseBodySize>0.6</baseBodySize>
       <baseHungerRate>0.1</baseHungerRate>
       <baseHealthScale>0.8</baseHealthScale>
-      <useMeatFrom>Megaspider</useMeatFrom>
       <lifeExpectancy>4</lifeExpectancy>
-      <trainability>None</trainability>
       <lifeStageAges>
         <li>
           <def>EusocialInsectAdult</def>
@@ -257,7 +262,6 @@
       </li>
     </comps>
   </ThingDef>
-
   <PawnKindDef ParentName="InsectKindBase">
     <defName>NingshaRace_DesertPitWorkerAntKind</defName>
     <label>洞穴工蚁</label>
@@ -273,7 +277,6 @@
       </li>
     </lifeStages>
   </PawnKindDef>
-
   <PawnKindDef ParentName="InsectKindBase">
     <defName>NingshaRace_DesertPitSoldierAntKind</defName>
     <label>洞穴兵蚁</label>
@@ -289,7 +292,6 @@
       </li>
     </lifeStages>
   </PawnKindDef>
-
   <PawnKindDef ParentName="InsectKindBase">
     <defName>NingshaRace_DesertPitQueenAntKind</defName>
     <label>洞穴蚁后</label>
@@ -305,7 +307,6 @@
       </li>
     </lifeStages>
   </PawnKindDef>
-
   <PawnKindDef ParentName="InsectKindBase">
     <defName>NingshaRace_DesertPitBoomAntKind</defName>
     <label>爆浆蚁</label>

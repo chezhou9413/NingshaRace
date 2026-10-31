@@ -16,27 +16,11 @@
     <casualInterruptible>true</casualInterruptible>
     <playerInterruptible>false</playerInterruptible>
   </JobDef>
-
-  <JobDef>
-    <defName>NingshaRace_Job_DesertPitAntReproduce</defName>
-    <driverClass>NingshaRaceLib.DesertPit.AntColony.Jobs.JobDriver_DesertPitAntReproduce</driverClass>
-    <reportString>正在为蚁穴补充成员。</reportString>
-    <casualInterruptible>false</casualInterruptible>
-    <playerInterruptible>false</playerInterruptible>
-  </JobDef>
-
   <JobDef>
     <defName>NingshaRace_Job_DesertPitBoomAntDetonate</defName>
     <driverClass>NingshaRaceLib.DesertPit.AntColony.Jobs.JobDriver_DesertPitBoomAntDetonate</driverClass>
     <reportString>正在扑向 TargetA。</reportString>
     <casualInterruptible>false</casualInterruptible>
-    <playerInterruptible>false</playerInterruptible>
-  </JobDef>
-  <JobDef>
-    <defName>NingshaRace_Job_DesertPitAntDigResource</defName>
-    <driverClass>NingshaRaceLib.DesertPit.AntColony.Jobs.JobDriver_DesertPitAntDigResource</driverClass>
-    <reportString>正在从地底挖出资源。</reportString>
-    <casualInterruptible>true</casualInterruptible>
     <playerInterruptible>false</playerInterruptible>
   </JobDef>
   <JobDef>

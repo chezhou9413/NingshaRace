@@ -14,12 +14,14 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         //函数职责：成员受到实际伤害时记住攻击者，只在反击目标变化或记忆过期时中断全巢工作。
         public void NotifyMemberDamaged(Pawn member, Thing aggressor)
         {
-            if (!TryGetColony(member, out AntColonyState state) || !IsValidAggressor(state, aggressor)) return;
+            if (!TryGetColony(member, out AntColonyState state)) return;
+            if (state.Queen == member) NotifyNestDamaged(state.Nest, state.Id, aggressor);
+            if (!IsValidAggressor(state, aggressor)) return;
+            if (aggressor is Pawn ally && IsColonyMember(ally, state)) return;
             bool changed = state.LastAggressor != aggressor || Find.TickManager.TicksGame >= state.RetaliationUntilTick;
             RememberAggressor(state, aggressor);
             if (changed)
             {
-                CancelInvestigation(state);
                 InterruptAllMembers(state);
             }
         }
@@ -61,9 +63,22 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             return verb != null && verb.CanHitTarget(target) || pawn.CanReach(target, PathEndMode.Touch, Danger.Deadly);
         }
 
-        //函数职责：贴身时使用颚齿，远处先寻找合法射击点，再完成一次有实际弹丸的喷酸。
+        //破军蚁优先冲锋任意合法战斗目标，其余蚁种沿用腾跃、近战和喷酸。
         private Job CreateCombatJob(Pawn pawn, Thing target)
         {
+            Comp_DesertPitAntMember member = pawn.GetComp<Comp_DesertPitAntMember>();
+            float distance = pawn.Position.DistanceTo(target.Position);
+            if (Find.TickManager.TicksGame >= member.NextAbilityTick)
+            {
+                if (member.Caste == AntCaste.Breaker
+                    && AntChargeUtility.TryGetDestination(pawn, target, Settings.chargeRange, out IntVec3 destination))
+                    return JobMaker.MakeJob(DefOfRefs.NingshaRace_Job_AntCharge, target, destination);
+                if (member.Caste == AntCaste.Flying && distance > 2f)
+                    foreach (IntVec3 cell in GenAdj.CellsAdjacent8Way(target))
+                        if (JumpUtility.ValidJumpTarget(pawn, map, cell) && pawn.CanReserve(cell)
+                            && JumpUtility.CanHitTargetFrom(pawn, pawn.Position, cell, Settings.jumpRange))
+                            return JobMaker.MakeJob(DefOfRefs.NingshaRace_Job_AntJump, cell);
+            }
             Verb verb = AcidVerb(pawn);
             if (verb == null || pawn.Position.AdjacentTo8WayOrInside(target.Position))
                 return AntMeleeCapability.CanAttack(pawn, target) ? CreateMeleeAttackJob(target) : null;

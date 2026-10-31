@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <JobDef>
+    <defName>NingshaRace_Job_AntWork</defName>
+    <driverClass>NingshaRaceLib.DesertPit.AntColony.Jobs.JobDriver_AntWork</driverClass>
+    <reportString>正在完成蚁群任务。</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+  <JobDef>
+    <defName>NingshaRace_Job_AntEnterNest</defName>
+    <driverClass>NingshaRaceLib.DesertPit.AntColony.Jobs.JobDriver_AntEnterNest</driverClass>
+    <reportString>正在返回巢内。</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+  <JobDef>
+    <defName>NingshaRace_Job_AntCharge</defName>
+    <driverClass>NingshaRaceLib.DesertPit.AntColony.Jobs.JobDriver_AntCharge</driverClass>
+    <reportString>正在蓄力冲锋。</reportString>
+    <casualInterruptible>false</casualInterruptible>
+    <playerInterruptible>false</playerInterruptible>
+    <suspendable>false</suspendable>
+  </JobDef>
+  <JobDef>
+    <defName>NingshaRace_Job_AntJump</defName>
+    <driverClass>NingshaRaceLib.DesertPit.AntColony.Jobs.JobDriver_AntJump</driverClass>
+    <reportString>正在腾跃。</reportString>
+    <casualInterruptible>false</casualInterruptible>
+    <playerInterruptible>false</playerInterruptible>
+    <suspendable>false</suspendable>
+  </JobDef>
+  <JobDef>
+    <defName>NingshaRace_Job_AntTakeFood</defName>
+    <driverClass>NingshaRaceLib.DesertPit.AntColony.Jobs.JobDriver_AntTakeFood</driverClass>
+    <reportString>正在从巢群库存取食。</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+  <ThingDef ParentName="PawnFlyerBase">
+    <defName>NingshaRace_AntFlyer</defName>
+    <label>腾跃的飞镰蚁</label>
+    <pawnFlyer>
+      <flightSpeed>12</flightSpeed>
+      <heightFactor>1</heightFactor>
+      <flightDurationMin>0.35</flightDurationMin>
+    </pawnFlyer>
+  </ThingDef>
+  <JobDef>
+    <defName>NingshaRace_Job_AntMine</defName>
+    <driverClass>NingshaRaceLib.DesertPit.AntColony.Jobs.JobDriver_AntMine</driverClass>
+    <reportString>正在挖掘障碍。</reportString>
+    <casualInterruptible>true</casualInterruptible>
+  </JobDef>
+</Defs>

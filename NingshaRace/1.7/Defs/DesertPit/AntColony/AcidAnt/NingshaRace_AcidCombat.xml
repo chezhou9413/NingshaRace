@@ -40,10 +40,4 @@
       </li>
     </comps>
   </HediffDef>
-  <JobDef>
-    <defName>NingshaRace_Job_DesertPitAntHarvest</defName>
-    <driverClass>NingshaRaceLib.DesertPit.AntColony.Jobs.JobDriver_DesertPitAntHarvest</driverClass>
-    <reportString>正在采收TargetA。</reportString>
-    <casualInterruptible>true</casualInterruptible>
-  </JobDef>
 </Defs>

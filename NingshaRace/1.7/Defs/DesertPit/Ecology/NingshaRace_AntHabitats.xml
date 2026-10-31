@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!--生态建筑共用轻量表现；驱蚁桩与共生菌巢使用独立透明贴图，保留原图颜色和比例。-->
+  <!--生态建筑共用轻量表现；驱蚁桩与蚁群建筑各用独立透明贴图。-->
   <ThingDef ParentName="BuildingBase" Name="NingshaRace_AntHabitatBase" Abstract="True">
     <category>Building</category>
     <tickerType>Normal</tickerType>
@@ -51,33 +51,6 @@
         <radius>12</radius>
         <cycleTicks>15000</cycleTicks>
         <failureChance>0.06</failureChance>
-      </li>
-    </modExtensions>
-  </ThingDef>
-  <ThingDef ParentName="NingshaRace_AntHabitatBase">
-    <defName>NingshaRace_FungalMound</defName>
-    <label>共生菌巢</label>
-    <description>一截半埋在地下的古老木头，内部被菌丝和虫群改造成了温床。周围会陆续长出食用菌，附近植物生长更快，食用菌收成也更丰富。它不能搬移或建造，也不会阻挡蚂蚁通行。</description>
-    <thingClass>NingshaRaceLib.DesertPit.Ecology.Habitats.Building_FungalMound</thingClass>
-    <size>(2,1)</size>
-    <graphicData>
-      <graphicClass>Graphic_Single</graphicClass>
-      <texPath>Things/Building/NingshaRace/DesertPit/Ecology/FungalMound</texPath>
-      <drawSize>(2.8,2.8)</drawSize>
-    </graphicData>
-    <modExtensions>
-      <li Class="NingshaRaceLib.DesertPit.Ecology.Habitats.DefModExtension_FungalMound">
-        <!--作用半径，单位为格；生长与采收倍率分别控制植物长成速度和食用菌产量。-->
-        <radius>5</radius>
-        <growthMultiplier>2</growthMultiplier>
-        <harvestMultiplier>2</harvestMultiplier>
-        <!--每处菌巢范围内的植物总数上限；空地、通路或间距限制可能使实际数量更少。-->
-        <targetPlants>24</targetPlants>
-        <!--植物之间的最小直线距离，单位为格；1.5避开相邻八格，0不额外限制；不得超过作用半径。-->
-        <minimumPlantSpacing>1.5</minimumPlantSpacing>
-        <!--每2500计时单位为游戏内一小时；5000表示每两小时尝试补生，单次最多3株。-->
-        <regrowthIntervalTicks>5000</regrowthIntervalTicks>
-        <regrowthBatch>3</regrowthBatch>
       </li>
     </modExtensions>
   </ThingDef>

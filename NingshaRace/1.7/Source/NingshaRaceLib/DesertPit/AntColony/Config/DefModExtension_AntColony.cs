@@ -5,15 +5,24 @@ namespace NingshaRaceLib.DesertPit.AntColony.Config
     //类职责：承载单个沙漠巨坑蚁巢的数量、活动范围、繁殖和自爆配置。
     public class DefModExtension_AntColony : DefModExtension
     {
+        public float flyingNutritionCost = 1f;
+        public float breakerNutritionCost = 3f;
+        public float upgradeWork = 1200f;
+        public int chargeWindup = 180;
+        public float chargeRange = 9f;
+        public float chargeSpeedFactor = 2f;
+        public int chargeAccelerationTicks = 45;
+        public int chargeWallStunTicks = 60;
+        public int chargeDamage = 40;
+        public int chargeKnockback = 2;
+        public int chargeCooldown = 20000;
+        public float jumpRange = 7f;
+        public int jumpCooldown = 15000;
         //字段职责：控制吐酸蚁补员营养、保留口粮和有限受击反击距离。
         public float acidNutritionCost = 2f;
         public float foodReserveDays = 1f;
         public int foodStorageCells = 4;
-        //字段职责：限制保底采收的巢周距离、植物成熟度和库存营养门槛。
-        public float harvestRadius = 16f;
-        public float harvestMinGrowth = 0.9f;
-        public float harvestReserveMultiplier = 2f;
-        public float retaliationRadius = 55f;
+        public float retaliationRadius = 45f;
         public int retaliationDurationTicks = 2500;
         //字段职责：固定规模蚁群和一级可升级蚁群的工蚁目标数量。
         public int workerTarget = 4;
@@ -48,16 +57,16 @@ namespace NingshaRaceLib.DesertPit.AntColony.Config
         //字段职责：规定每次升级后的七天冷却。
         public int upgradeCooldownTicks = 420000;
 
-        //字段职责：规定蚁穴受击后开始自动修复前需要等待的时间。
+        //蚁穴受击后开始修补施工前需要等待的时间。
         public int repairDelayAfterDamageTicks = 2500;
 
-        //字段职责：规定自动修复相邻两个结算批次之间的时间。
+        //蚁穴相邻两次修补施工之间的间隔。
         public int repairIntervalTicks = 2500;
 
-        //字段职责：规定完整自动修复批次需要消耗的实体储藏营养。
+        //完整修补批次需要消耗的实体储藏营养。
         public float repairNutritionCost = 1f;
 
-        //字段职责：规定完整自动修复批次能够恢复的蚁穴耐久。
+        //完整修补批次能够恢复的蚁穴耐久。
         public int repairHitPoints = 100;
 
         //字段职责：限定完整警报和受击时可补充的爆浆蚁数量。
@@ -73,16 +82,13 @@ namespace NingshaRaceLib.DesertPit.AntColony.Config
         public float soldierPatrolRadius = 12f;
 
         //字段职责：规定工蚁日常游荡半径。
-        public float workerWanderRadius = 8f;
+        public float workerWanderRadius = 9f;
 
         //字段职责：规定蚁后离开蚁穴的最大活动半径。
-        public float queenLeashRadius = 5f;
+        public float queenLeashRadius = 9f;
 
         //字段职责：规定工蚁遭遇近距离威胁时的撤回半径。
         public float workerRetreatRadius = 8f;
-
-        //字段职责：规定蚁穴被毁后狂暴成员的搜敌半径。
-        public float frenzyRadius = 40f;
 
         //撤退期间只防御蚁穴十五格内可见的敌人。
         public float retreatDefenseRadius = 15f;
@@ -124,7 +130,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Config
         public int investigationMaxSquadSize = 6;
 
         //字段职责：规定工蚁每批次允许完成的搬运次数。
-        public int workerHaulLimit = 3;
+        public int workerHaulLimit = 5;
 
         //工蚁完成三趟搬运后休整半天。
         public int workerHaulCooldownTicks = 30000;
@@ -164,9 +170,16 @@ namespace NingshaRaceLib.DesertPit.AntColony.Config
         public override System.Collections.Generic.IEnumerable<string> ConfigErrors()
         {
             foreach (string error in base.ConfigErrors()) yield return error;
-            if (!(harvestRadius > 0f && harvestRadius <= 50f)) yield return "工蚁采收半径必须大于零且不超过五十格。";
-            if (!(harvestMinGrowth > 0f && harvestMinGrowth <= 1f)) yield return "工蚁采收成熟度必须大于零且不超过一。";
-            if (!(harvestReserveMultiplier > 0f) || float.IsInfinity(harvestReserveMultiplier)) yield return "工蚁采收库存倍率必须是有限正数。";
+            if (foodStorageCells < 4 || storageCellCount < foodStorageCells) yield return "蚁巢至少预留四个地面食物格。";
+            if (workerHaulLimit <= 0 || reproductionWorkTicks <= 0 || reproductionCooldownTicks <= 0 || upgradeWork <= 0)
+                yield return "蚁群工作次数、工作量和冷却必须大于零。";
+            if (workerNutritionCost <= 0 || soldierNutritionCost <= 0 || acidNutritionCost <= 0
+                || flyingNutritionCost <= 0 || breakerNutritionCost <= 0 || repairNutritionCost <= 0 || foodReserveDays <= 0)
+                yield return "蚁群营养费用和保留天数必须大于零。";
+            if (chargeRange <= 0 || chargeRange > 30 || jumpRange <= 0 || jumpRange > 30
+                || chargeWindup < 1 || chargeCooldown < 1 || jumpCooldown < 1 || chargeSpeedFactor <= 0
+                || chargeAccelerationTicks < 1 || chargeWallStunTicks < 1)
+                yield return "蚁群冲锋与腾跃配置超出有效范围。";
         }
 
         //函数职责：根据当前等级返回升到下一等级需要消耗的实体储藏营养。

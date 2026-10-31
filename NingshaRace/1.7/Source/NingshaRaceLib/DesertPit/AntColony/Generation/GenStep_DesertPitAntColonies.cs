@@ -38,15 +38,11 @@ namespace NingshaRaceLib.DesertPit.AntColony.Generation
             {
                 var room = data.AntChambers[i];
                 DesertPitAntSceneUtility.GenerateInChamber(map, data, room, i);
-                AntHabitatGeneration.SpawnMound(map, data, room.Mound);
                 yield return null;
             }
-            IntVec3 freeMound = AntHabitatGeneration.FindMoundCell(map, data, data.MainCenter, 18f, 35f, false);
-            AntHabitatGeneration.SpawnMound(map, data, freeMound);
             DefModExtension_DesertPitLayout settings = map.generatorDef.GetModExtension<DefModExtension_DesertPitLayout>();
             //入口保护物允许落在出生干地预留区，普通散布物仍需避让该区域。
             AntHabitatGeneration.SpawnRepellent(map, data, data.MainCenter, 3f, 5f, settings != null);
-            if (settings != null) SecondaryFungalMounds.Generate(map, data, settings);
         }
     }
 }

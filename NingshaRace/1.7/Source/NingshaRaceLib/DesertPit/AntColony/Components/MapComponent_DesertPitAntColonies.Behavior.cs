@@ -19,7 +19,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         //函数职责：记录工蚁或兵蚁死亡，并在未处于撤退时检查四小时百分之五十伤亡阈值。
         private void RecordRegularAntDeath(AntColonyState state, Pawn pawn, AntCaste caste)
         {
-            if (caste != AntCaste.Worker && caste != AntCaste.Soldier && caste != AntCaste.Acid)
+            if (caste != AntCaste.Worker && !IsCombatCaste(caste))
             {
                 return;
             }
@@ -42,7 +42,8 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             int windowStart = ticks - Settings.retreatLossWindowTicks;
             List<AntDeathRecord> recent = state.DeathRecords.Where(record => record.Tick >= windowStart).ToList();
             int uncountedDeaths = recent.Count(record => !record.CountedForRetreat);
-            int aliveRegular = CountCaste(state, AntCaste.Worker) + CountCaste(state, AntCaste.Soldier) + CountCaste(state, AntCaste.Acid);
+            int aliveRegular = CountCaste(state, AntCaste.Worker) + CountCaste(state, AntCaste.Soldier)
+                + CountCaste(state, AntCaste.Acid) + CountCaste(state, AntCaste.Breaker) + CountCaste(state, AntCaste.Flying);
             int threshold = Mathf.CeilToInt((aliveRegular + recent.Count) * Settings.retreatLossFraction);
             if (uncountedDeaths < Mathf.Max(1, threshold))
             {
@@ -55,6 +56,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             }
 
             state.RetreatUntilTick = ticks + Settings.retreatDurationTicks;
+            state.Tasks.Clear();
             CancelInvestigation(state);
             InterruptAllMembers(state);
         }
@@ -75,7 +77,8 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         //函数职责：在满足安全条件、死亡热点和兵蚁数量时建立唯一的 Lord 调查队。
         private void TryDispatchInvestigation(AntColonyState state, int ticks)
         {
-            if (state.NestDestroyed || state.Nest == null || state.Nest.Destroyed || state.Frenzy || IsRetreating(state, ticks) || IsFullAlarm(state, ticks) || ticks < state.NextInvestigationTick || HasActiveInvestigation(state))
+            if (TryDispatchRevenge(state, ticks)) return;
+            if (state.NestDestroyed || state.Nest == null || state.Nest.Destroyed || IsRetreating(state, ticks) || IsFullAlarm(state, ticks) || ticks < state.NextInvestigationTick || HasActiveInvestigation(state))
             {
                 return;
             }
@@ -154,7 +157,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         {
             Comp_DesertPitAntMember comp = pawn?.TryGetComp<Comp_DesertPitAntMember>();
             return pawn != null && pawn.Spawned && !pawn.Dead && !pawn.Downed && pawn.MentalStateDef == null && pawn.GetLord() == null && comp != null
-                && (comp.Caste == AntCaste.Soldier || comp.Caste == AntCaste.Acid);
+                && (comp.Caste == AntCaste.Soldier || comp.Caste == AntCaste.Acid || comp.Caste == AntCaste.Breaker);
         }
 
         //函数职责：判断指定蚁巢当前是否已经拥有一支调查队。
@@ -171,18 +174,20 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
                 Lord lord = map.lordManager.lords[i];
                 if (lord.LordJob is LordJob_DesertPitAntInvestigation job && job.ColonyId == state.Id)
                 {
+                    job.Cancelled = true;
                     map.lordManager.RemoveLord(lord);
                 }
             }
         }
 
-        //函数职责：强制中断巢群成员当前的外出、搬运、攻击和调查工作。
+        //巢群重新派活时保留已经开始的冲锋和腾跃。
         private static void InterruptAllMembers(AntColonyState state)
         {
             for (int i = 0; i < state.Members.Count; i++)
             {
                 Pawn pawn = state.Members[i];
-                if (pawn != null && pawn.Spawned && !pawn.Dead && pawn.CurJobDef != null)
+                if (pawn != null && pawn.Spawned && !pawn.Dead && pawn.CurJobDef != null
+                    && !Combat.AntAbilityCommitment.IsLocked(pawn.jobs.curDriver))
                 {
                     pawn.jobs.EndCurrentJob(JobCondition.InterruptForced);
                 }
@@ -192,8 +197,8 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         //撤退时兵蚁、吐酸蚁和爆浆蚁只防御蚁穴十五格内可见的敌人。
         private Job TryCreateRetreatJob(Pawn pawn, AntColonyState state, AntCaste caste)
         {
-            Thing nearbyIntruder = FindNearestIntruderWithinNestRadius(pawn, state, Settings.retreatDefenseRadius);
-            if ((caste == AntCaste.Soldier || caste == AntCaste.Boom || caste == AntCaste.Acid) && nearbyIntruder != null)
+            Thing nearbyIntruder = FindNearestIntruderWithinNestRadius(pawn, state, Settings.retaliationRadius);
+            if ((IsCombatCaste(caste) || caste == AntCaste.Boom) && nearbyIntruder != null)
             {
                 return caste == AntCaste.Boom ? CreateBoomAttackJob(nearbyIntruder) : CreateCombatJob(pawn, nearbyIntruder);
             }

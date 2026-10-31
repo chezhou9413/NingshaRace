@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using RimWorld;
 using Verse;
-
+using Verse.AI;
 using NingshaRaceLib.Core.Defs;
 using NingshaRaceLib.DesertPit.AntColony.Buildings;
 using NingshaRaceLib.DesertPit.AntColony.Config;
@@ -10,309 +10,174 @@ using NingshaRaceLib.DesertPit.AntColony.State;
 
 namespace NingshaRaceLib.DesertPit.AntColony.Components
 {
-    //类职责：统一管理当前地图上的全部洞穴蚁巢、成员、独立规模、警戒、补员和物资分配。
+    //地图唯一管理器，巢群各自持有成员、建筑、库存账目和任务。
     public partial class MapComponent_DesertPitAntColonies : MapComponent
     {
-        //字段职责：保存当前地图全部仍有效或尚有成员的巢群状态。
         private List<AntColonyState> colonies = new List<AntColonyState>();
-
-        //字段职责：记录下一次注册巢群时分配的唯一编号。
         private int nextColonyId = 1;
-
-        //字段职责：按巢群编号缓存运行时状态查询。
-        private Dictionary<int, AntColonyState> coloniesById = new Dictionary<int, AntColonyState>();
-
-        //字段职责：按成员 Pawn 缓存其所属巢群。
-        private Dictionary<Pawn, AntColonyState> coloniesByPawn = new Dictionary<Pawn, AntColonyState>();
-
-        //字段职责：按蚁穴建筑缓存其所属巢群。
-        private Dictionary<Building_DesertPitAntNest, AntColonyState> coloniesByNest = new Dictionary<Building_DesertPitAntNest, AntColonyState>();
-
-        //字段职责：缓存全图可供工蚁采集的实体物资。
-        private List<Thing> forageCandidates = new List<Thing>();
-
-        //字段职责：记录已经分配给工蚁的采集物，避免多只工蚁重复争抢。
-        private Dictionary<Thing, Pawn> assignedForageThings = new Dictionary<Thing, Pawn>();
-
-        //字段职责：记录已经分配给搬运工作的实体储藏格。
-        private Dictionary<IntVec3, Pawn> assignedStorageCells = new Dictionary<IntVec3, Pawn>();
-
-        //属性职责：统一读取蚁穴 Def 上的行为、等级、撤退与调查配置。
+        private readonly Dictionary<int, AntColonyState> coloniesById = new Dictionary<int, AntColonyState>();
+        private readonly Dictionary<Pawn, AntColonyState> coloniesByPawn = new Dictionary<Pawn, AntColonyState>();
+        private readonly Dictionary<Building_DesertPitAntNest, AntColonyState> coloniesByNest = new Dictionary<Building_DesertPitAntNest, AntColonyState>();
+        private readonly List<Thing> forageCandidates = new List<Thing>();
         private DefModExtension_AntColony Settings => DefOfRefs.NingshaRace_DesertPitAntNest.GetModExtension<DefModExtension_AntColony>();
 
-        //构造函数职责：把蚁群管理组件绑定到指定地图。
-        public MapComponent_DesertPitAntColonies(Map map) : base(map)
-        {
-        }
+        //绑定当前地图。
+        public MapComponent_DesertPitAntColonies(Map map) : base(map) { }
 
-        //函数职责：保存地图中的所有巢群状态和下一个可用巢群编号。
+        //巢群保存引用，建筑容器深度保存内部实体。
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Collections.Look(ref colonies, "desertPitAntColonies", LookMode.Deep);
-            Scribe_Values.Look(ref nextColonyId, "nextDesertPitAntColonyId", 1);
-            if (Scribe.mode == LoadSaveMode.PostLoadInit)
-            {
-                colonies = colonies ?? new List<AntColonyState>();
-            }
+            Scribe_Collections.Look(ref colonies, "antColonies", LookMode.Deep);
+            Scribe_Values.Look(ref nextColonyId, "nextAntColonyId", 1);
         }
 
-        //函数职责：地图完成初始化后重建不写入存档的快速查询索引。
+        //读档后重建索引，任务预留直接来源于已保存任务。
         public override void FinalizeInit()
         {
             base.FinalizeInit();
-            RebuildRuntimeIndices();
+            foreach (AntColonyState state in colonies) IndexColony(state);
             RefreshForageCandidates();
         }
 
-        //函数职责：按错峰间隔更新巢群状态，并定期刷新全图可搬运物资缓存。
+        //每巢独立错峰六十 tick，全地图共用三百 tick 物资缓存。
         public override void MapComponentTick()
         {
             if (colonies.Count == 0) return;
             int ticks = Find.TickManager.TicksGame;
-            if (ticks % 60 == map.uniqueID % 60)
-            {
-                UpdateColonies(ticks);
-                ReleaseStaleForageAssignments();
-            }
-
-            if (ticks % 250 == map.uniqueID % 250)
-            {
-                RefreshForageCandidates();
-            }
+            UpdateColonies(ticks);
+            if (ticks % 300 == map.uniqueID % 300) RefreshForageCandidates();
         }
 
-        //函数职责：登记生成步骤创建的完整巢群，并向蚁穴和所有成员写入统一编号。
-        public AntColonyState RegisterGeneratedColony(Building_DesertPitAntNest nest, Pawn queen, List<Pawn> members, List<IntVec3> storageCells, Faction faction, AntColonyPopulationSettings population, bool levelingEnabled, int currentLevel, int maximumLevel)
+        //三个场景共用登记与初始化，成员列表不包含蚁后。
+        public AntColonyState RegisterGeneratedColony(Building_DesertPitAntNest nest, Pawn queen,
+            List<Pawn> members, List<IntVec3> storageCells, Faction faction, AntColonyPopulationSettings population,
+            bool levelingEnabled, int currentLevel, int maximumLevel, List<IntVec3> buildArea, List<AntColonyTask> initialBuildings)
         {
-            if (population == null)
-            {
-                throw new System.ArgumentNullException(nameof(population));
-            }
             AntColonyState state = new AntColonyState
             {
-                Id = nextColonyId++,
-                Faction = faction,
-                Nest = nest,
-                NestPosition = nest.Position,
-                Queen = queen,
-                Members = new List<Pawn>(members),
-                StorageCells = new List<IntVec3>(storageCells),
-                Population = population,
-                LevelingEnabled = levelingEnabled,
-                CurrentLevel = currentLevel,
-                MaxLevel = maximumLevel,
-                NextRepairTick = Find.TickManager.TicksGame + Settings.repairIntervalTicks,
-                NextHarvestOrderTick = NextLocalNoonTick(Find.TickManager.TicksGame),
+                Id = nextColonyId++, Faction = faction, Nest = nest, NestPosition = nest.Position, Queen = queen,
+                Members = members.FindAll(pawn => pawn != queen), StorageCells = new List<IntVec3>(storageCells), BuildArea = buildArea,
+                Population = population, LevelingEnabled = levelingEnabled, CurrentLevel = currentLevel,
+                MaxLevel = maximumLevel, NextRepairTick = Find.TickManager.TicksGame + Settings.repairIntervalTicks,
                 NextBirthTick = Find.TickManager.TicksGame + Settings.reproductionCooldownTicks
             };
-
             nest.AssignColony(state.Id);
-            for (int i = 0; i < state.Members.Count; i++)
-            {
-                Comp_DesertPitAntMember memberComp = state.Members[i].TryGetComp<Comp_DesertPitAntMember>();
-                memberComp.AssignColony(state.Id);
-            }
-
+            queen.GetComp<Comp_DesertPitAntMember>().AssignColony(state.Id);
+            foreach (Pawn member in state.Members) member.GetComp<Comp_DesertPitAntMember>().AssignColony(state.Id);
             colonies.Add(state);
             IndexColony(state);
+            foreach (AntColonyTask placement in initialBuildings) SpawnStructure(state, placement.BuildingDef, placement.Cell);
+            SpawnBoomAntsToCap(state);
+            foreach (Pawn member in state.Members.ToArray())
+                if (member.GetComp<Comp_DesertPitAntMember>().Caste == AntCaste.Boom) nest.Enter(member);
+            state.NextBoomWaveTick = Find.TickManager.TicksGame + Settings.boomWaveCooldownTicks;
             return state;
         }
 
-        //函数职责：成员生成或读档恢复时把它登记到所属巢群及运行时索引。
+        //成员生成、出巢和读档使用相同登记入口。
         public void NotifyMemberSpawned(Pawn pawn, int colonyId)
         {
-            AntColonyState state;
-            if (pawn == null || !coloniesById.TryGetValue(colonyId, out state))
-            {
-                return;
-            }
-
-            if (!state.Members.Contains(pawn))
-            {
-                state.Members.Add(pawn);
-            }
-
+            if (!coloniesById.TryGetValue(colonyId, out AntColonyState state)) return;
+            if (pawn.GetComp<Comp_DesertPitAntMember>().Caste == AntCaste.Queen) state.Queen = pawn;
+            else if (!state.Members.Contains(pawn)) state.Members.Add(pawn);
             coloniesByPawn[pawn] = state;
-            Comp_DesertPitAntMember memberComp = pawn.TryGetComp<Comp_DesertPitAntMember>();
-            if (memberComp != null && memberComp.Caste == AntCaste.Queen)
-            {
-                state.Queen = pawn;
-            }
+            state.NutritionDirty = true;
         }
 
-        //函数职责：成员死亡或销毁时释放成员引用和它占用的搬运分配。
+        //死亡只登记一次，死亡与销毁事件重复到达也不会重复计数。
         public void NotifyMemberDestroyed(Pawn pawn, int colonyId)
         {
-            AntColonyState state;
-            if (pawn == null || !coloniesById.TryGetValue(colonyId, out state))
-            {
-                return;
-            }
-
-            Comp_DesertPitAntMember memberComp = pawn.TryGetComp<Comp_DesertPitAntMember>();
-            if (pawn.Dead && memberComp != null)
-            {
-                RecordRegularAntDeath(state, pawn, memberComp.Caste);
-            }
-
+            if (!coloniesById.TryGetValue(colonyId, out AntColonyState state)
+                || !coloniesByPawn.Remove(pawn)) return;
+            ReleaseTaskInState(state, pawn);
+            if (pawn.Dead) RecordRegularAntDeath(state, pawn, pawn.GetComp<Comp_DesertPitAntMember>().Caste);
             state.Members.Remove(pawn);
-            coloniesByPawn.Remove(pawn);
-            if (state.Queen == pawn)
-            {
-                state.Queen = null;
-            }
-
-            ReleaseForageAssignments(pawn);
+            if (state.Queen == pawn) state.Queen = null;
+            state.NutritionDirty = true;
         }
 
-        //函数职责：蚁穴生成或读档恢复时重建巢穴到巢群状态的索引。
+        //恢复蚁巢索引。
         public void NotifyNestSpawned(Building_DesertPitAntNest nest, int colonyId)
         {
-            AntColonyState state;
-            if (nest != null && coloniesById.TryGetValue(colonyId, out state))
-            {
-                state.Nest = nest;
-                state.NestPosition = nest.Position;
-                coloniesByNest[nest] = state;
-            }
+            if (!coloniesById.TryGetValue(colonyId, out AntColonyState state)) return;
+            state.Nest = nest;
+            coloniesByNest[nest] = state;
         }
 
-        //函数职责：蚁穴受击时进入完整警报，并在新一轮警报开始时立即补满爆浆蚁。
+        //蚁巢或蚁后受击启动同一警报，取消行军及工作。
         public void NotifyNestDamaged(Building_DesertPitAntNest nest, int colonyId, Thing aggressor)
         {
-            AntColonyState state;
-            if (!coloniesById.TryGetValue(colonyId, out state) || state.NestDestroyed)
-            {
-                return;
-            }
-
-            int ticks = Find.TickManager.TicksGame;
-            bool wasAlarmed = IsFullAlarm(state, ticks);
-            state.Nest = nest;
-            state.NestPosition = nest.Position;
-            state.LastNestDamageTick = ticks;
-            state.NextRepairTick = System.Math.Max(state.NextRepairTick, ticks + Settings.repairDelayAfterDamageTicks);
+            if (!coloniesById.TryGetValue(colonyId, out AntColonyState state)) return;
+            int now = Find.TickManager.TicksGame;
+            bool wasAlarmed = IsFullAlarm(state, now);
+            state.LastNestDamageTick = now;
+            state.NextRepairTick = System.Math.Max(state.NextRepairTick, now + Settings.repairDelayAfterDamageTicks);
             CancelInvestigation(state);
             RememberAggressor(state, aggressor);
             if (!wasAlarmed)
             {
-                SpawnBoomAntsToCap(state);
-                state.NextBoomWaveTick = ticks + Settings.boomWaveCooldownTicks;
+                state.Tasks.Clear();
                 InterruptAllMembers(state);
+                if (state.Queen?.Spawned == true) state.Queen.jobs.EndCurrentJob(JobCondition.InterruptForced);
             }
         }
 
-        //函数职责：蚁穴被摧毁时停止补员、触发狂暴并无视冷却补充最后一波爆浆蚁。
+        //巢毁先释放内部成员，再移除状态；存活成员保留阵营并转入无巢行为。
         public void NotifyNestDestroyed(Building_DesertPitAntNest nest, int colonyId)
         {
-            AntColonyState state;
-            if (!coloniesById.TryGetValue(colonyId, out state) || state.NestDestroyed)
-            {
-                return;
-            }
-
-            state.NestPosition = nest.Position;
+            if (!coloniesById.TryGetValue(colonyId, out AntColonyState state)) return;
             state.NestDestroyed = true;
-            state.Frenzy = true;
+            state.Tasks.Clear();
             CancelInvestigation(state);
-            SpawnBoomAntsToCap(state);
-        }
-
-        //函数职责：判断指定 Pawn 是否属于地图组件管理的任意蚁巢。
-        public bool IsManagedAnt(Pawn pawn)
-        {
-            return pawn != null && coloniesByPawn.ContainsKey(pawn);
-        }
-
-        //函数职责：判断指定 Pawn 是否属于给定巢群，从而只排除真正的同巢成员。
-        public bool IsColonyMember(Pawn pawn, AntColonyState state)
-        {
-            AntColonyState memberState;
-            return pawn != null && state != null && coloniesByPawn.TryGetValue(pawn, out memberState) && memberState == state;
-        }
-
-        //函数职责：取得指定蚂蚁所属的巢群状态。
-        public bool TryGetColony(Pawn pawn, out AntColonyState state)
-        {
-            if (pawn == null)
+            nest.ReleaseAll(map, state.NestPosition);
+            List<Pawn> survivors = new List<Pawn>(state.Members);
+            if (state.Queen != null) survivors.Add(state.Queen);
+            foreach (Pawn pawn in survivors)
             {
-                state = null;
-                return false;
+                coloniesByPawn.Remove(pawn);
+                pawn.GetComp<Comp_DesertPitAntMember>().AssignColony(0);
+                if (pawn.Spawned && !pawn.Dead) pawn.jobs.EndCurrentJob(JobCondition.InterruptForced);
             }
-
-            return coloniesByPawn.TryGetValue(pawn, out state);
+            foreach (Building_AntColonyStructure building in state.Buildings) building.ColonyId = 0;
+            coloniesByNest.Remove(nest);
+            coloniesById.Remove(state.Id);
+            colonies.Remove(state);
         }
 
-        //函数职责：返回指定巢群当前是否仍处于蚁穴受击后的完整警报阶段。
-        public bool IsFullAlarm(AntColonyState state, int ticks)
-        {
-            return !state.NestDestroyed && state.LastNestDamageTick >= 0 && ticks < state.LastNestDamageTick + Settings.fullAlarmDurationTicks;
-        }
+        //提供统一成员与巢群查询。
+        public bool IsManagedAnt(Pawn pawn) => pawn != null && coloniesByPawn.ContainsKey(pawn);
+        public bool IsColonyMember(Pawn pawn, AntColonyState state) => pawn != null
+            && coloniesByPawn.TryGetValue(pawn, out AntColonyState other) && other == state;
+        public bool TryGetColony(Pawn pawn, out AntColonyState state) => coloniesByPawn.TryGetValue(pawn, out state);
+        public bool IsFullAlarm(AntColonyState state, int ticks) => state.LastNestDamageTick >= 0
+            && ticks < state.LastNestDamageTick + Settings.fullAlarmDurationTicks;
 
-        //函数职责：结算爆浆蚁酸液爆炸，并只让爆炸来源所属巢群的成员和蚁穴免疫。
+        //爆浆只免伤同巢成员和建筑，无巢成员沿用其独立阵营辨认同伴。
         public void ExplodeBoomAnt(Pawn boomAnt)
         {
-            List<Thing> ignoredThings = new List<Thing>();
-            AntColonyState state;
-            if (TryGetColony(boomAnt, out state))
+            List<Thing> ignored = new List<Thing>();
+            if (TryGetColony(boomAnt, out AntColonyState state))
             {
-                if (state.Nest != null && !state.Nest.Destroyed)
-                {
-                    ignoredThings.Add(state.Nest);
-                }
-
-                for (int i = 0; i < state.Members.Count; i++)
-                {
-                    Pawn member = state.Members[i];
-                    if (member != null && !member.Destroyed)
-                    {
-                        ignoredThings.Add(member);
-                    }
-                }
+                ignored.Add(state.Nest);
+                if (state.Queen != null) ignored.Add(state.Queen);
+                ignored.AddRange(state.Members);
+                ignored.AddRange(state.Buildings);
             }
-
-            GenExplosion.DoExplosion(
-                boomAnt.Position,
-                map,
-                Settings.boomExplosionRadius,
-                DamageDefOf.AcidBurn,
-                boomAnt,
-                Settings.boomExplosionDamage,
-                damageFalloff: true,
-                chanceToStartFire: 0f,
-                ignoredThings: ignoredThings);
+            else foreach (Pawn pawn in map.mapPawns.AllPawnsSpawned)
+                if (pawn.Faction == boomAnt.Faction) ignored.Add(pawn);
+            GenExplosion.DoExplosion(boomAnt.Position, map, Settings.boomExplosionRadius, DamageDefOf.AcidBurn,
+                boomAnt, Settings.boomExplosionDamage, damageFalloff: true, chanceToStartFire: 0f, ignoredThings: ignored);
         }
 
-        //函数职责：重建巢群编号、成员和蚁穴的运行时查询索引。
-        private void RebuildRuntimeIndices()
-        {
-            coloniesById.Clear();
-            coloniesByPawn.Clear();
-            coloniesByNest.Clear();
-            for (int i = 0; i < colonies.Count; i++)
-            {
-                IndexColony(colonies[i]);
-            }
-        }
-
-        //函数职责：把单个巢群及其仍有效的实体引用加入运行时索引。
+        //只索引仍有效的成员；深存档由地图或建筑持有者负责。
         private void IndexColony(AntColonyState state)
         {
             coloniesById[state.Id] = state;
-            if (state.Nest != null && !state.Nest.Destroyed)
-            {
-                coloniesByNest[state.Nest] = state;
-            }
-
-            for (int i = 0; i < state.Members.Count; i++)
-            {
-                Pawn member = state.Members[i];
-                if (member != null && !member.Destroyed && !member.Dead)
-                {
-                    coloniesByPawn[member] = state;
-                }
-            }
+            coloniesByNest[state.Nest] = state;
+            if (state.Queen != null && !state.Queen.Dead) coloniesByPawn[state.Queen] = state;
+            foreach (Pawn member in state.Members)
+                if (member != null && !member.Destroyed && !member.Dead) coloniesByPawn[member] = state;
         }
     }
 }

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingDef ParentName="NingshaRace_AntHabitatBase">
+    <defName>NingshaRace_AntStoragePit</defName>
+    <label>储物穴</label>
+    <description>蚁群挖出的冷藏储物穴，能容纳十六堆物品，内部保持四摄氏度。</description>
+    <thingClass>NingshaRaceLib.DesertPit.AntColony.Buildings.Building_AntStoragePit</thingClass>
+    <size>(2,2)</size>
+    <statBases>
+      <MaxHitPoints>600</MaxHitPoints>
+      <WorkToBuild>1200</WorkToBuild>
+    </statBases>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Building/NingshaRace/DesertPit/AntColony/StoragePit</texPath>
+      <drawSize>(2.4,2.4)</drawSize>
+    </graphicData>
+    <modExtensions>
+      <li Class="NingshaRaceLib.DesertPit.AntColony.Config.DefModExtension_AntStructure">
+        <stoneChunks>3</stoneChunks>
+        <work>1200</work>
+        <radius>7</radius>
+        <capacity>16</capacity>
+        <productionTicks>30000</productionTicks>
+        <productionCap>75</productionCap>
+        <productionPerPlant>3</productionPerPlant>
+        <regrowthTicks>5000</regrowthTicks>
+        <growthRadius>5</growthRadius>
+        <growthMultiplier>2</growthMultiplier>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  <ThingDef ParentName="NingshaRace_AntHabitatBase">
+    <defName>NingshaRace_AntHoneyTower</defName>
+    <label>蜜露塔</label>
+    <description>利用周围食用菌生产翡翠蜜露的蚁群建筑。库存满七十五份后暂停生产。</description>
+    <thingClass>NingshaRaceLib.DesertPit.AntColony.Buildings.Building_AntHoneyTower</thingClass>
+    <size>(2,2)</size>
+    <statBases>
+      <MaxHitPoints>600</MaxHitPoints>
+      <WorkToBuild>1200</WorkToBuild>
+    </statBases>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Building/NingshaRace/DesertPit/Ecology/FungalMound</texPath>
+      <drawSize>(2.4,2.4)</drawSize>
+    </graphicData>
+    <modExtensions>
+      <li Class="NingshaRaceLib.DesertPit.AntColony.Config.DefModExtension_AntStructure">
+        <stoneChunks>3</stoneChunks>
+        <work>1200</work>
+        <radius>9</radius>
+        <capacity>1</capacity>
+        <productionTicks>30000</productionTicks>
+        <productionCap>75</productionCap>
+        <productionPerPlant>3</productionPerPlant>
+        <regrowthTicks>5000</regrowthTicks>
+        <growthRadius>5</growthRadius>
+        <growthMultiplier>2</growthMultiplier>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  <ThingDef ParentName="NingshaRace_AntHabitatBase">
+    <defName>NingshaRace_AntAcidTurret</defName>
+    <label>射浆蚁</label>
+    <description>固着在巢群周围的射浆蚁，会向靠近的敌人喷吐酸液。</description>
+    <thingClass>NingshaRaceLib.DesertPit.AntColony.Buildings.Building_AntAcidTurret</thingClass>
+    <size>(1,1)</size>
+    <statBases>
+      <MaxHitPoints>400</MaxHitPoints>
+      <WorkToBuild>400</WorkToBuild>
+    </statBases>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Building/NingshaRace/DesertPit/AntColony/AcidTurret</texPath>
+      <drawSize>(1.4,1.4)</drawSize>
+    </graphicData>
+    <modExtensions>
+      <li Class="NingshaRaceLib.DesertPit.AntColony.Config.DefModExtension_AntStructure">
+        <stoneChunks>2</stoneChunks>
+        <work>400</work>
+        <radius>10</radius>
+        <capacity>1</capacity>
+        <productionTicks>30000</productionTicks>
+        <productionCap>75</productionCap>
+        <productionPerPlant>3</productionPerPlant>
+        <regrowthTicks>5000</regrowthTicks>
+        <growthRadius>5</growthRadius>
+        <growthMultiplier>2</growthMultiplier>
+      </li>
+    </modExtensions>
+  </ThingDef>
+</Defs>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
   <!--吐酸蚁拥有贴身颚齿和原生远程喷酸；侧面原图朝左，由专用渲染树调整两侧网格镜像。-->
-  <ThingDef ParentName="BaseInsect">
+  <ThingDef ParentName="NingshaRace_AntBase">
     <defName>NingshaRace_DesertPitAcidAnt</defName>
     <label>吐酸蚁</label>
     <description>腹部透出荧绿光泽的洞穴蚂蚁。它会喷出黏稠酸液灼伤远处敌人，使其短暂行动迟缓；敌人靠近时则用颚齿还击。</description>
@@ -28,7 +28,9 @@
       <!--头爪或口器失效时仍可进行低伤害头撞，沿用原版昆虫的头部备用攻击规则。-->
       <li>
         <label>头部撞击</label>
-        <capacities><li>Blunt</li></capacities>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
         <power>3</power>
         <cooldownTime>2</cooldownTime>
         <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
@@ -56,15 +58,11 @@
     </verbs>
     <race>
       <renderTree>NingshaRace_AcidAntRenderTree</renderTree>
-      <thinkTreeMain>NingshaRace_DesertPitAnt</thinkTreeMain>
-      <thinkTreeConstant>NingshaRace_DesertPitAntConstant</thinkTreeConstant>
       <body>BeetleLike</body>
       <baseBodySize>1.1</baseBodySize>
       <baseHungerRate>0.22</baseHungerRate>
       <baseHealthScale>1.8</baseHealthScale>
-      <useMeatFrom>Megaspider</useMeatFrom>
       <lifeExpectancy>7</lifeExpectancy>
-      <trainability>None</trainability>
       <lifeStageAges>
         <li>
           <def>EusocialInsectAdult</def>

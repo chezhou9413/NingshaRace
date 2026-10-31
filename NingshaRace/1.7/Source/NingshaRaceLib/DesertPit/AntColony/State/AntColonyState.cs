@@ -30,11 +30,18 @@ namespace NingshaRaceLib.DesertPit.AntColony.State
         //字段职责：引用负责繁殖和升级营养结算的唯一蚁后。
         public Pawn Queen;
 
-        //字段职责：保存蚁后、工蚁、兵蚁和爆浆蚁成员引用。
+        //保存普通成员和巢内爆浆蚁引用，蚁后单独登记。
         public List<Pawn> Members = new List<Pawn>();
+        public List<Building_AntColonyStructure> Buildings = new List<Building_AntColonyStructure>();
+        public List<AntColonyTask> Tasks = new List<AntColonyTask>();
+        public float StoredNutrition;
+        public float DailyNutrition;
+        public int NextNutritionTick;
+        public bool NutritionDirty = true;
 
         //字段职责：保存蚁巢十二个实体储藏格。
         public List<IntVec3> StorageCells = new List<IntVec3>();
+        public List<IntVec3> BuildArea = new List<IntVec3>();
 
         //字段职责：保存当前等级或固定倍率对应的成员目标。
         public AntColonyPopulationSettings Population;
@@ -62,12 +69,10 @@ namespace NingshaRaceLib.DesertPit.AntColony.State
 
         //字段职责：记录调查队下一次允许派遣的游戏 Tick。
         public int NextInvestigationTick;
+        public IntVec3 RevengeTarget = IntVec3.Invalid;
 
         //字段职责：标记蚁穴是否已经被摧毁。
         public bool NestDestroyed;
-
-        //字段职责：标记失去蚁穴后的永久狂暴状态。
-        public bool Frenzy;
 
         //字段职责：记录蚁穴最近一次承受伤害的游戏 Tick。
         public int LastNestDamageTick = -1;
@@ -78,9 +83,6 @@ namespace NingshaRaceLib.DesertPit.AntColony.State
         //字段职责：记录蚁后下一次允许补员的游戏 Tick。
         public int NextBirthTick;
 
-        //下一次正午采收检查及尚未完成的缺粮采收指令。
-        public int NextHarvestOrderTick;
-        public bool HarvestRequested;
 
         //字段职责：引用最近攻击巢群的生物或炮塔，并限定反击记忆持续时间。
         public Thing LastAggressor;
@@ -99,7 +101,13 @@ namespace NingshaRaceLib.DesertPit.AntColony.State
             Scribe_Values.Look(ref PassageAnchor, "passageAnchor", IntVec3.Invalid);
             Scribe_References.Look(ref Queen, "queen");
             Scribe_Collections.Look(ref Members, "members", LookMode.Reference);
+            Scribe_Collections.Look(ref Buildings, "buildings", LookMode.Reference);
+            Scribe_Collections.Look(ref Tasks, "tasks", LookMode.Deep);
+            Scribe_Values.Look(ref StoredNutrition, "storedNutrition");
+            Scribe_Values.Look(ref DailyNutrition, "dailyNutrition");
+            Scribe_Values.Look(ref NextNutritionTick, "nextNutritionTick");
             Scribe_Collections.Look(ref StorageCells, "storageCells", LookMode.Value);
+            Scribe_Collections.Look(ref BuildArea, "buildArea", LookMode.Value);
             Scribe_Deep.Look(ref Population, "population");
             Scribe_Values.Look(ref LevelingEnabled, "levelingEnabled", false);
             Scribe_Values.Look(ref CurrentLevel, "currentLevel", 1);
@@ -109,13 +117,11 @@ namespace NingshaRaceLib.DesertPit.AntColony.State
             Scribe_Values.Look(ref RetreatUntilTick, "retreatUntilTick");
             Scribe_Collections.Look(ref DeathRecords, "deathRecords", LookMode.Deep);
             Scribe_Values.Look(ref NextInvestigationTick, "nextInvestigationTick");
+            Scribe_Values.Look(ref RevengeTarget, "revengeTarget", IntVec3.Invalid);
             Scribe_Values.Look(ref NestDestroyed, "nestDestroyed");
-            Scribe_Values.Look(ref Frenzy, "frenzy");
             Scribe_Values.Look(ref LastNestDamageTick, "lastNestDamageTick", -1);
             Scribe_Values.Look(ref NextBoomWaveTick, "nextBoomWaveTick", -1);
             Scribe_Values.Look(ref NextBirthTick, "nextBirthTick");
-            Scribe_Values.Look(ref NextHarvestOrderTick, "nextHarvestOrderTick");
-            Scribe_Values.Look(ref HarvestRequested, "harvestRequested");
             Scribe_References.Look(ref LastAggressor, "lastAggressor");
             Scribe_Values.Look(ref RetaliationUntilTick, "retaliationUntilTick");
 

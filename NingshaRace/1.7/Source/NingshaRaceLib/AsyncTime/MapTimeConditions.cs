@@ -5,7 +5,7 @@ using Verse;
 namespace NingshaRaceLib.AsyncTime;
 
 //地图环境状态读取当地时间，世界环境状态始终读取世界时间。
-[HarmonyPatch]
+[HarmonyPatch, HarmonyPatchCategory(MapTimePatches.PatchCategory)]
 internal static class MapTimeConditions
 {
     //环境状态面板即使在地图绘制之外查询，也能得到正确的剩余时间。

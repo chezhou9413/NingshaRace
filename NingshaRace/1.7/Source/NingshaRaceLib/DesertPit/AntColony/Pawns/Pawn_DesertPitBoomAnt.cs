@@ -1,4 +1,5 @@
 using Verse;
+using NingshaRaceLib.Core.Defs;
 
 using NingshaRaceLib.DesertPit.AntColony.Components;
 
@@ -24,7 +25,13 @@ namespace NingshaRaceLib.DesertPit.AntColony.Pawns
             if (!detonated && Spawned)
             {
                 detonated = true;
-                Map.GetComponent<MapComponent_DesertPitAntColonies>().ExplodeBoomAnt(this);
+                Map previousMap = Map;
+                IntVec3 previousCell = Position;
+                previousMap.GetComponent<MapComponent_DesertPitAntColonies>().ExplodeBoomAnt(this);
+                Thing honey = ThingMaker.MakeThing(DefOfRefs.NingshaRace_BurstHoneydew);
+                honey.stackCount = 3;
+                if (!GenPlace.TryPlaceThing(honey, previousCell, previousMap, ThingPlaceMode.Near))
+                    throw new System.InvalidOperationException("爆浆蜜露无法落地。");
             }
 
             base.Kill(dinfo, exactCulprit);
@@ -32,6 +39,13 @@ namespace NingshaRaceLib.DesertPit.AntColony.Pawns
             {
                 Corpse.Destroy();
             }
+        }
+
+        //单次结算标记随 Pawn 存档。
+        public override void ExposeData()
+        {
+            base.ExposeData();
+            Scribe_Values.Look(ref detonated, "detonated");
         }
     }
 }

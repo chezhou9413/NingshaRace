@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!-- 文件职责：定义由地图生成时创建并在世界内复用的隐藏蚁群阵营。 -->
+  <!--每次生成巢群均创建新实例，不跨地图复用阵营。-->
   <FactionDef ParentName="FactionBase">
     <defName>NingshaRace_DesertPitAntColonyFaction</defName>
     <label>沙穴蚁群</label>

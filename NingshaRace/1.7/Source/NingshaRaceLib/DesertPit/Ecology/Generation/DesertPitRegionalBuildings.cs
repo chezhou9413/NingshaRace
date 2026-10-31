@@ -23,24 +23,9 @@ internal static class DesertPitRegionalBuildings
         {
             var room = layout.Plan.EndRooms[i];
             var center = DesertPitAntSceneUtility.GenerateInNaturalChamber(map, data, room, i);
-            var mound = room.Floor.Select(layout.Cell).Where(c => c.DistanceTo(center) >= 5f
-                && AntHabitatGeneration.CanPlace(map, data, c, DefOfRefs.NingshaRace_FungalMound, true))
-                .OrderByDescending(c => GrowingArea(map, data, c, true)).FirstOrDefault(IntVec3.Invalid);
-            if (!mound.IsValid) throw new InvalidOperationException($"末端洞室 {i + 1} 没有菌床占地。");
-            AntHabitatGeneration.SpawnMound(map, data, mound);
         }
-        var candidates = Enumerable.Range(0, layout.Cells.Length).Where(i => layout.Oasis[i] != 0 && layout.RegionAt(i) != 0)
-            .Select(layout.Cell).Where(c => c.DistanceTo(data.MainCenter) is >= 12f and <= 35f
-                && AntHabitatGeneration.CanPlace(map, data, c, DefOfRefs.NingshaRace_FungalMound, false)
-                && GrowingArea(map, data, c, false) >= 36).ToList();
-        if (candidates.Count == 0) throw new InvalidOperationException("绿洲没有可安置公共菌床的干燥地面。");
-        AntHabitatGeneration.SpawnMound(map, data, candidates.RandomElement());
         AntHabitatGeneration.SpawnRepellent(map, data, data.MainCenter, 3f, 5f);
     }
-
-    //菌床优先选择有效生长地面最多的位置，避免落在洞颈或储藏区。
-    private static int GrowingArea(Map map, DesertPitLayoutData data, IntVec3 center, bool ownChamber) =>
-        GenRadial.RadialCellsAround(center, 5f, true).Count(c => AntHabitatGeneration.CanUseGround(map, data, c, ownChamber));
 
     //天光只落在既定亮区；晶体、钟乳石和落沙按不同岸带稀疏散布。
     internal static void Landmarks(Map map, DesertPitLayoutData data)

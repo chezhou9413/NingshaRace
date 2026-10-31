@@ -21,7 +21,7 @@ namespace NingshaRaceLib.Molting.Health
                 {
                     cachedStage = new HediffStage
                     {
-                        label = "蜕皮者",
+                        label = count + "层",
                         capMods = new List<PawnCapacityModifier>
                         {
                             new PawnCapacityModifier { capacity = PawnCapacityDefOf.Consciousness, postFactor = MoltingEffects.ConsciousnessFactor(count) },

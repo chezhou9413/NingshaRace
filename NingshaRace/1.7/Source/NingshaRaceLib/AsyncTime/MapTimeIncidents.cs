@@ -6,7 +6,7 @@ using Verse;
 namespace NingshaRaceLib.AsyncTime;
 
 //将地图事件按目标分流；世界任务本身仍由全局 QuestManager 推进。
-[HarmonyPatch]
+[HarmonyPatch, HarmonyPatchCategory(MapTimePatches.PatchCategory)]
 internal static class MapTimeIncidents
 {
     private static readonly AccessTools.FieldRef<IncidentQueue, List<QueuedIncident>> Queue =

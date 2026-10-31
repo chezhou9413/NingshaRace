@@ -6,16 +6,26 @@ using Verse;
 namespace NingshaRaceLib.AsyncTime;
 
 //将已接管地图从原版全局调度中移出，保留世界与未接管地图的原版入口。
-[HarmonyPatch]
+[HarmonyPatch, HarmonyPatchCategory(PatchCategory)]
 internal static class MapTimePatches
 {
+    internal const string PatchCategory = "NingshaAsyncTime";
+    private static readonly Harmony RuntimeHarmony = new("chezhou.race.ningsharace.asynctime");
+    private static bool patchesInstalled;
     internal static Map TickingMap;
 
-    //每帧重新累计各地图实际完成的步数。
+    //仅启用后逐帧重置当地步数；不再有请求时撤下整个异步时序模块。
     [HarmonyPrefix, HarmonyPatch(typeof(TickManager), nameof(TickManager.TickManagerUpdate))]
     private static void BeginFrame()
     {
-        foreach (Map map in Find.Maps) map.GetComponent<MapComponent_NingshaTime>().FrameTicks = 0;
+        bool needsPatches = false;
+        foreach (Map map in Find.Maps)
+        {
+            var clock = map.GetComponent<MapComponent_NingshaTime>();
+            clock.FrameTicks = 0;
+            needsPatches |= clock.Requested;
+        }
+        SetPatchesEnabled(needsPatches);
     }
 
     //安全边界内迁移队列，不在物体更新循环中删除元素。
@@ -72,6 +82,16 @@ internal static class MapTimePatches
         if (clock == null) return true;
         clock.Deregister(t);
         return false;
+    }
+
+    //首次请求时挂载整个分类，不再使用时连同转移、事件、环境与查询补丁一起卸载。
+    internal static void SetPatchesEnabled(bool enabled)
+    {
+        if (patchesInstalled == enabled) return;
+        var assembly = typeof(MapTimePatches).Assembly;
+        if (enabled) RuntimeHarmony.PatchCategory(assembly, PatchCategory);
+        else RuntimeHarmony.UnpatchCategory(assembly, PatchCategory);
+        patchesInstalled = enabled;
     }
 
     //跨图后旧队列可能尚未处理注销，禁止物体被旧地图重复推进。

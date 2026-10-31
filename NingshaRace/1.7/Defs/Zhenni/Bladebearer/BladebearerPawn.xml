@@ -51,6 +51,18 @@
       <ComfyTemperatureMin>-100</ComfyTemperatureMin>
       <ComfyTemperatureMax>100</ComfyTemperatureMax>
     </statBases>
+    <!-- 沿用原版实体的头部钝击，失去武器后仍有可用的近战攻击。 -->
+    <tools>
+      <li>
+        <label>头盔</label>
+        <capacities><li>Blunt</li></capacities>
+        <power>9</power>
+        <cooldownTime>2</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+        <chanceFactor>0.2</chanceFactor>
+      </li>
+    </tools>
     <race>
       <thinkTreeMain>Fleshbeast</thinkTreeMain>
       <thinkTreeConstant>FleshbeastConstant</thinkTreeConstant>

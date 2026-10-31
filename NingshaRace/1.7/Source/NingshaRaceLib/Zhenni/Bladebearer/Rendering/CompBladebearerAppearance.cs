@@ -53,11 +53,11 @@ namespace NingshaRaceLib.Zhenni.Bladebearer
         //专属武器交给原版公开持械规则，待机时也可显示。
         public override bool WantHoldWeapon(Pawn pawn) => pawn.equipment.Primary?.def == WeaponDef;
 
-        //装备由原版装备栏保存，专属武器使用原版销毁式弃置。
+        //恢复操纵能力后才补回武器，避免受伤时反复生成被原版弃置的装备。
         private void EnsureWeapon()
         {
             if (!Pawn.Spawned || Pawn.Dead || Pawn.Downed || Pawn.ParentHolder is Building_HoldingPlatform
-                || Pawn.equipment.Primary != null) return;
+                || Pawn.equipment.Primary != null || !Pawn.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation)) return;
             Pawn.equipment.AddEquipment((ThingWithComps)ThingMaker.MakeThing(WeaponDef));
             Rebuild();
         }

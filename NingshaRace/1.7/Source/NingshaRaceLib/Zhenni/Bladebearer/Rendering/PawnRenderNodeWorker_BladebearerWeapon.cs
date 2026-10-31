@@ -16,6 +16,8 @@ namespace NingshaRaceLib.Zhenni.Bladebearer
         //地图直接执行原版持械流程；美术预览使用原版闲置持刀姿态。
         public override void PostDraw(PawnRenderNode node, PawnDrawParms parms, Mesh mesh, Matrix4x4 matrix)
         {
+            //绘制请求可能仍缓存着上一帧的装备，提交前再次确认武器有效。
+            if (!CanDrawNow(node, parms)) return;
             if (parms.pawn.TryGetComp<NingshaRaceLib.Zhenni.Bowbearer.CompBowbearerShooting>() is { } bow)
             {
                 //弓使用原版远程持械流程，不进入近战动画状态。

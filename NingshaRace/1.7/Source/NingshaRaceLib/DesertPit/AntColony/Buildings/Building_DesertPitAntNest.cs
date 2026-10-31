@@ -10,7 +10,7 @@ using NingshaRaceLib.UI.Gizmos;
 namespace NingshaRaceLib.DesertPit.AntColony.Buildings
 {
     //类职责：作为沙漠巨坑蚁群的实体核心，并把受击和摧毁事件通知地图组件。
-    public class Building_DesertPitAntNest : Building
+    public partial class Building_DesertPitAntNest : Building, IThingHolderTickable, ISuspendableThingHolder
     {
         //字段职责：记录蚁穴所属的地图内唯一巢群编号。
         private int colonyId;
@@ -81,6 +81,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Buildings
         {
             base.ExposeData();
             Scribe_Values.Look(ref colonyId, "colonyId");
+            Scribe_Deep.Look(ref residents, "residents", this);
         }
 
         //函数职责：蚁穴进入地图时恢复它与地图组件中巢群状态的绑定。
@@ -117,12 +118,10 @@ namespace NingshaRaceLib.DesertPit.AntColony.Buildings
         //函数职责：蚁穴因致命伤害被摧毁时触发最后一波爆浆蚁和成员狂暴。
         public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
         {
-            if (Spawned && colonyId > 0 && (mode == DestroyMode.KillFinalize || mode == DestroyMode.KillFinalizeLeavingsOnly))
-            {
-                Map.GetComponent<MapComponent_DesertPitAntColonies>().NotifyNestDestroyed(this, colonyId);
-            }
-
+            Map previousMap = Map;
             base.Destroy(mode);
+            if (previousMap != null && colonyId > 0)
+                previousMap.GetComponent<MapComponent_DesertPitAntColonies>().NotifyNestDestroyed(this, colonyId);
         }
     }
 }

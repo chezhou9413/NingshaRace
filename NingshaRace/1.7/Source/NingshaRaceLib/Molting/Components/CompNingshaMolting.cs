@@ -103,8 +103,18 @@ namespace NingshaRaceLib.Molting.Components
 
             moltingNutrition -= Props.nutritionCapacity;
             moltingCount++;
+            RemoveScars();
             SynchronizeHediffs();
             Messages.Message(Pawn.LabelShortCap + "完成了第" + moltingCount + "次蜕皮。", Pawn, MessageTypeDefOf.PositiveEvent, false);
+        }
+
+        //主动蜕皮去除永久伤疤，保留疾病、植入物和缺失部位。
+        private void RemoveScars()
+        {
+            List<Hediff> hediffs = Pawn.health.hediffSet.hediffs;
+            for (int i = hediffs.Count - 1; i >= 0; i--)
+                if (hediffs[i] is Hediff_Injury injury && injury.IsPermanent())
+                    Pawn.health.RemoveHediff(injury);
         }
 
         //函数职责：由保命结算在成功治疗后扣除六十营养并撤销就绪状态。

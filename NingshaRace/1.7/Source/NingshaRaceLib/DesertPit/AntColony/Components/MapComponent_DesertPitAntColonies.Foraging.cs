@@ -1,282 +1,151 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using NingshaRaceLib.Core.Defs;
+using NingshaRaceLib.DesertPit.AntColony.Buildings;
+using NingshaRaceLib.DesertPit.AntColony.State;
+using NingshaRaceLib.DesertPit.Ecology.Habitats;
 using RimWorld;
 using Verse;
 using Verse.AI;
 
-using NingshaRaceLib.Core.Defs;
-using NingshaRaceLib.DesertPit.AntColony.State;
-using NingshaRaceLib.DesertPit.Ecology.Habitats;
-
 namespace NingshaRaceLib.DesertPit.AntColony.Components
 {
-    //类职责：集中实现工蚁全图物资缓存、实体储藏格分配和巢群食物消耗。
+    //共享全图物资缓存，任务自身保存来源和目的地预留。
     public partial class MapComponent_DesertPitAntColonies
     {
-        //函数职责：扫描一次地图并缓存符合巢群搬运规则的食物、尸体和贵重品。
+        //只每三百 tick 扫描一次地图物品，不采收活植物。
         private void RefreshForageCandidates()
         {
             forageCandidates.Clear();
-            RefreshHarvestCandidates();
             if (colonies.Count == 0) return;
             MapComponent_AntHabitats habitats = map.GetComponent<MapComponent_AntHabitats>();
-            List<Thing> allThings = map.listerThings.AllThings;
-            for (int i = 0; i < allThings.Count; i++)
+            foreach (Thing thing in map.listerThings.AllThings)
+                if (thing.Spawned && IsForageThing(thing) && !IsColonyStorageCell(thing.Position)
+                    && !habitats.IsRepelled(thing.Position)) forageCandidates.Add(thing);
+        }
+
+        //天然石块也进入缓存，只在巢群缺少建材时安排搬运。
+        private static bool IsForageThing(Thing thing) => IsStoredFood(thing) || IsStoneChunk(thing)
+            || thing.def == ThingDefOf.Steel || thing.def == ThingDefOf.WoodLog || thing.def == ThingDefOf.Silver
+            || thing.def == ThingDefOf.Gold || thing.def == ThingDefOf.Jade
+            || thing.def == ThingDefOf.ComponentIndustrial || thing.def == ThingDefOf.ComponentSpacer;
+
+        //所有巢群的地面储藏格都从外出搬运缓存排除。
+        public bool IsColonyStorageCell(IntVec3 cell) => colonies.Any(state => state.StorageCells.Contains(cell));
+
+        //取格子中实际占用容量的物品或尸体。
+        private Thing GetStorageOccupant(IntVec3 cell) => cell.GetThingList(map)
+            .FirstOrDefault(thing => thing is Corpse || thing.def.category == ThingCategory.Item);
+
+        //同一物资只允许一份搬运任务，覆盖不同巢群间的竞争。
+        private bool HaulReserved(Thing thing) => colonies.Any(state => state.Tasks.Any(task => task.Kind == AntTaskKind.Haul && task.Target == thing));
+
+        //优先蜜露收集，普通物资按八十、一百六十、二百四十格分层。
+        private void PlanHauling(AntColonyState state)
+        {
+            bool foodOnly = GetStoredNutrition(state) < GetFoodReserve(state) * 2f;
+            state.Tasks.RemoveAll(task => task.Kind == AntTaskKind.Haul && task.Worker == null
+                && !task.FreeHaul && (task.Target == null || task.Target.Destroyed || foodOnly && !IsStoredFood(task.Target)
+                    || !CanHaulTo(state, task.Target, task.Destination, task.Cell)));
+            int budget = Math.Max(1, state.Population.WorkerTarget) - state.Tasks.Count(task => task.Kind == AntTaskKind.Haul);
+            if (budget <= 0) return;
+            List<Thing> candidates = new List<Thing>();
+            foreach (Building_AntHoneyTower tower in state.Buildings.OfType<Building_AntHoneyTower>()) candidates.AddRange(tower.Contents);
+            candidates.AddRange(forageCandidates);
+            bool needsStone = state.Tasks.Any(task => task.Kind == AntTaskKind.Build && task.Worker == null)
+                && StoredStone(state).Sum(thing => thing.stackCount) < 8;
+            foreach (Thing thing in candidates.OrderBy(thing => HaulPriority(state, thing, foodOnly)))
             {
-                Thing thing = allThings[i];
-                if (!thing.Spawned || habitats.IsRepelled(thing.Position)) continue;
-                if (IsForageThing(thing) && !IsInAnyStorageCell(thing.Position))
-                {
-                    forageCandidates.Add(thing);
-                }
+                if (budget <= 0) break;
+                if (thing.Destroyed || HaulReserved(thing) || !thing.Spawned && !(thing.ParentHolder is Building_AntHoneyTower)) continue;
+                if (thing.Spawned && IsColonyStorageCell(thing.Position)) continue;
+                bool food = IsStoredFood(thing);
+                if (foodOnly && !food || !food && IsStoneChunk(thing) && !needsStone) continue;
+                if (!foodOnly && thing.PositionHeld.DistanceTo(state.NestPosition) > 240f) continue;
+                if (state.WorkerDanger.Contains(state, Settings, thing.PositionHeld, Find.TickManager.TicksGame)) continue;
+                if (TryPlanHaul(state, thing, false, HaulPriority(state, thing, foodOnly))) budget--;
             }
         }
 
-        //函数职责：判断实体是否属于工蚁允许搬运的食物、新鲜尸体或指定贵重品。
-        private static bool IsForageThing(Thing thing)
+        //距离以蚁巢为中心，缺粮时食物不受距离上限限制。
+        private int HaulPriority(AntColonyState state, Thing thing, bool foodOnly)
         {
-            Corpse corpse = thing as Corpse;
-            if (corpse != null)
-            {
-                return corpse.GetRotStage() == RotStage.Fresh;
-            }
+            if (foodOnly) return 5;
+            if (thing.ParentHolder is Building_AntHoneyTower) return 8;
+            int band = Math.Min(2, (int)(Math.Max(0f, thing.PositionHeld.DistanceTo(state.NestPosition) - 0.001f) / 80f));
+            if (IsStoneChunk(thing)) return 65;
+            return 80 + band * 2 + (IsStoredFood(thing) ? 0 : 1);
+        }
 
-            if (thing.def.category == ThingCategory.Item && thing.def.IsNutritionGivingIngestible && !thing.def.IsDrug)
+        //规划来源与目的地，不移动实物；取货失败时只释放记录。
+        private bool TryPlanHaul(AntColonyState state, Thing thing, bool free, int priority, Pawn preferredWorker = null)
+        {
+            if (!TryFindHaulDestination(state, thing, out Thing destination, out IntVec3 cell, out int count)) return false;
+            if (!CanHaulTo(state, thing, destination, cell)) return false;
+            state.Tasks.Add(new AntColonyTask { Kind = AntTaskKind.Haul, Target = thing, Destination = destination,
+                Cell = cell, Count = count, FreeHaul = free, Priority = priority, PreferredWorker = preferredWorker });
+            return true;
+        }
+
+        //只排至少有一只工蚁能到达来源和目的地的搬运，封墙或满仓不会堵死列表。
+        private bool CanHaulTo(AntColonyState state, Thing source, Thing destination, IntVec3 cell)
+        {
+            if (destination is Building_AntStoragePit pit && (!pit.Spawned || pit.SpaceFor(source) <= 0)) return false;
+            if (destination == null && !IsStorageCellAvailableFor(null, cell, source)) return false;
+            Thing pickup = source.Spawned ? source : source.ParentHolder as Thing;
+            if (pickup == null || !pickup.Spawned) return false;
+            return state.Members.Any(worker => worker.Spawned && !worker.Dead && !worker.Downed
+                && worker.GetComp<Comp_DesertPitAntMember>().Caste == Core.AntCaste.Worker
+                && worker.CanReach(pickup, PathEndMode.Touch, Danger.Deadly)
+                && worker.CanReach(destination != null ? new LocalTargetInfo(destination) : new LocalTargetInfo(cell),
+                    destination != null ? PathEndMode.Touch : PathEndMode.OnCell, Danger.Deadly));
+        }
+
+        //先维持四个地面食物格，再使用粮仓和其他库位。
+        private bool TryFindHaulDestination(AntColonyState state, Thing thing, out Thing destination, out IntVec3 cell, out int count)
+        {
+            destination = null;
+            cell = IntVec3.Invalid;
+            count = 0;
+            bool food = IsStoredFood(thing);
+            if (food && FindGroundDestination(state, thing, true, out cell, out count)) return true;
+            foreach (Building_AntStoragePit pit in state.Buildings.OfType<Building_AntStoragePit>().OrderByDescending(pit => pit.FoodOnly))
             {
+                if (pit.FoodOnly && !food || !pit.Spawned || state.Tasks.Any(task => task.Destination == pit)) continue;
+                count = Math.Min(thing.stackCount, pit.SpaceFor(thing));
+                if (count <= 0) continue;
+                destination = pit;
+                cell = pit.Position;
                 return true;
             }
-
-            return thing.def == ThingDefOf.Steel || thing.def == ThingDefOf.WoodLog ||
-                   thing.def == ThingDefOf.Silver ||
-                   thing.def == ThingDefOf.Gold ||
-                   thing.def == ThingDefOf.Jade ||
-                   thing.def == ThingDefOf.ComponentIndustrial ||
-                   thing.def == ThingDefOf.ComponentSpacer;
+            return FindGroundDestination(state, thing, false, out cell, out count);
         }
 
-        //函数职责：判断格子是否属于任意巢群的实体储藏范围。
-        private bool IsInAnyStorageCell(IntVec3 cell)
+        //每格只预留给一份任务，尸体占完整一格。
+        private bool FindGroundDestination(AntColonyState state, Thing thing, bool foodSlots, out IntVec3 result, out int count)
         {
-            for (int i = 0; i < colonies.Count; i++)
+            result = IntVec3.Invalid;
+            count = 0;
+            for (int i = 0; i < state.StorageCells.Count; i++)
             {
-                if (colonies[i].StorageCells.Contains(cell))
-                {
-                    return true;
-                }
+                if ((i < Settings.foodStorageCells) != foodSlots) continue;
+                IntVec3 cell = state.StorageCells[i];
+                if (!cell.Standable(map) || state.Tasks.Any(task => task.Kind == AntTaskKind.Haul && task.Destination == null && task.Cell == cell)) continue;
+                Thing occupant = GetStorageOccupant(cell);
+                if (occupant != null && (!occupant.CanStackWith(thing) || occupant.stackCount >= occupant.def.stackLimit)) continue;
+                result = cell;
+                count = Math.Min(thing.stackCount, thing.def.stackLimit - (occupant?.stackCount ?? 0));
+                return count > 0;
             }
-
             return false;
         }
 
-        //函数职责：为工蚁选择最近可达物资和可用储藏格，并创建实体搬运工作。
-        private Job TryCreateForageJob(Pawn pawn, AntColonyState state, bool foodOnly)
-        {
-            Comp_DesertPitAntMember memberComp = pawn.TryGetComp<Comp_DesertPitAntMember>();
-            if (memberComp == null || (!(foodOnly && GetStoredNutrition(state) < GetFoodReserve(state))
-                && !memberComp.CanStartForage(Find.TickManager.TicksGame, Settings.workerHaulLimit)))
-            {
-                return null;
-            }
-
-            Thing bestThing = null;
-            IntVec3 bestCell = IntVec3.Invalid;
-            int bestCount = 0;
-            float bestDistance = float.MaxValue;
-            for (int i = 0; i < forageCandidates.Count; i++)
-            {
-                Thing candidate = forageCandidates[i];
-                if (candidate == null || !candidate.Spawned || !IsForageThing(candidate) || assignedForageThings.ContainsKey(candidate)
-                    || IsStoredFood(candidate) != foodOnly
-                    || IsWorkerForageDangerous(pawn, candidate.Position)
-                    || map.GetComponent<MapComponent_AntHabitats>().IsRepelled(candidate.Position))
-                {
-                    continue;
-                }
-
-                float distance = pawn.Position.DistanceToSquared(candidate.Position);
-                if (distance >= bestDistance || !pawn.CanReserveAndReach(candidate, PathEndMode.ClosestTouch, Danger.Deadly))
-                {
-                    continue;
-                }
-
-                IntVec3 storageCell;
-                int carryCount;
-                if (!TryFindStorageCell(pawn, state, candidate, out storageCell, out carryCount))
-                {
-                    continue;
-                }
-
-                if (distance < bestDistance)
-                {
-                    bestDistance = distance;
-                    bestThing = candidate;
-                    bestCell = storageCell;
-                    bestCount = carryCount;
-                }
-            }
-
-            if (bestThing == null)
-            {
-                return null;
-            }
-
-            assignedForageThings[bestThing] = pawn;
-            assignedStorageCells[bestCell] = pawn;
-            Job job = JobMaker.MakeJob(DefOfRefs.NingshaRace_Job_DesertPitAntHaul, bestThing, bestCell);
-            job.count = bestCount;
-            job.haulMode = HaulMode.ToCellNonStorage;
-            return job;
-        }
-
-        //函数职责：优先寻找可合并同类堆叠的储藏格，其次寻找完全空闲的储藏格。
-        private bool TryFindStorageCell(Pawn pawn, AntColonyState state, Thing thing, out IntVec3 cell, out int carryCount)
-        {
-            int pawnCapacity = pawn.carryTracker.MaxStackSpaceEver(thing.def);
-            bool food = IsStoredFood(thing);
-            for (int i = 0; i < state.StorageCells.Count; i++)
-            {
-                IntVec3 candidate = state.StorageCells[i];
-                if (!food && i < Settings.foodStorageCells) continue;
-                Thing occupant = GetStorageOccupant(candidate);
-                if (occupant == null || occupant.def != thing.def || occupant is Corpse || occupant.stackCount >= occupant.def.stackLimit)
-                {
-                    continue;
-                }
-
-                if (assignedStorageCells.ContainsKey(candidate) || !pawn.CanReserveAndReach(candidate, PathEndMode.OnCell, Danger.Deadly))
-                {
-                    continue;
-                }
-
-                cell = candidate;
-                carryCount = System.Math.Min(System.Math.Min(thing.stackCount, pawnCapacity), occupant.def.stackLimit - occupant.stackCount);
-                return carryCount > 0;
-            }
-
-            for (int i = 0; i < state.StorageCells.Count; i++)
-            {
-                IntVec3 candidate = state.StorageCells[i];
-                if (!food && i < Settings.foodStorageCells) continue;
-                if (GetStorageOccupant(candidate) != null || assignedStorageCells.ContainsKey(candidate))
-                {
-                    continue;
-                }
-
-                if (!pawn.CanReserveAndReach(candidate, PathEndMode.OnCell, Danger.Deadly))
-                {
-                    continue;
-                }
-
-                cell = candidate;
-                carryCount = System.Math.Min(thing.stackCount, pawnCapacity);
-                return carryCount > 0;
-            }
-
-            cell = IntVec3.Invalid;
-            carryCount = 0;
-            return false;
-        }
-
-        //函数职责：取得储藏格中决定该格物资类型的实体堆叠或尸体。
-        private Thing GetStorageOccupant(IntVec3 cell)
-        {
-            List<Thing> things = cell.GetThingList(map);
-            for (int i = 0; i < things.Count; i++)
-            {
-                Thing thing = things[i];
-                if (thing is Corpse || thing.def.category == ThingCategory.Item)
-                {
-                    return thing;
-                }
-            }
-
-            return null;
-        }
-
-        //函数职责：验证搬运工作抵达前目标储藏格仍允许放入指定物资。
+        //抵达前再次检查容量，外部玩家搬运不会导致覆盖库存。
         public bool IsStorageCellAvailableFor(Pawn pawn, IntVec3 cell, Thing thing)
         {
-            Pawn assignedPawn;
-            if (assignedStorageCells.TryGetValue(cell, out assignedPawn) && assignedPawn != pawn)
-            {
-                return false;
-            }
-
             Thing occupant = GetStorageOccupant(cell);
-            return occupant == null || (!(thing is Corpse) && !(occupant is Corpse) && occupant.def == thing.def && occupant.stackCount < occupant.def.stackLimit);
+            return occupant == null || occupant.CanStackWith(thing) && occupant.stackCount < occupant.def.stackLimit;
         }
-
-        //函数职责：释放指定工蚁持有的物资和储藏格分配。
-        public void ReleaseForageAssignments(Pawn pawn)
-        {
-            List<Thing> thingsToRemove = new List<Thing>();
-            foreach (KeyValuePair<Thing, Pawn> pair in assignedForageThings)
-            {
-                if (pair.Value == pawn)
-                {
-                    thingsToRemove.Add(pair.Key);
-                }
-            }
-
-            for (int i = 0; i < thingsToRemove.Count; i++)
-            {
-                assignedForageThings.Remove(thingsToRemove[i]);
-            }
-
-            List<IntVec3> cellsToRemove = new List<IntVec3>();
-            foreach (KeyValuePair<IntVec3, Pawn> pair in assignedStorageCells)
-            {
-                if (pair.Value == pawn)
-                {
-                    cellsToRemove.Add(pair.Key);
-                }
-            }
-
-            for (int i = 0; i < cellsToRemove.Count; i++)
-            {
-                assignedStorageCells.Remove(cellsToRemove[i]);
-            }
-        }
-
-        //函数职责：在工蚁成功放入物资后累计本轮搬运次数并释放任务分配。
-        public void NotifyForageCompleted(Pawn pawn)
-        {
-            Comp_DesertPitAntMember memberComp = pawn?.TryGetComp<Comp_DesertPitAntMember>();
-            if (memberComp != null)
-            {
-                memberComp.NotifySuccessfulHaul(Find.TickManager.TicksGame, Settings.workerHaulLimit, Settings.workerHaulCooldownTicks);
-            }
-
-            ReleaseForageAssignments(pawn);
-        }
-
-        //函数职责：供其他地图生态系统查询指定格子是否属于任意蚁巢储藏区。
-        public bool IsColonyStorageCell(IntVec3 cell)
-        {
-            return IsInAnyStorageCell(cell);
-        }
-
-        //函数职责：定期释放已经不再执行对应搬运工作的运行时分配。
-        private void ReleaseStaleForageAssignments()
-        {
-            HashSet<Pawn> assignedPawns = new HashSet<Pawn>();
-            foreach (Pawn pawn in assignedForageThings.Values)
-            {
-                assignedPawns.Add(pawn);
-            }
-
-            foreach (Pawn pawn in assignedStorageCells.Values)
-            {
-                assignedPawns.Add(pawn);
-            }
-
-            foreach (Pawn pawn in assignedPawns)
-            {
-                if (pawn == null || pawn.Destroyed || pawn.CurJobDef != DefOfRefs.NingshaRace_Job_DesertPitAntHaul)
-                {
-                    ReleaseForageAssignments(pawn);
-                }
-            }
-        }
-
     }
 }

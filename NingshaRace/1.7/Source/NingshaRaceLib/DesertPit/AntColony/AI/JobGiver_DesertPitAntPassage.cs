@@ -46,6 +46,11 @@ namespace NingshaRaceLib.DesertPit.AntColony.AI
                 if (blocker == null || blocker == state.Nest || !AntMeleeCapability.CanAttack(pawn, blocker)
                     || manager.IsWorkerForageDangerous(pawn, before)) return null;
                 Job job = DigUtility.PassBlockerJob(pawn, blocker, before, true, false);
+                if (member.Caste == AntCaste.Worker && pawn.CanReserve(blocker))
+                {
+                    job = JobMaker.MakeJob(DefOfRefs.NingshaRace_Job_AntMine, blocker);
+                    job.ignoreDesignations = true;
+                }
                 if (job?.def == JobDefOf.AttackMelee) job.def = DefOfRefs.NingshaRace_Job_DesertPitAntMelee;
                 return job;
             }

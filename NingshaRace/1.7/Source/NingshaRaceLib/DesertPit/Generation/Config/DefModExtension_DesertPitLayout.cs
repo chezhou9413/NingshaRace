@@ -4,7 +4,7 @@ using Verse;
 
 namespace NingshaRaceLib.DesertPit.Generation.Config
 {
-    //类职责：配置分层洞群、水系和额外菌巢的规模，供两种自然巨坑共用。
+    //配置分层洞群和水系的规模，供两种自然巨坑共用。
     public sealed class DefModExtension_DesertPitLayout : DefModExtension
     {
         public FloatRange mainRadiusX = new FloatRange(34f, 40f);
@@ -42,8 +42,6 @@ namespace NingshaRaceLib.DesertPit.Generation.Config
         public FloatRange riverWidth = new FloatRange(3f, 5f);
         public float riverBankWidth = 2f;
         public float mainDryRadius = 12f;
-        public IntRange extraMoundsPerRoom = new IntRange(0, 3);
-        public float moundSpacing = 12f;
 
         //函数职责：按地图短边缩放洞室，限制极大地图的局部洞体尺寸。
         public float Scale(Map map) => Mathf.Clamp(Mathf.Min(map.Size.x, map.Size.z) / 200f, 0.75f, 1.5f);
@@ -68,11 +66,9 @@ namespace NingshaRaceLib.DesertPit.Generation.Config
             if (!(mainDryRadius >= 12f && mainDryRadius <= 20f) || !(riverBankWidth >= 1f && riverBankWidth <= 5f))
                 yield return "出生干地半径必须为十二至二十格，河岸宽度必须为一至五格。";
             if (!ValidCount(centralRoomCount, 4, 10) || !ValidCount(linkRoomCount, 3, 8)
-                || !ValidCount(outerRoomCount, 2, 8) || !ValidCount(branchRoomCount, 0, 5)
-                || !ValidCount(extraMoundsPerRoom, 0, 6)) yield return "洞室或可选菌巢数量超出允许区间。";
+                || !ValidCount(outerRoomCount, 2, 8) || !ValidCount(branchRoomCount, 0, 5)) yield return "洞室数量超出允许区间。";
             if (!(riverDiagonalReach >= 0.5f && riverDiagonalReach <= 0.9f)
                 || !(riverMeander >= 2f && riverMeander <= 12f)) yield return "斜河端点展开比例必须为零点五至零点九，曲流幅度必须为二至十二格。";
-            if (!(moundSpacing >= 12f && moundSpacing <= 30f)) yield return "菌巢最小间距必须为十二至三十格。";
             if (!(riverMeanderFrequency >= 2f && riverMeanderFrequency <= 16f)) yield return "河流曲流频率必须为二至十六。";
             if (!(riverEdgeNoise >= 0f && riverEdgeNoise <= 1.5f)
                 || !(habitatPondEdgeNoise >= 0f && habitatPondEdgeNoise <= 0.45f))

@@ -18,15 +18,16 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             for (int i = colonies.Count - 1; i >= 0; i--)
             {
                 AntColonyState state = colonies[i];
+                if ((ticks + state.Id * 17 + map.uniqueID) % 60 != 0) continue;
                 PruneInvalidMembers(state);
                 PruneDeathRecords(state, ticks);
                 RefreshIntruders(state);
-                UpdateHarvestOrder(state, ticks);
-                TryRepairNest(state, ticks);
-                TryUpgradeColony(state, ticks);
+                RefreshNutritionIfNeeded(state);
+                UpdateResidents(state, ticks);
+                UpdateTasks(state, ticks);
                 TryDispatchInvestigation(state, ticks);
 
-                if (IsFullAlarm(state, ticks) && ticks >= state.NextBoomWaveTick)
+                if (ticks >= state.NextBoomWaveTick)
                 {
                     SpawnBoomAntsToCap(state);
                     state.NextBoomWaveTick = ticks + Settings.boomWaveCooldownTicks;
@@ -50,12 +51,12 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
                     continue;
                 }
 
-                state.Members.RemoveAt(i);
                 if (member != null)
                 {
-                    coloniesByPawn.Remove(member);
-                    ReleaseForageAssignments(member);
+                    NotifyMemberDestroyed(member, state.Id);
+                    state.Members.Remove(member);
                 }
+                else state.Members.RemoveAt(i);
             }
 
             if (state.Queen == null || state.Queen.Destroyed || state.Queen.Dead)
@@ -73,7 +74,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
         private void RefreshIntruders(AntColonyState state)
         {
             state.Intruders.Clear();
-            float radius = state.Frenzy ? Settings.frenzyRadius : Settings.alertRadius;
+            float radius = Settings.alertRadius;
             IReadOnlyList<Pawn> pawns = map.mapPawns.AllPawnsSpawned;
             for (int i = 0; i < pawns.Count; i++)
             {
@@ -148,7 +149,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
                 }
 
                 float distance = member.Position.DistanceToSquared(candidate.Position);
-                if (distance < bestDistance && CanEngageIntruder(member, candidate))
+                if (distance < bestDistance && CanContinueColonyAttack(member, candidate) && CanEngageIntruder(member, candidate))
                 {
                     bestDistance = distance;
                     result = candidate;

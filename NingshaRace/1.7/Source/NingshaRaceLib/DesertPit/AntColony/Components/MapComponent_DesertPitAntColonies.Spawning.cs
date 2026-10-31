@@ -1,152 +1,58 @@
 using RimWorld;
 using Verse;
-
 using NingshaRaceLib.Core.Defs;
 using NingshaRaceLib.DesertPit.AntColony.Core;
 using NingshaRaceLib.DesertPit.AntColony.State;
 
 namespace NingshaRaceLib.DesertPit.AntColony.Components
 {
-    //类职责：集中实现蚁后补员、爆浆蚁波次和新成员实体生成。
+    //普通成员经孵化任务出生，爆浆蚁使用独立补员时钟。
     public partial class MapComponent_DesertPitAntColonies
     {
-        //函数职责：把指定巢群的存活爆浆蚁补充到独立数量上限。
+        //休眠爆浆蚁仍在 Members 中计数，只有真正消耗后才补充。
         private void SpawnBoomAntsToCap(AntColonyState state)
         {
+            if (ColonyDormant(state)) return;
             int missing = state.Population.BoomAntCap - CountCaste(state, AntCaste.Boom);
             for (int i = 0; i < missing; i++)
             {
-                if (SpawnMember(state, DefOfRefs.NingshaRace_DesertPitBoomAntKind) == null)
-                {
-                    break;
-                }
+                if (!TryFindMemberSpawnCell(state.NestPosition, out IntVec3 cell)) break;
+                Pawn pawn = SpawnMemberAt(state, DefOfRefs.NingshaRace_DesertPitBoomAntKind, cell);
+                if (!IsFullAlarm(state, Find.TickManager.TicksGame) && state.Intruders.Count == 0) state.Nest.Enter(pawn);
             }
         }
 
-        //函数职责：确认蚁后当前存在缺员、拥有足够实体食物，并选出本次取食时展示的物资。
-        private bool CanStartReproduction(Pawn queen, AntColonyState state, out Thing feedingSource)
-        {
-            feedingSource = null;
-            PawnKindDef kind;
-            float nutritionCost;
-            if (!TryGetMissingRegularCaste(state, out kind, out nutritionCost) || GetStoredNutrition(state, queen) < nutritionCost + GetFoodReserve(state))
-            {
-                return false;
-            }
-
-            feedingSource = FindStoredFoodFor(queen, state);
-            return feedingSource != null;
-        }
-
-        //函数职责：在蚁后完成取食和孵化后重新验证资源，优先消耗任务展示的食物并生成一只缺失成员。
-        public bool CompleteReproduction(Pawn queen, Thing feedingSource)
-        {
-            AntColonyState state;
-            if (!TryGetColony(queen, out state) || state.Queen != queen || queen.Dead || state.NestDestroyed || state.Nest == null || state.Nest.Destroyed)
-            {
-                return false;
-            }
-
-            int ticks = Find.TickManager.TicksGame;
-            if (ticks < state.NextBirthTick)
-            {
-                return false;
-            }
-
-            PawnKindDef kind;
-            float nutritionCost;
-            if (!TryGetMissingRegularCaste(state, out kind, out nutritionCost))
-            {
-                return false;
-            }
-
-            IntVec3 spawnCell;
-            if (!TryFindMemberSpawnCell(state.NestPosition, out spawnCell) || !ConsumeStoredNutrition(state, queen, nutritionCost, feedingSource))
-            {
-                return false;
-            }
-
-            Pawn newborn = SpawnMemberAt(state, kind, spawnCell);
-            if (newborn == null)
-            {
-                return false;
-            }
-
-            state.NextBirthTick = ticks + Settings.reproductionCooldownTicks;
-            return true;
-        }
-
-        //函数职责：逐阶级检查缺员，按工蚁、兵蚁、吐酸蚁顺序确定补员种类与营养消耗。
+        //按工蚁、飞镰蚁、兵蚁、破军蚁、吐酸蚁确定单次任务的固定种类和费用。
         private bool TryGetMissingRegularCaste(AntColonyState state, out PawnKindDef kind, out float nutritionCost)
         {
             if (CountCaste(state, AntCaste.Worker) < state.Population.WorkerTarget)
-            {
-                kind = DefOfRefs.NingshaRace_DesertPitWorkerAntKind;
-                nutritionCost = Settings.workerNutritionCost;
-                return true;
-            }
-
+            { kind = DefOfRefs.NingshaRace_DesertPitWorkerAntKind; nutritionCost = Settings.workerNutritionCost; return true; }
+            if (CountCaste(state, AntCaste.Flying) < state.Population.FlyingTarget)
+            { kind = DefOfRefs.NingshaRace_DesertPitFlyingAntKind; nutritionCost = Settings.flyingNutritionCost; return true; }
             if (CountCaste(state, AntCaste.Soldier) < state.Population.SoldierTarget)
-            {
-                kind = DefOfRefs.NingshaRace_DesertPitSoldierAntKind;
-                nutritionCost = Settings.soldierNutritionCost;
-                return true;
-            }
-
+            { kind = DefOfRefs.NingshaRace_DesertPitSoldierAntKind; nutritionCost = Settings.soldierNutritionCost; return true; }
+            if (CountCaste(state, AntCaste.Breaker) < state.Population.BreakerTarget)
+            { kind = DefOfRefs.NingshaRace_DesertPitBreakerAntKind; nutritionCost = Settings.breakerNutritionCost; return true; }
             if (CountCaste(state, AntCaste.Acid) < state.Population.AcidTarget)
-            {
-                kind = DefOfRefs.NingshaRace_DesertPitAcidAntKind;
-                nutritionCost = Settings.acidNutritionCost;
-                return true;
-            }
-
+            { kind = DefOfRefs.NingshaRace_DesertPitAcidAntKind; nutritionCost = Settings.acidNutritionCost; return true; }
             kind = null;
-            nutritionCost = 0f;
+            nutritionCost = 0;
             return false;
         }
 
-        //函数职责：创建指定种类的成年虫族 Pawn，写入巢群编号并生成到蚁穴附近。
-        private Pawn SpawnMember(AntColonyState state, PawnKindDef kind)
-        {
-            IntVec3 spawnCell;
-            if (!TryFindMemberSpawnCell(state.NestPosition, out spawnCell))
-            {
-                return null;
-            }
-
-            return SpawnMemberAt(state, kind, spawnCell);
-        }
-
-        //函数职责：在已经验证的格子创建成年虫族 Pawn，并把它登记为指定巢群成员。
-        private Pawn SpawnMemberAt(AntColonyState state, PawnKindDef kind, IntVec3 spawnCell)
+        //在已验证的格子生成原版 Pawn，组件事件完成成员登记。
+        private Pawn SpawnMemberAt(AntColonyState state, PawnKindDef kind, IntVec3 cell)
         {
             Pawn pawn = PawnGenerator.GeneratePawn(kind, state.Faction);
-            Comp_DesertPitAntMember memberComp = pawn.TryGetComp<Comp_DesertPitAntMember>();
-            memberComp.AssignColony(state.Id);
-            GenSpawn.Spawn(pawn, spawnCell, map, Rot4.Random);
+            pawn.GetComp<Comp_DesertPitAntMember>().AssignColony(state.Id);
+            GenSpawn.Spawn(pawn, cell, map, Rot4.Random);
             FleckMaker.ThrowDustPuff(pawn.DrawPos, map, 1.2f);
-            if (!state.Members.Contains(pawn))
-            {
-                state.Members.Add(pawn);
-            }
-
-            coloniesByPawn[pawn] = state;
             return pawn;
         }
 
-        //函数职责：在蚁穴附近寻找可站立、无建筑且能够生成新成员的格子。
-        private bool TryFindMemberSpawnCell(IntVec3 center, out IntVec3 cell)
-        {
-            return CellFinder.TryFindRandomCellNear(
-                center,
-                map,
-                6,
-                delegate(IntVec3 candidate)
-                {
-                    return candidate.InBounds(map) && candidate.Standable(map) && candidate.GetEdifice(map) == null && candidate.GetFirstPawn(map) == null;
-                },
-                out cell,
-                120);
-        }
+        //补员不覆盖建筑或其他 Pawn。
+        private bool TryFindMemberSpawnCell(IntVec3 center, out IntVec3 cell) => CellFinder.TryFindRandomCellNear(center, map, 6,
+            candidate => candidate.InBounds(map) && candidate.Standable(map) && candidate.GetEdifice(map) == null
+                && candidate.GetFirstPawn(map) == null, out cell, 120);
     }
 }

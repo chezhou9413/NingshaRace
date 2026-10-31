@@ -23,33 +23,6 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             return coloniesByNest.TryGetValue(nest, out state);
         }
 
-        //函数职责：在周期更新中验证最高等级、蚁后、冷却和营养并自动完成一次升级。
-        private void TryUpgradeColony(AntColonyState state, int ticks)
-        {
-            if (!state.LevelingEnabled || state.CurrentLevel >= state.MaxLevel || ticks < state.NextUpgradeTick)
-            {
-                return;
-            }
-
-            if (state.NestDestroyed || state.Nest == null || state.Nest.Destroyed || state.Queen == null || state.Queen.Dead || state.Queen.Destroyed)
-            {
-                return;
-            }
-
-            float requiredNutrition = Settings.GetUpgradeNutrition(state.CurrentLevel);
-            if (requiredNutrition <= 0f || GetStoredNutrition(state, state.Queen) < requiredNutrition + GetFoodReserve(state))
-            {
-                return;
-            }
-
-            if (!ConsumeStoredNutrition(state, state.Queen, requiredNutrition, null))
-            {
-                return;
-            }
-
-            IncreaseColonyLevel(state, ticks);
-        }
-
         //函数职责：让上帝模式无视营养、蚁后和冷却强制提升一级，但不允许超过本巢最高等级。
         public bool DebugForceUpgrade(AntColonyState state)
         {

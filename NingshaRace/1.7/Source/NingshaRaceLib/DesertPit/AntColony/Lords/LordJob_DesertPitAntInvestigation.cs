@@ -1,5 +1,7 @@
 using Verse;
 using Verse.AI.Group;
+using System.Linq;
+using NingshaRaceLib.DesertPit.AntColony.Components;
 
 namespace NingshaRaceLib.DesertPit.AntColony.Lords
 {
@@ -8,6 +10,11 @@ namespace NingshaRaceLib.DesertPit.AntColony.Lords
     {
         //字段职责：记录调查队所属蚁巢编号，供地图组件查找和强制解散。
         public int ColonyId;
+        public bool Revenge;
+        public bool Cancelled;
+        private bool reported;
+        private bool fighting;
+        public bool Traveling => !fighting;
 
         //字段职责：记录集结与返程使用的蚁穴位置。
         private IntVec3 nestCell;
@@ -61,9 +68,15 @@ namespace NingshaRaceLib.DesertPit.AntColony.Lords
 
             AddArrivalTransition(graph, rally, outbound);
             AddTimeoutTransition(graph, rally, end, rallyTimeoutTicks);
-            AddArrivalTransition(graph, outbound, investigate);
+            Transition arrival = new Transition(outbound, investigate);
+            arrival.AddTrigger(new Trigger_Memo("TravelArrived"));
+            arrival.AddPreAction(new TransitionAction_Custom(() => fighting = true));
+            graph.AddTransition(arrival);
             AddTimeoutTransition(graph, outbound, end, travelTimeoutTicks);
-            AddTimeoutTransition(graph, investigate, returning, defendTicks);
+            Transition finish = new Transition(investigate, returning);
+            finish.AddTrigger(new Trigger_TicksPassed(Revenge ? 4500 : defendTicks));
+            finish.AddPreAction(new TransitionAction_Custom(() => fighting = false));
+            graph.AddTransition(finish);
             AddArrivalTransition(graph, returning, end);
             AddTimeoutTransition(graph, returning, end, travelTimeoutTicks);
             return graph;
@@ -74,11 +87,26 @@ namespace NingshaRaceLib.DesertPit.AntColony.Lords
         {
             base.ExposeData();
             Scribe_Values.Look(ref ColonyId, "colonyId");
+            Scribe_Values.Look(ref Revenge, "revenge");
+            Scribe_Values.Look(ref Cancelled, "cancelled");
+            Scribe_Values.Look(ref reported, "reported");
+            Scribe_Values.Look(ref fighting, "fighting");
             Scribe_Values.Look(ref nestCell, "nestCell");
             Scribe_Values.Look(ref hotspotCell, "hotspotCell");
             Scribe_Values.Look(ref rallyTimeoutTicks, "rallyTimeoutTicks", 2500);
             Scribe_Values.Look(ref travelTimeoutTicks, "travelTimeoutTicks", 10000);
             Scribe_Values.Look(ref defendTicks, "defendTicks", 2500);
+        }
+
+        //正常解散或全灭均报告一次，警报和撤退取消不算调查失败。
+        public override void Cleanup()
+        {
+            base.Cleanup();
+            if (reported || Cancelled || Revenge) return;
+            reported = true;
+            int returned = lord.ownedPawns.Count(pawn => pawn.Spawned && !pawn.Dead && !pawn.Downed
+                && pawn.Position.DistanceTo(nestCell) <= 12f);
+            Map.GetComponent<MapComponent_DesertPitAntColonies>().NotifyInvestigationEnded(ColonyId, hotspotCell, returned);
         }
 
         //函数职责：添加原版 TravelToil 发出抵达备忘录后的阶段转换。

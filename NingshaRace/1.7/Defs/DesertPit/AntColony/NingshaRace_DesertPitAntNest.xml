@@ -65,18 +65,14 @@
         <acidNutritionCost>2</acidNutritionCost>
         <foodReserveDays>1</foodReserveDays>
         <!--每天当地时间十二点检查库存，缺粮时优先采收巢周九成成熟的野生食用菌。-->
-        <harvestRadius>16</harvestRadius>
-        <harvestMinGrowth>0.9</harvestMinGrowth>
-        <harvestReserveMultiplier>2</harvestReserveMultiplier>
         <foodStorageCells>4</foodStorageCells>
-        <retaliationRadius>55</retaliationRadius>
+        <retaliationRadius>45</retaliationRadius>
         <retaliationDurationTicks>2500</retaliationDurationTicks>
         <alertRadius>20</alertRadius>
         <soldierPatrolRadius>12</soldierPatrolRadius>
-        <workerWanderRadius>8</workerWanderRadius>
-        <queenLeashRadius>5</queenLeashRadius>
+        <workerWanderRadius>9</workerWanderRadius>
+        <queenLeashRadius>9</queenLeashRadius>
         <workerRetreatRadius>8</workerRetreatRadius>
-        <frenzyRadius>40</frenzyRadius>
         <retreatDefenseRadius>15</retreatDefenseRadius>
         <retreatLossWindowTicks>10000</retreatLossWindowTicks>
         <retreatDurationTicks>10000</retreatDurationTicks>
@@ -90,17 +86,44 @@
         <investigationTravelTimeoutTicks>10000</investigationTravelTimeoutTicks>
         <investigationDefendTicks>2500</investigationDefendTicks>
         <investigationMaxSquadSize>6</investigationMaxSquadSize>
-        <workerHaulLimit>3</workerHaulLimit>
+        <workerHaulLimit>5</workerHaulLimit>
         <workerHaulCooldownTicks>30000</workerHaulCooldownTicks>
         <workerResourceIntervalTicks>30000</workerResourceIntervalTicks>
         <workerResourceYields>
-          <li><thingDef>Steel</thingDef><count>5</count><weight>30</weight></li>
-          <li><thingDef>WoodLog</thingDef><count>5</count><weight>50</weight></li>
-          <li><thingDef>ComponentIndustrial</thingDef><count>2</count><weight>10</weight></li>
-          <li><thingDef>Jade</thingDef><count>3</count><weight>5</weight></li>
-          <li><thingDef>Gold</thingDef><count>3</count><weight>3</weight></li>
-          <li><thingDef>ComponentSpacer</thingDef><count>1</count><weight>1</weight></li>
-          <li><count>0</count><weight>31</weight></li>
+          <li>
+            <thingDef>Steel</thingDef>
+            <count>5</count>
+            <weight>30</weight>
+          </li>
+          <li>
+            <thingDef>WoodLog</thingDef>
+            <count>5</count>
+            <weight>50</weight>
+          </li>
+          <li>
+            <thingDef>ComponentIndustrial</thingDef>
+            <count>2</count>
+            <weight>10</weight>
+          </li>
+          <li>
+            <thingDef>Jade</thingDef>
+            <count>3</count>
+            <weight>5</weight>
+          </li>
+          <li>
+            <thingDef>Gold</thingDef>
+            <count>3</count>
+            <weight>3</weight>
+          </li>
+          <li>
+            <thingDef>ComponentSpacer</thingDef>
+            <count>1</count>
+            <weight>1</weight>
+          </li>
+          <li>
+            <count>0</count>
+            <weight>31</weight>
+          </li>
         </workerResourceYields>
         <reproductionWorkTicks>600</reproductionWorkTicks>
         <reproductionCooldownTicks>2500</reproductionCooldownTicks>
@@ -111,10 +134,22 @@
         <boomTriggerDistance>1.5</boomTriggerDistance>
         <boomExplosionRadius>2.5</boomExplosionRadius>
         <boomExplosionDamage>25</boomExplosionDamage>
+        <flyingNutritionCost>1</flyingNutritionCost>
+        <breakerNutritionCost>3</breakerNutritionCost>
+        <upgradeWork>1200</upgradeWork>
+        <chargeWindup>180</chargeWindup>
+        <chargeRange>9</chargeRange>
+        <chargeSpeedFactor>2</chargeSpeedFactor>
+        <chargeAccelerationTicks>45</chargeAccelerationTicks>
+        <chargeWallStunTicks>60</chargeWallStunTicks>
+        <chargeDamage>40</chargeDamage>
+        <chargeKnockback>2</chargeKnockback>
+        <chargeCooldown>20000</chargeCooldown>
+        <jumpRange>7</jumpRange>
+        <jumpCooldown>15000</jumpCooldown>
       </li>
     </modExtensions>
   </ThingDef>
-
   <ThingDef ParentName="NingshaRace_DesertPitAntNestBase">
     <defName>NingshaRace_GiantTombAntNest</defName>
     <label>墓穴洞穴蚁穴</label>

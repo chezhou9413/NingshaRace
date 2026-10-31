@@ -10,11 +10,11 @@ namespace NingshaRaceLib.Core.Bootstrap
     [StaticConstructorOnStartup]
     public static class MainEntry
     {
-        //静态构造函数负责创建 Harmony 实例并扫描当前程序集中的补丁。
+        //启动时只挂载常驻补丁，异步时序分类由首次启用入口负责挂载。
         static MainEntry()
         {
             var harmony = new Harmony("chezhou.race.ningsharace");
-            harmony.PatchAll(typeof(MainEntry).Assembly);
+            harmony.PatchAllUncategorized(typeof(MainEntry).Assembly);
             BodyAddonLinkFallbackUtility.Initialize();
             BodyAddonTextureScaleUtility.Initialize();
         }

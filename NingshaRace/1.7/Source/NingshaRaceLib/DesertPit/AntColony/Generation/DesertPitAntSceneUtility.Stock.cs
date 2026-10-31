@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using RimWorld;
 using UnityEngine;
 using Verse;
+using NingshaRaceLib.Core.Defs;
 
 namespace NingshaRaceLib.DesertPit.AntColony.Generation
 {
@@ -9,22 +10,23 @@ namespace NingshaRaceLib.DesertPit.AntColony.Generation
     public static partial class DesertPitAntSceneUtility
     {
         //函数职责：按完整初始巢群的两天消耗配置分堆口粮，并放置一至两堆随机贵重品。
-        private static void SpawnInitialStock(Map map, List<IntVec3> storageCells, List<Pawn> members)
+        private static void SpawnInitialStock(Map map, List<IntVec3> storageCells, List<Pawn> members, bool includeValuables)
         {
             float nutrition = 0f;
             foreach (Pawn member in members)
                 nutrition += member.needs.food.FoodFallPerTickAssumingCategory(HungerCategory.Fed) * GenDate.TicksPerDay * 2f;
-            int remaining = Mathf.CeilToInt(nutrition / ThingDefOf.InsectJelly.GetStatValueAbstract(StatDefOf.Nutrition));
+            int remaining = Mathf.CeilToInt(nutrition / DefOfRefs.NingshaRace_EmeraldHoneydew.GetStatValueAbstract(StatDefOf.Nutrition));
             int foodCells = 0;
             while (remaining > 0)
             {
                 if (foodCells >= storageCells.Count - 2) throw new System.InvalidOperationException("蚁巢储藏格不足以容纳初始两天口粮。");
-                Thing jelly = ThingMaker.MakeThing(ThingDefOf.InsectJelly);
+                Thing jelly = ThingMaker.MakeThing(DefOfRefs.NingshaRace_EmeraldHoneydew);
                 jelly.stackCount = System.Math.Min(remaining, jelly.def.stackLimit);
                 GenSpawn.Spawn(jelly, storageCells[foodCells++], map);
                 remaining -= jelly.stackCount;
             }
 
+            if (!includeValuables) return;
             List<ThingDef> valuables = new List<ThingDef>
             {
                 ThingDefOf.Silver,

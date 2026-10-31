@@ -15,6 +15,9 @@ namespace NingshaRaceLib.Molting.Health
         //字段职责：阻止移除和调整Hediff时再次进入同一Pawn的健康结算。
         private static readonly HashSet<int> ResolvingPawnIds = new HashSet<int>();
 
+        //同一次治疗尚未完成时不允许嵌套健康检查结算死亡。
+        public static bool IsResolving(Pawn pawn) => ResolvingPawnIds.Contains(pawn.thingIDNumber);
+
         //字段职责：在不触发健康状态结算的情况下临时调整严重度，用于保命结果模拟。
         private static readonly AccessTools.FieldRef<Hediff, float> SeverityField =
             AccessTools.FieldRefAccess<Hediff, float>("severityInt");
@@ -32,7 +35,7 @@ namespace NingshaRaceLib.Molting.Health
                 List<Hediff_Injury> injuries = pawn.health.hediffSet.hediffs.OfType<Hediff_Injury>()
                     .Where(injury => injury.Severity > 0f).OrderBy(injury => injury.Severity).ToList();
                 bool injuryEmergency = injuries.Count > 0
-                    && (pawn.Downed || pawn.health.ShouldBeDeadFromLethalDamageThreshold());
+                    && (pawn.Downed || pawn.health.ShouldBeDowned() || pawn.health.ShouldBeDead());
                 if (!injuryEmergency || HasFatalMissingPart(pawn))
                 {
                     return;

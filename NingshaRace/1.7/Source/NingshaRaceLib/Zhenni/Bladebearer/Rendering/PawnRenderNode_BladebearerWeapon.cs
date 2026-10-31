@@ -18,13 +18,13 @@ namespace NingshaRaceLib.Zhenni.Bladebearer
         public PawnRenderNode_BladebearerWeapon(Pawn pawn, PawnRenderNodeProperties props, PawnRenderTree tree)
             : base(pawn, props, tree) { Owner = pawn.GetComp<CompBladebearerAppearance>(); }
 
-        //原版装备移除不一定重建渲染树，状态变化时仅刷新绘制请求。
+        //初始化也会读取此属性，刷新标记需保留到原版真正重建绘制请求。
         public override bool RecacheRequested
         {
             get
             {
                 bool ready = Ready;
-                if (ready != lastReady) { lastReady = ready; return true; }
+                if (ready != lastReady) { lastReady = ready; requestRecache = true; }
                 return base.RecacheRequested;
             }
         }

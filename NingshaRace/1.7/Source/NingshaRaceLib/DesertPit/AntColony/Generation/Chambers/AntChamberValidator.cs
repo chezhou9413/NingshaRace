@@ -38,7 +38,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.Generation.Chambers
                         throw new InvalidOperationException("蚁巢自然洞室侧壁出现了非预期入口。");
             }
             RequireFloor(room, GenAdj.OccupiedRect(room.Nest, Rot4.North, DefOfRefs.NingshaRace_DesertPitAntNest.size).ExpandedBy(2));
-            RequireFloor(room, GenAdj.OccupiedRect(room.Mound, Rot4.North, DefOfRefs.NingshaRace_FungalMound.size));
+            RequireFloor(room, GenAdj.OccupiedRect(room.Mound, Rot4.North, DefOfRefs.NingshaRace_AntHoneyTower.size));
             CheckScreenedEntrance(room);
         }
 

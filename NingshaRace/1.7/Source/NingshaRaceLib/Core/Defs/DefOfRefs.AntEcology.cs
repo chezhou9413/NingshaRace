@@ -6,15 +6,12 @@ namespace NingshaRaceLib.Core.Defs
     public static partial class DefOfRefs
     {
         public static ThingDef NingshaRace_AntRepellent;
-        public static ThingDef NingshaRace_FungalMound;
         public static PawnKindDef NingshaRace_DesertPitAcidAntKind;
         public static HediffDef NingshaRace_AntAcidSlow;
         //字段职责：提供酸液飞行尾迹使用的柔边酸雾和散落液滴定义。
         public static FleckDef NingshaRace_AntAcidTrailMist;
         public static FleckDef NingshaRace_AntAcidTrailDroplet;
-        public static JobDef NingshaRace_Job_DesertPitAntHarvest;
         //工蚁挖掘与吐酸蚁射击、寻找射击点的专用任务。
-        public static JobDef NingshaRace_Job_DesertPitAntDigResource;
         public static JobDef NingshaRace_Job_DesertPitAntShoot;
         public static JobDef NingshaRace_Job_DesertPitAntCombatMove;
         public static ThingDef RawFungus;

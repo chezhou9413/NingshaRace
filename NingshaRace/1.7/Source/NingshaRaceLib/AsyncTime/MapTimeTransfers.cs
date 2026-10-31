@@ -6,7 +6,7 @@ using Verse;
 namespace NingshaRaceLib.AsyncTime;
 
 //在生成、装载和离图边界维护物体的时钟归属；未附着物体使用世界时间。
-[HarmonyPatch]
+[HarmonyPatch, HarmonyPatchCategory(MapTimePatches.PatchCategory)]
 internal static class MapTimeTransfers
 {
     //弱引用记录不阻止地图清理；读档时从所属地图重建。

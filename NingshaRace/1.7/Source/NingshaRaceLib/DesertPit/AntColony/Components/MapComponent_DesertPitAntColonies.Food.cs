@@ -1,109 +1,89 @@
 using RimWorld;
 using System.Collections.Generic;
+using System.Linq;
 using Verse;
-
+using NingshaRaceLib.DesertPit.AntColony.Buildings;
 using NingshaRaceLib.DesertPit.AntColony.State;
 
 namespace NingshaRaceLib.DesertPit.AntColony.Components
 {
-    //类职责：集中实现蚁群实体储备的营养统计、食物识别和繁殖消耗。
+    //统一地面与容器食物的统计和完整扣款。
     public partial class MapComponent_DesertPitAntColonies
     {
-        //函数职责：为检查面板和升级逻辑计算指定巢群当前可消费的实体储藏营养。
+        //面板和计划读取缓存；真正扣款必读当前库存。
         public float GetStoredNutrition(AntColonyState state)
         {
-            Pawn eater = GetNutritionConsumer(state);
-            return eater == null ? 0f : GetStoredNutrition(state, eater);
+            RefreshNutritionIfNeeded(state);
+            return state.StoredNutrition;
         }
 
-        //函数职责：优先选择蚁后并在蚁后失效时选择任一存活成员，作为营养换算与消费主体。
-        private static Pawn GetNutritionConsumer(AntColonyState state)
+        //优先以蚁后作为营养换算主体。
+        private static Pawn GetNutritionConsumer(AntColonyState state) => state.Queen != null && !state.Queen.Dead
+            ? state.Queen : state.Members.Find(member => member != null && !member.Dead && !member.Destroyed);
+
+        //储物穴食物先于蜜露塔，保证普通进食的取食顺序。
+        private IEnumerable<Thing> StoredFoods(AntColonyState state)
         {
-            Pawn eater = state?.Queen;
-            if (eater == null || eater.Dead || eater.Destroyed)
-            {
-                eater = state?.Members.Find(member => member != null && !member.Dead && !member.Destroyed);
-            }
-
-            return eater;
+            foreach (IntVec3 cell in state.StorageCells)
+                foreach (Thing thing in cell.GetThingList(map))
+                    if (IsStoredFood(thing)) yield return thing;
+            foreach (Building_AntColonyStructure building in state.Buildings)
+                if (building is Building_AntStoragePit && building.Spawned)
+                    foreach (Thing thing in building.Contents)
+                        if (IsStoredFood(thing)) yield return thing;
+            foreach (Building_AntColonyStructure building in state.Buildings)
+                if (building is Building_AntHoneyTower && building.Spawned)
+                    foreach (Thing thing in building.Contents)
+                        if (IsStoredFood(thing)) yield return thing;
         }
 
-        //函数职责：计算指定巢群实体储藏格内可用于进食和繁殖的总营养。
+        //每次扣款前重新读取实体数量，绝不根据过期账目扣料。
         private float GetStoredNutrition(AntColonyState state, Pawn eater)
         {
             float total = 0f;
-            for (int i = 0; i < state.StorageCells.Count; i++)
-            {
-                Thing food = GetStorageOccupant(state.StorageCells[i]);
-                if (!IsStoredFood(food))
-                {
-                    continue;
-                }
-
-                float nutrition = FoodUtility.NutritionForEater(eater, food);
-                total += food is Corpse ? nutrition : nutrition * food.stackCount;
-            }
-
+            foreach (Thing food in StoredFoods(state))
+                total += FoodUtility.NutritionForEater(eater, food) * (food is Corpse ? 1 : food.stackCount);
             return total;
         }
 
-        //函数职责：判断储藏实体是否属于允许蚁群消耗的新鲜食物。
-        private static bool IsStoredFood(Thing thing)
+        //只接收能提供营养的食品与新鲜尸体。
+        private static bool IsStoredFood(Thing thing) => thing != null && !thing.Destroyed
+            && (thing is Corpse corpse ? corpse.GetRotStage() == RotStage.Fresh
+                : thing.def.category == ThingCategory.Item && thing.def.IsNutritionGivingIngestible && !thing.def.IsDrug);
+
+        //先规划全部扣款，尸体和堆叠的取整也不能侵占其他预留和口粮。
+        private bool ConsumeStoredNutrition(AntColonyState state, Pawn eater, float required, AntColonyTask task)
         {
-            if (thing == null || thing.Destroyed)
-            {
-                return false;
-            }
-
-            Corpse corpse = thing as Corpse;
-            if (corpse != null)
-            {
-                return corpse.GetRotStage() == RotStage.Fresh;
-            }
-
-            return thing.def.IsNutritionGivingIngestible && !thing.def.IsDrug;
-        }
-
-        //函数职责：先规划完整扣款再消耗物资，整具尸体和堆叠向上取整都不能侵占保留口粮。
-        private bool ConsumeStoredNutrition(AntColonyState state, Pawn eater, float requiredNutrition, Thing preferredFood)
-        {
-            float budget = GetStoredNutrition(state, eater) - GetFoodReserve(state);
-            if (budget < requiredNutrition) return false;
-            float remaining = requiredNutrition;
+            if (eater == null) return false;
+            float newMemberReserve = task?.Kind == AntTaskKind.Hatch
+                ? Need_Food.BaseHungerRate(task.HatchKind.race.race.lifeStageAges.Last().def, task.HatchKind.race)
+                    * GenDate.TicksPerDay * Settings.foodReserveDays : 0f;
+            float budget = GetStoredNutrition(state, eater) - GetFoodReserve(state) - ReservedNutrition(state, task) - newMemberReserve;
+            if (budget <= required) return false;
+            float remaining = required;
             List<KeyValuePair<Thing, int>> payment = new List<KeyValuePair<Thing, int>>();
-            if (IsFoodStoredInColony(state, preferredFood))
-                PlanFoodPayment(preferredFood, eater, payment, ref remaining, ref budget);
-            for (int i = 0; i < state.StorageCells.Count && remaining > 0f; i++)
+            foreach (Thing food in StoredFoods(state))
             {
-                Thing food = GetStorageOccupant(state.StorageCells[i]);
-                if (food == preferredFood || !IsStoredFood(food)) continue;
-                PlanFoodPayment(food, eater, payment, ref remaining, ref budget);
+                if (remaining <= 0.0001f) break;
+                float nutrition = FoodUtility.NutritionForEater(eater, food);
+                if (nutrition <= 0f) continue;
+                int count = System.Math.Min(food is Corpse ? 1 : food.stackCount,
+                    System.Math.Min(UnityEngine.Mathf.CeilToInt(remaining / nutrition),
+                        UnityEngine.Mathf.FloorToInt((budget - 0.0001f) / nutrition)));
+                if (count <= 0) continue;
+                payment.Add(new KeyValuePair<Thing, int>(food, count));
+                budget -= count * nutrition;
+                remaining -= count * nutrition;
             }
             if (remaining > 0.0001f) return false;
             foreach (KeyValuePair<Thing, int> entry in payment)
-                if (entry.Value == entry.Key.stackCount) entry.Key.Destroy();
-                else entry.Key.SplitOff(entry.Value).Destroy();
+            {
+                Thing spent = entry.Key.holdingOwner != null ? entry.Key.holdingOwner.Take(entry.Key, entry.Value)
+                    : entry.Key.SplitOff(entry.Value);
+                spent.Destroy();
+            }
+            state.NutritionDirty = true;
             return true;
-        }
-
-        //函数职责：确认指定食物仍是当前巢群储藏格中的有效实体，避免结算已经被搬走的物资。
-        private bool IsFoodStoredInColony(AntColonyState state, Thing food)
-        {
-            return IsStoredFood(food) && food.Spawned && food.Map == map && state.StorageCells.Contains(food.Position) && GetStorageOccupant(food.Position) == food;
-        }
-
-        //函数职责：为单个物资计算可支付单位数，过大的尸体暂不消耗，未凑齐完整金额时不破坏任何物件。
-        private static void PlanFoodPayment(Thing food, Pawn eater, List<KeyValuePair<Thing, int>> payment, ref float remaining, ref float budget)
-        {
-            float nutrition = FoodUtility.NutritionForEater(eater, food);
-            if (nutrition <= 0f || remaining <= 0f) return;
-            int needed = UnityEngine.Mathf.CeilToInt(remaining / nutrition);
-            int affordable = UnityEngine.Mathf.FloorToInt(budget / nutrition);
-            int count = System.Math.Min(food is Corpse ? 1 : food.stackCount, System.Math.Min(needed, affordable));
-            if (count <= 0) return;
-            payment.Add(new KeyValuePair<Thing, int>(food, count));
-            remaining -= nutrition * count;
-            budget -= nutrition * count;
         }
     }
 }

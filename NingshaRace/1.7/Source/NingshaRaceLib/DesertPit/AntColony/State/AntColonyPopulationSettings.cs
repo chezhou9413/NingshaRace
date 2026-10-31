@@ -18,6 +18,8 @@ namespace NingshaRaceLib.DesertPit.AntColony.State
 
         //字段职责：记录三级以上巢群独立维护的吐酸蚁数量。
         public int AcidTarget;
+        public int BreakerTarget;
+        public int FlyingTarget;
 
         //字段职责：记录完整警报允许存在的爆浆蚁上限。
         public int BoomAntCap;
@@ -26,7 +28,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.State
         public int StorageCellCount;
 
         //属性职责：从工蚁、兵蚁和吐酸蚁目标之和得到常规蚁上限，蚁后和爆浆蚁单独统计。
-        public int RegularAntCap => WorkerTarget + SoldierTarget + AcidTarget;
+        public int RegularAntCap => WorkerTarget + SoldierTarget + AcidTarget + BreakerTarget + FlyingTarget;
 
         //函数职责：根据蚁穴基础配置和房间倍率计算可持久化的有效规模。
         public static AntColonyPopulationSettings Create(DefModExtension_AntColony settings, float scale)
@@ -47,7 +49,7 @@ namespace NingshaRaceLib.DesertPit.AntColony.State
                 Scale = scale,
                 WorkerTarget = workers,
                 SoldierTarget = soldiers,
-                BoomAntCap = Math.Max(0, (int)Math.Round(settings.boomAntCap * scale, MidpointRounding.AwayFromZero)),
+                BoomAntCap = settings.boomAntCap,
                 StorageCellCount = Math.Max(1, (int)Math.Round(settings.storageCellCount * scale, MidpointRounding.AwayFromZero))
             };
         }
@@ -70,6 +72,8 @@ namespace NingshaRaceLib.DesertPit.AntColony.State
                 WorkerTarget = settings.workerTarget * level,
                 SoldierTarget = settings.soldierTarget * level,
                 AcidTarget = Math.Max(0, level - 2) * 2,
+                BreakerTarget = Math.Max(0, level - 2) * 2,
+                FlyingTarget = Math.Max(0, level - 2) * 8,
                 BoomAntCap = settings.boomAntCap,
                 StorageCellCount = settings.storageCellCount
             };
@@ -82,6 +86,8 @@ namespace NingshaRaceLib.DesertPit.AntColony.State
             Scribe_Values.Look(ref WorkerTarget, "workerTarget");
             Scribe_Values.Look(ref SoldierTarget, "soldierTarget");
             Scribe_Values.Look(ref AcidTarget, "acidTarget");
+            Scribe_Values.Look(ref BreakerTarget, "breakerTarget");
+            Scribe_Values.Look(ref FlyingTarget, "flyingTarget");
             Scribe_Values.Look(ref BoomAntCap, "boomAntCap");
             Scribe_Values.Look(ref StorageCellCount, "storageCellCount");
         }

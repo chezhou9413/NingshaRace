@@ -26,43 +26,35 @@ namespace NingshaRaceLib.GiantTomb.Content.Generation
             AntColonyPopulationSettings population = AntColonyPopulationSettings.Create(settings, spawn.scale);
             for (int instance = 0; instance < spawn.count; instance++)
             {
-                IntVec3 center = FindNestCenter(spawn.antNestDef, cells);
+                IntVec3 center = FindNestCenter(map, spawn.antNestDef, cells, population.StorageCellCount);
+                List<IntVec3> buildArea = new List<IntVec3>(cells.Available);
                 CellRect occupied = GenAdj.OccupiedRect(center, Rot4.North, spawn.antNestDef.size);
                 cells.Reserve(occupied);
                 List<IntVec3> storageCells = TakeStorageCells(cells, center, population.StorageCellCount);
 
-                MapComponent_DesertPitAntColonies manager = map.GetComponent<MapComponent_DesertPitAntColonies>();
-                Faction faction = manager.GetColonyFaction(colonyIndex++);
-                Building_DesertPitAntNest nest = (Building_DesertPitAntNest)ThingMaker.MakeThing(spawn.antNestDef);
-                GenSpawn.Spawn(nest, center, map, Rot4.North);
-                nest.SetFaction(faction);
-
-                List<Pawn> members = new List<Pawn>();
-                Pawn queen = SpawnMember(map, cells, storageCells, center, DefOfRefs.NingshaRace_DesertPitQueenAntKind, faction);
-                members.Add(queen);
-                for (int i = 0; i < population.WorkerTarget; i++)
-                {
-                    members.Add(SpawnMember(map, cells, storageCells, center, DefOfRefs.NingshaRace_DesertPitWorkerAntKind, faction));
-                }
-                for (int i = 0; i < population.SoldierTarget; i++)
-                {
-                    members.Add(SpawnMember(map, cells, storageCells, center, DefOfRefs.NingshaRace_DesertPitSoldierAntKind, faction));
-                }
-                AntColonyState state = manager.RegisterGeneratedColony(nest, queen, members, storageCells, faction, population, false, 1, 1);
+                AntColonyState state = DesertPit.AntColony.Generation.DesertPitAntSceneUtility.SpawnColony(
+                    map, spawn.antNestDef, center, storageCells, population, 1, 1, false, false, buildArea);
+                colonyIndex++;
                 state.PassageAnchor = cells.PassageAnchor();
-                spawnedPawns.AddRange(members);
+                foreach (var building in state.Buildings) cells.Reserve(building.OccupiedRect());
+                spawnedPawns.Add(state.Queen);
+                spawnedPawns.AddRange(state.Members.Where(pawn => pawn.Spawned));
             }
         }
 
         //函数职责：随机选择一个完整三乘三占地均可用的蚁穴中心。
-        private static IntVec3 FindNestCenter(ThingDef nestDef, GiantTombContentCellPool cells)
+        private static IntVec3 FindNestCenter(Map map, ThingDef nestDef, GiantTombContentCellPool cells, int storageCount)
         {
             List<IntVec3> candidates = new List<IntVec3>(cells.Available);
             candidates.Shuffle();
             for (int i = 0; i < candidates.Count; i++)
             {
                 CellRect occupied = GenAdj.OccupiedRect(candidates[i], Rot4.North, nestDef.size);
-                if (cells.ContainsAll(occupied))
+                List<IntVec3> storage = cells.Available.Where(cell => !occupied.Contains(cell))
+                    .OrderBy(cell => cell.DistanceToSquared(candidates[i])).Take(storageCount).ToList();
+                if (cells.ContainsAll(occupied) && storage.Count == storageCount
+                    && map.GetComponent<MapComponent_DesertPitAntColonies>().TryPlanInitialBuildings(candidates[i], nestDef,
+                        storage, 1, new List<IntVec3>(cells.Available), out _))
                 {
                     return candidates[i];
                 }
@@ -86,25 +78,5 @@ namespace NingshaRaceLib.GiantTomb.Content.Generation
             return result;
         }
 
-        //函数职责：在蚁穴附近的普通空格或暂时空闲储藏格生成一只成年蚁群成员。
-        private static Pawn SpawnMember(Map map, GiantTombContentCellPool cells, List<IntVec3> storageCells, IntVec3 center, PawnKindDef kind, Faction faction)
-        {
-            List<IntVec3> candidates = cells.Available
-                .Where(candidate => candidate.DistanceToSquared(center) <= 64f && candidate.GetFirstPawn(map) == null)
-                .Concat(storageCells.Where(candidate => candidate.DistanceToSquared(center) <= 64f && candidate.GetFirstPawn(map) == null))
-                .ToList();
-            if (candidates.Count == 0)
-            {
-                throw new InvalidOperationException("墓葬蚁穴附近没有可生成成员的格子: " + cells.TemplateDefName + ", 种类=" + kind.defName);
-            }
-            IntVec3 cell = candidates.RandomElement();
-            if (cells.Available.Contains(cell))
-            {
-                cells.Reserve(cell);
-            }
-            Pawn pawn = PawnGenerator.GeneratePawn(kind, faction);
-            GenSpawn.Spawn(pawn, cell, map, Rot4.Random);
-            return pawn;
-        }
     }
 }

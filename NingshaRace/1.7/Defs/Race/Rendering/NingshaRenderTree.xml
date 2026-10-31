@@ -157,7 +157,7 @@
         <!-- 携带物节点负责绘制武器和搬运物。 -->
         <li Class="PawnRenderNodeProperties_Carried">
           <debugLabel>Ningsha carried thing</debugLabel>
-          <workerClass>PawnRenderNodeWorker_Carried</workerClass>
+          <workerClass>NingshaRaceLib.Race.Rendering.PawnRenderNodeWorker_NingshaCarried</workerClass>
         </li>
       </children>
     </root>

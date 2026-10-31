@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!--沿用原版地形网格与粗糙边缘，仅替换蚁巢地面的纹理采样。-->
+  <ShaderDef>
+    <defName>NingshaRace_AntLivingGround</defName>
+    <shaderProgram>
+      <vertexShaderFileName>MapWorldUV.vert.glsl</vertexShaderFileName>
+      <fragmentShaderFileName>NingshaAntGround.frag.glsl</fragmentShaderFileName>
+      <flipTextureST>false</flipTextureST>
+      <transparent>true</transparent>
+      <depthWrite>false</depthWrite>
+      <renderQueue>2001</renderQueue>
+      <textureWrapOverrides>
+        <li><key>_MainTex</key><value>Repeat</value></li>
+        <li><key>_AlphaAddTex</key><value>Repeat</value></li>
+      </textureWrapOverrides>
+    </shaderProgram>
+  </ShaderDef>
+  <ShaderTypeDef>
+    <defName>NingshaRace_AntLivingGround</defName>
+    <shaderPath>Map/NingshaRace_AntLivingGround</shaderPath>
+  </ShaderTypeDef>
+  <TerrainDef ParentName="NaturalTerrainBase">
+    <defName>NingshaRace_AntGround</defName>
+    <label>蚁巢菌膜</label>
+    <description>覆盖巢区的紫黑色菌膜，细密纹理缓缓起伏，为蚁群的食用菌提供生长基底。</description>
+    <texturePath>Terrain/Surfaces/NingshaRace/AntGround</texturePath>
+    <edgeType>FadeRough</edgeType>
+    <customShader>NingshaRace_AntLivingGround</customShader>
+    <renderPrecedence>350</renderPrecedence>
+    <pathCost>2</pathCost>
+    <fertility>1</fertility>
+    <layerable>false</layerable>
+    <statBases><Beauty>-3</Beauty><BeautyOutdoors>0</BeautyOutdoors><Cleanliness>-1</Cleanliness></statBases>
+    <affordances>
+      <li>Light</li><li>Medium</li><li>Heavy</li><li>GrowSoil</li><li>Diggable</li>
+    </affordances>
+  </TerrainDef>
+</Defs>

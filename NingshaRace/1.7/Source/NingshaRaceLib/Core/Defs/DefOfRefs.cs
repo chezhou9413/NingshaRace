@@ -306,7 +306,6 @@ namespace NingshaRaceLib.Core.Defs
         public static JobDef NingshaRace_Job_DesertPitAntMelee;
 
         //字段职责：蚁后消耗巢穴食物并补充常规成员时使用的工作。
-        public static JobDef NingshaRace_Job_DesertPitAntReproduce;
 
         //字段职责：爆浆蚁追到入侵者身边并触发酸液自爆时使用的工作。
         public static JobDef NingshaRace_Job_DesertPitBoomAntDetonate;

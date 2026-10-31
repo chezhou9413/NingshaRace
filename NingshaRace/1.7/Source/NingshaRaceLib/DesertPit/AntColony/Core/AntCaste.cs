@@ -7,6 +7,8 @@ namespace NingshaRaceLib.DesertPit.AntColony.Core
         Soldier,
         Queen,
         Boom,
-        Acid
+        Acid,
+        Breaker,
+        Flying
     }
 }

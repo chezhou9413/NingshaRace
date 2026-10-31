@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- 沙傀复用采矿优先级操作深钻井，其他机械体不使用此入口。 -->
+  <WorkGiverDef>
+    <defName>NingshaRace_SandGolemDeepDrill</defName>
+    <label>操作深钻井</label>
+    <giverClass>NingshaRaceLib.SandGolem.AI.WorkGiver_SandGolemDeepDrill</giverClass>
+    <workType>Mining</workType>
+    <priorityInType>50</priorityInType>
+    <verb>钻探</verb>
+    <gerund>钻探</gerund>
+    <requiredCapacities><li>Manipulation</li></requiredCapacities>
+    <canBeDoneByMechs>true</canBeDoneByMechs>
+  </WorkGiverDef>
+</Defs>
