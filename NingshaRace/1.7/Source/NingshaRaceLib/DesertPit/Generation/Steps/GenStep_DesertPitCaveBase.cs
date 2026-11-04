@@ -26,7 +26,9 @@ public sealed class GenStep_DesertPitCaveBase : GenStep, IDesertPitIncrementalGe
     {
         if (map.Size.x != map.Size.z) throw new InvalidOperationException("v14 洞穴基座需要正方形地图。");
         string seed = Rand.Int.ToString(CultureInfo.InvariantCulture);
-        string template = new[] { "lake", "confluence", "braided" }[(int)(CaveMath.Random(seed + ":template")() * 3)];
+        //每张新地图仅抽取一次模板，巨湖占百分之一，其余均分给两种河流模板。
+        double templateRoll = CaveMath.Random(seed + ":template")();
+        string template = templateRoll < .01 ? "lake" : templateRoll < .505 ? "confluence" : "braided";
         var settings = new CaveSettings(seed, map.Size.x, template);
         Log.Message($"[凝砂洞穴] v14 基座：地图 {map.uniqueID}，模板 {template}，种子 {seed}，尺寸 {settings.Size}。");
         DesertPitGenUtility.SetGenerationStatus("洞穴基座：洞室与河湖");

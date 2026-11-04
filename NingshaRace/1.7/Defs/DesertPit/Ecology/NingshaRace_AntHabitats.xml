@@ -31,7 +31,7 @@
   <ThingDef ParentName="NingshaRace_AntHabitatBase">
     <defName>NingshaRace_AntRepellent</defName>
     <label>驱蚁桩</label>
-    <description>菌类和植物附着在树桩状的高大石块上，散发出蚂蚁厌恶的气味。气味浓郁时，附近物资不会被工蚁收集，但蚂蚁仍会经过和攻击。每六小时有一成概率散去气味，持续到下个周期。可以占领并搬走，无法自行建造。</description>
+    <description>菌类和植物附着在树桩状的高大石块上，散发出蚂蚁厌恶的气味。气味浓郁时，附近物资不会被工蚁收集，但蚂蚁仍会经过和攻击。初次生成后的六小时内气味保持浓郁，之后每六小时有6%的概率散去气味，持续到下个周期。可以占领并搬走，无法自行建造。</description>
     <thingClass>NingshaRaceLib.DesertPit.Ecology.Habitats.Building_AntRepellent</thingClass>
     <size>(1,1)</size>
     <graphicData>

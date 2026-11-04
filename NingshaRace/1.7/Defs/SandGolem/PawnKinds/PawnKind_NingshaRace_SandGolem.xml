@@ -29,6 +29,12 @@
     <canStrip>false</canStrip>
     <lifeStages>
       <li>
+        <!--沙傀属于工具使用型机械体，远景剪影从 PawnKind 的生命阶段读取。-->
+        <silhouetteGraphicData>
+          <texPath>Things/Pawn/Humanlike/Silhouettes/Silhouette_HumanAdult</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <drawSize>1</drawSize>
+        </silhouetteGraphicData>
         <bodyGraphicData>
           <texPath>Things/Pawn/Humanlike/Silhouettes/Silhouette_HumanAdult</texPath>
           <shaderType>Cutout</shaderType>

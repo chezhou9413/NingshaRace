@@ -5,6 +5,7 @@ using Verse;
 using Verse.AI;
 
 using NingshaRaceLib.Core.Defs;
+using NingshaRaceLib.DesertPit.Generation.CaveBase;
 
 namespace NingshaRaceLib.Scenarios.Generation
 {
@@ -12,6 +13,8 @@ namespace NingshaRaceLib.Scenarios.Generation
     internal static class NingshaStartingPartyPlacement
     {
         private const float LandingRadius = 6f;
+        private const float SandRadius = 8f;
+        private const float SandEdgeVariation = 1f;
 
         //函数职责：整理连通安全区，安置成员及已生成的物资、动物，并核对成员能够步行到离洞绳。
         public static void Place(Map map, PocketMapExit exit, IReadOnlyList<Thing> startingSupplies)
@@ -66,6 +69,7 @@ namespace NingshaRaceLib.Scenarios.Generation
                 }
                 map.terrainGrid.SetTerrain(cell, TerrainDefOf.Sand);
             }
+            PaintSandEdge(map, exit.Position);
             map.regionAndRoomUpdater.TryRebuildDirtyRegionsAndRooms();
 
             List<IntVec3> result = new List<IntVec3>();
@@ -78,6 +82,21 @@ namespace NingshaRaceLib.Scenarios.Generation
                     result.Add(cell);
             }
             return result;
+        }
+
+        //在原安置区外扩出七至九格的自然沙地边缘，保留外围河水、岩壁和建筑。
+        private static void PaintSandEdge(Map map, IntVec3 center)
+        {
+            uint seed = CaveMath.Hash("starting-sand:" + map.uniqueID);
+            foreach (IntVec3 cell in GenRadial.RadialCellsAround(center, SandRadius + SandEdgeVariation, true))
+            {
+                if (!cell.InBounds(map) || cell.DistanceToSquared(center) <= LandingRadius * LandingRadius
+                    || !cell.Standable(map) || cell.GetTerrain(map).IsWater || cell.GetEdifice(map) != null) continue;
+                double radius = SandRadius + SandEdgeVariation * CaveMath.Noise(
+                    (cell.x - center.x) * .35, (cell.z - center.z) * .35, seed);
+                if (cell.DistanceToSquared(center) <= radius * radius)
+                    map.terrainGrid.SetTerrain(cell, TerrainDefOf.Sand);
+            }
         }
 
         //函数职责：拆分超量堆叠并限制物资只落在已确认连通的安全区，不散落到隔墙或地图边缘。

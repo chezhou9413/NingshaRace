@@ -4,7 +4,7 @@ using Verse;
 
 namespace NingshaRaceLib.DesertPit.Ecology.Plants
 {
-    //单株洞穴植物把贴图根部固定在所在格中心，成长时按相同比例缩放偏移。
+    //单株洞穴植物把贴图根部固定在所在格南缘，成长时按相同比例缩放偏移。
     public class Plant_DesertPit : Plant
     {
         private static readonly Color32[] WindColors = new Color32[4];
@@ -34,6 +34,8 @@ namespace NingshaRaceLib.DesertPit.Ecology.Plants
             float scale = def.plant.visualSizeRange.LerpThroughRange(Growth);
             Vector2 size = def.graphicData.drawSize * scale;
             Vector3 root = this.TrueCenter();
+            //根部校准偏移用于对齐贴图底部，落点应在格子下沿，不能把整株抬到格心。
+            root.z -= 0.5f;
             Vector3 center = root + graphic.DrawOffset(Rot4.North) * scale;
             PlantUtility.SetWindExposureColors(WindColors, this);
             PrintPlantPlane(layer, graphic.MatSingleFor(this), center, size);

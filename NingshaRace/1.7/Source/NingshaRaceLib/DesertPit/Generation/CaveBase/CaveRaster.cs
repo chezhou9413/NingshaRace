@@ -32,7 +32,9 @@ internal static class CaveRaster
         {
             if (cells[i] != 2) continue;
             int x = i % n, y = i / n;
-            if (x == 0 || y == 0 || x == n - 1 || y == n - 1 || cells[i - 1] != 2 || cells[i + 1] != 2 || cells[i - n] != 2 || cells[i + n] != 2)
+            //只把地图内的实际岸线作为浅水起点，出界河口继续保持河心水深。
+            if (x > 0 && cells[i - 1] != 2 || x < n - 1 && cells[i + 1] != 2
+                || y > 0 && cells[i - n] != 2 || y < n - 1 && cells[i + n] != 2)
             { depth[i] = 1; queue[tail++] = i; }
         }
         while (head < tail)

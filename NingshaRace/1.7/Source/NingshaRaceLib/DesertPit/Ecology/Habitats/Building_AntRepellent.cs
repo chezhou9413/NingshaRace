@@ -3,7 +3,7 @@ using RimWorld;
 
 namespace NingshaRaceLib.DesertPit.Ecology.Habitats
 {
-    //类职责：以不可通过搬动或读档重抽的独立周期阻止工蚁收集范围内物资。
+    //以不可通过搬动或读档重抽的独立周期阻止工蚁收集范围内物资。
     public sealed class Building_AntRepellent : Building_AntHabitat
     {
         private int epochTick = -1;
@@ -13,7 +13,7 @@ namespace NingshaRaceLib.DesertPit.Ecology.Habitats
         public override float Radius => Settings.radius;
         protected override bool EmitsSpores => Running;
 
-        //属性职责：用物件编号和绝对周期决定整周期状态，不消耗游戏全局随机序列。
+        //首次周期保持气味浓郁，后续用物件编号和绝对周期决定状态。
         public bool Running
         {
             get
@@ -22,20 +22,20 @@ namespace NingshaRaceLib.DesertPit.Ecology.Habitats
                 if (cycle != cachedCycle)
                 {
                     cachedCycle = cycle;
-                    running = !Rand.ChanceSeeded(Settings.failureChance, Gen.HashCombineInt(thingIDNumber, cycle));
+                    running = cycle == 0 || !Rand.ChanceSeeded(Settings.failureChance, Gen.HashCombineInt(thingIDNumber, cycle));
                 }
                 return running;
             }
         }
 
-        //函数职责：首次生成时记录周期起点，搬动和重新安装不重置起点。
+        //首次生成时记录周期起点，搬动和重新安装不重置起点。
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             if (epochTick < 0) epochTick = Find.TickManager.TicksGame;
             base.SpawnSetup(map, respawningAfterLoad);
         }
 
-        //函数职责：保存原始周期起点，读档后按同一物件编号恢复相同的周期状态。
+        //保存原始周期起点，读档后按同一物件编号恢复相同的周期状态。
         public override void ExposeData()
         {
             base.ExposeData();
@@ -43,7 +43,7 @@ namespace NingshaRaceLib.DesertPit.Ecology.Habitats
             if (Scribe.mode == LoadSaveMode.PostLoadInit) cachedCycle = -1;
         }
 
-        //函数职责：使用自然语言说明作用状态、下一次变化时间和非免战区限制。
+        //说明当前状态、下一次变化时间和非免战区限制。
         public override string GetInspectString()
         {
             int remaining = Settings.cycleTicks - (Find.TickManager.TicksGame - epochTick) % Settings.cycleTicks;

@@ -15,7 +15,9 @@ namespace NingshaRaceLib.SandGolem.Patches
                 || !__instance.SpawnedOrAnyParentSpawned) return;
             __instance.inventory?.DropAllNearPawn(__instance.PositionHeld);
             __instance.equipment?.DropAllEquipment(__instance.PositionHeld);
-            __instance.carryTracker?.TryDropCarriedThing(__instance.PositionHeld, ThingPlaceMode.Near, out _);
+            //原版掉落接口要求手持物存在，空容器不能调用。
+            if (__instance.carryTracker?.CarriedThing != null)
+                __instance.carryTracker.TryDropCarriedThing(__instance.PositionHeld, ThingPlaceMode.Near, out _);
         }
     }
 }

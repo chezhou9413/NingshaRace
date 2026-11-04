@@ -90,11 +90,18 @@ namespace NingshaRaceLib.DesertPit.AntColony.Components
             if (building is Building_AntHoneyTower tower) tower.SeedHabitat();
         }
 
-        //有限范围内按距离选址，避免把储藏格或已有任务预留覆盖。
+        //射浆蚁在合法空地中随机散布，其他建筑仍就近安置；生成与补建共用此规则。
         private bool TryFindBuildingCell(AntColonyState state, ThingDef def, out IntVec3 result)
         {
-            foreach (IntVec3 cell in GenRadial.RadialCellsAround(state.NestPosition,
-                def.GetModExtension<DefModExtension_AntStructure>().radius, true))
+            IEnumerable<IntVec3> candidates = GenRadial.RadialCellsAround(state.NestPosition,
+                def.GetModExtension<DefModExtension_AntStructure>().radius, true);
+            if (def == DefOfRefs.NingshaRace_AntAcidTurret)
+            {
+                if (candidates.TryRandomElement(cell => CanBuildAt(state, def, cell), out result)) return true;
+                result = IntVec3.Invalid;
+                return false;
+            }
+            foreach (IntVec3 cell in candidates)
                 if (CanBuildAt(state, def, cell)) { result = cell; return true; }
             result = IntVec3.Invalid;
             return false;
