@@ -55,7 +55,7 @@ namespace NingshaRaceLib.Zhenni.Bladebearer
             Shader shader = abDatabase.GetShader(name, PackageId);
             if (shader == null || !shader.isSupported)
                 throw new InvalidOperationException("震尼拥刀者 Shader 无法加载：" + name + "，请检查 Shader 资源清单。");
-            return new Material(shader) { name = name, hideFlags = HideFlags.HideAndDontSave };
+            return new Material(shader) { name = name };
         }
 
         //选择即时绘制或地图渲染材质，防止预览覆盖已提交的地图材质。
